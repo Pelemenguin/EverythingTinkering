@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:add",
+    "argument1": {
+        "type": "minecraft:mul",
+        "argument1": {   
+            "type": "minecraft:abs",
+            "argument": {
+                "type": "minecraft:add",
+                "argument1": {
+                    "type": "minecraft:mul",
+                    "argument1": {
+                        "type": "minecraft:abs",
+                        "argument": "kubejs:overworld/weirdness"
+                    },
+                    "argument2": 3
+                },
+                "argument2": -2
+            }
+        },
+        "argument2": -1
+    },
+    "argument2": 1
+}

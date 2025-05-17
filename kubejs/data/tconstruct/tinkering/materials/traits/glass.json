@@ -1,0 +1,20 @@
+{
+    "default": [
+        {
+            "name": "kubejs:glass_shard",
+            "level": 1
+        }
+    ],
+    "perStat": {
+        "tconstruct:skull": [
+            {
+                "level": 1,
+                "name": "tconstruct:self_destructive"
+            },
+            {
+                "level": 1,
+                "name": "tconstruct:creeper_disguise"
+            }
+        ]
+    }
+}

@@ -1,0 +1,25 @@
+[
+  {
+    "name": "intro",
+    "data": "sections/introduction.json",
+    "icon": {
+      "item": "tconstruct:pattern"
+    }
+  },
+  {
+    "name": "melee_harvest_materials",
+    "data": "no-load",
+    "extraData": { "tconstruct:material_tier": { "type": "tconstruct:melee_harvest", "tier": 1 } },
+    "icon": {
+      "item": "minecraft:stone"
+    }
+  },
+  {
+    "name": "ranged_materials",
+    "data": "no-load",
+    "extraData": { "tconstruct:material_tier": { "type": "tconstruct:ranged", "tier": 1 } },
+    "icon": {
+      "item": "minecraft:bamboo"
+    }
+  }
+]

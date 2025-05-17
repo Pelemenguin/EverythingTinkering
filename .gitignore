@@ -1,0 +1,15 @@
+/crash-reports
+/local
+/logs
+/PCL
+/resourcepacks
+/saves
+/texture_generator/resources
+/texture_generator/outputs
+/texture_generator/__pycache__
+/screenshots
+/mods
+/kubejs/README.txt
+/kubejs/probe
+/kubejs/assets/tconstruct/textures
+/.vscode

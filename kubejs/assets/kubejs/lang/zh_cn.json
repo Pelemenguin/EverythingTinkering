@@ -1,0 +1,38 @@
+{
+    "generator.kubejs.default": "整合包默认预设",
+
+        "_comment_materials": " ----- Materials ----- ",
+
+    "material.kubejs.soil": "沙土",
+    "material.kubejs.soil.dirt": "泥土",
+    "material.kubejs.soil.sand": "沙子",
+    "material.kubejs.soil.red_sand": "红沙",
+    "material.kubejs.soil.gravel": "沙砾",
+    "material.kubejs.soil.coarse_dirt": "砂土",
+    "material.kubejs.soil.rooted_dirt": "缠根泥土",
+    "material.kubejs.soil.mud": "泥巴",
+    "material.kubejs.soil.clay": "黏土",
+    "material.kubejs.soil.flavor": "纯天然材料！可能会弄脏你的手。",
+    "material.kubejs.soil.encyclopedia": "每游戏刻，每级有20%概率失去耐久，值为1至3倍特性等级",
+    
+    "material.tconstruct.glass.flavor": "小心易碎！",
+    "material.tconstruct.glass.encyclopedia": "攻击时，若伤害大于5点，则有概率对目标周围3×3×3的范围内的生物造成伤害，总和为对直接目标的伤害",
+
+    "material.kubejs.andesite_alloy": "安山合金",
+    "material.kubejs.andesite_alloy.flavor": "就像一个传动轴！",
+    "material.kubejs.andesite_alloy.encyclopedia": "判定箱是一个立方体，其棱会每级增加0.5格。在判定箱内的实体会受到你对直接目标造成的伤害的50%",
+    
+        "_comment_modifiers": " ----- Modifiers ----- ",
+
+    "modifier.kubejs.incompact": "松散",
+    "modifier.kubejs.incompact.flavor": "用后洗手！",
+    "modifier.kubejs.incompact.description": "即使不使用时也会损失耐久",
+
+    "modifier.kubejs.glass_shard": "玻璃碎片",
+    "modifier.kubejs.glass_shard.flavor": "易碎制品！",
+    "modifier.kubejs.glass_shard.description": "攻击有概率消耗更多耐久。此时，直接目标附近的敌人也会受伤",
+
+    "modifier.kubejs.relaying": "传动",
+    "modifier.kubejs.relaying.flavor": "传递动量！",
+    "modifier.kubejs.relaying.description": "攻击时，目标稍后方的敌人也会被击中"
+}

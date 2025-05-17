@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+        "item": "minecraft:red_sand"
+    },
+    "material": "kubejs:soil#red_sand",
+    "needed": 1,
+    "value": 1
+}

@@ -1,0 +1,19 @@
+{
+    "material.kubejs": {
+        "soil": "#79553a",
+        "soil.dirt": "#79553a",
+        "soil.sand": "#e7e4bb",
+        "soil.red_sand": "#cb6e24",
+        "soil.gravel": "#817f7f",
+        "soil.coarse_dirt": "#4a3322",
+        "soil.rooted_dirt": "#bb9789",
+        "soil.mud": "#3e3836",
+        "soil.clay": "#9aa3b3",
+        "andesite_alloy": "#c9caba"
+    },
+    "modifier.kubejs": {
+        "incompact": "#79553a",
+        "glass_shard": "#d0eae9",
+        "relaying": "#c9caba"
+    }
+}

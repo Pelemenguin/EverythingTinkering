@@ -1,0 +1,39 @@
+{
+    "generator.kubejs.default": "Modpack Default Preset",
+
+        "_comment_materials": " ----- Materials ----- ",
+
+    "material.kubejs.soil": "Soil",
+    "material.kubejs.soil.dirt": "Dirt",
+    "material.kubejs.soil.sand": "Sand",
+    "material.kubejs.soil.red_sand": "Red Sand",
+    "material.kubejs.soil.gravel": "Gravel",
+    "material.kubejs.soil.coarse_dirt": "Coarse Dirt",
+    "material.kubejs.soil.rooted_dirt": "Rooted Dirt",
+    "material.kubejs.soil.mud": "Mud",
+    "material.kubejs.soil.clay": "Clay",
+    "material.kubejs.soil.flavor": "Totally natural material! May get your hands dirty.",
+    "material.kubejs.soil.encyclopedia": "With each tick, the tool has a 20% chance per level to lose durability points. Losing durability points are 1~3 times the trait's level",
+    
+    "material.tconstruct.glass.flavor": "Handle with care! Fragile!",
+    "material.tconstruct.glass.encyclopedia": "While attacking, if damage is greater than 5 points, then it is possible to deal damage to enemies in 3×3×3 area. Sum of the damage dealt is equal to the damage to the direct damage",
+
+    "material.kubejs.andesite_alloy": "Andesite Alloy",
+    "material.kubejs.andesite_alloy.flavor": "Just like a Shaft!",
+    "material.kubejs.andesite_alloy.encyclopedia": "The hitbox is a cube with edges that increase by 0.5 blocks per level. Entities in the hitbox take 50% of the damage you deal to the direct target",
+    
+        "_comment_modifiers": " ----- Modifiers ----- ",
+
+    "modifier.kubejs.incompact": "Incompact",
+    "modifier.kubejs.incompact.flavor": "Wash your hands after using the tool!",
+    "modifier.kubejs.incompact.description": "Durability drops even when you are not using it",
+
+    "modifier.kubejs.glass_shard": "Glass Shard",
+    "modifier.kubejs.glass_shard.flavor": "Fragile products!",
+    "modifier.kubejs.glass_shard.description": "Attack may cost more durability points. When this happens, enemies near the direct target will be hurt",
+
+    "modifier.kubejs.relaying": "Relaying",
+    "modifier.kubejs.relaying.flavor": "Convey momentum!",
+    "modifier.kubejs.relaying.description": "Hit enemies that are slightly behind the target when attacking"
+
+}

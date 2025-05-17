@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+        "item": "minecraft:clay_ball"
+    },
+    "material": "kubejs:soil#clay",
+    "needed": 4,
+    "value": 1
+}
