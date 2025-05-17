@@ -1,6 +1,10 @@
 {
     "generator.kubejs.default": "Modpack Default Preset",
 
+        "_comment_command": " ----- Command ---- ",
+    "command.kubejs.item_list.parts.name": "Part list of %s",
+    "command.kubejs.item_list.parts.lore": "Contained every part of the material",
+
         "_comment_materials": " ----- Materials ----- ",
 
     "material.kubejs.soil": "Soil",
