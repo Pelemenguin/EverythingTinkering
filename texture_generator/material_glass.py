@@ -181,11 +181,11 @@ palette = [
     "grey": 0
   },
   {
-    "color": "FF4f4a47",
+    "color": "FF383433",
     "grey": 63
   },
   {
-    "color": "FF3f3c39",
+    "color": "FF625b57",
     "grey": 102
   },
   {
@@ -197,7 +197,7 @@ palette = [
     "grey": 216
   },
   {
-    "color": "FF6b6660",
+    "color": "FF3f3c39",
     "grey": 255
   }
 ]

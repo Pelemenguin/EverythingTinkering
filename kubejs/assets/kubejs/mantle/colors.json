@@ -11,6 +11,25 @@
         "soil.clay": "#9aa3b3",
         "andesite_alloy": "#c9caba"
     },
+    "material.tconstruct": {
+        "glass.white_stained": "#ffffff",
+        "glass.orange_stained": "#d87f33",
+        "glass.magenta_stained": "#b24cd8",
+        "glass.light_blue_stained": "#6699d8",
+        "glass.yellow_stained": "#e5e533",
+        "glass.lime_stained": "#7fcc19",
+        "glass.pink_stained": "#f27fa5",
+        "glass.gray_stained": "#4c4c4c",
+        "glass.light_gray_stained": "#999999",
+        "glass.cyan_stained": "#4c7f99",
+        "glass.purple_stained": "#7f3fb2",
+        "glass.blue_stained": "#334cb2",
+        "glass.brown_stained": "#664c33",
+        "glass.green_stained": "#667f33",
+        "glass.red_stained": "#993333",
+        "glass.black_stained": "#191919",
+        "glass.seared": "#3f3c39"
+    },
     "modifier.kubejs": {
         "incompact": "#79553a",
         "glass_shard": "#d0eae9",
