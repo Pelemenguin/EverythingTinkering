@@ -13,3 +13,5 @@
 /kubejs/probe
 /kubejs/assets/tconstruct/textures
 /.vscode
+/usercache.json
+/usernamecache.json
