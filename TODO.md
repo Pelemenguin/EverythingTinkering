@@ -21,6 +21,7 @@
 - 添加 `seared` 作为 `glass` 变种。[PLANNED on 2025/5/5, DONE on 2025/5/17]
 
 # 弃用
+暂无。
 
 ## 计划创建配方
 - 尝试添加配方：`clay` 部件烧制为 `brick` 部件。 [PLANNED on 2025/5/5, DEPRECATED on 2025/5/17]
