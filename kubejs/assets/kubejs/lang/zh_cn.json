@@ -36,6 +36,7 @@
     "material.tconstruct.glass.red_stained": "红色染色玻璃",
     "material.tconstruct.glass.black_stained": "黑色染色玻璃",
     "material.tconstruct.glass.seared": "焦黑玻璃",
+    "material.tconstruct.glass.scorched": "焦褐玻璃",
     "material.tconstruct.glass.flavor": "小心易碎！",
     "material.tconstruct.glass.encyclopedia": "攻击时，若伤害大于5点，则有概率对目标周围3×3×3的范围内的生物造成伤害，总和为对直接目标的伤害",
 

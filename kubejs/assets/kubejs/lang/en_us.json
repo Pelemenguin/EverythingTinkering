@@ -36,6 +36,7 @@
     "material.tconstruct.glass.red_stained": "Red Stained Glass",
     "material.tconstruct.glass.black_stained": "Black Stained Glass",
     "material.tconstruct.glass.seared": "Seared Glass",
+    "material.tconstruct.glass.scorched": "Scorched Glass",
     "material.tconstruct.glass.flavor": "Handle with care! Fragile!",
     "material.tconstruct.glass.encyclopedia": "While attacking, if damage is greater than 5 points, then it is possible to deal damage to enemies in 3×3×3 area. Sum of the damage dealt is equal to the damage to the direct damage",
 

@@ -208,3 +208,37 @@ generator = TextureGenerator(parts)
 generator.add_function(grayscale_colorize_function(processed_palette), "recolor", 0)
 generator.set_fallback(["crystal"])
 generator.generate("tconstruct_glass_seared", part_types=["tconstruct:head", "tconstruct:handle", "tconstruct:binding", "tconstruct:repair_kit"])
+
+palette = [
+  {
+    "color": "00000000",
+    "grey": 0
+  },
+  {
+    "color": "FF241d19",
+    "grey": 63
+  },
+  {
+    "color": "FF53453c",
+    "grey": 102
+  },
+  {
+    "color": "00000000",
+    "grey": 140
+  },
+  {
+    "color": "00000000",
+    "grey": 216
+  },
+  {
+    "color": "FF66554a",
+    "grey": 255
+  }
+]
+
+processed_palette = convert_palette(palette)
+
+generator = TextureGenerator(parts)
+generator.add_function(grayscale_colorize_function(processed_palette), "recolor", 0)
+generator.set_fallback(["crystal"])
+generator.generate("tconstruct_glass_scorched", part_types=["tconstruct:head", "tconstruct:handle", "tconstruct:binding", "tconstruct:repair_kit"])

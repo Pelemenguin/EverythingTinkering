@@ -19,7 +19,9 @@ const GLASS_TYPE_TO_PARTICLE = {
     "tconstruct:glass#brown_stained": "minecraft:brown_stained_glass",
     "tconstruct:glass#green_stained": "minecraft:green_stained_glass",
     "tconstruct:glass#red_stained": "minecraft:red_stained_glass",
-    "tconstruct:glass#black_stained": "minecraft:black_stained_glass"
+    "tconstruct:glass#black_stained": "minecraft:black_stained_glass",
+    "tconstruct:glass#seared": "tconstruct:seared_glass",
+    "tconstruct:glass#scorched": "tconstruct:scorched_glass"
 }
 
 const OFFHAND_ATTACKABLE_MODIFIER = [
@@ -34,16 +36,12 @@ EntityEvents.hurt(event => {
     if (event.source.actual.handSlots[0].nbt != null) {
         if (event.source.actual.handSlots[0].nbt.get("tic_broken").asInt != 1) {
             let attacker_weapon_modifier_data = event.source.actual.handSlots[0].nbt.get("tic_modifiers")
-            // console.info(attacker_weapon_modifier_data)
             var attacker_weapon_modifiers = {}
             attacker_weapon_modifier_data.forEach(modifier => {
                 let name = modifier.get("name").asString
                 let level = modifier.get("level").asInt
-                // console.info(name)
-                // console.info(level)
                 attacker_weapon_modifiers[name] = level
             })
-            // console.info(attacker_weapon_modifiers)
 
             run_modifiers(event, event.source.actual.handSlots[0], attacker_weapon_modifiers)
         }
@@ -57,8 +55,6 @@ EntityEvents.hurt(event => {
             attacker_offhand_weapon_modifier_data.forEach(modifier => {
                 let name = modifier.get("name").asString
                 let level = modifier.get("level").asInt
-                // console.info(name)
-                // console.info(level)
                 attacker_offhand_weapon_modifiers[name] = level
                 if (OFFHAND_ATTACKABLE_MODIFIER.indexOf(name) != -1) {
                     valid_offhand = true
@@ -93,14 +89,11 @@ function relaying(event, level) {
         let detect_radius = (0.5 * level) / 2
         let attacker = event.source.actual
         let facing = [attacker.yaw, attacker.pitch]
-        // console.info(facing)
         let actual_yaw = JavaMath.toRadians(facing[0] + 90)
         let actual_pitch = JavaMath.toRadians(-facing[1])
-        // console.info([actual_yaw, actual_pitch])
         let x_step = detect_radius * JavaMath.cos(actual_yaw) * JavaMath.cos(actual_pitch)
         let y_step = detect_radius * JavaMath.sin(actual_pitch)
         let z_step = detect_radius * JavaMath.sin(actual_yaw) * JavaMath.cos(actual_pitch)
-        // console.info([x_step, y_step, z_step])
         let target_x = event.entity.x
         let target_y = event.entity.y
         let target_z = event.entity.z
@@ -130,15 +123,20 @@ function relaying(event, level) {
     }
 }
 
+/**
+ * 
+ * @param {Internal.LivingEntityHurtEventJS} event 
+ * @param {Internal.ItemStack} item 
+ * @param {int} level 
+ */
+
 function glass_shard(event, item, level) {
     let if_repeated = event.entity.nbt.get("ForgeData").get("GlassShardTemporaryData")
     if (if_repeated == null) {
-        // Internal.LivingEntityHurtEventJS.prototype
         let damage = event.damage
         let source = event.source
         let chance = (damage - 5.0) * 0.2 * level
         if (JavaMath.random() < chance) {
-            // console.info("Glass Shard triggered")
             if (!event.source.player.creative) {
                 item.damageValue += JavaMath.round(damage)
             }
@@ -164,12 +162,13 @@ function glass_shard(event, item, level) {
                 // console.info("Removed "+entity)
                 entity.mergeNbt(NBT.toTagCompound({"ForgeData":new_forge_data}))
             })
+            let sound_pitch = 1 - (event.damage - 5.0) * 0.2
             item.nbt.get("tic_materials").forEach(material => {
                 let material_name = material.asString
                 if (material_name in GLASS_TYPE_TO_PARTICLE) {
                     let particle_block = GLASS_TYPE_TO_PARTICLE[material_name]
                     event.server.runCommandSilent("particle minecraft:block "+particle_block+" "+target_x+" "+target_y+" "+target_z+" 1 1 1 1 50")
-                    // console.info("Command run: "+"particle minecraft:block "+particle_block+" "+target_x+" "+target_y+" "+target_z+" 1 1 1 1 50")
+                    event.server.runCommandSilent("playsound minecraft:block.glass.break player @a "+particle_block+" "+target_x+" "+target_y+" "+target_z+" 10 "+sound_pitch)
                 }
             })
         }

@@ -28,7 +28,8 @@
         "glass.green_stained": "#667f33",
         "glass.red_stained": "#993333",
         "glass.black_stained": "#191919",
-        "glass.seared": "#3f3c39"
+        "glass.seared": "#3f3c39",
+        "glass.scorched": "#53453c"
     },
     "modifier.kubejs": {
         "incompact": "#79553a",

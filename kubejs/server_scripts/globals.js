@@ -8,7 +8,10 @@ const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.def
 const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager')
 const TextColor = Java.loadClass('net.minecraft.network.chat.TextColor')
 
-var toolParts = []
+/**
+ * @type {Internal.Item[]}
+ */
+var toolParts = [Item.of("tconstruct:repair_kit").item]
 ForgeRegistries.ITEMS.getValues().forEach(item => {
     if (item instanceof ToolPartItem) {
         toolParts.push(item)
