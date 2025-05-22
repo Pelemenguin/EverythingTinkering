@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+        "item": "minecraft:rooted_dirt"
+    },
+    "material": "kubejs:soil#rooted_dirt",
+    "needed": 1,
+    "value": 1
+}

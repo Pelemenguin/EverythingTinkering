@@ -1,0 +1,10 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+        "tag": "forge:storage_blocks/andesite_alloy"
+    },
+    "leftover": "create:andesite_alloy",
+    "material": "kubejs:andesite_alloy",
+    "needed": 1,
+    "value": 9
+}

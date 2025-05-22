@@ -1,0 +1,21 @@
+{
+    "type": "add",
+    "argument1": {
+        "type": "noise",
+        "noise": "kubejs:terrain_plains",
+        "xz_scale": 0.125,
+        "y_scale": 0.125
+    },
+    "argument2": {
+        "type": "clamp",
+        "input": {
+            "type": "y_clamped_gradient",
+            "from_y": -128,
+            "to_y": 512,
+            "from_value": 3,
+            "to_value": -7
+        },
+        "min": -1.5,
+        "max": 1.5
+    }
+}

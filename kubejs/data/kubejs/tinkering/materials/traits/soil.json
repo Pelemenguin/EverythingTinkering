@@ -1,0 +1,8 @@
+{
+    "default": [
+        {
+            "name": "kubejs:incompact",
+            "level": 1
+        }
+    ]
+}

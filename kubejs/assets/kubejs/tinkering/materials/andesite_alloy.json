@@ -1,0 +1,8 @@
+{
+    "color": "FFC9CABA",
+    "fallbacks": [
+        "rock"
+    ],
+    "luminosity": 0,
+    "texture": "kubejs:andesite_alloy"
+}

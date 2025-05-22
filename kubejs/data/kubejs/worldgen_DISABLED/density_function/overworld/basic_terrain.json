@@ -1,0 +1,5 @@
+{
+    "type": "max",
+    "argument1": "kubejs:overworld/terrain_plains",
+    "argument2": "kubejs:overworld/terrain_mountains"
+}
