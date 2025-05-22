@@ -70,12 +70,10 @@ function run_modifiers(event, item, modifiers) {
  * @param {int} level 
  */
 function whacking(event, item, level) {
-    console.info("[Whacking] Triggered!")
     let source = event.source
 
     /** @type {Internal.ServerPlayer} */
     let attacker = source.actual
-    console.info(`[Whacking] ${attacker}`)
 
     // Check if crit
     if (attacker && attacker.isPlayer()) {
@@ -88,6 +86,8 @@ function whacking(event, item, level) {
             !attacker.isSprinting() &&
             attacker.fallDistance > 0
         ) {
+            console.info("[Whacking] Triggered!")
+            console.info(`[Whacking] ${attacker}`)
             console.info(`[Whacking] Damage doubled. Original damage ${event.amount}`)
             event.amount *= 1.25 + level * 0.25
 

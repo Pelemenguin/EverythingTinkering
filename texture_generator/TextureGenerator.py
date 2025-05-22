@@ -61,9 +61,13 @@ class TextureGenerator:
     def _get_input_path(self, part_path):
         path_dir = os.path.dirname(part_path)
         for f in self._fallbacks:
-            l = os.path.basename(part_path).split(".")
-            l[-2] += f"_{f}"
-            part_name = ".".join(l)
+            try:
+                l = os.path.basename(part_path).split(".")
+                l[-2] += f"_{f}"
+                part_name = ".".join(l)
+            except:
+                l = os.path.basename(part_path) + f"_{f}"
+                part_name = l
             result = os.path.join(path_dir, part_name)
             if os.path.exists(os.path.join(path_dir, part_name)):
                 # print(result)
@@ -83,11 +87,16 @@ class TextureGenerator:
         
         for part in self._parts:
             if (part_types != None) and (part._type not in part_types):
+                print(f"Ignored part {part._path}, for {part._type} is not wanted")
                 continue
             this_input_path = os.path.normpath(os.path.join(input_path, part._path))
             this_input_path = self._get_input_path(this_input_path)
             this_output_path = os.path.normpath(os.path.join(output_path, part._path))
-            image = PIL.Image.open(this_input_path).convert("RGBA")
+            try:
+                image = PIL.Image.open(this_input_path).convert("RGBA")
+            except:
+                print(f"Unparsable input {this_input_path}")
+                continue
             for f in functions:
                 image = f[0](image)
             this_dir = os.path.dirname(this_output_path)
@@ -99,6 +108,7 @@ class TextureGenerator:
             suffixed_path = os.path.join(this_dir, this_name)
             os.open(suffixed_path, os.O_CREAT)
             image.save(suffixed_path)
+            print(f"Part generated {suffixed_path}")
             image.close()
 
 #################################
