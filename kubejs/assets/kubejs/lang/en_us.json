@@ -18,6 +18,10 @@
     "material.kubejs.soil.clay": "Clay",
     "material.kubejs.soil.flavor": "Totally natural material! May get your hands dirty.",
     "material.kubejs.soil.encyclopedia": "With each tick, the tool has a 20% chance per level to lose durability points. Losing durability points are 1~3 times the trait's level",
+
+    "material.kubejs.brick": "Brick",
+    "material.kubejs.brick.flavor": "Common building material...?",
+    "material.kubejs.brick.encyclopedia": "Critical hits' damage are multiplied by 2 again",
     
     "material.tconstruct.glass.white_stained": "White Stained Glass",
     "material.tconstruct.glass.orange_stained": "Orange Stained Glass",

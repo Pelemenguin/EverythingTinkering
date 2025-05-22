@@ -1,0 +1,10 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+        "item": "minecraft:bricks"
+    },
+    "material": "kubejs:brick",
+    "needed": 1,
+    "value": 1,
+    "leftover": "minecraft:brick"
+}

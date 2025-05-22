@@ -18,6 +18,10 @@
     "material.kubejs.soil.clay": "黏土",
     "material.kubejs.soil.flavor": "纯天然材料！可能会弄脏你的手。",
     "material.kubejs.soil.encyclopedia": "每游戏刻，每级有20%概率失去耐久，值为1至3倍特性等级",
+
+    "material.kubejs.brick": "红砖",
+    "material.kubejs.brick.flavor": "普通建材...？",
+    "material.kubejs.brick.encyclopedia": "暴击时再伤害再乘以2倍。",
     
     "material.tconstruct.glass.white_stained": "白色染色玻璃",
     "material.tconstruct.glass.orange_stained": "橙色染色玻璃",

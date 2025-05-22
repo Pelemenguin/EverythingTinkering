@@ -9,6 +9,7 @@
         "soil.rooted_dirt": "#bb9789",
         "soil.mud": "#3e3836",
         "soil.clay": "#9aa3b3",
+        "brick": "#b75a40",
         "andesite_alloy": "#c9caba"
     },
     "material.tconstruct": {

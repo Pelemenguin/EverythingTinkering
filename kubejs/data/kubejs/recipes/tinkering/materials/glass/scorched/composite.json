@@ -1,0 +1,10 @@
+{
+    "type": "tconstruct:material_fluid",
+    "fluid": {
+        "amount": 1000,
+        "tag": "tconstruct:scorched_stone"
+    },
+    "input": "tconstruct:glass",
+    "output": "tconstruct:glass#scorched",
+    "temperature": 600
+}

@@ -4,4 +4,4 @@ from _convert_palette import *
 
 generator = TextureGenerator(parts)
 generator.set_fallback(["rock"])
-generator.generate("soil", part_types=["tconstruct:head", "tconstruct:handle", "tconstruct:binding", "tconstruct:repair_kit"], output_path="outputs")
+generator.generate("nonmetal", part_types=["tconstruct:head", "tconstruct:handle", "tconstruct:binding", "tconstruct:repair_kit"], output_path="outputs")
