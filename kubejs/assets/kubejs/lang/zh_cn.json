@@ -21,7 +21,7 @@
 
     "material.kubejs.brick": "红砖",
     "material.kubejs.brick.flavor": "普通建材...？",
-    "material.kubejs.brick.encyclopedia": "暴击时再伤害再乘以2倍。",
+    "material.kubejs.brick.encyclopedia": "暴击时再伤害再翻倍。1级时倍率为1.5倍，每级增加0.25倍率。特性触发时消耗25%剩余耐久，至少10点",
     
     "material.tconstruct.glass.white_stained": "白色染色玻璃",
     "material.tconstruct.glass.orange_stained": "橙色染色玻璃",

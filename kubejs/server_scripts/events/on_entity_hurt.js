@@ -82,6 +82,11 @@ function run_modifiers(event, item, attacker_weapon_modifiers) {
 
 }
 
+/**
+ * 
+ * @param {Internal.LivingEntityHurtEventJS} event 
+ * @param {int} level 
+ */
 function relaying(event, level) {
     let if_repeated = event.entity.nbt.get("ForgeData").get("RelayingTemporaryData")
     if (if_repeated == null) {
