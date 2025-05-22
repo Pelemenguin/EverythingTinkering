@@ -3,7 +3,7 @@
 ## 计划修改材料
 - 添加 `calcite`，`tuff`，`prismarine`，`dripstone` 作为 `rock` 变种。[PLANNED on 2025/5/5]
 ## 计划创造材料
-- 添加 `草方块`，`灰化土` 作为材料 `dirt` 的原材料。[PLANNED on 2025/5/5]
+- 添加草方块，灰化土作为材料 `dirt` 的原材料。[PLANNED on 2025/5/5]
 - 添加材料 `brick`。[PLANNED on 2025/5/5]
 - 添加 `scorched`，`soul` 作为 `glass` 的变种。[PLANNED on 2025/5/10]
 ## 计划创建配方
