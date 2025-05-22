@@ -54,6 +54,10 @@
     "modifier.kubejs.incompact.flavor": "Wash your hands after using the tool!",
     "modifier.kubejs.incompact.description": "Durability drops even when you are not using it",
 
+    "modifier.kubejs.whacking": "Whacking",
+    "modifier.kubejs.whacking.flavor": "Bang!",
+    "modifier.kubejs.whacking.description": "Increase damage of critical hit",
+
     "modifier.kubejs.glass_shard": "Glass Shard",
     "modifier.kubejs.glass_shard.flavor": "Fragile products!",
     "modifier.kubejs.glass_shard.description": "Attack may cost more durability points. When this happens, enemies near the direct target will be hurt",

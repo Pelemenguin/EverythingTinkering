@@ -54,6 +54,10 @@
     "modifier.kubejs.incompact.flavor": "用后洗手！",
     "modifier.kubejs.incompact.description": "即使不使用时也会损失耐久",
 
+    "modifier.kubejs.whacking": "猛击",
+    "modifier.kubejs.whacking.flavor": "梆！",
+    "modifier.kubejs.whacking.description": "增加暴击时的伤害",
+
     "modifier.kubejs.glass_shard": "玻璃碎片",
     "modifier.kubejs.glass_shard.flavor": "易碎制品！",
     "modifier.kubejs.glass_shard.description": "攻击有概率消耗更多耐久。此时，直接目标附近的敌人也会受伤",

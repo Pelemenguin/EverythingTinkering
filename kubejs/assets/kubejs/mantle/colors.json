@@ -34,6 +34,7 @@
     },
     "modifier.kubejs": {
         "incompact": "#79553a",
+        "whacking": "#b75a40",
         "glass_shard": "#d0eae9",
         "relaying": "#c9caba"
     }
