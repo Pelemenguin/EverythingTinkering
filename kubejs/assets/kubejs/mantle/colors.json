@@ -11,6 +11,7 @@
         "soil.clay": "#9aa3b3",
         "brick": "#b75a40",
         "brick.nether": "#49242a",
+        "coal": "#393e46",
         "andesite_alloy": "#c9caba"
     },
     "material.tconstruct": {

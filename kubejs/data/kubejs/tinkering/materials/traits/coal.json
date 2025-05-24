@@ -1,0 +1,8 @@
+{
+    "default": [
+        {
+            "name": "kubejs:igniting",
+            "level": 1
+        }
+    ]
+}
