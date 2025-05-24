@@ -63,7 +63,7 @@ function run_modifiers(event, item, modifiers) {
 }
 
 /**
- * Whacking - Multiplies damage of critical hits, consumes 25% of remaining durability
+ * Whacking - Multiplies damage when falling, consumes 25% of remaining durability
  * 
  * @param {Internal.LivingHurtEvent} event 
  * @param {Internal.ItemStack} item 

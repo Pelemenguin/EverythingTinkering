@@ -3,7 +3,6 @@
 ## 计划修改材料
 - 添加 `calcite`，`tuff`，`prismarine`，`dripstone` 作为 `rock` 变种。
 ## 计划创造材料
-- 添加草方块，灰化土作为材料 `dirt` 的原材料。
 - 添加 `soul` 作为 `glass` 的变种。
 ## 计划创建配方
 - 添加材料 `glass#*_stained` 配方。

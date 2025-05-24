@@ -1,0 +1,10 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+        "item": "minecraft:nether_bricks"
+    },
+    "material": "kubejs:brick#nether",
+    "needed": 1,
+    "value": 1,
+    "leftover": "minecraft:nether_brick"
+}

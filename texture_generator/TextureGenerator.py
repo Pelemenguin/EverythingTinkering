@@ -2,16 +2,6 @@ import typing
 import os
 import os.path
 import PIL.Image
-import PIL.ImageCms
-import PIL.ImageDraw
-import PIL.ImageDraw2
-import PIL.ImageFile
-import PIL.ImageFilter
-import PIL.ImageMath
-import PIL.ImageMorph
-import PIL.ImageOps
-import PIL.ImageTransform
-import PIL.PSDraw
 
 ###############
 #   Classes   #
@@ -138,7 +128,7 @@ def grayscale_colorize_function(transformation: dict[int, tuple[int, int, int, i
     
     :param transformation: A `dict`. Keys are gray value. Values are pixels."""
     def transformer(input_pixel):
-        processed = sorted(transformation)
+        processed = sorted(transformation, reverse=True)
         if input_pixel == (0, 0, 0, 0):
             return (0, 0, 0, 0)
         try:
