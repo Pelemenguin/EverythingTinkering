@@ -15,5 +15,6 @@ Everything TInkering - NeoForge 1.20.1.jar
 Everything TInkering - NeoForge 1.20.1.json
 options.txt
 rhino.local.properties
-usercache.json
-usernamecache.json
+
+/usercache.json
+/usernamecache.json
