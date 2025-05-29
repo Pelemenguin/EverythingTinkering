@@ -1,3 +1,5 @@
+import { whacking } from "../modifiers/whacking";
+
 const OFFHAND_ATTACKABLE_MODIFIER = [
     "tconstruct:offhand_attack",
     "tconstruct:dual_wielding"
@@ -7,6 +9,9 @@ ForgeEvents.onEvent("net.minecraftforge.event.entity.living.LivingHurtEvent", ev
 
     console.info(`[LivingHurtEvent] Triggered by ${event.entity}`)
     try {
+
+        if (event.entity.source.actual == null) {return}
+
         let mainhandItem = (event.source.actual.handSlots[0])
         let offhandItem = (event.source.actual.handSlots[1])
 
@@ -59,47 +64,5 @@ ForgeEvents.onEvent("net.minecraftforge.event.entity.living.LivingHurtEvent", ev
 function run_modifiers(event, item, modifiers) {
     if ("kubejs:whacking" in modifiers) {
         whacking(event, item, modifiers["kubejs:whacking"])
-    }
-}
-
-/**
- * Whacking - Multiplies damage when falling, consumes 25% of remaining durability
- * 
- * @param {Internal.LivingHurtEvent} event 
- * @param {Internal.ItemStack} item 
- * @param {int} level 
- */
-function whacking(event, item, level) {
-    let source = event.source
-
-    /** @type {Internal.ServerPlayer} */
-    let attacker = source.actual
-
-    // Check if crit
-    if (attacker && attacker.isPlayer()) {
-        if (
-            !attacker.onGround() &&
-            !attacker.onClimbable() &&
-            !attacker.isInWater() &&
-            !attacker.isInLava() &&
-            !attacker.isPassenger() &&
-            !attacker.isSprinting() &&
-            attacker.fallDistance > 0
-        ) {
-            console.info("[Whacking] Triggered!")
-            console.info(`[Whacking] ${attacker}`)
-            console.info(`[Whacking] Damage doubled. Original damage ${event.amount}`)
-            event.amount *= 1.25 + level * 0.25
-
-            // Damage item
-            if (!attacker.creative) {
-                let remaining_dura = item.maxDamage - item.damageValue
-                let consuming_dura = JavaMath.max(JavaMath.ceil(remaining_dura * 0.25), 10)
-                console.info(`[Whacking] Item damaged ${consuming_dura}`)
-                item.damageValue += consuming_dura
-            } else {
-                console.info(`[Whacking] Item not damaged for player is in creative mode.`)
-            }
-        }
     }
 }
