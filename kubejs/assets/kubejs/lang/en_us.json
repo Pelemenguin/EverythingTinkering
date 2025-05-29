@@ -23,6 +23,11 @@
     "material.kubejs.brick.nether": "Nether Brick",
     "material.kubejs.brick.flavor": "Common building material...?",
     "material.kubejs.brick.encyclopedia": "Critical hits' damage are multiplied by 2 again",
+
+    "material.kubejs.coal": "Coal",
+    "material.kubejs.coal.charcoal": "Charcoal",
+    "material.kubejs.coal.flavor": "Living Fuses!",
+    "material.kubejs.coal.encyclopedia": "Attack an enemy can set your tool on fire. During this time, tool will continuously lose its durability points, and set fire to other enemies as you attack",
     
     "material.tconstruct.glass.white_stained": "White Stained Glass",
     "material.tconstruct.glass.orange_stained": "Orange Stained Glass",
@@ -57,7 +62,11 @@
 
     "modifier.kubejs.whacking": "Whacking",
     "modifier.kubejs.whacking.flavor": "Bang!",
-    "modifier.kubejs.whacking.description": "Increase damage of critical hit",
+    "modifier.kubejs.whacking.description": "Increases damage of critical hit",
+
+    "modifier.kubejs.igniting": "Igniting",
+    "modifier.kubejs.igniting.flavor": "Hot Caution!",
+    "modifier.kubejs.igniting.description": "Conveys fire from one enemy to another",
 
     "modifier.kubejs.glass_shard": "Glass Shard",
     "modifier.kubejs.glass_shard.flavor": "Fragile products!",
@@ -65,6 +74,6 @@
 
     "modifier.kubejs.relaying": "Relaying",
     "modifier.kubejs.relaying.flavor": "Convey momentum!",
-    "modifier.kubejs.relaying.description": "Hit enemies that are slightly behind the target when attacking"
+    "modifier.kubejs.relaying.description": "Hits enemies that are slightly behind the target when attacking"
 
 }

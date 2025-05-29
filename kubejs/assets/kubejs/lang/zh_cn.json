@@ -23,6 +23,11 @@
     "material.kubejs.brick.nether": "下界砖",
     "material.kubejs.brick.flavor": "普通建材...？",
     "material.kubejs.brick.encyclopedia": "下落时再伤害再翻倍。1级时倍率为1.5倍，每级增加0.25倍率。特性触发时消耗25%剩余耐久，至少10点",
+
+    "material.kubejs.coal": "煤炭",
+    "material.kubejs.coal.charcoal": "木炭",
+    "material.kubejs.coal.flavor": "活体引线！",
+    "material.kubejs.coal.encyclopedia": "攻击时点燃你的工具。这段时间内，工具会持续丢失耐久，而攻击时则可点燃其他敌人。",
     
     "material.tconstruct.glass.white_stained": "白色染色玻璃",
     "material.tconstruct.glass.orange_stained": "橙色染色玻璃",
@@ -58,6 +63,10 @@
     "modifier.kubejs.whacking": "猛击",
     "modifier.kubejs.whacking.flavor": "梆！",
     "modifier.kubejs.whacking.description": "增加暴击时的伤害",
+
+    "modifier.kubejs.igniting": "点燃",
+    "modifier.kubejs.igniting.flavor": "小心烫手！",
+    "modifier.kubejs.igniting.description": "将火从一个敌人传递到另一个敌人上",
 
     "modifier.kubejs.glass_shard": "玻璃碎片",
     "modifier.kubejs.glass_shard.flavor": "易碎制品！",
