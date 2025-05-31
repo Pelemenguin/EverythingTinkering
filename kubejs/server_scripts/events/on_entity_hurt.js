@@ -1,5 +1,8 @@
-import { relaying, RELAYING_DAMAGE_PERCENTAGE } from "../modifiers/relaying"
-import { glass_shard, GLASS_TYPE_TO_PARTICLE } from "../modifiers/glass_shard"
+// import { getModifiersFromItem } from "../../startup_scripts/globals";
+import { relaying } from "../modifiers/relaying"
+import { glass_shard } from "../modifiers/glass_shard"
+
+let getModifiersFromItem = global.getModifiersFromItem
 
 const OFFHAND_ATTACKABLE_MODIFIER = [
     "tconstruct:offhand_attack",
@@ -7,43 +10,45 @@ const OFFHAND_ATTACKABLE_MODIFIER = [
 ]
 
 EntityEvents.hurt(event => {
+    checkAttackerModifier(event) // Check and run attacker's modifiers
+})
 
-    if (event.source.actual == null) {event.exit()}
+/**
+ * 
+ * @param {Internal.LivingEntityHurtEventJS} event 
+ */
+function checkAttackerModifier (event) {
+    if (event.source.actual == null) {return}
 
-    if (event.source.actual.handSlots[0].nbt != null) {
-        if (event.source.actual.handSlots[0].nbt.get("tic_broken").asInt != 1) {
-            let attacker_weapon_modifier_data = event.source.actual.handSlots[0].nbt.get("tic_modifiers")
-            var attacker_weapon_modifiers = {}
-            attacker_weapon_modifier_data.forEach(modifier => {
-                let name = modifier.get("name").asString
-                let level = modifier.get("level").asInt
-                attacker_weapon_modifiers[name] = level
-            })
-
-            run_modifiers(event, event.source.actual.handSlots[0], attacker_weapon_modifiers)
-        }
-    }
-
-    if (event.source.actual.handSlots[1].nbt != null) {
-        if (event.source.actual.handSlots[1].nbt.get("tic_broken").asInt != 1) {
-            let attacker_offhand_weapon_modifier_data = event.source.actual.handSlots[1].nbt.get("tic_modifiers")
-            let attacker_offhand_weapon_modifiers = {}
-            let valid_offhand = false
-            attacker_offhand_weapon_modifier_data.forEach(modifier => {
-                let name = modifier.get("name").asString
-                let level = modifier.get("level").asInt
-                attacker_offhand_weapon_modifiers[name] = level
-                if (OFFHAND_ATTACKABLE_MODIFIER.indexOf(name) != -1) {
-                    valid_offhand = true
-                }
-            })
-            console.info(valid_offhand)
-            if (valid_offhand) {
-                run_modifiers(event, event.source.actual.handSlots[1], attacker_offhand_weapon_modifiers)
+    let mainhandItem = event.source.actual.handSlots[0];
+    if (mainhandItem != null) {
+        if (mainhandItem.nbt != null) {
+            if (mainhandItem.nbt.get("tic_broken").asInt != 1) {
+                let attacker_weapon_modifiers = getModifiersFromItem(mainhandItem)
+                run_modifiers(event, mainhandItem, attacker_weapon_modifiers)
             }
         }
     }
-})
+
+    let offhandItem = event.source.actual.handSlots[1]
+    if (offhandItem != null) {
+        if (offhandItem.nbt != null) {
+            if (offhandItem.nbt.get("tic_broken").asInt != 1) {
+                let valid_offhand = false
+                let attacker_weapon_modifiers = getModifiersFromItem(offhandItem)
+                Object.keys(attacker_weapon_modifiers).forEach(element => {
+                    if (OFFHAND_ATTACKABLE_MODIFIER.indexOf(element) >= 0) {
+                        valid_offhand = true
+                    }
+                });
+                console.info(`Item ${offhandItem} is valid for off hand? : ${valid_offhand}`)
+                if (valid_offhand) {
+                    run_modifiers(event, offhandItem, attacker_weapon_modifiers)
+                }
+            }
+        }
+    }
+}
 
 /**
  * 

@@ -1,6 +1,9 @@
 // priority: -1
 
-import { incompact } from "../modifiers/incompact";
+// import { getModifiersFromItem } from "../../startup_scripts/globals"
+import { incompact } from "../modifiers/incompact"
+
+let getModifiersFromItem = global.getModifiersFromItem
 
 PlayerEvents.tick(event => {
     let player = event.player
@@ -19,15 +22,8 @@ PlayerEvents.tick(event => {
  */
 function process_item(event, item) {
     let modifier_data = item.nbt.get("tic_modifiers")
-    if (modifier_data == null) {
-        return
-    }
-    var modifiers = {}
-    modifier_data.forEach(modifier => {
-        let name = modifier.get("name").asString
-        let level = modifier.get("level").asInt
-        modifiers[name] = level
-    })
+    if (modifier_data == null) {return}
+    var modifiers = getModifiersFromItem(item)
 
     // Incompact
     if ("kubejs:incompact" in modifiers) {
@@ -39,7 +35,6 @@ function process_item(event, item) {
         igniting_tick(item, event.player)
     }
 
-    // console.info(modifiers)
 }
 
 /**

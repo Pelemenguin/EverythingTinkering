@@ -19,7 +19,7 @@ ForgeRegistries.ITEMS.getValues().forEach(item => {
 })
 
 /**
- * @description Get the color of a material by its ID.
+ * Get the color of a material by its ID.
  * 
  * @param {string} translation_key - The translation key of the material.
  * @returns {TextColor} The color of the material in hex format, or white if not found.
@@ -27,3 +27,27 @@ ForgeRegistries.ITEMS.getValues().forEach(item => {
 function getMantleColor(translation_key) {
     return ResourceColorManager.getTextColor(translation_key)
 }
+
+/**
+ * Returns an object contains a TiC tool's traits
+ * 
+ * @param {Internal.ItemStack} item 
+ */
+function getModifiersFromItem(item) {
+    /** @type {Internal.ListTag} */
+    let modifiers_tag = item.nbt.get("tic_modifiers")
+    if (modifiers_tag == null) {return}
+    let result = {}
+    modifiers_tag.forEach(modifier => {
+        /** @type {string} */
+        let name = modifier.get("name").asString
+        /** @type {int} */
+        let level = modifier.get("level").asInt
+        result[name] = level
+    })
+    return result
+}
+
+global.toolParts = toolParts
+global.getMantleColor = getMantleColor
+global.getModifiersFromItem = getModifiersFromItem
