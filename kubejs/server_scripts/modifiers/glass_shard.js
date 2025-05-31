@@ -65,7 +65,8 @@ function glass_shard(event, item, level) {
                 if (material_name in GLASS_TYPE_TO_PARTICLE) {
                     let particle_block = GLASS_TYPE_TO_PARTICLE[material_name]
                     event.server.runCommandSilent("particle minecraft:block "+particle_block+" "+target_x+" "+target_y+" "+target_z+" 1 1 1 1 50")
-                    event.server.runCommandSilent("playsound minecraft:block.glass.break player @a "+particle_block+" "+target_x+" "+target_y+" "+target_z+" 10 "+sound_pitch)
+                    // event.server.runCommandSilent("playsound minecraft:block.glass.break player @a "+particle_block+" "+target_x+" "+target_y+" "+target_z+" 10 "+sound_pitch)
+                    event.entity.playSound("block.glass.break", 5, 0.8)
                 }
             })
         }
