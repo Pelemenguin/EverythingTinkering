@@ -5,7 +5,7 @@
 /kubejs/README.txt
 /local
 /logs
-/mods
+/mods/*.jar
 /PCL
 /saves
 /schematics
