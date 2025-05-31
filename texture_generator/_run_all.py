@@ -8,5 +8,7 @@ import material_glass
 print("glass complete")
 import material_brick
 print("brick complete")
+import material_coal
+print("coal complete")
 import material_andesite_alloy
 print("andesite_alloy complete")
