@@ -11,10 +11,7 @@
 /schematics
 /texture_generator/resources
 /texture_generator/outputs
-Everything TInkering - NeoForge 1.20.1.jar
-Everything TInkering - NeoForge 1.20.1.json
+*.jar
+*.json
 options.txt
 rhino.local.properties
-
-/usercache.json
-/usernamecache.json
