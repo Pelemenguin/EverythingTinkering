@@ -9,3 +9,9 @@ This modpack is still developing, and currently does not have any release yet.
 ## Why is there Python files in a modpack using KubeJS / What is `texture_generator` for
 
 This `texture_generator` is a Python project that can batch-generate TiC textures.
+
+# How can I play this modpack
+
+(Make sure Python3 is installed. )
+Download source code and run `build.py`. Then a modpack file is created.
+(I'm using Python because I didn't learn Java.)
