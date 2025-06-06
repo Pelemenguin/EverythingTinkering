@@ -3,7 +3,6 @@
     "ingredient": {
         "item": "minecraft:clay"
     },
-    "leftover": "minecraft:clay_ball",
     "material": "kubejs:soil#clay",
     "needed": 1,
     "value": 1
