@@ -44,8 +44,8 @@ ForgeEvents.onEvent("net.minecraftforge.event.entity.living.LivingHurtEvent", ev
         }
     }
     } catch (e) {
-        console.error("Error occured!")
-        console.error(e)
+        // console.error("Error occured!")
+        // console.error(e)
     }
 
 })

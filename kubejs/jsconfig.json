@@ -5,13 +5,13 @@
             "ES2015"
         ],
         "typeRoots": [
+            "./probe/user",
             "./probe/generated",
-            "./probe/user"
         ],
         "target": "ES2015",
         "rootDirs": [
-            "probe/generated",
             "probe/user",
+            "probe/generated",
             "server_scripts",
             "startup_scripts",
             "client_scripts"

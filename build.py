@@ -4,7 +4,6 @@ MODPACK_NAME = "Everything Tinkering"
 # Changing this variable will not change the fact whether it is a build version or not.
 # But this can affect the version showed in game and disable the build version warning.
 MODPACK_VERSION = ""
-MODLOADER_VERSION = "neoforge-1.20.1-47.1.106"
 
 # --------------------
 
@@ -19,6 +18,17 @@ import urllib.request
 
 curdir = os.path.relpath(os.path.dirname(os.path.realpath(__file__)), os.getcwd())
 
+modlist_file = open('modlist.md', 'r', encoding="utf-8")
+modlist_content = modlist_file.read()
+minecraft_version = re.findall(r'MINECRAFT \((.*)\)', modlist_content)[0]
+modloader_version = re.findall(r'MODLOADER \((.*)\)', modlist_content)[0]
+
+print("Build begin:")
+print(f" - Modpack name: {MODPACK_NAME}")
+print(f" - Modpack version: {MODPACK_VERSION if MODPACK_VERSION else "Build Version"}")
+print(f" - Mod loader version: {modloader_version}")
+print()
+
 manifest = {
     "manifestType": "minecraftModpack",
     "manifestVersion": 1,
@@ -29,15 +39,14 @@ manifest = {
     "minecraft": {
         "version": "1.20.1",
         "modLoaders": [{
-             "id": f"{MODLOADER_VERSION}",
+             "id": f"{modloader_version}",
              "primary": True
         }]
     },
     "files": []
 }
 
-modlist_file = open('modlist.md', 'r', encoding="utf-8")
-mods = re.findall(r'- \[(.*)\]\((.*)\) by (.*)\n<!-- (.*):(.*) -->', modlist_file.read(), flags=re.M)
+mods = re.findall(r'- \[(.*)\]\((.*)\) by (.*)\n<!-- (.*):(.*) -->', modlist_content, flags=re.M)
 modlist_file.close()
 
 tconstruct_file_id = 0
@@ -49,7 +58,7 @@ for m in mods:
         "required": True
     })
     read += 1
-    print(f"Creating manifest.json: {read}/{len(mods)} {read/len(mods):.2%}", end="\r")
+    print(f"Creating manifest.json --------- {read}/{len(mods)} {read/len(mods):.2%}", end="\r")
 print()
 
 manifest_json = json.dumps(manifest, indent=4)
@@ -57,10 +66,12 @@ manifest_json = json.dumps(manifest, indent=4)
 
 modlist_html = ""
 modlist_html += "<ul>\n"
+read = 0
 for m in mods:
     modlist_html += f"    <li><a href=\"{m[1]}\">{m[0]} by {m[2]}</a></li>\n"
+    print(f"Creating modlist.json ---------- {read}/{len(mods)} {read/len(mods):.2%}", end="\r")
 modlist_html += "</ul>"
-# print(modlist_html)
+print()
 
 output = zipfile.ZipFile(f"{MODPACK_NAME} {"v"+MODPACK_VERSION if MODPACK_VERSION else "[Build]"}.zip", "w")
 output.writestr("manifest.json", manifest_json)
@@ -89,7 +100,7 @@ for root, dirs, files in zipping:
         if any(fnmatch.fnmatch(file_path, ex) for ex in excluding): continue
         arcname = os.path.join("overrides", os.path.relpath(file_path, os.getcwd()))
         output.write(file_path, arcname)
-    print(f"Compressing files: {compressed}/{total} {(compressed/total):.2%}", end="\r")
-print()
+        print(f"Compressing folders ------------ {compressed}/{total} {(compressed/total):.2%}", end=f"\r")
+print("\a")
 
 output.close()

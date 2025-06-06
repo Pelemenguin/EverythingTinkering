@@ -1,5 +1,12 @@
 # Modlist
 
+<!-- Version info
+
+    MINECRAFT (1.20.1)
+    MODLOADER (neoforge-1.20.1-47.1.106)
+
+--->
+
 <!--
 
     Raw file names
