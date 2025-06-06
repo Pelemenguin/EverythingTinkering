@@ -1,0 +1,32 @@
+import { uncertain } from "../modifiers/uncertain";
+
+var getModifiersFromItem = global.getModifiersFromItem
+
+BlockEvents.broken(event => {
+    let entity = event.entity
+    if (entity == null) {return}
+    let mainhandItem = entity.handSlots[0]
+
+    if (mainhandItem != null && mainhandItem.nbt != null) {
+        console.info("Processing!")
+        process_item(event, mainhandItem)
+    }
+})
+
+/**
+ * 
+ * @param {Internal.BlockBrokenEventJS} event 
+ * @param {Internal.ItemStack} item 
+ */
+function process_item(event, item) {
+
+    let modifier_data = item.nbt.get("tic_modifiers")
+    console.info(modifier_data)
+    if (modifier_data == null) {return}
+    console.info("after", modifier_data)
+    var modifiers = getModifiersFromItem(item)
+
+    if ("kubejs:uncertain" in modifiers) {
+        uncertain(item, event.block, event.entity, modifiers["kubejs:uncertain"])
+    }
+}

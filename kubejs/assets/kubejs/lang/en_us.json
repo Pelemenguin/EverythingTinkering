@@ -28,6 +28,10 @@
     "material.kubejs.coal.charcoal": "Charcoal",
     "material.kubejs.coal.flavor": "Living Fuses!",
     "material.kubejs.coal.encyclopedia": "Attack an enemy can set your tool on fire. During this time, tool will continuously lose its durability points, and set fire to other enemies as you attack",
+
+    "material.kubejs.lapis_lazuli": "Lapis Lazuli",
+    "material.kubejs.lapis_lazuli.flavor": "Mining more ores! How do you know whether the block behind is stone ore treasure!",
+    "material.kubejs.lapis_lazuli.encyclopedia": "When mining blocks, there is a chance to turn the block behind it into ores. Probability reduces and reach 0 at last",
     
     "material.tconstruct.glass.white_stained": "White Stained Glass",
     "material.tconstruct.glass.orange_stained": "Orange Stained Glass",
@@ -63,6 +67,10 @@
     "modifier.kubejs.whacking": "Whacking",
     "modifier.kubejs.whacking.flavor": "Bang!",
     "modifier.kubejs.whacking.description": "Increases damage of critical hit",
+
+    "modifier.kubejs.uncertain": "Uncertain",
+    "modifier.kubejs.uncertain.flavor": "Schrödinger’s Ore!",
+    "modifier.kubejs.uncertain.description": "You'll never know what block is there behind",
 
     "modifier.kubejs.igniting": "Igniting",
     "modifier.kubejs.igniting.flavor": "Hot Caution!",
