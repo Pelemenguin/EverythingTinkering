@@ -12,6 +12,7 @@
         "brick": "#b75a40",
         "brick.nether": "#49242a",
         "coal": "#393e46",
+        "coal.charcoal": "#2B261D",
         "andesite_alloy": "#c9caba"
     },
     "material.tconstruct": {

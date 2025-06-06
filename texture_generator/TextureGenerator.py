@@ -32,7 +32,8 @@ class TextureGenerator:
         self._parts = parts
         self._fallbacks = []
         self._functions: dict[str, tuple[function, int|float]] = {}
-        self._childs = []
+        self._childs: list[SubTextureGenerator] = []
+        self._filter = lambda i: True
     
     def set_fallback(self, fallbacks: list[str]):
         self._fallbacks = fallbacks
@@ -74,6 +75,8 @@ class TextureGenerator:
 
         functions = list(self._functions[k] for k in self._functions)
         functions = sorted(functions, key=lambda i: i[1], reverse=True)
+
+        self._childs = sorted(self._childs, key=lambda i: i._priority, reverse=True)
         
         for part in self._parts:
             if (part_types != None) and (part._type not in part_types):
@@ -87,8 +90,14 @@ class TextureGenerator:
             except:
                 print(f"Unparsable input {this_input_path}")
                 continue
+            for c in self._childs:
+                if (c._priority <= 0): break
+                image = c.operate(image)
             for f in functions:
                 image = f[0](image)
+            for c in self._childs:
+                if (c._priority > 0): continue
+                image = c.operate(image)
             this_dir = os.path.dirname(this_output_path)
             l = (os.path.basename(this_output_path).split("."))
             l[-2] += f"_{suffix}"
@@ -101,6 +110,50 @@ class TextureGenerator:
             print(f"Part generated {suffixed_path}")
             image.close()
 
+class SubTextureGenerator(TextureGenerator):
+
+    """A SubTextureGenerator object."""
+
+    def __init__(self, parent: TextureGenerator, filter = (lambda i:True), priority: int = 0):
+        """Create a SubTextureGenerator object.
+        When using this to generate textures, it first take corresponding pixels in parent TextureGenerator out, then operate the texture.
+        So it may write pixels to parent TextureGenerator where is not in its filter.
+        
+        :param parent: A `TextureGenerator` object.
+        :param filter: To decide which pixels should be added in SubTextureGenerator.
+        Should be a function that accept a (x, y) pair.
+        :param priority: Priority of the generator. Generators will be executed before parent Generator if this is greater than 0."""
+        super().__init__(parent._parts)
+        parent._childs.append(self)
+        self._functions = parent._functions.copy()
+        self.filter = filter
+        self._priority = priority
+    
+    def operate(self, image: PIL.Image.Image) -> PIL.Image.Image:
+        """Operate a texture.
+        
+        :param image: The input image."""
+        filtered = image.copy()
+        for y in range(image.height):
+            for x in range(image.width):
+                if not self.filter((x,y)):
+                    filtered.putpixel((x,y), (0, 0, 0, 0))
+        
+        functions = list(self._functions[k] for k in self._functions)
+        functions = sorted(functions, key=lambda i: i[1], reverse=True)
+
+        for f in functions:
+            # print(functions)
+            filtered = f[0](filtered)
+        
+        result = image.copy()
+        for y in range(image.height):
+            for x in range(image.width):
+                if filtered.getpixel((x,y))[3] != 0:
+                    result.putpixel((x,y), filtered.getpixel((x,y)))
+        # return filtered
+        return result
+
 #################################
 #   Image operation functions   #
 #################################
@@ -110,7 +163,8 @@ def recolor_function(transformation):
     
     :param transformation: A `function` or a `dict`. Accepts a `tuple` and returns another one."""
     def result(image: PIL.Image.Image):
-        data = image.load()
+        copied = image.copy()
+        data = copied.load()
         for y in range(image.height):
             for x in range(image.width):
                 if isinstance(transformation, dict):
@@ -120,13 +174,14 @@ def recolor_function(transformation):
                         data[x,y] = (0, 0, 0, 0)
                 else:
                     data[x,y] = transformation(data[x,y])
-        return image
+        return copied
     return result
 
-def grayscale_colorize_function(transformation: dict[int, tuple[int, int, int, int]]):
+def grayscale_colorize_function(transformation: dict[int, tuple[int, int, int, int]], strict: bool = False):
     """Generates a function that colorize a grayscale image.
     
-    :param transformation: A `dict`. Keys are gray value. Values are pixels."""
+    :param transformation: A `dict`. Keys are gray value. Values are pixels.
+    :param strict: If set to True, non-gray pixels will be ignored. This parameter is defaultly False"""
     def transformer(input_pixel):
         processed = sorted(transformation, reverse=True)
         if input_pixel == (0, 0, 0, 0):
@@ -138,7 +193,15 @@ def grayscale_colorize_function(transformation: dict[int, tuple[int, int, int, i
                 if input_pixel[1] >= k:
                     return transformation[k]
         return (0, 0, 0, 0)
-    return recolor_function(transformer)
+    if strict:
+        def strict(input_pixel):
+            if not (input_pixel[0] == input_pixel[1] == input_pixel[2]):
+                return input_pixel
+            else:
+                return transformer(input_pixel)
+        return recolor_function(strict)
+    else:
+        return recolor_function(transformer)
 
 def multiply(im: PIL.Image.Image, scale: float = 1.5):
     """Generates a function that multiplies a image over the original one.
@@ -159,6 +222,7 @@ def multiply(im: PIL.Image.Image, scale: float = 1.5):
         # print(im.size)
         # image.putalpha(alpha_image)
         # sized_im.add(image, dest, source)
+        copied = image.copy()
         for y in range(image.height):
             for x in range(image.width):
                 original = list(image.getpixel((x,y)))
@@ -169,6 +233,6 @@ def multiply(im: PIL.Image.Image, scale: float = 1.5):
                     original[i] = int(original[i])
                     if original[i] >= 256:
                         original[i] = 255
-                image.putpixel((x,y), tuple(original))
-        return image
+                copied.putpixel((x,y), tuple(original))
+        return copied
     return result

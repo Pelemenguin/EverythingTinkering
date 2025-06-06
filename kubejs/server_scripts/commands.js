@@ -1,5 +1,7 @@
+const MaterialId = Java.loadClass("slimeknights.tconstruct.library.materials.definition.MaterialId")
 
-import { toolParts, getMantleColor } from './globals'
+let toolParts = global.toolParts
+let getMantleColor = global.getMantleColor
 
 ServerEvents.commandRegistry(event => {
     const { commands: Commands, arguments: Arguments } = event
