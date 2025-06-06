@@ -69,7 +69,8 @@ modlist_html += "<ul>\n"
 read = 0
 for m in mods:
     modlist_html += f"    <li><a href=\"{m[1]}\">{m[0]} by {m[2]}</a></li>\n"
-    print(f"Creating modlist.json ---------- {read}/{len(mods)} {read/len(mods):.2%}", end="\r")
+    read += 1
+    print(f"Creating modlist.html ---------- {read}/{len(mods)} {read/len(mods):.2%}", end="\r")
 modlist_html += "</ul>"
 print()
 
