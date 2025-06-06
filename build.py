@@ -4,7 +4,7 @@ MODPACK_NAME = "Everything Tinkering"
 # Changing this variable will not change the fact whether it is a build version or not.
 # But this can affect the version showed in game and disable the build version warning.
 MODPACK_VERSION = ""
-MODLOADER_VERSION = "neoforge-1.20.1-47.1.5"
+MODLOADER_VERSION = "neoforge-1.20.1-47.1.106"
 
 # --------------------
 
@@ -88,5 +88,6 @@ for root, dirs, files in zipping:
         arcname = os.path.join("overrides", os.path.relpath(file_path, os.getcwd()))
         output.write(file_path, arcname)
     print(f"Compressing files: {compressed}/{total} {(compressed/total):.2%}", end="\r")
+print()
 
 output.close()
