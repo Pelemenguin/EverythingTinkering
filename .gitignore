@@ -10,8 +10,8 @@
 /schematics
 /texture_generator/resources
 /texture_generator/outputs
-*.jar
-*.json
+/*.jar
+/*.json
 options.txt
 rhino.local.properties
 *Everything Tinkering*.zip
