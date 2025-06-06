@@ -29,7 +29,7 @@
 <!-- 328085:6323270 -->
 - [MmmMmmMmmMmm (Target Dummy)](https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm) by MehVahdJukaar
 <!-- 225738:6608233 -->
-- [Jade 🔍](https://www.curseforge.com/minecraft/mc-mods/jade) by Snownee
+- [Jade 🔍 ](https://www.curseforge.com/minecraft/mc-mods/jade) by Snownee
 <!-- 324717:6271651 -->
 - [Just Enough Items (JEI)](https://www.curseforge.com/minecraft/mc-mods/jei) by mezz
 <!-- 238222:6075247 -->
@@ -39,8 +39,7 @@
 <!-- 74924:6258424 -->
 - [Moonlight Lib](https://www.curseforge.com/minecraft/mc-mods/selene) by MehVahdJukaar
 <!-- 499980:6507197 -->
-- [ProbeJS](https://www.curseforge.com/minecraft/mc-mods/probejs) by Amygdaloideae
-<!-- 585406:5227399 -->
+<!-- ProbeJS is also installed when developing, but should not be included in the modpack. 585406:5227399 -->
 - [Rhino](https://www.curseforge.com/minecraft/mc-mods/rhino) by LatvianModder
 <!-- 416294:4735056 -->
 - [Tinkers Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) by mDiyo

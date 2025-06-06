@@ -36,7 +36,7 @@ manifest = {
     "files": []
 }
 
-modlist_file = open('modlist.md', 'r')
+modlist_file = open('modlist.md', 'r', encoding="utf-8")
 mods = re.findall(r'- \[(.*)\]\((.*)\) by (.*)\n<!-- (.*):(.*) -->', modlist_file.read(), flags=re.M)
 modlist_file.close()
 
@@ -74,7 +74,9 @@ zipping.extend(os.walk(os.path.join(curdir, "kubejs")))
 zipping.extend(os.walk(os.path.join(curdir, "config")))
 
 # Exclude files here
-excluding = []
+excluding = [
+    "kubejs/probe"   # Generated ProbeJS data
+]
 
 total = len(zipping)
 compressed = 0
