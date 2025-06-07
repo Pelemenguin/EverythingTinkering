@@ -6,6 +6,6 @@
  * @param {number} level 
  */
 function uncertain(item, blockContainer, entity, level) {
-    let entity_facing = entity.facing
-    console.info(entity_facing)
+    let entity_facing = entity.facing.toString()
+    let newblock = blockContainer[entity_facing]
 }
