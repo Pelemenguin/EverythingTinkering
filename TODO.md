@@ -12,6 +12,9 @@
 - 触发 `relaying` 时播放粒子特效。
 - 为属性添加UI显示。
 - 重新生成 `coal#charcoal` 材质。
+- 修复 `/modpack`。
+- 修复 `on_living_hurt` 出现在读取工具损坏时出现 `null` 的情况。
+- 更新匠魂。
 
 # 弃用
 
