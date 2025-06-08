@@ -7,7 +7,7 @@ BlockEvents.broken(event => {
     if (entity == null) {return}
     let mainhandItem = entity.handSlots[0]
 
-    if (mainhandItem != null && mainhandItem.nbt != null) {        
+    if (mainhandItem != null && mainhandItem.nbt != null) {
         process_item_on_mine(event, mainhandItem)
     }
 })
