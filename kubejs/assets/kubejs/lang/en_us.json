@@ -17,12 +17,12 @@
     "material.kubejs.soil.mud": "Mud",
     "material.kubejs.soil.clay": "Clay",
     "material.kubejs.soil.flavor": "Totally natural material! May get your hands dirty.",
-    "material.kubejs.soil.encyclopedia": "Damage get multiplied when falling. Multiplier is 1.5 at level 1, and increase 0.25 each level. Consumes 25% of remaining durability, at least 10 points",
+    "material.kubejs.soil.encyclopedia": "The tool has a chance of level*20% to drop durability points by (1~3)*level every tick",
 
     "material.kubejs.brick": "Brick",
     "material.kubejs.brick.nether": "Nether Brick",
     "material.kubejs.brick.flavor": "Common building material...?",
-    "material.kubejs.brick.encyclopedia": "Critical hits' damage are multiplied by 2 again",
+    "material.kubejs.brick.encyclopedia": "Damage get multiplied when falling. Multiplier is 1.5 at level 1, and increase 0.25 each level. Consumes 25% of remaining durability, at least 10 points",
 
     "material.kubejs.coal": "Coal",
     "material.kubejs.coal.charcoal": "Charcoal",
