@@ -194,12 +194,12 @@ def grayscale_colorize_function(transformation: dict[int, tuple[int, int, int, i
                     return transformation[k]
         return (0, 0, 0, 0)
     if strict:
-        def strict(input_pixel):
+        def strict_process(input_pixel):
             if not (input_pixel[0] == input_pixel[1] == input_pixel[2]):
                 return input_pixel
             else:
                 return transformer(input_pixel)
-        return recolor_function(strict)
+        return recolor_function(strict_process)
     else:
         return recolor_function(transformer)
 

@@ -121,3 +121,31 @@ random.seed(1928615854)
 # generator = TextureGenerator(parts)
 
 # def charcoalize
+
+# palette = {
+    # 0: [(0, 0, 0, 0)],
+    # 63: [(35, 31, 24, 255), (19, 17, 13, 255)],
+    # 102: [(29, 26, 20, 255)]*8 + [(43, 28, 29, 255)],
+    # 140: [(29, 26, 20, 255)]*16 + [(35, 31, 24, 255), (66, 59, 47, 255)],
+    # 178: [(29, 26, 20, 255)]*16 + [(43, 38, 29, 255), (35, 31, 24, 255)],
+    # 216: [(43, 38, 29, 255)]*16 + [(66, 59, 47, 255), (78, 69, 54, 255)],
+    # 255: [(66, 59, 47, 255)]*8 + [(125, 111, 88, 255), (96, 85, 67, 255)]
+# }
+
+# @recolor_function
+# def charcoalize(input_pixel) -> tuple:
+    # processed = sorted(palette, reverse=True)
+    # if input_pixel == (0, 0, 0, 0):
+        # return (0, 0, 0, 0)
+    # try:
+        # return transformation[input_pixel[1]]
+    # except:
+        # for k in processed:
+            # if input_pixel[1] >= k:
+                # return random.choice(palette[k])
+    # return (0, 0, 0, 0)
+
+generator = TextureGenerator(parts)
+generator.add_function(multiply(PIL.Image.open("charcoal_generator.png"), 1.2), "recolor", 0)
+generator.set_fallback(["nonmetal"])
+generator.generate("kubejs_coal_charcoal", part_types=["tconstruct:head", "tconstruct:handle", "tconstruct:binding", "tconstruct:repair_kit"])
