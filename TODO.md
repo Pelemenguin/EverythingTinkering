@@ -5,7 +5,6 @@
 ## 计划创造材料
 - 添加 `soul` 作为 `glass` 的变种。
 - 完善材料 `lapis_lazuli`。
-  - 生成 `lapis_lazuli` 的纹理并填写中文翻译。
 ## 计划创建配方
 - 添加材料 `glass#*_stained` 配方。
 ## 杂项
