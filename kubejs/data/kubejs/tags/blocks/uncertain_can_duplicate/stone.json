@@ -6,6 +6,7 @@
         "minecraft:copper_ore",
         "minecraft:redstone_ore",
         "minecraft:emerald_ore",
-        "minecraft:diamond_ore"
+        "minecraft:diamond_ore",
+        "create:zinc_ore"
     ]
 }
