@@ -41,5 +41,5 @@ function uncertain(item, blockContainer, entity, mclevel, level) {
             }
         }
     }
-    item.nbt.get("tic_persistent").get("kubejs:uncertain").putInt("blockMined", mined_block + 1)
+    item.nbt.get("tic_persistent").get("kubejs:uncertain").putInt("blockMined", mined_block+1)
 }
