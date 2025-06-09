@@ -1,6 +1,5 @@
-const MaterialId = Java.loadClass("slimeknights.tconstruct.library.materials.definition.MaterialId")
-
 let toolParts = global.toolParts
+// console.info(toolParts)
 let getMantleColor = global.getMantleColor
 
 ServerEvents.commandRegistry(event => {
@@ -88,7 +87,8 @@ function partSupportsMaterial(item, materialId) {
             return false
         }
     } catch (e) {
-        console.error(`Error parsing materialId ${materialId}: ${e}`)
+        console.error(`Error parsing materialId ${materialId} with item ${item}:`)
+        console.error(e)
         return false
     }
 }
