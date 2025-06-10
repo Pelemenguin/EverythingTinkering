@@ -18,7 +18,7 @@
     jei-1.20.1-forge-15.20.0.106.jar
     kubejs-forge-2001.6.5-build.14.jar
     lootjs-forge-1.20.1-2.13.0.jar
-    Mantle-1.20.1-1.11.44.jar
+    Mantle-1.20.1-1.11.61.jar
     moonlight-1.20-2.14.1-forge.jar
     probejs-6.0.1-forge.jar
     rhino-forge-2001.2.2-build.6.jar
@@ -46,7 +46,7 @@
 - [LootJS: KubeJS Addon](https://www.curseforge.com/minecraft/mc-mods/lootjs) by Lytho
 <!-- 570630:6508899 -->
 - [Mantle](https://www.curseforge.com/minecraft/mc-mods/mantle) by mDiyo
-<!-- 74924:6258424 -->
+<!-- 74924:6635380 -->
 - [Moonlight Lib](https://www.curseforge.com/minecraft/mc-mods/selene) by MehVahdJukaar
 <!-- 499980:6507197 -->
 <!-- ProbeJS is also installed when developing, but should not be included in the modpack. 585406:5227399 -->
