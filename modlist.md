@@ -17,11 +17,12 @@
     Jade-1.20.1-Forge-11.13.1.jar
     jei-1.20.1-forge-15.20.0.106.jar
     kubejs-forge-2001.6.5-build.14.jar
+    lootjs-forge-1.20.1-2.13.0.jar
     Mantle-1.20.1-1.11.44.jar
     moonlight-1.20-2.14.1-forge.jar
     probejs-6.0.1-forge.jar
     rhino-forge-2001.2.2-build.6.jar
-    TConstruct-1.20.1-3.9.2.37.jar
+    TConstruct-1.20.1-3.10.1.76.jar
     
 -->
 
@@ -42,6 +43,8 @@
 <!-- 238222:6075247 -->
 - [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) by LatvianModder
 <!-- 238086:5454840 -->
+- [LootJS: KubeJS Addon](https://www.curseforge.com/minecraft/mc-mods/lootjs) by Lytho
+<!-- 570630:6508899 -->
 - [Mantle](https://www.curseforge.com/minecraft/mc-mods/mantle) by mDiyo
 <!-- 74924:6258424 -->
 - [Moonlight Lib](https://www.curseforge.com/minecraft/mc-mods/selene) by MehVahdJukaar
@@ -50,4 +53,4 @@
 - [Rhino](https://www.curseforge.com/minecraft/mc-mods/rhino) by LatvianModder
 <!-- 416294:4735056 -->
 - [Tinkers Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) by mDiyo
-<!-- 74072:6266282 -->
+<!-- 74072:6635554 -->
