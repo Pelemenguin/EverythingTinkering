@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+        "item": "minecraft:charcoal"
+    },
+    "material": "kubejs:coal#charcoal",
+    "needed": 2,
+    "value": 1
+}

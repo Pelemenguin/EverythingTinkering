@@ -1,0 +1,8 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+        "item": "minecraft:lapis_block"
+    },
+    "material": "kubejs:lapis_lazuli",
+    "value": 1
+}
