@@ -1,13 +1,5 @@
 // priority: 1000
 
-const ToolPartItem = Java.loadClass('slimeknights.tconstruct.library.tools.part.ToolPartItem')
-// const Item = Java.loadClass('net.minecraft.world.item.Item')
-const ForgeRegistries = Java.loadClass('net.minecraftforge.registries.ForgeRegistries')
-const MaterialRegistry = Java.loadClass('slimeknights.tconstruct.library.materials.MaterialRegistry')
-const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialId')
-const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager')
-const TextColor = Java.loadClass('net.minecraft.network.chat.TextColor')
-
 /**
  * @type {Internal.Item[]}
  */
@@ -34,16 +26,30 @@ function getMantleColor(translation_key) {
  * 
  * @param {Internal.ItemStack} item 
  */
+// function getModifiersFromItem(item) {
+    // /** @type {Internal.ListTag} */
+    // let modifiers_tag = item.nbt.get("tic_modifiers")
+    // if (modifiers_tag == null) {return}
+    // let result = {}
+    // modifiers_tag.forEach(modifier => {
+        // /** @type {string} */
+        // let name = modifier.get("name").asString
+        // /** @type {int} */
+        // let level = modifier.get("level").asInt
+        // result[name] = level
+    // })
+    // return result
+// }
+
 function getModifiersFromItem(item) {
-    /** @type {Internal.ListTag} */
-    let modifiers_tag = item.nbt.get("tic_modifiers")
-    if (modifiers_tag == null) {return}
+    // let toolStack = ToolStack.from(item)
+    // let modNbt = toolStack.
+    let raw = item.nbt.get("tic_modifiers")
+    let modNbt = ModifierNBT.readFromNBT(raw)
     let result = {}
-    modifiers_tag.forEach(modifier => {
-        /** @type {string} */
-        let name = modifier.get("name").asString
-        /** @type {int} */
-        let level = modifier.get("level").asInt
+    modNbt.forEach(modifier => {
+        let name = modifier.getId().toString()
+        let level = modifier.level
         result[name] = level
     })
     return result
