@@ -5,7 +5,9 @@
     "command.kubejs.item_list.parts.name": "%s的部件列表",
     "command.kubejs.item_list.parts.lore": "包含了该材料的所有部件",
 
-        "_comment_materials": " ----- Materials ----- ",
+        "_comment_materials": " ----- 材料 ----- ",
+    
+    "material.tconstruct.wood.cherry": "樱花木"
 
     "material.kubejs.soil": "沙土",
     "material.kubejs.soil.dirt": "泥土",
@@ -58,7 +60,7 @@
     "material.kubejs.andesite_alloy.flavor": "就像一个传动轴！",
     "material.kubejs.andesite_alloy.encyclopedia": "判定箱是一个立方体，其棱会每级增加0.5格。在判定箱内的实体会受到你对直接目标造成的伤害的50%",
     
-        "_comment_modifiers": " ----- Modifiers ----- ",
+        "_comment_modifiers": " ----- 属性 ----- ",
 
     "modifier.kubejs.incompact": "松散",
     "modifier.kubejs.incompact.flavor": "用后洗手！",
