@@ -84,10 +84,12 @@ if not MODPACK_VERSION:
 zipping = []
 zipping.extend(os.walk(os.path.join(curdir, "kubejs")))
 zipping.extend(os.walk(os.path.join(curdir, "config")))
+zipping.extend(os.walk(os.path.join(curdir, "LICENSES")))
 
 # Exclude files here
 excluding = [
     "kubejs/probe"   # Generated ProbeJS data
+    "kubejs/README.txt"   # KubeJS's README file
 ]
 
 total = len(zipping)

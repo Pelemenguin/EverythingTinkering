@@ -8,3 +8,4 @@ License [here](./licenses/TinkersConstruct.txt).
 Copied files:
 - Part textures of material `tconstruct:wood`'s variants in `kubejs/assets/tconstruct/textures/item/tool/`.
 - All files in `kubejs/assets/tconstruct/tinkering/materials/wood/`.
+- All files in `kubejs/data/tconstruct/recipes/tools/materials/wood/`
