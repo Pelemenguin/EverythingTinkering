@@ -1,5 +1,6 @@
 {
     "material.kubejs": {
+    
         "soil": "#79553a",
         "soil.dirt": "#79553a",
         "soil.sand": "#e7e4bb",
@@ -9,14 +10,19 @@
         "soil.rooted_dirt": "#bb9789",
         "soil.mud": "#3e3836",
         "soil.clay": "#9aa3b3",
+        
         "brick": "#b75a40",
         "brick.nether": "#49242a",
+        
         "coal": "#393e46",
         "coal.charcoal": "#2B261D",
+        
         "lapis_lazuli": "#345EC3",
         "andesite_alloy": "#c9caba"
+        
     },
     "material.tconstruct": {
+    
         "glass.white_stained": "#ffffff",
         "glass.orange_stained": "#d87f33",
         "glass.magenta_stained": "#b24cd8",
@@ -35,12 +41,17 @@
         "glass.black_stained": "#191919",
         "glass.seared": "#3f3c39",
         "glass.scorched": "#53453c"
+        
     },
     "modifier.kubejs": {
+    
+        "welcome": "#00D638",
+    
         "incompact": "#79553a",
         "igniting": "#393e46",
         "whacking": "#b75a40",
         "glass_shard": "#d0eae9",
         "relaying": "#c9caba"
+        
     }
 }

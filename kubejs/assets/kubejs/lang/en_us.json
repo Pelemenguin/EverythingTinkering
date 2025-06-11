@@ -60,6 +60,11 @@
     
         "_comment_modifiers": " ----- Modifiers ----- ",
 
+    "modifier.kubejs.welcome": "Welcome",
+    "modifier.kubejs.welcome.flavor": "Wish you good luck!",
+    "modifier.kubejs.welcome.description": "Stats slightly boost during the first three days",
+    "modifier.kubejs.welcome.hint": "The gift from %s has disappeared. Good luck!",
+
     "modifier.kubejs.incompact": "Incompact",
     "modifier.kubejs.incompact.flavor": "Wash your hands after using the tool!",
     "modifier.kubejs.incompact.description": "Durability drops even when you are not using it",
@@ -82,6 +87,11 @@
 
     "modifier.kubejs.relaying": "Relaying",
     "modifier.kubejs.relaying.flavor": "Convey momentum!",
-    "modifier.kubejs.relaying.description": "Hits enemies that are slightly behind the target when attacking"
+    "modifier.kubejs.relaying.description": "Hits enemies that are slightly behind the target when attacking",
+    
+        "comment_artifacts": " ----- Artifacts ----- ",
+    
+    "item.kubejs.artifact.startup.pickaxe.name": "Startup Pickaxe",
+    "item.kubejs.artifact.startup.pickaxe.lore": "A gift to beginners."
 
 }

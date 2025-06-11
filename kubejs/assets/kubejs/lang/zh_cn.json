@@ -1,4 +1,5 @@
 {
+    
     "generator.kubejs.default": "整合包默认预设",
 
         "_comment_command": " ----- 命令 ---- ",
@@ -62,6 +63,11 @@
     
         "_comment_modifiers": " ----- 属性 ----- ",
 
+    "modifier.kubejs.welcome": "欢迎",
+    "modifier.kubejs.welcome.flavor": "祝你好运！",
+    "modifier.kubejs.welcome.description": "前三天内获得轻微的属性提升",
+    "modifier.kubejs.welcome.hint": "来自%s的赠礼已然消散。祝你好运！",
+
     "modifier.kubejs.incompact": "松散",
     "modifier.kubejs.incompact.flavor": "用后洗手！",
     "modifier.kubejs.incompact.description": "即使不使用时也会损失耐久",
@@ -84,5 +90,11 @@
 
     "modifier.kubejs.relaying": "传动",
     "modifier.kubejs.relaying.flavor": "传递动量！",
-    "modifier.kubejs.relaying.description": "攻击时，目标稍后方的敌人也会被击中"
+    "modifier.kubejs.relaying.description": "攻击时，目标稍后方的敌人也会被击中",
+    
+        "comment_artifacts": " ----- Artifacts ----- ",
+    
+    "item.kubejs.artifact.startup.pickaxe.name": "初始之镐",
+    "item.kubejs.artifact.startup.pickaxe.lore": "一份致新手的礼物。"
+    
 }

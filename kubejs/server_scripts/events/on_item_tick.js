@@ -2,7 +2,8 @@
 
 // import { getModifiersFromItem } from "../../startup_scripts/globals"
 import { incompact } from "../modifiers/incompact"
-// import { igniting_tick } from "../modifiers/igniting"
+import { igniting_tick } from "../modifiers/igniting"
+import { welcome_remove } from "../modifiers/welcome_remove"
 
 let getModifiersFromItem = global.getModifiersFromItem
 
@@ -34,6 +35,11 @@ function process_item(event, item) {
     // Igniting
     if ("kubejs:igniting" in modifiers) {
         igniting_tick(item, event.player)
+    }
+    
+    // Welcome
+    if ("kubejs:welcome" in modifiers) {
+        welcome_remove(item, event.level.time, event.player)
     }
 
 }
