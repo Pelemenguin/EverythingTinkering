@@ -18,6 +18,7 @@
         "coal.charcoal": "#2B261D",
         
         "lapis_lazuli": "#345EC3",
+        
         "andesite_alloy": "#c9caba"
         
     },
@@ -51,6 +52,7 @@
         "igniting": "#393e46",
         "whacking": "#b75a40",
         "glass_shard": "#d0eae9",
+        "uncertain": "#345EC3",
         "relaying": "#c9caba"
         
     }

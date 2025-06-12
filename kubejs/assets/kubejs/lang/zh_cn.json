@@ -8,7 +8,7 @@
 
         "_comment_materials": " ----- 材料 ----- ",
     
-    "material.tconstruct.wood.cherry": "樱花木"
+    "material.tconstruct.wood.cherry": "樱花木",
 
     "material.kubejs.soil": "沙土",
     "material.kubejs.soil.dirt": "泥土",
@@ -95,6 +95,12 @@
         "comment_artifacts": " ----- Artifacts ----- ",
     
     "item.kubejs.artifact.startup.pickaxe.name": "初始之镐",
-    "item.kubejs.artifact.startup.pickaxe.lore": "一份致新手的礼物。"
+    "item.kubejs.artifact.startup.pickaxe.lore": "一份致新手的礼物。",
+    
+    "item.kubejs.artifact.startup.hand_axe.name": "初始之斧",
+    "item.kubejs.artifact.startup.hand_axe.lore": "一份致新手的礼物。",
+    
+    "item.kubejs.artifact.startup.sword.name": "初始之剑",
+    "item.kubejs.artifact.startup.sword.lore": "一份致新手的礼物。"
     
 }
