@@ -34,7 +34,7 @@
     
     "material.kubejs.lapis_lazuli": "青金石",
     "material.kubejs.lapis_lazuli.flavor": "继续挖吧！你又怎么知道那儿后面的方块是石头还是埋藏的宝藏！",
-    "material.kubejs.lapis_lazuli.encyclopedia": "挖掘方块时，有概率将矿石后面的石头转化为该矿石。概率逐渐衰减并最终跌落至0",
+    "material.kubejs.lapis_lazuli.encyclopedia": "概率跌落至0之前，每级可以挖掘1000个方块。初始概率恒为20%",
     
     "material.tconstruct.glass.white_stained": "白色染色玻璃",
     "material.tconstruct.glass.orange_stained": "橙色染色玻璃",
@@ -82,7 +82,7 @@
 
     "modifier.kubejs.uncertain": "未定",
     "modifier.kubejs.uncertain.flavor": "薛定谔的矿！",
-    "modifier.kubejs.uncertain.description": "万一后面还有一个矿呢",
+    "modifier.kubejs.uncertain.description": "无人注意时，矿石有时会在被挖掘后复制自身。但是，概率会逐渐减少并最终归零",
 
     "modifier.kubejs.glass_shard": "玻璃碎片",
     "modifier.kubejs.glass_shard.flavor": "易碎制品！",

@@ -20,7 +20,7 @@ function uncertain(item, blockContainer, entity, mclevel, level) {
         item.nbt.merge({"tic_persistent": {"kubejs:uncertain": {"blockMined": NBT.intTag(0)}}})
     }
     // 概率判定。放在前面是因为若没有判定到就可以直接跳过，避免浪费时间
-    if (JavaMath.random() < UNCERTAIN_MAX_PROBABILITY - mined_block * UNCERTAIN_PROBABILITY_REDUCE) {
+    if (JavaMath.random() < UNCERTAIN_MAX_PROBABILITY - mined_block * UNCERTAIN_PROBABILITY_REDUCE / level) {
         let entity_facing = entity.facing.toString()
         /** @type {Internal.BlockContainerJS} */
         let newblock = blockContainer[entity_facing]
