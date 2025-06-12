@@ -14,13 +14,13 @@ BlockEvents.broken(event => {
     lastBlockPos = thisBlockPos
     lastBrokenTime = thisBrokenTime
     
-    console.info('A block is mined: '+lastBlockPos)
+    // console.info('A block is mined: '+lastBlockPos)
     let entity = event.entity
     if (entity == null) {return}
     let mainhandItem = entity.handSlots[0]
 
     if (mainhandItem != null && mainhandItem.nbt != null) {
-        console.info('Before calling')
+        // console.info('Before calling')
         process_item_on_mine(event, mainhandItem)
     }
 })
@@ -32,7 +32,7 @@ BlockEvents.broken(event => {
  */
 function process_item_on_mine(event, item) {
     
-    console.info('Function called!')
+    // console.info('Function called!')
     let modifier_data = item.nbt.get("tic_modifiers")
     if (modifier_data == null) {return}
     var modifiers = getModifiersFromItem(item)
