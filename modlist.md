@@ -36,6 +36,8 @@
 <!-- 419699:5137938 -->
 - [Create](https://www.curseforge.com/minecraft/mc-mods/create) by simibubi
 <!-- 328085:6323270 -->
+- [EventJS](https://www.curseforge.com/minecraft/mc-mods/eventjs/files/all?page=1&pageSize=20) by ZZZank
+<!-- 1132802:6582223 -->
 - [MmmMmmMmmMmm (Target Dummy)](https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm) by MehVahdJukaar
 <!-- 225738:6608233 -->
 - [Jade 🔍 ](https://www.curseforge.com/minecraft/mc-mods/jade) by Snownee
