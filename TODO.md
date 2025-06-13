@@ -10,7 +10,6 @@
 - 添加 `calcite`，`tuff`，`prismarine`，`dripstone` 作为 `rock` 变种。
 ## 计划创造材料
 - 添加 `soul` 作为 `glass` 的变种。
-- 为属性 `uncertain` 添加下界岩判定。
 ## 计划创建配方
 - 添加材料 `glass#*_stained` 配方。
 ## 杂项

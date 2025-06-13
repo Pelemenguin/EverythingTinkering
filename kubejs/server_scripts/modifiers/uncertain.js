@@ -29,6 +29,8 @@ function uncertain(item, blockContainer, entity, mclevel, level) {
             uncertain_work(new ResourceLocation("kubejs", "uncertain_can_duplicate/stone"), newblock, blockContainer)
         } else if (newblock.blockState.block.id == "minecraft:deepslate") { // 深板岩，其余同理
             uncertain_work(new ResourceLocation("kubejs", "uncertain_can_duplicate/deepslate"), newblock, blockContainer)
+        } else if (newblock.blockState.block.id == "minecraft:netherrack") { // 深板岩，其余同理
+            uncertain_work(new ResourceLocation("kubejs", "uncertain_can_duplicate/netherrack"), newblock, blockContainer)
         }
     }
     item.nbt.get("tic_persistent").get("kubejs:uncertain").putInt("blockMined", mined_block+1)
