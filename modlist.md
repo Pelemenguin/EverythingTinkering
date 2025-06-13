@@ -23,6 +23,7 @@
     probejs-6.0.1-forge.jar
     rhino-forge-2001.2.2-build.6.jar
     TConstruct-1.20.1-3.10.1.76.jar
+    tconstruct_js-1.0.3.jar
     
 -->
 
@@ -54,3 +55,5 @@
 <!-- 416294:4735056 -->
 - [Tinkers Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) by mDiyo
 <!-- 74072:6635554 -->
+- [TConstructJS](https://www.curseforge.com/minecraft/mc-mods/tconstructjs) by lcy0x1
+<!-- 1210790:6583705 -->
