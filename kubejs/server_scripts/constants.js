@@ -13,3 +13,10 @@ const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.Tool
 const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDefinitions')
 const MaterialNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT')
 const MaterialNBTBuilder = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT$Builder')
+
+const LivingHurtEvent = Java.loadClass("net.minecraftforge.event.entity.living.LivingHurtEvent")
+
+const OFFHAND_ATTACKABLE_MODIFIER = [
+    "tconstruct:offhand_attack",
+    "tconstruct:dual_wielding"
+]

@@ -5,11 +5,6 @@ import { igniting_trigger } from "../modifiers/igniting"
 
 let getModifiersFromItem = global.getModifiersFromItem
 
-const OFFHAND_ATTACKABLE_MODIFIER = [
-    "tconstruct:offhand_attack",
-    "tconstruct:dual_wielding"
-]
-
 EntityEvents.hurt(event => {
     checkAttackerModifier(event) // Check and run attacker's modifiers
 })
@@ -26,7 +21,7 @@ function checkAttackerModifier (event) {
         if (mainhandItem.nbt != null) {
             if (mainhandItem.nbt.get("tic_broken").asInt != 1) {
                 let attacker_weapon_modifiers = getModifiersFromItem(mainhandItem)
-                run_modifiers(event, mainhandItem, attacker_weapon_modifiers)
+                run_modifiers_on_entity_hurt(event, mainhandItem, attacker_weapon_modifiers)
             }
         }
     }
@@ -44,7 +39,7 @@ function checkAttackerModifier (event) {
                 });
                 console.info(`Item ${offhandItem} is valid for off hand? : ${valid_offhand}`)
                 if (valid_offhand) {
-                    run_modifiers(event, offhandItem, attacker_weapon_modifiers)
+                    run_modifiers_on_entity_hurt(event, offhandItem, attacker_weapon_modifiers)
                 }
             }
         }
@@ -57,7 +52,7 @@ function checkAttackerModifier (event) {
  * @param {Internal.ItemStack} item 
  * @param {*} attacker_weapon_modifiers 
  */
-function run_modifiers(event, item, attacker_weapon_modifiers) {
+let run_modifiers_on_entity_hurt = function(event, item, attacker_weapon_modifiers) {
 
     // Relaying
     if ("kubejs:relaying" in attacker_weapon_modifiers) {

@@ -13,10 +13,11 @@
 
     architectury-9.2.14-forge.jar
     create-1.20.1-6.0.4.jar
+    EventJS-1.20.1-1.4.0.jar
     dummmmmmy-1.20-2.0.6.jar
     Jade-1.20.1-Forge-11.13.1.jar
     jei-1.20.1-forge-15.20.0.106.jar
-    kubejs-forge-2001.6.5-build.14.jar
+    kubejs-forge-2001.6.5-build.16.jar
     lootjs-forge-1.20.1-2.13.0.jar
     Mantle-1.20.1-1.11.61.jar
     moonlight-1.20-2.14.1-forge.jar
@@ -36,7 +37,7 @@
 <!-- 419699:5137938 -->
 - [Create](https://www.curseforge.com/minecraft/mc-mods/create) by simibubi
 <!-- 328085:6323270 -->
-- [EventJS](https://www.curseforge.com/minecraft/mc-mods/eventjs/files/all?page=1&pageSize=20) by ZZZank
+- [EventJS](https://www.curseforge.com/minecraft/mc-mods/eventjs) by ZZZank
 <!-- 1132802:6582223 -->
 - [MmmMmmMmmMmm (Target Dummy)](https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm) by MehVahdJukaar
 <!-- 225738:6608233 -->
@@ -45,7 +46,7 @@
 - [Just Enough Items (JEI)](https://www.curseforge.com/minecraft/mc-mods/jei) by mezz
 <!-- 238222:6075247 -->
 - [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) by LatvianModder
-<!-- 238086:5454840 -->
+<!-- 238086:5853326 -->
 - [LootJS: KubeJS Addon](https://www.curseforge.com/minecraft/mc-mods/lootjs) by Lytho
 <!-- 570630:6508899 -->
 - [Mantle](https://www.curseforge.com/minecraft/mc-mods/mantle) by mDiyo
