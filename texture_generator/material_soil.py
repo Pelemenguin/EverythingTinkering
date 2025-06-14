@@ -4,7 +4,7 @@ from _convert_palette import *
 import PIL.Image
 
 generator = TextureGenerator(parts)
-image = PIL.Image.open("dirt.png")
+image = PIL.Image.open("composites/dirt.png")
 generator.add_function(multiply(image, 1.2), "composite", 0)
 generator.set_fallback(["nonmetal"])
 generator.generate("kubejs_soil", part_types=[
@@ -15,7 +15,7 @@ generator.generate("kubejs_soil", part_types=[
 ])
 
 generator = TextureGenerator(parts)
-image = PIL.Image.open("sand.png")
+image = PIL.Image.open("composites/sand.png")
 generator.add_function(multiply(image, 1.2), "composite", 0)
 generator.set_fallback(["nonmetal"])
 generator.generate("kubejs_soil_sand", part_types=[
@@ -26,7 +26,7 @@ generator.generate("kubejs_soil_sand", part_types=[
 ])
 
 generator = TextureGenerator(parts)
-image = PIL.Image.open("red_sand.png")
+image = PIL.Image.open("composites/red_sand.png")
 generator.add_function(multiply(image, 1.2), "composite", 0)
 generator.set_fallback(["nonmetal"])
 generator.generate("kubejs_soil_red_sand", part_types=[
@@ -37,7 +37,7 @@ generator.generate("kubejs_soil_red_sand", part_types=[
 ])
 
 generator = TextureGenerator(parts)
-image = PIL.Image.open("gravel.png")
+image = PIL.Image.open("composites/gravel.png")
 generator.add_function(multiply(image, 1.2), "composite", 0)
 generator.set_fallback(["nonmetal"])
 generator.generate("kubejs_soil_gravel", part_types=[
@@ -48,7 +48,7 @@ generator.generate("kubejs_soil_gravel", part_types=[
 ])
 
 generator = TextureGenerator(parts)
-image = PIL.Image.open("coarse_dirt.png")
+image = PIL.Image.open("composites/coarse_dirt.png")
 generator.add_function(multiply(image, 1.2), "composite", 0)
 generator.set_fallback(["nonmetal"])
 generator.generate("kubejs_soil_coarse_dirt", part_types=[
@@ -59,7 +59,7 @@ generator.generate("kubejs_soil_coarse_dirt", part_types=[
 ])
 
 generator = TextureGenerator(parts)
-image = PIL.Image.open("rooted_dirt.png")
+image = PIL.Image.open("composites/rooted_dirt.png")
 generator.add_function(multiply(image, 1.2), "composite", 0)
 generator.set_fallback(["nonmetal"])
 generator.generate("kubejs_soil_rooted_dirt", part_types=[
@@ -70,7 +70,7 @@ generator.generate("kubejs_soil_rooted_dirt", part_types=[
 ])
 
 generator = TextureGenerator(parts)
-image = PIL.Image.open("mud.png")
+image = PIL.Image.open("composites/mud.png")
 generator.add_function(multiply(image, 1.2), "composite", 0)
 generator.set_fallback(["nonmetal"])
 generator.generate("kubejs_soil_mud", part_types=[
@@ -81,7 +81,7 @@ generator.generate("kubejs_soil_mud", part_types=[
 ])
 
 generator = TextureGenerator(parts)
-image = PIL.Image.open("clay.png")
+image = PIL.Image.open("composites/clay.png")
 generator.add_function(multiply(image, 1.2), "composite", 0)
 generator.set_fallback(["nonmetal"])
 generator.generate("kubejs_soil_clay", part_types=[

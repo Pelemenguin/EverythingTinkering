@@ -146,6 +146,6 @@ random.seed(1928615854)
     # return (0, 0, 0, 0)
 
 generator = TextureGenerator(parts)
-generator.add_function(multiply(PIL.Image.open("charcoal_generator.png"), 1.2), "recolor", 0)
+generator.add_function(multiply(PIL.Image.open("composites/charcoal_generator.png"), 1.2), "recolor", 0)
 generator.set_fallback(["nonmetal"])
 generator.generate("kubejs_coal_charcoal", part_types=["tconstruct:head", "tconstruct:handle", "tconstruct:binding", "tconstruct:repair_kit"])
