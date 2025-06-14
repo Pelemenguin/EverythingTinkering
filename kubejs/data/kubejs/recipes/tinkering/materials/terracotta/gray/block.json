@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+        "item": "minecraft:gray_terracotta"
+    },
+    "material": "kubejs:terracotta#gray",
+    "needed": 1,
+    "value": 1
+}
