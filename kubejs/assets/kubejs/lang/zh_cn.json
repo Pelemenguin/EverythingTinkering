@@ -27,13 +27,17 @@
     "material.kubejs.brick.flavor": "普通建材...？",
     "material.kubejs.brick.encyclopedia": "下落时伤害再翻倍。1级时倍率为1.5倍，每级增加0.25倍率。特性触发时消耗25%剩余耐久，至少10点",
 
+    "material.kubejs.terracotta": "陶瓦",
+    "material.kubejs.terracotta.flavor": "使用方法：当一个花瓶。",
+    "material.kubejs.terracotta.encyclopedia": "工具时有最低0.5，最高剩余耐久百分比乘上特性等级再加上0.5点的随机伤害提升，",
+
     "material.kubejs.coal": "煤炭",
     "material.kubejs.coal.charcoal": "木炭",
     "material.kubejs.coal.flavor": "活体引线！",
-    "material.kubejs.coal.encyclopedia": "攻击时点燃你的工具。这段时间内，工具会持续丢失耐久，而攻击时则可点燃其他敌人。",
+    "material.kubejs.coal.encyclopedia": "攻击时点燃你的工具。这段时间内，工具会持续丢失耐久，而攻击时则可点燃其他敌人",
     
     "material.kubejs.lapis_lazuli": "青金石",
-    "material.kubejs.lapis_lazuli.flavor": "继续挖吧！你又怎么知道那儿后面的方块是石头还是埋藏的宝藏！",
+    "material.kubejs.lapis_lazuli.flavor": "继续挖吧！谁知道那儿后面的方块是石头还是埋藏的宝藏！",
     "material.kubejs.lapis_lazuli.encyclopedia": "概率跌落至0之前，每级可以挖掘1000个方块。初始概率恒为20%",
     
     "material.tconstruct.glass.white_stained": "白色染色玻璃",
@@ -75,6 +79,10 @@
     "modifier.kubejs.whacking": "猛击",
     "modifier.kubejs.whacking.flavor": "梆！",
     "modifier.kubejs.whacking.description": "增加暴击时的伤害",
+
+    "modifier.kubejs.pottery": "陶片",
+    "modifier.kubejs.pottery.flavor": "Macrohard Edge！",
+    "modifier.kubejs.pottery.description": "工具损伤时随机提升伤害",
 
     "modifier.kubejs.igniting": "点燃",
     "modifier.kubejs.igniting.flavor": "小心烫手！",

@@ -13,6 +13,8 @@
         
         "brick": "#b75a40",
         "brick.nether": "#49242a",
+
+        "terracotta": "#9B6045",
         
         "coal": "#393e46",
         "coal.charcoal": "#2B261D",
@@ -51,6 +53,7 @@
         "incompact": "#79553a",
         "igniting": "#393e46",
         "whacking": "#b75a40",
+        "pottery": "#9B6045",
         "glass_shard": "#d0eae9",
         "uncertain": "#345EC3",
         "relaying": "#c9caba"

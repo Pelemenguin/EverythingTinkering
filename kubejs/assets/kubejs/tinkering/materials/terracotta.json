@@ -1,0 +1,8 @@
+{
+    "color": "FF9B6045",
+    "fallbacks": [
+        "rock"
+    ],
+    "luminosity": 0,
+    "texture": "kubejs:terracotta"
+}

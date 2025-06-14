@@ -17,7 +17,7 @@
     "material.kubejs.soil.mud": "Mud",
     "material.kubejs.soil.clay": "Clay",
     "material.kubejs.soil.flavor": "Totally natural material! May get your hands dirty.",
-    "material.kubejs.soil.encyclopedia": "The tool has a chance of level*20% to drop durability points by (1~3)*level every tick",
+    "material.kubejs.soil.encyclopedia": "The tool has a chance of level×20% to drop durability points by (1~3)×level every tick",
 
     "material.kubejs.brick": "Brick",
     "material.kubejs.brick.nether": "Nether Brick",
@@ -28,6 +28,10 @@
     "material.kubejs.coal.charcoal": "Charcoal",
     "material.kubejs.coal.flavor": "Living Fuses!",
     "material.kubejs.coal.encyclopedia": "Attack an enemy can set your tool on fire. During this time, tool will continuously lose its durability points, and set fire to other enemies as you attack",
+
+    "material.kubejs.terracotta": "Terracotta",
+    "material.kubejs.terracotta.flavor": "Used as a vase.",
+    "material.kubejs.terracotta.encyclopedia": "The tool has a random damage boost. The least boost is 0.5 points and the greatest boost is (percentage of remaining durability × trait level + 0.5) points",
 
     "material.kubejs.lapis_lazuli": "Lapis Lazuli",
     "material.kubejs.lapis_lazuli.flavor": "Keep mining! How do you know whether the block behind there is a stone or hidden treasures!",
@@ -73,8 +77,12 @@
     "modifier.kubejs.whacking.flavor": "Bang!",
     "modifier.kubejs.whacking.description": "Increases damage of critical hit",
 
+    "modifier.kubejs.pottery": "Pottery",
+    "modifier.kubejs.pottery.flavor": "Macrohard Edge!",
+    "modifier.kubejs.pottery.description": "Randomly boost damage when tool is damaged",
+
     "modifier.kubejs.uncertain": "Uncertain",
-    "modifier.kubejs.uncertain.flavor": "Schrödinger’s Ore!",
+    "modifier.kubejs.uncertain.flavor": "Schrödinger's Ore!",
     "modifier.kubejs.uncertain.description": "Ores sometimes duplicate themselves when no one notices after being mined. However, probability of this will reduce and reach 0 at last",
 
     "modifier.kubejs.igniting": "Igniting",
