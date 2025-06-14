@@ -1,7 +1,7 @@
 {
     "color": "FF9B6045",
     "fallbacks": [
-        "rock"
+        "nonmetal"
     ],
     "luminosity": 0,
     "texture": "kubejs:terracotta"
