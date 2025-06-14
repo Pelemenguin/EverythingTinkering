@@ -16,3 +16,4 @@ var StartupSword = StartupSwordToolStack.createStack()
     .withLore([
         Component.translate("item.kubejs.artifact.startup.sword.lore")
     ])
+ToolStack.ensureInitialized(StartupSword)

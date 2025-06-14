@@ -5,14 +5,23 @@ import { StartupHandAxe } from "../artifacts/startup/hand_axe"
 import { StartupSword } from "../artifacts/startup/sword"
 
 LootJS.modifiers(event => {
-    ToolStack.ensureInitialized(StartupPickaxe)
-    ToolStack.ensureInitialized(StartupHandAxe)
-    ToolStack.ensureInitialized(StartupSword)
+    // ToolStack.ensureInitialized(StartupPickaxe)
+    // ToolStack.ensureInitialized(StartupHandAxe)
+    // ToolStack.ensureInitialized(StartupSword)
     event.addLootTableModifier("minecraft:chests/spawn_bonus_chest")
         .removeLoot(/.*/)
-        .addLoot(LootEntry.of(StartupPickaxe, 1))
-        .addLoot(LootEntry.of(StartupHandAxe, 1))
-        .addLoot(LootEntry.of(StartupSword, 1))
+        .addLoot((() => {
+            ToolStack.ensureInitialized(StartupPickaxe)   // For initialization
+            return LootEntry.of(StartupPickaxe, 1)
+        })())
+        .addLoot((() => {
+            ToolStack.ensureInitialized(StartupHandAxe)
+            return LootEntry.of(StartupHandAxe, 1)
+        })())
+        .addLoot((() => {
+            ToolStack.ensureInitialized(StartupSword)
+            return LootEntry.of(StartupSword, 1)
+        })())
         .addLoot(LootEntry.of("tconstruct:crafting_station", 1))
         .addLoot(LootEntry.of(Item.of('tconstruct:part_builder', '{texture:"minecraft:oak_planks"}'), 1))
         .addLoot(LootEntry.of(Item.of('tconstruct:tinker_station', '{texture:"minecraft:oak_planks"}'), 1))

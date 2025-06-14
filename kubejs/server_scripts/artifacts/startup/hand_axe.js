@@ -16,3 +16,4 @@ var StartupHandAxe = StartupHandAxeToolStack.createStack()
     .withLore([
         Component.translate("item.kubejs.artifact.startup.hand_axe.lore")
     ])
+ToolStack.ensureInitialized(StartupHandAxe)

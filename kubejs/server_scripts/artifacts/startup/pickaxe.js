@@ -16,3 +16,4 @@ var StartupPickaxe = StartupPickaxeToolStack.createStack()
     .withLore([
         Component.translate("item.kubejs.artifact.startup.pickaxe.lore")
     ])
+ToolStack.ensureInitialized(StartupPickaxe)
