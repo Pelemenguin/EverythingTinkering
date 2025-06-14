@@ -1,24 +1,16 @@
-import { whacking } from "../modifiers/whacking";
-
 let getModifiersFromItem = global.getModifiersFromItem
 
-// console.info(LivingHurtEvent)
-NativeEvents.onEvent(LivingHurtEvent, event => {
-    
-    // console.info(LivingHurtEvent)
-    // console.info(`[LivingHurtEvent] Triggered by ${event.entity}`)
-    // console.info(event.source.actual)
-    if (event.source.actual == null) {return}
-
-    let mainhandItem = event.source.actual.handSlots[0]
-    let offhandItem = event.source.actual.handSlots[1]
+NativeEvents.onEvent(CriticalHitEvent, event => {
+    let player = event.getEntity()
+    let mainhandItem = player.handSlots[0]
+    let offhandItem = player.handSlots[1]
 
     if (mainhandItem != null) {
         if (mainhandItem.nbt != null) {
             if (mainhandItem.nbt.get("tic_broken").asInt != 1) {
                 let attacker_weapon_modifiers = getModifiersFromItem(mainhandItem)
                 // console.info(event)
-                run_modifiers(event, mainhandItem, attacker_weapon_modifiers)
+                run_modifiers_on_crit(event, mainhandItem, attacker_weapon_modifiers)
             }
         }
     }
@@ -35,24 +27,20 @@ NativeEvents.onEvent(LivingHurtEvent, event => {
                 });
                 // console.info(`Item ${offhandItem} is valid for off hand? : ${valid_offhand}`)
                 if (valid_offhand) {
-                    run_modifiers(event, offhandItem, attacker_weapon_modifiers)
+                    run_modifiers_on_crit(event, offhandItem, attacker_weapon_modifiers)
                 }
             }
         }
     }
-    
 })
 
-/**
- * 
- * @param {Internal.LivingHurtEvent} event 
- * @param {Internal.ItemStack} item 
- * @param {any} modifiers 
- */
-let run_modifiers = function(event, item, modifiers) {
+let run_modifiers_on_crit = function(event, item, modifiers) {
+    
     // console.info(event)
-    if ("kubejs:pottery" in modifiers) {
-        pottery(event, item, modifiers["kubejs:pottery"])
+    let isCritical = (event.getOldDamageModifier() >= 1.5)
+    // Whacking
+    if ("kubejs:whacking" in modifiers) {
+        whacking(event, isCritical, modifiers["kubejs:whacking"])
     }
     
 }

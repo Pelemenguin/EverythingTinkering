@@ -15,6 +15,7 @@ const MaterialNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.Ma
 const MaterialNBTBuilder = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT$Builder')
 
 const LivingHurtEvent = Java.loadClass("net.minecraftforge.event.entity.living.LivingHurtEvent")
+const CriticalHitEvent = Java.loadClass("net.minecraftforge.event.entity.player.CriticalHitEvent")
 
 const OFFHAND_ATTACKABLE_MODIFIER = [
     "tconstruct:offhand_attack",
