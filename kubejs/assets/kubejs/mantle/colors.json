@@ -58,6 +58,8 @@
     },
     "material.tconstruct": {
     
+        "rock.prismarine": "#9BCBBF",
+    
         "glass.white_stained": "#ffffff",
         "glass.orange_stained": "#d87f33",
         "glass.magenta_stained": "#b24cd8",

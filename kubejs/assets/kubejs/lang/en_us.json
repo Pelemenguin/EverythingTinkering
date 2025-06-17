@@ -19,6 +19,8 @@
     "material.kubejs.soil.flavor": "Totally natural material! May get your hands dirty.",
     "material.kubejs.soil.encyclopedia": "The tool has a chance of level×20% to drop durability points by (1~3)×level every tick",
 
+    "material.tconstruct.rock.prismarine": "Prismarine",
+
     "material.kubejs.brick": "Brick",
     "material.kubejs.brick.nether": "Nether Brick",
     "material.kubejs.brick.flavor": "Common building material...?",

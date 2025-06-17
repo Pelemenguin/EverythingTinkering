@@ -7,7 +7,7 @@
 # 计划
 
 ## 计划修改材料
-- 添加 `calcite`，`tuff`，`prismarine`，`dripstone` 作为 `rock` 变种。
+- 添加 `calcite`，`tuff`，`dripstone` 作为 `rock` 变种。
 ## 计划创造材料
 - 添加 `soul` 作为 `glass` 的变种。
 ## 计划创建配方
