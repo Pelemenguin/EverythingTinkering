@@ -50,18 +50,19 @@ class TextureGenerator:
         else:
             self._functions["unnamed_"+str(len(self._functions))] = (func, priority)
     
-    def add_extra_file(self, name_func, content_func, identifier: str|None = None):
+    def add_extra_file(self, name_func, content_func, identifier: str|None = None, priority: int|float = 0):
         """Add extra file to generate.
         
         :param name_func: A function to calculate name of the file.
         Should have two arguments. The first one is the image's path, the second one is a PIL `Image` object that represents the image.
-        :param content_func: A function to calculate the file's content. Arguments are the same as described above."""
+        :param content_func: A function to calculate the file's content. Arguments are the same as described above.
+        :param priority: Priorize your extra files. Files of higher priority will be generated first."""
         def generate(path: str, image: PIL.Image.Image):
             file_name = name_func(path, image)
             file_content = content_func(path, image)
             with open(file_name, 'w') as f:
                 f.write(file_content)
-        self._extra_files[identifier if identifier else "unnamed_"+str(len(self._extra_files))]
+        self._extra_files[identifier if identifier else "unnamed_"+str(len(self._extra_files))] = (generate, priority)
     
     def _get_input_path(self, part_path):
         path_dir = os.path.dirname(part_path)
@@ -124,7 +125,7 @@ class TextureGenerator:
             print(f"Part generated {suffixed_path}")
             filegen_keys = sorted(self._extra_files, key=lambda i: self._extra_files[i][1])
             for k in filegen_keys:
-                self._extra_files[k][0](this_output_path, image)
+                self._extra_files[k][0](suffixed_path, image)
             image.close()
 
 class SubTextureGenerator(TextureGenerator):
