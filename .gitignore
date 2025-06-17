@@ -13,6 +13,7 @@
 /schematics
 /texture_generator/resources
 /texture_generator/outputs
+/texture_generator/__pycache__
 /*.jar
 /*.json
 options.txt
