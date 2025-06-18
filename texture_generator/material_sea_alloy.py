@@ -47,9 +47,9 @@ def dynamic(image):
         for x in range(result.width):
             if result.getpixel((x, y)) == (0, 255, 0, 255):
                 if large:
-                    result.putpixel((x, y), sea_lantern.getpixel((x//2%16, y//2%16)))
+                    result.putpixel((x, y), sea_lantern.getpixel((x//2%16, y//2%80)))
                 else:
-                    result.putpixel((x, y), sea_lantern.getpixel((x%16, y%16)))
+                    result.putpixel((x, y), sea_lantern.getpixel((x%16, y%80)))
     return result
 content = """{
     "animation": {
