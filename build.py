@@ -14,7 +14,7 @@ import os.path
 import zipfile
 import fnmatch
 import time
-import urllib.request
+# import urllib.request
 
 curdir = os.path.relpath(os.path.dirname(os.path.realpath(__file__)), os.getcwd())
 
@@ -88,8 +88,8 @@ zipping.extend(os.walk(os.path.join(curdir, "LICENSES")))
 
 # Exclude files here
 excluding = [
-    "kubejs/probe"   # Generated ProbeJS data
-    "kubejs/README.txt"   # KubeJS's README file
+    "./kubejs/probe/*",   # Generated ProbeJS data
+    "./kubejs/README.txt"   # KubeJS's README file
 ]
 
 total = len(zipping)
@@ -100,7 +100,14 @@ for root, dirs, files in zipping:
     compressed += 1
     for f in files:
         file_path = os.path.join(root, f)
-        if any(fnmatch.fnmatch(file_path, ex) for ex in excluding): continue
+        # print(file_path)
+        skipping = False
+        for ex in excluding:
+            if fnmatch.fnmatch(file_path, ex):
+                skipping = True
+                break
+        if skipping: continue
+        # if any(fnmatch.fnmatch(file_path, ex) for ex in excluding): continue
         arcname = os.path.join("overrides", os.path.relpath(file_path, os.getcwd()))
         output.write(file_path, arcname)
         print(f"Compressing folders ------------ {compressed}/{total} {(compressed/total):.2%}", end=f"\r")
