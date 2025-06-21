@@ -1,8 +1,8 @@
 {
     "default": [
         {
-            "name": "kubejs:antifatigue",
-            "level": 1
+            "level": 1,
+            "name": "kubejs:antifatigue"
         }
     ]
 }
