@@ -1,17 +1,6 @@
-## What is this repository for
+# This branch is deprecated
 
-This is a Minecraft modpack based on KubeJS and TiC3 on Minecraft 1.20.1.
-
-## Why are there so few files
-
-This modpack is still developing, and currently does not have any release yet.
-
-## Why is there Python files in a modpack using KubeJS / What is `texture_generator` for
-
-This `texture_generator` is a Python project that can batch-generate TiC textures.
-
-# How can I play this modpack
-
-(Make sure Python3 is installed. )
-Download source code and run `build.py`. Then a modpack file is created.
-(I'm using Python because I didn't learn Java.)
+The modifier `antifatigue` in this branch is made by Tinker's Construct's modifier modules.
+But the modifier failed to work properly.
+So this branch is deprecated.
+In the branch `dev/sea_alloy`, we use another way to create the modifier.
