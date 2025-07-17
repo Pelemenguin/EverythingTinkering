@@ -4,6 +4,11 @@ let getModifiersFromItem = global.getModifiersFromItem
 
 // console.info(LivingHurtEvent)
 NativeEvents.onEvent(LivingHurtEvent, event => {
+    check_attacker(event)
+    check_entity(event)
+})
+
+let check_attacker = event => {
     
     // console.info(LivingHurtEvent)
     // console.info(`[LivingHurtEvent] Triggered by ${event.entity}`)
@@ -41,7 +46,25 @@ NativeEvents.onEvent(LivingHurtEvent, event => {
         }
     }
     
-})
+}
+
+/**
+ * @param {Internal.LivingHurtEvent} event
+ */
+let check_entity = event => {
+    if (event.entity == null) return;
+    
+    let armors = event.entity.armorSlots;
+    armors.forEach(armor => {
+        if (armor == null) {
+            return;
+        }
+        console.log(`Armor ID:${armor.id}`)
+        console.log(`Armor NBT:${armor.nbt}`)
+    });
+};
+
+
 
 /**
  * 
