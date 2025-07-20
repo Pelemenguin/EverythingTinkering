@@ -3,31 +3,37 @@
  * - - - - -
  * ## Antifatigue
  * ### Description
- * When the tool's level is greater that `mining_fatigue`'s effect level,
- * clear the `mining_fatigue` effect.
+ * Cancel mining speed reduction brought by **Mining Fatigue**,
+ * at most trait-level levels of **Mining Fatigue**.
  * - - - - -
  * ## 抗疲劳
  * ### 描述
- * 当工具等级大于 `挖掘疲劳` 等级时，清除 `挖掘疲劳`。
+ * 抵消**挖掘疲劳**带来的影响（最多抵消和特性等级相同级别的**挖掘疲劳**）
  * - - - - -
  * @author Pelemenguin
  * @license CC-BY-NC-SA-4.0
  */
 
-ModifierRegisterer.onRegisterEvent(event => {
-    event.createNew("kubejs:antifatigue", modifier => {
-        modifier.onInventoryTick(
-            (view, lvl, level, entity, slot, inMainHand, inAvailableSlot, itemStack) => {
-                if (!inMainHand) return;
-                if (!entity.hasEffect("minecraft:mining_fatigue")) return;
-                let effectLevel = entity.getEffect("minecraft:mining_fatigue").amplifier;
-                // console.info(`[Antifatigue] Effect level: ${effectLevel}`);
-                // console.info(`[Antifatigue] Tool level: ${lvl}`);
-                if (effectLevel < lvl) {
-                    entity.removeEffect("minecraft:mining_fatigue");
-                    // console.info(`[Antifatigue] Removed effect`);
+ModifierRegisterer.registerModifier("kubejs:antifatigue", modifier => {
+    modifier.getBreakSpeed((view, lvl, breakSpeedEvent, direction, canDrop, currentSpeed) => {
+        let entity = breakSpeedEvent.entity;
+        if (entity instanceof LivingEntity) {
+            /** @type {Internal.LivingEntity} */
+            let living = entity;
+            let effect = living.getEffect("minecraft:mining_fatigue");
+            if (effect != null) {
+                let divisor = 0.00081;
+                switch (Math.min(effect.amplifier, lvl - 1)) {
+                    case 0: divisor = 0.3; break;
+                    case 1: divisor = 0.09; break;
+                    case 2: divisor = 0.0027; break;
+                    default: divisor = 0.00081;
                 }
+                // console.info(`Unmodified: ${currentSpeed}`);
+                // console.info(`New speed:  ${breakSpeedEvent.newSpeed}`);
+                // console.info(`Divisor:    ${divisor}`);
+                breakSpeedEvent.newSpeed /= divisor;
             }
-        );
+        }
     });
 });

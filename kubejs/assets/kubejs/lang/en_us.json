@@ -96,6 +96,10 @@
     "material.kubejs.andesite_alloy.flavor": "Just like a Shaft!",
     "material.kubejs.andesite_alloy.encyclopedia": "The hitbox is a cube with edges that increase by 0.5 blocks per level. Entities in the hitbox take 50% of the damage you deal to the direct target",
     
+    "material.kubejs.sea_alloy": "Sea Alloy",
+    "material.kubejs.sea_alloy.flavor": "It's basically sea lanterns...",
+    "material.kubejs.sea_alloy.encyclopedia": "Negates mining fatigue equivalent to the level of the Anti-Fatigue modifier",
+    
         "_comment_modifiers": " ----- Modifiers ----- ",
 
     "modifier.kubejs.welcome": "Welcome",
@@ -130,6 +134,10 @@
     "modifier.kubejs.relaying": "Relaying",
     "modifier.kubejs.relaying.flavor": "Convey momentum!",
     "modifier.kubejs.relaying.description": "Hits enemies that are slightly behind the target when attacking",
+
+    "modifier.kubejs.antifatigue": "Anti-Fatigue",
+    "modifier.kubejs.antifatigue.flavor": "Combat exhaustion!",
+    "modifier.kubejs.antifatigue.description": "Counteracts mining fatigue effects. The maximum fatigue level negated is equal to this modifier's level",
     
         "comment_artifacts": " ----- Artifacts ----- ",
     

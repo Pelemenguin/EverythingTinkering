@@ -8,19 +8,19 @@
  */
 
 TConJSEvents.modifierRegistry(event => {
-    RegisteredModifiers.forEach(consumer => {
-        consumer(event);
+    RegisteredModifiers.keySet().forEach(id => {
+        event.createNew(id, RegisteredModifiers.get(id));
     });
-})
+});
 
 /**
  * A JS object to store all registered modifiers.
  * - - - - -
  * 用于存储已注册的 modifier。
  * - - - - -
- * @type {((event: Internal.ModifierRegisterEventJS) => void)[]}
+ * @type {Internal.Map<string, ((event: Internal.ModifierBuilder) => void)>}
  */
-const RegisteredModifiers = [];
+const RegisteredModifiers = Utils.newMap();
 
 /**
  * An interface for modifier registries.
@@ -32,12 +32,14 @@ const RegisteredModifiers = [];
 function ModifierRegisterer() {}
 
 /**
+ * @param {string} id
+ * The modifier id.  
+ * modifier 的 id。
  * - - - - -
- * @param {(event: Internal.ModifierRegisterEventJS) => void} handler 
+ * @param {(modifier: Internal.ModifierBuilder) => void} builder 
  * A consumer to build a modifier.  
  * 一个用于注册 modifier 的函数。
- * - - - - -
  */
-ModifierRegisterer.onRegisterEvent = (handler) => {
-    RegisteredModifiers.push(handler)
+ModifierRegisterer.registerModifier = (id, builder) => {
+    RegisteredModifiers.put(id, builder);
 };

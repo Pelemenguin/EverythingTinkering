@@ -1,0 +1,1 @@
+const LivingEntity = Java.loadClass("net.minecraft.world.entity.LivingEntity")
