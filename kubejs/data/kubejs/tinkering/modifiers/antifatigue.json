@@ -1,33 +1,5 @@
 {
     "level_display": "tconstruct:default",
-    "modules": [
-        {
-            "type": "tconstruct:conditional_mining_speed",
-            "formula": [
-                "$speed",
-                "$fatigue_level",
-                "$level",
-                "min",
-                4,
-                "min",
-                "$multiplier",
-                "*",
-                0.3,
-                "!^",
-                "/"
-            ],
-            "percent": true,
-            "require_effective": true,
-            "variables": {
-                "fatigue_level": {
-                    "type": "tconstruct:entity",
-                    "effect": "minecraft:mining_fatigue",
-                    "entity_type": "tconstruct:effect_level",
-                    "fallback": 0.0,
-                    "which": "holder"
-                }
-            }
-        }
-    ],
+    "modules": [],
     "tooltip_display": "always"
 }
