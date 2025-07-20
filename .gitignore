@@ -16,9 +16,12 @@
 /texture_generator/__pycache__
 /*.jar
 /*.json
-options.txt
-rhino.local.properties
-*Everything Tinkering*.zip
+/options.txt
+/rhino.local.properties
+/*Everything Tinkering*.zip
+
+# Then we don't need to use the launcher
+/run.bat
 
 /modpack.cfg
 /log4j2.xml
