@@ -22,7 +22,7 @@
     Mantle-1.20.1-1.11.61.jar
     moonlight-1.20-2.14.1-forge.jar
     probejs-6.0.1-forge.jar
-    rhino-forge-2001.2.2-build.6.jar
+    rhino-forge-2001.2.3-build.10.jar
     TConstruct-1.20.1-3.10.1.76.jar
     tconstruct_js-1.0.3.jar
     
@@ -55,7 +55,7 @@
 <!-- 499980:6507197 -->
 <!-- ProbeJS is also installed when developing, but should not be included in the modpack. 585406:5227399 -->
 - [Rhino](https://www.curseforge.com/minecraft/mc-mods/rhino) by LatvianModder
-<!-- 416294:4735056 -->
+<!-- 416294:6186971 -->
 - [Tinkers Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) by mDiyo
 <!-- 74072:6635554 -->
 - [TConstructJS](https://www.curseforge.com/minecraft/mc-mods/tconstructjs) by lcy0x1
