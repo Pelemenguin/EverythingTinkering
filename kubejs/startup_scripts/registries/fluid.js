@@ -1,3 +1,5 @@
+// priority: 100
+
 /**
  * @fileoverview Fluid registries | 流体注册
  * 
@@ -11,7 +13,7 @@
  * - - - - -
  * @class
  */
-const KubeJSFluid = function () {};
+function KubeJSFluid () {};
 /**
  * A list for all fluids for the modpack.
  * 整合包中所有流体的列表。
@@ -37,33 +39,20 @@ KubeJSFluid.PROPERTIES = {};
 KubeJSFluid.Presets = function () {};
 
 /**
- * @typedef {function(Registry.Fluid, string): Internal.FluidBuilder} Annotation.FluidPreset
  * - A fluid preset.
  * - 一个流体预设。
- */
-
-/**
- * A fluid preset: hot / molten fluids  
- * 流体预设：热 / 熔融液体
- * 
- * Referred to Tinker's Construct's source code
  * - - - - -
+ * @callback Annotation.FluidPreset
  * @param {Registry.Fluid} event
- * - The fluid registry event.
- * - 流体注册事件。
- * - - - - -
+ * - A fluid registry event.
+ * - 一个流体注册事件。
  * @param {string} name
- * - Id of the fluid.  
- * - 液体 ID。
- * - - - - -
+ * - The fluid's name.
+ * - 流体名称。
  * @returns {Internal.FluidBuilder}
+ * - The fluid builder.
+ * - 一个流体 Builder.
  */
-KubeJSFluid.Presets.hot = (event, name) => {
-    return event.create(name)
-        .density(2000)
-        .viscosity(10000)
-        .temperature(1000);
-};
 
 /**
  * Create a new fluid.
@@ -103,8 +92,3 @@ StartupEvents.registry("minecraft:fluid", event => {
             .temperature(temperature);
     }
 });
-
-KubeJSFluid.create("molten_sea_alloy", {
-    temperature: 1400,
-    preset: KubeJSFluid.Presets.hot
-})
