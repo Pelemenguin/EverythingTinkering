@@ -16,7 +16,11 @@ const KubeJSFluids = { }
 /**
  * An interface containing all fluid presets.
  * 包含所有流体预设的接口。
+ * - - - - -
+ * @class
+ * @interface
  */
+function KubeJSFluidPresets () {}
 
 /**
  * A fluid preset: hot / molten fluids  
@@ -34,7 +38,7 @@ const KubeJSFluids = { }
  * - - - - -
  * @returns {Internal.FluidType$Properties}
  */
-KubeJSFluids.presetHot = (event, name) => {
+KubeJSFluidPresets.presetHot = (event, name) => {
     return FluidType$Properties.create()
         .density(2000)
         .viscosity(10000)
