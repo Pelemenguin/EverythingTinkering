@@ -1,4 +1,5 @@
 const LivingEntity = Java.loadClass("net.minecraft.world.entity.LivingEntity");
+const FlowingFluid = Java.loadClass("net.minecraft.world.level.material.FlowingFluid");
 const MapColor = Java.loadClass("net.minecraft.world.level.material.MapColor");
 const BlockPathTypes = Java.loadClass("net.minecraft.world.level.pathfinder.BlockPathTypes")
 const SoundEvents = Java.loadClass("net.minecraft.sounds.SoundEvents");

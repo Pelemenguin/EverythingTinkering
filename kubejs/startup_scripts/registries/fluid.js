@@ -38,7 +38,7 @@ function KubeJSFluidPresets () {}
  * - - - - -
  * @returns {Internal.FluidType$Properties}
  */
-KubeJSFluidPresets.presetHot = (event, name) => {
+KubeJSFluidPresets.presetHot = (name) => {
     return FluidType$Properties.create()
         .density(2000)
         .viscosity(10000)
@@ -57,8 +57,8 @@ KubeJSFluidPresets.presetHot = (event, name) => {
 // Fluid Registry
 
 /** Molten Sea Alloy */
-KubeJSFluids.moltenSeaAlloy = FLUIDS.register(null, "molten_sea_alloy")
-    .type(KubeJSFluids.presetHot("molten_sea_alloy")
+KubeJSFluids.moltenSeaAlloy = FLUIDS.register("molten_sea_alloy")
+    .type(KubeJSFluidPresets.presetHot("molten_sea_alloy")
         .temperature(1400)
         .lightLevel(15)
     )
@@ -69,10 +69,16 @@ KubeJSFluids.moltenSeaAlloy = FLUIDS.register(null, "molten_sea_alloy")
     .bucket()
     .flowing();
 
-StartupEvents.registry("minecraft:fluid", event => {
+StartupEvents.init(event => {
     console.info("Fluid registered!");
     console.info(FLUIDS["register(net.minecraftforge.eventbus.api.IEventBus)"]);
     console.info(ForgeEvents.eventBus());
+    FLUIDS["register(net.minecraftforge.eventbus.api.IEventBus)"].apply(FLUIDS, [ForgeEvents.eventBus()]);
+
     console.info(KubeJSFluids.moltenSeaAlloy);
-    FLUIDS["register(net.minecraftforge.eventbus.api.IEventBus)"](ForgeEvents.eventBus());
+    // console.info(KubeJSFluids.moltenSeaAlloy.still);
+
+    // event.createCustom("molten_sea_alloy", () => null);
+    // event.createCustom("flowing_molten_sea_alloy", () => KubeJSFluids.moltenSeaAlloy);
+    // Internal.ForgeFlowingFluid$Source
 });
