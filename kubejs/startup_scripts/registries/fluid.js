@@ -6,13 +6,17 @@
  */
 
 /**
- * An interface contains all fluids registered by this modpack.  
- * 包含所有由该整合包注册的流体的接口。
+ * An object contains all fluids registered by this modpack.  
+ * 包含所有由该整合包注册的流体的对象。
  * - - - - -
- * @class
- * @interface
+ * @constant
  */
-function KubeJSFluids() { }
+const KubeJSFluids = { }
+
+/**
+ * An interface containing all fluid presets.
+ * 包含所有流体预设的接口。
+ */
 
 /**
  * A fluid preset: hot / molten fluids  
@@ -30,7 +34,7 @@ function KubeJSFluids() { }
  * - - - - -
  * @returns {Internal.FluidType$Properties}
  */
-let presetHot = (name) => {
+KubeJSFluids.presetHot = (event, name) => {
     return FluidType$Properties.create()
         .density(2000)
         .viscosity(10000)
@@ -49,8 +53,8 @@ let presetHot = (name) => {
 // Fluid Registry
 
 /** Molten Sea Alloy */
-KubeJSFluids.moltenSeaAlloy = FLUIDS.register("molten_sea_alloy")
-    .type(presetHot("molten_sea_alloy")
+KubeJSFluids.moltenSeaAlloy = FLUIDS.register(null, "molten_sea_alloy")
+    .type(KubeJSFluids.presetHot("molten_sea_alloy")
         .temperature(1400)
         .lightLevel(15)
     )
