@@ -6,12 +6,26 @@
  */
 
 /**
- * An object contains all fluids registered by this modpack.  
- * 包含所有由该整合包注册的流体的对象。
+ * Used for modpack fluid operations.  
+ * 用于整合包流体管理。
  * - - - - -
- * @constant
+ * @class
  */
-const KubeJSFluids = { }
+const KubeJSFluid = function () {};
+/**
+ * A list for all fluids for the modpack.
+ * 整合包中所有流体的列表。
+ * - - - - -
+ * @type {Object<string, Internal.FluidBuilder>}
+ */
+KubeJSFluid.ALL = {};
+/**
+ * A list for properties of all fluids for the modpack.
+ * 整合包中所有流体属性的列表。
+ * - - - - -
+ * @type {Object<string, Annotation.FluidProperties>}
+ */
+KubeJSFluid.PROPERTIES = {};
 
 /**
  * An interface containing all fluid presets.
@@ -20,7 +34,13 @@ const KubeJSFluids = { }
  * @class
  * @interface
  */
-function KubeJSFluidPresets () {}
+KubeJSFluid.Presets = function () {};
+
+/**
+ * @typedef {function(Registry.Fluid, string): Internal.FluidBuilder} Annotation.FluidPreset
+ * - A fluid preset.
+ * - 一个流体预设。
+ */
 
 /**
  * A fluid preset: hot / molten fluids  
@@ -29,50 +49,62 @@ function KubeJSFluidPresets () {}
  * Referred to Tinker's Construct's source code
  * - - - - -
  * @param {Registry.Fluid} event
- * The fluid registry event.
- * 流体注册事件。
+ * - The fluid registry event.
+ * - 流体注册事件。
  * - - - - -
- * @param {String} name
- * Id of the fluid.  
- * 液体 ID。
+ * @param {string} name
+ * - Id of the fluid.  
+ * - 液体 ID。
  * - - - - -
- * @returns {Internal.FluidType$Properties}
+ * @returns {Internal.FluidBuilder}
  */
-KubeJSFluidPresets.presetHot = (event, name) => {
-    return FluidType$Properties.create()
+KubeJSFluid.Presets.hot = (event, name) => {
+    return event.create(name)
         .density(2000)
         .viscosity(10000)
-        .temperature(1000)
-        .descriptionId(`fluid.kubejs.${name}`)
-        .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA)
-        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
-        // from forge lava type
-        .motionScale(0.0023333333333333335)
-        .canSwim(false).canDrown(false)
-        .pathType(BlockPathTypes.LAVA)
-        .adjacentPathType(null);
-}
+        .temperature(1000);
+};
+
+/**
+ * Create a new fluid.
+ * 创建一个新的流体。
+ * - - - - -
+ * @typedef {Object} Annotation.FluidProperties
+ * @property {?number} temperature
+ * - Fluid temperature.
+ * - 液体温度。
+ * @property {?Annotation.FluidPreset} preset
+ * @todo More builder properties.
+ * - - - - -
+ * @param {string} name
+ * @param {Annotation.FluidProperties} properties
+ */
+KubeJSFluid.create = (name, properties) => {
+    KubeJSFluid.PROPERTIES[name] = properties;
+};
 
 // - - - - - - - - - -
 // Fluid Registry
 
-/** Molten Sea Alloy */
-KubeJSFluids.moltenSeaAlloy = FLUIDS.register(null, "molten_sea_alloy")
-    .type(KubeJSFluids.presetHot("molten_sea_alloy")
-        .temperature(1400)
-        .lightLevel(15)
-    )
-    .block(
-        BurningLiquidBlock.createBurning(MapColor.METAL, 15, 10, 6.0)
-    )
-    .commonTag()
-    .bucket()
-    .flowing();
-
 StartupEvents.registry("minecraft:fluid", event => {
-    console.info("Fluid registered!");
-    console.info(FLUIDS["register(net.minecraftforge.eventbus.api.IEventBus)"]);
-    console.info(ForgeEvents.eventBus());
-    console.info(KubeJSFluids.moltenSeaAlloy);
-    FLUIDS["register(net.minecraftforge.eventbus.api.IEventBus)"](ForgeEvents.eventBus());
+    for (let key in KubeJSFluid.PROPERTIES) {
+        let {
+            temperature,
+            preset
+        } = KubeJSFluid.PROPERTIES[key];
+        /** @type {Internal.FluidBuilder} */
+        let builder = null;
+        if (preset === undefined) {
+            builder = event.create(key);
+        } else {
+            builder = preset(event, key)
+        }
+        KubeJSFluid.ALL[key] = builder
+            .temperature(temperature);
+    }
 });
+
+KubeJSFluid.create("molten_sea_alloy", {
+    temperature: 1400,
+    preset: KubeJSFluid.Presets.hot
+})
