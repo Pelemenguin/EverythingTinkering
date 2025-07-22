@@ -1,0 +1,89 @@
+// priority: 100
+
+/**
+ * @fileoverview Fluid registries | 流体注册
+ * 
+ * @author Pelemenguin
+ * @license CC-BY-NC-SA-4.0
+ */
+
+/**
+ * - Used for modpack fluid operations.  
+ * - 用于整合包流体管理。
+ * - - - - -
+ * @class
+ * @interface
+ */
+function KubeJSFluid () {};
+/**
+ * - A list for all fluids for the modpack.
+ * - 整合包中所有流体的列表。
+ * - - - - -
+ * @type {Object<string, Internal.FluidBuilder>}
+ */
+KubeJSFluid.ALL = {};
+
+/**
+ * - A list for properties of all fluids for the modpack.
+ * - 整合包中所有流体属性的列表。
+ * - - - - -
+ * @type {Object<string, Annotation.FluidProperties>}
+ */
+KubeJSFluid.PROPERTIES = {};
+
+/**
+ * An interface containing all fluid presets.
+ * 包含所有流体预设的接口。
+ * - - - - -
+ * @class
+ * @interface
+ */
+KubeJSFluid.Presets = function () {};
+
+/**
+ * Create a new fluid.
+ * 创建一个新的流体。
+ * - - - - -
+ * @param {string} name
+ * @param {Annotation.FluidProperties} properties
+ */
+KubeJSFluid.create = (name, properties) => {
+    KubeJSFluid.PROPERTIES[name] = properties;
+};
+
+/**
+ * 
+ * @param {Annotation.FluidProperties} properties 
+ * @returns {string}
+ */
+let logProperties = (properties) => {
+    if (properties.presets !== undefined) {
+        console.info(` - Presets:`)
+        properties.presets.forEach(p => {
+            console.info(`   - ${p}`)
+        })
+    };
+    if (properties.temperature !== undefined) console.info(` - Temperature: ${properties.temperature}`);
+}
+
+// - - - - - - - - - -
+// Fluid Registry
+
+StartupEvents.registry("minecraft:fluid", event => {
+    for (let key in KubeJSFluid.PROPERTIES) {
+        let {
+            presets,
+            temperature
+        } = KubeJSFluid.PROPERTIES[key];
+        /** @type {!Internal.FluidBuilder} */
+        let builder = event.create(key);
+        if (presets !== undefined) {
+            presets.forEach(p => {
+                builder = p.process(builder);
+            });
+        }
+        builder = temperature === undefined ? builder : builder.temperature(temperature);
+        console.info(`Fluid \`${key}\` registered with properties:`);
+        logProperties(KubeJSFluid.PROPERTIES[key]);
+    }
+});
