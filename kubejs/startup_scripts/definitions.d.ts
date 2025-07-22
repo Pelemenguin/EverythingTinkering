@@ -38,6 +38,11 @@ declare namespace Annotation {
          * - 流体温度。
          */
         static temperature: ?numder;
+        /**
+         * - Light level of the fluid block.
+         * - 液体方块的亮度。
+         */
+        static lightLevel: ?(0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15);
         /** @todo More properties. */
     }
 
@@ -52,7 +57,7 @@ declare namespace Annotation {
              * - The damage received by entites inside.
              * - 内部实体收到的伤害。
              */
-            static damage: !number
+            static damage: !number;
         }
     }
 }

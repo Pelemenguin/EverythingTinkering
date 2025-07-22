@@ -58,12 +58,13 @@ KubeJSFluid.create = (name, properties) => {
  */
 let logProperties = (properties) => {
     if (properties.presets !== undefined) {
-        console.info(` - Presets:`)
+        console.info(`|- Presets:`)
         properties.presets.forEach(p => {
-            console.info(`   - ${p}`)
+            console.info(`|  - ${p}`)
         })
     };
-    if (properties.temperature !== undefined) console.info(` - Temperature: ${properties.temperature}`);
+    console.info(`|- Temperature: ${properties.temperature}`);
+    console.info(`|- Light level: ${properties.lightLevel}`)
 }
 
 // - - - - - - - - - -
@@ -73,7 +74,8 @@ StartupEvents.registry("minecraft:fluid", event => {
     for (let key in KubeJSFluid.PROPERTIES) {
         let {
             presets,
-            temperature
+            temperature,
+            lightLevel
         } = KubeJSFluid.PROPERTIES[key];
         /** @type {!Internal.FluidBuilder} */
         let builder = event.create(key);
@@ -81,6 +83,9 @@ StartupEvents.registry("minecraft:fluid", event => {
             presets.forEach(p => {
                 builder = p.process(builder);
             });
+        }
+        if (lightLevel !== undefined) {
+            builder.block = builder.block.lightLevel(lightLevel);
         }
         builder = temperature === undefined ? builder : builder.temperature(temperature);
         console.info(`Fluid \`${key}\` registered with properties:`);
