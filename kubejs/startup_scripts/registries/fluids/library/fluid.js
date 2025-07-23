@@ -52,9 +52,10 @@ KubeJSFluid.create = (name, properties) => {
 };
 
 /**
- * 
  * @param {Annotation.FluidProperties} properties 
  * @returns {string}
+ * - - - - -
+ * @private
  */
 let logProperties = (properties) => {
     if (properties.presets !== undefined) {
@@ -75,7 +76,9 @@ StartupEvents.registry("minecraft:fluid", event => {
         let {
             presets,
             temperature,
-            lightLevel
+            lightLevel,
+            stillTexture,
+            flowingTexture
         } = KubeJSFluid.PROPERTIES[key];
         /** @type {!Internal.FluidBuilder} */
         let builder = event.create(key);
@@ -86,6 +89,13 @@ StartupEvents.registry("minecraft:fluid", event => {
         }
         if (lightLevel !== undefined) {
             builder.block = builder.block.lightLevel(lightLevel);
+        }
+        if (stillTexture !== undefined) {
+            builder.stillTexture(stillTexture);
+            console.info(builder)
+        }
+        if (flowingTexture !== undefined) {
+            builder.flowingTexture(flowingTexture);
         }
         builder = temperature === undefined ? builder : builder.temperature(temperature);
         console.info(`Fluid \`${key}\` registered with properties:`);

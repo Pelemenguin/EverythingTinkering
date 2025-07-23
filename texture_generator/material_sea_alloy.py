@@ -62,3 +62,43 @@ generator.add_function(dynamic, "dynamic", -1)
 generator.add_extra_file(lambda i, j: i+".mcmeta", lambda i, j: content)
 generator.set_fallback(["nonmetal"])
 generator.generate("kubejs_sea_alloy", part_types=["tconstruct:head", "tconstruct:handle", "tconstruct:binding", "tconstruct:repair_kit"])
+
+palette = [
+  {
+    "color": "FF508375",
+    "grey": 0
+  },
+  {
+    "color": "FF578A7C",
+    "grey": 63
+  },
+  {
+    "color": "FF90BDB3",
+    "grey": 102
+  },
+  {
+    "color": "FFD6E3D3",
+    "grey": 140
+  },
+  {
+    "color": "FFE1EAE1",
+    "grey": 178
+  },
+  {
+    "color": "FFDBE6D8",
+    "grey": 216
+  },
+  {
+    "color": "FFE2EBE4",
+    "grey": 255
+  }
+]
+
+generator = TextureGenerator(parts)
+generator.add_function(grayscale_colorize_function(convert_palette(palette)), "recolor", 0)
+generator.add_extra_file(lambda i, j: i+".mcmeta", lambda i, j: """{
+    "animation": {
+        "frametime": 2
+    }
+}""")
+generator.generate("", "resources/fluid/shiny", "outputs/fluid/molten/alloy/sea_alloy", ["kubejs:molten"])

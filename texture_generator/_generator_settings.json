@@ -1,5 +1,13 @@
 [
     {
+        "path": "          :still",
+        "stat_type": "kubejs:molten"
+    },
+    {
+        "path": "          :flowing",
+        "stat_type": "kubejs:molten"
+    },
+    {
         "path": "tconstruct:item/tool/parts/large_plate",
         "stat_type": "tconstruct:head"
     },

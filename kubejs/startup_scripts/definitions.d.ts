@@ -43,6 +43,16 @@ declare namespace Annotation {
          * - 液体方块的亮度。
          */
         static lightLevel: ?(0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15);
+        /**
+         * - Texture path of still fluid.
+         * - 静止液体的材质路径。
+         */
+        static stillTexture: string;
+        /**
+         * - Texture path of flowing fluid.
+         * - 流动液体的材质路径。
+         */
+        static flowingTexture: string;
         /** @todo More properties. */
     }
 
