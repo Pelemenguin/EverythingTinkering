@@ -53,7 +53,9 @@
         
         "lapis_lazuli": "#345EC3",
         
-        "andesite_alloy": "#c9caba"
+        "andesite_alloy": "#c9caba",
+        
+        "sea_alloy": "#C6DFD8"
         
     },
     "material.tconstruct": {
