@@ -16,6 +16,7 @@
 /texture_generator/__pycache__
 /*.jar
 /*.json
+!/modlist.json
 /options.txt
 /rhino.local.properties
 /*Everything Tinkering*.zip
