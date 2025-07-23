@@ -5,6 +5,7 @@ import zipfile
 import fnmatch
 import time
 import sys
+import tomllib
 
 def build_modpack(args: list[str]):
     curdir = os.path.relpath(os.path.dirname(os.path.realpath(__file__)), os.getcwd())
@@ -138,11 +139,65 @@ Build time: {BUILD_TIME}""")
 
     output.close()
 
+def check_mods(args: list[str]):
+    try:
+        detected_mods: dict[str, str] = {}
+        listed_mods: dict[str, str] = {}
+        mods = os.listdir('mods')
+        for m in mods:
+            if not m.endswith('.jar'):
+                continue
+            modfile = zipfile.ZipFile('mods/'+m, 'r')
+            try:
+                toml_file = modfile.read('META-INF/mods.toml')
+                modinfo = tomllib.loads(toml_file.decode())
+                for i in modinfo['mods']:
+                    modid = i['modId']
+                    modversion = i['version']
+                    detected_mods[modid] = [modversion]
+            except:
+                print(f"Cannot read mod info from {m}. Possibly not a mod.")
+            finally:
+                modfile.close()
+        modlist_file = open('modlist.json', 'r')
+        modlist = json.loads(modlist_file.read())
+        for m in modlist['mods']:
+            listed_mods[m['mod_id']] = m['version']
+        missings = 0
+        mismatched = 0
+        extra = 0
+        for k in listed_mods:
+            v = listed_mods[k]
+            if not k in detected_mods:
+                print(f"Missing      | {k} is missing. Required version: {v}")
+                missings += 1
+            elif detected_mods[k][0] == v: ...
+            else:
+                print(f"Mismatched   | Installed {k} is of version {detected_mods[k][0]}, required {v}")
+                mismatched += 1
+            del detected_mods[k]
+        for k in detected_mods:
+            v = detected_mods[k]
+            print(f"Not required | Installed extra mod {k} of version {v}")
+            extra += 1
+        print()
+        print(f"Missing mods    | {missings}")
+        print(f"Mismatched mods | {mismatched}")
+        print(f"Extra mods      | {extra}")
+
+        if missings == mismatched == extra == 0:
+            print("All of you mods are up-to-date.")
+    except Exception as e:
+        try: modlist_file.close()
+        except: ...
+        raise
+
 def help_build(args: list[str]):
     if len(args) == 0:
         print()
         print("Available tasks:")
         print("build | Build the modpack zip files")
+        print("check | Check if mods are of correct versions")
         print("help  | Show this help menu")
         print()
         print("Use `python build.py <task>` to run a task.")
@@ -155,12 +210,19 @@ def help_build(args: list[str]):
                 print("    help")
                 print("    help <task>")
                 print()
-                print("To see the usage of a task")
+                print("To see the usage of a task.")
             case "build":
                 print("Usage:")
                 print("    build")
                 print()
                 print("Build the modpack zip file.")
+            case "check":
+                print("Usage:")
+                print("    check")
+                print()
+                print("Check if mods are of correct versions.")
+                print("This task is for developers to check if their mods are up-to-date with other developers.")
+                print("Normal players do not to check this.")
             case _:
                 print(f"No such task: {task}")
                 help_build([])
@@ -178,6 +240,8 @@ if __name__ == '__main__':
             help_build(args[1:])
         case "build":
             build_modpack(args[1:])
+        case "check":
+            check_mods(args[1:])
         case _:
             print(f"No such task: {task}")
             print()
