@@ -192,13 +192,39 @@ def check_mods(args: list[str]):
         except: ...
         raise
 
+def gen_markdown(args: list[str]):
+    TAG_DESCRIPTIONS = {
+        "developerOnly": "This mod is only installed when developing. Not included in the modpack."
+    }
+
+    modlistMarkdown = open('modlist.md', 'w')
+    modlistJson = open('modlist.json', 'r')
+
+    modlist = json.loads(modlistJson.read())
+
+    modlistMarkdown.write("# Mod list\n")
+    modlistMarkdown.write("\n")
+    modlistMarkdown.write("<!-- Generated from `build.py` -->\n")
+
+    for modinfo in modlist['mods']:
+        modlistMarkdown.write(f"- [{modinfo['name']}]({modinfo['url']}) *{modinfo['version']}* by {modinfo['author']}\n")
+        try:
+            tags = modinfo['tags']
+            for t in tags:
+                modlistMarkdown.write(f"  - {TAG_DESCRIPTIONS['developerOnly']}\n")
+        except: ...
+
+    modlistMarkdown.close()
+    modlistJson.close()
+
 def help_build(args: list[str]):
     if len(args) == 0:
         print()
         print("Available tasks:")
-        print("build | Build the modpack zip files")
-        print("check | Check if mods are of correct versions")
-        print("help  | Show this help menu")
+        print("build       | Build the modpack zip files")
+        print("check       | Check if mods are of correct versions")
+        print("help        | Show this help menu")
+        print("gen-modlist | Gen a `modlist.md`")
         print()
         print("Use `python build.py <task>` to run a task.")
         print("Use `python build.py help <command>` to see detailed help for a specific command.")
@@ -223,6 +249,11 @@ def help_build(args: list[str]):
                 print("Check if mods are of correct versions.")
                 print("This task is for developers to check if their mods are up-to-date with other developers.")
                 print("Normal players do not to check this.")
+            case "gen-modlist":
+                print("Usage:")
+                print("    gen-modlist")
+                print()
+                print("Gen a `modlist.md`")
             case _:
                 print(f"No such task: {task}")
                 help_build([])
@@ -242,6 +273,8 @@ if __name__ == '__main__':
             build_modpack(args[1:])
         case "check":
             check_mods(args[1:])
+        case "gen-modlist":
+            gen_markdown(args[1:])
         case _:
             print(f"No such task: {task}")
             print()
