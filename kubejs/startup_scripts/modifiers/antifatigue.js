@@ -14,8 +14,13 @@
  * @license CC-BY-NC-SA-4.0
  */
 
+/* global
+    ModifierRegisterer
+    LivingEntity
+*/
+
 ModifierRegisterer.registerModifier("kubejs:antifatigue", modifier => {
-    modifier.getBreakSpeed((view, lvl, breakSpeedEvent, direction, canDrop, currentSpeed) => {
+    modifier.getBreakSpeed((view, lvl, breakSpeedEvent) => {
         let entity = breakSpeedEvent.entity;
         if (entity instanceof LivingEntity) {
             /** @type {Internal.LivingEntity} */

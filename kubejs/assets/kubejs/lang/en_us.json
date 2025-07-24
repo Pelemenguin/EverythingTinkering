@@ -99,7 +99,14 @@
     "material.kubejs.sea_alloy": "Sea Alloy",
     "material.kubejs.sea_alloy.flavor": "It's basically sea lanterns...",
     "material.kubejs.sea_alloy.encyclopedia": "Negates mining fatigue equivalent to the level of the Anti-Fatigue modifier",
-    
+
+        "_comment_fluids": " ----- Fluids ----- ",
+
+    "block.kubejs.molten_sea_alloy": "Molten Sea Alloy",
+    "fluid.kubejs.molten_sea_alloy": "Molten Sea Alloy",
+    "fluid.kubejs.flowing_molten_sea_alloy": "Flowing Molten Sea Alloy",
+    "item.kubejs.molten_sea_alloy_bucket": "Molten Sea Alloy Bucket",
+
         "_comment_modifiers": " ----- Modifiers ----- ",
 
     "modifier.kubejs.welcome": "Welcome",

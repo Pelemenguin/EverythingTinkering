@@ -102,7 +102,14 @@
     "material.kubejs.sea_alloy": "海洋合金",
     "material.kubejs.sea_alloy.flavor": "其实就是海晶灯......",
     "material.kubejs.sea_alloy.encyclopedia": "抵消与“抗疲劳”等级相当的挖掘疲劳",
-    
+
+        "_commont_fluids": " ----- 流体 ----- ",
+
+    "block.kubejs.molten_sea_alloy": "熔融海洋合金",
+    "fluid.kubejs.molten_sea_alloy": "熔融海洋合金",
+    "fluid.kubejs.flowing_molten_sea_alloy": "流动的熔融海洋合金",
+    "item.kubejs.molten_sea_alloy_bucket": "熔融海洋合金桶",
+
         "_comment_modifiers": " ----- 属性 ----- ",
 
     "modifier.kubejs.welcome": "欢迎",

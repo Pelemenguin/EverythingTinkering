@@ -70,23 +70,23 @@ palette = [
   },
   {
     "color": "FF578A7C",
-    "grey": 63
+    "grey": 180
   },
   {
     "color": "FF90BDB3",
-    "grey": 102
+    "grey": 189
   },
   {
     "color": "FFD6E3D3",
-    "grey": 140
+    "grey": 197
   },
   {
     "color": "FFE1EAE1",
-    "grey": 178
+    "grey": 214
   },
   {
     "color": "FFDBE6D8",
-    "grey": 216
+    "grey": 230
   },
   {
     "color": "FFE2EBE4",
@@ -101,4 +101,4 @@ generator.add_extra_file(lambda i, j: i+".mcmeta", lambda i, j: """{
         "frametime": 2
     }
 }""")
-generator.generate("", "resources/fluid/shiny", "outputs/fluid/molten/alloy/sea_alloy", ["kubejs:molten"])
+generator.generate(None, "resources/fluid/shiny", "outputs/fluid/molten/alloy/sea_alloy", ["kubejs:molten"])
