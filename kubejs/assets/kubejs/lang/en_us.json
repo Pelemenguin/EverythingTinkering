@@ -2,6 +2,7 @@
     "generator.kubejs.default": "Modpack Default Preset",
 
         "_comment_command": " ----- Command ---- ",
+
     "command.kubejs.item_list.parts.name": "Part list of %s",
     "command.kubejs.item_list.parts.lore": "Contained every part of the material",
 
@@ -114,9 +115,9 @@
     "modifier.kubejs.welcome.description": "Stats slightly boost during the first three days",
     "modifier.kubejs.welcome.hint": "The gift from %s has disappeared. Good luck!",
 
-    "modifier.kubejs.incompact": "Incompact",
-    "modifier.kubejs.incompact.flavor": "Wash your hands after using the tool!",
-    "modifier.kubejs.incompact.description": "Durability drops even when you are not using it",
+    "modifier.kubejs.friable": "Friable",
+    "modifier.kubejs.friable.flavor": "Wash your hands after using the tool!",
+    "modifier.kubejs.friable.description": "Durability drops even when you are not using it",
 
     "modifier.kubejs.whacking": "Whacking",
     "modifier.kubejs.whacking.flavor": "Bang!",

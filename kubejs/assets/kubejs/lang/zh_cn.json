@@ -3,6 +3,7 @@
     "generator.kubejs.default": "整合包默认预设",
 
         "_comment_command": " ----- 命令 ---- ",
+
     "command.kubejs.item_list.parts.name": "%s的部件列表",
     "command.kubejs.item_list.parts.lore": "包含了该材料的所有部件",
 
@@ -117,9 +118,9 @@
     "modifier.kubejs.welcome.description": "前三天内获得轻微的属性提升",
     "modifier.kubejs.welcome.hint": "来自%s的赠礼已然消散。祝你好运！",
 
-    "modifier.kubejs.incompact": "松散",
-    "modifier.kubejs.incompact.flavor": "用后洗手！",
-    "modifier.kubejs.incompact.description": "即使不使用时也会损失耐久",
+    "modifier.kubejs.friable": "松散",
+    "modifier.kubejs.friable.flavor": "用后洗手！",
+    "modifier.kubejs.friable.description": "即使不使用时也会损失耐久",
 
     "modifier.kubejs.whacking": "猛击",
     "modifier.kubejs.whacking.flavor": "梆！",

@@ -1,7 +1,7 @@
 // priority: -1
 
 // import { getModifiersFromItem } from "../../startup_scripts/globals"
-import { incompact } from "../modifiers/incompact"
+// import { incompact } from "../modifiers/incompact"
 import { igniting_tick } from "../modifiers/igniting"
 import { welcome_remove } from "../modifiers/welcome_remove"
 
@@ -29,7 +29,7 @@ function process_item(event, item) {
 
     // Incompact
     if ("kubejs:incompact" in modifiers) {
-        incompact(item, event.player, modifiers["kubejs:incompact"])
+        // incompact(item, event.player, modifiers["kubejs:incompact"])
     }
 
     // Igniting
