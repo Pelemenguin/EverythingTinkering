@@ -7,6 +7,12 @@
  * @license CC-BY-NC-SA-4.0
  */
 
+/* global
+
+    KubeJSFluid
+
+*/
+
 /**
  * A fluid preset: hot / molten fluids  
  * 流体预设：热 / 熔融液体
@@ -21,7 +27,7 @@
 KubeJSFluid.Presets.Hot = function(extraData) {
     /** @type {!number} */ this.burnTime = extraData.burnTime;
     /** @type {!number} */ this.damage = extraData.damage;
-}
+};
 
 /**
  * @override

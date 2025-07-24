@@ -7,6 +7,12 @@
  * @license CC-BY-NC-SA-4.0
  */
 
+/* global
+
+    StartupEvents
+    console
+*/
+
 /**
  * - Used for modpack fluid operations.  
  * - 用于整合包流体管理。
@@ -14,7 +20,7 @@
  * @class
  * @interface
  */
-function KubeJSFluid () {};
+function KubeJSFluid () {}
 /**
  * - A list for all fluids for the modpack.
  * - 整合包中所有流体的列表。
@@ -53,20 +59,19 @@ KubeJSFluid.create = (name, properties) => {
 
 /**
  * @param {Annotation.FluidProperties} properties 
- * @returns {string}
  * - - - - -
  * @private
  */
 let logProperties = (properties) => {
     if (properties.presets !== undefined) {
-        console.info(`|- Presets:`)
+        console.info(`|- Presets:`);
         properties.presets.forEach(p => {
-            console.info(`|  - ${p}`)
-        })
-    };
+            console.info(`|  - ${p}`);
+        });
+    }
     console.info(`|- Temperature: ${properties.temperature}`);
-    console.info(`|- Light level: ${properties.lightLevel}`)
-}
+    console.info(`|- Light level: ${properties.lightLevel}`);
+};
 
 // - - - - - - - - - -
 // Fluid Registry
@@ -92,7 +97,7 @@ StartupEvents.registry("minecraft:fluid", event => {
         }
         if (stillTexture !== undefined) {
             builder.stillTexture(stillTexture);
-            console.info(builder)
+            console.info(builder);
         }
         if (flowingTexture !== undefined) {
             builder.flowingTexture(flowingTexture);
