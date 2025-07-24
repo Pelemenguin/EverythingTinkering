@@ -1,6 +1,6 @@
 // import { getModifiersFromItem } from "../../startup_scripts/globals";
 import { relaying } from "../modifiers/relaying"
-import { glass_shard } from "../modifiers/glass_shard"
+// import { glass_shard } from "../modifiers/glass_shard"
 import { igniting_trigger } from "../modifiers/igniting"
 
 let getModifiersFromItem = global.getModifiersFromItem
@@ -61,7 +61,7 @@ let run_modifiers_on_entity_hurt = function(event, item, attacker_weapon_modifie
 
     // Glass Shard
     if ("kubejs:glass_shard" in attacker_weapon_modifiers) {
-        glass_shard(event, item, attacker_weapon_modifiers["kubejs:glass_shard"])
+        // glass_shard(event, item, attacker_weapon_modifiers["kubejs:glass_shard"])
     }
 
     // Igniting

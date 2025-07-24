@@ -15,6 +15,7 @@
 
 const LivingEntity = Java.loadClass("net.minecraft.world.entity.LivingEntity");
 const Player = Java.loadClass("net.minecraft.world.entity.player.Player");
+const Entity = Java.loadClass("net.minecraft.world.entity.Entity");
 
 /**
  * - An interface for custom KubeJS utils.

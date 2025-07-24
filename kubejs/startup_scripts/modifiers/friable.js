@@ -8,6 +8,9 @@
  * ## 松散
  * ### 描述
  * 每游戏刻有 `(0.2 * level)` 的概率损失耐久。
+ * - - - - -
+ * @author Pelemenguin
+ * @license CC-BY-NC-SA-4.0
  */
 
 /* global
