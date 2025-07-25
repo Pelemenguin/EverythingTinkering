@@ -41,20 +41,7 @@ function getMantleColor(translation_key) {
     // return result
 // }
 
-function getModifiersFromItem(item) {
-    // let toolStack = ToolStack.from(item)
-    // let modNbt = toolStack.
-    let raw = item.nbt.get("tic_modifiers")
-    let modNbt = ModifierNBT.readFromNBT(raw)
-    let result = {}
-    modNbt.forEach(modifier => {
-        let name = modifier.getId().toString()
-        let level = modifier.level
-        result[name] = level
-    })
-    return result
-}
+
 
 global.toolParts = toolParts
 global.getMantleColor = getMantleColor
-global.getModifiersFromItem = getModifiersFromItem

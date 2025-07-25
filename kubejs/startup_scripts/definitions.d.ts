@@ -66,4 +66,8 @@ declare namespace Annotation {
             damage: number;
         }
     }
+
+    namespace TinkerFunction {
+        type Hook = "getBreakSpeed" | "onAfterMeleeHit" | "onBeforeMeleeHit" | "onInventoryTick"
+    }
 }

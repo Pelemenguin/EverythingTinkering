@@ -4,6 +4,9 @@
  * @fileoverview Constants | 常量
  * - Because Rhino made `const`-defined objects global, use a special JS file to create these.
  * - 由于 Rhino 使得 `const` 定义的对象全局可访问，这里使用一个特殊文件来创建。
+ * - - - - -
+ * @author Pelemenguin
+ * @license CC-BY-NC-SA-4.0
  */
 
 /* eslint-disable no-unused-vars */
@@ -11,11 +14,18 @@
 /* global
     Java
     global
+    JavaMath
 */
+
+// ---------- Java classes ---------- //
 
 const LivingEntity = Java.loadClass("net.minecraft.world.entity.LivingEntity");
 const Player = Java.loadClass("net.minecraft.world.entity.player.Player");
 const Entity = Java.loadClass("net.minecraft.world.entity.Entity");
+
+const ModifierNBT = Java.loadClass("slimeknights.tconstruct.library.tools.nbt.ModifierNBT");
+
+// ---------- Utils ---------- //
 
 /**
  * - An interface for custom KubeJS utils.
@@ -55,6 +65,150 @@ CustomUtils.Tinker.isBroken = (item) => {
         } catch (e) { /* empty */ }
     }
     return (item.damageValue == item.maxDamage);
+};
+
+/**
+ * - Get modifiers from an item.
+ * - 从物品上获取匠魂特性。
+ * - - - - -
+ * @param {Internal.ItemStack} item -
+ * - The item to get modifiers from.
+ * - 要获取特性的物品。
+ * - - - - -
+ * @returns 
+ * - Result object.
+ *   Keys are modifiers' ids,
+ *   values are their level.
+ * - 结果。键为特性 ID，值为等级。
+ */
+CustomUtils.Tinker.getModifiersFromItem = function(item) {
+    let raw = item.nbt.get("tic_modifiers");
+    if (raw == null) return;
+    let modNbt = ModifierNBT.readFromNBT(raw);
+    /** @type {Object<string, number>} */
+    let result = {};
+    modNbt.forEach(modifier => {
+        let name = modifier.getId().toString();
+        let level = modifier.level;
+        result[name] = level;
+    });
+    return result;
+};
+
+/**
+ * - Try damage item.
+ * - 尝试损坏物品。
+ * - - - - -
+ * ### Success
+ * - Return `damage` itself or actual damage.
+ * ### Fail
+ * - If:
+ *   - Player is creative.
+ *   - Or item is not damagable.
+ *   - Or level is on client side.
+ * - Return `0`
+ * - - - - -
+ * ### 成功
+ * - 返回 `damage` 或实际损坏值。
+ * ### 失败
+ * - 当：
+ *   - 玩家是创造模式。
+ *   - 或物品不能损坏。
+ *   - 或维度在客户端上。
+ * - 返回 `0`。
+ * - - - - -
+ * @param {Internal.ItemStack} item -
+ * - The item to damage.
+ * - 要损坏的物品。
+ * @param {number} damage -
+ * - The damage value.
+ * - 损坏值。
+ * @param {Internal.Entity} entity -
+ * - The entity which the item belongs to.
+ *   Can be `undefined` if you don't care about this.
+ *   - If entity is a player and is creative,
+ *     will cause failure of damaging item.
+ * - 物品所属的实体。如果你不关心这个，传入 `undefined`。
+ *   - 如果该实体是一个玩家且处于创造模式，
+ *     将导致损坏物品的尝试失败。
+ * @param {Internal.Level} level -
+ * - The level where the item is.
+ *   Can be `undefined` if you don't care about this.
+ *   - If level is on the client side, return `0`.
+ * - 物品所处的维度。
+ *   如果你不关心这个，传入 `undefined`。
+ *   - 如果维度是客户端的，返回 `0`。
+ * - - - - -
+ * @returns {number} 
+ * - Actual damage dealt to the item.
+ * - 实际损坏值
+ */
+CustomUtils.Tinker.tryDamageItem = (item, damage, entity, level) => {
+    if (entity !== undefined && entity instanceof Player && entity.isCreative()) return 0;
+    if (level !== undefined && level.isClientSide()) return 0;
+    if (!item.isDamageableItem()) return 0;
+    try {
+        if (item.nbt.get("tic_broken").asByte == 1) return 0;
+    } catch (e) {/* Do nothing */}
+    let remainDura = item.maxDamage - item.damageValue + 1;
+    let actualDamage = JavaMath["min(int,int)"](remainDura, damage);
+    item.damageValue += actualDamage;
+    return actualDamage;
+};
+
+/**
+ * - Interface for tinker's persistent data.
+ * - 匠魂 Persistent 数据的接口
+ * - - - - -
+ * @class
+ * @interface
+ */
+CustomUtils.Tinker.Persistent = function() {};
+
+/**
+ * - Set the persistent data of an item.
+ * - 设置一个物品的 Persistent 数据。
+ * - - - - -
+ * @param {Internal.ItemStack} item -
+ * - The item to set persistent data to.
+ * - 要设置 Persistent 数据的物品。
+ * @param {string} modifierId -
+ * - The id of the modifier.
+ * - 特性 ID。
+ * @param {any} value -
+ * - The value of the persistent data.
+ * - 要设置的 Persistent 数据的值。
+ */
+CustomUtils.Tinker.Persistent.set = (item, modifierId, value) => {
+    let newData = {tic_persistent: {}};
+    newData.tic_persistent[modifierId] = value;
+    item.nbt.merge(newData);
+};
+/**
+ * - Get the persistent data from an item.
+ * - 从一个物品上获取 Persistent 数据。
+ * - - - - -
+ * @param {Internal.ItemStack} item -
+ * - The item to get persistent data from.
+ * - 要获取 Persistent 数据的物品。
+ * - - - - -
+ * @param {string} modifierId -
+ * - The id of the modifier.
+ * - 特性 ID。
+ * - - - - -
+ * @return {?nternal.Tag} 
+ * - Result of the persistent data of the given modifier of the item.
+ * - 该物品的给定特性的 Persistent 数据结果。
+ */
+CustomUtils.Tinker.Persistent.get = (item, modifierId) => {
+    /** @type {Internal.CompoundTag} */
+    let persistent = item.nbt.get("tic_persistent");
+    if (persistent == null) return;
+    try {
+        return persistent.get(modifierId);
+    } catch (e) {
+        return null;
+    }
 };
 
 /**

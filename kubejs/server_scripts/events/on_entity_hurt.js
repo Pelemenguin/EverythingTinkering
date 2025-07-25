@@ -66,7 +66,7 @@ let run_modifiers_on_entity_hurt = function(event, item, attacker_weapon_modifie
 
     // Igniting
     if ("kubejs:igniting" in attacker_weapon_modifiers) {
-        igniting_trigger(item, event.entity, attacker_weapon_modifiers["kubejs:igniting"])
+        // igniting_trigger(item, event.entity, attacker_weapon_modifiers["kubejs:igniting"])
     }
 
 }

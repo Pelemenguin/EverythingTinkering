@@ -2,10 +2,10 @@
 
 // import { getModifiersFromItem } from "../../startup_scripts/globals"
 // import { incompact } from "../modifiers/incompact"
-import { igniting_tick } from "../modifiers/igniting"
+// import { igniting_tick } from "../modifiers/igniting"
 import { welcome_remove } from "../modifiers/welcome_remove"
 
-let getModifiersFromItem = global.getModifiersFromItem
+let getModifiersFromItem = global.CustomUtils.Tinker.getModifiersFromItem;
 
 PlayerEvents.tick(event => {
     let player = event.player
@@ -34,7 +34,7 @@ function process_item(event, item) {
 
     // Igniting
     if ("kubejs:igniting" in modifiers) {
-        igniting_tick(item, event.player)
+        // igniting_tick(item, event.player)
     }
     
     // Welcome

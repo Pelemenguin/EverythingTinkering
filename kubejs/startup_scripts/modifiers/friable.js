@@ -16,17 +16,13 @@
 /* global
 
     ModifierRegisterer
-    Player
     CustomUtils
     JavaMath
 
 */
 
-ModifierRegisterer.registerModifier("kubejs:friable", modifier => {
-    modifier.onInventoryTick((view, lvl, level, entity, slot, inMainHand, inAvailableSlot, itemStack) => {
-        if (JavaMath.random() >= lvl * 0.2) return;
-        if (entity instanceof Player && entity.isCreative()) return;
-        if (CustomUtils.Tinker.isBroken(itemStack)) return;
-        itemStack.damageValue += (lvl + JavaMath.round(level * 2 * JavaMath.random()));
-    });
+let FRIABLE = ModifierRegisterer.registerModifier("kubejs:friable", ["onInventoryTick"]);
+FRIABLE.onInventoryTick((view, lvl, level, entity, slot, inMainHand, inAvailableSlot, itemStack) => {
+    if (JavaMath.random() >= 0.2 * lvl) return;
+    CustomUtils.Tinker.tryDamageItem(itemStack, (lvl + JavaMath.round(lvl * 2 * JavaMath.random())), entity, level);
 });
