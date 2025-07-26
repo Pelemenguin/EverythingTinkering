@@ -1,9 +1,4 @@
-// import { getModifiersFromItem } from "../../startup_scripts/globals";
-import { relaying } from "../modifiers/relaying"
-// import { glass_shard } from "../modifiers/glass_shard"
-import { igniting_trigger } from "../modifiers/igniting"
-
-let getModifiersFromItem = global.getModifiersFromItem
+let getModifiersFromItem = global.CustomUtils.Tinker.getModifiersFromItem;
 
 EntityEvents.hurt(event => {
     checkAttackerModifier(event) // Check and run attacker's modifiers
@@ -26,24 +21,24 @@ function checkAttackerModifier (event) {
         }
     }
 
-    let offhandItem = event.source.actual.handSlots[1]
-    if (offhandItem != null) {
-        if (offhandItem.nbt != null) {
-            if (offhandItem.nbt.get("tic_broken").asInt != 1) {
-                let valid_offhand = false
-                let attacker_weapon_modifiers = getModifiersFromItem(offhandItem)
-                Object.keys(attacker_weapon_modifiers).forEach(element => {
-                    if (OFFHAND_ATTACKABLE_MODIFIER.indexOf(element) >= 0) {
-                        valid_offhand = true
-                    }
-                });
-                console.info(`Item ${offhandItem} is valid for off hand? : ${valid_offhand}`)
-                if (valid_offhand) {
-                    run_modifiers_on_entity_hurt(event, offhandItem, attacker_weapon_modifiers)
-                }
-            }
-        }
-    }
+    // let offhandItem = event.source.actual.handSlots[1]
+    // if (offhandItem != null) {
+    //     if (offhandItem.nbt != null) {
+    //         if (offhandItem.nbt.get("tic_broken").asInt != 1) {
+    //             let valid_offhand = false
+    //             let attacker_weapon_modifiers = getModifiersFromItem(offhandItem)
+    //             Object.keys(attacker_weapon_modifiers).forEach(element => {
+    //                 if (OFFHAND_ATTACKABLE_MODIFIER.indexOf(element) >= 0) {
+    //                     valid_offhand = true
+    //                 }
+    //             });
+    //             console.info(`Item ${offhandItem} is valid for off hand? : ${valid_offhand}`)
+    //             if (valid_offhand) {
+    //                 run_modifiers_on_entity_hurt(event, offhandItem, attacker_weapon_modifiers)
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 /**

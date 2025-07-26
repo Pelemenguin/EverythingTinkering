@@ -27,9 +27,13 @@ const Entity = Java.loadClass("net.minecraft.world.entity.Entity");
 
 const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
 
+const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialId');
+const MaterialVariant = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialVariant');
 const ModifierId = Java.loadClass('slimeknights.tconstruct.library.modifiers.ModifierId');
 const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ToolStack');
+const MaterialNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT');
 const ModifierNBT = Java.loadClass("slimeknights.tconstruct.library.tools.nbt.ModifierNBT");
+const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDefinitions');
 
 // ---------- Utils ---------- //
 
@@ -161,6 +165,16 @@ CustomUtils.Tinker.tryDamageItem = (item, damage, entity, level) => {
     item.damageValue += actualDamage;
     return actualDamage;
 };
+
+/**
+ * - A list for all parts in Tinker's Construct.
+ * - **Actually loaded in server_scripts**
+ * - 所有匠魂部件的列表。
+ * - **实际在 server_scripts 中加载**
+ * - - - - -
+ * @type {(Internal.ToolPartItem | Internal.RepairKitItem)[]}
+ */
+CustomUtils.Tinker.TOOL_PARTS = [];
 
 /**
  * - Interface for tinker's persistent data.
