@@ -48,6 +48,15 @@ TConJSEvents.modifierRegistry(event => {
                             }
                         });
                         break;
+                    case "getMeleeDamage":
+                        builder.getMeleeDamage((arg0, arg1, arg2, arg3, arg4) => {
+                            try {
+                                return global.TinkerFunctions.getMeleeDamageFunctions.get(id)(arg0, arg1, arg2, arg3, arg4);
+                            } catch (e) {
+                                console.error(`Exception occurred! ${e}`);
+                            }
+                        });
+                        break;
                     case "onAfterMeleeHit":
                         builder.onAfterMeleeHit((arg0, arg1, arg2, arg3) => {
                             try {
@@ -144,6 +153,15 @@ KubeJSModifier.prototype.onAfterBreak = function(consumer) {
     global.TinkerFunctions.onAfterBreakFunctions.put(this.id, consumer);
 };
 /**
+ * - Modify damage while attacking.
+ * - 攻击时修改伤害。
+ * - - - - -
+ * @param {Internal.ModifierBuilder$GetMeleeDamageFunction_} consumer 
+ */
+KubeJSModifier.prototype.getMeleeDamage = function(consumer) {
+    global.TinkerFunctions.getMeleeDamageFunctions.put(this.id, consumer);
+};
+/**
  * - Triggers after melee damage is dealt.
  * - 造成近战伤害后触发。
  * - - - - -
@@ -196,6 +214,10 @@ global.TinkerFunctions.getBreakSpeedFunctions = Utils.newMap();
  * @type {Internal.Map<string, Internal.ModifierBuilder$BreakBlockFunction_>}
  */
 global.TinkerFunctions.onAfterBreakFunctions = Utils.newMap();
+/**
+ * @type {Internal.Map<string, Internal.ModifierBuilder$GetMeleeDamageFunction_>}
+ */
+global.TinkerFunctions.getMeleeDamageFunctions = Utils.newMap();
 /**
  * @type {Internal.Map<string, Internal.ModifierBuilder$AfterMeleeHitFunction_>}
  */

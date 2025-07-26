@@ -68,6 +68,6 @@ declare namespace Annotation {
     }
 
     namespace TinkerFunction {
-        type Hook = "addToolStats" | "getBreakSpeed" | "onAfterBreak" | "onAfterMeleeHit" | "onBeforeMeleeHit" | "onInventoryTick"
+        type Hook = "addToolStats" | "getBreakSpeed" | "onAfterBreak" | "getMeleeDamage" | "onAfterMeleeHit" | "onBeforeMeleeHit" | "onInventoryTick"
     }
 }

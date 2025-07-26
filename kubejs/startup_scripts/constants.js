@@ -102,7 +102,7 @@ CustomUtils.Tinker.getModifiersFromItem = function(item) {
 };
 
 /**
- * - Try damage item.
+ * - Try to damage item.
  * - 尝试损坏物品。
  * - - - - -
  * ### Success

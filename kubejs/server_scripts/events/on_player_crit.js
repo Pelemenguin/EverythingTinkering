@@ -40,7 +40,7 @@ let run_modifiers_on_crit = function(event, item, modifiers) {
     let isCritical = (event.getOldDamageModifier() >= 1.5)
     // Whacking
     if ("kubejs:whacking" in modifiers) {
-        whacking(event, item, isCritical, modifiers["kubejs:whacking"])
+        // whacking(event, item, isCritical, modifiers["kubejs:whacking"])
     }
     
 }
