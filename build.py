@@ -175,7 +175,10 @@ def check_mods(args: list[str]):
             else:
                 print(f"Mismatched   | Installed {k} is of version {detected_mods[k][0]}, required {v}")
                 mismatched += 1
-            del detected_mods[k]
+            try:
+                del detected_mods[k]
+            except KeyError:
+                ...
         for k in detected_mods:
             v = detected_mods[k]
             print(f"Not required | Installed extra mod {k} of version {v}")
