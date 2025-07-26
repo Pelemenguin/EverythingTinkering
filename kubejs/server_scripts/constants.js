@@ -35,14 +35,3 @@ ForgeRegistries.ITEMS.getValues().forEach(item => {
 });
 
 global.CustomUtils.Tinker.TOOL_PARTS = toolParts;
-
-/**
- * Get the color of a material by its ID.
- * Temporary proxy for the one in `global`.
- * 
- * @param {string} translation_key - The translation key of the material.
- * @returns {TextColor} The color of the material in hex format, or white if not found.
- */
-function getMantleColor(translation_key) {
-    return global.CustomUtils.Tinker.getMantleColor(translation_key);
-}
