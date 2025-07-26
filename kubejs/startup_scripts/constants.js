@@ -23,6 +23,10 @@ const LivingEntity = Java.loadClass("net.minecraft.world.entity.LivingEntity");
 const Player = Java.loadClass("net.minecraft.world.entity.player.Player");
 const Entity = Java.loadClass("net.minecraft.world.entity.Entity");
 
+const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
+
+const ModifierId = Java.loadClass('slimeknights.tconstruct.library.modifiers.ModifierId');
+const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ToolStack');
 const ModifierNBT = Java.loadClass("slimeknights.tconstruct.library.tools.nbt.ModifierNBT");
 
 // ---------- Utils ---------- //
@@ -209,6 +213,21 @@ CustomUtils.Tinker.Persistent.get = (item, modifierId) => {
     } catch (e) {
         return null;
     }
+};
+
+/**
+ * - Get a color from Mantle's Resource Color Manager.
+ * - 从 Mantle 的 Resource Color Manager 中获取颜色
+ * 
+ * @param {string} translation_key - 
+ * - The translation key.
+ * - 翻译键
+ * @returns {Internal.TextColor}
+ * - The color of the material in hex format, or white if not found.
+ * - 对应翻译键的颜色，若未找到，则为白色。
+ */
+CustomUtils.Tinker.getMantleColor = (translation_key) => {
+    return ResourceColorManager.getTextColor(translation_key);
 };
 
 /**

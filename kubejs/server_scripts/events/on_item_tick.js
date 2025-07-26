@@ -39,7 +39,7 @@ function process_item(event, item) {
     
     // Welcome
     if ("kubejs:welcome" in modifiers) {
-        welcome_remove(item, event.level.time, event.player)
+        // welcome_remove(item, event.level.time, event.player)
     }
 
 }

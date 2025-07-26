@@ -21,6 +21,15 @@ TConJSEvents.modifierRegistry(event => {
             let modifier = RegisteredModifiers.get(id);
             modifier.hooks.forEach(hook => {
                 switch (hook) {
+                    case "addToolStats":
+                        builder.addToolStats((arg0, arg1, arg2) => {
+                            try {
+                                global.TinkerFunctions.addToolStatsFunctions.get(id)(arg0, arg1, arg2);
+                            } catch (e) {
+                                console.error(`Exception occurred! ${e}`);
+                            }
+                        });
+                        break;
                     case "getBreakSpeed":
                         builder.getBreakSpeed((arg0, arg1, arg2, arg3, arg4, arg5) => {
                             try {
@@ -102,6 +111,15 @@ const KubeJSModifier = function(name, hooks) {
  * - Modify break speed.
  * - 修改挖掘速度。
  * - - - - -
+ * @param {Internal.ModifierBuilder$ToolStatModifyFunction_} consumer 
+ */
+KubeJSModifier.prototype.addToolStats = function(consumer) {
+    global.TinkerFunctions.addToolStatsFunctions.put(this.id, consumer);
+};
+/**
+ * - Modify break speed.
+ * - 修改挖掘速度。
+ * - - - - -
  * @param {Internal.ModifierBuilder$GetBreakSpeedFunction_} consumer 
  */
 KubeJSModifier.prototype.getBreakSpeed = function(consumer) {
@@ -148,6 +166,10 @@ KubeJSModifier.prototype.onInventoryTick = function(consumer) {
  */
 global.TinkerFunctions = function() {};
 
+/**
+ * @type {Internal.Map<string, Internal.ModifierBuilder$ToolStatModifyFunction_>}
+ */
+global.TinkerFunctions.addToolStatsFunctions = Utils.newMap();
 /**
  * @type {Internal.Map<string, Internal.ModifierBuilder$GetBreakSpeedFunction_>}
  */
