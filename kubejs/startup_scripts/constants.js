@@ -19,6 +19,8 @@
 
 // ---------- Java classes ---------- //
 
+const ResourceKey = Java.loadClass("net.minecraft.resources.ResourceKey");
+const TagKey = Java.loadClass("net.minecraft.tags.TagKey");
 const LivingEntity = Java.loadClass("net.minecraft.world.entity.LivingEntity");
 const Player = Java.loadClass("net.minecraft.world.entity.player.Player");
 const Entity = Java.loadClass("net.minecraft.world.entity.Entity");

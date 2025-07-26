@@ -39,6 +39,15 @@ TConJSEvents.modifierRegistry(event => {
                             }
                         });
                         break;
+                    case "onAfterBreak":
+                        builder.onAfterBreak((arg0, arg1, arg2) => {
+                            try {
+                                global.TinkerFunctions.onAfterBreakFunctions.get(id)(arg0, arg1, arg2);
+                            } catch (e) {
+                                console.error(`Exception occurred! ${e}`);
+                            }
+                        });
+                        break;
                     case "onAfterMeleeHit":
                         builder.onAfterMeleeHit((arg0, arg1, arg2, arg3) => {
                             try {
@@ -108,8 +117,8 @@ const KubeJSModifier = function(name, hooks) {
 
 
 /**
- * - Modify break speed.
- * - 修改挖掘速度。
+ * - Modity tool stats.
+ * - 修改工具属性。
  * - - - - -
  * @param {Internal.ModifierBuilder$ToolStatModifyFunction_} consumer 
  */
@@ -124,6 +133,15 @@ KubeJSModifier.prototype.addToolStats = function(consumer) {
  */
 KubeJSModifier.prototype.getBreakSpeed = function(consumer) {
     global.TinkerFunctions.getBreakSpeedFunctions.put(this.id, consumer);
+};
+/**
+ * - Triggers after a block is mined.
+ * - 破坏方块后触发。
+ * - - - - -
+ * @param {Internal.ModifierBuilder$BreakBlockFunction_} consumer 
+ */
+KubeJSModifier.prototype.onAfterBreak = function(consumer) {
+    global.TinkerFunctions.onAfterBreakFunctions.put(this.id, consumer);
 };
 /**
  * - Triggers after melee damage is dealt.
@@ -175,6 +193,10 @@ global.TinkerFunctions.addToolStatsFunctions = Utils.newMap();
  */
 global.TinkerFunctions.getBreakSpeedFunctions = Utils.newMap();
 /**
+ * @type {Internal.Map<string, Internal.ModifierBuilder$BreakBlockFunction_>}
+ */
+global.TinkerFunctions.onAfterBreakFunctions = Utils.newMap();
+/**
  * @type {Internal.Map<string, Internal.ModifierBuilder$AfterMeleeHitFunction_>}
  */
 global.TinkerFunctions.onAfterMeleeHitFunctions = Utils.newMap();
@@ -203,6 +225,7 @@ const RegisteredModifiers = Utils.newMap();
  * - An interface for modifier registries.
  * - 该接口为整合包通用的 modifier 注册接口。
  * - - - - -
+ * @class
  * @interface
  */
 function ModifierRegisterer() {}

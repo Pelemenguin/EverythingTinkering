@@ -38,6 +38,6 @@ function process_item_on_mine(event, item) {
     var modifiers = getModifiersFromItem(item)
     
     if ("kubejs:uncertain" in modifiers) {
-        uncertain(item, event.block, event.entity, event.level, modifiers["kubejs:uncertain"])
+        // uncertain(item, event.block, event.entity, event.level, modifiers["kubejs:uncertain"])
     }
 }
