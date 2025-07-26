@@ -52,7 +52,7 @@ NativeEvents.onEvent(LivingHurtEvent, event => {
 let run_modifiers = function(event, item, modifiers) {
     // console.info(event)
     if ("kubejs:pottery" in modifiers) {
-        pottery(event, item, modifiers["kubejs:pottery"])
+        // pottery(event, item, modifiers["kubejs:pottery"])
     }
     
 }
