@@ -21,64 +21,10 @@
     Component
     MaterialNBT
     ModifierId
+    LootEntry
 */
 
-/**
- * - An interface for artifact creation.
- * - 用于创造 Artifact 的接口。
- * - - - - -
- * @class
- * @interface
- */
-const ArtifactRegisterer = function () {};
-
-/**
- * - Create an artifact.
- * - 创建一个 Artifact.
- * - - - - -
- * @param {string} id -
- * - Id of the artifact.
- * - 该 Artifact 的 ID。
- * @param {Internal.ToolDefinition_} definition -
- * - A tool definition.
- * - 工具定义。 
- * @param {string[]} materials -
- * - Materials of the tool.
- * - 工具材料列表。
- * - - - - -
- * @returns {Artifact}
- */
-ArtifactRegisterer.createArtifact = (id, definition, materials) => {
-    let registered = new Artifact(id, definition, materials);
-    global.Artifacts.put(id, registered);
-    console.info(`[Artifact] Registered new artifact "${id}", type ${definition.getId().toString()}, materials: [${materials}]`);
-    return registered;
-};
-
-/**
- * - Create an artifact group.
- * - 创建一个 Artifact 组。
- * - - - - -
- * @param {string} id -
- * - Id of the artiface group.
- * - 该 Artifact 组的 ID。
- */
-ArtifactRegisterer.createArtifactGroup = (id) => {
-    let registered = new ArtifactGroup(id);
-    global.Artifacts.put(id, registered);
-    console.info(`[Artifact] Registered new artifact group "${id}"`);
-    return registered;
-};
-
 /** @typedef {Artifact | ArtifactGroup} Annotation.ArtifactOrGroup */
-
-/**
- * - Stores all registered artifacts.
- * - 储存所有已注册的 Artifact。
- * - - - - -
- * @type {Internal.Map<string, Annotation.ArtifactOrGroup>}
- */
-global.Artifacts = Utils.newMap();
 
 /**
  * - Artifact.
@@ -149,20 +95,21 @@ Artifact.prototype.addModifier = function(modifier, level) {
     this.modifiers.put(modifierId, level);
 };
 
-/** @returns {string} */
+/** @returns {string} @private */
 Artifact.prototype.getTranslationId = function() {
     /** @type {Annotation.ArtifactOrGroup} */
     let cur = this;
     /** @type {string[]} */
-    let stack = [];
+    let stack = [this.id];
     while (true) {
+        console.info(cur.toString());
         cur = cur.parent;
         if (cur == null) break;
         stack.push(cur.id);
     }
-    let name = this.id;
+    let name = "";
     for (let i = stack.length - 1; i >= 0; i--) {
-        name.concat('.'+stack[i]);
+        name = name.concat('.' + stack.pop());
     }
     return name;
 };
@@ -174,7 +121,7 @@ Artifact.prototype.getTranslationId = function() {
  * @returns {Internal.Component}
  */
 Artifact.prototype.getName = function() {
-    return Component.translatable(`item.kubejs.artifact.${this.getTranslationId()}.name`);
+    return Component.translatable(`item.kubejs${this.getTranslationId()}.name`);
 };
 
 /**
@@ -184,7 +131,7 @@ Artifact.prototype.getName = function() {
  * @returns {Internal.Component}
  */
 Artifact.prototype.getLore = function() {
-    return Component.translatable(`item.kubejs.artifact.${this.getTranslationId()}.lore`);
+    return Component.translatable(`item.kubejs${this.getTranslationId()}.lore`);
 };
 
 Artifact.prototype.init = function() {
@@ -201,9 +148,13 @@ Artifact.prototype.reset = function() {
  * - Create an instance Item Stack of the artifact.
  * - 创建 Artifact 的物品堆叠实例。
  * - - - - -
+ * @param {number} count
+ * - The count of the item stack.
+ * - 物品堆叠的数量。
+ * - - - - -
  * @returns {Internal.ItemStack}
  */
-Artifact.prototype.createStack = function() {
+Artifact.prototype.createStack = function(count) {
     let materialNbt = MaterialNBT.builder();
     this.materials.forEach(material => {
         materialNbt["add(slimeknights.tconstruct.library.materials.definition.MaterialVariant)"](material);
@@ -216,12 +167,40 @@ Artifact.prototype.createStack = function() {
     this.modifiers.forEach((id, level) => {
         stack.addModifier(id, level);
     });
-    let result = stack.createStack();
+    let result;
+    if (count == undefined) {
+        result = stack.createStack();
+    } else {
+        result = stack.createStack(count);
+    }
     if (!this.initialized) this.init();
-    result.withName(this.name);
-    result.withLore(this.lore);
     ToolStack.ensureInitialized(result, this.definition);
+    result = result.withName(this.name);
+    result = result.withLore(this.lore);
     return result;
+};
+
+/**
+ * - Create a loot entry of the artifact.
+ * - 创建一个该 Artifact 的战利品表条目。
+ * - - - - -
+ * @param {number} count -
+ * - Item count.
+ * - 物品数量
+ * - - - - -
+ * @returns {Internal.LootEntry}
+ */
+Artifact.prototype.createLootEntry = function(count) {
+    let stack = this.createStack();
+    let item = stack.getItem();
+    let nbt = stack.getNbt();
+    let result = LootEntry.of(item, count);
+    result.addNBT(nbt);
+    return result;
+};
+
+Artifact.prototype.toString = function() {
+    return `${this.id}[${this.materials.toString()}]{${this.modifiers.toString()}}`;
 };
 
 // ---------- Artifact Group ---------- //
@@ -240,7 +219,7 @@ function ArtifactGroup(id) {
     /** @type {ArtifactGroup | null} */
     this.parent = null;
     this.id = id;
-    /** @type {Internal.Map<string, Artifact>} */
+    /** @type {Internal.Map<string, Annotation.ArtifactOrGroup>} */
     this.children = Utils.newMap();
 }
 
@@ -277,19 +256,35 @@ ArtifactGroup.prototype.createArtifact = function(id, item, definition, material
 };
 
 /**
- * - Create an artifact group.
- * - 创建一个 Artifact 组。
+ * - Get an artifact (or group) from a name path.
+ * - 通过命名路径获取一个 Artifact （或组）。
  * - - - - -
- * @param {string} id -
- * - Id of the artiface group.
- * - 该 Artifact 组的 ID。
+ * @example
+ * ```javascript
+ * let group = global.Artifacts.createArtifactGroup("group_a");
+ * let subgroup = group.createArtifactGroup("group_b");
+ * let example_artifact = subgroup.createArtifact("artifact", ...);
+ * 
+ * global.Artifacts.getRecursive("group_a.group_b.artifact") // example_artifact
+ * global.Artifacts.getRecursive("group_a.group_b") // subgroup
+ * ```
+ * - - - - -
+ * @param {string} namepath
+ * - - - - -
+ * @returns {?Annotation.ArtifactOrGroup} 
  */
-ArtifactRegisterer.createArtifactGroup = function(id) {
-    let registered = new ArtifactGroup(id);
-    registered.parent = this;
-    this.children.put(id, registered);
-    console.info(`[Artifact] Registered new artifact group "${id}"`);
-    return registered;
+ArtifactGroup.prototype.getRecursive = function(namepath) {
+    let indexOfDot = namepath.indexOf('.');
+    if (indexOfDot == -1) {
+        return this.get(namepath);
+    }
+    let first = namepath.substring(0, indexOfDot);
+    let sub = this.get(first);
+    if (sub instanceof ArtifactGroup) {
+        return sub.getRecursive(namepath.substring(indexOfDot + 1));
+    } else {
+        return null;
+    }
 };
 
 /**
@@ -300,10 +295,22 @@ ArtifactRegisterer.createArtifactGroup = function(id) {
  * - Id of the artiface group.
  * - 该 Artifact 组的 ID。
  */
-ArtifactRegisterer.createArtifactGroup = (id) => {
+ArtifactGroup.prototype.createArtifactGroup = function(id) {
     let registered = new ArtifactGroup(id);
     registered.parent = this;
-    global.Artifacts[id] = registered;
+    this.children.put(id, registered);
     console.info(`[Artifact] Registered new artifact group "${id}"`);
     return registered;
 };
+
+ArtifactGroup.prototype.toString = function() {
+    return `${this.id}${this.children.entrySet().map(a => a.value.toString()).toString()}`;
+};
+
+/**
+ * - Stores all registered artifacts.
+ * - 储存所有已注册的 Artifact。
+ * - - - - -
+ * @type {ArtifactGroup}
+ */
+global.Artifacts = new ArtifactGroup('artifact');

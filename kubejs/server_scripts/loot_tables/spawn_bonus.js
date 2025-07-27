@@ -29,10 +29,9 @@
     Item
 */
 
-/** */
-let STARTUP_PICKAXE = global.Artifacts.get("startup").get("pickaxe").createStack();
-let STARTUP_HAND_AXE = global.Artifacts.get("startup").get("hand_axe").createStack();
-let STARTUP_SWORD = global.Artifacts.get("startup").get("sword").createStack();
+/** @type {Artifact} */ let STARTUP_PICKAXE = global.Artifacts.get("startup").get("pickaxe");
+/** @type {Artifact} */ let STARTUP_HAND_AXE = global.Artifacts.get("startup").get("hand_axe");
+/** @type {Artifact} */ let STARTUP_SWORD = global.Artifacts.get("startup").get("sword");
 
 LootJS.modifiers(event => {
     // ToolStack.ensureInitialized(StartupPickaxe)
@@ -40,9 +39,9 @@ LootJS.modifiers(event => {
     // ToolStack.ensureInitialized(StartupSword)
     event.addLootTableModifier("minecraft:chests/spawn_bonus_chest")
         .removeLoot(/.*/)
-        .addLoot(LootEntry.of(STARTUP_PICKAXE, 1))
-        .addLoot(LootEntry.of(STARTUP_HAND_AXE, 1))
-        .addLoot(LootEntry.of(STARTUP_SWORD, 1))
+        .addLoot(STARTUP_PICKAXE.createLootEntry(1))
+        .addLoot(STARTUP_HAND_AXE.createLootEntry(1))
+        .addLoot(STARTUP_SWORD.createLootEntry(1))
         .addLoot(LootEntry.of("tconstruct:crafting_station", 1))
         .addLoot(LootEntry.of(Item.of('tconstruct:part_builder', '{texture:"minecraft:oak_planks"}'), 1))
         .addLoot(LootEntry.of(Item.of('tconstruct:tinker_station', '{texture:"minecraft:oak_planks"}'), 1))

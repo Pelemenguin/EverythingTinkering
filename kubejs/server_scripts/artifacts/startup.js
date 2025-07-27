@@ -17,12 +17,12 @@
  */
 
 /* global
-    ArtifactRegisterer
+    global: writable
     TiCToolDefinitions
     Item
 */
 
-let STARTUP = ArtifactRegisterer.createArtifactGroup("startup");
+let STARTUP = global.Artifacts.createArtifactGroup("startup");
 
 let PICKAXE = STARTUP.createArtifact("pickaxe", Item.getItem("tconstruct:pickaxe"), TiCToolDefinitions.PICKAXE, [
     "tconstruct:rock#stone",

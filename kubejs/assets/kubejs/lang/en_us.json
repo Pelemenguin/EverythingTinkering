@@ -6,6 +6,11 @@
     "command.kubejs.item_list.parts.name": "Part list of %s",
     "command.kubejs.item_list.parts.lore": "Contained every part of the material",
 
+    "command.kubejs.artifact.not_found": "Artifact not found: \"%s\"",
+    "command.kubejs.artifact.is_group": "Given namespace is a group: \"%s\", artifacts in the group:",
+    "command.kubejs.artifact.group_mark": "[Group]",
+    "command.kubejs.artifact.success": "Successfully gave %2$s artifact(s) \"%1$s\" to %3$s target(s)",
+
         "_comment_materials": " ----- Materials ----- ",
 
     "material.kubejs.soil": "Soil",

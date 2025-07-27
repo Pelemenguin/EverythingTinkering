@@ -7,6 +7,11 @@
     "command.kubejs.item_list.parts.name": "%s的部件列表",
     "command.kubejs.item_list.parts.lore": "包含了该材料的所有部件",
 
+    "command.kubejs.artifact.not_found": "未找到 Artifact：“%s”",
+    "command.kubejs.artifact.is_group": "给定的命名路径是一个组：“%s” ，组中的 Artifact：",
+    "command.kubejs.artifact.group_mark": "[组]",
+    "command.kubejs.artifact.success": "成功将%2$s个Artifact[%1$s]给予%3$s个目标",
+
         "_comment_materials": " ----- 材料 ----- ",
     
     "material.tconstruct.wood.cherry": "樱花木",
