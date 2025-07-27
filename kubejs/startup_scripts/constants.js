@@ -254,3 +254,12 @@ CustomUtils.Tinker.getMantleColor = (translation_key) => {
  * @interface
  */
 global.CustomUtils = CustomUtils;
+
+/**
+ * - An interface for modifier data.
+ * - 用于特性数据的接口。
+ * - - - - -
+ * @class
+ * @interface
+ */
+global.Tinker = function() {};

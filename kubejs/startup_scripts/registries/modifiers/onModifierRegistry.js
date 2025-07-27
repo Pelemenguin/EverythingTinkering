@@ -55,6 +55,7 @@ TConJSEvents.modifierRegistry(event => {
                             } catch (e) {
                                 console.error(`Exception occurred! ${e}`);
                             }
+                            return arg4;
                         });
                         break;
                     case "onAfterMeleeHit":
@@ -69,10 +70,11 @@ TConJSEvents.modifierRegistry(event => {
                     case "onBeforeMeleeHit":
                         builder.onBeforeMeleeHit((arg0, arg1, arg2, arg3, arg4, arg5) => {
                             try {
-                                global.TinkerFunctions.onBeforeMeleeHitFunctions.get(id)(arg0, arg1, arg2, arg3, arg4, arg5);
+                                return global.TinkerFunctions.onBeforeMeleeHitFunctions.get(id)(arg0, arg1, arg2, arg3, arg4, arg5);
                             } catch (e) {
                                 console.error(`Exception occurred! ${e}`);
                             }
+                            return arg5;
                         });
                         break;
                     case "onInventoryTick":

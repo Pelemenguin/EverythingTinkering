@@ -103,7 +103,7 @@
 
     "material.kubejs.andesite_alloy": "安山合金",
     "material.kubejs.andesite_alloy.flavor": "就像一个传动轴！",
-    "material.kubejs.andesite_alloy.encyclopedia": "判定箱是一个立方体，其棱会每级增加0.5格。在判定箱内的实体会受到你对直接目标造成的伤害的50%",
+    "material.kubejs.andesite_alloy.encyclopedia": "攻击一条直线上距离不超过三格的敌人。每次传递，伤害会被乘以0.2倍特性等级。传递至小于1时停止。",
 
     "material.kubejs.sea_alloy": "海洋合金",
     "material.kubejs.sea_alloy.flavor": "其实就是海晶灯......",
@@ -149,7 +149,7 @@
 
     "modifier.kubejs.relaying": "传动",
     "modifier.kubejs.relaying.flavor": "传递动量！",
-    "modifier.kubejs.relaying.description": "攻击时，目标稍后方的敌人也会被击中",
+    "modifier.kubejs.relaying.description": "攻击一条直线上的敌人",
 
     "modifier.kubejs.antifatigue": "抗疲劳",
     "modifier.kubejs.antifatigue.flavor": "横扫饥饿！",

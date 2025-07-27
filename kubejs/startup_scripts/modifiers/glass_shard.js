@@ -54,7 +54,7 @@ GLASS_SHARD.onBeforeMeleeHit((view, lvl, context, damage, baseKnockback, finalKn
         z + 1
     );
     let entityList = context.getLevel().getEntitiesWithin(box);
-    let source = context.getLevel().damageSources().playerAttack(context.getAttacker());
+    let source = context.getLevel().damageSources().mobAttack(context.getAttacker());
     /** @type {Internal.Entity[]} */
     let attackables = [];
     entityList.forEach(entity => {
