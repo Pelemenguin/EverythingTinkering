@@ -216,7 +216,7 @@ CustomUtils.Tinker.Persistent.set = (item, modifierId, value) => {
  * - The id of the modifier.
  * - 特性 ID。
  * - - - - -
- * @return {?nternal.Tag} 
+ * @return {?Internal.Tag} 
  * - Result of the persistent data of the given modifier of the item.
  * - 该物品的给定特性的 Persistent 数据结果。
  */

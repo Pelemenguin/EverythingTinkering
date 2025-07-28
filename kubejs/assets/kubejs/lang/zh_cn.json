@@ -138,6 +138,7 @@
     "modifier.kubejs.igniting": "点燃",
     "modifier.kubejs.igniting.flavor": "小心烫手！",
     "modifier.kubejs.igniting.description": "将火从一个敌人传递到另一个敌人上",
+    "modifier.kubejs.igniting.tooltip": "燃烧时间：%s",
 
     "modifier.kubejs.uncertain": "未定",
     "modifier.kubejs.uncertain.flavor": "薛定谔的矿！",

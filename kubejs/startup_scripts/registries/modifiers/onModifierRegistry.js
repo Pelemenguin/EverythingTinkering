@@ -86,6 +86,15 @@ TConJSEvents.modifierRegistry(event => {
                             }
                         });
                         break;
+                    case "tooltipSetting":
+                        builder.tooltipSetting((arg0, arg1, arg2, arg3, arg4, arg5) => {
+                            try {
+                                global.TinkerFunctions.tooltipSettingFunctions.get(id)(arg0, arg1, arg2, arg3, arg4, arg5);
+                            } catch (e) {
+                                console.error(`Exception occurred! ${e}`);
+                            }
+                        });
+                        break;
                 }
             });
         });
@@ -190,6 +199,15 @@ KubeJSModifier.prototype.onBeforeMeleeHit = function(consumer) {
 KubeJSModifier.prototype.onInventoryTick = function(consumer) {
     global.TinkerFunctions.onInventoryTickFunctions.put(this.id, consumer);
 };
+/**
+ * - Set the tooltips.
+ * - 设置工具提示。
+ * - - - - -
+ * @param {Internal.ModifierBuilder$TooltipSettingFunction_} consumer 
+ */
+KubeJSModifier.prototype.tooltipSetting = function(consumer) {
+    global.TinkerFunctions.tooltipSettingFunctions.put(this.id, consumer);
+};
 
 
 // ---------- Map Initialization ---------- //
@@ -232,6 +250,10 @@ global.TinkerFunctions.onBeforeMeleeHitFunctions = Utils.newMap();
  * @type {Internal.Map<string, Internal.ModifierBuilder$InventoryTickFunction_>}
  */
 global.TinkerFunctions.onInventoryTickFunctions = Utils.newMap();
+/**
+ * @type {Internal.Map<string, Internal.ModifierBuilder$TooltipSettingFunction_>}
+ */
+global.TinkerFunctions.tooltipSettingFunctions = Utils.newMap();
 
 /**
  * - A JS object to store all registered modifiers.

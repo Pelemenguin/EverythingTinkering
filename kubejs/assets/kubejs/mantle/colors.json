@@ -92,7 +92,8 @@
         "pottery": "#9B6045",
         "glass_shard": "#d0eae9",
         "uncertain": "#345EC3",
-        "relaying": "#c9caba"
+        "relaying": "#c9caba",
+        "antifatigue": "#C6DFD8"
         
     }
 }

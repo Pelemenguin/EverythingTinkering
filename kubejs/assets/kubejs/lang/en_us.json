@@ -139,6 +139,7 @@
     "modifier.kubejs.igniting": "Igniting",
     "modifier.kubejs.igniting.flavor": "Hot Caution!",
     "modifier.kubejs.igniting.description": "Conveys fire from one enemy to another",
+    "modifier.kubejs.igniting.tooltip": "Ignitng time: %s",
 
     "modifier.kubejs.glass_shard": "Glass Shard",
     "modifier.kubejs.glass_shard.flavor": "Fragile products!",

@@ -53,7 +53,7 @@ global.Tinker.RELAYING_PLANNED_DAMAGE = [];
 
 let RELAYING = ModifierRegisterer.registerModifier("kubejs:relaying", ["onBeforeMeleeHit"]);
 RELAYING.onBeforeMeleeHit((view, lvl, context, damage, baseKnockback, finalKnockback) => {
-
+    
     let world = context.getLevel();
     if (world.isClientSide()) return finalKnockback;
     let multiplier = lvl * RELAYING_DAMAGE_PERCENTAGE;
@@ -67,9 +67,9 @@ RELAYING.onBeforeMeleeHit((view, lvl, context, damage, baseKnockback, finalKnock
     let plannedDamages = Utils.newMap();
     
     let curDamage = damage;
-    let curPos = new Vec3d(context.target.x, context.target.y, context.target.z);
+    let curPos = new Vec3d(context.target.x, context.target.y + context.target.getEyeHeight(), context.target.z);
     let sinceLastEntity = 0;
-    let plannedTime = 2;
+    let plannedTime = 0;
     while (curDamage >= 1.0 && sinceLastEntity <= RELAYING_MAX_DISTANCE) {
         let nextPos = curPos.add(ray);
         let aabb = AABB.of(
@@ -83,7 +83,6 @@ RELAYING.onBeforeMeleeHit((view, lvl, context, damage, baseKnockback, finalKnock
             curDamage *= multiplier;
             sinceLastEntity = 0;
             plannedTime += 2;
-            curPos = new Vec3d(thisEntity.x, thisEntity.y, thisEntity.z);
         } else {
             sinceLastEntity += RELAYING_ITERATOR_STEP;
             curPos = nextPos;
@@ -93,7 +92,6 @@ RELAYING.onBeforeMeleeHit((view, lvl, context, damage, baseKnockback, finalKnock
     plannedDamages.forEach((uuid, entry) => {
         global.Tinker.RELAYING_PLANNED_DAMAGE.push(entry);
     });
-
     return finalKnockback;
 
 });

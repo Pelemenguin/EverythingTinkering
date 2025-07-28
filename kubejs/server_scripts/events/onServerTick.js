@@ -9,6 +9,9 @@
 */
 
 ServerEvents.tick(event => {
+
+    // ---------- Handle `relaying` damage ---------- //
+
     /** @type {Annotation.Tinker.RelayingPlannedDamageEntry[]} */
     let damagingEntries = [];
     global.Tinker.RELAYING_PLANNED_DAMAGE.forEach(entry => {
@@ -24,4 +27,23 @@ ServerEvents.tick(event => {
             entity.attack(entry[3], entry[1]);
         });
     });
+
+    // ---------- Handle `igniting` timer ---------- //
+
+    let removing = [];
+    global.Tinker.IGNITING_TIMER.forEach((key, timer) => {
+        let {current} = timer;
+        if (current == 0) {
+            removing.push(key);
+        } else {
+            timer.current = current - 1;
+        }
+    });
+    removing.forEach(r => global.Tinker.IGNITING_TIMER.remove(r));
+
+    if (global.Tinker.IGNITING_TIMER_COUNTER > 2147483640) {
+        global.Tinker.IGNITING_TIMER_COUNTER = 0;
+        global.Tinker.IGNITING_TIMER.clear();
+    }
+
 });
