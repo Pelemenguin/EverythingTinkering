@@ -15,6 +15,7 @@
     ToolStats
     JavaMath
     Vec3d
+    KubeJSDamageSources
 */
 
 /**
@@ -69,7 +70,9 @@ PAPERCUTTING.armorTakeAttacked((view, lvl, context, slot, source, damage) => {
     /** Push attacker to the list, so it can't be attacked by papercutting again. */
     PAPERCUT_TARGET_LIST_CLEARABLE = false;
     PAPERCUT_TARGET_IN_THIS_TICK.push(attacker);
-    attacker.attack(wearer.damageSources().thorns(wearer), returning);
+    // let damageSource = wearer.damageSources().thorns(wearer);
+    let damageSource = KubeJSDamageSources.papercut(context.getLevel(), wearer, wearer);
+    attacker.attack(damageSource, returning);
 
     return false;
 

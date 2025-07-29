@@ -19,11 +19,13 @@
 
 // ---------- Java classes ---------- //
 
+const Registries = Java.loadClass("net.minecraft.core.registries.Registries");
 const ResourceKey = Java.loadClass("net.minecraft.resources.ResourceKey");
 const TagKey = Java.loadClass("net.minecraft.tags.TagKey");
 const LivingEntity = Java.loadClass("net.minecraft.world.entity.LivingEntity");
 const Player = Java.loadClass("net.minecraft.world.entity.player.Player");
 const Entity = Java.loadClass("net.minecraft.world.entity.Entity");
+
 
 const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
 
@@ -35,7 +37,6 @@ const MaterialNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.Ma
 const ModifierNBT = Java.loadClass("slimeknights.tconstruct.library.tools.nbt.ModifierNBT");
 const ToolStats = Java.loadClass('slimeknights.tconstruct.library.tools.stat.ToolStats');
 const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDefinitions');
-
 
 // ---------- Utils ---------- //
 
@@ -255,7 +256,7 @@ CustomUtils.Tinker.getMantleColor = (translation_key) => {
  * @class
  * @interface
  */
-IGNITING_TIMER.CustomUtils = CustomUtils;
+global.CustomUtils = CustomUtils;
 
 /**
  * - An interface for modifier data.
@@ -264,4 +265,4 @@ IGNITING_TIMER.CustomUtils = CustomUtils;
  * @class
  * @interface
  */
-IGNITING_TIMER.Tinker = function() {};
+global.Tinker = function() {};

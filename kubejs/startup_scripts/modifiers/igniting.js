@@ -23,7 +23,6 @@
  */
 
 /* global
-    global: writable
     ModifierRegisterer
     CustomUtils
     NBT
