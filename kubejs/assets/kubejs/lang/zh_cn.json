@@ -146,7 +146,7 @@
 
     "modifier.kubejs.glass_shard": "玻璃碎片",
     "modifier.kubejs.glass_shard.flavor": "易碎制品！",
-    "modifier.kubejs.glass_shard.description": "攻击有概率消耗更多耐久。此时，直接目标附近的敌人也会受伤",
+    "modifier.kubejs.glass_shard.description": "攻击会更多耐久。此时，直接目标附近的敌人也会受伤",
 
     "modifier.kubejs.relaying": "传动",
     "modifier.kubejs.relaying.flavor": "传递动量！",
