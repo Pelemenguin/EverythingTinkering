@@ -12,6 +12,11 @@
     "command.kubejs.artifact.group_mark": "[组]",
     "command.kubejs.artifact.success": "成功将%2$s个Artifact[%1$s]给予%3$s个目标",
 
+        "_comment_damage_types": " ----- 伤害类型 ----- ",
+    
+    "death.attack.kubejs.papercut": "%1$s在撕%2$s的纸时被划伤了手指",
+    "death.attack.kubejs.papercut.player": "%1$s在撕%2$s的纸时被%3$s划伤了手指",
+
         "_comment_materials": " ----- 材料 ----- ",
     
     "material.tconstruct.wood.cherry": "樱花木",

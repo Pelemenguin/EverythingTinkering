@@ -46,9 +46,9 @@ let IGNITING_FIRE_PERCENTAGE_PER_LEVEL = 0.25;
  */
 let ignitingSetTime = (item, current, max) => {
     // In case of overflow
-    if (global.Tinker.IGNITING_TIMER_COUNTER > 2147483600) {
-        global.Tinker.IGNITING_TIMER_COUNTER = 0;
-        global.Tinker.IGNITING_TIMER.clear();
+    if (IGNITING_TIMER_COUNTER > 2147483600) {
+        IGNITING_TIMER_COUNTER = 0;
+        IGNITING_TIMER.clear();
     }
 
     let newObject = {
@@ -56,9 +56,9 @@ let ignitingSetTime = (item, current, max) => {
         max: NBT.intTag(max)
     };
     // CustomUtils.Tinker.Persistent.set(item, "kubejs:igniting", NBT.toTagCompound(newNbt));
-    global.Tinker.IGNITING_TIMER.put(global.Tinker.IGNITING_TIMER_COUNTER, newObject);
-    CustomUtils.Tinker.Persistent.set(item, "kubejs:igniting", NBT.intTag(global.Tinker.IGNITING_TIMER_COUNTER));
-    global.Tinker.IGNITING_TIMER_COUNTER++;
+    IGNITING_TIMER.put(IGNITING_TIMER_COUNTER, newObject);
+    CustomUtils.Tinker.Persistent.set(item, "kubejs:igniting", NBT.intTag(IGNITING_TIMER_COUNTER));
+    IGNITING_TIMER_COUNTER++;
 };
 
 /**
@@ -71,7 +71,7 @@ let ignitingSetTime = (item, current, max) => {
 let ignitingGet = (item) => {
     /** @type {Internal.CompoundTag} */
     try {
-        let obj = global.Tinker.IGNITING_TIMER.getOrDefault(CustomUtils.Tinker.Persistent.get(item, "kubejs:igniting").asInt, null);
+        let obj = IGNITING_TIMER.getOrDefault(CustomUtils.Tinker.Persistent.get(item, "kubejs:igniting").asInt, null);
         return obj;
     // eslint-disable-next-line no-unused-vars
     } catch (e) {
@@ -113,10 +113,10 @@ let calculateColor = (ratio) => {
  * - - - - -
  * @type {Internal.Map<number, Annotation.Tinker.IgnitingTimeRepresentation} 
  */
-global.Tinker.IGNITING_TIMER = Utils.newMap();
-global.Tinker.IGNITING_TIMER_COUNTER = 0;
+let IGNITING_TIMER = Utils.newMap();
+let IGNITING_TIMER_COUNTER = 0;
 
-let IGNITING = ModifierRegisterer.registerModifier("kubejs:igniting", ["onInventoryTick", "onAfterMeleeHit", "tooltipSetting"]);
+let IGNITING = ModifierRegisterer.registerModifier("kubejs:igniting", ["onInventoryTick", "onAfterMeleeHit", "tooltipSetting", "onServerTick"]);
 IGNITING.onAfterMeleeHit((view, lvl, context /*, damage*/) => {
     if (context.getLevel().isClientSide()) return;
 
@@ -177,7 +177,7 @@ IGNITING.onInventoryTick((view, lvl, level, entity, slot, inMainHand, inAvailabl
 IGNITING.tooltipSetting((view, lvl, player, tooltip /*, key, flags */) => {
     try {
         let reference = view.persistentData.getInt("kubejs:igniting");
-        let persistent = global.Tinker.IGNITING_TIMER.get(reference);
+        let persistent = IGNITING_TIMER.get(reference);
         if (persistent == null) return;
         let current = persistent.current;
         if (current <= 0) return;
@@ -191,4 +191,21 @@ IGNITING.tooltipSetting((view, lvl, player, tooltip /*, key, flags */) => {
         let component = Component.translatable("modifier.kubejs.igniting.tooltip", progreeComponent);
         tooltip.add(component);
     } catch (e) {console.error(e); }
+});
+IGNITING.onServerTick(() => {
+    let removing = [];
+    IGNITING_TIMER.forEach((key, timer) => {
+        let {current} = timer;
+        if (current == 0) {
+            removing.push(key);
+        } else {
+            timer.current = current - 1;
+        }
+    });
+    removing.forEach(r => IGNITING_TIMER.remove(r));
+
+    if (IGNITING_TIMER_COUNTER > 2147483640) {
+        IGNITING_TIMER_COUNTER = 0;
+        IGNITING_TIMER.clear();
+    }
 });

@@ -11,6 +11,11 @@
     "command.kubejs.artifact.group_mark": "[Group]",
     "command.kubejs.artifact.success": "Successfully gave %2$s artifact(s) \"%1$s\" to %3$s target(s)",
 
+        "_comment_damage_types": " ----- Damage Types ----- ",
+    
+    "death.attack.kubejs.papercut": "%1$s cut their fingers when trying to tear %2$s's paper apart.",
+    "death.attack.kubejs.papercut.player": "%1$s's fingers were cut by %3$s when trying to tear %2$s's paper apart.",
+
         "_comment_materials": " ----- Materials ----- ",
 
     "material.kubejs.soil": "Soil",

@@ -33,7 +33,9 @@ const ModifierId = Java.loadClass('slimeknights.tconstruct.library.modifiers.Mod
 const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ToolStack');
 const MaterialNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT');
 const ModifierNBT = Java.loadClass("slimeknights.tconstruct.library.tools.nbt.ModifierNBT");
+const ToolStats = Java.loadClass('slimeknights.tconstruct.library.tools.stat.ToolStats');
 const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDefinitions');
+
 
 // ---------- Utils ---------- //
 
@@ -253,7 +255,7 @@ CustomUtils.Tinker.getMantleColor = (translation_key) => {
  * @class
  * @interface
  */
-global.CustomUtils = CustomUtils;
+IGNITING_TIMER.CustomUtils = CustomUtils;
 
 /**
  * - An interface for modifier data.
@@ -262,4 +264,4 @@ global.CustomUtils = CustomUtils;
  * @class
  * @interface
  */
-global.Tinker = function() {};
+IGNITING_TIMER.Tinker = function() {};

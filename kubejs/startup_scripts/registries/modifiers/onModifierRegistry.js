@@ -1,4 +1,4 @@
-// priority: 100
+// priority: 10000
 
 /**
  * @file This JS file is for modifier registry.
@@ -28,6 +28,16 @@ TConJSEvents.modifierRegistry(event => {
                             } catch (e) {
                                 console.error(`Exception occurred! ${e}`);
                             }
+                        });
+                        break;
+                    case "armorTakeAttacked":
+                        builder.armorTakeAttacked((arg0, arg1, arg2, arg3, arg4, arg5) => {
+                            try {
+                                return global.TinkerFunctions.armorTakeAttackedFunctions.get(id)(arg0, arg1, arg2, arg3, arg4, arg5);
+                            } catch (e) {
+                                console.error(`Exception occurred! ${e}`);
+                            }
+                            return true;
                         });
                         break;
                     case "getBreakSpeed":
@@ -130,6 +140,13 @@ const KubeJSModifier = function(name, hooks) {
      * @type {Annotation.TinkerFunction.Hook[]}
      */
     this.hooks = hooks;
+
+    this.hooks.forEach(hook => {
+        switch (hook) {
+            case "onServerTick": global.TinkerFunctions.onServerTickFunctions.put(this.id, null);
+        }
+    });
+
 };
 
 
@@ -144,6 +161,15 @@ const KubeJSModifier = function(name, hooks) {
  */
 KubeJSModifier.prototype.addToolStats = function(consumer) {
     global.TinkerFunctions.addToolStatsFunctions.put(this.id, consumer);
+};
+/**
+ * - Triggers when being attacked.
+ * - 被攻击时触发。
+ * - - - - -
+ * @param {Internal.ModifierBuilder$ArmorAttackedFunction_} consumer 
+ */
+KubeJSModifier.prototype.armorTakeAttacked = function(consumer) {
+    global.TinkerFunctions.armorTakeAttackedFunctions.put(this.id, consumer);
 };
 /**
  * - Modify break speed.
@@ -208,6 +234,16 @@ KubeJSModifier.prototype.onInventoryTick = function(consumer) {
 KubeJSModifier.prototype.tooltipSetting = function(consumer) {
     global.TinkerFunctions.tooltipSettingFunctions.put(this.id, consumer);
 };
+/**
+ * - Triggers every server tick.
+ * - 每服务端 tick 触发。
+ * - - - - -
+ * @param {function(Internal.ServerEventJS_): void} consumer 
+ */
+KubeJSModifier.prototype.onServerTick = function(consumer) {
+    if (this.hooks.indexOf("onServerTick") == -1) console.error(`You cannot add "onServerTick" function, you forgot to declare this when registering modifier.`);
+    global.TinkerFunctions.onServerTickFunctions.put(this.id, consumer);
+};
 
 
 // ---------- Map Initialization ---------- //
@@ -226,6 +262,10 @@ global.TinkerFunctions = function() {};
  * @type {Internal.Map<string, Internal.ModifierBuilder$ToolStatModifyFunction_>}
  */
 global.TinkerFunctions.addToolStatsFunctions = Utils.newMap();
+/**
+ * @type {Internal.Map<string, Internal.ModifierBuilder$ArmorAttackedFunction_>}
+ */
+global.TinkerFunctions.armorTakeAttackedFunctions = Utils.newMap();
 /**
  * @type {Internal.Map<string, Internal.ModifierBuilder$GetBreakSpeedFunction_>}
  */
@@ -254,6 +294,10 @@ global.TinkerFunctions.onInventoryTickFunctions = Utils.newMap();
  * @type {Internal.Map<string, Internal.ModifierBuilder$TooltipSettingFunction_>}
  */
 global.TinkerFunctions.tooltipSettingFunctions = Utils.newMap();
+/**
+ * @type {Internal.Map<string, function(Internal.ServerEventJS_): void>}
+ */
+global.TinkerFunctions.onServerTickFunctions = Utils.newMap();
 
 /**
  * - A JS object to store all registered modifiers.
