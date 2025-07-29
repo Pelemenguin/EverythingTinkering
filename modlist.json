@@ -1,0 +1,185 @@
+{
+    "info": {
+        "name": "Everything Tinkering",
+        "author": [
+            "Pelemenguin"
+        ]
+    },
+    "version": {
+        "minecraft": "1.20.1",
+        "modloader": "neoforge-1.20.1-47.1.106",
+            "_comment_modpack_version": "Leave empty if this is a build version",
+        "modpack": ""
+    },
+    "mods": [
+        {
+            "name": "Architectury API",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/architectury-api",
+            "author": "shedaniel",
+            "curse_id": {
+                "project": 419699,
+                "file": 5137938
+            },
+            "raw_file_name": "architectury-9.2.14-forge.jar",
+            "mod_id": "architectury",
+            "version": "9.2.14"
+        },
+        {
+            "name": "Create",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/create",
+            "author": "simibubi",
+            "curse_id": {
+                "project": 328085,
+                "file": 6323270
+            },
+            "raw_file_name": "create-1.20.1-6.0.4.jar",
+            "mod_id": "create",
+            "version": "6.0.4"
+        },
+        {
+            "name": "MmmMmmMmmMmm (Target Dummy)",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm",
+            "author": "MehVahdJukaar",
+            "curse_id": {
+                "project": 225738,
+                "file": 6608233
+            },
+            "raw_file_name": "dummmmmmy-1.20-2.0.6.jar",
+            "mod_id": "dummmmmmy",
+            "version": "1.20-2.0.6"
+        },
+        {
+            "name": "EventJS",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/eventjs",
+            "author": "ZZZank",
+            "curse_id": {
+                "project": 1132802,
+                "file": 6582223
+            },
+            "raw_file_name": "EventJS-1.20.1-1.4.0.jar",
+            "mod_id": "eventjs",
+            "version": "1.4.0"
+        },
+        {
+            "name": "Jade 🔍",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/jade",
+            "author": "Snownee",
+            "curse_id": {
+                "project": 324717,
+                "file": 6271651
+            },
+            "raw_file_name": "Jade-1.20.1-Forge-11.13.1.jar",
+            "mod_id": "jade",
+            "version": "${file.jarVersion}"
+        },
+        {
+            "name": "Just Enough Items (JEI)",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/jei",
+            "author": "mezz",
+            "curse_id": {
+                "project": 238222,
+                "file": 6075247
+            },
+            "raw_file_name": "jei-1.20.1-forge-15.20.0.106.jar",
+            "mod_id": "jei",
+            "version": "15.20.0.106"
+        },
+        {
+            "name": "KubeJS",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/kubejs",
+            "author": "LatvianModder",
+            "curse_id": {
+                "project": 238086,
+                "file": 5853326
+            },
+            "raw_file_name": "kubejs-forge-2001.6.5-build.16.jar",
+            "mod_id": "kubejs",
+            "version": "2001.6.5-build.16"
+        },
+        {
+            "name": "LootJS: KubeJS Addon",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/lootjs",
+            "author": "Lytho",
+            "curse_id": {
+                "project": 570630,
+                "file": 6508899
+            },
+            "raw_file_name": "lootjs-forge-1.20.1-2.13.0.jar",
+            "mod_id": "lootjs",
+            "version": "1.20.1-2.13.0"
+        },
+        {
+            "name": "Mantle",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/mantle",
+            "author": "mDiyo",
+            "curse_id": {
+                "project": 74924,
+                "file": 6635380
+            },
+            "raw_file_name": "Mantle-1.20.1-1.11.61.jar",
+            "mod_id": "mantle",
+            "version": "1.11.61"
+        },
+        {
+            "name": "Moonlight Lib",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/selene",
+            "author": "MehVahdJukaar",
+            "curse_id": {
+                "project": 499980,
+                "file": 6507197
+            },
+            "raw_file_name": "moonlight-1.20-2.14.1-forge.jar",
+            "mod_id": "moonlight",
+            "version": "1.20-2.14.1"
+        },
+        {
+            "name": "Rhino",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/rhino",
+            "author": "LatvianModder",
+            "curse_id": {
+                "project": 416294,
+                "file": 6186971
+            },
+            "raw_file_name": "rhino-forge-2001.2.3-build.10.jar",
+            "mod_id": "rhino",
+            "version": "2001.2.3-build.10"
+        },
+        {
+            "name": "ProbeJS",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/probejs",
+            "author": "Amygdaloideae",
+            "curse_id": {
+                "project": 585406,
+                "file": 5227399
+            },
+            "tags": ["DeveloperOnly"],
+            "raw_file_name": "probejs-6.0.1-forge.jar",
+            "mod_id": "probejs",
+            "version": "6.0.1"
+        },
+        {
+            "name": "Tinkers Construct",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/tinkers-construct",
+            "author": "mDiyo",
+            "curse_id": {
+                "project": 74072,
+                "file": 6635554
+            },
+            "raw_file_name": "TConstruct-1.20.1-3.10.1.76.jar",
+            "mod_id": "tconstruct",
+            "version": "3.10.1.76"
+        },
+        {
+            "name": "TConstructJS",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/tconstructjs",
+            "author": "lcy0x1",
+            "curse_id": {
+                "project": 1210790,
+                "file": 6583705
+            },
+            "raw_file_name": "tconstruct_js-1.0.3.jar",
+            "mod_id": "tconstruct_js",
+            "version": "1.0.3"
+        }
+    ]
+}

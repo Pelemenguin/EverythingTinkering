@@ -53,7 +53,9 @@
         
         "lapis_lazuli": "#345EC3",
         
-        "andesite_alloy": "#c9caba"
+        "andesite_alloy": "#c9caba",
+        
+        "sea_alloy": "#C6DFD8"
         
     },
     "material.tconstruct": {
@@ -84,13 +86,14 @@
     
         "welcome": "#00D638",
     
-        "incompact": "#79553a",
+        "friable": "#79553a",
         "igniting": "#393e46",
         "whacking": "#b75a40",
         "pottery": "#9B6045",
         "glass_shard": "#d0eae9",
         "uncertain": "#345EC3",
-        "relaying": "#c9caba"
+        "relaying": "#c9caba",
+        "antifatigue": "#C6DFD8"
         
     }
 }

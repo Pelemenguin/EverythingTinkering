@@ -80,7 +80,7 @@ class TextureGenerator:
                 return result
         return part_path
 
-    def generate(self, suffix: str, input_path = "resources", output_path = "outputs", part_types: list = None):
+    def generate(self, suffix: str | None = None, input_path = "resources", output_path = "outputs", part_types: list = None):
         """Generate images.
         
         :param suffix: Suffix for your image.
@@ -115,7 +115,7 @@ class TextureGenerator:
                 image = c.operate(image)
             this_dir = os.path.dirname(this_output_path)
             l = (os.path.basename(this_output_path).split("."))
-            l[-2] += f"_{suffix}"
+            l[-2] += "" if not suffix else f"_{suffix}"
             this_name = ".".join(l)
             if not os.path.exists(this_dir):
                 os.makedirs(this_dir)

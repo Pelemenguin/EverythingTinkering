@@ -3,8 +3,14 @@
     "generator.kubejs.default": "整合包默认预设",
 
         "_comment_command": " ----- 命令 ---- ",
+
     "command.kubejs.item_list.parts.name": "%s的部件列表",
     "command.kubejs.item_list.parts.lore": "包含了该材料的所有部件",
+
+    "command.kubejs.artifact.not_found": "未找到 Artifact：“%s”",
+    "command.kubejs.artifact.is_group": "给定的命名路径是一个组：“%s” ，组中的 Artifact：",
+    "command.kubejs.artifact.group_mark": "[组]",
+    "command.kubejs.artifact.success": "成功将%2$s个Artifact[%1$s]给予%3$s个目标",
 
         "_comment_materials": " ----- 材料 ----- ",
     
@@ -97,8 +103,19 @@
 
     "material.kubejs.andesite_alloy": "安山合金",
     "material.kubejs.andesite_alloy.flavor": "就像一个传动轴！",
-    "material.kubejs.andesite_alloy.encyclopedia": "判定箱是一个立方体，其棱会每级增加0.5格。在判定箱内的实体会受到你对直接目标造成的伤害的50%",
-    
+    "material.kubejs.andesite_alloy.encyclopedia": "攻击一条直线上距离不超过三格的敌人。每次传递，伤害会被乘以0.2倍特性等级。传递至小于1时停止。",
+
+    "material.kubejs.sea_alloy": "海洋合金",
+    "material.kubejs.sea_alloy.flavor": "其实就是海晶灯......",
+    "material.kubejs.sea_alloy.encyclopedia": "抵消与“抗疲劳”等级相当的挖掘疲劳",
+
+        "_commont_fluids": " ----- 流体 ----- ",
+
+    "block.kubejs.molten_sea_alloy": "熔融海洋合金",
+    "fluid.kubejs.molten_sea_alloy": "熔融海洋合金",
+    "fluid.kubejs.flowing_molten_sea_alloy": "流动的熔融海洋合金",
+    "item.kubejs.molten_sea_alloy_bucket": "熔融海洋合金桶",
+
         "_comment_modifiers": " ----- 属性 ----- ",
 
     "modifier.kubejs.welcome": "欢迎",
@@ -106,9 +123,9 @@
     "modifier.kubejs.welcome.description": "前三天内获得轻微的属性提升",
     "modifier.kubejs.welcome.hint": "来自%s的赠礼已然消散。祝你好运！",
 
-    "modifier.kubejs.incompact": "松散",
-    "modifier.kubejs.incompact.flavor": "用后洗手！",
-    "modifier.kubejs.incompact.description": "即使不使用时也会损失耐久",
+    "modifier.kubejs.friable": "松散",
+    "modifier.kubejs.friable.flavor": "用后洗手！",
+    "modifier.kubejs.friable.description": "即使不使用时也会损失耐久",
 
     "modifier.kubejs.whacking": "猛击",
     "modifier.kubejs.whacking.flavor": "梆！",
@@ -121,6 +138,7 @@
     "modifier.kubejs.igniting": "点燃",
     "modifier.kubejs.igniting.flavor": "小心烫手！",
     "modifier.kubejs.igniting.description": "将火从一个敌人传递到另一个敌人上",
+    "modifier.kubejs.igniting.tooltip": "燃烧时间：%s",
 
     "modifier.kubejs.uncertain": "未定",
     "modifier.kubejs.uncertain.flavor": "薛定谔的矿！",
@@ -128,11 +146,15 @@
 
     "modifier.kubejs.glass_shard": "玻璃碎片",
     "modifier.kubejs.glass_shard.flavor": "易碎制品！",
-    "modifier.kubejs.glass_shard.description": "攻击有概率消耗更多耐久。此时，直接目标附近的敌人也会受伤",
+    "modifier.kubejs.glass_shard.description": "攻击会更多耐久。此时，直接目标附近的敌人也会受伤",
 
     "modifier.kubejs.relaying": "传动",
     "modifier.kubejs.relaying.flavor": "传递动量！",
-    "modifier.kubejs.relaying.description": "攻击时，目标稍后方的敌人也会被击中",
+    "modifier.kubejs.relaying.description": "攻击一条直线上的敌人",
+
+    "modifier.kubejs.antifatigue": "抗疲劳",
+    "modifier.kubejs.antifatigue.flavor": "横扫饥饿！",
+    "modifier.kubejs.antifatigue.description": "抵消挖掘疲劳带来的影响，能够抵消的挖掘疲劳等级不超过该特性的等级",
     
         "comment_artifacts": " ----- Artifacts ----- ",
     

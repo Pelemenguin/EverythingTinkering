@@ -8,6 +8,7 @@
 /local
 /logs
 /mods
+/node_modules
 /PCL
 /saves
 /schematics
@@ -16,9 +17,14 @@
 /texture_generator/__pycache__
 /*.jar
 /*.json
-options.txt
-rhino.local.properties
-*Everything Tinkering*.zip
+!/modlist.json
+!/.eslintrc.json
+/options.txt
+/rhino.local.properties
+/*Everything Tinkering*.zip
+
+# Then we don't need to use the launcher
+/run.bat
 
 /modpack.cfg
 /log4j2.xml

@@ -1,23 +1,37 @@
+/* eslint-disable no-unused-vars */
 // priority: 2147483647
 
-const ToolPartItem = Java.loadClass('slimeknights.tconstruct.library.tools.part.ToolPartItem')
-const ForgeRegistries = Java.loadClass('net.minecraftforge.registries.ForgeRegistries')
-const MaterialRegistry = Java.loadClass('slimeknights.tconstruct.library.materials.MaterialRegistry')
-const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialId')
-const MaterialVariant = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialVariant')
-const ModifierId = Java.loadClass('slimeknights.tconstruct.library.modifiers.ModifierId')
-const ModifierNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ModifierNBT')
-const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager')
-const TextColor = Java.loadClass('net.minecraft.network.chat.TextColor')
-const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ToolStack')
-const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDefinitions')
-const MaterialNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT')
-const MaterialNBTBuilder = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT$Builder')
+/* global
+    global: writable
+    Java
+    Item
+*/
 
-const LivingHurtEvent = Java.loadClass("net.minecraftforge.event.entity.living.LivingHurtEvent")
-const CriticalHitEvent = Java.loadClass("net.minecraftforge.event.entity.player.CriticalHitEvent")
+const ToolPartItem = Java.loadClass('slimeknights.tconstruct.library.tools.part.ToolPartItem');
+const ForgeRegistries = Java.loadClass('net.minecraftforge.registries.ForgeRegistries');
+const MaterialRegistry = Java.loadClass('slimeknights.tconstruct.library.materials.MaterialRegistry');
+const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialId');
+const MaterialVariant = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialVariant');
+const ModifierId = Java.loadClass('slimeknights.tconstruct.library.modifiers.ModifierId');
+const ModifierNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ModifierNBT');
+const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
+const TextColor = Java.loadClass('net.minecraft.network.chat.TextColor');
+const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ToolStack');
+const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDefinitions');
+const MaterialNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT');
+const MaterialNBTBuilder = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT$Builder');
 
-const OFFHAND_ATTACKABLE_MODIFIER = [
-    "tconstruct:offhand_attack",
-    "tconstruct:dual_wielding"
-]
+const LivingHurtEvent = Java.loadClass("net.minecraftforge.event.entity.living.LivingHurtEvent");
+const CriticalHitEvent = Java.loadClass("net.minecraftforge.event.entity.player.CriticalHitEvent");
+
+/**
+ * @type {Internal.Item[]}
+ */
+var toolParts = [Item.of("tconstruct:repair_kit").item];
+ForgeRegistries.ITEMS.getValues().forEach(item => {
+    if (item instanceof ToolPartItem) {
+        toolParts.push(item);
+    }
+});
+
+global.CustomUtils.Tinker.TOOL_PARTS = toolParts;

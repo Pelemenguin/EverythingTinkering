@@ -1,17 +1,18 @@
-## What is this repository for
+**EverythingTinkering (c) 2025 by Pelemenguin is licensed under CC BY-NC-SA 4.0.**  
+([License in repo](./LICENSE) | [Deed on CC's official website](https://creativecommons.org/licenses/by-nc-sa/4.0/))
 
-This is a Minecraft modpack based on KubeJS and TiC3 on Minecraft 1.20.1.
+# EverythingTinkering
 
-## Why are there so few files
+Everything Tinkering is a modpack on Minecraft 1.20.1 and on [NeoForge](https://github.com/neoforged/).
 
 This modpack is still developing, and currently does not have any release yet.
 
-## Why is there Python files in a modpack using KubeJS / What is `texture_generator` for
+## What does those Python files in folder `texture_generator` do
 
-This `texture_generator` is a Python project that can batch-generate TiC textures.
+They are used to generate TiC textures.
+TiC's built-in texture generator is not enough for this modpack.
 
 # How can I play this modpack
 
 (Make sure Python3 is installed. )
 Download source code and run `build.py`. Then a modpack file is created.
-(I'm using Python because I didn't learn Java.)

@@ -1,62 +1,18 @@
-# Modlist
+# Mod list
 
-<!-- Version info
-
-    MINECRAFT (1.20.1)
-    MODLOADER (neoforge-1.20.1-47.1.106)
-
---->
-
-<!--
-
-    Raw file names
-
-    architectury-9.2.14-forge.jar
-    create-1.20.1-6.0.4.jar
-    EventJS-1.20.1-1.4.0.jar
-    dummmmmmy-1.20-2.0.6.jar
-    Jade-1.20.1-Forge-11.13.1.jar
-    jei-1.20.1-forge-15.20.0.106.jar
-    kubejs-forge-2001.6.5-build.16.jar
-    lootjs-forge-1.20.1-2.13.0.jar
-    Mantle-1.20.1-1.11.61.jar
-    moonlight-1.20-2.14.1-forge.jar
-    probejs-6.0.1-forge.jar
-    rhino-forge-2001.2.2-build.6.jar
-    TConstruct-1.20.1-3.10.1.76.jar
-    tconstruct_js-1.0.3.jar
-    
--->
-
-<!--
-    Comments below mods are their curseforge id.
-    Format is project_id:file_id
--->
-
-- [Architectury API](https://www.curseforge.com/minecraft/mc-mods/architectury-api) by shedaniel
-<!-- 419699:5137938 -->
-- [Create](https://www.curseforge.com/minecraft/mc-mods/create) by simibubi
-<!-- 328085:6323270 -->
-- [EventJS](https://www.curseforge.com/minecraft/mc-mods/eventjs) by ZZZank
-<!-- 1132802:6582223 -->
-- [MmmMmmMmmMmm (Target Dummy)](https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm) by MehVahdJukaar
-<!-- 225738:6608233 -->
-- [Jade 🔍 ](https://www.curseforge.com/minecraft/mc-mods/jade) by Snownee
-<!-- 324717:6271651 -->
-- [Just Enough Items (JEI)](https://www.curseforge.com/minecraft/mc-mods/jei) by mezz
-<!-- 238222:6075247 -->
-- [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) by LatvianModder
-<!-- 238086:5853326 -->
-- [LootJS: KubeJS Addon](https://www.curseforge.com/minecraft/mc-mods/lootjs) by Lytho
-<!-- 570630:6508899 -->
-- [Mantle](https://www.curseforge.com/minecraft/mc-mods/mantle) by mDiyo
-<!-- 74924:6635380 -->
-- [Moonlight Lib](https://www.curseforge.com/minecraft/mc-mods/selene) by MehVahdJukaar
-<!-- 499980:6507197 -->
-<!-- ProbeJS is also installed when developing, but should not be included in the modpack. 585406:5227399 -->
-- [Rhino](https://www.curseforge.com/minecraft/mc-mods/rhino) by LatvianModder
-<!-- 416294:4735056 -->
-- [Tinkers Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) by mDiyo
-<!-- 74072:6635554 -->
-- [TConstructJS](https://www.curseforge.com/minecraft/mc-mods/tconstructjs) by lcy0x1
-<!-- 1210790:6583705 -->
+<!-- Generated from `build.py` -->
+- [Architectury API](https://www.curseforge.com/minecraft/mc-mods/architectury-api) *9.2.14* by shedaniel
+- [Create](https://www.curseforge.com/minecraft/mc-mods/create) *6.0.4* by simibubi
+- [MmmMmmMmmMmm (Target Dummy)](https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm) *1.20-2.0.6* by MehVahdJukaar
+- [EventJS](https://www.curseforge.com/minecraft/mc-mods/eventjs) *1.4.0* by ZZZank
+- [Jade 🔍](https://www.curseforge.com/minecraft/mc-mods/jade) *${file.jarVersion}* by Snownee
+- [Just Enough Items (JEI)](https://www.curseforge.com/minecraft/mc-mods/jei) *15.20.0.106* by mezz
+- [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) *2001.6.5-build.16* by LatvianModder
+- [LootJS: KubeJS Addon](https://www.curseforge.com/minecraft/mc-mods/lootjs) *1.20.1-2.13.0* by Lytho
+- [Mantle](https://www.curseforge.com/minecraft/mc-mods/mantle) *1.11.61* by mDiyo
+- [Moonlight Lib](https://www.curseforge.com/minecraft/mc-mods/selene) *1.20-2.14.1* by MehVahdJukaar
+- [Rhino](https://www.curseforge.com/minecraft/mc-mods/rhino) *2001.2.3-build.10* by LatvianModder
+- [ProbeJS](https://www.curseforge.com/minecraft/mc-mods/probejs) *6.0.1* by Amygdaloideae
+  - This mod is only installed when developing. Not included in the modpack.
+- [Tinkers Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) *3.10.1.76* by mDiyo
+- [TConstructJS](https://www.curseforge.com/minecraft/mc-mods/tconstructjs) *1.0.3* by lcy0x1

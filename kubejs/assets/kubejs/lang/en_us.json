@@ -2,8 +2,14 @@
     "generator.kubejs.default": "Modpack Default Preset",
 
         "_comment_command": " ----- Command ---- ",
+
     "command.kubejs.item_list.parts.name": "Part list of %s",
     "command.kubejs.item_list.parts.lore": "Contained every part of the material",
+
+    "command.kubejs.artifact.not_found": "Artifact not found: \"%s\"",
+    "command.kubejs.artifact.is_group": "Given namespace is a group: \"%s\", artifacts in the group:",
+    "command.kubejs.artifact.group_mark": "[Group]",
+    "command.kubejs.artifact.success": "Successfully gave %2$s artifact(s) \"%1$s\" to %3$s target(s)",
 
         "_comment_materials": " ----- Materials ----- ",
 
@@ -94,8 +100,19 @@
 
     "material.kubejs.andesite_alloy": "Andesite Alloy",
     "material.kubejs.andesite_alloy.flavor": "Just like a Shaft!",
-    "material.kubejs.andesite_alloy.encyclopedia": "The hitbox is a cube with edges that increase by 0.5 blocks per level. Entities in the hitbox take 50% of the damage you deal to the direct target",
+    "material.kubejs.andesite_alloy.encyclopedia": "Attack enemies in a row with distances between them less than 3 blocks. Damage gets multiplied by 0.2 times trait level and stops conveying when being less that 1.",
     
+    "material.kubejs.sea_alloy": "Sea Alloy",
+    "material.kubejs.sea_alloy.flavor": "It's basically sea lanterns...",
+    "material.kubejs.sea_alloy.encyclopedia": "Negates mining fatigue equivalent to the level of the Anti-Fatigue modifier",
+
+        "_comment_fluids": " ----- Fluids ----- ",
+
+    "block.kubejs.molten_sea_alloy": "Molten Sea Alloy",
+    "fluid.kubejs.molten_sea_alloy": "Molten Sea Alloy",
+    "fluid.kubejs.flowing_molten_sea_alloy": "Flowing Molten Sea Alloy",
+    "item.kubejs.molten_sea_alloy_bucket": "Molten Sea Alloy Bucket",
+
         "_comment_modifiers": " ----- Modifiers ----- ",
 
     "modifier.kubejs.welcome": "Welcome",
@@ -103,9 +120,9 @@
     "modifier.kubejs.welcome.description": "Stats slightly boost during the first three days",
     "modifier.kubejs.welcome.hint": "The gift from %s has disappeared. Good luck!",
 
-    "modifier.kubejs.incompact": "Incompact",
-    "modifier.kubejs.incompact.flavor": "Wash your hands after using the tool!",
-    "modifier.kubejs.incompact.description": "Durability drops even when you are not using it",
+    "modifier.kubejs.friable": "Friable",
+    "modifier.kubejs.friable.flavor": "Wash your hands after using the tool!",
+    "modifier.kubejs.friable.description": "Durability drops even when you are not using it",
 
     "modifier.kubejs.whacking": "Whacking",
     "modifier.kubejs.whacking.flavor": "Bang!",
@@ -122,14 +139,19 @@
     "modifier.kubejs.igniting": "Igniting",
     "modifier.kubejs.igniting.flavor": "Hot Caution!",
     "modifier.kubejs.igniting.description": "Conveys fire from one enemy to another",
+    "modifier.kubejs.igniting.tooltip": "Ignitng time: %s",
 
     "modifier.kubejs.glass_shard": "Glass Shard",
     "modifier.kubejs.glass_shard.flavor": "Fragile products!",
-    "modifier.kubejs.glass_shard.description": "Attack may cost more durability points. When this happens, enemies near the direct target will be hurt",
+    "modifier.kubejs.glass_shard.description": "Attack costs more durability points. When this happens, enemies near the direct target will be hurt",
 
     "modifier.kubejs.relaying": "Relaying",
     "modifier.kubejs.relaying.flavor": "Convey momentum!",
-    "modifier.kubejs.relaying.description": "Hits enemies that are slightly behind the target when attacking",
+    "modifier.kubejs.relaying.description": "Attack enemies in a row",
+
+    "modifier.kubejs.antifatigue": "Anti-Fatigue",
+    "modifier.kubejs.antifatigue.flavor": "Combat exhaustion!",
+    "modifier.kubejs.antifatigue.description": "Counteracts mining fatigue effects. The maximum fatigue level negated is equal to this modifier's level",
     
         "comment_artifacts": " ----- Artifacts ----- ",
     
