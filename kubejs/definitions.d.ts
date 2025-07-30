@@ -72,3 +72,13 @@ declare namespace Annotation {
             | "tooltipSetting" | "onServerTick"
     }
 }
+
+declare namespace BookArguments {
+    type MaterialPage = {
+        /**
+         * - The string ID of the material.
+         * - 材料 ID。
+         */
+        materialId: string
+    }
+}

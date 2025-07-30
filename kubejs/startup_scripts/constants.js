@@ -28,15 +28,23 @@ const Entity = Java.loadClass("net.minecraft.world.entity.Entity");
 const EquipmentSlot = Java.loadClass("net.minecraft.world.entity.EquipmentSlot");
 
 const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
+const BookTransformer = Java.loadClass("slimeknights.mantle.client.book.transformer.BookTransformer");
+const TextComponentData = Java.loadClass("slimeknights.mantle.client.book.data.element.TextComponentData");
 
 const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialId');
 const MaterialVariant = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialVariant');
+const TinkerBook = Java.loadClass("slimeknights.tconstruct.library.client.book.TinkerBook");
+const MaterialRegistry = Java.loadClass('slimeknights.tconstruct.library.materials.MaterialRegistry');
+const MaterialStatsId = Java.loadClass("slimeknights.tconstruct.library.materials.stats.MaterialStatsId");
 const ModifierId = Java.loadClass('slimeknights.tconstruct.library.modifiers.ModifierId');
 const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ToolStack');
 const MaterialNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT');
 const ModifierNBT = Java.loadClass("slimeknights.tconstruct.library.tools.nbt.ModifierNBT");
+const ToolStatId = Java.loadClass("slimeknights.tconstruct.library.tools.stat.ToolStatId");
 const ToolStats = Java.loadClass('slimeknights.tconstruct.library.tools.stat.ToolStats');
 const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDefinitions');
+
+const MantleJSTransformer = Java.loadClass("pelemenguin.mantlejs.content.book.transformer.MantleJSTransformer");
 
 // ---------- Utils ---------- //
 
