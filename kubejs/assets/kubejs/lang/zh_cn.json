@@ -74,7 +74,7 @@
     "material.kubejs.terracotta.red_glazed": "红色带釉陶瓦",
     "material.kubejs.terracotta.black_glazed": "黑色带釉陶瓦",
     "material.kubejs.terracotta.flavor": "使用方法：当一个花瓶。",
-    "material.kubejs.terracotta.encyclopedia": "工具时有最低0.5，最高剩余耐久百分比乘上特性等级再加上0.5点的随机伤害提升，",
+    "material.kubejs.terracotta.encyclopedia": "工具有零至最高剩余耐久百分比乘上特性等级点的随机伤害提升",
 
     "material.kubejs.coal": "煤炭",
     "material.kubejs.coal.charcoal": "木炭",
@@ -82,7 +82,7 @@
     "material.kubejs.coal.encyclopedia": "攻击时点燃你的工具。这段时间内，工具会持续丢失耐久，而攻击时则可点燃其他敌人",
     
     "material.kubejs.lapis_lazuli": "青金石",
-    "material.kubejs.lapis_lazuli.flavor": "继续挖吧！谁知道那儿后面的方块是石头还是埋藏的宝藏！",
+    "material.kubejs.lapis_lazuli.flavor": "继续挖吧！万一挖到好东西了呢！",
     "material.kubejs.lapis_lazuli.encyclopedia": "概率跌落至0之前，每级可以挖掘1000个方块。初始概率恒为20%",
     
     "material.tconstruct.glass.white_stained": "白色染色玻璃",
@@ -105,6 +105,10 @@
     "material.tconstruct.glass.scorched": "焦褐玻璃",
     "material.tconstruct.glass.flavor": "小心易碎！",
     "material.tconstruct.glass.encyclopedia": "攻击时，若伤害大于5点，则有概率对目标周围3×3×3的范围内的生物造成伤害，总和为对直接目标的伤害",
+    
+    "material.kubejs.paper": "纸",
+    "material.kubejs.paper.flavor": "致《入门熔炼术》的忠实读者们：翻书的时候小心划伤手指。",
+    "material.kubejs.paper.encyclopedia": "对于从侧面攻击的攻击者，造成相当于护甲值的伤害。盔甲韧性可以转化少量受到的伤害并攻击回去",
 
     "material.kubejs.andesite_alloy": "安山合金",
     "material.kubejs.andesite_alloy.flavor": "就像一个传动轴！",
@@ -152,6 +156,10 @@
     "modifier.kubejs.glass_shard": "玻璃碎片",
     "modifier.kubejs.glass_shard.flavor": "易碎制品！",
     "modifier.kubejs.glass_shard.description": "攻击会更多耐久。此时，直接目标附近的敌人也会受伤",
+
+    "modifier.kubejs.papercutting": "剪纸",
+    "modifier.kubejs.papercutting.flavor": "并非儿童剪刀！",
+    "modifier.kubejs.papercutting.description": "只会伤害从侧面攻击的攻击者",
 
     "modifier.kubejs.relaying": "传动",
     "modifier.kubejs.relaying.flavor": "传递动量！",

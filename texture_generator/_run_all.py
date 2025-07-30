@@ -1,14 +1,12 @@
-# Soil suffix
+# Suffix
 import suffix_nonmetal
-print("_nonmetal complete")
 
-import material_soil
-print("soil complete")
-import material_glass
-print("glass complete")
-import material_brick
-print("brick complete")
+# Material
 import material_coal
-print("coal complete")
-import material_andesite_alloy
-print("andesite_alloy complete")
+import material_glass
+import material_lapis_lazuli
+import material_paper
+import material_rock_variants
+import material_sea_alloy
+import material_soil
+import material_terracotta

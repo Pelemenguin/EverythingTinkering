@@ -46,12 +46,11 @@
  * @class
  */
 function Artifact(id, item, definition, materials) {
-    /** @type {ArtifactGroup | null} */
-    this.parent = null;
     this.id = id;
     this.item = item;
     this.definition = definition;
     this.initialized = false;
+    this.translationId = id;
     /** @type {Internal.Component | null} */
     this.name = null;
     /** @type {Internal.Component | null} */
@@ -121,7 +120,7 @@ Artifact.prototype.getTranslationId = function() {
  * @returns {Internal.Component}
  */
 Artifact.prototype.getName = function() {
-    return Component.translatable(`item.kubejs${this.getTranslationId()}.name`);
+    return Component.translatable(`item.kubejs.${this.translationId}.name`);
 };
 
 /**
@@ -131,7 +130,7 @@ Artifact.prototype.getName = function() {
  * @returns {Internal.Component}
  */
 Artifact.prototype.getLore = function() {
-    return Component.translatable(`item.kubejs${this.getTranslationId()}.lore`);
+    return Component.translatable(`item.kubejs.${this.translationId}.lore`);
 };
 
 Artifact.prototype.init = function() {
@@ -216,11 +215,10 @@ Artifact.prototype.toString = function() {
  * @extends Artifact
  */
 function ArtifactGroup(id) {
-    /** @type {ArtifactGroup | null} */
-    this.parent = null;
     this.id = id;
     /** @type {Internal.Map<string, Annotation.ArtifactOrGroup>} */
     this.children = Utils.newMap();
+    this.translationId = id;
 }
 
 /**
@@ -249,7 +247,7 @@ ArtifactGroup.prototype.get = function(id) {
  */
 ArtifactGroup.prototype.createArtifact = function(id, item, definition, materials) {
     let registered = new Artifact(id, item, definition, materials);
-    registered.parent = this;
+    registered.translationId = this.translationId + '.' + id;
     this.children.put(id, registered);
     console.info(`[Artifact] Registered new artifact "${id}", type ${definition.getId().toString()}, materials: [${materials}]`);
     return registered;
@@ -297,7 +295,7 @@ ArtifactGroup.prototype.getRecursive = function(namepath) {
  */
 ArtifactGroup.prototype.createArtifactGroup = function(id) {
     let registered = new ArtifactGroup(id);
-    registered.parent = this;
+    registered.translationId = this.translationId + '.' + id;
     this.children.put(id, registered);
     console.info(`[Artifact] Registered new artifact group "${id}"`);
     return registered;

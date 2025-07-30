@@ -10,7 +10,7 @@ parts = []
 #         parts.append(PartPath(i, k))
 for part in settings:
     k = part["stat_type"]
-    v = part["path"][11:] + ".png"
+    v = part["path"].split(':')[-1] + ".png"
     # print(k, v)
     parts.append(PartPath(v, k))
 settings_file.close()

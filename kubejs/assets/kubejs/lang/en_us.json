@@ -13,8 +13,8 @@
 
         "_comment_damage_types": " ----- Damage Types ----- ",
     
-    "death.attack.kubejs.papercut": "%1$s cut their fingers when trying to tear %2$s's paper apart.",
-    "death.attack.kubejs.papercut.player": "%1$s's fingers were cut by %3$s when trying to tear %2$s's paper apart.",
+    "death.attack.kubejs.papercut": "%1$s got a paper cut while tearing %2$s's armor",
+    "death.attack.kubejs.papercut.player": "%1$s got a pepr cut from %3$s while tearing %2$s's armor",
 
         "_comment_materials": " ----- Materials ----- ",
 
@@ -76,7 +76,7 @@
     "material.kubejs.terracotta.red_glazed": "Red Glazed Terracotta",
     "material.kubejs.terracotta.black_glazed": "Black Glazed Terracotta",
     "material.kubejs.terracotta.flavor": "Used as a vase.",
-    "material.kubejs.terracotta.encyclopedia": "The tool has a random damage boost. The least boost is 0.5 points and the greatest boost is (percentage of remaining durability × trait level + 0.5) points",
+    "material.kubejs.terracotta.encyclopedia": "The tool has a random damage boost from 0 to (percentage of consumed durability × trait level) points",
 
     "material.kubejs.lapis_lazuli": "Lapis Lazuli",
     "material.kubejs.lapis_lazuli.flavor": "Keep mining! How do you know whether the block behind there is a stone or hidden treasures!",
@@ -103,9 +103,13 @@
     "material.tconstruct.glass.flavor": "Handle with care! Fragile!",
     "material.tconstruct.glass.encyclopedia": "While attacking, if damage is greater than 5 points, then it is possible to deal damage to enemies in 3×3×3 area. Sum of the damage dealt is equal to the damage to the direct damage",
 
+    "material.kubejs.paper": "Paper",
+    "material.kubejs.paper.flavor": "To the loyal readers of 'Puny Smelting': Not to cut your finger when turning pages",
+    "material.kubejs.paper.encyclopedia": "Deals damage equal to armor value to attackers hitting from the side. Converts a portion of taken damage using armor toughness to counterattack",
+
     "material.kubejs.andesite_alloy": "Andesite Alloy",
     "material.kubejs.andesite_alloy.flavor": "Just like a Shaft!",
-    "material.kubejs.andesite_alloy.encyclopedia": "Attack enemies in a row with distances between them less than 3 blocks. Damage gets multiplied by 0.2 times trait level and stops conveying when being less that 1.",
+    "material.kubejs.andesite_alloy.encyclopedia": "Attack targets in a row with distances between them less than 3 blocks. Damage gets multiplied by 0.2 times trait level and stops conveying when being less that 1.",
     
     "material.kubejs.sea_alloy": "Sea Alloy",
     "material.kubejs.sea_alloy.flavor": "It's basically sea lanterns...",
@@ -135,7 +139,7 @@
 
     "modifier.kubejs.pottery": "Pottery",
     "modifier.kubejs.pottery.flavor": "Macrohard Edge!",
-    "modifier.kubejs.pottery.description": "Randomly boost damage when tool is damaged",
+    "modifier.kubejs.pottery.description": "Randomly boost damage after tool is damaged",
 
     "modifier.kubejs.uncertain": "Uncertain",
     "modifier.kubejs.uncertain.flavor": "Schrödinger's Ore!",
@@ -149,6 +153,10 @@
     "modifier.kubejs.glass_shard": "Glass Shard",
     "modifier.kubejs.glass_shard.flavor": "Fragile products!",
     "modifier.kubejs.glass_shard.description": "Attack costs more durability points. When this happens, enemies near the direct target will be hurt",
+    
+    "modifier.kubejs.papercutting": "Papercutting",
+    "modifier.kubejs.papercutting.flavor": "Not children's scissors!",
+    "modifier.kubejs.papercutting.description": "Only damages attackers that hit from the side",
 
     "modifier.kubejs.relaying": "Relaying",
     "modifier.kubejs.relaying.flavor": "Convey momentum!",
