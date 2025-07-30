@@ -16,6 +16,8 @@
     JavaMath
     Vec3d
     KubeJSDamageSources
+    Utils
+    EquipmentSlot
 */
 
 /**
@@ -24,12 +26,63 @@
  * - - - - -
  * @constant
  */
-let PAPERCUTTING_MAX_CONSINE_ABSOLUTE = 0.5;
+let PAPERCUTTING_MAX_CONSINE_ABSOLUTE = 0.2;
+
+/**
+ * - Controls max damage per level.
+ * - 控制每级最大伤害。
+ * - - - - -
+ * @constant
+ */
+let PAPERCUTTING_MAX_DAMAGE = 5;
 
 /** Record damaged entities in case of Stack Overflow. */
-let PAPERCUT_TARGET_IN_THIS_TICK = [];
+/**
+ * @type {Internal.Map<Internal.Entity, [source, number, number]>}
+ */
+let PAPERCUT_TARGET_IN_THIS_TICK = Utils.newMap();
 /** Record if server can clear this list now. */
 let PAPERCUT_TARGET_LIST_CLEARABLE = true;
+
+/**
+ * 
+ * @param {Internal.Entity} entity 
+ * @param {number} damage 
+ * @param {Internal.EquipmentSlot} numberSlot - 4 for default
+ * @param {DamageSource} damageSource
+ */
+let addPlannedDamage = (entity, damage, slot, damageSource) => {
+    let numberSlot = 4;
+    switch (slot) {
+        case EquipmentSlot.HEAD: numberSlot = 0; break;
+        case EquipmentSlot.CHEST: numberSlot = 1; break;
+        case EquipmentSlot.LEGS: numberSlot = 2; break;
+        case EquipmentSlot.FEET: numberSlot = 3; break;
+    }
+    if (PAPERCUT_TARGET_IN_THIS_TICK.containsKey(entity)) {
+        let [source, oldDamage, flag] = PAPERCUT_TARGET_IN_THIS_TICK.get(entity);
+        if (flag & (1 << numberSlot) != 0) return;
+        let newDamage = oldDamage + damage;
+        let newFlag = flag | (1 << numberSlot);
+        PAPERCUT_TARGET_IN_THIS_TICK.put(entity, [source, newDamage, newFlag]);
+    } else {
+        PAPERCUT_TARGET_IN_THIS_TICK.put(entity, [damageSource, damage, 1 << numberSlot]);
+    }
+};
+
+/**
+ * 
+ * @param {Internal.MinecraftServer} server 
+ */
+let dealDamage = server => {
+    server.getEntities().forEach(entity => {
+        if (PAPERCUT_TARGET_IN_THIS_TICK.containsKey(entity)) {
+            let [source, damage /*, flags */] = PAPERCUT_TARGET_IN_THIS_TICK.get(entity);
+            entity.attack(source, damage);
+        }
+    });
+    PAPERCUT_TARGET_IN_THIS_TICK.clear();
+};
 
 /**
  * 
@@ -53,7 +106,6 @@ PAPERCUTTING.armorTakeAttacked((view, lvl, context, slot, source, damage) => {
 
     let attacker = source.getImmediate();
     if (attacker == null || !attacker.isLiving()) return true;
-    if (PAPERCUT_TARGET_IN_THIS_TICK.indexOf(attacker) != -1) return true;
 
     let wearer = context.getEntity();
 
@@ -63,23 +115,23 @@ PAPERCUTTING.armorTakeAttacked((view, lvl, context, slot, source, damage) => {
         attacker.z - wearer.z
     ))) > PAPERCUTTING_MAX_CONSINE_ABSOLUTE) return true;
 
+    // let armor = view.getStats().get(ToolStats.ARMOR);
     let armor = view.getStats().get(ToolStats.ARMOR);
     let toughness = view.getStats().get(ToolStats.ARMOR_TOUGHNESS);
-    let returning = armor + JavaMath.log10(damage * toughness + 1);
+    let returning = JavaMath["min(float,float)"](armor + JavaMath.log10(damage * toughness + 1), lvl * PAPERCUTTING_MAX_DAMAGE);
 
     /** Push attacker to the list, so it can't be attacked by papercutting again. */
     PAPERCUT_TARGET_LIST_CLEARABLE = false;
-    PAPERCUT_TARGET_IN_THIS_TICK.push(attacker);
     // let damageSource = wearer.damageSources().thorns(wearer);
     let damageSource = KubeJSDamageSources.papercut(context.getLevel(), wearer, wearer);
-    attacker.attack(damageSource, returning);
+    addPlannedDamage(attacker, returning, slot, damageSource);
 
     return false;
 
 });
-PAPERCUTTING.onServerTick(() => {
+PAPERCUTTING.onServerTick(event => {
     if (PAPERCUT_TARGET_LIST_CLEARABLE) {
-        PAPERCUT_TARGET_IN_THIS_TICK = [];
+        dealDamage(event.getServer());
     }
     /** If not clearable, clear at next tick. */
     PAPERCUT_TARGET_LIST_CLEARABLE = true;

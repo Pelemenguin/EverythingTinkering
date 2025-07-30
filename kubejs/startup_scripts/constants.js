@@ -25,7 +25,7 @@ const TagKey = Java.loadClass("net.minecraft.tags.TagKey");
 const LivingEntity = Java.loadClass("net.minecraft.world.entity.LivingEntity");
 const Player = Java.loadClass("net.minecraft.world.entity.player.Player");
 const Entity = Java.loadClass("net.minecraft.world.entity.Entity");
-
+const EquipmentSlot = Java.loadClass("net.minecraft.world.entity.EquipmentSlot");
 
 const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
 
