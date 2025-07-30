@@ -8,6 +8,9 @@
  * ## 剪纸
  * ### 描述
  * ### 对从侧面攻击的敌人造成伤害。 
+ * - - - - -
+ * @author Pelemenguin
+ * @license CC-BY-NC-SA-4.0
  */
 
 /* global
