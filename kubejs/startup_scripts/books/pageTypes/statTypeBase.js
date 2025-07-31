@@ -19,7 +19,8 @@
     MaterialRegistry
     BookScreen
     MaterialStatsId
-    TextComponentData
+    BookTextComponentData
+    ChatFormatting
 */
 
 // eslint-disable-next-line no-unused-vars
@@ -31,16 +32,17 @@ const MaterialPreferenceDisplay = {
 };
 
 let StatRepresentaticeItem = {
-    "tconstruct:head": "tconstruct:pick_head"
+    "tconstruct:head": "tconstruct:pick_head",
+    "tconstruct:handle": "tconstruct:tool_handle",
+    "tconstruct:binding": "tconstruct:tool_binding"
 };
 
 /**
+ * @param {Internal.ArrayList<Internal.BookElement>} elements
  * @param {string} materialId
  * @param {Internal.Font} font
- * - - - - -
- * @returns {Internal.TextElement}
  */
-let createTitle = (materialId, font) => {
+let createTitle = (elements, materialId, font) => {
 
     let [namespace, path] = materialId.split(':');
     let translationKey = `material.${namespace}.${path}`;
@@ -54,122 +56,117 @@ let createTitle = (materialId, font) => {
 
     let width = JavaMath.ceil(font.width(translationKey) * text.scale) + 1;
 
-    return [
-        BookElement.text(20, 2, width, 15, text),
-        BookElement.item(0, 0, 1, RepresentativeItems[materialId])
-    ];
+    elements.add(BookElement.text(20, 2, width, 15, text));
+    elements.add(BookElement.item(0, 0, 1, RepresentativeItems[materialId]));
 
 };
 
 /**
- * @param {number} x
+ * @param {Internal.ArrayList<Internal.BookElement>} elements
  * @param {number} y
  * @param {string} materialId
  * @param {string[]} statIds
  * @param {Internal.Font} font
- * - - - - -
- * @returns {Internal.BookElement[]}
  */
-let createStats = (x, y, materialId, statIds, font) => {
-    // let result = createHeadStat(materialId, font, 16);
-    let result = [];
+let createStats = (elements, y, materialId, statIds) => {
     let curY = y;
     /** @type {Internal.MaterialId} */
     let parsedMaterial = MaterialId.tryParse(materialId);
     statIds.forEach(statId => {
-        let [elements, yIncresement] = writeStat(curY, parsedMaterial, statId, font);
+        let yIncresement = writeStat(elements, curY, parsedMaterial, statId);
         curY += yIncresement;
-        result = result.concat(elements);
-        // result.push(BookElement.text(x, curY, BookScreen.PAGE_WIDTH - x, 32, BookTextData.literal(parsedId)));
     });
-    return result;
 };
 
 /**
+ * @param {Internal.ArrayList<Internal.BookElement>} elements
  * @param {number} y
  * @param {Internal.MaterialId} materialId
  * @param {string} statId
  * @param {Internal.Font} font
+ * - - - - -
+ * @returns {number}
  */
-let writeStat = (y, materialId, statId, font) => {
+let writeStat = (elements, y, materialId, statId) => {
 
-    let statsOptional = MaterialRegistry.getInstance().getMaterialStats(materialId, MaterialStatsId.tryParse(statId));
-    if (statsOptional.isEmpty()) return [result, 0];
+    let registry = MaterialRegistry.getInstance();
+    let processedStatId = MaterialStatsId.tryParse(statId);
 
-    let yIncresement = 25;
-    let result = [];
+    let statsOptional = registry.getMaterialStats(materialId, processedStatId);
+    if (statsOptional.isEmpty()) return 0;
+
+    let yIncresement = 18;
 
     let reprItem = Item.of(StatRepresentaticeItem[statId], 1, {Material: materialId.toString()});
-    result.push(BookElement.item(0, y + 1, 0.5, reprItem));
+    elements.add(BookElement.item(0, y + 1, 0.5, reprItem));
 
     let stats = statsOptional.get();
     let [statTitle] = BookTextData.fromComponent(stats.getLocalizedName());
     statTitle.underlined = true;
     statTitle.bold = true;
-    result.push(BookElement.text(10, y, BookScreen.PAGE_WIDTH, 9, [statTitle]));
-    // result.push(BookElement.textComponent(10, y + 9, writeStatDesc(materialId, stats)));
+    elements.add(BookElement.text(10, y, BookScreen.PAGE_WIDTH, 9, [statTitle]));
 
-    return [result, yIncresement];
+    /** @type {Internal.ModifierEntry[]} */
+    let traits = registry.getTraits(materialId, processedStatId).toArray();
+
+    let [statLines, statYIncreasement] = writeStatDesc(stats);
+    elements.add(BookElement.textComponent(10, y + 1, BookScreen.PAGE_WIDTH * 0.5, BookScreen.PAGE_HEIGHT, statLines));
+    yIncresement += statYIncreasement;
+
+    let traitLines = writeTraitDesc(traits);
+    elements.add(BookElement.textComponent(BookScreen.PAGE_WIDTH * 0.5, y, BookScreen.PAGE_WIDTH * 0.4, BookScreen.PAGE_HEIGHT, traitLines));
+
+    return yIncresement;
 };
 
-// /**
-//  * @param {number} y
-//  * @param {Internal.MaterialId} materialId
-//  * @param {Internal.IMaterialStats} stats
-//  * @param {Internal.Font} font
-//  * - - - - -
-//  * @returns {Internal.TextComponentData[]}
-//  */
-// let writeStatDesc = (materialId, stats) => {
-//     let result = [];
+/**
+ * @param {Internal.IMaterialStats} stats
+ * - - - - -
+ * @returns {[Internal.TextComponentData[], number]}
+ */
+let writeStatDesc = (stats) => {
+    let result = [BookTextComponentData.literal("\n")];
+    let y = 0;
 
-//     let info = stats.getLocalizedInfo();
-//     let tooltips = stats.getLocalizedDescriptions();
-//     for (let i = 0; i < Math.min(info.length, tooltips.length); i++) {
-//         let thisTooltip = tooltips.get(i);
-//         let [text] = BookTextData.fromComponent(info.get(i));
-//         if (thisTooltip.getString().length == 0) {
-//             text.tooltips = null;
-//         } else {
-//             text.tooltips = [thisTooltip];
-//         }
-//         result.push(text);
-//         result.push(new TextComponentData('\n'));
-//     }
+    /** @type {Internal.Component[]} */
+    let info = stats.getLocalizedInfo().toArray();
+    /** @type {Internal.Component[]} */
+    let tooltips = stats.getLocalizedDescriptions().toArray();
+    for (let i = 0; i < Math.min(info.length, tooltips.length); i++) {
+        let thisTooltip = tooltips[i];
+        let text = BookTextComponentData.of(info[i]);
+        if (thisTooltip.getString().length() == 0) {
+            text.tooltips = null;
+        } else {
+            text.tooltips = [thisTooltip];
+        }
+        result.push(text);
+        result.push(BookTextComponentData.literal("\n"));
+        y += 9;
+    }
 
-//     return result;
-// };
+    return [result, y];
+};
 
-// /**
-//  * @param {Internal.ItemStack_} item
-//  * @param {string} statTranslationKey
-//  * @param {Internal.Font} font
-//  * @param {number} y
-//  * - - - - -
-//  * @returns {Internal.TextData[]}
-//  */
-// let createStatIcon = (item, statTranslationKey, font, y) => {
-//     let [text] = BookTextData.fromComponent(Component.translatable(statTranslationKey));
-//     let w = font.width(text.text);
+/**
+ * 
+ * @param {Internal.ModifierEntry[]} traits 
+ * - - - - -
+ * @returns {Internal.TextComponentData[]}
+ */
+let writeTraitDesc = (traits) => {
+    let result = [];
+    traits.forEach(trait => {
+        let modifier = trait.getModifier();
+        let textCopmonentData = BookTextComponentData.of(modifier.getDisplayName());
 
-//     let itemElement = BookElement.item(0, y, 1.5, [item]);
-//     return [
-//         BookElement.text(12 - w / 2, y + 24, w, 16, [text]),
-//         itemElement
-//     ];
-// };
+        textCopmonentData.tooltips = modifier.getDescriptionList(trait.getLevel()).toArray();
+        textCopmonentData.text = textCopmonentData.text.copy().withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.UNDERLINE);
 
-// /**
-//  * @param {string} materialId
-//  * @param {Internal.Font} font
-//  * @param {number} y
-//  * - - - - -
-//  * @returns {Internal.BookElement[]}
-//  */
-// let createHeadStat = (materialId, font, y) => {
-//     let representativeItem = Item.of("tconstruct:pick_head", 1, {Material: materialId});
-//     return createStatIcon(representativeItem, "stat.tconstruct.head", font, y);
-// };
+        result.push(textCopmonentData);
+    });
+    return result;
+};
 
 // eslint-disable-next-line no-unused-vars
 const StatTypeBase = {

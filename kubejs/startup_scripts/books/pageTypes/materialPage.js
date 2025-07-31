@@ -19,8 +19,8 @@
  */
 let buildLeftPage = (elements, materialId, font) => {
 
-    elements.addAll(StatTypeBase.createTitle(materialId, font));
-    elements.addAll(StatTypeBase.createStats(0, 18, materialId, ["tconstruct:head"], font));
+    StatTypeBase.createTitle(elements, materialId, font);
+    StatTypeBase.createStats(elements, 20, materialId, ["tconstruct:head", "tconstruct:handle", "tconstruct:binding"]);
 
 };
 
