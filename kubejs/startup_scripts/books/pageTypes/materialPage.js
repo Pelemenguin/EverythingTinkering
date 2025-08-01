@@ -25,15 +25,15 @@ let buildLeftPage = (elements, materialId, font) => {
 };
 
 MantleJSEvents.pageTypeRegistry(event => {
-    event.create("kubejs:material_page")
+    event.create("kubejs:general_material_page_left")
         .buildPage((/**@type {BookArguments.MaterialPage}*/args, book, elements, rightSide) => {
             rightSide;
 
             let {
-                materialId
+                materialId: stringMatId
             } = args;
 
-            buildLeftPage(elements, materialId, book.fontRenderer);
+            buildLeftPage(elements, stringMatId, book.fontRenderer);
 
         });
 });

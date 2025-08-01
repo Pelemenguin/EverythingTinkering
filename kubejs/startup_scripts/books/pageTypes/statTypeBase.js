@@ -8,18 +8,18 @@
  */
 
 /* global
-    BookTextData
-    BookElement
-    JavaMath
-    Component
-    RepresentativeItems
-    CustomUtils
-    MaterialId
-    Item
     MaterialRegistry
-    BookScreen
-    MaterialStatsId
     BookTextComponentData
+    Item
+    BookTextData
+    Component
+    CustomUtils
+    JavaMath
+    BookElement
+    RepresentativeItems
+    MaterialId
+    MaterialStatsId
+    BookScreen
     ChatFormatting
 */
 
@@ -56,8 +56,8 @@ let createTitle = (elements, materialId, font) => {
 
     let width = JavaMath.ceil(font.width(translationKey) * text.scale) + 1;
 
-    elements.add(BookElement.text(20, 2, width, 15, text));
-    elements.add(BookElement.item(0, 0, 1, RepresentativeItems[materialId]));
+    elements.add(BookElement.text(21, 2, width, 15, text));
+    elements.add(BookElement.item(1, 0, 1, RepresentativeItems.get(materialId)));
 
 };
 
@@ -67,6 +67,8 @@ let createTitle = (elements, materialId, font) => {
  * @param {string} materialId
  * @param {string[]} statIds
  * @param {Internal.Font} font
+ * - - - - -
+ * @returns {boolean} If any stat is written
  */
 let createStats = (elements, y, materialId, statIds) => {
     let curY = y;
@@ -76,6 +78,8 @@ let createStats = (elements, y, materialId, statIds) => {
         let yIncresement = writeStat(elements, curY, parsedMaterial, statId);
         curY += yIncresement;
     });
+
+    return curY != y;
 };
 
 /**

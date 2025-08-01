@@ -7,7 +7,7 @@
         }
     },
     {
-        "name": "kubejs.general_materials",
+        "name": "kubejs_general_materials",
         "data": "no-load",
         "extraData": {
             "kubejs:general_materials": 1
@@ -15,6 +15,7 @@
         "icon": {
             "item": "tconstruct:hand_axe",
             "nbt": {
+                "type": "forge:nbt",
                 "tic_display": true,
                 "tic_materials": [
                     "tconstruct:wood#oak",

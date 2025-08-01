@@ -35,13 +35,13 @@ MantleJSEvents.transformerRegistry(event => {
                 materials.forEach(material => {
                     let matId = material.identifier.toString();
                     section.addPage(page => {
-                        page.setCustomType("kubejs:material_page", {
+                        page.setCustomType("kubejs:general_material_page_left", {
                             materialId: matId
                         });
-                        page.setName(`kubejs.general_materials.${matId}.left`);
+                        page.setName(`${matId.replace(':', '_')}_left`);
                     });
                     section.addPage(page => {
-                        page.setName(`kubejs.general_materials.${matId}.right`);
+                        page.setName(`${matId.replace(':', '_')}_right`);
                     });
                 });
             });
