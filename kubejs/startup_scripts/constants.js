@@ -45,6 +45,7 @@ const ModifierNBT = Java.loadClass("slimeknights.tconstruct.library.tools.nbt.Mo
 const ToolStatId = Java.loadClass("slimeknights.tconstruct.library.tools.stat.ToolStatId");
 const ToolStats = Java.loadClass('slimeknights.tconstruct.library.tools.stat.ToolStats');
 const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDefinitions');
+const TinkerItemElement = Java.loadClass("slimeknights.tconstruct.library.client.book.elements.TinkerItemElement");
 
 const PageDataJS = Java.loadClass("pelemenguin.mantlejs.content.book.data.PageDataJS");
 const MantleJSTransformer = Java.loadClass("pelemenguin.mantlejs.content.book.transformer.MantleJSTransformer");

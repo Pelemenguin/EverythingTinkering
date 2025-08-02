@@ -71,6 +71,9 @@ declare namespace Annotation {
         type Hook = "addToolStats" | "armorTakeAttacked" | "getBreakSpeed" | "onAfterBreak" | "getMeleeDamage" | "onAfterMeleeHit" | "onBeforeMeleeHit" | "onInventoryTick"
             | "tooltipSetting" | "onServerTick"
     }
+
+    type MaterialUsage = "MISSING" | "DURABILITY" | "DAMAGE" | "SPEED" | "MINING" | "BALANCED" | "PROTECTION" | "MISCELLANEOUS" | "ALTERNATIVE"
+        | "NOT_SUGGESTED" | "FUNCTIONAL" | "APPEARANCE"
 }
 
 declare namespace BookArguments {

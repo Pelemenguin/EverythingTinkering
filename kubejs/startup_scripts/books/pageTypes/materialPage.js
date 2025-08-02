@@ -10,18 +10,12 @@
 /* global
     MantleJSEvents
     StatTypeBase
+    MaterialSuggestions
+    BookScreen
+    Component
+    BookElement
+    BookTextComponentData
 */
-
-/**
- * @param {Internal.ArrayList<Internal.BookElement>} elements
- * @param {Internal.MaterialId} materialId
- */
-let buildLeftPage = (elements, materialId) => {
-
-    StatTypeBase.createTitle(elements, materialId);
-    StatTypeBase.createStats(elements, 20, materialId, ["tconstruct:head", "tconstruct:handle", "tconstruct:binding"]);
-
-};
 
 /**
  * @param {Internal.ArrayList<Internal.BookElement>} elements
@@ -37,12 +31,12 @@ MantleJSEvents.pageTypeRegistry(event => {
                 materialId
             } = args;
 
-            buildLeftPage(elements, materialId);
+            StatTypeBase.createTitle(elements, materialId);
+            StatTypeBase.createStats(elements, 20, materialId, ["tconstruct:head", "tconstruct:handle", "tconstruct:binding"]);
 
         });
     
     event.create("kubejs:general_material_page_right")
-        // eslint-disable-next-line no-unused-vars
         .buildPage((/**@type {BookArguments.MaterialPageRight}*/args, book, elements) => {
 
             // let {
@@ -51,6 +45,17 @@ MantleJSEvents.pageTypeRegistry(event => {
             // } = args;
 
             
+            let [usage, multiplier] = MaterialSuggestions.getUsage(args.materialId.toString());
+            elements.add(MaterialSuggestions.getElement(args.materialId.toString(), BookScreen.PAGE_WIDTH - 18, 0));
+            let usageTranslationKey = `book.suggestion.${usage.toLowerCase()}.name`;
+            let usageComponent = Component.literal(multiplier).gray().bold(true)
+                .append(Component.literal(" "))
+                .append(Component.translatable(usageTranslationKey).color(MaterialSuggestions.getColor(usage.toLowerCase())).bold(false));
+            
+            let usageWidth = book.fontRenderer.width(usageComponent.getString());
+            let usageTextCompData = BookTextComponentData.of(usageComponent);
+            usageTextCompData.scale = 1.2;
+            elements.add(BookElement.textComponent(BookScreen.PAGE_WIDTH - 22 - usageWidth * 1.2, 2, BookScreen.PAGE_WIDTH, 9, [usageTextCompData]));
 
         });
 });

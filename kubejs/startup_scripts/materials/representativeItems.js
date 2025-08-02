@@ -14,26 +14,11 @@
 */
 
 /**
- * - Representative items to show in the book.
- * - 在书中显示的代表物品。
+ * - Representative items map.
+ * - 代表物品表
+ * - - - - -
+ * @type {{[materialId: string]: string}}
  */
-const RepresentativeItems = {
-    /**
-     * @param {string} id 
-     * - - - - -
-     * @returns {string}
-     */
-    get: (id) => {
-        /** @type {string} */
-        let item = reprItems[id];
-        if (item === undefined) {
-            return Item.of("tconstruct:repair_kit", 1, {Material: id});
-        } else {
-            return Item.of(item);
-        }
-    }
-};
-
 let reprItems = {
     "tconstruct:wood": "minecraft:oak_log",
     "kubejs:soil": "minecraft:dirt",
@@ -52,4 +37,25 @@ let reprItems = {
     "tconstruct:leather": "minecraft:leather",
     "kubejs:paper": "minecraft:paper",
     "tconstruct:vine": "minecraft:vine"
+};
+
+/**
+ * - Representative items to show in the book.
+ * - 在书中显示的代表物品。
+ */
+const RepresentativeItems = {
+    /**
+     * @param {string} id 
+     * - - - - -
+     * @returns {string}
+     */
+    get: (id) => {
+        /** @type {string} */
+        let item = reprItems[id];
+        if (item === undefined) {
+            return Item.of("tconstruct:large_plate", 1, {Material: id});
+        } else {
+            return Item.of(item);
+        }
+    }
 };
