@@ -14,10 +14,8 @@
     BookTextData
     Component
     CustomUtils
-    JavaMath
     BookElement
     RepresentativeItems
-    MaterialId
     MaterialStatsId
     BookScreen
     ChatFormatting
@@ -39,12 +37,12 @@ let StatRepresentaticeItem = {
 
 /**
  * @param {Internal.ArrayList<Internal.BookElement>} elements
- * @param {string} materialId
- * @param {Internal.Font} font
+ * @param {Internal.MaterialId} materialId
  */
-let createTitle = (elements, materialId, font) => {
+let createTitle = (elements, materialId) => {
 
-    let [namespace, path] = materialId.split(':');
+    let strMatId = materialId.toString();
+    let [namespace, path] = strMatId.split(':');
     let translationKey = `material.${namespace}.${path}`;
 
     let [text] = BookTextData.fromComponent(Component.translatable(translationKey));
@@ -54,28 +52,24 @@ let createTitle = (elements, materialId, font) => {
     text.rgbColor = CustomUtils.Tinker.getMantleColor(translationKey).getValue();
     text.dropshadow = true;
 
-    let width = JavaMath.ceil(font.width(translationKey) * text.scale) + 1;
-
-    elements.add(BookElement.text(21, 2, width, 15, text));
-    elements.add(BookElement.item(1, 0, 1, RepresentativeItems.get(materialId)));
+    elements.add(BookElement.text(21, 2, BookScreen.PAGE_WIDTH - 21, 15, text));
+    elements.add(BookElement.item(1, 0, 1, RepresentativeItems.get(strMatId)));
 
 };
 
 /**
  * @param {Internal.ArrayList<Internal.BookElement>} elements
  * @param {number} y
- * @param {string} materialId
+ * @param {Internal.MaterialId} materialId
  * @param {string[]} statIds
- * @param {Internal.Font} font
  * - - - - -
  * @returns {boolean} If any stat is written
  */
 let createStats = (elements, y, materialId, statIds) => {
     let curY = y;
     /** @type {Internal.MaterialId} */
-    let parsedMaterial = MaterialId.tryParse(materialId);
     statIds.forEach(statId => {
-        let yIncresement = writeStat(elements, curY, parsedMaterial, statId);
+        let yIncresement = writeStat(elements, curY, materialId, statId);
         curY += yIncresement;
     });
 
@@ -114,11 +108,11 @@ let writeStat = (elements, y, materialId, statId) => {
     let traits = registry.getTraits(materialId, processedStatId).toArray();
 
     let [statLines, statYIncreasement] = writeStatDesc(stats);
-    elements.add(BookElement.textComponent(10, y + 1, BookScreen.PAGE_WIDTH * 0.5, BookScreen.PAGE_HEIGHT, statLines));
+    elements.add(BookElement.textComponent(10, y + 1, BookScreen.PAGE_WIDTH * 0.55, BookScreen.PAGE_HEIGHT, statLines));
     yIncresement += statYIncreasement;
 
     let traitLines = writeTraitDesc(traits);
-    elements.add(BookElement.textComponent(BookScreen.PAGE_WIDTH * 0.5, y, BookScreen.PAGE_WIDTH * 0.4, BookScreen.PAGE_HEIGHT, traitLines));
+    elements.add(BookElement.textComponent(BookScreen.PAGE_WIDTH * 0.55, y - 9, BookScreen.PAGE_WIDTH * 0.45, BookScreen.PAGE_HEIGHT, traitLines));
 
     return yIncresement;
 };
@@ -159,7 +153,7 @@ let writeStatDesc = (stats) => {
  * @returns {Internal.TextComponentData[]}
  */
 let writeTraitDesc = (traits) => {
-    let result = [];
+    let result = [BookTextComponentData.literal("\n")];
     traits.forEach(trait => {
         let modifier = trait.getModifier();
         let textCopmonentData = BookTextComponentData.of(modifier.getDisplayName());

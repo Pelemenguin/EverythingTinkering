@@ -30,7 +30,8 @@ const ChatFormatting = Java.loadClass("net.minecraft.ChatFormatting");
 
 const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
 const BookTransformer = Java.loadClass("slimeknights.mantle.client.book.transformer.BookTransformer");
-const TextComponentData = Java.loadClass("slimeknights.mantle.client.book.data.element.TextComponentData");
+const ContentPageIconList = Java.loadClass("slimeknights.mantle.client.book.data.content.ContentPageIconList");
+const ContentPageIconList$PageWithIcon = Java.loadClass("slimeknights.mantle.client.book.data.content.ContentPageIconList$PageWithIcon");
 
 const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialId');
 const MaterialVariant = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialVariant');
@@ -45,7 +46,12 @@ const ToolStatId = Java.loadClass("slimeknights.tconstruct.library.tools.stat.To
 const ToolStats = Java.loadClass('slimeknights.tconstruct.library.tools.stat.ToolStats');
 const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDefinitions');
 
+const PageDataJS = Java.loadClass("pelemenguin.mantlejs.content.book.data.PageDataJS");
 const MantleJSTransformer = Java.loadClass("pelemenguin.mantlejs.content.book.transformer.MantleJSTransformer");
+
+const JavaUtils = {
+    ArrayList: Java.loadClass("java.util.ArrayList")
+};
 
 // ---------- Utils ---------- //
 

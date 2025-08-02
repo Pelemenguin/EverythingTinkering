@@ -74,11 +74,19 @@ declare namespace Annotation {
 }
 
 declare namespace BookArguments {
-    type MaterialPage = {
+    type MaterialPageLeft = {
         /**
          * - The string ID of the material.
          * - 材料 ID。
          */
-        materialId: string
+        materialId: Internal.MaterialId
+    }
+    type MaterialPageRight = {
+        /**
+         * - The string ID of the material.
+         * - 材料 ID。
+         */
+        materialId: Internal.MaterialId,
+        isEncyclopedia: boolean
     }
 }
