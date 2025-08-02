@@ -82,7 +82,7 @@ let usageRepr = {
         Damage: NBT.intTag((1 - multiplier) * 100),
         tic_materials: [
             "tconstruct:nahuatl",
-            "tconstruct:iron"
+            "tconstruct:obsidian"
         ],
         tic_stats: {
             "tconstruct:durability": 100.0
@@ -108,7 +108,7 @@ let usageRepr = {
 let usageReprColor = {
     "missing": "#FF0000",
     "not_suggested": "#000000",
-    "durability": "#08002C",
+    "durability": "#160075",
     "damage": "#999999"
 };
 
