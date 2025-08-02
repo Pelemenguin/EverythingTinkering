@@ -21,7 +21,7 @@ const RepresentativeItems = {
     /**
      * @param {string} id 
      * - - - - -
-     * @returns {Internal.ItemStack}
+     * @returns {string}
      */
     get: (id) => {
         /** @type {string} */
@@ -29,27 +29,27 @@ const RepresentativeItems = {
         if (item === undefined) {
             return Item.of("tconstruct:repair_kit", 1, {Material: id});
         } else {
-            return item;
+            return Item.of(item);
         }
     }
 };
 
 let reprItems = {
-    "tconstruct:wood": Item.of("minecraft:oak_log"),
-    "kubejs:soil": Item.of("minecraft:dirt"),
-    "tconstruct:rock": Item.of("minecraft:stone"),
-    "kubejs:brick": Item.of("minecraft:brick"),
-    "kubejs:coal": Item.of("minecraft:coal"),
-    "tconstruct:flint": Item.of("minecraft:flint"),
-    "tconstruct:bone": Item.of("minecraft:bone"),
-    "tconstruct:copper": Item.of("minecraft:copper_ingot"),
-    "kubejs:terracotta": Item.of("minecraft:terracotta"),
-    "tconstruct:bamboo": Item.of("minecraft:bamboo"),
-    "kubejs:lapis_lazuli": Item.of("minecraft:lapis_lazuli"),
-    "kubejs:andesite_alloy": Item.of("create:andesite_alloy"),
-    "tconstruct:chorus": Item.of("minecraft:popped_chorus_fruit"),
-    "tconstruct:string": Item.of("minecraft:string"),
-    "tconstruct:leather": Item.of("minecraft:leather"),
-    "kubejs:paper": Item.of("minecraft:paper"),
-    "tconstruct:vine": Item.of("minecraft:vine")
+    "tconstruct:wood": "minecraft:oak_log",
+    "kubejs:soil": "minecraft:dirt",
+    "tconstruct:rock": "minecraft:stone",
+    "kubejs:brick": "minecraft:brick",
+    "kubejs:coal": "minecraft:coal",
+    "tconstruct:flint": "minecraft:flint",
+    "tconstruct:bone": "minecraft:bone",
+    "tconstruct:copper": "minecraft:copper_ingot",
+    "kubejs:terracotta": "minecraft:terracotta",
+    "tconstruct:bamboo": "minecraft:bamboo",
+    "kubejs:lapis_lazuli": "minecraft:lapis_lazuli",
+    "kubejs:andesite_alloy": "create:andesite_alloy",
+    "tconstruct:chorus": "minecraft:popped_chorus_fruit",
+    "tconstruct:string": "minecraft:string",
+    "tconstruct:leather": "minecraft:leather",
+    "kubejs:paper": "minecraft:paper",
+    "tconstruct:vine": "minecraft:vine"
 };
