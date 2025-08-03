@@ -38,50 +38,6 @@ let StatRepresentaticeItem = {
 
 /**
  * @param {Internal.ArrayList<Internal.BookElement>} elements
- * @param {Internal.MaterialId} materialId
- */
-let createTitle = (elements, materialId) => {
-
-    let strMatId = materialId.toString();
-    let [namespace, path] = strMatId.split(':');
-    let translationKey = `material.${namespace}.${path}`;
-
-    let [text] = BookTextData.fromComponent(Component.translatable(translationKey));
-    text.scale = 1.2;
-    text.underlined = true;
-    text.useOldColor = false;
-    text.rgbColor = CustomUtils.Tinker.getMantleColor(translationKey).getValue();
-    text.dropshadow = true;
-
-    let itemElement = new TinkerItemElement(RepresentativeItems.get(strMatId));
-    itemElement.x = 1,
-
-    elements.add(BookElement.text(21, 2, BookScreen.PAGE_WIDTH - 21, 15, text));
-    elements.add(itemElement);
-
-};
-
-/**
- * @param {Internal.ArrayList<Internal.BookElement>} elements
- * @param {number} y
- * @param {Internal.MaterialId} materialId
- * @param {string[]} statIds
- * - - - - -
- * @returns {boolean} If any stat is written
- */
-let createStats = (elements, y, materialId, statIds) => {
-    let curY = y;
-    /** @type {Internal.MaterialId} */
-    statIds.forEach(statId => {
-        let yIncresement = writeStat(elements, curY, materialId, statId);
-        curY += yIncresement;
-    });
-
-    return curY != y;
-};
-
-/**
- * @param {Internal.ArrayList<Internal.BookElement>} elements
  * @param {number} y
  * @param {Internal.MaterialId} materialId
  * @param {string} statId
@@ -175,6 +131,49 @@ let writeTraitDesc = (traits) => {
 
 // eslint-disable-next-line no-unused-vars
 const StatTypeBase = {
-    createTitle: createTitle,
-    createStats: createStats
+
+    /**
+     * @param {Internal.ArrayList<Internal.BookElement>} elements
+     * @param {Internal.MaterialId} materialId
+     */
+    createTitle: (elements, materialId) => {
+
+        let strMatId = materialId.toString();
+        let [namespace, path] = strMatId.split(':');
+        let translationKey = `material.${namespace}.${path}`;
+
+        let [text] = BookTextData.fromComponent(Component.translatable(translationKey));
+        text.scale = 1.2;
+        text.underlined = true;
+        text.useOldColor = false;
+        text.rgbColor = CustomUtils.Tinker.getMantleColor(translationKey).getValue();
+        text.dropshadow = true;
+
+        let itemElement = new TinkerItemElement(RepresentativeItems.get(strMatId));
+        itemElement.x = 1,
+
+        elements.add(BookElement.text(21, 2, BookScreen.PAGE_WIDTH - 21, 15, text));
+        elements.add(itemElement);
+
+    },
+
+    /**
+     * @param {Internal.ArrayList<Internal.BookElement>} elements
+     * @param {number} y
+     * @param {Internal.MaterialId} materialId
+     * @param {string[]} statIds
+     * - - - - -
+     * @returns {boolean} If any stat is written
+     */
+    createStats: (elements, y, materialId, statIds) => {
+        let curY = y;
+        /** @type {Internal.MaterialId} */
+        statIds.forEach(statId => {
+            let yIncresement = writeStat(elements, curY, materialId, statId);
+            curY += yIncresement;
+        });
+
+        return curY != y;
+    }
+
 };
