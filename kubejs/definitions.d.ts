@@ -73,7 +73,7 @@ declare namespace Annotation {
     }
 
     type MaterialUsage = "MISSING" | "DURABILITY" | "DAMAGE" | "SPEED" | "MINING" | "BALANCED" | "PROTECTION" | "MISCELLANEOUS" | "ALTERNATIVE"
-        | "NOT_SUGGESTED" | "FUNCTIONAL" | "APPEARANCE"
+        | "NOT_SUGGESTED" | "FUNCTIONAL" | "APPEARANCE" | "EXTENDABLE"
 }
 
 declare namespace BookArguments {

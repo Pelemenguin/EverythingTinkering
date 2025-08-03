@@ -52,12 +52,11 @@ let suggestions = {
     "tconstruct:chorus": ["FUNCTIONAL", 0.5],
     "tconstruct:string": ["DURABILITY", 0.5],
     "tconstruct:leather": ["DURABILITY", 0.5],
-    "tconstruct:vine": ["DURABILITTY", 0.5]
+    "tconstruct:vine": ["DURABILITY", 0.5]
 
 };
 
 /**
- * 
  * @param {(number) => Internal.ItemStack} item 
  * @param {string} id
  * - - - - -
@@ -69,8 +68,8 @@ let reprItemElementBase = (item, id) => {
         result.x = x;
         result.y = y;
         result.tooltip = Utils.newList();
-        result.tooltip.add(Component.translatable(`book.suggestion.${id}.name`).color(usageReprColor[id]).underlined());
-        result.tooltip.add(Component.translatable(`book.suggestion.${id}.description`).gray());
+        result.tooltip.add(Component.translatable(`book.kubejs.material.suggestion.${id}.name`).color(usageReprColor[id]).underlined());
+        result.tooltip.add(Component.translatable(`book.kubejs.material.suggestion.${id}.description`).gray());
         return result;
     };
 };
@@ -79,7 +78,7 @@ let usageRepr = {
     "MISSING": reprItemElementBase(() => Item.of("minecraft:barrier"), "missing"),
 
     "DURABILITY": reprItemElementBase((multiplier) => Item.of("tconstruct:plate_shield", 1, {
-        Damage: NBT.intTag((1 - multiplier) * 100),
+        Damage: NBT.intTag((1 - multiplier % 1) * 100),
         tic_materials: [
             "tconstruct:nahuatl",
             "tconstruct:obsidian"
@@ -91,7 +90,7 @@ let usageRepr = {
     }), "durability"),
 
     "DAMAGE": reprItemElementBase((multiplier) => Item.of("tconstruct:sword", 1, {
-        Damage: NBT.intTag((1 - multiplier) * 100),
+        Damage: NBT.intTag((1 - multiplier % 1) * 100),
         tic_materials: [
             "tconstruct:iron",
             "tconstruct:iron",
@@ -101,15 +100,66 @@ let usageRepr = {
             "tconstruct:durability": 100.0
         },
         tic_display: true
-    }), "damage")
+    }), "damage"),
+
+    "FUNCTIONAL": reprItemElementBase((multiplier) => Item.of("tconstruct:kama", 1, {
+        Damage: NBT.intTag((1 - multiplier % 1) * 100),
+        tic_materials: [
+            "tconstruct:rose_gold",
+            "tconstruct:rose_gold",
+            "tconstruct:rose_gold"
+        ],
+        tic_stats: {
+            "tconstruct:durability": 100.0
+        },
+        tic_display: true
+    }), "functional"),
+
+    "ALTERNATIVE": reprItemElementBase((multiplier) => Item.of("tconstruct:flint_and_brick", 1, {
+        Damage: NBT.intTag((1 - multiplier % 1) * 100),
+        tic_stats: {
+            "tconstruct:durability": 100.0
+        },
+        tic_display: true
+    }), "alternative"),
+
+    "NOT_SUGGESTED": reprItemElementBase(() => Item.of("tconstruct:sword", 1, {
+        Damage: NBT.intTag(0),
+        tic_broken: true,
+        tic_materials: [
+            "kubejs:soil",
+            "kubejs:soil",
+            "kubejs:soil"
+        ],
+        tic_stats: {
+            "tconstruct:durability": 100.0
+        },
+        tic_display: true
+    }), "not_suggested"),
+
+    "MINING": reprItemElementBase((multiplier) => Item.of("tconstruct:pickaxe", 1, {
+        Damage: NBT.intTag((1 - multiplier % 1) * 100),
+        tic_materials: [
+            "tconstruct:copper",
+            "tconstruct:copper",
+            "tconstruct:copper"
+        ],
+        tic_stats: {
+            "tconstruct:durability": 100.0
+        },
+        tic_display: true
+    }), "mining")
 
 };
 
 let usageReprColor = {
     "missing": "#FF0000",
-    "not_suggested": "#000000",
     "durability": "#160075",
-    "damage": "#999999"
+    "damage": "#999999",
+    "functional": "#FFB9A8",
+    "alternative": "#383838",
+    "not_suggested": "#744E1C",
+    "mining": "#E77C56"
 };
 
 const MaterialSuggestions = {

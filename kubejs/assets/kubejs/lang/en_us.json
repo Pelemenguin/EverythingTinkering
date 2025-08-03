@@ -166,7 +166,7 @@
     "modifier.kubejs.antifatigue.flavor": "Combat exhaustion!",
     "modifier.kubejs.antifatigue.description": "Counteracts mining fatigue effects. The maximum fatigue level negated is equal to this modifier's level",
     
-        "comment_artifacts": " ----- Artifacts ----- ",
+        "_comment_artifacts": " ----- Artifacts ----- ",
     
     "item.kubejs.artifact.startup.pickaxe.name": "Startup Pickaxe",
     "item.kubejs.artifact.startup.pickaxe.lore": "A gift to beginners.",
@@ -175,6 +175,29 @@
     "item.kubejs.artifact.startup.hand_axe.lore": "A gift to beginners.",
     
     "item.kubejs.artifact.startup.sword.name": "Startup Sword",
-    "item.kubejs.artifact.startup.sword.lore": "A gift to beginners."
+    "item.kubejs.artifact.startup.sword.lore": "A gift to beginners.",
+
+        "_comment_material_suggestions": " ----- Material Suggestions ----- ",
+    
+    "book.kubejs.material.suggestion.missing.name": "Missing",
+    "book.kubejs.material.suggestion.missing.description": "Your modpack developer has forgotten filling this suggestion. Report this issue on GitHub!",
+
+    "book.kubejs.material.suggestion.alternative.name": "Alternative",
+    "book.kubejs.material.suggestion.alternative.description": "Not a strong material, but may still be a good one in early game or when you're short of other materials.",
+
+    "book.kubejs.material.suggestion.not_suggested.name": "Not Suggested",
+    "book.kubejs.material.suggestion.not_suggested.description": "Do not use this material at any time.",
+
+    "book.kubejs.material.suggestion.damage.name": "Damage",
+    "book.kubejs.material.suggestion.damage.description": "This material provides either high damage or damage boosts.",
+
+    "book.kubejs.material.suggestion.functional.name": "Functional",
+    "book.kubejs.material.suggestion.functional.description": "This material is used in some specific situations.",
+
+    "book.kubejs.material.suggestion.mining.name": "Mining",
+    "book.kubejs.material.suggestion.mining.description": "This material can help you with mining, providing high mining speed, high mining level, or other functionality.",
+
+    "book.kubejs.material.suggestion.durability.name": "Durability",
+    "book.kubejs.material.suggestion.durability.description": "This material can make you tool more durable."
 
 }

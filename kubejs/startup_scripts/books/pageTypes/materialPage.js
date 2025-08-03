@@ -47,10 +47,7 @@ MantleJSEvents.pageTypeRegistry(event => {
             
             let [usage, multiplier] = MaterialSuggestions.getUsage(args.materialId.toString());
             elements.add(MaterialSuggestions.getElement(args.materialId.toString(), BookScreen.PAGE_WIDTH - 18, 0));
-            let usageTranslationKey = `book.suggestion.${usage.toLowerCase()}.name`;
-            let usageComponent = Component.literal(multiplier).gray().bold(true)
-                .append(Component.literal(" "))
-                .append(Component.translatable(usageTranslationKey).color(MaterialSuggestions.getColor(usage.toLowerCase())).bold(false));
+            let usageComponent = Component.literal(multiplier).color(MaterialSuggestions.getColor(usage.toLowerCase())).bold(true);
             
             let usageWidth = book.fontRenderer.width(usageComponent.getString());
             let usageTextCompData = BookTextComponentData.of(usageComponent);

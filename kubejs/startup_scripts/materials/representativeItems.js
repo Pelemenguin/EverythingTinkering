@@ -47,7 +47,7 @@ const RepresentativeItems = {
     /**
      * @param {string} id 
      * - - - - -
-     * @returns {string}
+     * @returns {Internal.ItemStack}
      */
     get: (id) => {
         /** @type {string} */

@@ -19,6 +19,7 @@
     MaterialStatsId
     BookScreen
     ChatFormatting
+    TinkerItemElement
 */
 
 // eslint-disable-next-line no-unused-vars
@@ -52,8 +53,11 @@ let createTitle = (elements, materialId) => {
     text.rgbColor = CustomUtils.Tinker.getMantleColor(translationKey).getValue();
     text.dropshadow = true;
 
+    let itemElement = new TinkerItemElement(RepresentativeItems.get(strMatId));
+    itemElement.x = 1,
+
     elements.add(BookElement.text(21, 2, BookScreen.PAGE_WIDTH - 21, 15, text));
-    elements.add(BookElement.item(1, 0, 1, RepresentativeItems.get(strMatId)));
+    elements.add(itemElement);
 
 };
 
@@ -96,7 +100,10 @@ let writeStat = (elements, y, materialId, statId) => {
     let yIncresement = 18;
 
     let reprItem = Item.of(StatRepresentaticeItem[statId], 1, {Material: materialId.toString()});
-    elements.add(BookElement.item(0, y + 1, 0.5, reprItem));
+    let itemElement = new TinkerItemElement(reprItem);
+    itemElement.y = y + 1;
+    itemElement.scale = 0.5;
+    elements.add(itemElement);
 
     let stats = statsOptional.get();
     let [statTitle] = BookTextData.fromComponent(stats.getLocalizedName());
