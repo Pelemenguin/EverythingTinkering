@@ -1,4 +1,4 @@
-// priority: 9000
+// priority: 5000
 
 /**
  * @fileoverview Stat Page Type Base

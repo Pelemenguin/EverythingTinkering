@@ -40,7 +40,7 @@ let suggestions = {
     // Tier 1
     "tconstruct:wood": ["ALTERNATIVE", 0.1],
     "tconstruct:rock": ["ALTERNATIVE", 0.15],
-    "kubejs:soil": ["NOT_SUGGESTED", 0],
+    "kubejs:soil": ["NOT_RECOMMENDED", 0],
     "kubejs:brick": ["DAMAGE", 0.3],
     "kubejs:coal": ["FUNCTIONAL", 0.4],
     "tconstruct:flint": ["DAMAGE", 0.5],
@@ -123,7 +123,7 @@ let usageRepr = {
         tic_display: true
     }), "alternative"),
 
-    "NOT_SUGGESTED": reprItemElementBase(() => Item.of("tconstruct:sword", 1, {
+    "NOT_RECOMMENDED": reprItemElementBase(() => Item.of("tconstruct:sword", 1, {
         Damage: NBT.intTag(0),
         tic_broken: true,
         tic_materials: [
@@ -135,7 +135,7 @@ let usageRepr = {
             "tconstruct:durability": 100.0
         },
         tic_display: true
-    }), "not_suggested"),
+    }), "not_recommended"),
 
     "MINING": reprItemElementBase((multiplier) => Item.of("tconstruct:pickaxe", 1, {
         Damage: NBT.intTag((1 - multiplier % 1) * 100),
@@ -158,7 +158,7 @@ let usageReprColor = {
     "damage": "#999999",
     "functional": "#FFB9A8",
     "alternative": "#383838",
-    "not_suggested": "#744E1C",
+    "not_recommended": "#744E1C",
     "mining": "#E77C56"
 };
 

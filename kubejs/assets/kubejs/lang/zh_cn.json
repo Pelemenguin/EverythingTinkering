@@ -178,6 +178,37 @@
     "item.kubejs.artifact.startup.hand_axe.lore": "一份致新手的礼物。",
     
     "item.kubejs.artifact.startup.sword.name": "初始之剑",
-    "item.kubejs.artifact.startup.sword.lore": "一份致新手的礼物。"
+    "item.kubejs.artifact.startup.sword.lore": "一份致新手的礼物。",
+
+        "_comment_book": " ----- 书本 ----- ",
+    
+    "book.kubejs.material.recipes.material_value_indicator": "%1$s 材料值的%2$s",
+
+    "book.kubejs.material.recipes.missing": "该材料缺少配方",
+
+    "book.kubejs.material.recipes.part_builder.name": "部件制造台",
+    "book.kubejs.material.recipes.part_builder.description": "能在部件制造台中制作",
+    "book.kubejs.material.recipes.part_builder.description.uncraftable": "不能在部件制造台中制作，仅用于工具修复",
+    
+    "book.kubejs.material.suggestion.missing.name": "缺失",
+    "book.kubejs.material.suggestion.missing.description": "你的整合包作者忘记填写这个建议了，在GitHub上提交一个Issue！",
+
+    "book.kubejs.material.suggestion.alternative.name": "备选",
+    "book.kubejs.material.suggestion.alternative.description": "不是很强的材料，但在游戏早期或缺少其它材料时或许是个不错的选择。",
+
+    "book.kubejs.material.suggestion.not_recommended.name": "不建议",
+    "book.kubejs.material.suggestion.not_recommended.description": "任何时候都不要使用这个材料。",
+
+    "book.kubejs.material.suggestion.damage.name": "伤害",
+    "book.kubejs.material.suggestion.damage.description": "该材料善于造成伤害，能够提供高伤害或伤害提升，也可能提供其它利于造成伤害的特性。",
+
+    "book.kubejs.material.suggestion.functional.name": "功能",
+    "book.kubejs.material.suggestion.functional.description": "该材料用于一些特定情景。",
+
+    "book.kubejs.material.suggestion.mining.name": "挖掘",
+    "book.kubejs.material.suggestion.mining.description": "该材料可以帮助你挖掘，可能提供高挖掘速度，高挖掘等级，或者其它功能。",
+
+    "book.kubejs.material.suggestion.durability.name": "耐久",
+    "book.kubejs.material.suggestion.durability.description": "该材料可以通过高耐久或保护性特性来延长你的工具寿命。"
     
 }

@@ -15,6 +15,7 @@
     Component
     BookElement
     BookTextComponentData
+    DetailedBase
 */
 
 /**
@@ -52,19 +53,14 @@ MantleJSEvents.pageTypeRegistry(event => {
             
             let [usage, multiplier] = MaterialSuggestions.getUsage(materialId.toString());
             elements.add(MaterialSuggestions.getElement(materialId.toString(), BookScreen.PAGE_WIDTH - 18, 0));
-            let usageComponent = Component.literal(multiplier).color(MaterialSuggestions.getColor(usage.toLowerCase())).bold(true);
+            let usageComponent = Component.literal(multiplier + '').color(MaterialSuggestions.getColor(usage.toLowerCase())).bold(true);
             
             let usageWidth = book.fontRenderer.width(usageComponent.getString());
             let usageTextCompData = BookTextComponentData.of(usageComponent);
             usageTextCompData.scale = 1.2;
-            elements.add(BookElement.textComponent(BookScreen.PAGE_WIDTH - 22 - usageWidth * 1.2, 2, BookScreen.PAGE_WIDTH, 9, [usageTextCompData]));
+            elements.add(BookElement.textComponent(BookScreen.PAGE_WIDTH - 22 - usageWidth * 1.2, 2, BookScreen.PAGE_WIDTH, 9, usageTextCompData));
 
-            MaterialRecipesHelper.getPartBuilderRecipeOf(materialId).forEach((variant, recipes) => {
-                console.info(`Material variant ${variant}`);
-                recipes.forEach(recipe => {
-                    console.info(`    ${recipe.ingredient.itemIds}`);
-                });
-            });
+            DetailedBase.drawRecipe(elements, materialId);
 
         });
 });

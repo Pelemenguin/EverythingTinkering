@@ -7,7 +7,7 @@
  * - - - - -
  * @author Pelemenguin
  * @license CC-BY-NC-SA-4.0
- */
+ */ /** */
 
 /* eslint-disable no-unused-vars */
 
@@ -18,6 +18,8 @@
 */
 
 // ---------- Java classes ---------- //
+
+const NonNullList = Java.loadClass("net.minecraft.core.NonNullList");
 
 const Registries = Java.loadClass("net.minecraft.core.registries.Registries");
 const ResourceKey = Java.loadClass("net.minecraft.resources.ResourceKey");
@@ -48,6 +50,7 @@ const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDef
 const TinkerItemElement = Java.loadClass("slimeknights.tconstruct.library.client.book.elements.TinkerItemElement");
 const MaterialCastingLookup = Java.loadClass("slimeknights.tconstruct.library.recipe.casting.material.MaterialCastingLookup");
 const MaterialRecipeCache = Java.loadClass("slimeknights.tconstruct.library.recipe.material.MaterialRecipeCache");
+const TinkerToolParts = Java.loadClass("slimeknights.tconstruct.tools.TinkerToolParts");
 
 const PageDataJS = Java.loadClass("pelemenguin.mantlejs.content.book.data.PageDataJS");
 const MantleJSTransformer = Java.loadClass("pelemenguin.mantlejs.content.book.transformer.MantleJSTransformer");
