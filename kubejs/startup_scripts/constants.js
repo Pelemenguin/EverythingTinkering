@@ -30,6 +30,7 @@ const Player = Java.loadClass("net.minecraft.world.entity.player.Player");
 const Entity = Java.loadClass("net.minecraft.world.entity.Entity");
 const EquipmentSlot = Java.loadClass("net.minecraft.world.entity.EquipmentSlot");
 const ChatFormatting = Java.loadClass("net.minecraft.ChatFormatting");
+const LanguageManager = Java.loadClass("net.minecraft.client.resources.language.LanguageManager");
 
 const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
 const BookTransformer = Java.loadClass("slimeknights.mantle.client.book.transformer.BookTransformer");

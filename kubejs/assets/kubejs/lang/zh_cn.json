@@ -182,6 +182,8 @@
 
         "_comment_book": " ----- 书本 ----- ",
     
+    "book.kubejs.material.title.general.1": "一阶通用材料",
+    
     "book.kubejs.material.recipes.material_value_indicator": "%1$s 材料值的%2$s",
 
     "book.kubejs.material.recipes.missing": "该材料缺少配方",

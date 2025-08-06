@@ -75,6 +75,7 @@ MantleJSEvents.transformerRegistry(event => {
             sections.forEach(section => {
                 if (!section.extraData.containsKey(ResourceLocation.tryBuild("kubejs", "general_materials"))) return;
                 let tier = section.extraData.get(ResourceLocation.tryBuild("kubejs", "general_materials"));
+                let isEncyclopedia = section.extraData.get(ResourceLocation.tryBuild("kubejs", "is_encyclopedia"));
 
                 /** @type {Internal.IMaterial[]} */
                 let materials = registry.getVisibleMaterials().toArray().filter((/** @type {Internal.IMaterial} */material) => {
@@ -92,7 +93,7 @@ MantleJSEvents.transformerRegistry(event => {
                     return result;
                 });
 
-                let contentTablePages = ContentPageIconList.getPagesNeededForItemCount(materials.length, section.origin, section.title, "");
+                let contentTablePages = ContentPageIconList.getPagesNeededForItemCount(materials.length, section.origin, Component.translatable(`book.kubejs.material.title.general.${tier}`).getString(), "");
                 let contentTablePageCount = contentTablePages.length;
 
                 let firstPageNumber = book.getFirstPageNumber(section, null);
@@ -130,7 +131,8 @@ MantleJSEvents.transformerRegistry(event => {
                     icons.push(BookElement.item(0, 0, 1, RepresentativeItems.get(matId.toString())));
 
                     let rightPage = PageDataJS.createNewCustom("kubejs:general_material_page_right", {
-                        materialId: matId
+                        materialId: matId,
+                        isEncyclopedia: isEncyclopedia
                     });
                     rightPage.setParent(section);
                     rightPage.setName(`${matId.toString()}.right`);

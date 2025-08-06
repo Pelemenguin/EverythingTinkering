@@ -16,6 +16,7 @@
     BookElement
     BookTextComponentData
     DetailedBase
+    BookTextData
 */
 
 /**
@@ -42,7 +43,6 @@ MantleJSEvents.pageTypeRegistry(event => {
 
             let {
                 materialId,
-                // eslint-disable-next-line no-unused-vars
                 isEncyclopedia
             } = args;
             
@@ -56,6 +56,17 @@ MantleJSEvents.pageTypeRegistry(event => {
             elements.add(BookElement.textComponent(BookScreen.PAGE_WIDTH - 22 - usageWidth * 1.2, 2, BookScreen.PAGE_WIDTH, 9, usageTextCompData));
 
             DetailedBase.drawRecipe(elements, materialId, 0);
+
+            elements.add(isEncyclopedia
+                ? BookElement.text(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
+                    BookTextData.fromComponent(Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.encyclopedia').darkGray())[0]
+                )
+                : BookElement.text(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
+                    BookTextData.fromComponent(Component.literal('"').darkGray())[0],
+                    BookTextData.fromComponent(Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.flavor').italic().darkGray())[0],
+                    BookTextData.fromComponent(Component.literal('"').darkGray())[0]
+                )
+            );
 
         });
 });

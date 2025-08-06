@@ -138,6 +138,11 @@ const DetailedBase = {
             BookTextComponentData.LINEBREAK,
             BookTextComponentData.of(Component.translatable("book.kubejs.material.recipes.count", totalRecipes.toFixed()))
         );
-    }
+    },
+
+    /**
+     * 
+     * 
+     */    
 
 };

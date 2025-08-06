@@ -13,15 +13,19 @@
             "kubejs:general_materials": 1
         },
         "icon": {
-            "item": "tconstruct:hand_axe",
-            "nbt": {
+            "item": {
                 "type": "forge:nbt",
-                "tic_display": true,
-                "tic_materials": [
-                    "tconstruct:wood#oak",
-                    "tconstruct:wood#spruce",
-                    "tconstruct:wood#birch"
-                ]
+                "item": "tconstruct:hand_axe",
+                "nbt": {
+                    "tic_display": true,
+                    "tic_materials": [
+                        "tconstruct:wood#oak",
+                        "tconstruct:wood#spruce",
+                        "tconstruct:wood#birch"
+                    ],
+                    "tic_broken": false,
+                    "Damage": 0
+                }
             }
         }
     },

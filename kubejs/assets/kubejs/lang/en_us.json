@@ -179,6 +179,8 @@
 
         "_comment_book": " ----- Book ----- ",
     
+    "book.kubejs.material.title.general.1": "Tier 1 General Material",
+    
     "book.kubejs.material.recipes.material_value_indicator": "%1$s Material Value of %2$s",
 
     "book.kubejs.material.recipes.missing": "No recipes available for this material",
