@@ -53,7 +53,7 @@ let initialize = () => {
         }
     });
 
-    initialized = true;
+    if (!materialRecipesCache.isEmpty()) initialized = true;
 };
 
 let ensureInitialized = () => {

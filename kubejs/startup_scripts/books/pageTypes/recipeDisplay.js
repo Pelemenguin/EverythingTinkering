@@ -28,7 +28,7 @@ const RecipeDisplay = function(x, y) {
     this.y = y === undefined ? RecipeDisplay.DEFAULT_Y : y;
 };
 
-RecipeDisplay.DEFAULT_X = 0;
+RecipeDisplay.DEFAULT_X = 8;
 RecipeDisplay.DEFAULT_Y = 18;
 
 /**

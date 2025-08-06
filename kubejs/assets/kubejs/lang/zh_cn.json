@@ -185,6 +185,8 @@
     "book.kubejs.material.recipes.material_value_indicator": "%1$s 材料值的%2$s",
 
     "book.kubejs.material.recipes.missing": "该材料缺少配方",
+    "book.kubejs.material.recipes.count": "共 %s 个配方",
+    "book.kubejs.material.recipes.page": "第 %1$s / %2$s 页",
 
     "book.kubejs.material.recipes.part_builder.name": "部件制造台",
     "book.kubejs.material.recipes.part_builder.description": "能在部件制造台中制作",

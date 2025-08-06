@@ -182,6 +182,8 @@
     "book.kubejs.material.recipes.material_value_indicator": "%1$s Material Value of %2$s",
 
     "book.kubejs.material.recipes.missing": "No recipes available for this material",
+    "book.kubejs.material.recipes.count": "%s Recipes Total",
+    "book.kubejs.material.recipes.page": "Page %1$s of %2$s",
 
     "book.kubejs.material.recipes.part_builder.name": "Part Builder",
     "book.kubejs.material.recipes.part_builder.description": "Craftable in the Part Builder",

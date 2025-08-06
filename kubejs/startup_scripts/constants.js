@@ -21,6 +21,7 @@
 
 const NonNullList = Java.loadClass("net.minecraft.core.NonNullList");
 
+const SimpleSoundInstance = Java.loadClass("net.minecraft.client.resources.sounds.SimpleSoundInstance");
 const Registries = Java.loadClass("net.minecraft.core.registries.Registries");
 const ResourceKey = Java.loadClass("net.minecraft.resources.ResourceKey");
 const TagKey = Java.loadClass("net.minecraft.tags.TagKey");

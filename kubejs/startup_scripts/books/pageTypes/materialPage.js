@@ -40,11 +40,6 @@ MantleJSEvents.pageTypeRegistry(event => {
     event.create("kubejs:general_material_page_right")
         .buildPage((/**@type {BookArguments.MaterialPageRight}*/args, book, elements) => {
 
-            // let {
-            //     materialId,
-            //     isEncyclopedia
-            // } = args;
-
             let {
                 materialId,
                 // eslint-disable-next-line no-unused-vars
@@ -60,7 +55,7 @@ MantleJSEvents.pageTypeRegistry(event => {
             usageTextCompData.scale = 1.2;
             elements.add(BookElement.textComponent(BookScreen.PAGE_WIDTH - 22 - usageWidth * 1.2, 2, BookScreen.PAGE_WIDTH, 9, usageTextCompData));
 
-            DetailedBase.drawRecipe(elements, materialId);
+            DetailedBase.drawRecipe(elements, materialId, 0);
 
         });
 });
