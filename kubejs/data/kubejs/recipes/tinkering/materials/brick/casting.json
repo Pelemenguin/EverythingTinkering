@@ -4,6 +4,6 @@
         "amount": 1000,
         "tag": "tconstruct:molten_clay"
     },
-    "output": "tconstruct:iron",
+    "output": "kubejs:brick",
     "temperature": 450
 }

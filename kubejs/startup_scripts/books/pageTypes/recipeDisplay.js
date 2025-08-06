@@ -14,6 +14,10 @@
     BookElement
     ImageData
     TinkerToolParts
+    ItemStack
+    BookTextData
+    console
+    JavaUtils
 */
 
 /**
@@ -47,8 +51,20 @@ RecipeDisplay.materialValueIndicator = (variantId, value, x, y) => {
     // let outputName = 'material.' + recipe.getMaterial().getVariant().getSuffix().replace('_', '.');
     let translation = 'material.' + variantId.toString().replace(':', '.').replace('#', '.');
     // output.tooltip.add(Component.literal(recipe.getValue()).append(Component.literal(' ')).append(Component.translatable(outputName).underlined()));
-    result.tooltip.add(Component.translatable("book.kubejs.material.recipes.material_value_indicator", [Component.literal(value), Component.translatable(translation).underlined()]));
+    result.tooltip.add(Component.translatable("book.kubejs.material.recipes.material_value_indicator", [Component.literal(value.toFixed()), Component.translatable(RecipeDisplay.specialTranslation(translation)).underlined()]));
     return result;
+};
+
+/**
+ * Special translations.
+ * I don't know how to directly fix them,
+ * so create a helper function to remap them.
+ */
+RecipeDisplay.specialTranslation = (translationId) => {
+    switch (translationId) {
+        case "material.tconstruct.whitestone.end": return "material.tconstruct.whitestone";
+    }
+    return translationId;
 };
 
 RecipeDisplay.prototype = {
@@ -95,13 +111,86 @@ RecipeDisplay.prototype = {
         elements.add(RecipeDisplay.materialValueIndicator(recipe.getMaterial().getVariant(), recipe.getValue(), arrow.x + 21, pattern.y));
 
         return 18;
+    },
+
+    /**
+     * @param {Internal.ArrayList<Internal.BookElement>} elements
+     * @param {Internal.MaterialFluidRecipe} recipe
+     * - - - - -
+     * @returns {number}
+     */
+    casting: function(elements, recipe) {
+        /** @type {Internal.Optional<Internal.Fluid>} */
+        let fluid = recipe.getFluids().stream().map(fluid => fluid.getFluid()).findFirst();
+
+        let icon = new TinkerItemElement("tconstruct:seared_table");
+        icon.x = this.x;
+        icon.y = this.y;
+        icon.tooltip = Utils.newList();
+        icon.tooltip.add(Component.translatable("book.kubejs.material.recipes.casting.name"));
+        icon.tooltip.add(Component.translatable("book.kubejs.material.recipes.casting.description").gray());
+        elements.add(icon);
+
+        /** @type {Internal.TinkerItemElement} */
+        let displayItem;
+        try {
+            displayItem = new TinkerItemElement(new ItemStack(fluid.get().getBucket()));
+        }
+        catch (e) {
+            console.error(e);
+            displayItem = new TinkerItemElement("minecraft:barrier");
+        }
+        displayItem.x = icon.x + 24;
+        displayItem.y = icon.y;
+
+        let amountIndicator;
+        let amount = '?';
+        try {
+            amount = recipe.getFluids().get(0).getAmount().toFixed();
+            amountIndicator = BookElement.text(
+                displayItem.x + 16,
+                displayItem.y + 8,
+                40,
+                9,
+                BookTextData.fromComponent(Component.translatable("book.kubejs.material.recipes.casting.amount", amount).getString())
+            );
+        } catch (e) {
+            console.error(e);
+            amountIndicator = BookElement.text(
+                displayItem.x + 16,
+                displayItem.y + 8,
+                40,
+                9,
+                BookTextData.fromComponent(Component.translatable("book.kubejs.material.recipes.casting.amount", amount).getString())
+            );
+        }
+        displayItem.tooltip = JavaUtils.ArrayList["of(java.lang.Object[])"]([
+            Component.translatable("book.kubejs.material.recipes.casting.fluid", amount, fluid.isEmpty() ? Component.translatable("book.kubejs.material.recipes.casting.fluid.unknown") : fluid.get().getFluidType().getDescription())
+        ]);
+
+        elements.add(displayItem);
+        elements.add(amountIndicator);
+
+        let arrowExtend = BookElement.image(new ImageData("jei:textures/jei/atlas/gui/recipe_arrow.png", 2, 0, 12, 16, 22, 16, 9, 12));
+        arrowExtend.x = displayItem.x + 42;
+        arrowExtend.y = displayItem.y + 2;
+        elements.add(arrowExtend);
+
+        let cast = new TinkerItemElement("tconstruct:tool_binding_cast");
+        cast.x = arrowExtend.x + 9;
+        cast.y = displayItem.y;
+        cast.tooltip = JavaUtils.ArrayList["of(java.lang.Object[])"]([
+            Component.translatable("book.kubejs.material.recipes.casting.cast")
+        ]);
+        elements.add(cast);
+        
+        let arrow = BookElement.image(new ImageData("jei:textures/jei/atlas/gui/recipe_arrow.png", 2, 0, 20, 16, 22, 16, 15, 12));
+        arrow.x = cast.x + 16;
+        arrow.y = arrowExtend.y;
+        elements.add(arrow);
+
+        elements.add(RecipeDisplay.materialValueIndicator(recipe.getOutput().getVariant(), 1, arrow.x + 21, cast.y));
+
+        return 18;
     }
 };
-
-    // /** @constant */BEGIN_X: 0,
-    // /** @constant */BEGIN_Y: 18,
-
-    // /**
-    //  * @type {(elements: Internal.ArrayList<Internal.BookElement>, recipe: Internal.MaterialRecipe) => void}
-    //  */
-    // partBuilder: undefined

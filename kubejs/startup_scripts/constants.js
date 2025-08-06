@@ -29,6 +29,7 @@ const LivingEntity = Java.loadClass("net.minecraft.world.entity.LivingEntity");
 const Player = Java.loadClass("net.minecraft.world.entity.player.Player");
 const Entity = Java.loadClass("net.minecraft.world.entity.Entity");
 const EquipmentSlot = Java.loadClass("net.minecraft.world.entity.EquipmentSlot");
+const ItemStack = Java.loadClass("net.minecraft.world.item.ItemStack");
 const ChatFormatting = Java.loadClass("net.minecraft.ChatFormatting");
 const LanguageManager = Java.loadClass("net.minecraft.client.resources.language.LanguageManager");
 
@@ -58,7 +59,8 @@ const PageDataJS = Java.loadClass("pelemenguin.mantlejs.content.book.data.PageDa
 const MantleJSTransformer = Java.loadClass("pelemenguin.mantlejs.content.book.transformer.MantleJSTransformer");
 
 const JavaUtils = {
-    ArrayList: Java.loadClass("java.util.ArrayList")
+    ArrayList: Java.loadClass("java.util.ArrayList"),
+    Collectors: Java.loadClass("java.util.stream.Collectors")
 };
 
 // ---------- Utils ---------- //

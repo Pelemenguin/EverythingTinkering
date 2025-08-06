@@ -190,6 +190,13 @@
     "book.kubejs.material.recipes.count": "共 %s 个配方",
     "book.kubejs.material.recipes.page": "第 %1$s / %2$s 页",
 
+    "book.kubejs.material.recipes.casting.name": "浇铸",
+    "book.kubejs.material.recipes.casting.description": "能通过在铸模中浇铸流体制作",
+    "book.kubejs.material.recipes.casting.fluid": "%1$smB的%2$s",
+    "book.kubejs.material.recipes.casting.amount": "%smB",
+    "book.kubejs.material.recipes.casting.fluid.unknown": "未知流体",
+    "book.kubejs.material.recipes.casting.cast": "对应部件的铸模",
+
     "book.kubejs.material.recipes.part_builder.name": "部件制造台",
     "book.kubejs.material.recipes.part_builder.description": "能在部件制造台中制作",
     "book.kubejs.material.recipes.part_builder.description.uncraftable": "不能在部件制造台中制作，仅用于工具修复",

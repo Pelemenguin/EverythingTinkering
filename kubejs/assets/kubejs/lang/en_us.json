@@ -190,6 +190,13 @@
     "book.kubejs.material.recipes.part_builder.name": "Part Builder",
     "book.kubejs.material.recipes.part_builder.description": "Craftable in the Part Builder",
     "book.kubejs.material.recipes.part_builder.description.uncraftable": "Not craftable in the Part Builder. Used exclusively for tool repair",
+
+    "book.kubejs.material.recipes.casting.name": "Casting",
+    "book.kubejs.material.recipes.casting.description": "Craftable by pouring fluid into casts",
+    "book.kubejs.material.recipes.casting.fluid": "%1$smB of %2$s",
+    "book.kubejs.material.recipes.casting.amount": "%smB",
+    "book.kubejs.material.recipes.casting.fluid.unknown": "Unknown Fluid",
+    "book.kubejs.material.recipes.casting.cast": "Cast for corresponding part",
     
     "book.kubejs.material.suggestion.missing.name": "Missing",
     "book.kubejs.material.suggestion.missing.description": "Your modpack developer has forgotten to fill this suggestion. Please submit an Issue on GitHub!",
