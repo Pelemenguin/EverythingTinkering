@@ -9,9 +9,14 @@
  * ### 介绍
  * 对目标周围 3x3x3 范围内的实体造成伤害。
  * - - - - -
+ * @copyright Pelemenguin 2025
+ * @license LGPL-3.0-or-later
+ * This file is part of EverythingTinkering.
+ * Full license see file `COPYING.LESSER`
+ * - - - - -
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ * - - - - -
  * @author Pelemenguin
- * @license CC-BY-NC-SA-4.0
- * @todo Modify this
  */
 
 /* global

@@ -9,8 +9,14 @@
  * ### 描述
  * 消耗更多耐久并在暴击时造成更多伤害。
  * - - - - -
+ * @copyright Pelemenguin 2025
+ * @license LGPL-3.0-or-later
+ * This file is part of EverythingTinkering.
+ * Full license see file `COPYING.LESSER`
+ * - - - - -
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ * - - - - -
  * @author Pelemenguin
- * @license CC-BY-NC-SA-4.0
  */
 
 /* global

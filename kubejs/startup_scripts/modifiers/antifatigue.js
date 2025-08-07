@@ -10,8 +10,14 @@
  * ### 描述
  * 抵消**挖掘疲劳**带来的影响（最多抵消和特性等级相同级别的**挖掘疲劳**）
  * - - - - -
+ * @copyright Pelemenguin 2025
+ * @license LGPL-3.0-or-later
+ * This file is part of EverythingTinkering.
+ * Full license see file `COPYING.LESSER`
+ * - - - - -
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ * - - - - -
  * @author Pelemenguin
- * @license CC-BY-NC-SA-4.0
  */
 
 /* global

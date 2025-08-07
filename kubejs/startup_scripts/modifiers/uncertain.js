@@ -9,8 +9,14 @@
  * ### 描述
  * 有概率将你挖的方块后面的岩石替换为矿物。
  * - - - - -
- * @author Pelemenguin | Morty-Tang
- * @license CC-BY-NC-SA-4.0
+ * @copyright Pelemenguin 2025
+ * @license LGPL-3.0-or-later
+ * This file is part of EverythingTinkering.
+ * Full license see file `COPYING.LESSER`
+ * - - - - -
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ * - - - - -
+ * @author Pelemenguin
  */
 
 /* global
