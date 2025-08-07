@@ -10,7 +10,7 @@
 - [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) *2001.6.5-build.16* by LatvianModder
 - [LootJS: KubeJS Addon](https://www.curseforge.com/minecraft/mc-mods/lootjs) *1.20.1-2.13.0* by Lytho
 - [Mantle](https://www.curseforge.com/minecraft/mc-mods/mantle) *1.11.79* by mDiyo
-- [MantleJS](https://www.curseforge.com/minecraft/mc-mods/mantlejs) *0.1-alpha.2* by Pelemenguin
+- [MantleJS](https://www.curseforge.com/minecraft/mc-mods/mantlejs) *0.1-alpha.3* by Pelemenguin
 - [Moonlight Lib](https://www.curseforge.com/minecraft/mc-mods/selene) *1.20-2.14.1* by MehVahdJukaar
 - [Rhino](https://www.curseforge.com/minecraft/mc-mods/rhino) *2001.2.3-build.10* by LatvianModder
 - [ProbeJS](https://www.curseforge.com/minecraft/mc-mods/probejs) *6.0.1* by Amygdaloideae
