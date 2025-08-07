@@ -20,6 +20,15 @@
  * `IGNITING_FIRE_PERCENTAGE_PER_LEVEL` = `0.25`
  * - 每级的着火时间衰减。
  * - 默认每级多保留 25% 着火时间。
+ * - - - - -
+ * @copyright Pelemenguin 2025
+ * @license LGPL-3.0-or-later
+ * This file is part of EverythingTinkering.
+ * Full license see file `COPYING.LESSER`
+ * - - - - -
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ * - - - - -
+ * @author Pelemenguin
  */
 
 /* global

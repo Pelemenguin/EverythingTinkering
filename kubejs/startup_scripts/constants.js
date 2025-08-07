@@ -5,9 +5,15 @@
  * - Because Rhino made `const`-defined objects global, use a special JS file to create these.
  * - 由于 Rhino 使得 `const` 定义的对象全局可访问，这里使用一个特殊文件来创建。
  * - - - - -
+ * @copyright Pelemenguin 2025
+ * @license LGPL-3.0-or-later
+ * This file is part of EverythingTinkering.
+ * Full license see file `COPYING.LESSER`
+ * - - - - -
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ * - - - - -
  * @author Pelemenguin
- * @license CC-BY-NC-SA-4.0
- */ /** */
+ */
 
 /* eslint-disable no-unused-vars */
 

@@ -18,8 +18,15 @@
  * - 苹果
  * - 密渍苹果
  * - 宝钻苹果
+ * - - - - -
+ * @copyright Pelemenguin 2025
+ * @license LGPL-3.0-or-later
+ * This file is part of EverythingTinkering.
+ * Full license see file `COPYING.LESSER`
+ * - - - - -
+ * SPDX-License-Identifier: LGPL-3.0-or-later
+ * - - - - -
  * @author Pelemenguin
- * @license CC-BY-NC-SA-4.0
  */
 
 /* global
