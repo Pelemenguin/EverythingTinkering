@@ -41,7 +41,6 @@ const DetailedBase = {
      * @param {(infer R)[]} recipes
      * @ param {(elements: Internal.List<Internal.BookElement>, recipe: (infer R)) => number} recipeDrawer
      * @param {string} recipeDrawer
-     * @param {Internal.ArrayList<Internal.BookElement>[]}
      * - - - - -
      * @returns {{newH: number, newRecipeCount: number}}
      */
@@ -78,13 +77,6 @@ const DetailedBase = {
      * @param {number} curPage
      */
     drawRecipe: (elements, materialId, curPage) => {
-        let partBuilderRecipes = MaterialRecipesHelper.getPartBuilderRecipeOf(materialId);
-        // let materialCastingRecipes = MaterialCastingLookup.getCastingFluids(MaterialRecipeCache.getVariants(materialId));
-        /** @type {Internal.Map<Internal.MaterialVariantId, Internal.MaterialFluidRecipe[]>} */
-        let materialCastingRecipes = Utils.newMap();
-        MaterialRecipeCache.getVariants(materialId).forEach(variant => {
-            materialCastingRecipes.put(variant, MaterialCastingLookup.getCastingFluids(variant).toArray());
-        });
         let displayer = new RecipeDisplay(undefined, undefined);
         let h = 0;
         /** @type {Internal.ArrayList<Internal.BookElement>[]} */
@@ -92,6 +84,7 @@ const DetailedBase = {
         let totalRecipes = 0;
 
         // Draw Part Builder recipes
+        let partBuilderRecipes = MaterialRecipesHelper.getPartBuilderRecipeOf(materialId);
         if (partBuilderRecipes != null) {
             partBuilderRecipes.forEach((variantId, recipes) => {
                 let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, recipes, "partBuilder");
@@ -101,11 +94,34 @@ const DetailedBase = {
         }
 
         // Draw casting recipes
+        /** @type {Internal.Map<Internal.MaterialVariantId, Internal.MaterialFluidRecipe[]>} */
+        let materialCastingRecipes = Utils.newMap();
+        MaterialRecipeCache.getVariants(materialId).forEach(variant => {
+            materialCastingRecipes.put(variant, MaterialCastingLookup.getCastingFluids(variant).toArray());
+        });
         materialCastingRecipes.forEach((variant, recipes) => {
             let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, recipes, "casting");
             h = newH;
             totalRecipes = newRecipeCount;
-        }); 
+        });
+
+        // Draw composite recipes
+        /** @type {number[]} */
+        let drawnCompositeRecipes = [];
+        MaterialRecipeCache.getVariants(materialId).forEach(variant => {
+            let recipes = MaterialCastingLookup.getCompositeFluids(variant).toArray().filter((/** @type {Internal.MaterialFluidRecipe} */ recipe) => {
+                if (recipe.getFluids().isEmpty()) return false;
+                let hashCode = recipe.hashCode();
+                let result = drawnCompositeRecipes.indexOf(hashCode) == -1;
+                if (result) drawnCompositeRecipes.push(hashCode);
+                return result;
+            });
+            let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, recipes, "composite");
+            recipes = drawnCompositeRecipes.concat(recipes);
+            h = newH;
+            totalRecipes = newRecipeCount;
+        });
+
         elements.addAll(recipePages[0]);
 
         let currentRecipePageIndicator = DetailedBase.updateRecipePageIndicator(totalRecipes, 1, recipePages.length);

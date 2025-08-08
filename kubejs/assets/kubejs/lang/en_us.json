@@ -197,6 +197,12 @@
     "book.kubejs.material.recipes.casting.amount": "%smB",
     "book.kubejs.material.recipes.casting.fluid.unknown": "Unknown Fluid",
     "book.kubejs.material.recipes.casting.cast": "Cast for corresponding part",
+
+    "book.kubejs.material.recipes.composite.name": "Composite",
+    "book.kubejs.material.recipes.composite.description": "Craftable by pouring fluid onto parts of other materials",
+    "book.kubejs.material.recipes.composite.fluid": "%1$smB of %2$s",
+    "book.kubejs.material.recipes.composite.amount": "%smB",
+    "book.kubejs.material.recipes.composite.fluid.unknown": "Unknown Fluid",
     
     "book.kubejs.material.suggestion.missing.name": "Missing",
     "book.kubejs.material.suggestion.missing.description": "Your modpack developer has forgotten to fill this suggestion. Please submit an Issue on GitHub!",
