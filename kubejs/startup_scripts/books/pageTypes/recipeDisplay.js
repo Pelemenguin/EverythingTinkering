@@ -54,9 +54,7 @@ RecipeDisplay.materialValueIndicator = (variantId, value, x, y) => {
     result.x = x;
     result.y = y;
     result.tooltip = Utils.newList();
-    // let outputName = 'material.' + recipe.getMaterial().getVariant().getSuffix().replace('_', '.');
     let translation = 'material.' + variantId.toString().replace(':', '.').replace('#', '.');
-    // output.tooltip.add(Component.literal(recipe.getValue()).append(Component.literal(' ')).append(Component.translatable(outputName).underlined()));
     result.tooltip.add(Component.translatable("book.kubejs.material.recipes.material_value_indicator", [Component.literal(value.toFixed()), RecipeDisplay.translationFallback(translation).underlined()]));
     return result;
 };
@@ -101,7 +99,6 @@ RecipeDisplay.prototype = {
         elements.add(pattern);
 
         let ingredient = new TinkerItemElement(recipe.getIngredient().first.withCount(recipe.needed));
-        // ingredient.itemCycle = NonNullList["of(java.lang.Object,java.lang.Object[])"](Item.of("minecraft:air"), recipe.ingredient.displayStacks.toArray()); // recipe.ingredient.displayStacks.toList();
         ingredient.x = pattern.x + 18;
         ingredient.y = pattern.y;
         elements.add(ingredient);

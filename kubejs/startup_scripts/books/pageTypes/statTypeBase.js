@@ -28,14 +28,6 @@
     TinkerItemElement
 */
 
-// eslint-disable-next-line no-unused-vars
-const MaterialPreferenceDisplay = {
-    durability: {
-        item: Item.of("tconstruct:plate_shield", {tic_materials: ["tconstruct:iron", "tconstruct:wood"]}),
-        color: "#606060"
-    }
-};
-
 let StatRepresentaticeItem = {
     "tconstruct:head": "tconstruct:pick_head",
     "tconstruct:handle": "tconstruct:tool_handle",

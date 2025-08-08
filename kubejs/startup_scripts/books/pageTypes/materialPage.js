@@ -22,7 +22,8 @@
     BookElement
     BookTextComponentData
     DetailedBase
-    BookTextData
+    MaterialVariantId
+    TinkerTools
 */
 
 /**
@@ -64,15 +65,25 @@ MantleJSEvents.pageTypeRegistry(event => {
             DetailedBase.drawRecipe(elements, materialId, 0);
 
             elements.add(isEncyclopedia
-                ? BookElement.text(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
-                    BookTextData.fromComponent(Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.encyclopedia').darkGray())[0]
+                ? BookElement.textComponent(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
+                    BookTextComponentData.of(Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.encyclopedia').darkGray())[0]
                 )
-                : BookElement.text(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
-                    BookTextData.fromComponent(Component.literal('"').darkGray())[0],
-                    BookTextData.fromComponent(Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.flavor').italic().darkGray())[0],
-                    BookTextData.fromComponent(Component.literal('"').darkGray())[0]
+                : BookElement.textComponent(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
+                    BookTextComponentData.of(Component.translatable("book.kubejs.material.flavor_format", Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.flavor').italic()).darkGray())
                 )
             );
+
+            DetailedBase.drawExampleTools(elements, materialId, MaterialVariantId["tryParse(java.lang.String)"]("tconstruct:wood"), [
+                TinkerTools.pickaxe,
+                TinkerTools.handAxe,
+                TinkerTools.mattock,
+                TinkerTools.kama,
+                TinkerTools.sword,
+                TinkerTools.dagger,
+                TinkerTools.sledgeHammer,
+                TinkerTools.excavator,
+                TinkerTools.broadAxe
+            ]);
 
         });
 });

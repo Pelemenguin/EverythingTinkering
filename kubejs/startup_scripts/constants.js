@@ -46,12 +46,15 @@ const ContentPageIconList$PageWithIcon = Java.loadClass("slimeknights.mantle.cli
 
 const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialId');
 const MaterialVariant = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialVariant');
+const MaterialVariantId = Java.loadClass("slimeknights.tconstruct.library.materials.definition.MaterialVariantId");
 const TinkerBook = Java.loadClass("slimeknights.tconstruct.library.client.book.TinkerBook");
 const MaterialRegistry = Java.loadClass('slimeknights.tconstruct.library.materials.MaterialRegistry');
 const MaterialStatsId = Java.loadClass("slimeknights.tconstruct.library.materials.stats.MaterialStatsId");
 const ModifierId = Java.loadClass('slimeknights.tconstruct.library.modifiers.ModifierId');
+const ToolMaterialHook = Java.loadClass("slimeknights.tconstruct.library.tools.definition.module.material.ToolMaterialHook");
 const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ToolStack');
 const MaterialNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT');
+const MaterialNBTBuilder = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT$Builder');
 const ModifierNBT = Java.loadClass("slimeknights.tconstruct.library.tools.nbt.ModifierNBT");
 const ToolStatId = Java.loadClass("slimeknights.tconstruct.library.tools.stat.ToolStatId");
 const ToolStats = Java.loadClass('slimeknights.tconstruct.library.tools.stat.ToolStats');
@@ -60,6 +63,7 @@ const TinkerItemElement = Java.loadClass("slimeknights.tconstruct.library.client
 const MaterialCastingLookup = Java.loadClass("slimeknights.tconstruct.library.recipe.casting.material.MaterialCastingLookup");
 const MaterialRecipeCache = Java.loadClass("slimeknights.tconstruct.library.recipe.material.MaterialRecipeCache");
 const TinkerToolParts = Java.loadClass("slimeknights.tconstruct.tools.TinkerToolParts");
+const TinkerTools = Java.loadClass("slimeknights.tconstruct.tools.TinkerTools");
 
 const PageDataJS = Java.loadClass("pelemenguin.mantlejs.content.book.data.PageDataJS");
 const MantleJSTransformer = Java.loadClass("pelemenguin.mantlejs.content.book.transformer.MantleJSTransformer");

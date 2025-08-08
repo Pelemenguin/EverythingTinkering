@@ -180,6 +180,9 @@
         "_comment_book": " ----- Book ----- ",
     
     "book.kubejs.material.title.general.1": "Tier 1 General Material",
+
+    "book.kubejs.material.flavor_format": "\"%s\"",
+    "book.kubejs.material.tool.missing": "No parts of %1$s can use %2$s",
     
     "book.kubejs.material.recipes.material_value_indicator": "%1$s Material Value of %2$s",
 

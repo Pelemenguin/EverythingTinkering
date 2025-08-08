@@ -26,6 +26,13 @@
     BookScreen
     MaterialRecipeCache
     MaterialCastingLookup
+    ToolStack
+    TinkerItemElement
+    MaterialNBT
+    ToolMaterialHook
+    ItemStack
+    MaterialVariantId
+    JavaUtils
 */
 
 const DetailedBase = {
@@ -199,8 +206,46 @@ const DetailedBase = {
     },
 
     /**
-     * 
-     * 
-     */    
+     * @param {Internal.ArrayList<Internal.BookElement>} elements
+     * @param {Internal.MaterialId} materialId
+     * @param {Internal.MaterialVariantId} defaultMaterial
+     * @param {Internal.ItemObject<Internal.ModifiableItem>[]} tools
+     */
+    drawExampleTools: (elements, materialId, defaultMaterial, tools) => {
+        let x = BookScreen.PAGE_WIDTH - 16;
+        tools.forEach((tool, index) => {
+            let item = tool.getOrNull();
+            if (item == null) return;
+            let y = 18 + index * 16;
+
+            let materialBuilder = MaterialNBT.builder();
+
+            /** @type {Internal.List<Internal.MaterialStatsId>} */
+            let requirements = ToolMaterialHook.stats(item.getToolDefinition());
+            let anyUsed = false;
+            requirements.forEach(part => {
+                if (part.canUseMaterial(materialId)) {
+                    materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](MaterialVariantId["tryParse(java.lang.String)"](materialId.toString()));
+                    anyUsed = true;
+                } else {
+                    materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](defaultMaterial);
+                }
+            });
+
+            let itemStack;
+            if (anyUsed) itemStack = ToolStack.createTool(item, item.getToolDefinition(), materialBuilder.build()).createStack();
+            else itemStack = new ItemStack(item, 1, {});
+            let itemElement = new TinkerItemElement(itemStack);
+            itemElement.x = x;
+            itemElement.y = y;
+            if (!anyUsed) {
+                let translation = 'material.' + materialId.toString().replace(':', '.');
+                itemElement.tooltip = JavaUtils.ArrayList["of(java.lang.Object[])"]([
+                    Component.translatable("book.kubejs.material.tool.missing", itemStack.getHoverName(), Component.translatable(translation).underlined()).gray()
+                ]);
+            }
+            elements.add(itemElement);
+        });
+    }
 
 };
