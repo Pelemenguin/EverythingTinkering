@@ -32,17 +32,6 @@ const KubeJSTransformers = {
     MATERIAL_TRANSFORMER: new MantleJSTransformer("kubejs:material_transformer")
 };
 
-//   public static void addPages(SectionData data, List<ContentPageIconList> indexList, Collection<PageWithIcon> pages) {
-//     Iterator<ContentPageIconList> indexes = indexList.iterator();
-//     ContentPageIconList overview = indexes.next();
-//     for (PageWithIcon page : pages) {
-//       data.pages.add(page.page);
-//       while (!overview.addLink(page.icon, Component.literal(page.page.getTitle()), page.page)) {
-//         overview = indexes.next();
-//       }
-//     }
-//   }
-
 /**
  * 
  * @param {Internal.SectionDataJS} section 
@@ -79,8 +68,8 @@ MantleJSEvents.transformerRegistry(event => {
             let sections = book.getSections().toArray();
 
             sections.forEach(section => {
-                if (!section.extraData.containsKey(ResourceLocation.tryBuild("kubejs", "general_materials"))) return;
-                let tier = section.extraData.get(ResourceLocation.tryBuild("kubejs", "general_materials"));
+                if (!section.extraData.containsKey(ResourceLocation.tryBuild("kubejs", "melee_harvest_materials"))) return;
+                let tier = section.extraData.get(ResourceLocation.tryBuild("kubejs", "melee_harvest_materials"));
                 let isEncyclopedia = section.extraData.get(ResourceLocation.tryBuild("kubejs", "is_encyclopedia"));
 
                 /** @type {Internal.IMaterial[]} */
@@ -99,7 +88,7 @@ MantleJSEvents.transformerRegistry(event => {
                     return result;
                 });
 
-                let contentTablePages = ContentPageIconList.getPagesNeededForItemCount(materials.length, section.origin, Component.translatable(`book.kubejs.material.title.general.${tier}`).getString(), "");
+                let contentTablePages = ContentPageIconList.getPagesNeededForItemCount(materials.length, section.origin, section.title, "");
                 let contentTablePageCount = contentTablePages.length;
 
                 let firstPageNumber = book.getFirstPageNumber(section, null);
@@ -113,30 +102,15 @@ MantleJSEvents.transformerRegistry(event => {
                 let rightPages = [];
                 materials.forEach(material => {
                     let matId = material.identifier;
-                    // section.addPage(page => {
-                    //     page.setCustomType("kubejs:general_material_page_left", {
-                    //         materialId: matId
-                    //     });
-                    //     page.setName(`${strMatId}_left`);
-                    //     pages.push(new ContentPageIconList$PageWithIcon(BookElement.item(0, 0, 1, RepresentativeItems.get(matId.toString())), page.origin));
-                    // });
-                    // section.addPage(page => {
-                    //     page.setCustomType("kubejs:general_material_page_right", {
-                    //         materialId: matId,
-                    //         isEncyclopedia: false
-                    //     });
-                    //     page.setName(`${strMatId}_right`);
-                    // });
-                    let leftPage = PageDataJS.createNewCustom("kubejs:general_material_page_left", {
+                    let leftPage = PageDataJS.createNewCustom("kubejs:melee_harvest_material_page_left", {
                         materialId: matId
                     });
                     leftPage.setParent(section);
                     leftPage.setName(`${matId.toString()}`);
-                    // pages.push(new ContentPageIconList$PageWithIcon(BookElement.item(0, 0, 1, RepresentativeItems.get(matId.toString())), leftPage.origin));
                     leftPages.push(leftPage);
                     icons.push(BookElement.item(0, 0, 1, RepresentativeItems.get(matId.toString())));
 
-                    let rightPage = PageDataJS.createNewCustom("kubejs:general_material_page_right", {
+                    let rightPage = PageDataJS.createNewCustom("kubejs:melee_harvest_material_page_right", {
                         materialId: matId,
                         isEncyclopedia: isEncyclopedia
                     });
@@ -144,14 +118,6 @@ MantleJSEvents.transformerRegistry(event => {
                     rightPage.setName(`${matId.toString()}.right`);
                     rightPages.push(rightPage);
                 });
-
-                // ContentPageIconList.addPages(section.origin, contentTablePages, JavaUtils.ArrayList["of(java.lang.Object[])"](pages));
-
-                // let i = contentTablePageCount + 1;
-                // rightPages.forEach(page => {
-                //     section.addRawPage(i, page);
-                //     i += 2;
-                // });
 
                 addPages(section, contentTablePages.toArray(), icons, leftPages, rightPages);
 

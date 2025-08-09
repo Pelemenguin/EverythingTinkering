@@ -33,6 +33,7 @@
     ItemStack
     MaterialVariantId
     JavaUtils
+    MaterialSuggestions
 */
 
 const DetailedBase = {
@@ -246,6 +247,47 @@ const DetailedBase = {
             }
             elements.add(itemElement);
         });
+    },
+
+    /**
+     * - Page builder base.
+     * - 基类书页构建器。
+     * - - - - -
+     * @param {Internal.ArrayList<Internal.BookElement>} elements
+     * @param {Internal.BookDataJS} book
+     * @param {BookArguments.MaterialPageRight} pageArguments
+     * @param {{
+     *     tools: Internal.ItemObject<Internal.ModifiableItem>[]
+     * }} displayToolArguments
+     */
+    build: (elements, book, pageArguments, displayToolArguments) => {
+
+        let {
+            materialId,
+            isEncyclopedia
+        } = pageArguments;
+        
+        let [usage, multiplier] = MaterialSuggestions.getUsage(materialId.toString());
+        elements.add(MaterialSuggestions.getElement(materialId.toString(), BookScreen.PAGE_WIDTH - 18, 0));
+        let usageComponent = Component.literal(multiplier + '').color(MaterialSuggestions.getColor(usage.toLowerCase())).bold(true);
+        
+        let usageWidth = book.fontRenderer.width(usageComponent.getString());
+        let usageTextCompData = BookTextComponentData.of(usageComponent);
+        usageTextCompData.scale = 1.2;
+        elements.add(BookElement.textComponent(BookScreen.PAGE_WIDTH - 22 - usageWidth * 1.2, 2, BookScreen.PAGE_WIDTH, 9, usageTextCompData));
+
+        DetailedBase.drawRecipe(elements, materialId, 0);
+
+        elements.add(isEncyclopedia
+            ? BookElement.textComponent(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
+                BookTextComponentData.of(Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.encyclopedia').darkGray())[0]
+            )
+            : BookElement.textComponent(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
+                BookTextComponentData.of(Component.translatable("book.kubejs.material.flavor_format", Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.flavor').italic()).darkGray())
+            )
+        );
+
+        DetailedBase.drawExampleTools(elements, materialId, MaterialVariantId["tryParse(java.lang.String)"]("tconstruct:wood"), displayToolArguments.tools);
     }
 
 };

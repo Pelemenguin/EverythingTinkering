@@ -15,15 +15,9 @@
 
 /* global
     MantleJSEvents
-    StatTypeBase
-    MaterialSuggestions
-    BookScreen
-    Component
-    BookElement
-    BookTextComponentData
     DetailedBase
-    MaterialVariantId
     TinkerTools
+    StatTypeBase
 */
 
 /**
@@ -33,57 +27,27 @@
  */
 
 MantleJSEvents.pageTypeRegistry(event => {
-    event.create("kubejs:general_material_page_left")
+    event.create("kubejs:melee_harvest_material_page_left")
         .buildPage((/**@type {BookArguments.MaterialPageLeft}*/args, book, elements/*, rightSide*/) => {
-
-            let {
-                materialId
-            } = args;
-
-            StatTypeBase.createTitle(elements, materialId);
-            StatTypeBase.createStats(elements, 20, materialId, ["tconstruct:head", "tconstruct:handle", "tconstruct:binding"]);
-
+            StatTypeBase.build(elements, book, args, {
+                stats: ["tconstruct:head", "tconstruct:handle", "tconstruct:binding"]
+            });
         });
     
-    event.create("kubejs:general_material_page_right")
+    event.create("kubejs:melee_harvest_material_page_right")
         .buildPage((/**@type {BookArguments.MaterialPageRight}*/args, book, elements) => {
-
-            let {
-                materialId,
-                isEncyclopedia
-            } = args;
-            
-            let [usage, multiplier] = MaterialSuggestions.getUsage(materialId.toString());
-            elements.add(MaterialSuggestions.getElement(materialId.toString(), BookScreen.PAGE_WIDTH - 18, 0));
-            let usageComponent = Component.literal(multiplier + '').color(MaterialSuggestions.getColor(usage.toLowerCase())).bold(true);
-            
-            let usageWidth = book.fontRenderer.width(usageComponent.getString());
-            let usageTextCompData = BookTextComponentData.of(usageComponent);
-            usageTextCompData.scale = 1.2;
-            elements.add(BookElement.textComponent(BookScreen.PAGE_WIDTH - 22 - usageWidth * 1.2, 2, BookScreen.PAGE_WIDTH, 9, usageTextCompData));
-
-            DetailedBase.drawRecipe(elements, materialId, 0);
-
-            elements.add(isEncyclopedia
-                ? BookElement.textComponent(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
-                    BookTextComponentData.of(Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.encyclopedia').darkGray())[0]
-                )
-                : BookElement.textComponent(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
-                    BookTextComponentData.of(Component.translatable("book.kubejs.material.flavor_format", Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.flavor').italic()).darkGray())
-                )
-            );
-
-            DetailedBase.drawExampleTools(elements, materialId, MaterialVariantId["tryParse(java.lang.String)"]("tconstruct:wood"), [
-                TinkerTools.pickaxe,
-                TinkerTools.handAxe,
-                TinkerTools.mattock,
-                TinkerTools.kama,
-                TinkerTools.sword,
-                TinkerTools.dagger,
-                TinkerTools.sledgeHammer,
-                TinkerTools.excavator,
-                TinkerTools.broadAxe
-            ]);
-
+            DetailedBase.build(elements, book, args, {
+                tools: [
+                    TinkerTools.pickaxe,
+                    TinkerTools.handAxe,
+                    TinkerTools.mattock,
+                    TinkerTools.kama,
+                    TinkerTools.sword,
+                    TinkerTools.dagger,
+                    TinkerTools.sledgeHammer,
+                    TinkerTools.excavator,
+                    TinkerTools.broadAxe
+                ]
+            });
         });
 });

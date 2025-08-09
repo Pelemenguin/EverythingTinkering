@@ -28,7 +28,7 @@
     TinkerItemElement
 */
 
-let StatRepresentaticeItem = {
+let StatRepresentativeItem = {
     "tconstruct:head": "tconstruct:pick_head",
     "tconstruct:handle": "tconstruct:tool_handle",
     "tconstruct:binding": "tconstruct:tool_binding"
@@ -39,7 +39,6 @@ let StatRepresentaticeItem = {
  * @param {number} y
  * @param {Internal.MaterialId} materialId
  * @param {string} statId
- * @param {Internal.Font} font
  * - - - - -
  * @returns {number}
  */
@@ -53,10 +52,12 @@ let writeStat = (elements, y, materialId, statId) => {
 
     let yIncresement = 18;
 
-    let reprItem = Item.of(StatRepresentaticeItem[statId], 1, {Material: materialId.toString()});
+    let reprItem = Item.of(StatRepresentativeItem[statId], 1, {Material: materialId.toString()});
     let itemElement = new TinkerItemElement(reprItem);
-    itemElement.y = y + 1;
-    itemElement.scale = 0.5;
+    itemElement.y = y;
+    itemElement.scale(0.5);
+    itemElement.width = 8;
+    itemElement.width = 8;
     elements.add(itemElement);
 
     let stats = statsOptional.get();
@@ -127,7 +128,6 @@ let writeTraitDesc = (traits) => {
     return result;
 };
 
-// eslint-disable-next-line no-unused-vars
 const StatTypeBase = {
 
     /**
@@ -172,6 +172,28 @@ const StatTypeBase = {
         });
 
         return curY != y;
+    },
+
+    /**
+     * - Stat page builder base.
+     * - 属性书页构建器基类。
+     * - - - - -
+     * @param {Internal.ArrayList<Internal.BookElement>} elements
+     * @param {Internal.BookDataJS} book
+     * @param {BookArguments.MaterialPageLeft} pageArguments
+     * @param {{
+     *     stats: string[]
+     * }} statArguments
+     */
+    build: (elements, book, pageArguments, statArguments) => {
+
+        let {
+            materialId
+        } = pageArguments;
+
+        StatTypeBase.createTitle(elements, materialId);
+        StatTypeBase.createStats(elements, 20, materialId, statArguments.stats);
+
     }
 
 };

@@ -7,10 +7,10 @@
         }
     },
     {
-        "name": "kubejs_general_materials",
+        "name": "melee_harvest_materials",
         "data": "no-load",
         "extraData": {
-            "kubejs:general_materials": 1
+            "kubejs:melee_harvest_materials": 1
         },
         "icon": {
             "item": {
