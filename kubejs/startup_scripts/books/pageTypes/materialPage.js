@@ -50,4 +50,21 @@ MantleJSEvents.pageTypeRegistry(event => {
                 ]
             });
         });
+    
+    event.create("kubejs:ranged_material_page_left")
+        .buildPage((/** @type {BookArguments.MaterialPageLeft} */ args, book, elements) => {
+            StatTypeBase.build(elements, book, args, {
+                stats: ["tconstruct:limb", "tconstruct:grip"]
+            });
+        });
+    
+    event.create("kubejs:ranged_material_page_right")
+        .buildPage((/**@type {BookArguments.MaterialPageRight}*/args, book, elements) => {
+            DetailedBase.build(elements, book, args, {
+                tools: [
+                    TinkerTools.crossbow,
+                    TinkerTools.longbow
+                ]
+            });
+        });
 });

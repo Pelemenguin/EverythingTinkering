@@ -50,7 +50,14 @@ RecipeDisplay.DEFAULT_Y = 18;
  * @returns {Internal.TinkerItemElement}
  */
 RecipeDisplay.materialValueIndicator = (variantId, value, x, y) => {
-    let result = new TinkerItemElement(TinkerToolParts.toolBinding.getOrNull().withMaterial(variantId).withCount(value));
+    let item = TinkerToolParts.toolBinding.getOrNull();
+    if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.toolHandle.getOrNull();
+    if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.pickHead.getOrNull();
+    if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.bowGrip.getOrNull();
+    if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.bowLimb.getOrNull();
+    if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.bowstring.getOrNull();
+    
+    let result = new TinkerItemElement(item.withMaterial(variantId).withCount(value));
     result.x = x;
     result.y = y;
     result.tooltip = Utils.newList();

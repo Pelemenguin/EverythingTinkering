@@ -55,6 +55,7 @@ let suggestions = {
     "kubejs:terracotta": ["DAMAGE", 0.1],
     "kubejs:lapis_lazuli": ["FUNCTIONAL", 0.8],
     "kubejs:andesite_alloy": ["DAMAGE", 0.7],
+    "tconstruct:bamboo": ["SPEED", 0.5],
     "tconstruct:chorus": ["FUNCTIONAL", 0.5],
     "tconstruct:string": ["DURABILITY", 0.5],
     "tconstruct:leather": ["DURABILITY", 0.5],
@@ -74,8 +75,8 @@ let reprItemElementBase = (item, id) => {
         result.x = x;
         result.y = y;
         result.tooltip = Utils.newList();
-        result.tooltip.add(Component.translatable(`book.kubejs.material.suggestion.${id}.name`).color(usageReprColor[id]).underlined());
-        result.tooltip.add(Component.translatable(`book.kubejs.material.suggestion.${id}.description`).gray());
+        result.tooltip.add(Component.translatable(`book.kubejs.material.suggestion.${id.toLowerCase()}.name`).color(usageReprColor[id]).underlined());
+        result.tooltip.add(Component.translatable(`book.kubejs.material.suggestion.${id.toLowerCase()}.description`).gray());
         return result;
     };
 };
@@ -93,7 +94,7 @@ let usageRepr = {
             "tconstruct:durability": 100.0
         },
         tic_display: true
-    }), "durability"),
+    }), "DURABILITY"),
 
     "DAMAGE": reprItemElementBase((multiplier) => Item.of("tconstruct:sword", 1, {
         Damage: NBT.intTag((1 - multiplier % 1) * 100),
@@ -106,7 +107,7 @@ let usageRepr = {
             "tconstruct:durability": 100.0
         },
         tic_display: true
-    }), "damage"),
+    }), "DAMAGE"),
 
     "FUNCTIONAL": reprItemElementBase((multiplier) => Item.of("tconstruct:kama", 1, {
         Damage: NBT.intTag((1 - multiplier % 1) * 100),
@@ -119,7 +120,7 @@ let usageRepr = {
             "tconstruct:durability": 100.0
         },
         tic_display: true
-    }), "functional"),
+    }), "FUNCTIONAL"),
 
     "ALTERNATIVE": reprItemElementBase((multiplier) => Item.of("tconstruct:flint_and_brick", 1, {
         Damage: NBT.intTag((1 - multiplier % 1) * 100),
@@ -127,7 +128,7 @@ let usageRepr = {
             "tconstruct:durability": 100.0
         },
         tic_display: true
-    }), "alternative"),
+    }), "ALTERNATIVE"),
 
     "NOT_RECOMMENDED": reprItemElementBase(() => Item.of("tconstruct:sword", 1, {
         Damage: NBT.intTag(0),
@@ -141,7 +142,7 @@ let usageRepr = {
             "tconstruct:durability": 100.0
         },
         tic_display: true
-    }), "not_recommended"),
+    }), "NOT_RECOMMENDED"),
 
     "MINING": reprItemElementBase((multiplier) => Item.of("tconstruct:pickaxe", 1, {
         Damage: NBT.intTag((1 - multiplier % 1) * 100),
@@ -154,18 +155,31 @@ let usageRepr = {
             "tconstruct:durability": 100.0
         },
         tic_display: true
-    }), "mining")
+    }), "MINING"),
+
+    "SPEED": reprItemElementBase((multiplier) => Item.of("tconstruct:plate_boots", 1, {
+        Damage: NBT.intTag((1 - multiplier % 1) * 100),
+        tic_materials: [
+            "tconstruct:cobalt",
+            "tconstruct:cobalt"
+        ],
+        tic_stats: {
+            "tconstruct:durability": 100.0
+        },
+        tic_display: true
+    }), "SPEED")
 
 };
 
 let usageReprColor = {
-    "missing": "#FF0000",
-    "durability": "#160075",
-    "damage": "#999999",
-    "functional": "#FFB9A8",
-    "alternative": "#383838",
-    "not_recommended": "#744E1C",
-    "mining": "#E77C56"
+    "MISSING": "#FF0000",
+    "DURABILITY": "#160075",
+    "DAMAGE": "#999999",
+    "FUNCTIONAL": "#FFB9A8",
+    "ALTERNATIVE": "#383838",
+    "NOT_RECOMMENDED": "#744E1C",
+    "MINING": "#E77C56",
+    "SPEED": "#0045C5"
 };
 
 const MaterialSuggestions = {
@@ -198,7 +212,7 @@ const MaterialSuggestions = {
     },
 
     /**
-     * @param {Annotation.MaterialUsage}
+     * @param {Annotation.MaterialUsage} usageId
      */
     getColor: (usageId) => {
         let color = usageReprColor[usageId];

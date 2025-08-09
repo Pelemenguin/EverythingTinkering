@@ -14,7 +14,6 @@
  */
 
 /* global
-    MaterialRecipesHelper
     RecipeDisplay
     Utils
     Client
@@ -91,20 +90,35 @@ const DetailedBase = {
         let recipePages = [Utils.newList()];
         let totalRecipes = 0;
 
+        /** @type {Internal.MaterialVariantId[]} */
+        let allVariants = MaterialRecipeCache.getVariants(materialId).toArray();
+        allVariants = allVariants.sort((a, b) => {
+            return a.getVariant() > b.getVariant() ? 1 : -1;
+        });
+
         // Draw Part Builder recipes
-        let partBuilderRecipes = MaterialRecipesHelper.getPartBuilderRecipeOf(materialId);
-        if (partBuilderRecipes != null) {
-            partBuilderRecipes.forEach((variantId, recipes) => {
-                let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, recipes, "partBuilder");
-                h = newH;
-                totalRecipes = newRecipeCount;
+        // let partBuilderRecipes = MaterialRecipesHelper.getPartBuilderRecipeOf(materialId);
+        let usedPartBuilderRecipes = [];
+        allVariants.forEach(variant => {
+            let recipes = [];
+            MaterialRecipeCache.getRecipes(variant).toArray().forEach((/** @type {Internal.MaterialRecipe} */ recipe) => {
+                let hash = (
+                    recipe.ingredient.itemIds.hashCode() + recipe.material.variant.hashCode() + recipe.needed + recipe.value
+                ) % 16777216;
+                if (usedPartBuilderRecipes.indexOf(hash) == -1) {
+                    usedPartBuilderRecipes.push(hash);
+                    recipes.push(recipe);
+                }
             });
-        }
+            let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, recipes, "partBuilder");
+            h = newH;
+            totalRecipes = newRecipeCount;
+        });
 
         // Draw casting recipes
         /** @type {Internal.Map<Internal.MaterialVariantId, Internal.MaterialFluidRecipe[]>} */
         let materialCastingRecipes = Utils.newMap();
-        MaterialRecipeCache.getVariants(materialId).forEach(variant => {
+        allVariants.forEach(variant => {
             materialCastingRecipes.put(variant, MaterialCastingLookup.getCastingFluids(variant).toArray());
         });
         materialCastingRecipes.forEach((variant, recipes) => {
@@ -116,7 +130,7 @@ const DetailedBase = {
         // Draw composite recipes
         /** @type {number[]} */
         let drawnCompositeRecipes = [];
-        MaterialRecipeCache.getVariants(materialId).forEach(variant => {
+        allVariants.forEach(variant => {
             let recipes = MaterialCastingLookup.getCompositeFluids(variant).toArray().filter((/** @type {Internal.MaterialFluidRecipe} */ recipe) => {
                 if (recipe.getFluids().isEmpty()) return false;
                 let hashCode = recipe.hashCode();
@@ -268,8 +282,8 @@ const DetailedBase = {
         } = pageArguments;
         
         let [usage, multiplier] = MaterialSuggestions.getUsage(materialId.toString());
-        elements.add(MaterialSuggestions.getElement(materialId.toString(), BookScreen.PAGE_WIDTH - 18, 0));
-        let usageComponent = Component.literal(multiplier + '').color(MaterialSuggestions.getColor(usage.toLowerCase())).bold(true);
+        elements.add(MaterialSuggestions.getElement(materialId.toString(), BookScreen.PAGE_WIDTH - 16, 0));
+        let usageComponent = Component.literal(multiplier + '').color(MaterialSuggestions.getColor(usage)).bold(true);
         
         let usageWidth = book.fontRenderer.width(usageComponent.getString());
         let usageTextCompData = BookTextComponentData.of(usageComponent);
@@ -280,7 +294,7 @@ const DetailedBase = {
 
         elements.add(isEncyclopedia
             ? BookElement.textComponent(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
-                BookTextComponentData.of(Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.encyclopedia').darkGray())[0]
+                BookTextComponentData.of(Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.encyclopedia').darkGray())
             )
             : BookElement.textComponent(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
                 BookTextComponentData.of(Component.translatable("book.kubejs.material.flavor_format", Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.flavor').italic()).darkGray())

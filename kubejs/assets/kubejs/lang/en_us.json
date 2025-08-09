@@ -226,6 +226,9 @@
     "book.kubejs.material.suggestion.mining.description": "Enhances excavation capabilities. Offers high mining speed, mining level, or other digging-related traits.",
 
     "book.kubejs.material.suggestion.durability.name": "Durability",
-    "book.kubejs.material.suggestion.durability.description": "Extends tool lifespan through durability enhancements or protective traits."
+    "book.kubejs.material.suggestion.durability.description": "Extends tool lifespan through durability enhancements or protective traits.",
+
+    "book.kubejs.material.suggestion.speed.name": "Speed",
+    "book.kubejs.material.suggestion.speed.description": "Improve your mining speed, attack speed, or movement speed."
 
 }

@@ -229,6 +229,9 @@
     "book.kubejs.material.suggestion.mining.description": "该材料可以帮助你挖掘，可能提供高挖掘速度，高挖掘等级，或者其它功能。",
 
     "book.kubejs.material.suggestion.durability.name": "耐久",
-    "book.kubejs.material.suggestion.durability.description": "该材料可以通过高耐久或保护性特性来延长你的工具寿命。"
+    "book.kubejs.material.suggestion.durability.description": "该材料可以通过高耐久或保护性特性来延长你的工具寿命。",
+
+    "book.kubejs.material.suggestion.speed.name": "速度",
+    "book.kubejs.material.suggestion.speed.description": "该材料可以提升挖掘速度、攻击速度或移动速度。"
     
 }

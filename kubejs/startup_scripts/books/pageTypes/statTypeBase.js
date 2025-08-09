@@ -31,7 +31,9 @@
 let StatRepresentativeItem = {
     "tconstruct:head": "tconstruct:pick_head",
     "tconstruct:handle": "tconstruct:tool_handle",
-    "tconstruct:binding": "tconstruct:tool_binding"
+    "tconstruct:binding": "tconstruct:tool_binding",
+    "tconstruct:limb": "tconstruct:bow_limb",
+    "tconstruct:grip": "tconstruct:bow_grip"
 };
 
 /**

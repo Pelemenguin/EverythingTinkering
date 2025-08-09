@@ -10,7 +10,11 @@
         "name": "melee_harvest_materials",
         "data": "no-load",
         "extraData": {
-            "kubejs:melee_harvest_materials": 1
+            "kubejs:material_tier": {
+                "type": "melee_harvest",
+                "tier": 1,
+                "isEncyclopedia": false
+            }
         },
         "icon": {
             "item": {
@@ -33,9 +37,10 @@
         "name": "ranged_materials",
         "data": "no-load",
         "extraData": {
-            "tconstruct:material_tier": {
-                "type": "tconstruct:ranged",
-                "tier": 1
+            "kubejs:material_tier": {
+                "type": "ranged",
+                "tier": 1,
+                "isEncyclopedia": false
             }
         },
         "icon": {

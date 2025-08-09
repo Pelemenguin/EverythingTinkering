@@ -32,6 +32,18 @@ const KubeJSTransformers = {
     MATERIAL_TRANSFORMER: new MantleJSTransformer("kubejs:material_transformer")
 };
 
+const PageType2ToolParts = {
+    "melee_harvest": [
+        MaterialStatsId.tryParse("tconstruct:head"),
+        MaterialStatsId.tryParse("tconstruct:handle"),
+        MaterialStatsId.tryParse("tconstruct:binding")
+    ],
+    "ranged": [
+        MaterialStatsId.tryParse("tconstruct:limb"),
+        MaterialStatsId.tryParse("tconstruct:grip")
+    ]
+};
+
 /**
  * 
  * @param {Internal.SectionDataJS} section 
@@ -68,19 +80,20 @@ MantleJSEvents.transformerRegistry(event => {
             let sections = book.getSections().toArray();
 
             sections.forEach(section => {
-                if (!section.extraData.containsKey(ResourceLocation.tryBuild("kubejs", "melee_harvest_materials"))) return;
-                let tier = section.extraData.get(ResourceLocation.tryBuild("kubejs", "melee_harvest_materials"));
-                let isEncyclopedia = section.extraData.get(ResourceLocation.tryBuild("kubejs", "is_encyclopedia"));
+                if (!section.extraData.containsKey(ResourceLocation.tryBuild("kubejs", "material_tier"))) return;
+                let data = section.extraData.get(ResourceLocation.tryBuild("kubejs", "material_tier")).getAsJsonObject();
+                let tier = data.get("tier").getAsInt();
+                let type = data.get("type").getAsString();
+
+                let isEncyclopedia = data.get("isEncyclopedia");
+                if (isEncyclopedia == null) isEncyclopedia = false;
+                else isEncyclopedia = isEncyclopedia.getAsBoolean();
 
                 /** @type {Internal.IMaterial[]} */
                 let materials = registry.getVisibleMaterials().toArray().filter((/** @type {Internal.IMaterial} */material) => {
                     if (material.tier != tier) return false;
                     let result = false;
-                    [
-                        MaterialStatsId.tryParse("tconstruct:head"),
-                        MaterialStatsId.tryParse("tconstruct:handle"),
-                        MaterialStatsId.tryParse("tconstruct:binding")
-                    ].forEach(statId => {
+                    PageType2ToolParts[type].forEach(statId => {
                         if (!registry.getMaterialStats(material.identifier, statId).isEmpty()) {
                             result = true;
                         }
@@ -102,7 +115,7 @@ MantleJSEvents.transformerRegistry(event => {
                 let rightPages = [];
                 materials.forEach(material => {
                     let matId = material.identifier;
-                    let leftPage = PageDataJS.createNewCustom("kubejs:melee_harvest_material_page_left", {
+                    let leftPage = PageDataJS.createNewCustom(`kubejs:${type}_material_page_left`, {
                         materialId: matId
                     });
                     leftPage.setParent(section);
@@ -110,7 +123,7 @@ MantleJSEvents.transformerRegistry(event => {
                     leftPages.push(leftPage);
                     icons.push(BookElement.item(0, 0, 1, RepresentativeItems.get(matId.toString())));
 
-                    let rightPage = PageDataJS.createNewCustom("kubejs:melee_harvest_material_page_right", {
+                    let rightPage = PageDataJS.createNewCustom(`kubejs:${type}_material_page_right`, {
                         materialId: matId,
                         isEncyclopedia: isEncyclopedia
                     });
