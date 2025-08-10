@@ -18,6 +18,7 @@
     DetailedBase
     TinkerTools
     StatTypeBase
+    ArmorStatPage
 */
 
 /**
@@ -65,6 +66,20 @@ MantleJSEvents.pageTypeRegistry(event => {
                     TinkerTools.crossbow,
                     TinkerTools.longbow
                 ]
+            });
+        });
+    
+    event.create("kubejs:armor_material_page_left")
+        .buildPage((/** @type {BookArguments.MaterialPageLeft} */ args, book, elements) => {
+            ArmorStatPage.build(elements, book, args);
+        });
+    
+    event.create("kubejs:armor_material_page_right")
+        .buildPage((/**@type {BookArguments.MaterialPageRight}*/args, book, elements) => {
+            DetailedBase.build(elements, book, args, {
+                tools: [
+                    TinkerTools.plateShield
+                ].concat(TinkerTools.plateArmor.values().toArray().map(a => ({getOrNull: () => a})))
             });
         });
 });

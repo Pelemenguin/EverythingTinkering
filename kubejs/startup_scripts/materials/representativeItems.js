@@ -48,6 +48,7 @@ let reprItems = {
 
     // Tier 2
     "tconstruct:iron": "minecraft:iron_ingot",
+    "tconstruct:gold": "minecraft:gold_ingot",
     "tconstruct:seared_stone": "tconstruct:seared_brick",
     "tconstruct:venombone": "tconstruct:venombone",
     "tconstruct:slimewood": "tconstruct:greenheart_log",

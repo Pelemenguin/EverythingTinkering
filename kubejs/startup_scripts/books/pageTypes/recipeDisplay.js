@@ -56,6 +56,8 @@ RecipeDisplay.materialValueIndicator = (variantId, value, x, y) => {
     if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.bowGrip.getOrNull();
     if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.bowLimb.getOrNull();
     if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.bowstring.getOrNull();
+    if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.maille.getOrNull();
+    if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.plating.values().get(0);
     
     let result = new TinkerItemElement(item.withMaterial(variantId).withCount(value));
     result.x = x;
