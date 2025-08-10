@@ -117,7 +117,7 @@ let writeStatDesc = (stats) => {
  * @returns {Internal.TextComponentData[]}
  */
 let writeTraitDesc = (traits) => {
-    let result = [BookTextComponentData.literal("\n")];
+    let result = [BookTextComponentData.LINEBREAK];
     traits.forEach(trait => {
         let modifier = trait.getModifier();
         let textCopmonentData = BookTextComponentData.of(modifier.getDisplayName());
@@ -126,6 +126,8 @@ let writeTraitDesc = (traits) => {
         textCopmonentData.text = textCopmonentData.text.copy().withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.UNDERLINE);
 
         result.push(textCopmonentData);
+
+        result.push(BookTextComponentData.LINEBREAK);
     });
     return result;
 };
