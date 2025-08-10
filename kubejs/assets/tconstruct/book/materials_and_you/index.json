@@ -13,7 +13,10 @@
             "kubejs:material_tier": {
                 "type": "melee_harvest",
                 "tier": 1,
-                "isEncyclopedia": false
+                "isEncyclopedia": false,
+                "defaultMaterials": [
+                    "tconstruct:wood"
+                ]
             }
         },
         "icon": {
@@ -40,7 +43,11 @@
             "kubejs:material_tier": {
                 "type": "ranged",
                 "tier": 1,
-                "isEncyclopedia": false
+                "isEncyclopedia": false,
+                "defaultMaterials": [
+                    "tconstruct:wood",
+                    "tconstruct:string"
+                ]
             }
         },
         "icon": {

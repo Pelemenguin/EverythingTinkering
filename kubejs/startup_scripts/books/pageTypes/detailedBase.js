@@ -223,10 +223,10 @@ const DetailedBase = {
     /**
      * @param {Internal.ArrayList<Internal.BookElement>} elements
      * @param {Internal.MaterialId} materialId
-     * @param {Internal.MaterialVariantId} defaultMaterial
+     * @param {Internal.MaterialVariantId[]} defaultMaterials
      * @param {Internal.ItemObject<Internal.ModifiableItem>[]} tools
      */
-    drawExampleTools: (elements, materialId, defaultMaterial, tools) => {
+    drawExampleTools: (elements, materialId, defaultMaterials, tools) => {
         let x = BookScreen.PAGE_WIDTH - 16;
         tools.forEach((tool, index) => {
             let item = tool.getOrNull();
@@ -243,7 +243,13 @@ const DetailedBase = {
                     materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](MaterialVariantId["tryParse(java.lang.String)"](materialId.toString()));
                     anyUsed = true;
                 } else {
-                    materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](defaultMaterial);
+                    if (defaultMaterials.length == 0) materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](MaterialVariantId["tryParse(java.lang.String)"](materialId.toString()));
+                    let index = 0;
+                    while (index < defaultMaterials.length && !part.canUseMaterial(defaultMaterials[index])) {
+                        index ++;
+                    }
+                    if (index == defaultMaterials.length) materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](MaterialVariantId["tryParse(java.lang.String)"](materialId.toString()));
+                    materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](defaultMaterials[index]);
                 }
             });
 
@@ -278,7 +284,8 @@ const DetailedBase = {
 
         let {
             materialId,
-            isEncyclopedia
+            isEncyclopedia,
+            defaultMaterials
         } = pageArguments;
         
         let [usage, multiplier] = MaterialSuggestions.getUsage(materialId.toString());
@@ -301,7 +308,12 @@ const DetailedBase = {
             )
         );
 
-        DetailedBase.drawExampleTools(elements, materialId, MaterialVariantId["tryParse(java.lang.String)"]("tconstruct:wood"), displayToolArguments.tools);
+        let parsedDefaultMaterials = new Array(defaultMaterials.length);
+        defaultMaterials.forEach((m, i) => {
+            parsedDefaultMaterials[i] = MaterialVariantId["tryParse(java.lang.String)"](m.toString());
+        });
+
+        DetailedBase.drawExampleTools(elements, materialId, parsedDefaultMaterials, displayToolArguments.tools);
     }
 
 };

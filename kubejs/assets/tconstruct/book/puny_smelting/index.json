@@ -34,11 +34,27 @@
             "kubejs:material_tier": {
                 "type": "melee_harvest",
                 "tier": 2,
-                "isEncyclopedia": false
+                "isEncyclopedia": false,
+                "defaultMaterials": [
+                    "tconstruct:iron"
+                ]
             }
         },
         "icon": {
-            "item": "tconstruct:seared_brick"
+            "item": {
+                "type": "forge:nbt",
+                "item": "tconstruct:hand_axe",
+                "nbt": {
+                    "tic_display": true,
+                    "tic_materials": [
+                        "tconstruct:iron",
+                        "tconstruct:seared_stone",
+                        "tconstruct:skyslime_vine"
+                    ],
+                    "tic_broken": false,
+                    "Damage": 0
+                }
+            }
         }
     },
     {
@@ -48,11 +64,29 @@
             "kubejs:material_tier": {
                 "type": "ranged",
                 "tier": 2,
-                "isEncyclopedia": false
+                "isEncyclopedia": false,
+                "defaultMaterials": [
+                    "tconstruct:iron",
+                    "tconstruct:skyslime_vine"
+                ]
             }
         },
         "icon": {
-            "item": "minecraft:iron_ingot"
+            "item": {
+                "type": "forge:nbt",
+                "item": "tconstruct:longbow",
+                "nbt": {
+                    "tic_display": true,
+                    "tic_materials": [
+                        "tconstruct:iron",
+                        "tconstruct:seared_stone",
+                        "tconstruct:whitestone",
+                        "tconstruct:skyslime_vine"
+                    ],
+                    "tic_broken": false,
+                    "Damage": 0
+                }
+            }
         }
     },
     {

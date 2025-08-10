@@ -90,6 +90,11 @@ MantleJSEvents.transformerRegistry(event => {
                 if (isEncyclopedia == null) isEncyclopedia = false;
                 else isEncyclopedia = isEncyclopedia.getAsBoolean();
 
+                /** @type {string[] | Internal.JsonElement} defaultMaterials */
+                let defaultMaterials = data.get("defaultMaterials");
+                if (defaultMaterials == null) defaultMaterials = ["tconstruct:wood"];
+                else defaultMaterials = defaultMaterials.getAsJsonArray().asList().toArray().map((/** @type {Internal.JsonElement}*/ jsonString) => jsonString.getAsString());
+
                 /** @type {Internal.IMaterial[]} */
                 let materials = registry.getVisibleMaterials().toArray().filter((/** @type {Internal.IMaterial} */material) => {
                     if (material.tier != tier) return false;
@@ -131,7 +136,8 @@ MantleJSEvents.transformerRegistry(event => {
 
                     let rightPage = PageDataJS.createNewCustom(`kubejs:${type}_material_page_right`, {
                         materialId: matId,
-                        isEncyclopedia: isEncyclopedia
+                        isEncyclopedia: isEncyclopedia,
+                        defaultMaterials: defaultMaterials
                     });
                     rightPage.setParent(section);
                     rightPage.setName(`${matId.toString()}.right`);

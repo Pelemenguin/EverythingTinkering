@@ -90,6 +90,7 @@ declare namespace BookArguments {
          * - 材料 ID。
          */
         materialId: Internal.MaterialId,
-        isEncyclopedia: boolean
+        isEncyclopedia: boolean,
+        defaultMaterials: string[]
     }
 }
