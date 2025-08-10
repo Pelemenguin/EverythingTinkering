@@ -26,6 +26,8 @@
  * @type {{[materialId: string]: string}}
  */
 let reprItems = {
+
+    // Tier 1
     "tconstruct:wood": "minecraft:oak_log",
     "kubejs:soil": "minecraft:dirt",
     "tconstruct:rock": "minecraft:stone",
@@ -42,7 +44,22 @@ let reprItems = {
     "tconstruct:string": "minecraft:string",
     "tconstruct:leather": "minecraft:leather",
     "kubejs:paper": "minecraft:paper",
-    "tconstruct:vine": "minecraft:vine"
+    "tconstruct:vine": "minecraft:vine",
+
+    // Tier 2
+    "tconstruct:iron": "minecraft:iron_ingot",
+    "tconstruct:seared_stone": "tconstruct:seared_brick",
+    "tconstruct:venombone": "tconstruct:venombone",
+    "tconstruct:slimewood": "tconstruct:greenheart_log",
+    "tconstruct:necrotic_bone": "tconstruct:necrotic_bone",
+    "tconstruct:scorched_stone": "tconstruct:scorched_brick",
+    "kubejs:sea_alloy": "minecraft:sea_lantern",
+    "tconstruct:whitestone": "minecraft:end_stone",
+    "tconstruct:skyslime_vine": "tconstruct:sky_slime_vine",
+    "tconstruct:twisting_vine": "minecraft:twisting_vines",
+    "tconstruct:weeping_vine": "minecraft:weeping_vines",
+    "tconstruct:glass": "minecraft:glass"
+
 };
 
 /**
