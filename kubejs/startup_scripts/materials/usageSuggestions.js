@@ -67,7 +67,7 @@ let suggestions = {
  * @param {(number) => Internal.ItemStack} item 
  * @param {string} id
  * - - - - -
- * @returns {(number, number, number, number) => Internal.TinkerItemElement}
+ * @returns {(x: number, y: number, scale: number, multiplier: number) => Internal.TinkerItemElement}
  */
 let reprItemElementBase = (item, id) => {
     return (x, y, scale, multiplier) => {
@@ -82,7 +82,7 @@ let reprItemElementBase = (item, id) => {
 };
 
 let usageRepr = {
-    "MISSING": reprItemElementBase(() => Item.of("minecraft:barrier"), "missing"),
+    "MISSING": reprItemElementBase(() => Item.of("minecraft:barrier"), "MISSING"),
 
     "DURABILITY": reprItemElementBase((multiplier) => Item.of("tconstruct:plate_shield", 1, {
         Damage: NBT.intTag((1 - multiplier % 1) * 100),
@@ -217,7 +217,7 @@ const MaterialSuggestions = {
     getColor: (usageId) => {
         let color = usageReprColor[usageId];
         if (color === undefined) {
-            return "#000000";
+            return "#FFFFFF";
         }
         return color;
     }

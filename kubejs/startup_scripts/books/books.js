@@ -21,4 +21,5 @@
 
 StartupEvents.init(() => {
     TinkerBook.MATERIALS_AND_YOU.addTransformer(KubeJSTransformers.MATERIAL_TRANSFORMER);
+    TinkerBook.PUNY_SMELTING.addTransformer(KubeJSTransformers.MATERIAL_TRANSFORMER);
 });

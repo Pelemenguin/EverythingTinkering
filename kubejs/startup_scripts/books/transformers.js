@@ -105,7 +105,11 @@ MantleJSEvents.transformerRegistry(event => {
                 let contentTablePageCount = contentTablePages.length;
 
                 let firstPageNumber = book.getFirstPageNumber(section, null);
-                if ((firstPageNumber + contentTablePageCount) % 2 == 1) section.addPage(() => {});
+                if ((firstPageNumber + contentTablePageCount) % 2 == 1) section.addPage((page) => {
+                    page.setType("mantle:text", (content) => {
+                        content.title = section.translate(section.title);
+                    });
+                });
 
                 /** @type {Internal.ItemElement[]} */
                 let icons = [];
