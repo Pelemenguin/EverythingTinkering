@@ -40,7 +40,8 @@ const PageType2ToolParts = {
     ],
     "ranged": [
         MaterialStatsId.tryParse("tconstruct:limb"),
-        MaterialStatsId.tryParse("tconstruct:grip")
+        MaterialStatsId.tryParse("tconstruct:grip"),
+        MaterialStatsId.tryParse("tconstruct:bowstring")
     ]
 };
 

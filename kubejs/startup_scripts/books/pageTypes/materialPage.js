@@ -54,7 +54,7 @@ MantleJSEvents.pageTypeRegistry(event => {
     event.create("kubejs:ranged_material_page_left")
         .buildPage((/** @type {BookArguments.MaterialPageLeft} */ args, book, elements) => {
             StatTypeBase.build(elements, book, args, {
-                stats: ["tconstruct:limb", "tconstruct:grip"]
+                stats: ["tconstruct:limb", "tconstruct:grip", "tconstruct:bowstring"]
             });
         });
     
