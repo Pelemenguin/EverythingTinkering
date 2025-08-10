@@ -23,7 +23,7 @@
                 "nbt": {
                     "tic_display": true,
                     "tic_materials": [
-                        "tconstruct:wood#oak",
+                        "tconstruct:rock#stone",
                         "tconstruct:wood#spruce",
                         "tconstruct:wood#birch"
                     ],
@@ -44,7 +44,21 @@
             }
         },
         "icon": {
-            "item": "minecraft:bamboo"
+            "item": {
+                "type": "forge:nbt",
+                "item": "tconstruct:longbow",
+                "nbt": {
+                    "tic_display": true,
+                    "tic_materials": [
+                        "tconstruct:wood#oak",
+                        "tconstruct:wood#birch",
+                        "tconstruct:bamboo",
+                        "tconstruct:string"
+                    ],
+                    "tic_broken": false,
+                    "Damage": 0
+                }
+            }
         }
     },
     {

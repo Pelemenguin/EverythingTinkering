@@ -100,6 +100,7 @@ MantleJSEvents.transformerRegistry(event => {
                     });
                     return result;
                 });
+                materials = RepresentativeItems.sortMaterials(materials);
 
                 let contentTablePages = ContentPageIconList.getPagesNeededForItemCount(materials.length, section.origin, section.title, "");
                 let contentTablePageCount = contentTablePages.length;

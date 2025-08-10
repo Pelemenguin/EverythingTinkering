@@ -29,15 +29,15 @@ let reprItems = {
 
     // Tier 1
     "tconstruct:wood": "minecraft:oak_log",
-    "kubejs:soil": "minecraft:dirt",
+    "tconstruct:bamboo": "minecraft:bamboo",
     "tconstruct:rock": "minecraft:stone",
+    "kubejs:soil": "minecraft:dirt",
+    "kubejs:terracotta": "minecraft:terracotta",
     "kubejs:brick": "minecraft:brick",
     "kubejs:coal": "minecraft:coal",
     "tconstruct:flint": "minecraft:flint",
     "tconstruct:bone": "minecraft:bone",
     "tconstruct:copper": "minecraft:copper_ingot",
-    "kubejs:terracotta": "minecraft:terracotta",
-    "tconstruct:bamboo": "minecraft:bamboo",
     "kubejs:lapis_lazuli": "minecraft:lapis_lazuli",
     "kubejs:andesite_alloy": "create:andesite_alloy",
     "tconstruct:chorus": "minecraft:popped_chorus_fruit",
@@ -80,5 +80,20 @@ const RepresentativeItems = {
         } else {
             return Item.of(item);
         }
+    },
+
+    /**
+     * @param {Internal.IMaterial[]} materialArray
+     */
+    sortMaterials: (materialArray) => {
+        let keys = Object.keys(reprItems);
+        let keyToIndex = {};
+        keys.forEach((v, i) => {keyToIndex[v] = i + 1;});
+        return materialArray.sort((a, b) => {
+            let aString = a.getIdentifier().toString();
+            let bString = b.getIdentifier().toString();
+            return ((keyToIndex[aString] === undefined ? 2147483647 : keyToIndex[aString])
+            - (keyToIndex[bString] === undefined ? 2147483647 : keyToIndex[bString]));
+        });
     }
 };
