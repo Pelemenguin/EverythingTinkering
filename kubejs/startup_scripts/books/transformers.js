@@ -48,7 +48,9 @@ const PageType2ToolParts = {
         MaterialStatsId.tryParse("tconstruct:plating_chestplate"),
         MaterialStatsId.tryParse("tconstruct:plating_leggings"),
         MaterialStatsId.tryParse("tconstruct:plating_boots"),
-        MaterialStatsId.tryParse("tconstruct:plating_shield")
+        MaterialStatsId.tryParse("tconstruct:plating_shield"),
+        MaterialStatsId.tryParse("tconstruct:maille"),
+        MaterialStatsId.tryParse("tconstruct:shield_core")
     ]
 };
 
