@@ -107,7 +107,19 @@
             }
         },
         "icon": {
-            "item": "minecraft:gold_ingot"
+            "item": {
+                "type": "forge:nbt",
+                "item": "tconstruct:plate_chestplate",
+                "nbt": {
+                    "tic_display": true,
+                    "tic_materials": [
+                        "tconstruct:iron",
+                        "tconstruct:seared_stone"
+                    ],
+                    "tic_broken": false,
+                    "Damage": 0
+                }
+            }
         }
     },
     {
