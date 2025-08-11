@@ -60,7 +60,29 @@ let reprItems = {
     "tconstruct:twisting_vine": "minecraft:twisting_vines",
     "tconstruct:weeping_vine": "minecraft:weeping_vines",
     "tconstruct:glass": "minecraft:glass",
-    "tconstruct:slimeskin": "tconstruct:earth_slime_bucket"
+    "tconstruct:slimeskin": "tconstruct:earth_slime_bucket",
+
+    // Tier 3
+    "tconstruct:rose_gold": "tconstruct:rose_gold_ingot",
+    "tconstruct:amethyst_bronze": "tconstruct:amethyst_bronze_ingot",
+    "tconstruct:pig_iron": "tconstruct:pig_iron_ingot",
+    "tconstruct:slimesteel": "tconstruct:slimesteel_ingot",
+    "tconstruct:nahuatl": "tconstruct:nahuatl",
+    "tconstruct:plated_slimewood": "create:brass_ingot",
+    "tconstruct:steel": "tconstruct:steel_ingot",
+    "tconstruct:obsidian": "minecraft:obsidian",
+    "tconstruct:darkthread": "minecraft:obsidian",
+    "tconstruct:cobalt": "tconstruct:cobalt_ingot",
+
+    // Tier 4
+    "tconstruct:blazewood": "tconstruct:blazewood",
+    "tconstruct:hepatizon": "tconstruct:hepatizon_ingot",
+    "tconstruct:manyullyn": "tconstruct:manyullyn_ingot",
+    "tconstruct:cinderslime": "tconstruct:cinderslime_ingot",
+    "tconstruct:queens_slime": "tconstruct:queens_slime_ingot",
+    "tconstruct:blazing_bone": "tconstruct:blazing_bone",
+    "tconstruct:ancient_hide": "minecraft:netherite_scrap",
+    "tconstruct:enderslime_vine": "tconstruct:ender_slime_vine",
 
 };
 
