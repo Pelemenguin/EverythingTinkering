@@ -22,4 +22,7 @@
 StartupEvents.init(() => {
     TinkerBook.MATERIALS_AND_YOU.addTransformer(KubeJSTransformers.MATERIAL_TRANSFORMER);
     TinkerBook.PUNY_SMELTING.addTransformer(KubeJSTransformers.MATERIAL_TRANSFORMER);
+    TinkerBook.MIGHTY_SMELTING.addTransformer(KubeJSTransformers.MATERIAL_TRANSFORMER);
+    TinkerBook.FANTASTIC_FOUNDRY.addTransformer(KubeJSTransformers.MATERIAL_TRANSFORMER);
+    TinkerBook.ENCYCLOPEDIA.addTransformer(KubeJSTransformers.MATERIAL_TRANSFORMER);
 });

@@ -205,30 +205,6 @@
     "book.kubejs.material.recipes.composite.description": "Craftable by pouring fluid onto parts of other materials",
     "book.kubejs.material.recipes.composite.fluid": "%1$smB of %2$s",
     "book.kubejs.material.recipes.composite.amount": "%smB",
-    "book.kubejs.material.recipes.composite.fluid.unknown": "Unknown Fluid",
-    
-    "book.kubejs.material.suggestion.missing.name": "Missing",
-    "book.kubejs.material.suggestion.missing.description": "Your modpack developer has forgotten to fill this suggestion. Please submit an Issue on GitHub!",
-
-    "book.kubejs.material.suggestion.alternative.name": "Alternative",
-    "book.kubejs.material.suggestion.alternative.description": "Not a strong material, but a viable option in early game or when other materials are unavailable.",
-
-    "book.kubejs.material.suggestion.not_recommended.name": "Not Recommeded",
-    "book.kubejs.material.suggestion.not_recommended.description": "Avoid using this material under any circumstances.",
-
-    "book.kubejs.material.suggestion.damage.name": "Damage",
-    "book.kubejs.material.suggestion.damage.description": "Excels at dealing damage. Provides high base damage, damage boosts, or traits beneficial for combat.",
-
-    "book.kubejs.material.suggestion.functional.name": "Functional",
-    "book.kubejs.material.suggestion.functional.description": "Specialized material for specific situations or unique mechanics.",
-
-    "book.kubejs.material.suggestion.mining.name": "Mining",
-    "book.kubejs.material.suggestion.mining.description": "Enhances excavation capabilities. Offers high mining speed, mining level, or other digging-related traits.",
-
-    "book.kubejs.material.suggestion.durability.name": "Durability",
-    "book.kubejs.material.suggestion.durability.description": "Extends tool lifespan through durability enhancements or protective traits.",
-
-    "book.kubejs.material.suggestion.speed.name": "Speed",
-    "book.kubejs.material.suggestion.speed.description": "Improve your mining speed, attack speed, or movement speed."
+    "book.kubejs.material.recipes.composite.fluid.unknown": "Unknown Fluid"
 
 }

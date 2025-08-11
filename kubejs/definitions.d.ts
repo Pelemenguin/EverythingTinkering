@@ -69,11 +69,9 @@ declare namespace Annotation {
 
     namespace TinkerFunction {
         type Hook = "addToolStats" | "armorTakeAttacked" | "getBreakSpeed" | "onAfterBreak" | "getMeleeDamage" | "onAfterMeleeHit" | "onBeforeMeleeHit" | "onInventoryTick"
-            | "tooltipSetting" | "onServerTick"
+            | "tooltipSetting" | "onServerTick";
     }
 
-    type MaterialUsage = "MISSING" | "DURABILITY" | "DAMAGE" | "SPEED" | "MINING" | "BALANCED" | "PROTECTION" | "MISCELLANEOUS" | "ALTERNATIVE"
-        | "NOT_SUGGESTED" | "FUNCTIONAL" | "APPEARANCE" | "EXTENDABLE"
 }
 
 declare namespace BookArguments {

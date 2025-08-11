@@ -47,7 +47,8 @@ MantleJSEvents.pageTypeRegistry(event => {
                     TinkerTools.dagger,
                     TinkerTools.sledgeHammer,
                     TinkerTools.excavator,
-                    TinkerTools.broadAxe
+                    TinkerTools.broadAxe,
+                    TinkerTools.cleaver
                 ]
             });
         });

@@ -32,7 +32,6 @@
     ItemStack
     MaterialVariantId
     JavaUtils
-    MaterialSuggestions
 */
 
 const DetailedBase = {
@@ -231,7 +230,7 @@ const DetailedBase = {
         tools.forEach((tool, index) => {
             let item = tool.getOrNull();
             if (item == null) return;
-            let y = 18 + index * 16;
+            let y = index * 16;
 
             let materialBuilder = MaterialNBT.builder();
 
@@ -287,15 +286,6 @@ const DetailedBase = {
             isEncyclopedia,
             defaultMaterials
         } = pageArguments;
-        
-        let [usage, multiplier] = MaterialSuggestions.getUsage(materialId.toString());
-        elements.add(MaterialSuggestions.getElement(materialId.toString(), BookScreen.PAGE_WIDTH - 16, 0));
-        let usageComponent = Component.literal(multiplier + '').color(MaterialSuggestions.getColor(usage)).bold(true);
-        
-        let usageWidth = book.fontRenderer.width(usageComponent.getString());
-        let usageTextCompData = BookTextComponentData.of(usageComponent);
-        usageTextCompData.scale = 1.2;
-        elements.add(BookElement.textComponent(BookScreen.PAGE_WIDTH - 22 - usageWidth * 1.2, 2, BookScreen.PAGE_WIDTH, 9, usageTextCompData));
 
         DetailedBase.drawRecipe(elements, materialId, 0);
 
