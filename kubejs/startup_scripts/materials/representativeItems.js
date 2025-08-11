@@ -59,7 +59,8 @@ let reprItems = {
     "tconstruct:skyslime_vine": "tconstruct:sky_slime_vine",
     "tconstruct:twisting_vine": "minecraft:twisting_vines",
     "tconstruct:weeping_vine": "minecraft:weeping_vines",
-    "tconstruct:glass": "minecraft:glass"
+    "tconstruct:glass": "minecraft:glass",
+    "tconstruct:slimeskin": "tconstruct:earth_slime_bucket"
 
 };
 
