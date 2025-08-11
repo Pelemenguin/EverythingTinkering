@@ -95,7 +95,10 @@
         "extraData": {
             "kubejs:material_tier": {
                 "type": "armor",
-                "tier": 2,
+                "tier": {
+                    "min": 1,
+                    "max": 2
+                },
                 "isEncyclopedia": false,
                 "defaultMaterials": [
                     "tconstruct:iron",

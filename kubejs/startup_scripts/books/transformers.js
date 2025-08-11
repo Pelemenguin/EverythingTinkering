@@ -92,7 +92,6 @@ MantleJSEvents.transformerRegistry(event => {
             sections.forEach(section => {
                 if (!section.extraData.containsKey(ResourceLocation.tryBuild("kubejs", "material_tier"))) return;
                 let data = section.extraData.get(ResourceLocation.tryBuild("kubejs", "material_tier")).getAsJsonObject();
-                let tier = data.get("tier").getAsInt();
                 let type = data.get("type").getAsString();
 
                 let isEncyclopedia = data.get("isEncyclopedia");
@@ -104,9 +103,21 @@ MantleJSEvents.transformerRegistry(event => {
                 if (defaultMaterials == null) defaultMaterials = ["tconstruct:wood"];
                 else defaultMaterials = defaultMaterials.getAsJsonArray().asList().toArray().map((/** @type {Internal.JsonElement}*/ jsonString) => jsonString.getAsString());
 
+                /** @type {number[] | Internal.JsonElement} */
+                let tier = data.get("tier");
+                let tierMax = 0;
+                let tierMin = 0;
+                if (tier.isJsonObject()) {
+                    tierMax = tier.getAsJsonObject().get("max");
+                    tierMin = tier.getAsJsonObject().get("min");
+                } else {
+                    tierMax = tier.getAsInt();
+                    tierMin = tier.getAsInt();
+                }
+
                 /** @type {Internal.IMaterial[]} */
                 let materials = registry.getVisibleMaterials().toArray().filter((/** @type {Internal.IMaterial} */material) => {
-                    if (material.tier != tier) return false;
+                    if (material.tier > tierMax || material.tier < tierMin) return false;
                     let result = false;
                     PageType2ToolParts[type].forEach(statId => {
                         if (!registry.getMaterialStats(material.identifier, statId).isEmpty()) {
