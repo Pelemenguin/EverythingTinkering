@@ -1,4 +1,6 @@
-// priority: 100
+// priority: 10000
+
+// SPDX-License-Identifier: LGPL-3.0-or-later
 
 /**
  * @fileoverview Fluid registries | 流体注册
@@ -8,13 +10,11 @@
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
  * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
- * - - - - -
  * @author Pelemenguin
  */
 
 /* global
-
+    global: writable
     StartupEvents
     console
 */
@@ -27,21 +27,30 @@
  * @interface
  */
 function KubeJSFluid () {}
-/**
- * - A list for all fluids for the modpack.
- * - 整合包中所有流体的列表。
- * - - - - -
- * @type {Object<string, Internal.FluidBuilder>}
- */
-KubeJSFluid.ALL = {};
 
-/**
- * - A list for properties of all fluids for the modpack.
- * - 整合包中所有流体属性的列表。
- * - - - - -
- * @type {Object<string, Annotation.FluidProperties>}
- */
-KubeJSFluid.PROPERTIES = {};
+if (global.Fluids === undefined) {
+    /**
+     * - A list for all fluids for the modpack.
+     * - 整合包中所有流体的列表。
+     * - - - - -
+     * @type {Object<string, Internal.FluidBuilder>}
+     */
+    KubeJSFluid.ALL = {};
+} else {
+    KubeJSFluid.ALL = Object.assign({}, global.Fluids.ALL);
+}
+
+if (global.Fluids === undefined) {
+    /**
+     * - A list for properties of all fluids for the modpack.
+     * - 整合包中所有流体属性的列表。
+     * - - - - -
+     * @type {Object<string, Annotation.FluidProperties>}
+     */
+    KubeJSFluid.PROPERTIES = {};
+} else {
+    KubeJSFluid.PROPERTIES = Object.assign({}, global.Fluids.PROPERTIES);
+}
 
 /**
  * An interface containing all fluid presets.
@@ -77,6 +86,7 @@ let logProperties = (properties) => {
     }
     console.info(`|- Temperature: ${properties.temperature}`);
     console.info(`|- Light level: ${properties.lightLevel}`);
+    console.info(`|- Tooltip tag: ${properties.fluidTooltip}`);
 };
 
 // - - - - - - - - - -
@@ -89,10 +99,12 @@ StartupEvents.registry("minecraft:fluid", event => {
             temperature,
             lightLevel,
             stillTexture,
-            flowingTexture
+            flowingTexture,
+            fluidTooltip
         } = KubeJSFluid.PROPERTIES[key];
         /** @type {!Internal.FluidBuilder} */
         let builder = event.create(key);
+        KubeJSFluid.ALL[key] = builder;
         if (presets !== undefined) {
             presets.forEach(p => {
                 builder = p.process(builder);
@@ -103,13 +115,43 @@ StartupEvents.registry("minecraft:fluid", event => {
         }
         if (stillTexture !== undefined) {
             builder.stillTexture(stillTexture);
-            console.info(builder);
         }
         if (flowingTexture !== undefined) {
             builder.flowingTexture(flowingTexture);
         }
         builder = temperature === undefined ? builder : builder.temperature(temperature);
+        builder.tag(`kubejs:${key}`).tag(fluidTooltip);
+        builder.flowingFluid.tag(`kubejs:${key}`).tag(fluidTooltip);
+
         console.info(`Fluid \`${key}\` registered with properties:`);
         logProperties(KubeJSFluid.PROPERTIES[key]);
     }
 });
+
+KubeJSFluid.getProperties = (/** @type {string} */ name) => KubeJSFluid.PROPERTIES[name];
+KubeJSFluid.getBuilder = (/** @type {string} */ name) => KubeJSFluid.ALL[name];
+
+KubeJSFluid.reload = () => {
+    for (let key in KubeJSFluid.PROPERTIES) {
+        let {
+            presets
+        } = KubeJSFluid.PROPERTIES[key];
+        let builder = KubeJSFluid.ALL[key];
+        if (presets !== undefined) {
+            presets.forEach(p => {
+                builder = p.processReloadable(builder);
+            });
+        }
+    }
+};
+
+global.Fluids = KubeJSFluid;
+
+if (global.FluidData === undefined) {
+    /**
+     * @type {{
+     *     HotFluidData: {[id: string]: Annotation.FluidPresetExtraData.Hot}
+     * }}
+     */
+    global.FluidData = {};
+}

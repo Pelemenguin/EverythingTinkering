@@ -1,8 +1,14 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 /**
  * @fileoverview Typings | 类型提示
- * 
+ * - - - - -
+ * @copyright Pelemenguin 2025
+ * @license LGPL-3.0-or-later
+ * This file is part of EverythingTinkering.
+ * Full license see file `COPYING.LESSER`
+ * - - - - -
  * @author Pelemenguin
- * @license CC-BY-NC-SA-4.0
  */
 
 declare namespace Annotation {
@@ -22,6 +28,7 @@ declare namespace Annotation {
          * - 处理后的流体 Builder.
          */
         process: (builder: Internal.FluidBuilder) => Internal.FluidBuilder;
+        processReloadable: (builder: Internal.FluidBuilder) => Internal.FluidBuilder;
     }
     interface FluidProperties {
         /**
@@ -49,6 +56,11 @@ declare namespace Annotation {
          * - 流动液体的材质路径。
          */
         flowingTexture: string | undefined;
+        /**
+         * - Fluid tooltip tag.
+         * - 流体工具提示标签。
+         */
+        fluidTooltip: Special.FluidTag
         /** @todo More properties. */
     }
 

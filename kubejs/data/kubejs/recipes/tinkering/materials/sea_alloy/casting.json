@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material_fluid",
+    "fluid": {
+        "amount": 90,
+        "tag": "kubejs:molten_sea_alloy"
+    },
+    "output": "kubejs:sea_alloy",
+    "temperature": 1400
+}

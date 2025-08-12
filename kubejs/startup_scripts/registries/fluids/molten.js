@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 /**
  * @fileoverview Molten fluids | 熔融液体
  * - - - - -
@@ -5,8 +7,6 @@
  * @license LGPL-3.0-or-later
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
- * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
  * - - - - -
  * @author Pelemenguin
  */
@@ -22,8 +22,9 @@ KubeJSFluid.create("molten_sea_alloy", {
     flowingTexture: "kubejs:fluid/molten/alloy/sea_alloy/flowing",
     presets: [
         new KubeJSFluid.Presets.Hot({
-            burnTime: 10,
+            burnTime: 200,
             damage: 6
         })
-    ]
+    ],
+    fluidTooltip: "tconstruct:tooltips/metal"
 });

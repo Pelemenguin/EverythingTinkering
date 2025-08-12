@@ -1,4 +1,6 @@
-// priority: 50
+// priority: 5000
+
+// SPDX-License-Identifier: LGPL-3.0-or-later
 
 /**
  * @fileoverview Hot fluids | 热流体
@@ -8,13 +10,12 @@
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
  * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
- * - - - - -
  * @author Pelemenguin
  */
 
 /* global
 
+    global: writable
     KubeJSFluid
 
 */
@@ -35,11 +36,31 @@ KubeJSFluid.Presets.Hot = function(extraData) {
     /** @type {!number} */ this.damage = extraData.damage;
 };
 
+if (global.FluidData.HotFluidData === undefined) {
+    global.FluidData.HotFluidData = {};
+}
+
+/**
+ * @type {Annotation.FluidPreset['processReloadable']}
+ */
+KubeJSFluid.Presets.Hot.prototype.processReloadable = function(builder) {
+    global.FluidData.HotFluidData[builder.id.toString()] = {
+        burnTime: this.burnTime,
+        damage: this.damage
+    };
+    global.FluidData.HotFluidData[builder.flowingFluid.id.toString()] = {
+        burnTime: this.burnTime,
+        damage: this.damage
+    };
+    return builder;
+};
+
 /**
  * @override
  * @type {Annotation.FluidPreset['process']}
  */
 KubeJSFluid.Presets.Hot.prototype.process = function(builder) {
+    this.processReloadable(builder);
     return builder.density(2000)
         .viscosity(10000)
         .temperature(1000);
