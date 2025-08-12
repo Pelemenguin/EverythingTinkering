@@ -24,6 +24,7 @@
     BookTextData
     console
     JavaUtils
+    Item
 */
 
 /**
@@ -42,30 +43,80 @@ RecipeDisplay.DEFAULT_X = 8;
 RecipeDisplay.DEFAULT_Y = 18;
 
 /**
+ * 
+ * @param {number} value 
+ * @param {number} x 
+ * @param {number} y 
+ * @param {Internal.MaterialVariantId} referenceMaterial 
+ * @returns {Internal.ToolPartItem}
+ */
+let getIndicatorToolPart = (referenceMaterial) => {
+
+    let item = TinkerToolParts.toolBinding.getOrNull();
+    let materialId = referenceMaterial.getId();
+    if (!item.canUseMaterial(materialId)) item = TinkerToolParts.toolHandle.getOrNull();
+    if (!item.canUseMaterial(materialId)) item = TinkerToolParts.pickHead.getOrNull();
+    if (!item.canUseMaterial(materialId)) item = TinkerToolParts.bowGrip.getOrNull();
+    if (!item.canUseMaterial(materialId)) item = TinkerToolParts.bowLimb.getOrNull();
+    if (!item.canUseMaterial(materialId)) item = TinkerToolParts.bowstring.getOrNull();
+    if (!item.canUseMaterial(materialId)) item = TinkerToolParts.maille.getOrNull();
+    if (!item.canUseMaterial(materialId)) item = TinkerToolParts.plating.values().get(0);
+
+    return item;
+};
+
+/**
  * @param {Internal.MaterialVariantId} variantId
  * @param {number} value
  * @param {number} x
  * @param {number} y
+ * @param {Internal.MaterialVariantId} referenceMaterial
  * - - - - -
  * @returns {Internal.TinkerItemElement}
  */
-RecipeDisplay.materialValueIndicator = (variantId, value, x, y) => {
-    let item = TinkerToolParts.toolBinding.getOrNull();
-    if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.toolHandle.getOrNull();
-    if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.pickHead.getOrNull();
-    if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.bowGrip.getOrNull();
-    if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.bowLimb.getOrNull();
-    if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.bowstring.getOrNull();
-    if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.maille.getOrNull();
-    if (!item.canUseMaterial(variantId.getId())) item = TinkerToolParts.plating.values().get(0);
+RecipeDisplay.materialValueIndicator = (variantId, value, x, y, referenceMaterial) => {
+    if (referenceMaterial === undefined) referenceMaterial = variantId;
     
-    let result = new TinkerItemElement(item.withMaterial(variantId).withCount(value));
+    let result = new TinkerItemElement(getIndicatorToolPart(referenceMaterial).withMaterial(variantId).withCount(value));
     result.x = x;
     result.y = y;
     result.tooltip = Utils.newList();
     let translation = 'material.' + variantId.toString().replace(':', '.').replace('#', '.');
     result.tooltip.add(Component.translatable("book.kubejs.material.recipes.material_value_indicator", [Component.literal(value.toFixed()), RecipeDisplay.translationFallback(translation).underlined()]));
     return result;
+};
+
+/**
+ * @param {Internal.MaterialVariantId} referenceMaterial
+ * @param {number} x
+ * @param {number} y
+ * @returns {Internal.TinkerItemElement}
+ */
+RecipeDisplay.castIndicator = (referenceMaterial, x, y) => {
+
+    let indicatorToolPart = getIndicatorToolPart(referenceMaterial);
+    /** @type {Internal.ItemStack} */ let item;
+    switch (indicatorToolPart.idLocation) {
+
+        case (TinkerToolParts.toolBinding.id):          item = Item.of("tconstruct:tool_binding_cast");   break;
+        case (TinkerToolParts.toolHandle.id):           item = Item.of("tconstruct:tool_handle_cast");    break;
+        case (TinkerToolParts.pickHead.id):             item = Item.of("tconstruct:pick_head_cast");      break;
+        case (TinkerToolParts.bowGrip.id):              item = Item.of("tconstruct:bow_grip_cast");       break;
+        case (TinkerToolParts.bowLimb.id):              item = Item.of("tconstruct:bow_limb_cast");       break;
+        case (TinkerToolParts.bowstring.id):            item = Item.of("minecraft:structure_void");       break;
+        case (TinkerToolParts.maille.id):               item = Item.of("tconstruct:maille_cast");         break;
+        case (TinkerToolParts.plating.values().get(0)): item = Item.of("tconstruct:helmet_plating_cast"); break;
+
+    }
+
+    let cast = new TinkerItemElement(item);
+    cast.x = x;
+    cast.y = y;
+    cast.tooltip = JavaUtils.ArrayList["of(java.lang.Object[])"]([
+        Component.translatable("book.kubejs.material.recipes.casting.cast")
+    ]);
+    return cast;
+
 };
 
 /**
@@ -193,20 +244,21 @@ RecipeDisplay.prototype = {
         arrowExtend.y = displayItem.y + 2;
         elements.add(arrowExtend);
 
-        let cast = new TinkerItemElement("tconstruct:tool_binding_cast");
-        cast.x = arrowExtend.x + 9;
-        cast.y = displayItem.y;
-        cast.tooltip = JavaUtils.ArrayList["of(java.lang.Object[])"]([
-            Component.translatable("book.kubejs.material.recipes.casting.cast")
-        ]);
-        elements.add(cast);
+        // let cast = new TinkerItemElement("tconstruct:tool_binding_cast");
+        // cast.x = arrowExtend.x + 9;
+        // cast.y = displayItem.y;
+        // cast.tooltip = JavaUtils.ArrayList["of(java.lang.Object[])"]([
+        //     Component.translatable("book.kubejs.material.recipes.casting.cast")
+        // ]);
+        // elements.add(cast);
+        elements.add(RecipeDisplay.castIndicator(recipe.getOutput().getVariant(), arrowExtend.x + 9, displayItem.y));
         
         let arrow = BookElement.image(new ImageData("jei:textures/jei/atlas/gui/recipe_arrow.png", 2, 0, 20, 16, 22, 16, 15, 12));
-        arrow.x = cast.x + 16;
+        arrow.x = arrowExtend.x + 25;
         arrow.y = arrowExtend.y;
         elements.add(arrow);
 
-        elements.add(RecipeDisplay.materialValueIndicator(recipe.getOutput().getVariant(), 1, arrow.x + 21, cast.y));
+        elements.add(RecipeDisplay.materialValueIndicator(recipe.getOutput().getVariant(), 1, arrow.x + 21, displayItem.y));
 
         return 18;
     },
@@ -273,7 +325,7 @@ RecipeDisplay.prototype = {
         arrowExtend.y = displayItem.y + 2;
         elements.add(arrowExtend);
 
-        let cast = RecipeDisplay.materialValueIndicator(recipe.getInput().getVariant(), 1, arrowExtend.x + 9, displayItem.y);
+        let cast = RecipeDisplay.materialValueIndicator(recipe.getInput().getVariant(), 1, arrowExtend.x + 9, displayItem.y, recipe.getOutput().getVariant());
         elements.add(cast);
         
         let arrow = BookElement.image(new ImageData("jei:textures/jei/atlas/gui/recipe_arrow.png", 2, 0, 20, 16, 22, 16, 15, 12));
