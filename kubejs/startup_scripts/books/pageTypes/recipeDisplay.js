@@ -25,6 +25,7 @@
     console
     JavaUtils
     Item
+    NonNullList
 */
 
 /**
@@ -158,9 +159,13 @@ RecipeDisplay.prototype = {
         pattern.y = icon.y;
         elements.add(pattern);
 
-        let ingredient = new TinkerItemElement(recipe.getIngredient().first.withCount(recipe.needed));
+        let ingredient = new TinkerItemElement(Item.of("minecraft:air"));
         ingredient.x = pattern.x + 18;
         ingredient.y = pattern.y;
+        ingredient.itemCycle = NonNullList.of(
+            recipe.getIngredient().first.withCount(recipe.needed),
+            recipe.getIngredient().getItemTypes().toArray().map(item => new ItemStack(item))
+        );
         elements.add(ingredient);
 
         let arrow = BookElement.image(new ImageData("jei:textures/jei/atlas/gui/recipe_arrow.png", 2, 0, 20, 16, 22, 16, 15, 12));
