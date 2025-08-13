@@ -164,7 +164,7 @@ RecipeDisplay.prototype = {
         ingredient.y = pattern.y;
         ingredient.itemCycle = NonNullList.of(
             recipe.getIngredient().first.withCount(recipe.needed),
-            recipe.getIngredient().getItemTypes().toArray().map(item => new ItemStack(item))
+            recipe.getIngredient().getItemTypes().toArray().map(item => new ItemStack(item, recipe.getNeeded()))
         );
         elements.add(ingredient);
 

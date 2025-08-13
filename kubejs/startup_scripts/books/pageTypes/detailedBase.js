@@ -101,11 +101,9 @@ const DetailedBase = {
         allVariants.forEach(variant => {
             let recipes = [];
             MaterialRecipeCache.getRecipes(variant).toArray().forEach((/** @type {Internal.MaterialRecipe} */ recipe) => {
-                let hash = (
-                    recipe.ingredient.itemIds.hashCode() + recipe.material.variant.hashCode() + recipe.needed + recipe.value
-                ) % 16777216;
-                if (usedPartBuilderRecipes.indexOf(hash) == -1) {
-                    usedPartBuilderRecipes.push(hash);
+                if (recipe.getIngredient().itemTypes.isEmpty()) return;
+                if (usedPartBuilderRecipes.indexOf(recipe.getId()) == -1) {
+                    usedPartBuilderRecipes.push(recipe.getId());
                     recipes.push(recipe);
                 }
             });
