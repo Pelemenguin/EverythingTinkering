@@ -49,7 +49,8 @@ MantleJSEvents.pageTypeRegistry(event => {
                     TinkerTools.excavator,
                     TinkerTools.broadAxe,
                     TinkerTools.cleaver
-                ]
+                ],
+                translationSuffix: "encyclopedia"
             });
         });
     
@@ -66,7 +67,8 @@ MantleJSEvents.pageTypeRegistry(event => {
                 tools: [
                     TinkerTools.crossbow,
                     TinkerTools.longbow
-                ]
+                ],
+                translationSuffix: "ranged"
             });
         });
     
@@ -80,7 +82,8 @@ MantleJSEvents.pageTypeRegistry(event => {
             DetailedBase.build(elements, book, args, {
                 tools: [
                     TinkerTools.plateShield
-                ].concat(TinkerTools.plateArmor.values().toArray().map(a => ({getOrNull: () => a})))
+                ].concat(TinkerTools.plateArmor.values().toArray().map(a => ({getOrNull: () => a}))),
+                translationSuffix: "armor"
             });
         });
 });

@@ -1,5 +1,7 @@
 // priority: 5000
 
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 /**
  * @fileoverview Base page builder for detailed information.
  * - - - - -
@@ -7,8 +9,6 @@
  * @license LGPL-3.0-or-later
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
- * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
  * - - - - -
  * @author Pelemenguin
  */
@@ -265,6 +265,14 @@ const DetailedBase = {
             elements.add(itemElement);
         });
     },
+    
+    description: (materialId, suffix, isEncyclopedia) => {
+        if (!isEncyclopedia) return Component.translatable("book.kubejs.material.flavor_format", Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.flavor').italic()).darkGray();
+        let key = 'material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.' + suffix;
+        let result = Component.translatable(key).darkGray();
+        if (result.getString() == key) return Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.encyclopedia');
+        return result;
+    },
 
     /**
      * - Page builder base.
@@ -274,10 +282,11 @@ const DetailedBase = {
      * @param {Internal.BookDataJS} book
      * @param {BookArguments.MaterialPageRight} pageArguments
      * @param {{
-     *     tools: Internal.ItemObject<Internal.ModifiableItem>[]
-     * }} displayToolArguments
+     *     tools: Internal.ItemObject<Internal.ModifiableItem>[],
+     *     translationSuffix: string
+     * }} displayArguments
      */
-    build: (elements, book, pageArguments, displayToolArguments) => {
+    build: (elements, book, pageArguments, displayArguments) => {
 
         let {
             materialId,
@@ -287,21 +296,24 @@ const DetailedBase = {
 
         DetailedBase.drawRecipe(elements, materialId, 0);
 
-        elements.add(isEncyclopedia
-            ? BookElement.textComponent(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
-                BookTextComponentData.of(Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.encyclopedia').darkGray())
-            )
-            : BookElement.textComponent(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
-                BookTextComponentData.of(Component.translatable("book.kubejs.material.flavor_format", Component.translatable('material.' + materialId.toString().replace(':', '.').replace('#', '.') + '.flavor').italic()).darkGray())
-            )
-        );
+        // elements.add(isEncyclopedia
+        //     ? BookElement.textComponent(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
+        //         BookTextComponentData.of(DetailedBase.description(materialId, displayArguments.translationSuffix, isEncyclopedia))
+        //     )
+        //     : BookElement.textComponent(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
+        //         BookTextComponentData.of()
+        //     )
+        // );
+        elements.add(BookElement.textComponent(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,
+            BookTextComponentData.of(DetailedBase.description(materialId, displayArguments.translationSuffix, isEncyclopedia))
+        ));
 
         let parsedDefaultMaterials = new Array(defaultMaterials.length);
         defaultMaterials.forEach((m, i) => {
             parsedDefaultMaterials[i] = MaterialVariantId["tryParse(java.lang.String)"](m.toString());
         });
 
-        DetailedBase.drawExampleTools(elements, materialId, parsedDefaultMaterials, displayToolArguments.tools);
+        DetailedBase.drawExampleTools(elements, materialId, parsedDefaultMaterials, displayArguments.tools);
     }
 
 };
