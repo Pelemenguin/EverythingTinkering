@@ -30,6 +30,7 @@ let reprItems = {
     // Tier 1
     "tconstruct:wood": "minecraft:oak_log",
     "tconstruct:bamboo": "minecraft:bamboo",
+    "tconstruct:cactus": "minecraft:cactus",
     "tconstruct:rock": "minecraft:stone",
     "kubejs:soil": "minecraft:dirt",
     "kubejs:terracotta": "minecraft:terracotta",
@@ -45,6 +46,7 @@ let reprItems = {
     "tconstruct:leather": "minecraft:leather",
     "kubejs:paper": "minecraft:paper",
     "tconstruct:vine": "minecraft:vine",
+    "tconstruct:ice": "minecraft:ice",
 
     // Tier 2
     "tconstruct:iron": "minecraft:iron_ingot",
@@ -73,6 +75,7 @@ let reprItems = {
     "tconstruct:obsidian": "minecraft:obsidian",
     "tconstruct:darkthread": "minecraft:obsidian",
     "tconstruct:cobalt": "tconstruct:cobalt_ingot",
+    "tconstruct:ichorskin": "tconstruct:ichor_bucket",
 
     // Tier 4
     "tconstruct:blazewood": "tconstruct:blazewood",
