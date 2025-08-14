@@ -15,5 +15,5 @@
 - [Rhino](https://www.curseforge.com/minecraft/mc-mods/rhino) *2001.2.3-build.10* by LatvianModder
 - [ProbeJS](https://www.curseforge.com/minecraft/mc-mods/probejs) *6.0.1* by Amygdaloideae
   - This mod is only installed when developing. Not included in the modpack.
-- [Tinkers Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) *3.10.1.76* by mDiyo
+- [Tinkers Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) *3.10.2.92* by mDiyo
 - [TConstructJS](https://www.curseforge.com/minecraft/mc-mods/tconstructjs) *1.0.3* by lcy0x1
