@@ -51,14 +51,14 @@ let getIndicatorToolPart = (referenceMaterials) => {
 
     let item = TinkerToolParts.toolBinding.getOrNull();
     let materialId = referenceMaterials.map(material => material.getId());
-    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.toolHandle.getOrNull();
-    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.pickHead.getOrNull();
-    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.bowGrip.getOrNull();
-    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.bowLimb.getOrNull();
-    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.bowstring.getOrNull();
-    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.maille.getOrNull();
-    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.plating.values().get(0);
-    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.shieldCore.getOrNull();
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.toolHandle.getOrNull();  else return item;
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.pickHead.getOrNull();    else return item;
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.bowGrip.getOrNull();     else return item;
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.bowLimb.getOrNull();     else return item;
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.bowstring.getOrNull();   else return item;
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.maille.getOrNull();      else return item;
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.plating.values().get(0); else return item;
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.shieldCore.getOrNull();  else return item;
 
     return item;
 };
