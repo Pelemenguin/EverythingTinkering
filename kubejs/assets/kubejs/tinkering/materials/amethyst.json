@@ -1,0 +1,9 @@
+{
+    "color": "FF8D6ACC",
+    "fallbacks": [
+        "crystal",
+        "metal"
+    ],
+    "luminosity": 0,
+    "texture": "kubejs:amethyst"
+}
