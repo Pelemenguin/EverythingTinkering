@@ -44,24 +44,21 @@ RecipeDisplay.DEFAULT_X = 8;
 RecipeDisplay.DEFAULT_Y = 18;
 
 /**
- * 
- * @param {number} value 
- * @param {number} x 
- * @param {number} y 
- * @param {Internal.MaterialVariantId} referenceMaterial 
+ * @param {Internal.MaterialVariantId[]} referenceMaterials
  * @returns {Internal.ToolPartItem}
  */
-let getIndicatorToolPart = (referenceMaterial) => {
+let getIndicatorToolPart = (referenceMaterials) => {
 
     let item = TinkerToolParts.toolBinding.getOrNull();
-    let materialId = referenceMaterial.getId();
-    if (!item.canUseMaterial(materialId)) item = TinkerToolParts.toolHandle.getOrNull();
-    if (!item.canUseMaterial(materialId)) item = TinkerToolParts.pickHead.getOrNull();
-    if (!item.canUseMaterial(materialId)) item = TinkerToolParts.bowGrip.getOrNull();
-    if (!item.canUseMaterial(materialId)) item = TinkerToolParts.bowLimb.getOrNull();
-    if (!item.canUseMaterial(materialId)) item = TinkerToolParts.bowstring.getOrNull();
-    if (!item.canUseMaterial(materialId)) item = TinkerToolParts.maille.getOrNull();
-    if (!item.canUseMaterial(materialId)) item = TinkerToolParts.plating.values().get(0);
+    let materialId = referenceMaterials.map(material => material.getId());
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.toolHandle.getOrNull();
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.pickHead.getOrNull();
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.bowGrip.getOrNull();
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.bowLimb.getOrNull();
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.bowstring.getOrNull();
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.maille.getOrNull();
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.plating.values().get(0);
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.shieldCore.getOrNull();
 
     return item;
 };
@@ -78,7 +75,7 @@ let getIndicatorToolPart = (referenceMaterial) => {
 RecipeDisplay.materialValueIndicator = (variantId, value, x, y, referenceMaterial) => {
     if (referenceMaterial === undefined) referenceMaterial = variantId;
     
-    let result = new TinkerItemElement(getIndicatorToolPart(referenceMaterial).withMaterial(variantId).withCount(value));
+    let result = new TinkerItemElement(getIndicatorToolPart([variantId, referenceMaterial]).withMaterial(variantId).withCount(value));
     result.x = x;
     result.y = y;
     result.tooltip = Utils.newList();
@@ -95,7 +92,7 @@ RecipeDisplay.materialValueIndicator = (variantId, value, x, y, referenceMateria
  */
 RecipeDisplay.castIndicator = (referenceMaterial, x, y) => {
 
-    let indicatorToolPart = getIndicatorToolPart(referenceMaterial);
+    let indicatorToolPart = getIndicatorToolPart([referenceMaterial]);
     /** @type {Internal.ItemStack} */ let item;
     switch (indicatorToolPart.idLocation) {
 
@@ -107,6 +104,7 @@ RecipeDisplay.castIndicator = (referenceMaterial, x, y) => {
         case (TinkerToolParts.bowstring.id):            item = Item.of("minecraft:structure_void");       break;
         case (TinkerToolParts.maille.id):               item = Item.of("tconstruct:maille_cast");         break;
         case (TinkerToolParts.plating.values().get(0)): item = Item.of("tconstruct:helmet_plating_cast"); break;
+        case (TinkerToolParts.shieldCore.id):           item = Item.of("minecraft:barrier");              break;
 
     }
 
@@ -338,7 +336,7 @@ RecipeDisplay.prototype = {
         arrow.y = arrowExtend.y;
         elements.add(arrow);
 
-        elements.add(RecipeDisplay.materialValueIndicator(recipe.getOutput().getVariant(), 1, arrow.x + 21, cast.y));
+        elements.add(RecipeDisplay.materialValueIndicator(recipe.getOutput().getVariant(), 1, arrow.x + 21, cast.y, recipe.getInput().getVariant()));
 
         return 18;
     }
