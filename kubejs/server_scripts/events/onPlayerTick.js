@@ -33,7 +33,7 @@ PlayerEvents.tick(event => {
     if (damage > 0) {
         event.getPlayer().attack(event.getPlayer().damageSources().lava(), damage);
     }
-    if (fireTime > event.getPlayer().getRemainingFireTicks()) {
+    if (fireTime > event.getPlayer().getRemainingFireTicks() && fireTime > 0) {
         event.getPlayer().setRemainingFireTicks(fireTime);
     }
 });
