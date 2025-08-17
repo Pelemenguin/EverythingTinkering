@@ -176,13 +176,13 @@
     
         "_comment_artifacts": " ----- Artifacts ----- ",
     
-    "item.kubejs.artifact.startup.pickaxe.name": "Startup Pickaxe",
+    "item.kubejs.artifact.startup.pickaxe.name": "Starter Pickaxe",
     "item.kubejs.artifact.startup.pickaxe.lore": "A gift to beginners.",
     
-    "item.kubejs.artifact.startup.hand_axe.name": "Startup Hand Axe",
+    "item.kubejs.artifact.startup.hand_axe.name": "Starter Hand Axe",
     "item.kubejs.artifact.startup.hand_axe.lore": "A gift to beginners.",
     
-    "item.kubejs.artifact.startup.sword.name": "Startup Sword",
+    "item.kubejs.artifact.startup.sword.name": "Starter Sword",
     "item.kubejs.artifact.startup.sword.lore": "A gift to beginners.",
 
         "_comment_book": " ----- Book ----- ",
