@@ -39,6 +39,8 @@ const ItemStack = Java.loadClass("net.minecraft.world.item.ItemStack");
 const MobEffectInstance = Java.loadClass("net.minecraft.world.effect.MobEffectInstance");
 const ChatFormatting = Java.loadClass("net.minecraft.ChatFormatting");
 const LanguageManager = Java.loadClass("net.minecraft.client.resources.language.LanguageManager");
+const ParticleOptions = Java.loadClass("net.minecraft.core.particles.ParticleOptions");
+const DustParticleOptions = Java.loadClass("net.minecraft.core.particles.DustParticleOptions");
 
 const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
 const BookTransformer = Java.loadClass("slimeknights.mantle.client.book.transformer.BookTransformer");

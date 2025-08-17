@@ -81,7 +81,7 @@ declare namespace Annotation {
 
     namespace TinkerFunction {
         type Hook = "addToolStats" | "armorTakeAttacked" | "getBreakSpeed" | "onAfterBreak" | "getMeleeDamage" | "onAfterMeleeHit" | "onBeforeMeleeHit" | "onInventoryTick"
-            | "tooltipSetting" | "onServerTick";
+            | "projectileLaunch" | "tooltipSetting" | "onServerTick";
     }
 
 }

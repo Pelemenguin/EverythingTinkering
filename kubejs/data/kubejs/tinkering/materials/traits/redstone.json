@@ -1,0 +1,8 @@
+{
+    "default": [
+        {
+            "name": "kubejs:enpower",
+            "level": 1
+        }
+    ]
+}

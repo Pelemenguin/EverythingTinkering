@@ -102,6 +102,15 @@ TConJSEvents.modifierRegistry(event => {
                             }
                         });
                         break;
+                    case "projectileLaunch":
+                        builder.projectileLaunch((arg0, arg1, arg2, arg3, arg4, arg5, arg6) => {
+                            try {
+                                global.TinkerFunctions.projectileLaunch.get(id)(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+                            } catch (e) {
+                                console.error(`Exception occurred! ${e}`);
+                            }
+                        });
+                        break;
                     case "tooltipSetting":
                         builder.tooltipSetting((arg0, arg1, arg2, arg3, arg4, arg5) => {
                             try {
@@ -232,6 +241,15 @@ KubeJSModifier.prototype.onInventoryTick = function(consumer) {
     global.TinkerFunctions.onInventoryTickFunctions.put(this.id, consumer);
 };
 /**
+ * - Triggers when launching projectiles.
+ * - 发射弹射物时触发。
+ * - - - - -
+ * @param {Internal.ModifierBuilder$ProjectileLaunchFunction_} consumer 
+ */
+KubeJSModifier.prototype.projectileLaunch = function(consumer) {
+    global.TinkerFunctions.projectileLaunch.put(this.id, consumer);
+};
+/**
  * - Set the tooltips.
  * - 设置工具提示。
  * - - - - -
@@ -296,6 +314,10 @@ global.TinkerFunctions.onBeforeMeleeHitFunctions = Utils.newMap();
  * @type {Internal.Map<string, Internal.ModifierBuilder$InventoryTickFunction_>}
  */
 global.TinkerFunctions.onInventoryTickFunctions = Utils.newMap();
+/**
+ * @type {Internal.Map<string, Internal.ModifierBuilder$ProjectileLaunchFunction_>}
+ */
+global.TinkerFunctions.projectileLaunch = Utils.newMap();
 /**
  * @type {Internal.Map<string, Internal.ModifierBuilder$TooltipSettingFunction_>}
  */
