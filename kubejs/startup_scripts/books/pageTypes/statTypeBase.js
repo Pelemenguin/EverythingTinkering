@@ -62,10 +62,10 @@ let writeStat = (elements, y, materialId, statId) => {
 
     let reprItem = Item.of(StatRepresentativeItem[statId], 1, {Material: materialId.toString()});
     let itemElement = new TinkerItemElement(reprItem);
-    itemElement.y = y;
+    itemElement.y = y + 1;
     itemElement.scale(0.5);
     itemElement.width = 8;
-    itemElement.width = 8;
+    itemElement.height = 8;
     elements.add(itemElement);
 
     let stats = statsOptional.get();
@@ -375,7 +375,7 @@ let addMailleStats = (elements, materialId, y) => {
 
     let item = new TinkerItemElement(TinkerToolParts.maille.getOrNull().withMaterial(materialId));
     item.x = 0;
-    item.y = y;
+    item.y = y + 1;
     item.scale(0.5);
     item.width = 8;
     item.height = 8;
@@ -408,7 +408,7 @@ let addShieldCoreStats = (elements, materialId, y) => {
 
     let item = new TinkerItemElement(TinkerToolParts.shieldCore.getOrNull().withMaterial(materialId));
     item.x = 0;
-    item.y = y;
+    item.y = y + 1;
     item.scale(0.5);
     item.width = 8;
     item.height = 8;
