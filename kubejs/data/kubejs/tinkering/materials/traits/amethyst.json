@@ -1,4 +1,8 @@
 {
     "default": [
+        {
+            "name": "kubejs:resonance",
+            "level": 1
+        }
     ]
 }
