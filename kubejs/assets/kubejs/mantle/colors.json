@@ -53,6 +53,8 @@
         
         "lapis_lazuli": "#345EC3",
 
+        "amethyst": "#8D6ACC",
+
         "paper": "#FCFCF2",
         
         "andesite_alloy": "#c9caba",
@@ -94,6 +96,7 @@
         "pottery": "#9B6045",
         "glass_shard": "#d0eae9",
         "uncertain": "#345EC3",
+        "resonance": "#8D6ACC",
         "papercutting": "#FCFCF2",
         "relaying": "#c9caba",
         "antifatigue": "#C6DFD8"

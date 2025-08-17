@@ -81,6 +81,10 @@
     "material.kubejs.lapis_lazuli": "Lapis Lazuli",
     "material.kubejs.lapis_lazuli.flavor": "Keep mining! How do you know whether the block behind there is a stone or hidden treasures!",
     "material.kubejs.lapis_lazuli.encyclopedia": "Before the probability reach 0, each level can support you to mine 1000 blocks. The initial probability is constantly 20%",
+
+    "material.kubejs.amethyst": "Amethyst",
+    "material.kubejs.amethyst.flavor": "Ding~",
+    "material.kubejs.amethyst.encyclopedia": "Highlights surrounding targets of same type on attack. Effect range is a cube centered on target with side length = 4×trait level + 2×attack damage",
     
     "material.tconstruct.glass.white_stained": "White Stained Glass",
     "material.tconstruct.glass.orange_stained": "Orange Stained Glass",
@@ -144,6 +148,10 @@
     "modifier.kubejs.uncertain": "Uncertain",
     "modifier.kubejs.uncertain.flavor": "Schrödinger's Ore!",
     "modifier.kubejs.uncertain.description": "Ores sometimes duplicate themselves when no one notices after being mined. However, probability of this will reduce and reach 0 at last",
+
+    "modifier.kubejs.resonance": "Resonance",
+    "modifier.kubejs.resonance.flavor": "Calibrated Sculk Sensor!",
+    "modifier.kubejs.resonance.description": "Highlights surrounding creatures of same type on attack",
 
     "modifier.kubejs.igniting": "Igniting",
     "modifier.kubejs.igniting.flavor": "Hot Caution!",

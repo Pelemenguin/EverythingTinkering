@@ -40,6 +40,7 @@ let reprItems = {
     "tconstruct:bone": "minecraft:bone",
     "tconstruct:copper": "minecraft:copper_ingot",
     "kubejs:lapis_lazuli": "minecraft:lapis_lazuli",
+    "kubejs:amethyst": "minecraft:amethyst_shard",
     "kubejs:andesite_alloy": "create:andesite_alloy",
     "tconstruct:chorus": "minecraft:popped_chorus_fruit",
     "tconstruct:string": "minecraft:string",
