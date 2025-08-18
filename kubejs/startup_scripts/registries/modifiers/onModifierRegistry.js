@@ -158,7 +158,7 @@ const KubeJSModifier = function(name, hooks) {
 
     this.hooks.forEach(hook => {
         switch (hook) {
-            case "onServerTick": global.TinkerFunctions.onServerTickFunctions.put(this.id, null);
+            case "onServerTick": global.TinkerFunctions.onServerTickFunctions.put(this.id, () => {});
         }
     });
 
