@@ -25,6 +25,9 @@
 
 // ---------- Java classes ---------- //
 
+/** @type {typeof Internal.Class} */
+const Class = Java.loadClass("java.lang.Object").__javaObject__.getClass();
+
 const NonNullList = Java.loadClass("net.minecraft.core.NonNullList");
 
 const SimpleSoundInstance = Java.loadClass("net.minecraft.client.resources.sounds.SimpleSoundInstance");
