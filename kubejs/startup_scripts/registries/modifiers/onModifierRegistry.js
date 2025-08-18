@@ -1,5 +1,7 @@
 // priority: 10000
 
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 /**
  * @file This JS file is for modifier registry.
  * - - - - -
@@ -7,8 +9,6 @@
  * @license LGPL-3.0-or-later
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
- * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
  * - - - - -
  * @author Pelemenguin
  */
@@ -140,7 +140,7 @@ TConJSEvents.modifierRegistry(event => {
  * - - - - -
  * @class
  */
-const KubeJSModifier = function(name, hooks) {
+const KubeJSModifierBuilder = function(name, hooks) {
     /**
      * - Modifier's name.
      * - 特性名称。
@@ -174,7 +174,7 @@ const KubeJSModifier = function(name, hooks) {
  * - - - - -
  * @param {Internal.ModifierBuilder$ToolStatModifyFunction_} consumer 
  */
-KubeJSModifier.prototype.addToolStats = function(consumer) {
+KubeJSModifierBuilder.prototype.addToolStats = function(consumer) {
     global.TinkerFunctions.addToolStatsFunctions.put(this.id, consumer);
 };
 /**
@@ -183,7 +183,7 @@ KubeJSModifier.prototype.addToolStats = function(consumer) {
  * - - - - -
  * @param {Internal.ModifierBuilder$ArmorAttackedFunction_} consumer 
  */
-KubeJSModifier.prototype.armorTakeAttacked = function(consumer) {
+KubeJSModifierBuilder.prototype.armorTakeAttacked = function(consumer) {
     global.TinkerFunctions.armorTakeAttackedFunctions.put(this.id, consumer);
 };
 /**
@@ -192,7 +192,7 @@ KubeJSModifier.prototype.armorTakeAttacked = function(consumer) {
  * - - - - -
  * @param {Internal.ModifierBuilder$GetBreakSpeedFunction_} consumer 
  */
-KubeJSModifier.prototype.getBreakSpeed = function(consumer) {
+KubeJSModifierBuilder.prototype.getBreakSpeed = function(consumer) {
     global.TinkerFunctions.getBreakSpeedFunctions.put(this.id, consumer);
 };
 /**
@@ -201,7 +201,7 @@ KubeJSModifier.prototype.getBreakSpeed = function(consumer) {
  * - - - - -
  * @param {Internal.ModifierBuilder$BreakBlockFunction_} consumer 
  */
-KubeJSModifier.prototype.onAfterBreak = function(consumer) {
+KubeJSModifierBuilder.prototype.onAfterBreak = function(consumer) {
     global.TinkerFunctions.onAfterBreakFunctions.put(this.id, consumer);
 };
 /**
@@ -210,7 +210,7 @@ KubeJSModifier.prototype.onAfterBreak = function(consumer) {
  * - - - - -
  * @param {Internal.ModifierBuilder$GetMeleeDamageFunction_} consumer 
  */
-KubeJSModifier.prototype.getMeleeDamage = function(consumer) {
+KubeJSModifierBuilder.prototype.getMeleeDamage = function(consumer) {
     global.TinkerFunctions.getMeleeDamageFunctions.put(this.id, consumer);
 };
 /**
@@ -219,7 +219,7 @@ KubeJSModifier.prototype.getMeleeDamage = function(consumer) {
  * - - - - -
  * @param {Internal.ModifierBuilder$AfterMeleeHitFunction_} consumer 
  */
-KubeJSModifier.prototype.onAfterMeleeHit = function(consumer) {
+KubeJSModifierBuilder.prototype.onAfterMeleeHit = function(consumer) {
     global.TinkerFunctions.onAfterMeleeHitFunctions.put(this.id, consumer);
 };
 /**
@@ -228,7 +228,7 @@ KubeJSModifier.prototype.onAfterMeleeHit = function(consumer) {
  * - - - - -
  * @param {Internal.ModifierBuilder$BeforeMeleeHitFunction_} consumer 
  */
-KubeJSModifier.prototype.onBeforeMeleeHit = function(consumer) {
+KubeJSModifierBuilder.prototype.onBeforeMeleeHit = function(consumer) {
     global.TinkerFunctions.onBeforeMeleeHitFunctions.put(this.id, consumer);
 };
 /**
@@ -237,7 +237,7 @@ KubeJSModifier.prototype.onBeforeMeleeHit = function(consumer) {
  * - - - - -
  * @param {Internal.ModifierBuilder$InventoryTickFunction_} consumer 
  */
-KubeJSModifier.prototype.onInventoryTick = function(consumer) {
+KubeJSModifierBuilder.prototype.onInventoryTick = function(consumer) {
     global.TinkerFunctions.onInventoryTickFunctions.put(this.id, consumer);
 };
 /**
@@ -246,7 +246,7 @@ KubeJSModifier.prototype.onInventoryTick = function(consumer) {
  * - - - - -
  * @param {Internal.ModifierBuilder$ProjectileLaunchFunction_} consumer 
  */
-KubeJSModifier.prototype.projectileLaunch = function(consumer) {
+KubeJSModifierBuilder.prototype.projectileLaunch = function(consumer) {
     global.TinkerFunctions.projectileLaunch.put(this.id, consumer);
 };
 /**
@@ -255,7 +255,7 @@ KubeJSModifier.prototype.projectileLaunch = function(consumer) {
  * - - - - -
  * @param {Internal.ModifierBuilder$TooltipSettingFunction_} consumer 
  */
-KubeJSModifier.prototype.tooltipSetting = function(consumer) {
+KubeJSModifierBuilder.prototype.tooltipSetting = function(consumer) {
     global.TinkerFunctions.tooltipSettingFunctions.put(this.id, consumer);
 };
 /**
@@ -264,7 +264,7 @@ KubeJSModifier.prototype.tooltipSetting = function(consumer) {
  * - - - - -
  * @param {function(Internal.ServerEventJS_): void} consumer 
  */
-KubeJSModifier.prototype.onServerTick = function(consumer) {
+KubeJSModifierBuilder.prototype.onServerTick = function(consumer) {
     if (this.hooks.indexOf("onServerTick") == -1) console.error(`You cannot add "onServerTick" function, you forgot to declare this when registering modifier.`);
     global.TinkerFunctions.onServerTickFunctions.put(this.id, consumer);
 };
@@ -331,7 +331,7 @@ global.TinkerFunctions.onServerTickFunctions = Utils.newMap();
  * - A JS object to store all registered modifiers.
  * - 用于存储已注册的 modifier。
  * - - - - -
- * @type {Internal.Map<string, KubeJSModifier>}
+ * @type {Internal.Map<string, KubeJSModifierBuilder>}
  */
 const RegisteredModifiers = Utils.newMap();
 
@@ -357,12 +357,12 @@ function ModifierRegisterer() {}
  * - Functions that modifier will register.
  * - 将会注册的函数。
  * - - - - -
- * @returns {KubeJSModifier}
+ * @returns {KubeJSModifierBuilder}
  * - The new modifier.
  * - 新的自定义特性。
  */
 ModifierRegisterer.registerModifier = (id, hooks) => {
-    let modifier = new KubeJSModifier(id, hooks);
+    let modifier = new KubeJSModifierBuilder(id, hooks);
     RegisteredModifiers.put(modifier.id, modifier);
     console.log(`[Modifier] "${modifier.id}" registered! With functions: [${modifier.hooks}]`);
     return modifier;

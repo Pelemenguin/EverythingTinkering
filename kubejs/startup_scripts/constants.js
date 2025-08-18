@@ -1,4 +1,4 @@
-// priority: 10000
+// priority: 2147483647
 
 /**
  * @fileoverview Constants | 常量
@@ -24,6 +24,9 @@
 */
 
 // ---------- Java classes ---------- //
+
+/** @type {typeof Internal.Class} */
+const Class = Java.loadClass("java.lang.Object").__javaObject__.getClass();
 
 const NonNullList = Java.loadClass("net.minecraft.core.NonNullList");
 
@@ -53,6 +56,7 @@ const MaterialVariantId = Java.loadClass("slimeknights.tconstruct.library.materi
 const TinkerBook = Java.loadClass("slimeknights.tconstruct.library.client.book.TinkerBook");
 const MaterialRegistry = Java.loadClass('slimeknights.tconstruct.library.materials.MaterialRegistry');
 const MaterialStatsId = Java.loadClass("slimeknights.tconstruct.library.materials.stats.MaterialStatsId");
+const Modifier = Java.loadClass("slimeknights.tconstruct.library.modifiers.Modifier");
 const ModifierId = Java.loadClass('slimeknights.tconstruct.library.modifiers.ModifierId');
 const ToolMaterialHook = Java.loadClass("slimeknights.tconstruct.library.tools.definition.module.material.ToolMaterialHook");
 const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ToolStack');
@@ -67,6 +71,12 @@ const MaterialCastingLookup = Java.loadClass("slimeknights.tconstruct.library.re
 const MaterialRecipeCache = Java.loadClass("slimeknights.tconstruct.library.recipe.material.MaterialRecipeCache");
 const TinkerToolParts = Java.loadClass("slimeknights.tconstruct.tools.TinkerToolParts");
 const TinkerTools = Java.loadClass("slimeknights.tconstruct.tools.TinkerTools");
+
+const KubeJS = Java.loadClass("dev.latvian.mods.kubejs.KubeJS");
+const Context = Java.loadClass("dev.latvian.mods.rhino.Context");
+
+const startupContext = KubeJS.getStartupScriptManager().context;
+const topLevelScope = KubeJS.getStartupScriptManager().topLevelScope;
 
 const PageDataJS = Java.loadClass("pelemenguin.mantlejs.content.book.data.PageDataJS");
 const MantleJSTransformer = Java.loadClass("pelemenguin.mantlejs.content.book.transformer.MantleJSTransformer");
