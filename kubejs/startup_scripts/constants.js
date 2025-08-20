@@ -72,6 +72,7 @@ const MaterialCastingLookup = Java.loadClass("slimeknights.tconstruct.library.re
 const MaterialRecipeCache = Java.loadClass("slimeknights.tconstruct.library.recipe.material.MaterialRecipeCache");
 const TinkerToolParts = Java.loadClass("slimeknights.tconstruct.tools.TinkerToolParts");
 const TinkerTools = Java.loadClass("slimeknights.tconstruct.tools.TinkerTools");
+const ModifierDeferredRegister = Java.loadClass("slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister");
 
 const KubeJS = Java.loadClass("dev.latvian.mods.kubejs.KubeJS");
 const Context = Java.loadClass("dev.latvian.mods.rhino.Context");
@@ -94,6 +95,9 @@ const JavaUtils = {
     /** @type {typeof Internal.MethodHandles} */
     MethodHandles: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.lang.invoke.MethodHandles"))
 };
+
+/** @type {typeof Internal.FMLJavaModLoadingContext} */
+const FMLJavaModLoadingContext = new NativeJavaClass(startupContext, topLevelScope, Class.forName("net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext"));
 
 // ---------- Utils ---------- //
 

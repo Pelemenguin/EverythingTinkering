@@ -29,7 +29,7 @@ const CodeAttribute = function(maxStack, maxLocals, byteCodeGenerator) {
 };
 
 CodeAttribute.prototype.generateByteCode = function() {
-    let content = this.generator();
+    let content = this.generator().map(b => b > 127 ? b - 256 : b);
     let length = content.length;
 
     return JavaUtils.ByteBuffer.allocate(8).putShort(0, this.maxStack).putShort(2, this.maxLocals).putInt(4, length).array().concat(content).concat(
