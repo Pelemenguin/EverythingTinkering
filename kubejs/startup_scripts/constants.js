@@ -27,6 +27,7 @@
 
 /** @type {typeof Internal.Class} */
 const Class = Java.loadClass("java.lang.Object").__javaObject__.getClass();
+const NativeJavaClass = Java.loadClass("dev.latvian.mods.rhino.NativeJavaClass");
 
 const NonNullList = Java.loadClass("net.minecraft.core.NonNullList");
 
@@ -83,7 +84,9 @@ const MantleJSTransformer = Java.loadClass("pelemenguin.mantlejs.content.book.tr
 
 const JavaUtils = {
     ArrayList: Java.loadClass("java.util.ArrayList"),
-    Collectors: Java.loadClass("java.util.stream.Collectors")
+    Collectors: Java.loadClass("java.util.stream.Collectors"),
+    /** @type {typeof Internal.ByteBuffer} */
+    ByteBuffer: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.nio.ByteBuffer"))
 };
 
 // ---------- Utils ---------- //
