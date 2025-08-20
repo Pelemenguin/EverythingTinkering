@@ -53,14 +53,16 @@ let CONSTANT_Utf8 = function(content) {
     this.length = content.length;
 };
 
+/** @returns {number[]} */
 CONSTANT_Utf8.prototype.generateByteCode = function() {
-    let tag = [1];
-    let lengthInfo = [this.length >> 8, this.length % 256];
-    /** @type {number[]} */ let encoded = [];
-    for (let i = 0; i < this.length; i++) {
-        encoded.push(this.content.charCodeAt(i));
-    }
-    return tag.concat(lengthInfo).concat(encoded).map(b => b > 127 ? b - 128 : b);
+    let boas = new JavaUtils.ByteArrayOutputStream();
+    let dos = new JavaUtils.DataOutputStream(boas);
+
+    dos.writeByte(1);
+    dos.writeUTF(this.content);
+    dos.close();
+
+    return boas.toByteArray();
 };
 
 /**
@@ -86,7 +88,7 @@ CONSTANT_Float.prototype.generateByteCode = function() {
 };
 
 /**
- * @param {bigint} value 
+ * @param {number} value 
  */
 let CONSTANT_Long = function(value) {
     this.value = value;

@@ -86,7 +86,11 @@ const JavaUtils = {
     ArrayList: Java.loadClass("java.util.ArrayList"),
     Collectors: Java.loadClass("java.util.stream.Collectors"),
     /** @type {typeof Internal.ByteBuffer} */
-    ByteBuffer: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.nio.ByteBuffer"))
+    ByteBuffer: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.nio.ByteBuffer")),
+    /** @type {typeof Internal.ByteArrayOutputStream} */
+    ByteArrayOutputStream: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.io.ByteArrayOutputStream")),
+    /** @type {typeof Internal.DataOutputStream} */
+    DataOutputStream: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.io.DataOutputStream"))
 };
 
 // ---------- Utils ---------- //
