@@ -90,7 +90,9 @@ const JavaUtils = {
     /** @type {typeof Internal.ByteArrayOutputStream} */
     ByteArrayOutputStream: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.io.ByteArrayOutputStream")),
     /** @type {typeof Internal.DataOutputStream} */
-    DataOutputStream: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.io.DataOutputStream"))
+    DataOutputStream: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.io.DataOutputStream")),
+    /** @type {typeof Internal.MethodHandles} */
+    MethodHandles: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.lang.invoke.MethodHandles"))
 };
 
 // ---------- Utils ---------- //
