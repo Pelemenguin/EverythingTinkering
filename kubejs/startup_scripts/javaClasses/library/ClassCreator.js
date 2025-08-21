@@ -14,6 +14,7 @@
  */
 
 /* global
+    global: writable
     JavaUtils
     ConstantPoolEntries
     Method
@@ -21,13 +22,18 @@
     NativeJavaClass
     startupContext
     topLevelScope
+    Utils
 */
+
+/** @type {Internal.Map<string, Internal.NativeJavaClass>} */
+global.CreatedClasses;
+if (global.CreatedClasses === undefined) global.CreatedClasses = Utils.newMap();
 
 /**
  * @param {string} name 
  */
 function ClassCreator(name) {
-    this.name = name;
+    this.name = "dev.latvian.mods.rhino." + name;
     this.constantPoolCounter = 1;
     /** @type {Method[]} */
     this.methods = [];
@@ -43,8 +49,8 @@ function ClassCreator(name) {
  * @returns {number[]}
  */
 ClassCreator.prototype.generateByteCode = function() {
-    let thisClass = this.createConstant(7, new ConstantPoolEntries.Class(this.createConstant(1, new ConstantPoolEntries.Utf8(this.name.replace('.', '/')))));
-    let superClass = this.createConstant(7, new ConstantPoolEntries.Class(this.createConstant(1, new ConstantPoolEntries.Utf8(this.superClass.replace('.', '/')))));
+    let thisClass = this.createConstant(7, new ConstantPoolEntries.Class(this.createConstant(1, new ConstantPoolEntries.Utf8(this.name.replace(/\./g, '/')))));
+    let superClass = this.createConstant(7, new ConstantPoolEntries.Class(this.createConstant(1, new ConstantPoolEntries.Utf8(this.superClass.replace(/\./g, '/')))));
 
     let methodByteCodes = (() => {
         let result = [];
@@ -77,7 +83,7 @@ ClassCreator.prototype.generateByteCode = function() {
     let printer = "\n------------------------ BYTE CODE GENERATED ------------------------";
     printer += `\nTHIS CLASS:  #${thisClass}    ${this.name}`;
     printer += `\nSUPER CLASS: #${superClass}    ${this.superClass}`;
-    printer += "\nBYTE CODE:";
+    printer += `\nBYTE CODE: (${result.length} bytes)`;
     result.map(b => (b < 0 ? b + 256 : b).toString(16)).map(s => '0'.repeat(2 - s.length).concat(s)).forEach((s, i) => {
         if (i % 16 == 0) {
             printer += '\n';
@@ -100,10 +106,19 @@ ClassCreator.prototype.generateByteCode = function() {
  * @param {Internal.MethodHandles$Lookup} lookup 
  */
 ClassCreator.prototype.defineHiddenClass = function(lookup) {
+    if (global.CreatedClasses.containsKey(this.name)) {
+        console.info(`\n    Class creation rejected: ${this.name.split('.').pop()} has been created before.`);
+        return global.CreatedClasses.get(this.name);
+    }
+
     let bc = this.generateByteCode();
 
-    let clazz = lookup.defineHiddenClass(bc, true);
-    return new NativeJavaClass(startupContext, topLevelScope, clazz);
+    let clazz = lookup.defineHiddenClass(bc, true).lookupClass();
+    let result = new NativeJavaClass(startupContext, topLevelScope, clazz);
+
+    global.CreatedClasses.put(this.name, result);
+
+    return result;
 };
 
 /**

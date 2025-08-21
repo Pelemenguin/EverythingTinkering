@@ -22,14 +22,14 @@
     StartupEvents
 */
 
-let TestModifier = (new ClassCreator("dev.latvian.mods.rhino.TestModifier"))
+let TestModifier = (new ClassCreator("TestModifier"))
     .extends("slimeknights.tconstruct.library.modifiers.Modifier")
     .addMethod('<init>', '()V', method => {
         method.setPublic().addAttribute('Code', new CodeAttribute(1, 1, () => [
             0x2a, // aload_0
             0xb7, // invokespecial: `superClass`.<init>()V
         ].concat(
-            JavaUtils.ByteBuffer.allocate(2).putShort(0, method.parent.CONSTANT_Methodref(method.parent.superClass, "<init>", "()V")).array()
+            JavaUtils.ByteBuffer.allocate(2).putShort(0, method.parent.CONSTANT_Methodref("slimeknights/tconstruct/library/modifiers/Modifier", "<init>", "()V")).array()
         ).concat([
             0xb1, // return
         ])));
