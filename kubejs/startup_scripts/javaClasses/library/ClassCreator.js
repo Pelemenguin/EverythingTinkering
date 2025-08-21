@@ -38,6 +38,8 @@ function ClassCreator(name) {
     /** @type {Method[]} */
     this.methods = [];
 
+    this.access = 33; // ACC_PUBILC, ACC_SUPER
+
     /** @type {[tag: number, {generateByteCode: () => number[]}][]} */
     this.constantPool = [];
 
@@ -79,7 +81,7 @@ ClassCreator.prototype.generateByteCode = function() {
     let result = [-54, -2, -70, -66, 0, 0, 0, 61]
         .concat(JavaUtils.ByteBuffer.allocate(2).putShort(0, this.constantPoolCounter).array())
         .concat(constantPool)
-        .concat([0, 33]) // ACC_PUBLIC, ACC_SUPER
+        .concat(JavaUtils.ByteBuffer.allocate(2).putShort(0, this.access).array())
         .concat(JavaUtils.ByteBuffer.allocate(4).putShort(0, thisClass).putShort(2, superClass).array())
         .concat(superInterfaces) // 0 Interface
         .concat([0, 0]) // 0 Field
@@ -89,6 +91,7 @@ ClassCreator.prototype.generateByteCode = function() {
         ;
 
     let printer = "\n------------------------ BYTE CODE GENERATED ------------------------";
+    printer += `\nCLASS MODIFIERS: 0x${this.access.toString(16)}`;
     printer += `\nTHIS CLASS:  #${thisClass}    ${this.name}`;
     printer += `\nSUPER CLASS: #${superClass}    ${this.superClass}`;
     printer += `\nSUPER INTERFACES: (${this.superInterfaces.length} total)`;
@@ -104,7 +107,7 @@ ClassCreator.prototype.generateByteCode = function() {
     });
     printer += "\nCONSTANT POOL:";
     this.constantPool.forEach((c, i) => printer += `\n    #${i+1}\tTag: ${c[0]}\tContent: ${c[1].toString()}`);
-    printer += `\n\nMETHODS: (total ${this.methods.length})`;
+    printer += `\nMETHODS: (total ${this.methods.length})`;
     this.methods.forEach(m => {
         printer += `\n    ${m.name} ${m.descriptor}`;
     });
@@ -116,6 +119,7 @@ ClassCreator.prototype.generateByteCode = function() {
 
 /**
  * @param {Internal.MethodHandles$Lookup} lookup 
+ * @returns {typeof any}
  */
 ClassCreator.prototype.defineHiddenClass = function(lookup) {
     if (global.CreatedClasses.containsKey(this.name)) {
@@ -191,6 +195,19 @@ ClassCreator.prototype.extends = function(superClass) {
  */
 ClassCreator.prototype.implements = function(superinterface) {
     this.superInterfaces.push(superinterface.replace(/\./g, '/'));
+    return this;
+};
+
+/**
+ * - Mark the class as an interface.
+ * - 将类标记为接口。
+ * - - - - -
+ * @returns {this}
+ */
+ClassCreator.prototype.isInterface = function() {
+    this.access |= 0x0200;
+    this.access |= 0x0400;
+    this.access -= (this.access & 0x0020);
     return this;
 };
 

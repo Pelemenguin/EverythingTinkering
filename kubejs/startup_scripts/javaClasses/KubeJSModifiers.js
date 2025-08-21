@@ -22,6 +22,10 @@
     StartupEvents
 */
 
+// eslint-disable-next-line no-unused-vars
+let ProjectileLaunchFunction = (new ClassCreator("ProjectileLaunchFunction"))
+    .isInterface().defineHiddenClass(JavaUtils.MethodHandles.lookup());
+
 let TestModifier = (new ClassCreator("TestModifier"))
     .extends("slimeknights.tconstruct.library.modifiers.Modifier")
     .implements("slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook")
