@@ -19,28 +19,11 @@
     JavaUtils
     ModifierDeferredRegister
     FMLJavaModLoadingContext
+    StartupEvents
 */
 
-// let testClassCreator = (new ClassCreator("dev/latvian/mods/rhino/TestClass"))
-//     .extends("slimeknights/tconstruct/library/modifiers/Modifier")
-//     .addMethod('<init>', '()V', method => {
-//         method.setPublic().addAttribute('Code', new CodeAttribute(1, 1, () => [
-//             0x2a, // aload_0
-//             0xb7 -256, // invokespecial
-//         ].concat(JavaUtils.ByteBuffer.allocate(2).putShort(0, method.parent.CONSTANT_Methodref("slimeknights/tconstruct/library/modifiers/Modifier", "<init>", "()V")).array()).concat([
-//             0xb1 -256, // return
-//         ])));
-//     });
-
-// let TestClass = testClassCreator.createClass(JavaUtils.MethodHandles.lookup());
-
-// // let TestClassInstance = TestClass.getConstructor([]).newInstance([]);
-// // console.info(TestClass.getMethod("getPriority", []).invoke(TestClassInstance, []));
-
-// console.info((new TestClass()).getPriority());
-
-let TestModifier = (new ClassCreator("dev/latvian/mods/rhino/TestModifier"))
-    .extends("slimeknights/tconstruct/library/modifiers/Modifier")
+let TestModifier = (new ClassCreator("dev.latvian.mods.rhino.TestModifier"))
+    .extends("slimeknights.tconstruct.library.modifiers.Modifier")
     .addMethod('<init>', '()V', method => {
         method.setPublic().addAttribute('Code', new CodeAttribute(1, 1, () => [
             0x2a, // aload_0
@@ -50,14 +33,13 @@ let TestModifier = (new ClassCreator("dev/latvian/mods/rhino/TestModifier"))
         ).concat([
             0xb1, // return
         ])));
-    }).createClass(JavaUtils.MethodHandles.lookup());
+    }).defineHiddenClass(JavaUtils.MethodHandles.lookup());
 
 StartupEvents.init(() => {
     const KUBEJS_MODIFIERS = new ModifierDeferredRegister.create("kubejs");
 
+    // eslint-disable-next-line no-unused-vars
     let TEST_MODIFIER = KUBEJS_MODIFIERS.register("test_modifier", () => new TestModifier());
 
     KUBEJS_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-
-    console.info(TEST_MODIFIER.isBound());
 });

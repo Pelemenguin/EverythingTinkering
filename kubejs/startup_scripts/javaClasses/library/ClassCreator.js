@@ -43,8 +43,8 @@ function ClassCreator(name) {
  * @returns {number[]}
  */
 ClassCreator.prototype.generateByteCode = function() {
-    let thisClass = this.createConstant(7, new ConstantPoolEntries.Class(this.createConstant(1, new ConstantPoolEntries.Utf8(this.name))));
-    let superClass = this.createConstant(7, new ConstantPoolEntries.Class(this.createConstant(1, new ConstantPoolEntries.Utf8(this.superClass))));
+    let thisClass = this.createConstant(7, new ConstantPoolEntries.Class(this.createConstant(1, new ConstantPoolEntries.Utf8(this.name.replace('.', '/')))));
+    let superClass = this.createConstant(7, new ConstantPoolEntries.Class(this.createConstant(1, new ConstantPoolEntries.Utf8(this.superClass.replace('.', '/')))));
 
     let methodByteCodes = (() => {
         let result = [];
@@ -74,7 +74,7 @@ ClassCreator.prototype.generateByteCode = function() {
         .concat([0, 0]) // 0 Attributes
         ;
 
-    let printer = "\n------------------------ NEW CLASS ------------------------";
+    let printer = "\n------------------------ BYTE CODE GENERATED ------------------------";
     printer += `\nTHIS CLASS:  #${thisClass}    ${this.name}`;
     printer += `\nSUPER CLASS: #${superClass}    ${this.superClass}`;
     printer += "\nBYTE CODE:";
@@ -90,7 +90,7 @@ ClassCreator.prototype.generateByteCode = function() {
     this.methods.forEach(m => {
         printer += `\n    ${m.name} ${m.descriptor}`;
     });
-    printer += "\n-----------------------------------------------------------";
+    printer += "\n---------------------------------------------------------------------";
     console.info(printer);
 
     return result;
@@ -99,9 +99,11 @@ ClassCreator.prototype.generateByteCode = function() {
 /**
  * @param {Internal.MethodHandles$Lookup} lookup 
  */
-ClassCreator.prototype.createClass = function(lookup) {
+ClassCreator.prototype.defineHiddenClass = function(lookup) {
     let bc = this.generateByteCode();
-    return new NativeJavaClass(startupContext, topLevelScope, lookup.defineHiddenClass(bc, true).lookupClass());
+
+    let clazz = lookup.defineHiddenClass(bc, true);
+    return new NativeJavaClass(startupContext, topLevelScope, clazz);
 };
 
 /**
@@ -119,11 +121,11 @@ ClassCreator.prototype.createConstant = function(tag, constant) {
     // eslint-disable-next-line no-unused-vars
     let index = this.constantPool.findIndex(([checkTag, obj], _1, _2) => checkTag === tag && Object.keys(obj).every(k => k === 'generateByteCode' || constant[k] === obj[k]));
     if (index != -1) {
-        console.info(`Constant pushment rejected (to class ${this.name}) for the same constant found at #${index + 1} : ${tag}, ${constant}`);
+        console.debug(`Constant pushment rejected (to class ${this.name}) for the same constant found at #${index + 1} : ${tag}, ${constant}`);
         return index + 1;
     }
     this.constantPool.push([tag, constant]);
-    console.info(`New constant pushed to class ${this.name}: ${tag}, ${constant}`);
+    console.debug(`New constant pushed to class ${this.name}: ${tag}, ${constant}`);
     return this.constantPoolCounter ++;
 };
 

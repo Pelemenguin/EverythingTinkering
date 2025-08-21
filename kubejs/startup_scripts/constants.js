@@ -93,7 +93,14 @@ const JavaUtils = {
     /** @type {typeof Internal.DataOutputStream} */
     DataOutputStream: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.io.DataOutputStream")),
     /** @type {typeof Internal.MethodHandles} */
-    MethodHandles: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.lang.invoke.MethodHandles"))
+    MethodHandles: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.lang.invoke.MethodHandles")),
+    String: Java.loadClass("java.lang.String"),
+    Integer: Java.loadClass("java.lang.Integer"),
+    Byte: Java.loadClass("java.lang.Byte"),
+    /** @type {typeof Internal.ClassLoader} */
+    ClassLoader: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.lang.ClassLoader")),
+    /** @type {typeof Internal.Thread} */
+    Thread: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.lang.Thread"))
 };
 
 /** @type {typeof Internal.FMLJavaModLoadingContext} */
