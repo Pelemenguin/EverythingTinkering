@@ -29,19 +29,26 @@ const Method = function(name, descriptor, parent) {
     this.descriptor = descriptor;
     this.parent = parent;
 
-    this.access = 0;
+    this.access = 1;
 
     /** @type {[string, {generateByteCode: () => number[]}][]} */
     this.attributes = [];
 };
 
 Method.prototype.setPublic = function() {
+    this.access -= (this.access & 7);
     this.access |= 1;
     return this;
 };
 
 Method.prototype.setProtected = function() {
+    this.access -= (this.access & 7);
     this.access |= 4;
+    return this;
+};
+
+Method.prototype.setAbstract = function() {
+    this.access |= 0x0400;
     return this;
 };
 

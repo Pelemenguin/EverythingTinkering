@@ -25,7 +25,7 @@
     Utils
 */
 
-/** @type {Internal.Map<string, Internal.NativeJavaClass>} */
+/** @type {Internal.Map<string, Internal.Class<?>>} */
 global.CreatedClasses;
 if (global.CreatedClasses === undefined) global.CreatedClasses = Utils.newMap();
 
@@ -37,6 +37,10 @@ function ClassCreator(name) {
     this.constantPoolCounter = 1;
     /** @type {Method[]} */
     this.methods = [];
+    /** @type {[string, {generateByteCode: () => number[]}][]} */
+    this.attributes = [];
+    /** @type {{name: string, descriptor: string, access: number}[]} */
+    this.fields = [];
 
     this.access = 33; // ACC_PUBILC, ACC_SUPER
 
@@ -62,10 +66,36 @@ ClassCreator.prototype.generateByteCode = function() {
         superInterfaces = superInterfaces.concat(JavaUtils.ByteBuffer.allocate(2).putShort(0, this.CONSTANT_Class(superInterface)).array());
     });
 
+    let fieldByteCodes = (() => {
+        let result = [];
+        this.fields.forEach(f => {
+            result = result.concat(JavaUtils.ByteBuffer.allocate(8)
+                .putShort(0, f.access)
+                .putShort(2, this.CONSTANT_Utf8(f.name))
+                .putShort(4, this.CONSTANT_Utf8(f.descriptor))
+                .putShort(6, 0)
+                .array()
+            );
+        });
+        return result;
+    })();
+
     let methodByteCodes = (() => {
         let result = [];
         this.methods.map(m => m.generateByteCode()).forEach(bc => {
             result = result.concat(bc);
+        });
+        return result;
+    })();
+
+    let attributeByteCodes = (() => {
+        let result = [];
+        this.attributes.forEach(([name, attr]) => {
+            let byteCode = attr.generateByteCode();
+            result = result.concat(
+                JavaUtils.ByteBuffer.allocate(6).putShort(0, this.createConstant(1, new ConstantPoolEntries.Utf8(name)))
+                    .putInt(2, byteCode.length).array()
+            ).concat(byteCode);
         });
         return result;
     })();
@@ -83,18 +113,20 @@ ClassCreator.prototype.generateByteCode = function() {
         .concat(constantPool)
         .concat(JavaUtils.ByteBuffer.allocate(2).putShort(0, this.access).array())
         .concat(JavaUtils.ByteBuffer.allocate(4).putShort(0, thisClass).putShort(2, superClass).array())
-        .concat(superInterfaces) // 0 Interface
-        .concat([0, 0]) // 0 Field
+        .concat(superInterfaces)
+        .concat(JavaUtils.ByteBuffer.allocate(2).putShort(this.fields.length).array())
+        .concat(fieldByteCodes)
         .concat(JavaUtils.ByteBuffer.allocate(2).putShort(0, this.methods.length).array())
         .concat(methodByteCodes)
-        .concat([0, 0]) // 0 Attributes
+        .concat(JavaUtils.ByteBuffer.allocate(2).putShort(0, this.attributes.length).array())
+        .concat(attributeByteCodes)
         ;
 
     let printer = "\n------------------------ BYTE CODE GENERATED ------------------------";
     printer += `\nCLASS MODIFIERS: 0x${this.access.toString(16)}`;
     printer += `\nTHIS CLASS:  #${thisClass}    ${this.name}`;
     printer += `\nSUPER CLASS: #${superClass}    ${this.superClass}`;
-    printer += `\nSUPER INTERFACES: (${this.superInterfaces.length} total)`;
+    printer += `\nSUPER INTERFACES: (${this.superInterfaces.length} in total)`;
     this.superInterfaces.forEach(superInterface => {
         printer += `\n    ${superInterface}`;
     });
@@ -107,7 +139,7 @@ ClassCreator.prototype.generateByteCode = function() {
     });
     printer += "\nCONSTANT POOL:";
     this.constantPool.forEach((c, i) => printer += `\n    #${i+1}\tTag: ${c[0]}\tContent: ${c[1].toString()}`);
-    printer += `\nMETHODS: (total ${this.methods.length})`;
+    printer += `\nMETHODS: (${this.methods.length} in total)`;
     this.methods.forEach(m => {
         printer += `\n    ${m.name} ${m.descriptor}`;
     });
@@ -124,7 +156,7 @@ ClassCreator.prototype.generateByteCode = function() {
 ClassCreator.prototype.defineHiddenClass = function(lookup) {
     if (global.CreatedClasses.containsKey(this.name)) {
         console.info(`\n    Class creation rejected: ${this.name.split('.').pop()} has been created before.`);
-        return global.CreatedClasses.get(this.name);
+        return new NativeJavaClass(startupContext, topLevelScope, global.CreatedClasses.get(this.name));
     }
 
     let bc = this.generateByteCode();
@@ -132,7 +164,27 @@ ClassCreator.prototype.defineHiddenClass = function(lookup) {
     let clazz = lookup.defineHiddenClass(bc, true).lookupClass();
     let result = new NativeJavaClass(startupContext, topLevelScope, clazz);
 
-    global.CreatedClasses.put(this.name, result);
+    global.CreatedClasses.put(this.name, clazz);
+
+    return result;
+};
+
+/**
+ * @param {Internal.MethodHandles$Lookup} lookup
+ * @returns {typeof any}
+ */
+ClassCreator.prototype.defineClass = function(lookup) {
+    if (global.CreatedClasses.containsKey(this.name)) {
+        console.info(`\n    Class creation rejected: ${this.name.split('.').pop()} has been created before.`);
+        return new NativeJavaClass(startupContext, topLevelScope, global.CreatedClasses.get(this.name));
+    }
+
+    let bc = this.generateByteCode();
+
+    let clazz = lookup.defineClass(bc);
+    let result = new NativeJavaClass(startupContext, topLevelScope, clazz);
+
+    global.CreatedClasses.put(this.name, clazz);
 
     return result;
 };
@@ -204,7 +256,7 @@ ClassCreator.prototype.implements = function(superinterface) {
  * - - - - -
  * @returns {this}
  */
-ClassCreator.prototype.isInterface = function() {
+ClassCreator.prototype.setIsInterface = function() {
     this.access |= 0x0200;
     this.access |= 0x0400;
     this.access -= (this.access & 0x0020);
@@ -225,6 +277,37 @@ ClassCreator.prototype.addMethod = function(name, descriptor, method) {
     let rawMethod = new Method(name, descriptor, this);
     method(rawMethod);
     this.methods.push(rawMethod);
+    return this;
+};
+
+/**
+ * - Add an attribute.
+ * - 添加一个属性。
+ * - - - - -
+ * @param {string} name
+ * @param {{generateByteCode: () => number[]}} attribute
+ * - - - - -
+ * @returns {this}
+ */
+ClassCreator.prototype.addAttribute = function(name, attribute) {
+    this.attributes.push([name, attribute]);
+    return this;
+};
+
+/**
+ * - Add a field.
+ * - 添加一个字段。
+ * - - - - -
+ * @param {string} name
+ * @param {string} descriptor
+ * @param {number} access
+ */
+ClassCreator.prototype.addField = function(name, descriptor, access) {
+    this.fields.push({
+        name: name,
+        descriptor: descriptor,
+        access: access
+    });
     return this;
 };
 
@@ -275,4 +358,14 @@ ClassCreator.prototype.CONSTANT_Methodref = function(className, methodName, meth
  */
 ClassCreator.prototype.CONSTANT_Fieldref = function(className, fieldName, fieldDescriptor) {
     return this.createConstant(9, new ConstantPoolEntries.Fieldref(this.CONSTANT_Class(className), this.CONSTANT_NameAndType(fieldName, fieldDescriptor)));
+};
+
+/**
+ * @param {string} className 
+ * @param {string} methodName 
+ * @param {string} methodDescriptor 
+ * @returns {number}
+ */
+ClassCreator.prototype.CONSTANT_InterfaceMethodref = function(className, methodName, methodDescriptor) {
+    return this.createConstant(11, new ConstantPoolEntries.InterfaceMethodref(this.CONSTANT_Class(className), this.CONSTANT_NameAndType(methodName, methodDescriptor)));
 };

@@ -84,6 +84,40 @@ declare namespace Annotation {
             | "projectileLaunch" | "tooltipSetting" | "onServerTick";
     }
 
+    namespace JavaClass {
+        type AnnotationStructure = {
+                name: string
+            } & ({
+                tag: 'B' | 'C' | 'I' | 'S' | 'Z',
+                value: number
+            } | {
+                tag: 'D',
+                value: number
+            } | {
+                tag: 'F',
+                value: number
+            } | {
+                tag: 'J',
+                value: number
+            } | {
+                tag: 's',
+                value: string
+            } | {
+                tag: 'e',
+                type: string,
+                constName: string
+            } | {
+                tag: 'c',
+                className: string
+            } | {
+                tag: '@',
+                annotation: Annnotation.JavaClass.AnnotationStructure
+            } | {
+                tag: '[',
+                values: AnnotationStructure[]
+            });
+    }
+
 }
 
 declare namespace BookArguments {
