@@ -165,7 +165,7 @@ CONSTANT_Fieldref.prototype.generateByteCode = function() {
     return JavaUtils.ByteBuffer.allocate(5)["put(int,byte)"](0, 9).putShort(1, this.classIndex).putShort(3, this.nameAndTypeIndex).array();
 };
 CONSTANT_Fieldref.prototype.toString = function() {
-    return `Fieldref\t\t\t\t#${this.classIndex}.#${this.nameAndTypeIndex}`;
+    return `Fieldref\t\t\t#${this.classIndex}.#${this.nameAndTypeIndex}`;
 };
 
 /**

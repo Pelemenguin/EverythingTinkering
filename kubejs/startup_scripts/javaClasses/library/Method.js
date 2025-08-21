@@ -40,6 +40,11 @@ Method.prototype.setPublic = function() {
     return this;
 };
 
+Method.prototype.setProtected = function() {
+    this.access |= 4;
+    return this;
+};
+
 Method.prototype.generateByteCode = function() {
     return JavaUtils.ByteBuffer.allocate(8)
         .putShort(0, this.access)

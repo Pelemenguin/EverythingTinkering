@@ -43,6 +43,9 @@ function ClassCreator(name) {
 
     /** @type {?string} */
     this.superClass = "java/lang/Object";
+
+    /** @type {string[]} */
+    this.superInterfaces = [];
 }
 
 /**
@@ -51,6 +54,11 @@ function ClassCreator(name) {
 ClassCreator.prototype.generateByteCode = function() {
     let thisClass = this.createConstant(7, new ConstantPoolEntries.Class(this.createConstant(1, new ConstantPoolEntries.Utf8(this.name.replace(/\./g, '/')))));
     let superClass = this.createConstant(7, new ConstantPoolEntries.Class(this.createConstant(1, new ConstantPoolEntries.Utf8(this.superClass.replace(/\./g, '/')))));
+
+    let superInterfaces = JavaUtils.ByteBuffer.allocate(2).putShort(0, this.superInterfaces.length).array();
+    this.superInterfaces.forEach(superInterface => {
+        superInterfaces = superInterfaces.concat(JavaUtils.ByteBuffer.allocate(2).putShort(0, this.CONSTANT_Class(superInterface)).array());
+    });
 
     let methodByteCodes = (() => {
         let result = [];
@@ -73,7 +81,7 @@ ClassCreator.prototype.generateByteCode = function() {
         .concat(constantPool)
         .concat([0, 33]) // ACC_PUBLIC, ACC_SUPER
         .concat(JavaUtils.ByteBuffer.allocate(4).putShort(0, thisClass).putShort(2, superClass).array())
-        .concat([0, 0]) // 0 Interface
+        .concat(superInterfaces) // 0 Interface
         .concat([0, 0]) // 0 Field
         .concat(JavaUtils.ByteBuffer.allocate(2).putShort(0, this.methods.length).array())
         .concat(methodByteCodes)
@@ -83,6 +91,10 @@ ClassCreator.prototype.generateByteCode = function() {
     let printer = "\n------------------------ BYTE CODE GENERATED ------------------------";
     printer += `\nTHIS CLASS:  #${thisClass}    ${this.name}`;
     printer += `\nSUPER CLASS: #${superClass}    ${this.superClass}`;
+    printer += `\nSUPER INTERFACES: (${this.superInterfaces.length} total)`;
+    this.superInterfaces.forEach(superInterface => {
+        printer += `\n    ${superInterface}`;
+    });
     printer += `\nBYTE CODE: (${result.length} bytes)`;
     result.map(b => (b < 0 ? b + 256 : b).toString(16)).map(s => '0'.repeat(2 - s.length).concat(s)).forEach((s, i) => {
         if (i % 16 == 0) {
@@ -170,6 +182,19 @@ ClassCreator.prototype.extends = function(superClass) {
 };
 
 /**
+ * - Add a superinterface.
+ * - 添加一个父接口。
+ * - - - - -
+ * @param {string} superinterface
+ * - - - - -
+ * @returns {this}
+ */
+ClassCreator.prototype.implements = function(superinterface) {
+    this.superInterfaces.push(superinterface.replace(/\./g, '/'));
+    return this;
+};
+
+/**
  * - Add a method.
  * - 添加一个方法。
  * - - - - -
@@ -223,4 +248,14 @@ ClassCreator.prototype.CONSTANT_Class = function(name) {
  */
 ClassCreator.prototype.CONSTANT_Methodref = function(className, methodName, methodDescriptor) {
     return this.createConstant(10, new ConstantPoolEntries.Methodref(this.CONSTANT_Class(className), this.CONSTANT_NameAndType(methodName, methodDescriptor)));
+};
+
+/**
+ * @param {string} className 
+ * @param {string} fieldName 
+ * @param {string} fieldDescriptor 
+ * @returns {number}
+ */
+ClassCreator.prototype.CONSTANT_Fieldref = function(className, fieldName, fieldDescriptor) {
+    return this.createConstant(9, new ConstantPoolEntries.Fieldref(this.CONSTANT_Class(className), this.CONSTANT_NameAndType(fieldName, fieldDescriptor)));
 };
