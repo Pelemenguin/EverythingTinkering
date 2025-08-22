@@ -80,8 +80,16 @@ declare namespace Annotation {
     }
 
     namespace TinkerFunction {
+        /** @deprecated */
         type Hook = "addToolStats" | "armorTakeAttacked" | "getBreakSpeed" | "onAfterBreak" | "getMeleeDamage" | "onAfterMeleeHit" | "onBeforeMeleeHit" | "onInventoryTick"
             | "projectileLaunch" | "tooltipSetting" | "onServerTick";
+        type ModifierHookArgument = {
+            ProjectileLaunchModifierHook: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, shooter: Internal.LivingEntity, ammo: Internal.ItemStack, projectile: Internal.Projectile, arrow: Internal.AbstractArrow, persistent: Internal.ModDataNBT, isPrimary: boolean) => void
+            __custom__: {
+                ServerTick: (event: Internal.ServerEventJS) => void
+            }
+        }
+        type ModifierHooks = keyof ModifierHookArgument;
     }
 
     namespace JavaClass {

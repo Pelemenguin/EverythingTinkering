@@ -38,7 +38,7 @@ function ClassCreator(name) {
     this.constantPoolCounter = 1;
     /** @type {Method[]} */
     this.methods = [];
-    /** @type {[string, {generateByteCode: () => number[]}][]} */
+    /** @type {[string, {generateByteCode: (classCreator: ClassCreator) => number[]}][]} */
     this.attributes = [];
     /** @type {{name: string, descriptor: string, access: number}[]} */
     this.fields = [];
@@ -92,7 +92,7 @@ ClassCreator.prototype.generateByteCode = function() {
     let attributeByteCodes = (() => {
         let result = [];
         this.attributes.forEach(([name, attr]) => {
-            let byteCode = attr.generateByteCode();
+            let byteCode = attr.generateByteCode(this);
             result = result.concat(
                 JavaUtils.ByteBuffer.allocate(6).putShort(0, this.createConstant(1, new ConstantPoolEntries.Utf8(name)))
                     .putInt(2, byteCode.length).array()
@@ -205,7 +205,7 @@ ClassCreator.prototype.createDefaultConstructor = function() {
     let references = JavaUtils.ByteBuffer.allocate(2).putShort(0, this.CONSTANT_Methodref(this.superClass.replace(/\./g, '/'), "<init>", "()V")).array();
 
     this.addMethod('<init>', '()V', method => {
-        method.setPublic().addAttribute('Code', new CodeAttribute(1, 1, () => [
+        method.setPublic().addAttribute('Code', new CodeAttribute(1, 1).setCustomByteCodeGenerator(() => [
             0x2a, // aload_0
             0xb7, // invokespecial: `superClass`.<init>()V
             references[0], references[1],
@@ -312,7 +312,7 @@ ClassCreator.prototype.addMethod = function(name, descriptor, method) {
  * - 添加一个属性。
  * - - - - -
  * @param {string} name
- * @param {{generateByteCode: () => number[]}} attribute
+ * @param {{generateByteCode: (classCreator: ClassCreator) => number[]}} attribute
  * - - - - -
  * @returns {this}
  */

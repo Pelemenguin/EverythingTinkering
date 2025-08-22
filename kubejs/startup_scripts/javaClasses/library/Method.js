@@ -31,7 +31,7 @@ const Method = function(name, descriptor, parent) {
 
     this.access = 1;
 
-    /** @type {[string, {generateByteCode: () => number[]}][]} */
+    /** @type {[string, {generateByteCode: (classCreator: ClassCreator) => number[]}][]} */
     this.attributes = [];
 };
 
@@ -62,7 +62,7 @@ Method.prototype.generateByteCode = function() {
         .concat((() => {
             let result = [];
             this.attributes.forEach(([name, attr]) => {
-                let byteCode = attr.generateByteCode();
+                let byteCode = attr.generateByteCode(this.parent);
                 result = result.concat(
                     JavaUtils.ByteBuffer.allocate(6).putShort(0, this.createConstant(1, new ConstantPoolEntries.Utf8(name)))
                         .putInt(2, byteCode.length).array()
