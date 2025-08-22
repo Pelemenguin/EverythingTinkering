@@ -23,6 +23,7 @@
     startupContext
     topLevelScope
     Utils
+    CodeAttribute
 */
 
 /** @type {Internal.Map<string, Internal.Class<?>>} */
@@ -48,7 +49,7 @@ function ClassCreator(name) {
     this.constantPool = [];
 
     /** @type {?string} */
-    this.superClass = "java/lang/Object";
+    this.superClass = "java.lang.Object";
 
     /** @type {string[]} */
     this.superInterfaces = [];
@@ -187,6 +188,32 @@ ClassCreator.prototype.defineClass = function(lookup) {
     global.CreatedClasses.put(this.name, clazz);
 
     return result;
+};
+
+/**
+ * 生成一个默认的构造器方法，
+ * 若需指定父类，则必须要在生成该方法之前设置。
+ * 请确保父类有公开的无参数构造器，
+ * 生成构造器方法时我们不会检测。
+ * - - - - -
+ * Generate a default constructor method.
+ * If you want to set super class, do so before calling this method.
+ * Please ensure that the super class has a constructor with no arguments.
+ * We do not detect that when generating constructors.
+ */
+ClassCreator.prototype.createDefaultConstructor = function() {
+    let references = JavaUtils.ByteBuffer.allocate(2).putShort(0, this.CONSTANT_Methodref(this.superClass.replace(/\./g, '/'), "<init>", "()V")).array();
+
+    this.addMethod('<init>', '()V', method => {
+        method.setPublic().addAttribute('Code', new CodeAttribute(1, 1, () => [
+            0x2a, // aload_0
+            0xb7, // invokespecial: `superClass`.<init>()V
+            references[0], references[1],
+            0xb1, // return
+        ]));
+    });
+
+    return this;
 };
 
 /**
