@@ -31,14 +31,40 @@ let ModifierClass = new ClassCreator("Modifier")
     .createDefaultConstructor()
     .defineClass(JavaUtils.MethodHandles.lookup());
 
-const KubeJSModifierManager = {
+const ModifierManager = {
     /** @type {Internal.Map<string, {className: string, modifierClass: typeof any, registerer: () => Internal.Modifier}} */
     ALL_MODIFIERS: Utils.newMap(),
     /**
+     * Register a common modifier.
+     * 注册一个普通特性。
+     * - - - - -
+     * @param {string} name Modifier's name. Should not have `kubejs:` prefix  
+     *                      特性名称，应无`kubejs:`前缀
+     * @param {string} className Class' name. For example: `TestModifier`  
+     *                           类名。例如：`TestModifier`
+     * @param {Annotation.TinkerFunction.ModifierHookArgument extends infer T ? T : never} hooks Hooks to register. You should receive a more detailed typing hint when checking the object's keys  
+     *                                                                                           要注册的钩子。你应该会在查看该对象的键时获取到更详细的介绍
+     * - - - - -
+     * Related links for the example | 此示例的相关链接：
+     * - {@link Annotation.TinkerFunction.ModifierHookArgument.onProjectileLaunch `onProjectileLaunch`}  
+     *   Hook method appears in the example  
+     *   示例中出现的钩子方法
+     * @example
+     * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+     *     // Here we use `onProjectileLaunch` as an example, which triggers when projectiles are launched
+     *     // 这里使用`onProjectileLaunch`为例，其在弹射物发射时触发
+     *     onProjectileLaunch: (tool, modifier, shooter, ammo, projectile, arrow, persistent, isPrimary) => {
+     *         // The reason of possibly appearing `null` see `onProjectileLaunch`'s descriptions.
+     *         // 判空的原因详见`onProjectileLaunch`的介绍
+     *         if (arrow == null) return;
      * 
-     * @param {string} name 
-     * @param {string} className
-     * @param {Annotation.TinkerFunction.ModifierHookArgument extends infer T ? T : never} hooks 
+     *         // Send a message to console
+     *         // 向控制台发送信息
+     *         console.info(`Arrow launched, damage: ${arrow.damage}`);
+     *     }
+     *     // Then the modifier `kubejs:test` can send a message to the console every time when a tool with this modifier launches a projectile
+     *     // 现在特性`kubejs:test`就可以在带有此特性的工具每次发射弹射物的时候向控制台发送一次信息
+     * })
      */
     registerCommonModifier: (name, className, hooks) => {
         let modifierClassCreator = new ClassCreator(`Modifier$${className}`)
@@ -47,21 +73,21 @@ const KubeJSModifierManager = {
 
         Object.keys(hooks).forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
             switch (hook) {
-                case "ProjectileLaunchModifierHook": {
+                case "onProjectileLaunch": {
                     let interfaceName = TinkerFunctionsSet.ProjectileLaunchFunction.__javaObject__.getName().replace('.', '/');
                     let methodDescriptor = "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/projectile/Projectile;Lnet/minecraft/world/entity/projectile/AbstractArrow;Lslimeknights/tconstruct/library/tools/nbt/ModDataNBT;Z)V";
 
                     modifierClassCreator.implements("slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook")
-                        .addField("projectileLaunchModifierHook", `L${interfaceName};`, 9)
+                        .addField("onProjectileLaunchFunction", `L${interfaceName};`, 9)
                         .addMethod("onProjectileLaunch", methodDescriptor, method => {
                             method.addAttribute("Code", new CodeAttribute(9, 9).setCustomByteCodeGenerator((classCreator) => {
                                 let references = JavaUtils.ByteBuffer.allocate(4)
-                                    .putShort(0, classCreator.CONSTANT_Fieldref(classCreator.name.replace(/\./g, '/'), "projectileLaunchModifierHook", `L${interfaceName};`))
+                                    .putShort(0, classCreator.CONSTANT_Fieldref(classCreator.name.replace(/\./g, '/'), "onProjectileLaunchFunction", `L${interfaceName};`))
                                     .putShort(2, classCreator.CONSTANT_InterfaceMethodref(interfaceName, "onProjectileLaunch", methodDescriptor))
                                     .array();
 
                                 return [
-                                    0xb2, // getstatic thisClass.projectileLaunchModifierHook
+                                    0xb2, // getstatic thisClass.onProjectileLaunchFunction
                                         references[0],
                                         references[1],
                                     0x2b, // aload_1
@@ -102,7 +128,7 @@ const KubeJSModifierManager = {
                 
                 let hookAdder = Object.keys(hooks).map((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
                     switch (hook) {
-                        case "ProjectileLaunchModifierHook": {
+                        case "onProjectileLaunch": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "PROJECTILE_LAUNCH", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
                         default: {
@@ -135,17 +161,19 @@ const KubeJSModifierManager = {
 
         Object.keys(hooks).forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
             switch (hook) {
-                case "ProjectileLaunchModifierHook": {
-                    modifierClass.projectileLaunchModifierHook = hooks.ProjectileLaunchModifierHook;
+                case "onProjectileLaunch": {
+                    modifierClass['onProjectileLaunchFunction'] = hooks.onProjectileLaunch;
                 }
             }
         });
         
-        KubeJSModifierManager.ALL_MODIFIERS[name] = {
+        ModifierManager.ALL_MODIFIERS[name] = {
             className: modifierClassCreator.name,
             modifierClass: modifierClass,
             registerer: () => new modifierClass()
         };
+
+        return modifierClass;
     }
 };
 
@@ -154,7 +182,7 @@ StartupEvents.init(() => {
 
     console.info("Modifier Registration Begin:");
 
-    KubeJSModifierManager.ALL_MODIFIERS.forEach((modifierName, modifierObject) => {
+    ModifierManager.ALL_MODIFIERS.forEach((modifierName, modifierObject) => {
         console.info(`New Modifier: ${modifierName} (className: ${modifierObject.className})`);
         KUBEJS_MODIFIERS.register(modifierName, modifierObject.registerer);
     });

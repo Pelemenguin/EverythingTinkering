@@ -84,8 +84,75 @@ declare namespace Annotation {
         type Hook = "addToolStats" | "armorTakeAttacked" | "getBreakSpeed" | "onAfterBreak" | "getMeleeDamage" | "onAfterMeleeHit" | "onBeforeMeleeHit" | "onInventoryTick"
             | "projectileLaunch" | "tooltipSetting" | "onServerTick";
         type ModifierHookArgument = {
-            ProjectileLaunchModifierHook: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, shooter: Internal.LivingEntity, ammo: Internal.ItemStack, projectile: Internal.Projectile, arrow: Internal.AbstractArrow, persistent: Internal.ModDataNBT, isPrimary: boolean) => void
+            /**
+             * Triggers when launching a projectile.
+             * 发射弹射物时触发。
+             * - - - - -
+             * @param tool       Bow instance  
+             *                   弓实例
+             * 
+             * @param modifier   Modifier being used  
+             *                   特性条目。
+             * 
+             * @param shooter    Entity firing the arrow  
+             *                   发射者实体。
+             * 
+             * @param ammo       Ammo stack used to fire this projectile. May be empty if the projectile is unusual, e.g. fluid projectiles.  
+             *                   使用的弹药。对于不寻常的弹射物，该项为空，例如：流体弹药。
+             * 
+             * @param projectile Projectile to modify  
+             *                   要修改的弹射物
+             * 
+             * @param arrow      Arrow to modify as most modifiers wish to change that, will be null for non-arrow projectiles  
+             *                   要修改的箭（由于很多特性都需要修改这个），对于非箭类的弹射物，将为`null`
+             * 
+             * @param persistent Persistent data instance stored on the arrow to write arbitrary data. Note the modifier list was already written  
+             *                   保存在箭实体上的持久数据实例，可以向其中写入任意数据。注意：特性列表在之前就已写入
+             * 
+             * @param isPrimary  If true, this is the primary projectile. Multishot may launch multiple  
+             *                   若为`true`，则这是主要的弹射物。多重射击可能会发射多个
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     onProjectileLaunch: (tool, modifier, shooter, ammo, projectile, arrow, persistent, isPrimary) => {
+             *         if (arrow == null) return; // Prevent non-arrow projectiles. See descriptions for parameter `arrow`.
+             *                                    // 防止非箭类弹射物。见参数`arrow`的介绍。
+             * 
+             *         arrow.baseDamage += 5;     // Add 5 damage to the arrow
+             *                                    // 向箭矢增加 5 伤害
+             *     }
+             * });
+             */
+            onProjectileLaunch: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, shooter: Internal.LivingEntity, ammo: Internal.ItemStack, projectile: Internal.Projectile, arrow: Internal.AbstractArrow, persistent: Internal.ModDataNBT, isPrimary: boolean) => void
+            /**
+             * Some custom methods for modifiers written by our KubeJS scripts.
+             * These are not standard Tinker's Construct modifier hooks.  
+             * 使用我们的KubeJS脚本编写的一些自定义方法，
+             * 并非标准的匠魂特性钩子机制。
+             */
             __custom__: {
+                /**
+                 * Triggers **every tick** on server side,
+                 * regardless of whether there are modifier instances in the world.
+                 * Usually used to validate or evaluate something together with other methods.  
+                 * 在服务端**每个tick**触发一次，
+                 * 无论世界中是否存在这一特性的实例。
+                 * 常用于检验或计算某些东西，
+                 * 配合其它方法使用。
+                 * - - - - -
+                 * @param event Server tick event
+                 *              服务端tick事件
+                 * - - - - -
+                 * @example
+                 * let TEST = KubeJSModifierManager.registerCommonModifier("test", "TestModifier", {
+                 *     __custom__: {
+                 *         ServerTick: (event) => {
+                 *             console.info("Test message"); // Send `Test message` to console
+                 *                                           // 向控制台发送`Test message`
+                 *         }
+                 *     }
+                 * });
+                 */
                 ServerTick: (event: Internal.ServerEventJS) => void
             }
         }
