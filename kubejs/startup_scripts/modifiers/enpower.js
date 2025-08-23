@@ -3,13 +3,8 @@
 /**
  * @fileoverview Enpower | 充能
  * - - - - -
- * ## Enpower
- * ### Description
- * WIP
- * - - - - -
- * ## 充能
- * ### 描述
- * WIP
+ * Consumes Redstone Dust to speed up a projectile.
+ * 消耗红石粉加速弹射物。
  * - - - - -
  * @copyright Pelemenguin 2025
  * @license LGPL-3.0-or-later

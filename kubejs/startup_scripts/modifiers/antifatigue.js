@@ -21,29 +21,54 @@
  */
 
 /* global
-    ModifierRegisterer
+    ModifierManager
     LivingEntity
 */
 
-let ANTIFATIGUE = ModifierRegisterer.registerModifier("kubejs:antifatigue", ["getBreakSpeed"]);
-ANTIFATIGUE.getBreakSpeed((view, lvl, breakSpeedEvent) => {
-    let entity = breakSpeedEvent.entity;
-    if (entity instanceof LivingEntity) {
-        /** @type {Internal.LivingEntity} */
-        let living = entity;
-        let effect = living.getEffect("minecraft:mining_fatigue");
-        if (effect != null) {
-            let divisor = 0.00081;
-            switch (Math.min(effect.amplifier, lvl - 1)) {
-                case 0: divisor = 0.3; break;
-                case 1: divisor = 0.09; break;
-                case 2: divisor = 0.0027; break;
-                default: divisor = 0.00081;
+// let ANTIFATIGUE = ModifierRegisterer.registerModifier("kubejs:antifatigue", ["getBreakSpeed"]);
+// ANTIFATIGUE.getBreakSpeed((view, lvl, breakSpeedEvent) => {
+//     let entity = breakSpeedEvent.entity;
+//     if (entity instanceof LivingEntity) {
+//         /** @type {Internal.LivingEntity} */
+//         let living = entity;
+//         let effect = living.getEffect("minecraft:mining_fatigue");
+//         if (effect != null) {
+//             let divisor = 0.00081;
+//             switch (Math.min(effect.amplifier, lvl - 1)) {
+//                 case 0: divisor = 0.3; break;
+//                 case 1: divisor = 0.09; break;
+//                 case 2: divisor = 0.0027; break;
+//                 default: divisor = 0.00081;
+//             }
+//             // console.info(`Unmodified: ${currentSpeed}`);
+//             // console.info(`New speed:  ${breakSpeedEvent.newSpeed}`);
+//             // console.info(`Divisor:    ${divisor}`);
+//             breakSpeedEvent.newSpeed /= divisor;
+//         }
+//     }
+// });
+
+// eslint-disable-next-line no-unused-vars
+let ANTIFATIGUE = ModifierManager.registerCommonModifier("antifatigue", "AntifatigueModifier", {
+    onBreakSpeed: (tool, modifier, event /*, sideHit, isEffective, miningSpeedModifier*/) => {
+        let entity = event.entity;
+        if (entity instanceof LivingEntity) {
+            /** @type {Internal.LivingEntity} */
+            let living = entity;
+            let effect = living.getEffect("minecraft:mining_fatigue");
+            if (effect != null) {
+                let divisor = 0.00081;
+                switch (Math.min(effect.amplifier, modifier.level - 1)) {
+                    case 0: divisor = 0.3; break;
+                    case 1: divisor = 0.09; break;
+                    case 2: divisor = 0.0027; break;
+                    default: divisor = 0.00081;
+                }
+                // console.info(`Unmodified: ${currentSpeed}`);
+                // console.info(`New speed:  ${breakSpeedEvent.newSpeed}`);
+                // console.info(`Divisor:    ${divisor}`);
+                event.newSpeed /= divisor;
             }
-            // console.info(`Unmodified: ${currentSpeed}`);
-            // console.info(`New speed:  ${breakSpeedEvent.newSpeed}`);
-            // console.info(`Divisor:    ${divisor}`);
-            breakSpeedEvent.newSpeed /= divisor;
         }
     }
 });

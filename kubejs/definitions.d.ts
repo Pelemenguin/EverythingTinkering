@@ -85,6 +85,39 @@ declare namespace Annotation {
             | "projectileLaunch" | "tooltipSetting" | "onServerTick";
         type ModifierHookArgument = {
             /**
+             * Triggers when mining blocks.
+             * Note that modification on mining speed should be done on `newSpeed` field of {@link event `event`}.  
+             * 挖掘方块时触发。
+             * 注意：对于挖掘速度的修改都应该在{@link event `event`}的`newSpeed`字段上完成。
+             * - - - - -
+             * @param tool                Current tool instance  
+             *                            当前工具实例
+             * 
+             * @param modifier            Modifier level  
+             *                            特性（及其）等级
+             * 
+             * @param event               Event instance  
+             *                            事件实例
+             * 
+             * @param sideHit             Side of the block that was hit  
+             *                            挖掘的方块的面
+             * 
+             * @param isEffective         If true, the tool is effective against this block type  
+             *                            若为真，则对该方块种类来说是有效工具
+             * 
+             * @param miningSpeedModifier Calculated modifier from potion effects such as haste and environment such as water, use for additive bonuses to ensure consistency with the mining speed stat  
+             *                            从药水效果（例如急迫）或环境（例如在水中）计算得来，用于额外速度奖励来保证与挖掘速度统计数据的一致性
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     onBreakSpeed: (tool, modifier, event, sideHit, isEffective, miningSpeedModifier) => {
+             *         event.newSpeed *= 2; // Double the mining speed
+             *                              // 将挖掘速度翻倍
+             *     }
+             * });
+             */
+            onBreakSpeed: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, event: Internal.PlayerEvent$BreakSpeed, sideHit: Internal.Direction, isEffective: boolean, miningSpeedModifier: number) => void;
+            /**
              * Triggers when launching a projectile.
              * 发射弹射物时触发。
              * - - - - -

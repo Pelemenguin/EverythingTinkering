@@ -71,47 +71,18 @@ const ModifierManager = {
             .extends("slimeknights.tconstruct.library.modifiers.Modifier")
             .createDefaultConstructor();
 
+                            // =============================
+                            // =     FIRST SWITCH-CASE     =
+                            // =============================
+
         Object.keys(hooks).forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
             switch (hook) {
                 case "onProjectileLaunch": {
-                    let interfaceName = TinkerFunctionsSet.ProjectileLaunchFunction.__javaObject__.getName().replace('.', '/');
-                    let methodDescriptor = "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/projectile/Projectile;Lnet/minecraft/world/entity/projectile/AbstractArrow;Lslimeknights/tconstruct/library/tools/nbt/ModDataNBT;Z)V";
-
-                    modifierClassCreator.implements("slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook")
-                        .addField("onProjectileLaunchFunction", `L${interfaceName};`, 9)
-                        .addMethod("onProjectileLaunch", methodDescriptor, method => {
-                            method.addAttribute("Code", new CodeAttribute(9, 9).setCustomByteCodeGenerator((classCreator) => {
-                                let references = JavaUtils.ByteBuffer.allocate(4)
-                                    .putShort(0, classCreator.CONSTANT_Fieldref(classCreator.name.replace(/\./g, '/'), "onProjectileLaunchFunction", `L${interfaceName};`))
-                                    .putShort(2, classCreator.CONSTANT_InterfaceMethodref(interfaceName, "onProjectileLaunch", methodDescriptor))
-                                    .array();
-
-                                return [
-                                    0xb2, // getstatic thisClass.onProjectileLaunchFunction
-                                        references[0],
-                                        references[1],
-                                    0x2b, // aload_1
-                                    0x2c, // aload_2
-                                    0x2d, // aload_3
-                                    0x19, // aload 4
-                                        0x04,
-                                    0x19, // aload 5
-                                        0x05,
-                                    0x19, // aload 6
-                                        0x06,
-                                    0x19, // aload 7
-                                        0x07,
-                                    0x15, // iload 8
-                                        0x08,
-                                    0xb9, // invokeinterface
-                                        references[2],
-                                        references[3],
-                                        0x09,
-                                        0x00,
-                                    0xb1, // return
-                                ];
-                            }));
-                        });
+                    TinkerFunctionsSet.ProjectileLaunchFunction.addClassMethod(modifierClassCreator);
+                    break;
+                }
+                case "onBreakSpeed": {
+                    TinkerFunctionsSet.BreakSpeedFunction.addClassMethod(modifierClassCreator);
                     break;
                 }
                 case "__custom__": {
@@ -127,9 +98,17 @@ const ModifierManager = {
                     .array();
                 
                 let hookAdder = Object.keys(hooks).map((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
+
+                                // ==============================
+                                // =     SECOND SWITCH-CASE     =
+                                // ==============================
+
                     switch (hook) {
                         case "onProjectileLaunch": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "PROJECTILE_LAUNCH", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
+                        }
+                        case "onBreakSpeed": {
+                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "BREAK_SPEED", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
                         default: {
                             return undefined;
@@ -160,9 +139,19 @@ const ModifierManager = {
         let modifierClass = modifierClassCreator.defineClass(JavaUtils.MethodHandles.lookup());
 
         Object.keys(hooks).forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
+
+                                // =============================
+                                // =     THIRD SWITCH-CASE     =
+                                // =============================
+
             switch (hook) {
                 case "onProjectileLaunch": {
                     modifierClass['onProjectileLaunchFunction'] = hooks.onProjectileLaunch;
+                    break;
+                }
+                case "onBreakSpeed": {
+                    modifierClass['onBreakSpeedFunction'] = hooks.onBreakSpeed;
+                    break;
                 }
             }
         });
