@@ -3,7 +3,7 @@
 /**
  * @fileoverview Enpower | 充能
  * - - - - -
- * Consumes Redstone Dust to speed up a projectile.
+ * Consumes Redstone Dust to speed up a projectile.  
  * 消耗红石粉加速弹射物。
  * - - - - -
  * @copyright Pelemenguin 2025
@@ -57,7 +57,7 @@ let ENPOWER = ModifierManager.registerCommonModifier("enpower", "EnpowerModifier
         });
     },
     __custom__: {
-        ServerTick: (event) => {
+        onServerTick: (event) => {
             event.getServer().getEntities().forEach(entity => {
                 if (entity.nbt.contains("inGround") && entity.nbt.get("inGround").asByte == 1) return;
                 /** @type {Internal.CompoundTag} */ let forgeData = entity.getNbt().get("ForgeData");

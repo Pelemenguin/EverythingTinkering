@@ -44,8 +44,16 @@ let TinkerFunctions = (new ClassCreator("TinkerFunctions"))
     .createDefaultConstructor()
     .defineClass(JavaUtils.MethodHandles.lookup());
 
+let TinkerFunctions$InventoryTickFunction = addFunctionalInterfaceAnnotation(
+    (new ClassCreator("TinkerFunctions$InventoryTickFunction"))
+        .setIsInterface()
+        .addMethod("onInventoryTick", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;IZZLnet/minecraft/world/item/ItemStack;)V", method => {
+            method.setAbstract();
+        })
+).defineClass(JavaUtils.MethodHandles.lookup());
+
 let TinkerFunctions$ProjectileLaunchFunction = addFunctionalInterfaceAnnotation(
-        (new ClassCreator("TinkerFunctions$ProjectileLaunchFunction"))
+    (new ClassCreator("TinkerFunctions$ProjectileLaunchFunction"))
         .setIsInterface()
         .addMethod('onProjectileLaunch', '(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/projectile/Projectile;Lnet/minecraft/world/entity/projectile/AbstractArrow;Lslimeknights/tconstruct/library/tools/nbt/ModDataNBT;Z)V', method => {
             method.setAbstract();
@@ -53,7 +61,7 @@ let TinkerFunctions$ProjectileLaunchFunction = addFunctionalInterfaceAnnotation(
     ).defineClass(JavaUtils.MethodHandles.lookup());
 
 let TinkerFunctions$BreakSpeedFunction = addFunctionalInterfaceAnnotation(
-        (new ClassCreator("TinkerFunctions$BreakSpeedFunction"))
+    (new ClassCreator("TinkerFunctions$BreakSpeedFunction"))
         .setIsInterface()
         .addMethod("onBreakSpeed", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraftforge/event/entity/player/PlayerEvent$BreakSpeed;Lnet/minecraft/core/Direction;ZF)V", method => {
             method.setAbstract();
@@ -61,30 +69,27 @@ let TinkerFunctions$BreakSpeedFunction = addFunctionalInterfaceAnnotation(
     ).defineClass(JavaUtils.MethodHandles.lookup());
 
 const TinkerFunctionsSet = {
-    ProjectileLaunchFunction: {
-        class: TinkerFunctions$ProjectileLaunchFunction,
+
+    InventoryTickFunction: {
+        class: TinkerFunctions$InventoryTickFunction,
 
         /** @type {string} */
-        internalName: TinkerFunctions$ProjectileLaunchFunction.__javaObject__.getName().replace('.', '/'),
+        internalName: TinkerFunctions$InventoryTickFunction.__javaObject__.getName().replace('.', '/'),
 
         /**
          * @param {ClassCreator} classCreator 
          */
         addClassMethod: (classCreator) => {
-            let interfaceName = TinkerFunctionsSet.ProjectileLaunchFunction.internalName;
-            let methodDescriptor = "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/projectile/Projectile;Lnet/minecraft/world/entity/projectile/AbstractArrow;Lslimeknights/tconstruct/library/tools/nbt/ModDataNBT;Z)V";
+            let interfaceName = TinkerFunctionsSet.InventoryTickFunction.class.__javaObject__.getName().replace('.', '/');
+            let methodDescriptor = "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;IZZLnet/minecraft/world/item/ItemStack;)V";
 
-            classCreator.implements("slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook")
-                .addField("onProjectileLaunchFunction", `L${interfaceName};`, 9)
-                .addMethod("onProjectileLaunch", methodDescriptor, method => {
-                    method.addAttribute("Code", new CodeAttribute(9, 10).setCustomByteCodeGenerator((classCreator) => {
-                        let references = JavaUtils.ByteBuffer.allocate(12)
-                            .putShort(0, classCreator.CONSTANT_Fieldref(classCreator.name.replace(/\./g, '/'), "onProjectileLaunchFunction", `L${interfaceName};`))
-                            .putShort(2, classCreator.CONSTANT_InterfaceMethodref(interfaceName, "onProjectileLaunch", methodDescriptor))
-                            .putShort(4, 39 /** return */)
-                            .putShort(6, classCreator.CONSTANT_Fieldref("dev/latvian/mods/kubejs/util/ConsoleJS", "STARTUP", "Ldev/latvian/mods/kubejs/util/ConsoleJS;"))
-                            .putShort(8, classCreator.CONSTANT_Methodref("dev/latvian/mods/kubejs/util/ConsoleJS", "error", "(Ljava/lang/String;Ljava/lang/Throwable;)Ldev/latvian/mods/kubejs/script/ConsoleLine;"))
-                            .putShort(10, classCreator.CONSTANT_Methodref("java/lang/Throwable", "toString", "()Ljava/lang/String;"))
+            classCreator.implements("slimeknights/tconstruct/library/modifiers/hook/interaction/InventoryTickModifierHook")
+                .addField("onInventoryTickFunction", `L${interfaceName};`, 9)
+                .addMethod("onInventoryTick", methodDescriptor, method => {
+                    method.addAttribute("Code", new CodeAttribute(9, 9).setCustomByteCodeGenerator(() => {
+                        let references = JavaUtils.ByteBuffer.allocate(4)
+                            .putShort(0, classCreator.CONSTANT_Fieldref(classCreator.internalName, "onInventoryTickFunction", `L${interfaceName};`))
+                            .putShort(2, classCreator.CONSTANT_InterfaceMethodref(interfaceName, "onInventoryTick", methodDescriptor))
                             .array();
 
                         return [
@@ -95,13 +100,13 @@ const TinkerFunctionsSet = {
                             0x2d, // 5: aload_3
                             0x19, // 6: aload #4
                                 0x04,
-                            0x19, // 8: aload #5
+                            0x15, // 8: iload #5
                                 0x05,
-                            0x19, // 10: aload #6
+                            0x15, // 10: iload #6
                                 0x06,
-                            0x19, // 12: aload #7
+                            0x15, // 12: iload #7
                                 0x07,
-                            0x15, // 14: iload #8
+                            0x19, // 14: aload #8
                                 0x08,
                             0xb9, // 16: invokeinterface
                                 references[2],
@@ -114,6 +119,7 @@ const TinkerFunctionsSet = {
                 });
         }
     },
+    
     BreakSpeedFunction: {
         class: TinkerFunctions$BreakSpeedFunction,
 
@@ -152,6 +158,55 @@ const TinkerFunctionsSet = {
                                 references[2], references[3],
                                 0x07, 0x00,
                             0xb1, // return
+                        ];
+                    }));
+                });
+        }
+    },
+    ProjectileLaunchFunction: {
+        class: TinkerFunctions$ProjectileLaunchFunction,
+
+        /** @type {string} */
+        internalName: TinkerFunctions$ProjectileLaunchFunction.__javaObject__.getName().replace('.', '/'),
+
+        /**
+         * @param {ClassCreator} classCreator 
+         */
+        addClassMethod: (classCreator) => {
+            let interfaceName = TinkerFunctionsSet.ProjectileLaunchFunction.internalName;
+            let methodDescriptor = "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/projectile/Projectile;Lnet/minecraft/world/entity/projectile/AbstractArrow;Lslimeknights/tconstruct/library/tools/nbt/ModDataNBT;Z)V";
+
+            classCreator.implements("slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook")
+                .addField("onProjectileLaunchFunction", `L${interfaceName};`, 9)
+                .addMethod("onProjectileLaunch", methodDescriptor, method => {
+                    method.addAttribute("Code", new CodeAttribute(9, 9).setCustomByteCodeGenerator((classCreator) => {
+                        let references = JavaUtils.ByteBuffer.allocate(4)
+                            .putShort(0, classCreator.CONSTANT_Fieldref(classCreator.name.replace(/\./g, '/'), "onProjectileLaunchFunction", `L${interfaceName};`))
+                            .putShort(2, classCreator.CONSTANT_InterfaceMethodref(interfaceName, "onProjectileLaunch", methodDescriptor))
+                            .array();
+
+                        return [
+                            0xb2, // 0: getstatic thisClass.onProjectileLaunchFunction
+                                references[0], references[1],
+                            0x2b, // 3: aload_1
+                            0x2c, // 4: aload_2
+                            0x2d, // 5: aload_3
+                            0x19, // 6: aload #4
+                                0x04,
+                            0x19, // 8: aload #5
+                                0x05,
+                            0x19, // 10: aload #6
+                                0x06,
+                            0x19, // 12: aload #7
+                                0x07,
+                            0x15, // 14: iload #8
+                                0x08,
+                            0xb9, // 16: invokeinterface
+                                references[2],
+                                references[3],
+                                0x09,
+                                0x00,
+                            0xb1, // 21: return
                         ];
                     }));
                 });

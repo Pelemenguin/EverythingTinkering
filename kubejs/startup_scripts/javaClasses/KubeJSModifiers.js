@@ -77,12 +77,16 @@ const ModifierManager = {
 
         Object.keys(hooks).forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
             switch (hook) {
-                case "onProjectileLaunch": {
-                    TinkerFunctionsSet.ProjectileLaunchFunction.addClassMethod(modifierClassCreator);
+                case "onInventoryTick": {
+                    TinkerFunctionsSet.InventoryTickFunction.addClassMethod(modifierClassCreator);
                     break;
                 }
                 case "onBreakSpeed": {
                     TinkerFunctionsSet.BreakSpeedFunction.addClassMethod(modifierClassCreator);
+                    break;
+                }
+                case "onProjectileLaunch": {
+                    TinkerFunctionsSet.ProjectileLaunchFunction.addClassMethod(modifierClassCreator);
                     break;
                 }
                 case "__custom__": {
@@ -104,11 +108,14 @@ const ModifierManager = {
                                 // ==============================
 
                     switch (hook) {
-                        case "onProjectileLaunch": {
-                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "PROJECTILE_LAUNCH", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
+                        case "onInventoryTick": {
+                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "INVENTORY_TICK", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
                         case "onBreakSpeed": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "BREAK_SPEED", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
+                        }
+                        case "onProjectileLaunch": {
+                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "PROJECTILE_LAUNCH", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
                         default: {
                             return undefined;
@@ -145,12 +152,25 @@ const ModifierManager = {
                                 // =============================
 
             switch (hook) {
-                case "onProjectileLaunch": {
-                    modifierClass['onProjectileLaunchFunction'] = hooks.onProjectileLaunch;
+                case "onInventoryTick": {
+                    modifierClass['onInventoryTickFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) => {
+                        try {hooks.onInventoryTick(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);}
+                        catch (e) {console.error(e.toString, e);}
+                    };
                     break;
                 }
                 case "onBreakSpeed": {
-                    modifierClass['onBreakSpeedFunction'] = hooks.onBreakSpeed;
+                    modifierClass['onBreakSpeedFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
+                        try {hooks.onBreakSpeed(arg0, arg1, arg2, arg3, arg4, arg5);}
+                        catch (e) {console.error(e.toString(), e);}
+                    };
+                    break;
+                }
+                case "onProjectileLaunch": {
+                    modifierClass['onProjectileLaunchFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) => {
+                        try {hooks.onProjectileLaunch(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);}
+                        catch (e) {console.error(e.toString(), e);}
+                    };
                     break;
                 }
             }
@@ -181,13 +201,13 @@ StartupEvents.init(() => {
 
 /**
  * @param {string} modifierId
- * @param {Annotation.TinkerFunction.ModifierHookArgument['__custom__']} hook 
+ * @param {Annotation.TinkerFunction.CustomModifierHookArgument} hook 
  */
 let customHookHandler = (modifierId, hook) => {
     Object.keys(hook).forEach((/** @type {keyof hook} */ customHook) => {
         switch (customHook) {
-            case "ServerTick": {
-                global.TinkerFunctions.onServerTickFunctions.put(`kubejs:${modifierId}`, hook.ServerTick);
+            case "onServerTick": {
+                global.TinkerFunctions.onServerTickFunctions.put(`kubejs:${modifierId}`, hook.onServerTick);
             }
         }
     });

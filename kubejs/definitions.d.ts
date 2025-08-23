@@ -85,6 +85,45 @@ declare namespace Annotation {
             | "projectileLaunch" | "tooltipSetting" | "onServerTick";
         type ModifierHookArgument = {
             /**
+             * Triggers every tick in the inventory.
+             * Not to be confused with {@link CustomModifierHookArgument.onServerTick `__custom__.onServerTick`}  
+             * 在物品栏中每Tick触发。
+             * 不要与{@link CustomModifierHookArgument.onServerTick `__custom__.onServerTick`}混淆。
+             * - - - - -
+             * @param tool          Current tool instance  
+             *                      当前工具实例
+             * 
+             * @param modifier      Modifier running the hook  
+             *                      使用此钩子函数的特性
+             * 
+             * @param world         World containing tool  
+             *                      工具所在的世界
+             * 
+             * @param holder        Entity holding tool  
+             *                      手持工具的实体
+             * 
+             * @param itemSlot      Slot containing this tool. Note this may be from the hotbar, main inventory, or armor inventory  
+             *                      放置工具的栏位。注意，其可能来自快捷栏，主物品栏，或护甲栏
+             * 
+             * @param isSelected    If true, this item is currently in the player's main hand  
+             *                      若为真，则该物品正在玩家的主手上
+             * 
+             * @param isCorrectSlot If true, this item is in the proper slot. For tools, that is main hand or off hand. For armor, this means its in the correct armor slot  
+             *                      若为真，则该物品在正确的栏位上。对于工具来说，这是主手或副手。对于盔甲，这意味着其对应的护甲栏位
+             * 
+             * @param stack         Item stack instance to check other slots for the tool. Do not modify  
+             *                      用以检查工具其它栏位的物品堆叠实例。不要更改
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     onBreakSpeed: (tool, modifier, world, holder, itemSlot, isSelected, isCorrectSlot, stack) => {
+             *         tool.damage += 1; // Reduce 1 durability point every tick
+             *                           // 每Tick损失一点耐久值
+             *     }
+             * });
+             */
+            onInventoryTick: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, world: Internal.Level, holder: Internal.LivingEntity, itemSlot: number, isSelected: boolean, isCorrectSlot: boolean, stack: Internal.ItemStack) => void
+            /**
              * Triggers when mining blocks.
              * Note that modification on mining speed should be done on `newSpeed` field of {@link event `event`}.  
              * 挖掘方块时触发。
@@ -163,31 +202,44 @@ declare namespace Annotation {
              * 使用我们的KubeJS脚本编写的一些自定义方法，
              * 并非标准的匠魂特性钩子机制。
              */
-            __custom__: {
-                /**
-                 * Triggers **every tick** on server side,
-                 * regardless of whether there are modifier instances in the world.
-                 * Usually used to validate or evaluate something together with other methods.  
-                 * 在服务端**每个tick**触发一次，
-                 * 无论世界中是否存在这一特性的实例。
-                 * 常用于检验或计算某些东西，
-                 * 配合其它方法使用。
-                 * - - - - -
-                 * @param event Server tick event
-                 *              服务端tick事件
-                 * - - - - -
-                 * @example
-                 * let TEST = KubeJSModifierManager.registerCommonModifier("test", "TestModifier", {
-                 *     __custom__: {
-                 *         ServerTick: (event) => {
-                 *             console.info("Test message"); // Send `Test message` to console
-                 *                                           // 向控制台发送`Test message`
-                 *         }
-                 *     }
-                 * });
-                 */
-                ServerTick: (event: Internal.ServerEventJS) => void
-            }
+            __custom__: CustomModifierHookArgument
+        }
+        type CustomModifierHookArgument = {
+            /**
+             * Triggers **every tick** on server side.
+             * 在服务端**每个tick**触发一次。
+             * - - - - -
+             * Not to be confused with {@link ModifierHookArgument.onInventoryTick `onInventoryTick`}.
+             * `onInventoryTick` functions focus on real tool instances,
+             * they are called only when tool with that modifier exists.
+             * May also be called more than once respectively for multiple tools in one tick.  
+             * However, this `onServerTick` function is not related to any real tool instances.
+             * `onServerTick` functions are called even if no tool exists in the world,
+             * and can never be called multiple times within a single tick.
+             * (They are called once and only once within a tick.)  
+             * 不要与{@link ModifierHookArgument.onInventoryTick `onInventoryTick`}混淆。
+             * `onInventoryTick`函数更注重实际的工具实例，
+             * 它们只在带有该特性的工具存在时被调用，
+             * 也可能在一刻内为多个工具分别调用。  
+             * 但是，这个`onServerTick`函数并不与任何真正的工具实例相关，
+             * `onServerTick`函数即使在没有相应工具存在时也会被调用，
+             * 且不能再同一刻内被调用多次。
+             * （即它们在一个刻内会被调用一次，且仅有一次。）
+             * - - - - -
+             * @param event Server tick event
+             *              服务端tick事件
+             * - - - - -
+             * @example
+             * let TEST = KubeJSModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     __custom__: {
+             *         ServerTick: (event) => {
+             *             console.info("Test message"); // Send `Test message` to console
+             *                                           // 向控制台发送`Test message`
+             *         }
+             *     }
+             * });
+             */
+            onServerTick: (event: Internal.ServerEventJS) => void
         }
         type ModifierHooks = keyof ModifierHookArgument;
     }
