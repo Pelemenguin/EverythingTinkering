@@ -35,6 +35,7 @@ if (global.CreatedClasses === undefined) global.CreatedClasses = Utils.newMap();
  */
 function ClassCreator(name) {
     this.name = "dev.latvian.mods.rhino." + name;
+    this.internalName = this.name.replace(/\./g, '/');
     this.constantPoolCounter = 1;
     /** @type {Method[]} */
     this.methods = [];

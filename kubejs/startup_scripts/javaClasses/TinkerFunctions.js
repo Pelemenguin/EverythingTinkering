@@ -77,34 +77,38 @@ const TinkerFunctionsSet = {
             classCreator.implements("slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook")
                 .addField("onProjectileLaunchFunction", `L${interfaceName};`, 9)
                 .addMethod("onProjectileLaunch", methodDescriptor, method => {
-                    method.addAttribute("Code", new CodeAttribute(9, 9).setCustomByteCodeGenerator((classCreator) => {
-                        let references = JavaUtils.ByteBuffer.allocate(4)
+                    method.addAttribute("Code", new CodeAttribute(9, 10).setCustomByteCodeGenerator((classCreator) => {
+                        let references = JavaUtils.ByteBuffer.allocate(12)
                             .putShort(0, classCreator.CONSTANT_Fieldref(classCreator.name.replace(/\./g, '/'), "onProjectileLaunchFunction", `L${interfaceName};`))
                             .putShort(2, classCreator.CONSTANT_InterfaceMethodref(interfaceName, "onProjectileLaunch", methodDescriptor))
+                            .putShort(4, 39 /** return */)
+                            .putShort(6, classCreator.CONSTANT_Fieldref("dev/latvian/mods/kubejs/util/ConsoleJS", "STARTUP", "Ldev/latvian/mods/kubejs/util/ConsoleJS;"))
+                            .putShort(8, classCreator.CONSTANT_Methodref("dev/latvian/mods/kubejs/util/ConsoleJS", "error", "(Ljava/lang/String;Ljava/lang/Throwable;)Ldev/latvian/mods/kubejs/script/ConsoleLine;"))
+                            .putShort(10, classCreator.CONSTANT_Methodref("java/lang/Throwable", "toString", "()Ljava/lang/String;"))
                             .array();
 
                         return [
-                            0xb2, // getstatic thisClass.onProjectileLaunchFunction
+                            0xb2, // 0: getstatic thisClass.onProjectileLaunchFunction
                                 references[0], references[1],
-                            0x2b, // aload_1
-                            0x2c, // aload_2
-                            0x2d, // aload_3
-                            0x19, // aload 4
+                            0x2b, // 3: aload_1
+                            0x2c, // 4: aload_2
+                            0x2d, // 5: aload_3
+                            0x19, // 6: aload #4
                                 0x04,
-                            0x19, // aload 5
+                            0x19, // 8: aload #5
                                 0x05,
-                            0x19, // aload 6
+                            0x19, // 10: aload #6
                                 0x06,
-                            0x19, // aload 7
+                            0x19, // 12: aload #7
                                 0x07,
-                            0x15, // iload 8
+                            0x15, // 14: iload #8
                                 0x08,
-                            0xb9, // invokeinterface
+                            0xb9, // 16: invokeinterface
                                 references[2],
                                 references[3],
                                 0x09,
                                 0x00,
-                            0xb1, // return
+                            0xb1, // 21: return
                         ];
                     }));
                 });
