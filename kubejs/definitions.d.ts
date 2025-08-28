@@ -157,6 +157,42 @@ declare namespace Annotation {
              */
             addTooltip?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, player: Internal.Player | null, tooltip: Internal.List<Internal.Component>, tooltipKey: Internal.TooltipKey, tooltipFlag: Internal.TooltipFlag) => void,
             /**
+             * Called when an entity is attacked, before critical hit damage is calculated.
+             * Allows modifying the damage dealt.
+             * Do not modify the entity here,
+             * its possible the attack will still be canceled without calling further hooks due to 0 damage being dealt.  
+             * 生物被攻击时调用，在暴击伤害计算之前。
+             * 允许修改伤害。
+             * 不要在此处修改实体，攻击可能仍然会由于造成0伤害而被取消，不调用更后面的钩子函数。
+             * - - - - -
+             * @param tool       Tool used to attack  
+             *                   用于攻击的工具
+             * 
+             * @param modifier   Modifier level  
+             *                   特性（及其）等级
+             * 
+             * @param context    Attack context  
+             *                   攻击上下文
+             * 
+             * @param baseDamage Base damage dealt before modifiers  
+             *                   特性计算前的基础伤害
+             * 
+             * @param damage     Computed damage from all prior modifiers  
+             *                   由更优先的特性计算之后的伤害
+             * 
+             * @returns          New damage to deal  
+             *                   要造成的新伤害
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     getMeleeDamage: (tool, modifier, context, baseDamage, damage) => {
+             *         return damage + modifier.level; // Add damage that equals to modifier's level
+             *                                         // 增加相当于特性等级的伤害
+             *     }
+             * });
+             */
+            getMeleeDamage?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, baseDamage: number, damage: number) => number,
+            /**
              * Called right before an entity is hit, used to modify knockback applied or to apply special effects that need to run before damage.
              * {@linkcode damage} is final damage including critical damage.
              * Note there is still a chance this attack won't deal damage, if that happens {@linkcode ModifierHookArgument.failedMeleeHit} will run.  

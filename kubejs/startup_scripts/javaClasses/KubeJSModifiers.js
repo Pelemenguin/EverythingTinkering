@@ -89,6 +89,10 @@ const ModifierManager = {
                     TinkerFunctionsSet.BreakSpeedFunction.addClassMethod(modifierClassCreator);
                     break;
                 }
+                case "getMeleeDamage": {
+                    TinkerFunctionsSet.MeleeDamageFunction.addClassMethod(modifierClassCreator);
+                    break;
+                }
                 case "beforeMeleeHit": {
                     TinkerFunctionsSet.BeforeMeleeHitFunction.addClassMethod(modifierClassCreator);
                     break;
@@ -132,6 +136,9 @@ const ModifierManager = {
                         }
                         case "onBreakSpeed": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "BREAK_SPEED", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
+                        }
+                        case "getMeleeDamage": {
+                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "MELEE_DAMAGE", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
                         case "beforeMeleeHit": {/* fallthrough to `afterMeleeHit` */}
                         case "afterMeleeHit": {
@@ -197,6 +204,13 @@ const ModifierManager = {
                     modifierClass['onBreakSpeedFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
                         try {hooks.onBreakSpeed(arg0, arg1, arg2, arg3, arg4, arg5);}
                         catch (e) {console.error(e);}
+                    };
+                    break;
+                }
+                case "getMeleeDamage": {
+                    modifierClass['getMeleeDamageFunction'] = (arg0, arg1, arg2, arg3, arg4) => {
+                        try {return hooks.getMeleeDamage(arg0, arg1, arg2, arg3, arg4);}
+                        catch (e) {console.error(e); return arg4;}
                     };
                     break;
                 }

@@ -103,44 +103,6 @@ let calcIncludedAngleCosine = (first, second) => {
     return (dotProd / lengthProd);
 };
 
-// let PAPERCUTTING = ModifierRegisterer.registerModifier("kubejs:papercutting", ["armorTakeAttacked", "onServerTick"]);
-// PAPERCUTTING.armorTakeAttacked((view, lvl, context, slot, source, damage) => {
-
-//     if (context.getLevel().isClientSide()) return true;
-
-//     let attacker = source.getImmediate();
-//     if (attacker == null || !attacker.isLiving()) return true;
-
-//     let wearer = context.getEntity();
-
-//     if (JavaMath["abs(float)"](calcIncludedAngleCosine(wearer.getViewVector(1), new Vec3d(
-//         attacker.x - wearer.x,
-//         attacker.y - wearer.y,
-//         attacker.z - wearer.z
-//     ))) > PAPERCUTTING_MAX_CONSINE_ABSOLUTE) return true;
-
-//     // let armor = view.getStats().get(ToolStats.ARMOR);
-//     let armor = view.getStats().get(ToolStats.ARMOR);
-//     let toughness = view.getStats().get(ToolStats.ARMOR_TOUGHNESS);
-//     let returning = JavaMath["min(float,float)"](armor + JavaMath.log10(damage * toughness + 1), lvl * PAPERCUTTING_MAX_DAMAGE);
-
-//     /** Push attacker to the list, so it can't be attacked by papercutting again. */
-//     PAPERCUT_TARGET_LIST_CLEARABLE = false;
-//     // let damageSource = wearer.damageSources().thorns(wearer);
-//     let damageSource = KubeJSDamageSources.papercut(context.getLevel(), wearer, wearer);
-//     addPlannedDamage(attacker, returning, slot, damageSource);
-
-//     return false;
-
-// });
-// PAPERCUTTING.onServerTick(event => {
-//     if (PAPERCUT_TARGET_LIST_CLEARABLE) {
-//         dealDamage(event.getServer());
-//     }
-//     /** If not clearable, clear at next tick. */
-//     PAPERCUT_TARGET_LIST_CLEARABLE = true;
-// });
-
 // eslint-disable-next-line no-unused-vars
 let PAPERCUTTING = ModifierManager.registerCommonModifier("papercutting", "PapercuttingModifier", {
     onAttacked: (tool, modifier, context, slotType, source, amount/*, isDirectDamage*/) => {
