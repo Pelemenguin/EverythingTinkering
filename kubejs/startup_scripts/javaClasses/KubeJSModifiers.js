@@ -97,6 +97,10 @@ const ModifierManager = {
                     TinkerFunctionsSet.AfterMeleeHitFunction.addClassMethod(modifierClassCreator);
                     break;
                 }
+                case "onAttacked":{
+                    TinkerFunctionsSet.OnAttackedFunction.addClassMethod(modifierClassCreator);
+                    break;
+                }
                 case "onProjectileLaunch": {
                     TinkerFunctionsSet.ProjectileLaunchFunction.addClassMethod(modifierClassCreator);
                     break;
@@ -132,6 +136,9 @@ const ModifierManager = {
                         case "beforeMeleeHit": {/* fallthrough to `afterMeleeHit` */}
                         case "afterMeleeHit": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "MELEE_HIT", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
+                        }
+                        case "onAttacked": {
+                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "ON_ATTACKED", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
                         case "onProjectileLaunch": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "PROJECTILE_LAUNCH", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
@@ -203,6 +210,13 @@ const ModifierManager = {
                 case "afterMeleeHit": {
                     modifierClass['afterMeleeHitFunction'] = (arg0, arg1, arg2, arg3) => {
                         try {hooks.afterMeleeHit(arg0, arg1, arg2, arg3);}
+                        catch (e) {console.error(e);}
+                    };
+                    break;
+                }
+                case "onAttacked": {
+                    modifierClass['onAttackedFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5, arg6) => {
+                        try {hooks.onAttacked(arg0, arg1, arg2, arg3, arg4, arg5, arg6);}
                         catch (e) {console.error(e);}
                     };
                     break;

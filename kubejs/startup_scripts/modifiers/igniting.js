@@ -10,17 +10,10 @@
  * 并在下次攻击释放。
  * 当工具仍然在着火时，每秒消耗耐久。
  * - - - - -
- * `IGNITING_FIRE_PERCENTAGE_PER_LEVEL = 0.25`  
- * Fire time delay per transfer per level.  
- * Keep 25% more fire time each level at default.  
- * 每级的着火时间衰减。  
- * 默认每级多保留 25% 着火时间。
- * - - - - -
  * @copyright Pelemenguin 2025
  * @license LGPL-3.0-or-later
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
- * - - - - -
  * - - - - -
  * @author Pelemenguin
  */

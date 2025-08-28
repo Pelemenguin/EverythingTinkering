@@ -224,6 +224,43 @@ declare namespace Annotation {
              */
             afterMeleeHit?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, damageDealt: number) => void,
             /**
+             * Runs after an entity is attacked (and we know the attack will land).
+             * Note you can attack the entity here,
+             * but you are responsible for preventing infinite recursion if you do so (by detecting your own attack source for instance)  
+             * 在一个实体被攻击之前运行（且我们知道攻击会发生）。
+             * 注意：你可以在此处攻击实体，但若这么做，你有责任防止无限递归（例如，检测你自己的攻击源）
+             * - - - - -
+             * @param tool           Tool being used  
+             *                       使用的工具
+             * 
+             * @param modifier       Level of the modifier  
+             *                       特性（及其）等级
+             * 
+             * @param context        Context of entity and other equipment  
+             *                       实体与其其它装备的上下文
+             * 
+             * @param slotType       Slot containing the tool  
+             *                       该工具的栏位
+             * 
+             * @param source         Damage source causing the attack  
+             *                       导致该攻击的伤害来源
+             * 
+             * @param amount         Amount of damage caused
+             *                       伤害量
+             * 
+             * @param isDirectDamage If true, this attack is direct damage from an entity
+             *                       若为真，则该攻击时来自实体的直接伤害
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     onAttacked: (tool, modifier, context, slotType, source, amount, isDirectDamage) => {
+             *         console.info(`Damage dealt: ${amount}`); // Display dealt damage in the console
+             *                                                  // 在控制台中显示造成的伤害
+             *     }
+             * });
+             */
+            onAttacked?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.EquipmentContext, slotType: Internal.EquipmentSlot, source: DamageSource, amount: number, isDirectDamage: boolean) => void,
+            /**
              * Triggers when mining blocks.
              * Note that modification on mining speed should be done on `newSpeed` field of {@link event `event`}.  
              * 挖掘方块时触发。
