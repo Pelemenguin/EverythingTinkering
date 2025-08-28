@@ -124,6 +124,39 @@ declare namespace Annotation {
              */
             onInventoryTick?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, world: Internal.Level, holder: Internal.LivingEntity, itemSlot: number, isSelected: boolean, isCorrectSlot: boolean, stack: Internal.ItemStack) => void,
             /**
+             * Adds additional information from the modifier to the tooltip.
+             * Shown when holding `shift` on a tool, or in the stats area of the tinker station  
+             * 从特性向工具提示中添加额外信息。
+             * 在工具上按`Shift`时显示，或工匠站的`stats`区域
+             * - - - - -
+             * @param tool        Tool instance  
+             *                    工具实例
+             * 
+             * @param modifier    Tool level  
+             *                    工具等级
+             * 
+             * @param player      Player holding this tool  
+             *                    持有工具的玩家
+             * 
+             * @param tooltip     Tooltip  
+             *                    工具提示
+             * 
+             * @param tooltipKey  Shows if the player is holding shift, control, or neither  
+             *                    表示玩家正在按下`Shift`，`Ctrl`，或均不
+             * 
+             * @param tooltipFlag Flag determining tooltip type  
+             *                    决定工具提示的标记
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     addTooltip: (tool, modifier, player, tooltip, tooltipKey, tooltipFlag) => {
+             *         tooltip.add(Component.literal("Test Tooltip")); // Add `Test Tooltip` to the tool's tooltips
+             *                                                         // 向工具的工具提示中加入`Test Tooltip`
+             *     }
+             * });
+             */
+            addTooltip?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, player: Internal.Player | null, tooltip: Internal.List<Internal.Component>, tooltipKey: Internal.TooltipKey, tooltipFlag: Internal.TooltipFlag) => void,
+            /**
              * Called right before an entity is hit, used to modify knockback applied or to apply special effects that need to run before damage.
              * {@linkcode damage} is final damage including critical damage.
              * Note there is still a chance this attack won't deal damage, if that happens {@linkcode ModifierHookArgument.failedMeleeHit} will run.  
@@ -262,7 +295,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            onProjectileLaunch?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, shooter: Internal.LivingEntity, ammo: Internal.ItemStack, projectile: Internal.Projectile, arrow: Internal.AbstractArrow, persistent: Internal.ModDataNBT, isPrimary: boolean) => void,
+            onProjectileLaunch?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, shooter: Internal.LivingEntity, ammo: Internal.ItemStack, projectile: Internal.Projectile, arrow: Internal.AbstractArrow | null, persistent: Internal.ModDataNBT, isPrimary: boolean) => void,
             /**
              * Some custom methods for modifiers written by our KubeJS scripts.
              * These are not standard Tinker's Construct modifier hooks.  

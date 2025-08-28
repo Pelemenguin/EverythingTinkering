@@ -81,6 +81,10 @@ const ModifierManager = {
                     TinkerFunctionsSet.InventoryTickFunction.addClassMethod(modifierClassCreator);
                     break;
                 }
+                case "addTooltip": {
+                    TinkerFunctionsSet.AddTooltipFunction.addClassMethod(modifierClassCreator);
+                    break;
+                }
                 case "onBreakSpeed": {
                     TinkerFunctionsSet.BreakSpeedFunction.addClassMethod(modifierClassCreator);
                     break;
@@ -119,6 +123,9 @@ const ModifierManager = {
                         case "onInventoryTick": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "INVENTORY_TICK", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
+                        case "addTooltip": {
+                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "TOOLTIP", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
+                        }
                         case "onBreakSpeed": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "BREAK_SPEED", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
@@ -141,7 +148,6 @@ const ModifierManager = {
                     let ref = JavaUtils.ByteBuffer.allocate(2).putShort(0, classCreator.CONSTANT_Fieldref(attr[0], attr[1], attr[2])).array();
 
                     return [
-                        0x2b, // aload_1
                         0x2a, // aload_0
                         0xb2, // getstatic
                             ref[0], ref[1],
@@ -150,7 +156,7 @@ const ModifierManager = {
                     ];
                 });
 
-                let result = [];
+                let result = [0x2b]; // aload_1
                 hookAdder.forEach(l => result = result.concat(l));
                 result.push(0xb1); // return
                 return result;
@@ -169,6 +175,13 @@ const ModifierManager = {
                 case "onInventoryTick": {
                     modifierClass['onInventoryTickFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) => {
                         try {hooks.onInventoryTick(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);}
+                        catch (e) {console.error(e);}
+                    };
+                    break;
+                }
+                case "addTooltip": {
+                    modifierClass['addTooltipFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
+                        try {hooks.addTooltip(arg0, arg1, arg2, arg3, arg4, arg5);}
                         catch (e) {console.error(e);}
                     };
                     break;

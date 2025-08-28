@@ -52,6 +52,14 @@ let TinkerFunctions$InventoryTickFunction = addFunctionalInterfaceAnnotation(
         })
 ).defineClass(JavaUtils.MethodHandles.lookup());
 
+let TinkerFunctions$AddTooltipFunction = addFunctionalInterfaceAnnotation(
+    (new ClassCreator("TinkerFunctions$AddTooltipFunction"))
+        .setIsInterface()
+        .addMethod("addTooltip", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/player/Player;Ljava/util/List;Lslimeknights/mantle/client/TooltipKey;Lnet/minecraft/world/item/TooltipFlag;)V", method => {
+            method.setAbstract();
+        })
+).defineClass(JavaUtils.MethodHandles.lookup());
+
 let TinkerFunctions$BeforeMeleeHitFunction = addFunctionalInterfaceAnnotation(
     (new ClassCreator("TinkerFunctions$BeforeMeleeHitFunction"))
         .setIsInterface()
@@ -130,6 +138,50 @@ const TinkerFunctionsSet = {
                                 0x09,
                                 0x00,
                             0xb1, // 21: return
+                        ];
+                    }));
+                });
+        }
+    },
+
+    AddTooltipFunction: {
+        class: TinkerFunctions$AddTooltipFunction,
+
+        /** @type {string} */
+        internalName: TinkerFunctions$AddTooltipFunction.__javaObject__.getName().replace('.', '/'),
+
+        /**
+         * @param {ClassCreator} classCreator 
+         */
+        addClassMethod: (classCreator) => {
+            let interfaceName = TinkerFunctionsSet.AddTooltipFunction.class.__javaObject__.getName().replace('.', '/');
+            let methodDescriptor = "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/player/Player;Ljava/util/List;Lslimeknights/mantle/client/TooltipKey;Lnet/minecraft/world/item/TooltipFlag;)V";
+
+            classCreator.implements("slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook")
+                .addField("addTooltipFunction", `L${interfaceName};`, 9)
+                .addMethod("addTooltip", methodDescriptor, method => {
+                    method.addAttribute("Code", new CodeAttribute(7, 7).setCustomByteCodeGenerator(classCreator => {
+                        let references = JavaUtils.ByteBuffer.allocate(4)
+                            .putShort(0, classCreator.CONSTANT_Fieldref(classCreator.name.replace(/\./g, '/'), "addTooltipFunction", `L${interfaceName};`))
+                            .putShort(2, classCreator.CONSTANT_InterfaceMethodref(interfaceName, "addTooltip", methodDescriptor))
+                            .array();
+
+                        return [
+                            0xb2, // getstatic thisClass.onBreakSpeedFunction
+                                references[0], references[1],
+                            0x2b, // aload_1
+                            0x2c, // aload_2
+                            0x2d, // aload_3
+                            0x19, // aload 4
+                                0x04,
+                            0x19, // aload 5
+                                0x05,
+                            0x19, // aload 6
+                                0x06,
+                            0xb9, // invokeinterface
+                                references[2], references[3],
+                                0x07, 0x00,
+                            0xb1, // return
                         ];
                     }));
                 });
