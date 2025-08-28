@@ -80,7 +80,7 @@ declare namespace Annotation {
     }
 
     namespace TinkerFunction {
-        /** @deprecated */
+        /** @deprecated Use {@linkcode ModifierHooks} instead */
         type Hook = "addToolStats" | "armorTakeAttacked" | "getBreakSpeed" | "onAfterBreak" | "getMeleeDamage" | "onAfterMeleeHit" | "onBeforeMeleeHit" | "onInventoryTick"
             | "projectileLaunch" | "tooltipSetting" | "onServerTick";
         type ModifierHookArgument = {
@@ -122,7 +122,74 @@ declare namespace Annotation {
              *     }
              * });
              */
-            onInventoryTick: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, world: Internal.Level, holder: Internal.LivingEntity, itemSlot: number, isSelected: boolean, isCorrectSlot: boolean, stack: Internal.ItemStack) => void
+            onInventoryTick?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, world: Internal.Level, holder: Internal.LivingEntity, itemSlot: number, isSelected: boolean, isCorrectSlot: boolean, stack: Internal.ItemStack) => void,
+            /**
+             * Called right before an entity is hit, used to modify knockback applied or to apply special effects that need to run before damage.
+             * {@linkcode damage} is final damage including critical damage.
+             * Note there is still a chance this attack won't deal damage, if that happens {@linkcode ModifierHookArgument.failedMeleeHit} will run.  
+             * 在实体被攻击前调用，用于修改击退或添加需要在计算攻击伤害前运行的药水效果。
+             * {@linkcode damage}是包含暴击加成的最终伤害。
+             * 注意：此时仍有可能该攻击不会造成任何伤害，这将导致{@linkcode ModifierHookArgument.failedMeleeHit}运行。
+             * - - - - -
+             * @param tool          Tool used to attack  
+             *                      用于攻击的工具
+             * 
+             * @param modifier      Modifier level  
+             *                      特性（及其）等级
+             * 
+             * @param context       Attack context  
+             *                      攻击上下文
+             * 
+             * @param damage        Damage to deal to the attacker  
+             *                      造成的伤害
+             * 
+             * @param baseKnockback Base knockback before modifiers  
+             *                      修改前的击退
+             * 
+             * @param knockback     Computed knockback from all prior modifiers  
+             *                      由更优先的特性计算后的击退
+             * 
+             * @returns             New knockback to apply. 0.5 is equivelent to 1 level of the vanilla enchant  
+             *                      新的击退。`0.5`与原版的一级击退附魔等价
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     beforeMeleeHit: (tool, modifier, context, damage, baseKnockback, knockback) => {
+             *         return knockback + 0.5; // Add 0.5 knockback
+             *                                 // 增加 0.5 击退
+             *     }
+             * });
+             */
+            beforeMeleeHit?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, damage: number, baseKnockback: number, knockback: number) => number,
+            /**
+             * Called after a living entity is successfully attacked.
+             * Used to apply special effects on hit.  
+             * 在一个生物被成功攻击时调用。
+             * 常用于用于攻击时添加特殊效果。
+             * - - - - -
+             * @param tool        Tool used to attack  
+             *                    用于攻击的工具
+             * 
+             * @param modifier    Modifier level  
+             *                    特性（及其）等级
+             * 
+             * @param context     Attack context  
+             *                    攻击上下文
+             * 
+             * @param damageDealt Amount of damage successfully dealt
+             *                    (After testing, this is always `0.0`)  
+             *                    成功造成的伤害
+             *                    （经过测试，总为`0.0`）
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     afterMeleeHit: (tool, modifier, context, damageDealt) => {
+             *         console.info(`Damage dealt: ${damageDealt}`); // Display dealt damage in the console
+             *                                                       // 在控制台中显示造成的伤害
+             *     }
+             * });
+             */
+            afterMeleeHit?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, damageDealt: number) => void,
             /**
              * Triggers when mining blocks.
              * Note that modification on mining speed should be done on `newSpeed` field of {@link event `event`}.  
@@ -155,7 +222,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            onBreakSpeed: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, event: Internal.PlayerEvent$BreakSpeed, sideHit: Internal.Direction, isEffective: boolean, miningSpeedModifier: number) => void;
+            onBreakSpeed?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, event: Internal.PlayerEvent$BreakSpeed, sideHit: Internal.Direction, isEffective: boolean, miningSpeedModifier: number) => void,
             /**
              * Triggers when launching a projectile.
              * 发射弹射物时触发。
@@ -195,14 +262,14 @@ declare namespace Annotation {
              *     }
              * });
              */
-            onProjectileLaunch: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, shooter: Internal.LivingEntity, ammo: Internal.ItemStack, projectile: Internal.Projectile, arrow: Internal.AbstractArrow, persistent: Internal.ModDataNBT, isPrimary: boolean) => void
+            onProjectileLaunch?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, shooter: Internal.LivingEntity, ammo: Internal.ItemStack, projectile: Internal.Projectile, arrow: Internal.AbstractArrow, persistent: Internal.ModDataNBT, isPrimary: boolean) => void,
             /**
              * Some custom methods for modifiers written by our KubeJS scripts.
              * These are not standard Tinker's Construct modifier hooks.  
              * 使用我们的KubeJS脚本编写的一些自定义方法，
              * 并非标准的匠魂特性钩子机制。
              */
-            __custom__: CustomModifierHookArgument
+            __custom__?: CustomModifierHookArgument
         }
         type CustomModifierHookArgument = {
             /**
@@ -239,43 +306,12 @@ declare namespace Annotation {
              *     }
              * });
              */
-            onServerTick: (event: Internal.ServerEventJS) => void
+            onServerTick?: (event: Internal.ServerEventJS) => void
         }
         type ModifierHooks = keyof ModifierHookArgument;
     }
 
     namespace JavaClass {
-        type AnnotationStructure = {
-                name: string
-            } & ({
-                tag: 'B' | 'C' | 'I' | 'S' | 'Z',
-                value: number
-            } | {
-                tag: 'D',
-                value: number
-            } | {
-                tag: 'F',
-                value: number
-            } | {
-                tag: 'J',
-                value: number
-            } | {
-                tag: 's',
-                value: string
-            } | {
-                tag: 'e',
-                type: string,
-                constName: string
-            } | {
-                tag: 'c',
-                className: string
-            } | {
-                tag: '@',
-                annotation: Annnotation.JavaClass.AnnotationStructure
-            } | {
-                tag: '[',
-                values: AnnotationStructure[]
-            });
     }
 
 }

@@ -42,8 +42,8 @@ const ModifierManager = {
      *                      特性名称，应无`kubejs:`前缀
      * @param {string} className Class' name. For example: `TestModifier`  
      *                           类名。例如：`TestModifier`
-     * @param {Annotation.TinkerFunction.ModifierHookArgument extends infer T ? T : never} hooks Hooks to register. You should receive a more detailed typing hint when checking the object's keys  
-     *                                                                                           要注册的钩子。你应该会在查看该对象的键时获取到更详细的介绍
+     * @param {Annotation.TinkerFunction.ModifierHookArgument} hooks Hooks to register. You should receive a more detailed typing hint when checking the object's keys  
+     *                                                               要注册的钩子。你应该会在查看该对象的键时获取到更详细的介绍
      * - - - - -
      * Related links for the example | 此示例的相关链接：
      * - {@link Annotation.TinkerFunction.ModifierHookArgument.onProjectileLaunch `onProjectileLaunch`}  
@@ -85,6 +85,14 @@ const ModifierManager = {
                     TinkerFunctionsSet.BreakSpeedFunction.addClassMethod(modifierClassCreator);
                     break;
                 }
+                case "beforeMeleeHit": {
+                    TinkerFunctionsSet.BeforeMeleeHitFunction.addClassMethod(modifierClassCreator);
+                    break;
+                }
+                case "afterMeleeHit": {
+                    TinkerFunctionsSet.AfterMeleeHitFunction.addClassMethod(modifierClassCreator);
+                    break;
+                }
                 case "onProjectileLaunch": {
                     TinkerFunctionsSet.ProjectileLaunchFunction.addClassMethod(modifierClassCreator);
                     break;
@@ -101,7 +109,7 @@ const ModifierManager = {
                     .putShort(0, classCreator.CONSTANT_Methodref("slimeknights/tconstruct/library/module/ModuleHookMap$Builder", "addHook", "(Ljava/lang/Object;Lslimeknights/tconstruct/library/module/ModuleHook;)Lslimeknights/tconstruct/library/module/ModuleHookMap$Builder;"))
                     .array();
                 
-                let hookAdder = Object.keys(hooks).map((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
+                let hookAdder = Array.from(new Set(Object.keys(hooks).map((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
 
                                 // ==============================
                                 // =     SECOND SWITCH-CASE     =
@@ -114,6 +122,10 @@ const ModifierManager = {
                         case "onBreakSpeed": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "BREAK_SPEED", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
+                        case "beforeMeleeHit": {/* fallthrough to `afterMeleeHit` */}
+                        case "afterMeleeHit": {
+                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "MELEE_HIT", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
+                        }
                         case "onProjectileLaunch": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "PROJECTILE_LAUNCH", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
@@ -121,8 +133,10 @@ const ModifierManager = {
                             return undefined;
                         }
                     }
-                }).map(attr => {
-                    if (attr === undefined) return [];
+                }).filter(a => a !== undefined)
+                .map(a => JSON.stringify(a))))
+                .map(v => JSON.parse(v))
+                .map((/** @type {[string, string, string]} */attr) => {
 
                     let ref = JavaUtils.ByteBuffer.allocate(2).putShort(0, classCreator.CONSTANT_Fieldref(attr[0], attr[1], attr[2])).array();
 
@@ -155,21 +169,35 @@ const ModifierManager = {
                 case "onInventoryTick": {
                     modifierClass['onInventoryTickFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) => {
                         try {hooks.onInventoryTick(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);}
-                        catch (e) {console.error(e.toString, e);}
+                        catch (e) {console.error(e);}
                     };
                     break;
                 }
                 case "onBreakSpeed": {
                     modifierClass['onBreakSpeedFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
                         try {hooks.onBreakSpeed(arg0, arg1, arg2, arg3, arg4, arg5);}
-                        catch (e) {console.error(e.toString(), e);}
+                        catch (e) {console.error(e);}
+                    };
+                    break;
+                }
+                case "beforeMeleeHit": {
+                    modifierClass['beforeMeleeHitFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
+                        try {return hooks.beforeMeleeHit(arg0, arg1, arg2, arg3, arg4, arg5);}
+                        catch (e) {console.error(e); return arg5;}
+                    };
+                    break;
+                }
+                case "afterMeleeHit": {
+                    modifierClass['afterMeleeHitFunction'] = (arg0, arg1, arg2, arg3) => {
+                        try {hooks.afterMeleeHit(arg0, arg1, arg2, arg3);}
+                        catch (e) {console.error(e);}
                     };
                     break;
                 }
                 case "onProjectileLaunch": {
                     modifierClass['onProjectileLaunchFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) => {
                         try {hooks.onProjectileLaunch(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);}
-                        catch (e) {console.error(e.toString(), e);}
+                        catch (e) {console.error(e);}
                     };
                     break;
                 }

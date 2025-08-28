@@ -274,7 +274,9 @@ ClassCreator.prototype.extends = function(superClass) {
  * @returns {this}
  */
 ClassCreator.prototype.implements = function(superinterface) {
-    this.superInterfaces.push(superinterface.replace(/\./g, '/'));
+    let intfname = superinterface.replace(/\./g, '/');
+    if (this.superInterfaces.indexOf(intfname) >= 0) return this;
+    this.superInterfaces.push(intfname);
     return this;
 };
 
