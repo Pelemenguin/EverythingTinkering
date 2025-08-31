@@ -157,6 +157,38 @@ declare namespace Annotation {
              */
             addTooltip?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, player: Internal.Player | null, tooltip: Internal.List<Internal.Component>, tooltipKey: Internal.TooltipKey, tooltipFlag: Internal.TooltipFlag) => void,
             /**
+             * Adds raw stats to the tool. Called whenever tool stats are rebuilt.  
+             * 向工具添加直接属性数据。在工具属性重建时调用。
+             * - - - - -
+             * @param context  Context about the tool built.
+             *                 Partial view of {@link Internal.IToolStackView `IToolStackView`} as the tool is not fully built.
+             *                 Note this hook runs after volatile data builds  
+             *                 工具重建上下文。
+             *                 {@link Internal.IToolStackView `IToolStackView`}的部分视图，因为工具还未完全建成。
+             *                 注意：该钩子方法在易失数据建立后运行
+             * 
+             * @param modifier Modifier level  
+             *                 特性（及其）等级
+             * 
+             * @param builder  Tool stat builder
+             *                 工具属性构建器
+             * - - - - -
+             * @example
+             * // const ToolStats = Java.loadClass("slimeknights.tconstruct.library.tools.stat.ToolStats");
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     addToolStats: (context, modifier, builder) => {
+             *         ToolStats.ATTACK_DAMAGE.add(builder, 1.0); // Add 1.0 attack damage
+             *                                                    // 增加1.0攻击伤害
+             *     }
+             * });
+             * @end
+             * Related Links | 相关链接
+             * - {@linkcode Internal.ToolStats ToolStats}  
+             *     `ToolStats` is a Java class that records all Tinker's Construct tool stat types  
+             *     `ToolStats`是记录了所有匠魂工具属性类型的Java类
+             */
+            addToolStats?: (context: Internal.IToolContext, modifier: Internal.ModifierEntry, builder: Internal.ModifierStatsBuilder) => void,
+            /**
              * Called when an entity is attacked, before critical hit damage is calculated.
              * Allows modifying the damage dealt.
              * Do not modify the entity here,
@@ -330,7 +362,7 @@ declare namespace Annotation {
              */
             onBreakSpeed?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, event: Internal.PlayerEvent$BreakSpeed, sideHit: Internal.Direction, isEffective: boolean, miningSpeedModifier: number) => void,
             /**
-             * Called after a block is broken to apply special effects
+             * Called after a block is broken to apply special effects  
              * 在方块被破坏后调用来添加特殊效果
              * - - - - -
              * @param tool     Tool used  
@@ -344,7 +376,7 @@ declare namespace Annotation {
              * - - - - -
              * @example
              * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
-             *     onBreakSpeed: (tool, modifier, context) => {
+             *     afterBlockBreak: (tool, modifier, context) => {
              *         console.info(context.getState()); // Send block state of the block mined to the console
              *                                           // 向控制台发送破坏的方块的方块状态
              *     }

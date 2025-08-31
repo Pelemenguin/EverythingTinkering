@@ -1,12 +1,9 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 /**
  * @fileoverview Welcome | 欢迎
  * - - - - -
- * ## Welcome
- * ### Description
  * Give stat boost at the beginning of the game.
- * - - - - -
- * ## 欢迎
- * ### 描述
  * 游戏开始时，给予属性提升。
  * - - - - -
  * @copyright Pelemenguin 2025
@@ -14,17 +11,16 @@
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
  * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
- * - - - - -
  * @author Pelemenguin
  */
 
 /* global
-    ModifierRegisterer
+    ModifierManager
     ToolStack
     ModifierId
     CustomUtils
-    TinkerToolStats
+    ToolStats
+    Component
 */
 
 /**
@@ -35,42 +31,21 @@
  */
 let WELCOME_DISAPPEAR_TIME = 72000;
 
-let WELCOME = ModifierRegisterer.registerModifier("kubejs:welcome", ["onInventoryTick", "addToolStats"]);
-WELCOME.onInventoryTick((view, lvl, level, entity, slot, inMainHand, inAvailableSlot, itemStack) => {
-    if (level.isClientSide()) return;
-    if (level.getTime() > WELCOME_DISAPPEAR_TIME) {
-        ToolStack.from(itemStack).removeModifier(ModifierId.tryBuild("kubejs", "welcome"), 1);
-        entity.sendSystemMessage({
-            translate: "modifier.kubejs.welcome.hint",
-            color: CustomUtils.Tinker.getMantleColor("modifier.kubejs.welcome").toString(),
-            with: [
-                itemStack.displayName
-            ]
-        });
+// eslint-disable-next-line no-unused-vars
+let WELCOME = ModifierManager.registerCommonModifier("welcome", "WelcomeModifier", {
+    onInventoryTick: (tool, modifier, world, holder, itemSlot, isSelected, isCorrectSlot, stack) => {
+        if (world.isClientSide()) return;
+        let traitColor = CustomUtils.Tinker.getMantleColor("modifier.kubejs.welcome");
+        let colorNumber = traitColor.getValue();
+        let darkenedColorChannels = [Math.round(((colorNumber & 0xFF0000) >> 16) / 2), Math.round(((colorNumber & 0x00FF00) >> 8) / 2), Math.round((colorNumber & 0x0000FF) / 2)];
+        let darkenedColor = (darkenedColorChannels[0] << 16) + (darkenedColorChannels[1] << 8) + darkenedColorChannels[2];
+        if (world.getTime() > WELCOME_DISAPPEAR_TIME) {
+            ToolStack.from(stack).removeModifier(ModifierId.tryBuild("kubejs", "welcome"), 1);
+            holder.sendSystemMessage(Component.translatable("modifier.kubejs.welcome.hint", Component.of(stack.hoverName).color(darkenedColor)).color(traitColor));
+        }
+    },
+    addToolStats: (context, modifier, builder) => {
+        ToolStats.ATTACK_DAMAGE.add(builder, 1.0);
+        ToolStats.MINING_SPEED.add(builder, 1.5);
     }
 });
-WELCOME.addToolStats((context, lvl, builder) => {
-    TinkerToolStats.ATTACK_DAMAGE.add(builder, 1.0);
-    TinkerToolStats.MINING_SPEED.add(builder, 1.5);
-});
-
-// let getMantleColor = global.getMantleColor
-
-// /**
-//  * @exports
-//  * @param {Internal.ItemStack} item 
-//  * @param {number} time 
-//  * @param {Internal.Player} player 
-//  */
-// function welcome_remove(item, time, player) {
-//     if (time > 72000) {
-//         ToolStack.from(item).removeModifier(ModifierId.tryBuild("kubejs", "welcome"), 1)
-//         player.sendSystemMessage({
-//             "translate": "modifier.kubejs.welcome.hint",
-//             "color": getMantleColor("modifier.kubejs.welcome").toString(),
-//             "with": [
-//                 item.displayName
-//             ]
-//         })
-//     }
-// }

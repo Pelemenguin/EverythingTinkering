@@ -60,6 +60,14 @@ let TinkerFunctions$AddTooltipFunction = addFunctionalInterfaceAnnotation(
         })
 ).defineClass(JavaUtils.MethodHandles.lookup());
 
+let TinkerFunctions$ToolStatsFunction = addFunctionalInterfaceAnnotation(
+    (new ClassCreator("TinkerFunctions$ToolStatsFunction"))
+        .setIsInterface()
+        .addMethod("addToolStats", "(Lslimeknights/tconstruct/library/tools/nbt/IToolContext;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/stat/ModifierStatsBuilder;)V", method => {
+            method.setAbstract();
+        })
+).defineClass(JavaUtils.MethodHandles.lookup());
+
 let TinkerFunctions$MeleeDamageFunction = addFunctionalInterfaceAnnotation(
     (new ClassCreator("TinkerFunctions$MeleeDamageFunction"))
         .setIsInterface()
@@ -216,6 +224,33 @@ const TinkerFunctionsSet = {
                 0xb9, // invokeinterface
                     references[2], references[3],
                     0x07, 0x00,
+                0xb1, // return
+            ]
+        )
+    },
+
+    ToolStatsFunction: {
+        class: TinkerFunctions$ToolStatsFunction,
+
+        /** @type {string} */
+        internalName: TinkerFunctions$ToolStatsFunction.__javaObject__.getName().replace('.', '/'),
+
+        addClassMethod: addClassMethodHelper(
+            TinkerFunctions$ToolStatsFunction,
+            "(Lslimeknights/tconstruct/library/tools/nbt/IToolContext;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/stat/ModifierStatsBuilder;)V",
+            "slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook",
+            "addToolStats",
+            4,
+            4,
+            (references) => [
+                0xb2, // getstatic thisClass.addToolStatsFunction
+                    references[0], references[1],
+                0x2b, // aload_1
+                0x2c, // aload_2
+                0x2d, // aload_3
+                0xb9, // invokeinterface
+                    references[2], references[3],
+                    0x04, 0x00,
                 0xb1, // return
             ]
         )

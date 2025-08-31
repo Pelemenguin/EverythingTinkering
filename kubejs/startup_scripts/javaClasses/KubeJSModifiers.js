@@ -85,6 +85,10 @@ const ModifierManager = {
                     TinkerFunctionsSet.AddTooltipFunction.addClassMethod(modifierClassCreator);
                     break;
                 }
+                case "addToolStats": {
+                    TinkerFunctionsSet.ToolStatsFunction.addClassMethod(modifierClassCreator);
+                    break;
+                }
                 case "getMeleeDamage": {
                     TinkerFunctionsSet.MeleeDamageFunction.addClassMethod(modifierClassCreator);
                     break;
@@ -137,6 +141,9 @@ const ModifierManager = {
                         }
                         case "addTooltip": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "TOOLTIP", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
+                        }
+                        case "addToolStats": {
+                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "TOOL_STATS", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
                         case "getMeleeDamage": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "MELEE_DAMAGE", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
@@ -203,6 +210,13 @@ const ModifierManager = {
                 case "addTooltip": {
                     modifierClass['addTooltipFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
                         try {hooks.addTooltip(arg0, arg1, arg2, arg3, arg4, arg5);}
+                        catch (e) {console.error(e);}
+                    };
+                    break;
+                }
+                case "addToolStats": {
+                    modifierClass['addToolStatsFunction'] = (arg0, arg1, arg2) => {
+                        try {hooks.addToolStats(arg0, arg1, arg2);}
                         catch (e) {console.error(e);}
                     };
                     break;
