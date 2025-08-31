@@ -1,12 +1,9 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 /**
  * @fileoverview Whacking | 猛击
  * - - - - -
- * ## Whacking
- * ### Description
  * Consume much more durability and deal more damage on critical hits.
- * - - - - -
- * ## 猛击
- * ### 描述
  * 消耗更多耐久并在暴击时造成更多伤害。
  * - - - - -
  * @copyright Pelemenguin 2025
@@ -14,13 +11,11 @@
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
  * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
- * - - - - -
  * @author Pelemenguin
  */
 
 /* global
-    ModifierRegisterer
+    ModifierManager
     JavaMath
     Player
 */
@@ -41,12 +36,14 @@ let WHACKING_DURABILITY_PERCENTAGE = 0.05;
  */
 let WHACKING_DAMAGE_PERCENTAGE = 0.15;
 
-let WHACKING = ModifierRegisterer.registerModifier("kubejs:whacking", ["getMeleeDamage"]);
-WHACKING.getMeleeDamage((view, lvl, context, baseDamage, modifiedDamage) => {
-    if (context.getLevel().isClientSide()) return modifiedDamage;
-    if (!context.isCritical()) return modifiedDamage;
-    let durabilityPercentage = JavaMath["round(float)"](view.getCurrentDurability() * WHACKING_DURABILITY_PERCENTAGE * lvl);
-    let durabilityLoss = JavaMath["max(int,int)"](durabilityPercentage, 10);
-    if (!(context.attacker instanceof Player && context.attacker.isCreative())) view.setDamage(durabilityLoss + view.getDamage() - 1);
-    return modifiedDamage * (1 + lvl * WHACKING_DAMAGE_PERCENTAGE);
+// eslint-disable-next-line no-unused-vars
+let WHACKING = ModifierManager.registerCommonModifier("whacking", "WhackingModifier", {
+    getMeleeDamage: (tool, modifier, context, baseDamage, damage) => {
+        if (context.getLevel().isClientSide()) return damage;
+        if (!context.isCritical()) return damage;
+        let durabilityPercentage = JavaMath["round(float)"](tool.getCurrentDurability() * WHACKING_DURABILITY_PERCENTAGE * modifier.level);
+        let durabilityLoss = JavaMath["max(int,int)"](durabilityPercentage, 10);
+        if (!(context.attacker instanceof Player && context.attacker.isCreative())) tool.setDamage(durabilityLoss + tool.getDamage() - 1);
+        return damage * (1 + modifier.level * WHACKING_DAMAGE_PERCENTAGE);
+    }
 });
