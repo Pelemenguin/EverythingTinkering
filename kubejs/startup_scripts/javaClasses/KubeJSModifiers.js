@@ -26,6 +26,11 @@
     console
 */
 
+global.TinkerFunctions = {};
+
+/** @type {Internal.Map<string, (event: Internal.ServerEventJS) => void>} */
+global.TinkerFunctions.onServerTickFunctions = Utils.newMap();
+
 // eslint-disable-next-line no-unused-vars
 let ModifierClass = new ClassCreator("Modifier")
     .createDefaultConstructor()
