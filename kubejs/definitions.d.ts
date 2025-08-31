@@ -330,6 +330,28 @@ declare namespace Annotation {
              */
             onBreakSpeed?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, event: Internal.PlayerEvent$BreakSpeed, sideHit: Internal.Direction, isEffective: boolean, miningSpeedModifier: number) => void,
             /**
+             * Called after a block is broken to apply special effects
+             * 在方块被破坏后调用来添加特殊效果
+             * - - - - -
+             * @param tool     Tool used  
+             *                 使用的工具
+             * 
+             * @param modifier Modifier level  
+             *                 特性（及其）等级
+             * 
+             * @param context  Harvest context  
+             *                 收获上下文
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     onBreakSpeed: (tool, modifier, context) => {
+             *         console.info(context.getState()); // Send block state of the block mined to the console
+             *                                           // 向控制台发送破坏的方块的方块状态
+             *     }
+             * });
+             */
+            afterBlockBreak?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolHarvestContext) => void,
+            /**
              * Triggers when launching a projectile.
              * 发射弹射物时触发。
              * - - - - -

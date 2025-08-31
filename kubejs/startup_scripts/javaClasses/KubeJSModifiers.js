@@ -85,10 +85,6 @@ const ModifierManager = {
                     TinkerFunctionsSet.AddTooltipFunction.addClassMethod(modifierClassCreator);
                     break;
                 }
-                case "onBreakSpeed": {
-                    TinkerFunctionsSet.BreakSpeedFunction.addClassMethod(modifierClassCreator);
-                    break;
-                }
                 case "getMeleeDamage": {
                     TinkerFunctionsSet.MeleeDamageFunction.addClassMethod(modifierClassCreator);
                     break;
@@ -103,6 +99,14 @@ const ModifierManager = {
                 }
                 case "onAttacked":{
                     TinkerFunctionsSet.OnAttackedFunction.addClassMethod(modifierClassCreator);
+                    break;
+                }
+                case "onBreakSpeed": {
+                    TinkerFunctionsSet.BreakSpeedFunction.addClassMethod(modifierClassCreator);
+                    break;
+                }
+                case "afterBlockBreak": {
+                    TinkerFunctionsSet.BlockBreakFunction.addClassMethod(modifierClassCreator);
                     break;
                 }
                 case "onProjectileLaunch": {
@@ -134,9 +138,6 @@ const ModifierManager = {
                         case "addTooltip": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "TOOLTIP", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
-                        case "onBreakSpeed": {
-                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "BREAK_SPEED", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
-                        }
                         case "getMeleeDamage": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "MELEE_DAMAGE", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
@@ -146,6 +147,12 @@ const ModifierManager = {
                         }
                         case "onAttacked": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "ON_ATTACKED", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
+                        }
+                        case "onBreakSpeed": {
+                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "BREAK_SPEED", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
+                        }
+                        case "afterBlockBreak": {
+                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "BLOCK_BREAK", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
                         case "onProjectileLaunch": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "PROJECTILE_LAUNCH", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
@@ -200,13 +207,6 @@ const ModifierManager = {
                     };
                     break;
                 }
-                case "onBreakSpeed": {
-                    modifierClass['onBreakSpeedFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
-                        try {hooks.onBreakSpeed(arg0, arg1, arg2, arg3, arg4, arg5);}
-                        catch (e) {console.error(e);}
-                    };
-                    break;
-                }
                 case "getMeleeDamage": {
                     modifierClass['getMeleeDamageFunction'] = (arg0, arg1, arg2, arg3, arg4) => {
                         try {return hooks.getMeleeDamage(arg0, arg1, arg2, arg3, arg4);}
@@ -231,6 +231,20 @@ const ModifierManager = {
                 case "onAttacked": {
                     modifierClass['onAttackedFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5, arg6) => {
                         try {hooks.onAttacked(arg0, arg1, arg2, arg3, arg4, arg5, arg6);}
+                        catch (e) {console.error(e);}
+                    };
+                    break;
+                }
+                case "onBreakSpeed": {
+                    modifierClass['onBreakSpeedFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
+                        try {hooks.onBreakSpeed(arg0, arg1, arg2, arg3, arg4, arg5);}
+                        catch (e) {console.error(e);}
+                    };
+                    break;
+                }
+                case "afterBlockBreak": {
+                    modifierClass['afterBlockBreakFunction'] = (arg0, arg1, arg2) => {
+                        try {hooks.afterBlockBreak(arg0, arg1, arg2);}
                         catch (e) {console.error(e);}
                     };
                     break;
