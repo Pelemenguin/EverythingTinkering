@@ -1,12 +1,7 @@
 /**
  * @fileoverview Relaying | 传动
  * - - - - -
- * ## Relaying
- * ### Description
  * Deal damage to entites behind the direct target.
- * - - - - -
- * ## 传动
- * ### 描述
  * 对直接目标后方的实体造成伤害。
  * - - - - -
  * @copyright Pelemenguin 2025
