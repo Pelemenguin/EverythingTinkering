@@ -47,5 +47,10 @@ let WELCOME = ModifierManager.registerCommonModifier("welcome", "WelcomeModifier
     addToolStats: (context, modifier, builder) => {
         ToolStats.ATTACK_DAMAGE.add(builder, 1.0);
         ToolStats.MINING_SPEED.add(builder, 1.5);
+    },
+    __class__: {
+        post: (classCreator) => {
+            classCreator.extends("slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier");
+        }
     }
 });

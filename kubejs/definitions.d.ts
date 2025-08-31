@@ -173,6 +173,10 @@ declare namespace Annotation {
              * @param builder  Tool stat builder
              *                 工具属性构建器
              * - - - - -
+             * Related Links | 相关链接
+             * - {@linkcode Internal.ToolStats ToolStats}  
+             *     A Java class that records all Tinker's Construct tool stat types  
+             *     记录了所有匠魂工具属性类型的Java类
              * @example
              * // const ToolStats = Java.loadClass("slimeknights.tconstruct.library.tools.stat.ToolStats");
              * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
@@ -181,11 +185,6 @@ declare namespace Annotation {
              *                                                    // 增加1.0攻击伤害
              *     }
              * });
-             * @end
-             * Related Links | 相关链接
-             * - {@linkcode Internal.ToolStats ToolStats}  
-             *     `ToolStats` is a Java class that records all Tinker's Construct tool stat types  
-             *     `ToolStats`是记录了所有匠魂工具属性类型的Java类
              */
             addToolStats?: (context: Internal.IToolContext, modifier: Internal.ModifierEntry, builder: Internal.ModifierStatsBuilder) => void,
             /**
@@ -429,8 +428,13 @@ declare namespace Annotation {
              * 使用我们的KubeJS脚本编写的一些自定义方法，
              * 并非标准的匠魂特性钩子机制。
              */
-            __custom__?: CustomModifierHookArgument
-        }
+            __custom__?: CustomModifierHookArgument,
+            /**
+             * Some custom methods on class definitions.
+             * 一些在类定义上的自定义方法。
+             */
+            __class__?: ClassModifierHookArgument
+        };
         type CustomModifierHookArgument = {
             /**
              * Triggers **every tick** on server side.
@@ -467,7 +471,35 @@ declare namespace Annotation {
              * });
              */
             onServerTick?: (event: Internal.ServerEventJS) => void
-        }
+        };
+        type ClassModifierHookArgument = {
+            /**
+             * Called before finally defining the modifier class.
+             * For example, overriding class to extend from.
+             * Note this is called still before default constructor is created.
+             * You can manually add a custom constructor to cancel the creation of default constructor.  
+             * 在最后定义类之前调用，例如可以覆盖要继承的类。
+             * 注意，调用时间仍然在创建默认构造方法之前。
+             * 你可以在此时手动添加一个自定义构造方法来取消默认构造方法的创建。
+             * - - - - -
+             * @param classCreator Class Creator object to define modifier class  
+             *                     类创建器对象，用于创建特性类
+             * - - - - -
+             * Related Link | 相关链接
+             * - ***(Will open browser)*** [`NoLevelsModifier`](https://github.com/SlimeKnights/TinkersConstruct/blob/1.20.1/src/main/java/slimeknights/tconstruct/library/modifiers/impl/NoLevelsModifier.java)
+             * @example
+             * let TEST = KubeJSModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     __class__: {
+             *         post: (classCreator) => {
+             *             classCreator.extends("slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier");
+             *             // Let the modifier class extends `NoLevelsModifier` to remove level display at the end of modifier name
+             *             // 让特性继承`NoLevelsModifier`来移除特性名称末尾的等级显示
+             *         }
+             *     }
+             * });
+             */
+            post?: (classCreator: ClassCreator) => void
+        };
         type ModifierHooks = keyof ModifierHookArgument;
     }
 

@@ -68,8 +68,7 @@ const ModifierManager = {
      */
     registerCommonModifier: (name, className, hooks) => {
         let modifierClassCreator = new ClassCreator(`Modifier$${className}`)
-            .extends("slimeknights.tconstruct.library.modifiers.Modifier")
-            .createDefaultConstructor();
+            .extends("slimeknights.tconstruct.library.modifiers.Modifier");
 
                             // =============================
                             // =     FIRST SWITCH-CASE     =
@@ -190,6 +189,12 @@ const ModifierManager = {
                 return result;
             }));
         });
+
+        if ('__class__' in hooks && 'post' in hooks.__class__) {
+            hooks.__class__.post(modifierClassCreator);
+        }
+
+        if (modifierClassCreator.methods.findIndex(m => m.name === '<init>') == -1) modifierClassCreator.createDefaultConstructor();
             
         let modifierClass = modifierClassCreator.defineClass(JavaUtils.MethodHandles.lookup());
 
