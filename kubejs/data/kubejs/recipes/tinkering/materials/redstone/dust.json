@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+        "item": "minecraft:redstone"
+    },
+    "material": "kubejs:redstone",
+    "needed": 9,
+    "value": 1
+}

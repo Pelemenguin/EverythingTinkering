@@ -154,7 +154,7 @@
     "modifier.kubejs.uncertain.description": "Ores sometimes duplicate themselves when no one notices after being mined. However, probability of this will reduce and reach 0 at last",
 
     "modifier.kubejs.empower": "Empower",
-    "modifier.kubejs.empower.flavor": "Accelerate!",
+    "modifier.kubejs.empower.flavor": "Speed up!",
     "modifier.kubejs.empower.description": "Consumes Redstone Dust to provide additional initial velocity to projectiles",
 
     "modifier.kubejs.resonance": "Resonance",
