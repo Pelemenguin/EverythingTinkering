@@ -46,21 +46,21 @@ def build_modpack(args: list[str]):
     # )
     version = MODPACK_VERSION if MODPACK_VERSION else "Build version"
     manifest = {
-    "manifestType": "minecraftModpack",
-    "manifestVersion": 1,
-    "name": f"{MODPACK_NAME}",
-    "version": f"{version}",
-    "author": "Pelemenguin",
-    "overrides": "overrides",
-    "minecraft": {
-        "version": f"{MINECRAFT_VERSION}",
-        "modLoaders": [{
-             "id": f"{MODLOADER_VERSION}",
-             "primary": True
-        }]
-    },
-    "files": []
-}
+        "manifestType": "minecraftModpack",
+        "manifestVersion": 1,
+        "name": f"{MODPACK_NAME}",
+        "version": f"{version}",
+        "author": "Pelemenguin",
+        "overrides": "overrides",
+        "minecraft": {
+            "version": f"{MINECRAFT_VERSION}",
+            "modLoaders": [{
+                 "id": f"{MODLOADER_VERSION}",
+                 "primary": True
+            }]
+        },
+        "files": []
+    }
 
     mods = modlist_content['mods']
     modlist_file.close()
@@ -106,14 +106,14 @@ Build time: {BUILD_TIME}""")
 
     zipping = []
     zipping.extend(os.walk(os.path.join(curdir, "kubejs")))
-    zipping.extend(os.walk(os.path.join(curdir, "config")))
+    # zipping.extend(os.walk(os.path.join(curdir, "config")))
     zipping.extend(os.walk(os.path.join(curdir, "LICENSES")))
 
 # Exclude files here
     excluding = [
-    "./kubejs/probe/*",   # Generated ProbeJS data
-    "./kubejs/README.txt"   # KubeJS's README file
-]
+        "./kubejs/probe/*",   # Generated ProbeJS data
+        "./kubejs/README.txt"   # KubeJS's README file
+    ]
 
     total = len(zipping)
     compressed = 0
