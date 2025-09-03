@@ -27,7 +27,7 @@
  * - - - - -
  * @type {(stack: Internal.ItemStack) => boolean}
  */
-let ENPOWER_ACCEPTABLE_PREDICATE = (item) => {
+let EMPOWER_ACCEPTABLE_PREDICATE = (item) => {
     return item.id === "minecraft:redstone";
 };
 
@@ -35,20 +35,20 @@ let ENPOWER_ACCEPTABLE_PREDICATE = (item) => {
  * - Projectile speed multiplier.
  * - 弹射物速度乘数。
  */
-let ENPOWER_PROJECTILE_SPEED_MODIFIER = 0.05;
+let EMPOWER_PROJECTILE_SPEED_MODIFIER = 0.05;
 
 // eslint-disable-next-line no-unused-vars
-let ENPOWER = ModifierManager.registerCommonModifier("empower", "EmpowerModifier", {
+let EMPOWER = ModifierManager.registerCommonModifier("empower", "EmpowerModifier", {
     onProjectileLaunch: (tool, modifier, shooter, ammo, projectile /*, arrow, persistent, isPrimary */) => {
         if (!shooter.isPlayer()) return;
         let found = false;
         shooter.inventory.getAllItems().forEach(stack => {
             if (found) return;
-            if (!ENPOWER_ACCEPTABLE_PREDICATE(stack)) return;
+            if (!EMPOWER_ACCEPTABLE_PREDICATE(stack)) return;
             projectile.addMotion(
-                projectile.motionX * ENPOWER_PROJECTILE_SPEED_MODIFIER * modifier.level,
-                projectile.motionY * ENPOWER_PROJECTILE_SPEED_MODIFIER * modifier.level,
-                projectile.motionZ * ENPOWER_PROJECTILE_SPEED_MODIFIER * modifier.level
+                projectile.motionX * EMPOWER_PROJECTILE_SPEED_MODIFIER * modifier.level,
+                projectile.motionY * EMPOWER_PROJECTILE_SPEED_MODIFIER * modifier.level,
+                projectile.motionZ * EMPOWER_PROJECTILE_SPEED_MODIFIER * modifier.level
             );
             found = true;
             if (!shooter.isCreative()) stack.count -= 1;

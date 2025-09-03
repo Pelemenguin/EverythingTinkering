@@ -1,0 +1,8 @@
+{
+    "color": "FFAA0F01",
+    "fallbacks": [
+        "rock"
+    ],
+    "luminosity": 0,
+    "texture": "kubejs:redstone"
+}

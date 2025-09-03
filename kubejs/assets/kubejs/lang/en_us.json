@@ -82,6 +82,10 @@
     "material.kubejs.lapis_lazuli.flavor": "Keep mining! How do you know whether the block behind there is a stone or hidden treasures!",
     "material.kubejs.lapis_lazuli.encyclopedia": "Before the probability reach 0, each level can support you to mine 1000 blocks. The initial probability is constantly 20%",
 
+    "material.kubejs.redstone": "Redstone",
+    "material.kubejs.redstone.flavor": "Why does an energy-conducting material produce acceleration?",
+    "material.kubejs.redstone.encyclopedia": "Consumes 1 redstone dust per shot. Accelerates projectiles by 5% per level",
+
     "material.kubejs.amethyst": "Amethyst",
     "material.kubejs.amethyst.flavor": "Ding~",
     "material.kubejs.amethyst.encyclopedia": "Highlights surrounding targets of same type on attack. Effect range is a cube centered on target with side length = 4×trait level + 2×attack damage",
@@ -148,6 +152,10 @@
     "modifier.kubejs.uncertain": "Uncertain",
     "modifier.kubejs.uncertain.flavor": "Schrödinger's Ore!",
     "modifier.kubejs.uncertain.description": "Ores sometimes duplicate themselves when no one notices after being mined. However, probability of this will reduce and reach 0 at last",
+
+    "modifier.kubejs.empower": "Empower",
+    "modifier.kubejs.empower.flavor": "Accelerate!",
+    "modifier.kubejs.empower.description": "Consumes Redstone Dust to provide additional initial velocity to projectiles",
 
     "modifier.kubejs.resonance": "Resonance",
     "modifier.kubejs.resonance.flavor": "Calibrated Sculk Sensor!",

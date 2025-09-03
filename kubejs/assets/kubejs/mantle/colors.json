@@ -53,6 +53,8 @@
         
         "lapis_lazuli": "#345EC3",
 
+        "redstone": "#AA0F01",
+
         "amethyst": "#8D6ACC",
 
         "paper": "#FCFCF2",
@@ -96,6 +98,7 @@
         "pottery": "#9B6045",
         "glass_shard": "#d0eae9",
         "uncertain": "#345EC3",
+        "empower": "#AA0F01",
         "resonance": "#8D6ACC",
         "papercutting": "#FCFCF2",
         "relaying": "#c9caba",

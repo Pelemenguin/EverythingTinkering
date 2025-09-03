@@ -85,6 +85,10 @@
     "material.kubejs.lapis_lazuli.flavor": "继续挖吧！万一挖到好东西了呢！",
     "material.kubejs.lapis_lazuli.encyclopedia": "概率跌落至0之前，每级可以挖掘1000个方块。初始概率恒为20%",
 
+    "material.kubejs.redstone": "红石",
+    "material.kubejs.redstone.flavor": "为什么一个传导能量的东西能产生加速度？",
+    "material.kubejs.redstone.encyclopedia": "消耗一个红石粉，每级将弹射物加速5%",
+
     "material.kubejs.amethyst": "紫水晶",
     "material.kubejs.amethyst.flavor": "叮~",
     "material.kubejs.amethyst.encyclopedia": "攻击时高亮周围的同种目标。高亮范围为一个以目标为中心正方体，边长由四倍特性等级加两倍攻击伤害决定",
@@ -156,6 +160,10 @@
     "modifier.kubejs.uncertain": "未定",
     "modifier.kubejs.uncertain.flavor": "薛定谔的矿！",
     "modifier.kubejs.uncertain.description": "无人注意时，矿石有时会在被挖掘后复制自身。但是，概率会逐渐减少并最终归零",
+
+    "modifier.kubejs.empower": "赋能",
+    "modifier.kubejs.empower.flavor": "加速！",
+    "modifier.kubejs.empower.description": "消耗红石粉为弹射物提供额外的初速度",
 
     "modifier.kubejs.resonance": "共振",
     "modifier.kubejs.resonance.flavor": "校频幽匿感测体！",

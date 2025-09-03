@@ -2,10 +2,12 @@
 import suffix_nonmetal
 
 # Material
+import material_amethyst
 import material_coal
 import material_glass
 import material_lapis_lazuli
 import material_paper
+import material_redstone
 import material_rock_variants
 import material_sea_alloy
 import material_soil
