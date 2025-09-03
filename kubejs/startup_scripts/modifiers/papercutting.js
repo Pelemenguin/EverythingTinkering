@@ -1,26 +1,21 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 /**
  * @fileoverview Paper-Cutting | 剪纸
  * - - - - -
- * ## Paper-Cutting
- * ### Description
  * Deal damage to enemies attacked from the side.
- * - - - - -
- * ## 剪纸
- * ### 描述
- * ### 对从侧面攻击的敌人造成伤害。 
+ * 对从侧面攻击的敌人造成伤害。 
  * - - - - -
  * @copyright Pelemenguin 2025
  * @license LGPL-3.0-or-later
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
  * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
- * - - - - -
  * @author Pelemenguin
  */
 
 /* global
-    ModifierRegisterer
+    ModifierManager
     ToolStats
     JavaMath
     Vec3d
@@ -108,40 +103,42 @@ let calcIncludedAngleCosine = (first, second) => {
     return (dotProd / lengthProd);
 };
 
-let PAPERCUTTING = ModifierRegisterer.registerModifier("kubejs:papercutting", ["armorTakeAttacked", "onServerTick"]);
-PAPERCUTTING.armorTakeAttacked((view, lvl, context, slot, source, damage) => {
+// eslint-disable-next-line no-unused-vars
+let PAPERCUTTING = ModifierManager.registerCommonModifier("papercutting", "PapercuttingModifier", {
+    onAttacked: (tool, modifier, context, slotType, source, amount/*, isDirectDamage*/) => {
+        if (context.getLevel().isClientSide()) return true;
 
-    if (context.getLevel().isClientSide()) return true;
+        let attacker = source.getImmediate();
+        if (attacker == null || !attacker.isLiving()) return true;
 
-    let attacker = source.getImmediate();
-    if (attacker == null || !attacker.isLiving()) return true;
+        let wearer = context.getEntity();
 
-    let wearer = context.getEntity();
+        if (JavaMath["abs(float)"](calcIncludedAngleCosine(wearer.getViewVector(1), new Vec3d(
+            attacker.x - wearer.x,
+            attacker.y - wearer.y,
+            attacker.z - wearer.z
+        ))) > PAPERCUTTING_MAX_CONSINE_ABSOLUTE) return true;
 
-    if (JavaMath["abs(float)"](calcIncludedAngleCosine(wearer.getViewVector(1), new Vec3d(
-        attacker.x - wearer.x,
-        attacker.y - wearer.y,
-        attacker.z - wearer.z
-    ))) > PAPERCUTTING_MAX_CONSINE_ABSOLUTE) return true;
+        // let armor = view.getStats().get(ToolStats.ARMOR);
+        let armor = tool.getStats().get(ToolStats.ARMOR);
+        let toughness = tool.getStats().get(ToolStats.ARMOR_TOUGHNESS);
+        let returning = JavaMath["min(float,float)"](armor + JavaMath.log10(amount * toughness + 1), modifier.level * PAPERCUTTING_MAX_DAMAGE);
 
-    // let armor = view.getStats().get(ToolStats.ARMOR);
-    let armor = view.getStats().get(ToolStats.ARMOR);
-    let toughness = view.getStats().get(ToolStats.ARMOR_TOUGHNESS);
-    let returning = JavaMath["min(float,float)"](armor + JavaMath.log10(damage * toughness + 1), lvl * PAPERCUTTING_MAX_DAMAGE);
+        /** Push attacker to the list, so it can't be attacked by papercutting again. */
+        PAPERCUT_TARGET_LIST_CLEARABLE = false;
+        // let damageSource = wearer.damageSources().thorns(wearer);
+        let damageSource = KubeJSDamageSources.papercut(context.getLevel(), wearer, wearer);
+        addPlannedDamage(attacker, returning, slotType, damageSource);
 
-    /** Push attacker to the list, so it can't be attacked by papercutting again. */
-    PAPERCUT_TARGET_LIST_CLEARABLE = false;
-    // let damageSource = wearer.damageSources().thorns(wearer);
-    let damageSource = KubeJSDamageSources.papercut(context.getLevel(), wearer, wearer);
-    addPlannedDamage(attacker, returning, slot, damageSource);
-
-    return false;
-
-});
-PAPERCUTTING.onServerTick(event => {
-    if (PAPERCUT_TARGET_LIST_CLEARABLE) {
-        dealDamage(event.getServer());
+        return false;
+    },
+    __custom__: {
+        onServerTick: (event) => {
+            if (PAPERCUT_TARGET_LIST_CLEARABLE) {
+                dealDamage(event.getServer());
+            }
+            /** If not clearable, clear at next tick. */
+            PAPERCUT_TARGET_LIST_CLEARABLE = true;
+        }
     }
-    /** If not clearable, clear at next tick. */
-    PAPERCUT_TARGET_LIST_CLEARABLE = true;
 });

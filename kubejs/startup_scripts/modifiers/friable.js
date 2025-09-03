@@ -1,12 +1,9 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 /**
  * @fileoverview Friable | 松散
  * - - - - -
- * ## Friable
- * ### Description
- * Every game tick, the tool has `(0.2 * level)`'s chance to lose durability.
- * - - - - -
- * ## 松散
- * ### 描述
+ * Every game tick, the tool has `(0.2 * level)`'s chance to lose durability.  
  * 每游戏刻有 `(0.2 * level)` 的概率损失耐久。
  * - - - - -
  * @copyright Pelemenguin 2025
@@ -14,21 +11,20 @@
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
  * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
- * - - - - -
  * @author Pelemenguin
  */
 
 /* global
-
-    ModifierRegisterer
-    CustomUtils
+    ModifierManager
     JavaMath
-
 */
 
-let FRIABLE = ModifierRegisterer.registerModifier("kubejs:friable", ["onInventoryTick"]);
-FRIABLE.onInventoryTick((view, lvl, level, entity, slot, inMainHand, inAvailableSlot, itemStack) => {
-    if (JavaMath.random() >= 0.2 * lvl) return;
-    CustomUtils.Tinker.tryDamageItem(itemStack, (lvl + JavaMath.round(lvl * 2 * JavaMath.random())), entity, level);
+// eslint-disable-next-line no-unused-vars
+let FIRABLE = ModifierManager.registerCommonModifier("friable", "FriableModifier", {
+    onInventoryTick: (tool, modifier, world, holder/*, itemSlot, isSelected, isCorrectSlot, stack*/) => {
+        if (world.isClientSide()) return;
+        if (holder.isPlayer() && holder.isCreative()) return;
+        if (JavaMath.random() >= 0.2 * modifier.level) return;
+        tool.damage += modifier.level + JavaMath.round(modifier.level * 2 * JavaMath.random());
+    }
 });

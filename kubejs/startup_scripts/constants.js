@@ -1,4 +1,4 @@
-// priority: 10000
+// priority: 2147483647
 
 /**
  * @fileoverview Constants | 常量
@@ -27,6 +27,10 @@
 
 /** @type {typeof Internal.Class} */
 const Class = Java.loadClass("java.lang.Object").__javaObject__.getClass();
+<<<<<<< HEAD
+=======
+const NativeJavaClass = Java.loadClass("dev.latvian.mods.rhino.NativeJavaClass");
+>>>>>>> dev/test/no_tconstructjs
 
 const NonNullList = Java.loadClass("net.minecraft.core.NonNullList");
 
@@ -56,6 +60,7 @@ const MaterialVariantId = Java.loadClass("slimeknights.tconstruct.library.materi
 const TinkerBook = Java.loadClass("slimeknights.tconstruct.library.client.book.TinkerBook");
 const MaterialRegistry = Java.loadClass('slimeknights.tconstruct.library.materials.MaterialRegistry');
 const MaterialStatsId = Java.loadClass("slimeknights.tconstruct.library.materials.stats.MaterialStatsId");
+const Modifier = Java.loadClass("slimeknights.tconstruct.library.modifiers.Modifier");
 const ModifierId = Java.loadClass('slimeknights.tconstruct.library.modifiers.ModifierId');
 const ToolMaterialHook = Java.loadClass("slimeknights.tconstruct.library.tools.definition.module.material.ToolMaterialHook");
 const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ToolStack');
@@ -70,14 +75,40 @@ const MaterialCastingLookup = Java.loadClass("slimeknights.tconstruct.library.re
 const MaterialRecipeCache = Java.loadClass("slimeknights.tconstruct.library.recipe.material.MaterialRecipeCache");
 const TinkerToolParts = Java.loadClass("slimeknights.tconstruct.tools.TinkerToolParts");
 const TinkerTools = Java.loadClass("slimeknights.tconstruct.tools.TinkerTools");
+const ModifierDeferredRegister = Java.loadClass("slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister");
+
+const KubeJS = Java.loadClass("dev.latvian.mods.kubejs.KubeJS");
+const Context = Java.loadClass("dev.latvian.mods.rhino.Context");
+const ConsoleJS = Java.loadClass("dev.latvian.mods.kubejs.util.ConsoleJS");
+
+const startupContext = KubeJS.getStartupScriptManager().context;
+const topLevelScope = KubeJS.getStartupScriptManager().topLevelScope;
 
 const PageDataJS = Java.loadClass("pelemenguin.mantlejs.content.book.data.PageDataJS");
 const MantleJSTransformer = Java.loadClass("pelemenguin.mantlejs.content.book.transformer.MantleJSTransformer");
 
 const JavaUtils = {
     ArrayList: Java.loadClass("java.util.ArrayList"),
-    Collectors: Java.loadClass("java.util.stream.Collectors")
+    Collectors: Java.loadClass("java.util.stream.Collectors"),
+    /** @type {typeof Internal.ByteBuffer} */
+    ByteBuffer: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.nio.ByteBuffer")),
+    /** @type {typeof Internal.ByteArrayOutputStream} */
+    ByteArrayOutputStream: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.io.ByteArrayOutputStream")),
+    /** @type {typeof Internal.DataOutputStream} */
+    DataOutputStream: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.io.DataOutputStream")),
+    /** @type {typeof Internal.MethodHandles} */
+    MethodHandles: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.lang.invoke.MethodHandles")),
+    String: Java.loadClass("java.lang.String"),
+    Integer: Java.loadClass("java.lang.Integer"),
+    Byte: Java.loadClass("java.lang.Byte"),
+    /** @type {typeof Internal.ClassLoader} */
+    ClassLoader: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.lang.ClassLoader")),
+    /** @type {typeof Internal.Thread} */
+    Thread: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.lang.Thread"))
 };
+
+/** @type {typeof Internal.FMLJavaModLoadingContext} */
+const FMLJavaModLoadingContext = new NativeJavaClass(startupContext, topLevelScope, Class.forName("net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext"));
 
 // ---------- Utils ---------- //
 

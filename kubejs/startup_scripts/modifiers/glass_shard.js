@@ -1,12 +1,9 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 /**
  * @fileoverview Glass Shard | 玻璃碎片
  * - - - - -
- * ## Glass Shard
- * ### Description
  * Deal damage to entites in a 3x3x3 area near the target.
- * - - - - -
- * ## 玻璃碎片
- * ### 介绍
  * 对目标周围 3x3x3 范围内的实体造成伤害。
  * - - - - -
  * @copyright Pelemenguin 2025
@@ -14,13 +11,11 @@
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
  * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
- * - - - - -
  * @author Pelemenguin
  */
 
 /* global
-    ModifierRegisterer
+    ModifierManager
     AABB
     JavaMath
 */
@@ -48,42 +43,44 @@ let GLASS_TYPE_TO_PARTICLE = {
     "tconstruct:glass#scorched": "tconstruct:scorched_glass"
 };
 
-let GLASS_SHARD = ModifierRegisterer.registerModifier("kubejs:glass_shard", ["onBeforeMeleeHit"]);
-GLASS_SHARD.onBeforeMeleeHit((view, lvl, context, damage, baseKnockback, finalKnockback) => {
-    let chance = (damage - 5.0) * 0.2 * lvl;
-    if (JavaMath.random() >= chance) return finalKnockback;
-    
-    let {x, y, z} = context.getTarget();
-    let box = AABB.of(
-        x - 1,
-        y - 1,
-        z - 1,
-        x + 1,
-        y + 1,
-        z + 1
-    );
-    let entityList = context.getLevel().getEntitiesWithin(box);
-    let source = context.getLevel().damageSources().mobAttack(context.getAttacker());
-    /** @type {Internal.Entity[]} */
-    let attackables = [];
-    entityList.forEach(entity => {
-        if (entity.isAttackable()) {
-            attackables.push(entity);
-        }
-    });
-    if (attackables.length == 0) return;
-    let damagePerEntity = damage / attackables.length;
-    attackables.forEach(entity => {
-        entity.attack(source, damagePerEntity);
-    });
-    view.getMaterials().forEach(material => {
-        // let material_name = material.getId().toString();
-        let material_name = material.getVariant().toString();
-        if (material_name in GLASS_TYPE_TO_PARTICLE) {
-            let particle_block = GLASS_TYPE_TO_PARTICLE[material_name];
-            context.attacker.runCommandSilent("particle minecraft:block "+particle_block+" "+x+" "+y+" "+z+" 1 1 1 1 50");
-            context.target.playSound("block.glass.break", 5, 0.8);
-        }
-    });
-    return finalKnockback;
+// eslint-disable-next-line no-unused-vars
+let GLASS_SHARD = ModifierManager.registerCommonModifier("glass_shard", "GlassShardModifier", {
+    beforeMeleeHit: (tool, modifier, context, damageDealt, baseKnockback, knockback) => {
+        let chance = (damageDealt - 5.0) * 0.2 * modifier.level;
+        if (JavaMath.random() >= chance) return knockback;
+        
+        let {x, y, z} = context.getTarget();
+        let box = AABB.of(
+            x - 1,
+            y - 1,
+            z - 1,
+            x + 1,
+            y + 1,
+            z + 1
+        );
+        let entityList = context.getLevel().getEntitiesWithin(box);
+        let source = context.getLevel().damageSources().mobAttack(context.getAttacker());
+        /** @type {Internal.Entity[]} */
+        let attackables = [];
+        entityList.forEach(entity => {
+            if (entity.isAttackable()) {
+                attackables.push(entity);
+            }
+        });
+        if (attackables.length == 0) return knockback;
+        let damagePerEntity = damageDealt / attackables.length;
+        attackables.forEach(entity => {
+            entity.attack(source, damagePerEntity);
+        });
+        tool.getMaterials().forEach(material => {
+            // let material_name = material.getId().toString();
+            let material_name = material.getVariant().toString();
+            if (material_name in GLASS_TYPE_TO_PARTICLE) {
+                let particle_block = GLASS_TYPE_TO_PARTICLE[material_name];
+                context.attacker.runCommandSilent("particle minecraft:block "+particle_block+" "+x+" "+y+" "+z+" 1 1 1 1 50");
+                context.target.playSound("block.glass.break", 5, 0.8);
+            }
+        });
+        return knockback;
+    }
 });

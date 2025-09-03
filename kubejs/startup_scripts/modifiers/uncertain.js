@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 /**
  * @fileoverview Uncertain | 未定
  * - - - - -
@@ -14,19 +16,19 @@
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
  * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
- * - - - - -
  * @author Pelemenguin
  */
 
 /* global
-    ModifierRegisterer
+    ModifierManager
     CustomUtils
     NBT
     JavaMath
     Direction
     ResourceLocation
 */
+
+let UNCERTAIN_ID = `kubejs:uncertain`;
 
 /**
  * - Controls initial probability of `uncertain`.
@@ -74,12 +76,12 @@ let UNCERTAIN_TAGS = {
  */
 let addUncertainPersistent = (item, value) => {
     try {
-        if (!(UNCERTAIN.id in CustomUtils.Tinker.getModifiersFromItem(item))) return false;
+        if (!(UNCERTAIN_ID in CustomUtils.Tinker.getModifiersFromItem(item))) return false;
         try {
-            CustomUtils.Tinker.Persistent.set(item, UNCERTAIN.id, NBT.intTag(CustomUtils.Tinker.Persistent.get(item, UNCERTAIN.id).asInt + value));
+            CustomUtils.Tinker.Persistent.set(item, UNCERTAIN_ID, NBT.intTag(CustomUtils.Tinker.Persistent.get(item, UNCERTAIN_ID).asInt + value));
         // eslint-disable-next-line no-unused-vars
         } catch (e) {
-            CustomUtils.Tinker.Persistent.set(item, UNCERTAIN.id, NBT.intTag(value));
+            CustomUtils.Tinker.Persistent.set(item, UNCERTAIN_ID, NBT.intTag(value));
             return true;
         }
     // eslint-disable-next-line no-unused-vars
@@ -121,30 +123,32 @@ let run = (tag, duplicating, container, originalDirection) => {
     container.set(duplicating.getBlock().getId());
 };
 
-let UNCERTAIN = ModifierRegisterer.registerModifier("kubejs:uncertain", ["onAfterBreak"]);
-UNCERTAIN.onAfterBreak((view, lvl, context) => {
-    if (context.getWorld().isClientSide()) return;
-    let mined = 0;
-    try {
-        mined = view.persistentData.getInt("tic_persistent");
-    // eslint-disable-next-line no-unused-vars
-    } catch (e) { /* Do nothing */ }
-        context.getLiving().handSlots.forEach(item => {
-            addUncertainPersistent(item, 1);
-        });
-    if (JavaMath.random() >= UNCERTAIN_MAX_PROBABILITY - mined * UNCERTAIN_PROBABILITY_REDUCE / lvl) return;
-    let miningBlock = context.getWorld().getBlock(context.getPos());
-    /** @type {Internal.BlockContainerJS} */
-    let replacingBlock = miningBlock[context.sideHit.getOpposite().toString()];
-    switch (replacingBlock.getBlockState().getBlock().getId()) {
-        case "minecraft:stone":
-            run(UNCERTAIN_TAGS.stone, context.getState(), replacingBlock, context.getSideHit());
-            break;
-        case "minecraft:deepslate":
-            run(UNCERTAIN_TAGS.deepslate, context.getState(), replacingBlock, context.getSideHit());
-            break;
-        case "minecraft:netherrack":
-            run(UNCERTAIN_TAGS.netherrack, context.getState(), replacingBlock, context.getSideHit());
-            break;
+// eslint-disable-next-line no-unused-vars
+let UNCERTAIN = ModifierManager.registerCommonModifier("uncertain", "UncertainModifier", {
+    afterBlockBreak: (tool, modifier, context) => {
+        if (context.getWorld().isClientSide()) return;
+        let mined = 0;
+        try {
+            mined = tool.persistentData.getInt("tic_persistent");
+        // eslint-disable-next-line no-unused-vars
+        } catch (e) { /* Do nothing */ }
+            context.getLiving().handSlots.forEach(item => {
+                addUncertainPersistent(item, 1);
+            });
+        if (JavaMath.random() >= UNCERTAIN_MAX_PROBABILITY - mined * UNCERTAIN_PROBABILITY_REDUCE / modifier.level) return;
+        let miningBlock = context.getWorld().getBlock(context.getPos());
+        /** @type {Internal.BlockContainerJS} */
+        let replacingBlock = miningBlock[context.sideHit.getOpposite().toString()];
+        switch (replacingBlock.getBlockState().getBlock().getId()) {
+            case "minecraft:stone":
+                run(UNCERTAIN_TAGS.stone, context.getState(), replacingBlock, context.getSideHit());
+                break;
+            case "minecraft:deepslate":
+                run(UNCERTAIN_TAGS.deepslate, context.getState(), replacingBlock, context.getSideHit());
+                break;
+            case "minecraft:netherrack":
+                run(UNCERTAIN_TAGS.netherrack, context.getState(), replacingBlock, context.getSideHit());
+                break;
+        }
     }
 });
