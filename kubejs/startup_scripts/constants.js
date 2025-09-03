@@ -27,10 +27,7 @@
 
 /** @type {typeof Internal.Class} */
 const Class = Java.loadClass("java.lang.Object").__javaObject__.getClass();
-<<<<<<< HEAD
-=======
 const NativeJavaClass = Java.loadClass("dev.latvian.mods.rhino.NativeJavaClass");
->>>>>>> dev/test/no_tconstructjs
 
 const NonNullList = Java.loadClass("net.minecraft.core.NonNullList");
 
