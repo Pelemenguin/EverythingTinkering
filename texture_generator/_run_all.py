@@ -3,6 +3,8 @@ import suffix_nonmetal
 
 # Material
 import material_amethyst
+import material_andesite_alloy
+import material_brick
 import material_coal
 import material_glass
 import material_lapis_lazuli
