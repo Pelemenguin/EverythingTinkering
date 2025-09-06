@@ -153,7 +153,7 @@ declare namespace Annotation {
              * - - - - -
              * @example
              * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
-             *     onBreakSpeed: (tool, modifier, world, holder, itemSlot, isSelected, isCorrectSlot, stack) => {
+             *     onInventoryTick: (tool, modifier, world, holder, itemSlot, isSelected, isCorrectSlot, stack) => {
              *         tool.damage += 1; // Reduce 1 durability point every tick
              *                           // 每Tick损失一点耐久值
              *     }
