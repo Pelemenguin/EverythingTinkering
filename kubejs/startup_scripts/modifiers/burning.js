@@ -24,7 +24,6 @@ let BURNING = ModifierManager.registerCommonModifier("burning", "BurningModifier
     onInventoryTick: (tool, modifier, world, holder, itemSlot, isSelected/*, isCorrectSlot, stack*/) => {
         if (world.isClientSide()) return;
         if (isSelected) {
-            holder.setHealth(10);
             let source = KubeJSDamageSources.hotTool(world, holder, null, holder.pos);
             holder.attack(source, 1);
         }
