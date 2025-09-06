@@ -21,11 +21,8 @@
 /**
  * - Contains custom command creator.
  * - 包含自定义指令创建器
- * - - - - -
- * @class
- * @interface
  */
-global.Commands = function() {};
+global.Commands = {};
 
 ServerEvents.commandRegistry(event => {
     const {commands: Commands} = event;
@@ -33,5 +30,6 @@ ServerEvents.commandRegistry(event => {
     event.register(Commands.literal('modpack')
         .then(global.Commands.itemListCommand(event))
         .then(global.Commands.artifactCommand(event))
+        .then(global.Commands.rescueCommand(event))
     );
 });

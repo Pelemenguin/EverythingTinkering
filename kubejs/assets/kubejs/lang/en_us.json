@@ -11,6 +11,9 @@
     "command.kubejs.artifact.group_mark": "[Group]",
     "command.kubejs.artifact.success": "Successfully gave %2$s artifact(s) \"%1$s\" to %3$s target(s)",
 
+    "command.kubejs.rescue.success": "Successfully restored player health from NaN",
+    "command.kubejs.rescue.not_nan": "Player health is not NaN",
+
         "_comment_damage_types": " ----- Damage Types ----- ",
     
     "death.attack.kubejs.papercut": "%1$s got a paper cut while tearing %2$s's armor",

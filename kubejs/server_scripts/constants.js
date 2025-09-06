@@ -36,6 +36,10 @@ const MaterialNBTBuilder = Java.loadClass('slimeknights.tconstruct.library.tools
 const LivingHurtEvent = Java.loadClass("net.minecraftforge.event.entity.living.LivingHurtEvent");
 const CriticalHitEvent = Java.loadClass("net.minecraftforge.event.entity.player.CriticalHitEvent");
 
+const JavaUtils = {
+    Float: Java.loadClass("java.lang.Float")
+};
+
 /**
  * @type {Internal.Item[]}
  */
