@@ -44,6 +44,7 @@ let reprItems = {
     "kubejs:amethyst": "minecraft:amethyst_shard",
     "kubejs:andesite_alloy": "create:andesite_alloy",
     "tconstruct:chorus": "minecraft:popped_chorus_fruit",
+    "kubejs:sugar_cane": "minecraft:sugar_cane",
     "tconstruct:string": "minecraft:string",
     "tconstruct:leather": "minecraft:leather",
     "kubejs:paper": "minecraft:paper",

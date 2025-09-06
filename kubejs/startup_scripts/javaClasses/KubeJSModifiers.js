@@ -81,6 +81,10 @@ const ModifierManager = {
 
         Object.keys(hooks).forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
             switch (hook) {
+                case "onDamageTool": {
+                    TinkerFunctionsSet.ToolDamgeFunction.addClassMethod(modifierClassCreator);
+                    break;
+                }
                 case "onInventoryTick": {
                     TinkerFunctionsSet.InventoryTickFunction.addClassMethod(modifierClassCreator);
                     break;
@@ -140,6 +144,9 @@ const ModifierManager = {
                                 // ==============================
 
                     switch (hook) {
+                        case "onDamageTool": {
+                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "TOOL_DAMAGE", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
+                        }
                         case "onInventoryTick": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "INVENTORY_TICK", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
@@ -210,6 +217,13 @@ const ModifierManager = {
                                 // =============================
 
             switch (hook) {
+                case "onDamageTool": {
+                    modifierClass['onDamageToolFunction'] = (arg0, arg1, arg2, arg3, arg4) => {
+                        try {return hooks.onDamageTool(arg0, arg1, arg2, arg3, arg4);}
+                        catch (e) {console.error(e); return arg2;}
+                    };
+                    break;
+                }
                 case "onInventoryTick": {
                     modifierClass['onInventoryTickFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) => {
                         try {hooks.onInventoryTick(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);}

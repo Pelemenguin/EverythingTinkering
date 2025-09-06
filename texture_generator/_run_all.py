@@ -13,4 +13,5 @@ import material_redstone
 import material_rock_variants
 import material_sea_alloy
 import material_soil
+import material_sugar_cane
 import material_terracotta

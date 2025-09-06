@@ -85,6 +85,43 @@ declare namespace Annotation {
             | "projectileLaunch" | "tooltipSetting" | "onServerTick";
         type ModifierHookArgument = {
             /**
+             * Called when the tool is damaged.
+             * Can be used to cancel, decrease, or increase the damage.  
+             * 在工具消耗耐久时调用。
+             * 可以被用于取消，减少，或增加损失的耐久值。
+             * - - - - -
+             * @param tool     Tool stack  
+             *                 工具堆叠
+             * 
+             * @param modifier Modifier running this hook  
+             *                 运行该钩子函数的特性条目
+             * 
+             * @param amount   Amount of damage to deal  
+             *                 要消耗的耐久
+             * 
+             * @param holder   Entity holding the tool (Nullable)  
+             *                 持有工具的实体（可为`null`）
+             * 
+             * @param stack    Stack instance being damaged.
+             *                 Useful for identifying the slot being damaged. (Nullable)  
+             *                 要损坏的物品堆叠实例。
+             *                 可用于辨别要损坏的栏位。（可为`null`）
+             * 
+             * @returns        Replacement damage.
+             *                 Returning 0 cancels the damage and stops other modifiers from processing.  
+             *                 要替换为的耐久值消耗。
+             *                 返回`0`取消耐久值消耗并停止其它特性的耐久值消耗计算。
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     onBreakSpeed: (tool, modifier, amount, holder, stack) => {
+             *         return amount + 1; // Increase 1 durability point consumption
+             *                            // 增加一点耐久消耗
+             *     }
+             * });
+             */
+            onDamageTool?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, amount: number, holder: Internal.LivingEntity | null, stack: Internal.ItemStack | null) => number;
+            /**
              * Triggers every tick in the inventory.
              * Not to be confused with {@link CustomModifierHookArgument.onServerTick `__custom__.onServerTick`}  
              * 在物品栏中每Tick触发。

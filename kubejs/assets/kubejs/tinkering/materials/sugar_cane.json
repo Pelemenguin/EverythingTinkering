@@ -1,0 +1,8 @@
+{
+    "color": "FF97F544",
+    "fallbacks": [
+        "wood"
+    ],
+    "luminosity": 0,
+    "texture": "kubejs:sugar_cane"
+}

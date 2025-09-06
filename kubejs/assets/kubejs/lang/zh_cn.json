@@ -118,6 +118,10 @@
     "material.kubejs.paper.flavor": "致《入门熔炼术》的忠实读者们：翻书的时候小心划伤手指。",
     "material.kubejs.paper.encyclopedia": "对于从侧面攻击的攻击者，造成相当于护甲值的伤害。盔甲韧性可以转化少量受到的伤害并攻击回去",
 
+    "material.kubejs.sugar_cane": "甘蔗",
+    "material.kubejs.sugar_cane.flavor": "更便宜的蜂蜜替代品！",
+    "material.kubejs.sugar_cane.encyclopedia": "靠近X轴方向使用时有最多25%的概率不消耗耐久",
+
     "material.kubejs.andesite_alloy": "安山合金",
     "material.kubejs.andesite_alloy.flavor": "就像一个传动轴！",
     "material.kubejs.andesite_alloy.encyclopedia": "攻击一条直线上距离不超过三格的敌人。每次传递，伤害会被乘以0.2倍特性等级。传递至小于1时停止。",
@@ -172,6 +176,10 @@
     "modifier.kubejs.glass_shard": "玻璃碎片",
     "modifier.kubejs.glass_shard.flavor": "易碎制品！",
     "modifier.kubejs.glass_shard.description": "攻击会更多耐久。此时，直接目标附近的敌人也会受伤",
+
+    "modifier.kubejs.fibrous": "纤维",
+    "modifier.kubejs.fibrous.flavor": "单向抗压！",
+    "modifier.kubejs.fibrous.description": "在X轴方向使用时有概率不消耗耐久",
 
     "modifier.kubejs.papercutting": "剪纸",
     "modifier.kubejs.papercutting.flavor": "并非儿童剪刀！",

@@ -115,6 +115,10 @@
     "material.kubejs.paper.flavor": "To the loyal readers of 'Puny Smelting': Not to cut your finger when turning pages",
     "material.kubejs.paper.encyclopedia": "Deals damage equal to armor value to attackers hitting from the side. Converts a portion of taken damage using armor toughness to counterattack",
 
+    "material.kubejs.sugar_cane": "Sugar Cane",
+    "material.kubejs.sugar_cane.flavor": "A cheaper alternative to honey!",
+    "material.kubejs.sugar_cane.encyclopedia": "Up to 25% chance to not consume durability when facing near the X-axis",
+
     "material.kubejs.andesite_alloy": "Andesite Alloy",
     "material.kubejs.andesite_alloy.flavor": "Just like a Shaft!",
     "material.kubejs.andesite_alloy.encyclopedia": "Attack targets in a row with distances between them less than 3 blocks. Damage gets multiplied by 0.2 times trait level and stops conveying when being less that 1.",
@@ -169,6 +173,10 @@
     "modifier.kubejs.glass_shard": "Glass Shard",
     "modifier.kubejs.glass_shard.flavor": "Fragile products!",
     "modifier.kubejs.glass_shard.description": "Attack costs more durability points. When this happens, enemies near the direct target will be hurt",
+
+    "modifier.kubejs.fibrous": "Fibrous",
+    "modifier.kubejs.fibrous.flavor": "Unidirectional strength!",
+    "modifier.kubejs.fibrous.description": "Chance to not consume durability when used along the X-axis direction",
     
     "modifier.kubejs.papercutting": "Papercutting",
     "modifier.kubejs.papercutting.flavor": "Not children's scissors!",

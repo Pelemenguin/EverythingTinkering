@@ -44,6 +44,14 @@ let TinkerFunctions = (new ClassCreator("TinkerFunctions"))
     .createDefaultConstructor()
     .defineClass(JavaUtils.MethodHandles.lookup());
 
+let TinkerFunctions$ToolDamageFunction = addFunctionalInterfaceAnnotation(
+    (new ClassCreator("TinkerFunctions$ToolDamageFunction"))
+        .setIsInterface()
+        .addMethod("onDamageTool", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;ILnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)I", method => {
+            method.setAbstract();
+        })
+).defineClass(JavaUtils.MethodHandles.lookup());
+
 let TinkerFunctions$InventoryTickFunction = addFunctionalInterfaceAnnotation(
     (new ClassCreator("TinkerFunctions$InventoryTickFunction"))
         .setIsInterface()
@@ -129,7 +137,8 @@ let TinkerFunctions$ProjectileLaunchFunction = addFunctionalInterfaceAnnotation(
  * @param {string} methodDescriptor
  * @param {string} implementingInterface
  * @param {string} functionName
- * @param {number} maxStackAndLocals
+ * @param {number} maxStack
+ * @param {number} maxLocals
  * @param {((references: number[]) => number[])} byteCodeGenerator
  * @returns {((classCreator: ClassCreator) => void)}
  */
@@ -156,6 +165,69 @@ let addClassMethodHelper = (tinkerFunctionClass, methodDescriptor, implementingI
 };
 
 const TinkerFunctionsSet = {
+
+    ToolDamgeFunction: {
+        class: TinkerFunctions$ToolDamageFunction,
+
+        /** @type {string} */
+        internalName: TinkerFunctions$ToolDamageFunction.__javaObject__.getName().replace('.', '/'),
+
+        addClassMethod: (/** @type {ClassCreator} */ classCreator) => {
+            addClassMethodHelper(
+                TinkerFunctions$ToolDamageFunction,
+                "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;ILnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)I",
+                "slimeknights.tconstruct.library.modifiers.hook.behavior.ToolDamageModifierHook",
+                "onDamageTool",
+                6,
+                6,
+                (references) => [
+                    0xb2, // 0: getstatic thisClass.onDamageToolFunction
+                        references[0], references[1],
+                    0x2b, // 3: aload_1
+                    0x2c, // 4: aload_2
+                    0x1d, // 5: iload_3
+                    0x19, // 6: aload #4
+                        0x04,
+                    0x19, // 8: aload #5
+                        0x05,
+                    0xb9, // 10: invokeinterface
+                        references[2],
+                        references[3],
+                        0x06,
+                        0x00,
+                    0xac, // 15: ireturn
+                ]
+            )(classCreator);
+
+        let interfaceName = TinkerFunctions$ToolDamageFunction.__javaObject__.getName().replace('.', '/');
+
+        classCreator.addMethod("onDamageTool", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;ILnet/minecraft/world/entity/LivingEntity;)I", method => {
+                method.addAttribute("Code", new CodeAttribute(6, 5).setCustomByteCodeGenerator(() => {
+                    let references = JavaUtils.ByteBuffer.allocate(4)
+                        .putShort(0, classCreator.CONSTANT_Fieldref(classCreator.internalName, "onDamageToolFunction", `L${interfaceName};`))
+                        .putShort(2, classCreator.CONSTANT_InterfaceMethodref(interfaceName, "onDamageTool", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;ILnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)I"))
+                        .array();
+
+                    return [
+                        0xb2, // 0: getstatic thisClass.onDamageToolFunction
+                            references[0], references[1],
+                        0x2b, // 3: aload_1
+                        0x2c, // 4: aload_2
+                        0x1d, // 5: iload_3
+                        0x19, // 6: aload #4
+                            0x04,
+                        0x01, // 8: aconst_null
+                        0xb9, // 9: invokeinterface
+                            references[2],
+                            references[3],
+                            0x06,
+                            0x00,
+                        0xac, // 14: ireturn
+                    ];
+                }));
+            });
+        }
+    },
 
     InventoryTickFunction: {
         class: TinkerFunctions$InventoryTickFunction,
