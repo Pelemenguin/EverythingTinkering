@@ -17,11 +17,6 @@ jobs:
                     python-version: '3.x'
               - name: Run build script
                 run: python build.py build --build-version ${{ github.sha }}
-              - name: Upload Artifact
-                uses: actions/upload-artifact@v4
-                with:
-                    name: "Built modpack ${{ github.sha }}"
-                    path: '*[Build]*.zip'
     
     cleanup_artifacts:
         needs: build
@@ -31,5 +26,16 @@ jobs:
           - name: Remove old artifacts
             uses: c-hive/gha-remove-artifacts@v1.4.0
             with:
-                age: "0"
+                age: 0
                 skip-recent: 1
+
+    upload_artifact:
+        needs: build
+        runs-on: ubuntu-latest
+
+        steps:
+              - name: Upload Artifact
+                uses: actions/upload-artifact@v4
+                with:
+                    name: "Built modpack ${{ github.sha }}"
+                    path: '*[Build]*.zip'
