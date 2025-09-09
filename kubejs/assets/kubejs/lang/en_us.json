@@ -19,6 +19,8 @@
     "death.attack.kubejs.papercut": "%1$s got a paper cut while tearing %2$s's armor",
     "death.attack.kubejs.papercut.player": "%1$s got a pepr cut from %3$s while tearing %2$s's armor",
 
+    "death.attack.kubejs.hot_tool": "%s thought their hands were heat-proof",
+
         "_comment_materials": " ----- Materials ----- ",
 
     "material.kubejs.soil": "Soil",
@@ -172,6 +174,10 @@
     "modifier.kubejs.igniting.flavor": "Hot Caution!",
     "modifier.kubejs.igniting.description": "Conveys fire from one enemy to another",
     "modifier.kubejs.igniting.tooltip": "Ignitng Time: %s",
+
+    "modifier.kubejs.burning": "Burning",
+    "modifier.kubejs.burning.flavor": "Hot! Hot! Hot!",
+    "modifier.kubejs.burning.description": "Burns yourself while wielding",
 
     "modifier.kubejs.glass_shard": "Glass Shard",
     "modifier.kubejs.glass_shard.flavor": "Fragile products!",

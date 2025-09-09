@@ -20,6 +20,8 @@
     "death.attack.kubejs.papercut": "%1$s在撕%2$s的纸时被划伤了手指",
     "death.attack.kubejs.papercut.player": "%1$s在撕%2$s的纸时被%3$s划伤了手指",
 
+    "death.attack.kubejs.hot_tool": "%s觉得自己的手是铁做的",
+
         "_comment_materials": " ----- 材料 ----- ",
     
     "material.tconstruct.wood.cherry": "樱花木",
@@ -175,6 +177,10 @@
     "modifier.kubejs.resonance": "共振",
     "modifier.kubejs.resonance.flavor": "校频幽匿感测体！",
     "modifier.kubejs.resonance.description": "攻击时高亮周围的同种生物",
+
+    "modifier.kubejs.burning": "烫伤",
+    "modifier.kubejs.burning.flavor": "锟斤拷烫烫烫！",
+    "modifier.kubejs.burning.description": "手持时烫伤自己",
 
     "modifier.kubejs.glass_shard": "玻璃碎片",
     "modifier.kubejs.glass_shard.flavor": "易碎制品！",

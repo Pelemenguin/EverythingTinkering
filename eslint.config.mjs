@@ -8,7 +8,12 @@ export default defineConfig([
             {
                 "semi": ["error", "always"],
                 "no-extra-semi": "error",
-                "no-unused-vars": "warn"
+                "no-unused-vars": [
+                    "warn",
+                    {
+                        "argsIgnorePattern": "^_"
+                    }
+                ]
             }
     },
     { files: ["**/*.js"], languageOptions: { sourceType: "script" } },

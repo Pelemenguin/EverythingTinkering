@@ -247,7 +247,6 @@ const ModifierManager = {
                 }
                 case "getMeleeDamage": {
                     modifierClass['getMeleeDamageFunction'] = (arg0, arg1, arg2, arg3, arg4) => {
-                        console.info(`getMeleeDamageFunction of ${arg1}: ${arg4}`);
                         try {return hooks.getMeleeDamage(arg0, arg1, arg2, arg3, arg4);}
                         catch (e) {console.error(e); return arg4;}
                     };
@@ -269,7 +268,6 @@ const ModifierManager = {
                 }
                 case "onAttacked": {
                     modifierClass['onAttackedFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5, arg6) => {
-                        console.info(`onAttackedFunction of ${arg1}: Source: ${arg4}, Amount: ${arg5}`);
                         try {hooks.onAttacked(arg0, arg1, arg2, arg3, arg4, arg5, arg6);}
                         catch (e) {console.error(e);}
                     };
