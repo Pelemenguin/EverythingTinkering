@@ -8,6 +8,26 @@ import sys
 import tomllib
 
 def build_modpack(args: list[str]):
+    options = {
+        "build_version": "Unknown"
+    }
+
+    args_index = 0
+    while (args_index < len(args)):
+        match (args[args_index]):
+            case "--build-version":
+                args_index += 1
+                try:
+                    options["build_version"] = args[args_index]
+                except:
+                    print("An argument is required after '--build-version'")
+                    return
+            case unknown:
+                print(f"Unknown option: {args[args_index]}")
+                help_build(["build"])
+                return
+        args_index += 1
+
     curdir = os.path.relpath(os.path.dirname(os.path.realpath(__file__)), os.getcwd())
 
     modlist_file = open('modlist.json', 'r', encoding="utf-8")
@@ -18,26 +38,13 @@ def build_modpack(args: list[str]):
     MODLOADER_VERSION = modlist_content['version']['modloader']
     BUILD_TIME = time.asctime(time.localtime(time.time()))
 
-    LATEST_COMMIT = ''
-    try:
-        headfile = open('.git/HEAD', 'r')
-        ref = headfile.read()
-        if ref.startswith("ref:"):
-            path = ref[4:].strip()
-            latest_commit_file = open('.git/'+path, 'r')
-            LATEST_COMMIT = latest_commit_file.read().strip()
-            latest_commit_file.close()
-        else:
-            LATEST_COMMIT = ref
-        headfile.close()
-    except:
-        LATEST_COMMIT = 'Unknown'
+    LATEST_COMMIT = options["build_version"]
 
     print("Build begin:")
     print(f" - Modpack name: {MODPACK_NAME}")
     print(f" - Modpack version: {MODPACK_VERSION if MODPACK_VERSION else "Build Version"}")
     print(f" - Mod loader version: {MODLOADER_VERSION}")
-    if not MODLOADER_VERSION: print(f" - Latest commit: {LATEST_COMMIT}")
+    if not MODPACK_VERSION: print(f" - Latest commit: {LATEST_COMMIT}")
     print()
 
     # version = MODPACK_VERSION if MODPACK_VERSION else (
@@ -91,17 +98,17 @@ def build_modpack(args: list[str]):
     modlist_html += "</ul>"
     print()
 
-    output = zipfile.ZipFile(f"{MODPACK_NAME} {"v"+MODPACK_VERSION if MODPACK_VERSION else "[Build]"}.zip", "w")
+    output = zipfile.ZipFile(f"{MODPACK_NAME} {"v"+MODPACK_VERSION if MODPACK_VERSION else f"[Build]{" "+LATEST_COMMIT if LATEST_COMMIT != "Unknown" else ""}"}.zip", "w")
     output.writestr("manifest.json", manifest_json)
     output.writestr("modlist.html", modlist_html)
 
     if not MODPACK_VERSION:
         output.writestr("README.md", f"""当前版本是构建版本，并非发布版，可能出现问题。
-最新提交：{LATEST_COMMIT if LATEST_COMMIT != 'Unknown' else "未找到 Git 仓库，未知"}
+最新提交：{LATEST_COMMIT}
 构建时间：{BUILD_TIME}
 
 This is a build version, not a release. Problems may be encountered.
-Latest commit: {LATEST_COMMIT if LATEST_COMMIT != 'Unknown' else "No Git repository found. Unknown."}
+Latest commit: {LATEST_COMMIT}
 Build time: {BUILD_TIME}""")
 
     zipping = []
@@ -242,9 +249,12 @@ def help_build(args: list[str]):
                 print("To see the usage of a task.")
             case "build":
                 print("Usage:")
-                print("    build")
+                print("    build [options]")
                 print()
                 print("Build the modpack zip file.")
+                print()
+                print("Options:")
+                print("    --build-version <commit-hash> | Record last commit in the modpack's README")
             case "check":
                 print("Usage:")
                 print("    check")
