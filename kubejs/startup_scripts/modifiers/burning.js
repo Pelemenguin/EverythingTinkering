@@ -21,7 +21,7 @@
 
 // eslint-disable-next-line no-unused-vars
 let BURNING = ModifierManager.registerCommonModifier("burning", "BurningModifier", {
-    onInventoryTick: (tool, modifier, world, holder, itemSlot, isSelected, _isCorrectSlot, _stack) => {
+    onInventoryTick: (_tool, _modifier, world, holder, _itemSlot, isSelected, _isCorrectSlot, _stack) => {
         if (world.isClientSide()) return;
         if (isSelected) {
             let source = KubeJSDamageSources.hotTool(world, holder, null, holder.pos);

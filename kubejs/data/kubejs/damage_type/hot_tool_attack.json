@@ -1,0 +1,7 @@
+{
+    "death_message_type": "default",
+    "effects": "burning",
+    "exhaustion": 0,
+    "message_id": "kubejs.hot_tool_attack",
+    "scaling": "never"
+}

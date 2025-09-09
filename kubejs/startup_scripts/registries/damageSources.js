@@ -21,25 +21,21 @@
 
 /**
  * @param {Internal.ResourceKey<Internal.DamageType>} resKey
- * @returns {(level: Internal.Level, direct: Internal.Entity, actual: Internal.Entity, pos: Vec3d) => DamageSource}
+ * @returns {(level: Internal.Level, direct: Internal.Entity, actual?: Internal.Entity, pos?: Vec3d) => DamageSource}
  */
 let damageSourceCreatorHelper = (resKey) => {
     return (level, direct, actual, pos) => {
-        let newDirect = direct === undefined ? null : direct;
-        let newActual = actual === undefined ? newDirect : actual;
-        let newPos = pos === undefined ? (newActual == null ? null : newActual.pos) : pos;
-        return new DamageSource(
-            level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(resKey),
-            newDirect,
-            newActual,
-            newPos
-        );
+        let holder = level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(resKey);
+        if (actual === undefined && pos === undefined) return new DamageSource(holder, direct);
+        if (pos === undefined) return new DamageSource(holder, direct, actual);
+        return new DamageSource(holder, direct, actual, pos);
     };
 };
 
 const KubeJSDamageTypes = {
     PAPERCUT: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:papercut"),
-    HOT_TOOL: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:hot_tool")
+    HOT_TOOL: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:hot_tool"),
+    HOT_TOOL_ATTACK: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:hot_tool_attack")
 };
 
 const KubeJSDamageSources = {
@@ -54,6 +50,12 @@ const KubeJSDamageSources = {
      * - Create damage source of type `kubejs:hot_tool`.
      * - 创建一个类型为 `kubejs:hot_tool` 的伤害来源。
      */
-    hotTool: damageSourceCreatorHelper(KubeJSDamageTypes.HOT_TOOL)
+    hotTool: damageSourceCreatorHelper(KubeJSDamageTypes.HOT_TOOL),
+
+    /**
+     * - Create damage source of type `kubejs:hot_tool_attack`.
+     * - 创建一个类型为 `kubejs:hot_tool_attack` 的伤害来源。
+     */
+    hotToolAttack: damageSourceCreatorHelper(KubeJSDamageTypes.HOT_TOOL_ATTACK)
 
 };

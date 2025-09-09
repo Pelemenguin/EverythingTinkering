@@ -22,6 +22,9 @@
 
     "death.attack.kubejs.hot_tool": "%s觉得自己的手是铁做的",
 
+    "death.attack.kubejs.hot_tool_attack": "%1$s发现了%2$s的武器是熔岩做的",
+    "death.attack.kubejs.hot_tool_attack.item": "%1$s发现了%2$s的%3$s是熔岩做的",
+
         "_comment_materials": " ----- 材料 ----- ",
     
     "material.tconstruct.wood.cherry": "樱花木",
@@ -177,6 +180,10 @@
     "modifier.kubejs.resonance": "共振",
     "modifier.kubejs.resonance.flavor": "校频幽匿感测体！",
     "modifier.kubejs.resonance.description": "攻击时高亮周围的同种生物",
+
+    "modifier.kubejs.magma": "岩浆",
+    "modifier.kubejs.magma.flavor": "不要与“熔岩”混淆……",
+    "modifier.kubejs.magma.description": "追加1点灼烧伤害",
 
     "modifier.kubejs.burning": "烫伤",
     "modifier.kubejs.burning.flavor": "锟斤拷烫烫烫！",
