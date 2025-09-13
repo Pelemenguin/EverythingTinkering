@@ -8,6 +8,7 @@ import material_brick
 import material_coal
 import material_glass
 import material_lapis_lazuli
+import material_magma
 import material_paper
 import material_redstone
 import material_rock_variants

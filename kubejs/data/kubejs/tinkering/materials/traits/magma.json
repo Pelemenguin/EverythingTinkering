@@ -1,0 +1,22 @@
+{
+    "default": [
+        {
+            "name": "kubejs:burning",
+            "level": 1
+        }
+    ],
+    "perStat": {
+        "tconstruct:head": [
+            {
+                "name": "kubejs:heating",
+                "level": 1
+            }
+        ],
+        "tconstruct:binding": [
+            {
+                "name": "kubejs:heating",
+                "level": 1
+            }
+        ]
+    }
+}

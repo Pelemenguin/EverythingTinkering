@@ -1,5 +1,5 @@
 {
-    
+
     "generator.kubejs.default": "整合包默认预设",
 
         "_comment_command": " ----- 命令 ---- ",
@@ -16,7 +16,7 @@
     "command.kubejs.rescue.not_nan": "玩家血量不是NaN",
 
         "_comment_damage_types": " ----- 伤害类型 ----- ",
-    
+
     "death.attack.kubejs.papercut": "%1$s在撕%2$s的纸时被划伤了手指",
     "death.attack.kubejs.papercut.player": "%1$s在撕%2$s的纸时被%3$s划伤了手指",
 
@@ -26,7 +26,7 @@
     "death.attack.kubejs.hot_tool_attack.item": "%1$s发现了%2$s的%3$s是熔岩做的",
 
         "_comment_materials": " ----- 材料 ----- ",
-    
+
     "material.tconstruct.wood.cherry": "樱花木",
 
     "material.kubejs.soil": "沙土",
@@ -47,6 +47,15 @@
     "material.kubejs.brick.nether": "下界砖",
     "material.kubejs.brick.flavor": "普通建材...？",
     "material.kubejs.brick.encyclopedia": "下落时伤害再翻倍。1级时倍率为1.5倍，每级增加0.25倍率。特性触发时消耗25%剩余耐久，至少10点",
+
+    "material.kubejs.coal": "煤炭",
+    "material.kubejs.coal.charcoal": "木炭",
+    "material.kubejs.coal.flavor": "活体引线！",
+    "material.kubejs.coal.encyclopedia": "攻击时点燃你的工具。这段时间内，工具会持续丢失耐久，而攻击时则可点燃其他敌人",
+
+    "material.kubejs.magma": "岩浆",
+    "material.kubejs.magma.flavor": "不要与“熔岩”混淆……",
+    "material.kubejs.magma.encyclopedia": "对持有者或近战目标造成1点伤害，取决于该材料的部件类型",
 
     "material.kubejs.terracotta": "陶瓦",
     "material.kubejs.terracotta.white": "白色陶瓦",
@@ -84,11 +93,6 @@
     "material.kubejs.terracotta.flavor": "使用方法：当一个花瓶。",
     "material.kubejs.terracotta.encyclopedia": "工具有零至最高剩余耐久百分比乘上特性等级点的随机伤害提升",
 
-    "material.kubejs.coal": "煤炭",
-    "material.kubejs.coal.charcoal": "木炭",
-    "material.kubejs.coal.flavor": "活体引线！",
-    "material.kubejs.coal.encyclopedia": "攻击时点燃你的工具。这段时间内，工具会持续丢失耐久，而攻击时则可点燃其他敌人",
-    
     "material.kubejs.lapis_lazuli": "青金石",
     "material.kubejs.lapis_lazuli.flavor": "继续挖吧！万一挖到好东西了呢！",
     "material.kubejs.lapis_lazuli.encyclopedia": "概率跌落至0之前，每级可以挖掘1000个方块。初始概率恒为20%",
@@ -100,7 +104,7 @@
     "material.kubejs.amethyst": "紫水晶",
     "material.kubejs.amethyst.flavor": "叮~",
     "material.kubejs.amethyst.encyclopedia": "攻击时高亮周围的同种目标。高亮范围为一个以目标为中心正方体，边长由四倍特性等级加两倍攻击伤害决定",
-    
+
     "material.tconstruct.glass.white_stained": "白色染色玻璃",
     "material.tconstruct.glass.orange_stained": "橙色染色玻璃",
     "material.tconstruct.glass.magenta_stained": "洋红色染色玻璃",
@@ -121,7 +125,7 @@
     "material.tconstruct.glass.scorched": "焦褐玻璃",
     "material.tconstruct.glass.flavor": "小心易碎！",
     "material.tconstruct.glass.encyclopedia": "攻击时，若伤害大于5点，则有概率对目标周围3×3×3的范围内的生物造成伤害，总和为对直接目标的伤害",
-    
+
     "material.kubejs.paper": "纸",
     "material.kubejs.paper.flavor": "致《入门熔炼术》的忠实读者们：翻书的时候小心划伤手指。",
     "material.kubejs.paper.encyclopedia": "对于从侧面攻击的攻击者，造成相当于护甲值的伤害。盔甲韧性可以转化少量受到的伤害并攻击回去",
@@ -208,25 +212,25 @@
     "modifier.kubejs.antifatigue": "抗疲劳",
     "modifier.kubejs.antifatigue.flavor": "横扫饥饿！",
     "modifier.kubejs.antifatigue.description": "抵消挖掘疲劳带来的影响，能够抵消的挖掘疲劳等级不超过该特性的等级",
-    
+
         "comment_artifacts": " ----- Artifacts ----- ",
-    
+
     "item.kubejs.artifact.startup.pickaxe.name": "初始之镐",
     "item.kubejs.artifact.startup.pickaxe.lore": "一份致新手的礼物。",
-    
+
     "item.kubejs.artifact.startup.hand_axe.name": "初始之斧",
     "item.kubejs.artifact.startup.hand_axe.lore": "一份致新手的礼物。",
-    
+
     "item.kubejs.artifact.startup.sword.name": "初始之剑",
     "item.kubejs.artifact.startup.sword.lore": "一份致新手的礼物。",
 
         "_comment_book": " ----- 书本 ----- ",
-    
+
     "book.kubejs.material.title.general.1": "一阶通用材料",
 
     "book.kubejs.material.flavor_format": "“%s”",
     "book.kubejs.material.tool.missing": "%1$s上没有可以使用%2$s的部件",
-    
+
     "book.kubejs.material.recipes.material_value_indicator": "%1$s 材料值的%2$s",
 
     "book.kubejs.material.recipes.missing": "该材料缺少配方",
@@ -249,5 +253,5 @@
     "book.kubejs.material.recipes.composite.fluid": "%1$smB的%2$s",
     "book.kubejs.material.recipes.composite.amount": "%smB",
     "book.kubejs.material.recipes.composite.fluid.unknown": "未知流体"
-    
+
 }

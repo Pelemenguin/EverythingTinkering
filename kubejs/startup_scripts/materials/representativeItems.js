@@ -36,6 +36,7 @@ let reprItems = {
     "kubejs:terracotta": "minecraft:terracotta",
     "kubejs:brick": "minecraft:brick",
     "kubejs:coal": "minecraft:coal",
+    "kubejs:magma": "minecraft:magma_block",
     "tconstruct:flint": "minecraft:flint",
     "tconstruct:bone": "minecraft:bone",
     "tconstruct:copper": "minecraft:copper_ingot",

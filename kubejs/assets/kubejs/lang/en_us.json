@@ -50,6 +50,10 @@
     "material.kubejs.coal.flavor": "Living Fuses!",
     "material.kubejs.coal.encyclopedia": "Attack an enemy can set your tool on fire. During this time, tool will continuously lose its durability points, and set fire to other enemies as you attack",
 
+    "material.kubejs.magma": "Magma",
+    "material.kubejs.magma.flavor": "Not to be confused with 'lava'...",
+    "material.kubejs.magma.encyclopedia": "Deal 1 damage to the holder or the melee target, depending on the part type of this material",
+
     "material.kubejs.terracotta": "Terracotta",
     "material.kubejs.terracotta.white": "White Terracotta",
     "material.kubejs.terracotta.orange": "Orange Terracotta",
@@ -97,7 +101,7 @@
     "material.kubejs.amethyst": "Amethyst",
     "material.kubejs.amethyst.flavor": "Ding~",
     "material.kubejs.amethyst.encyclopedia": "Highlights surrounding targets of same type on attack. Effect range is a cube centered on target with side length = 4×trait level + 2×attack damage",
-    
+
     "material.tconstruct.glass.white_stained": "White Stained Glass",
     "material.tconstruct.glass.orange_stained": "Orange Stained Glass",
     "material.tconstruct.glass.magenta_stained": "Magenta Stained Glass",
@@ -130,7 +134,7 @@
     "material.kubejs.andesite_alloy": "Andesite Alloy",
     "material.kubejs.andesite_alloy.flavor": "Just like a Shaft!",
     "material.kubejs.andesite_alloy.encyclopedia": "Attack targets in a row with distances between them less than 3 blocks. Damage gets multiplied by 0.2 times trait level and stops conveying when being less that 1.",
-    
+
     "material.kubejs.sea_alloy": "Sea Alloy",
     "material.kubejs.sea_alloy.flavor": "It's basically sea lanterns...",
     "material.kubejs.sea_alloy.encyclopedia": "Negates mining fatigue equivalent to the level of the Anti-Fatigue modifier",
@@ -193,7 +197,7 @@
     "modifier.kubejs.fibrous": "Fibrous",
     "modifier.kubejs.fibrous.flavor": "Unidirectional strength!",
     "modifier.kubejs.fibrous.description": "Chance to not consume durability when used along the X-axis direction",
-    
+
     "modifier.kubejs.papercutting": "Papercutting",
     "modifier.kubejs.papercutting.flavor": "Not children's scissors!",
     "modifier.kubejs.papercutting.description": "Only damages attackers that hit from the side",
@@ -205,25 +209,25 @@
     "modifier.kubejs.antifatigue": "Anti-Fatigue",
     "modifier.kubejs.antifatigue.flavor": "Combat exhaustion!",
     "modifier.kubejs.antifatigue.description": "Counteracts mining fatigue effects. The maximum fatigue level negated is equal to this modifier's level",
-    
+
         "_comment_artifacts": " ----- Artifacts ----- ",
-    
+
     "item.kubejs.artifact.startup.pickaxe.name": "Starter Pickaxe",
     "item.kubejs.artifact.startup.pickaxe.lore": "A gift to beginners.",
-    
+
     "item.kubejs.artifact.startup.hand_axe.name": "Starter Hand Axe",
     "item.kubejs.artifact.startup.hand_axe.lore": "A gift to beginners.",
-    
+
     "item.kubejs.artifact.startup.sword.name": "Starter Sword",
     "item.kubejs.artifact.startup.sword.lore": "A gift to beginners.",
 
         "_comment_book": " ----- Book ----- ",
-    
+
     "book.kubejs.material.title.general.1": "Tier 1 General Material",
 
     "book.kubejs.material.flavor_format": "\"%s\"",
     "book.kubejs.material.tool.missing": "No parts of %1$s can use %2$s",
-    
+
     "book.kubejs.material.recipes.material_value_indicator": "%1$s Material Value of %2$s",
 
     "book.kubejs.material.recipes.missing": "No recipes available for this material",
