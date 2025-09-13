@@ -79,6 +79,8 @@ const KubeJS = Java.loadClass("dev.latvian.mods.kubejs.KubeJS");
 const Context = Java.loadClass("dev.latvian.mods.rhino.Context");
 const ConsoleJS = Java.loadClass("dev.latvian.mods.kubejs.util.ConsoleJS");
 
+const logger = KubeJS.LOGGER;
+
 const startupContext = KubeJS.getStartupScriptManager().context;
 const topLevelScope = KubeJS.getStartupScriptManager().topLevelScope;
 

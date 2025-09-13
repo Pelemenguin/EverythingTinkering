@@ -24,6 +24,7 @@
     topLevelScope
     Utils
     CodeAttribute
+    logger
 */
 
 /** @type {Internal.Map<string, Internal.Class<?>>} */
@@ -146,7 +147,8 @@ ClassCreator.prototype.generateByteCode = function() {
         printer += `\n    ${m.name} ${m.descriptor}`;
     });
     printer += "\n---------------------------------------------------------------------";
-    console.info(printer);
+    logger.debug(printer);
+    console.info(`Byte Code Generated for class ${this.name}`);
 
     return result;
 };

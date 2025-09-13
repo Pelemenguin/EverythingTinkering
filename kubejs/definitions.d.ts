@@ -565,6 +565,18 @@ declare namespace BookArguments {
 }
 
 declare class ClassCreator<T extends typeof any> {
+
+    name: string;
+    internalName: string;
+    constantPoolCounter: number;
+    methods: Method[];
+    attributes: [string, {generateByteCode: (classCreator: ClassCreator) => number[]}][];
+    fields: {name: string, descriptor: string, access: number}[];
+    access: number;
+    constantPool: [tag: number, {generateByteCode: () => number[]}][];
+    superClass: string;
+    superInterfaces: string[];
+
     defineHiddenClass(lookup: Internal.MethodHandles$Lookup): T;
     defineClass(lookup: Internal.MethodHandles$Lookup): T;
     generateByteCode(): number[];
