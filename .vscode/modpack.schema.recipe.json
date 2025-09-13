@@ -1,0 +1,126 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Minecraft (or Mods) Recipe",
+    "type": "object",
+    "$ref": "#/definitions/recipe",
+    "definitions": {
+        "general.resource_location": {
+            "type": "string",
+            "pattern": "^([0-9a-z_\\-\\.]+:)?[0-9a-z_\\-\\./]+$"
+        },
+        "item_ingredient.single": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/item_ingredient.basic"
+                },
+                {
+                    "$ref": "#/definitions/item_ingredient.typed"
+                }
+            ]
+        },
+        "item_ingredient.basic": {
+            "type": "object",
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "item": {
+                            "$ref": "#/definitions/general.resource_location",
+                            "description": "Item's resource location as ingredient.\n作为原料的物品的资源路径。"
+                        }
+                    },
+                    "required": [
+                        "item"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "tag": {
+                            "$ref": "#/definitions/general.resource_location",
+                            "description": "Item tag's resource location as ingredient.\n作为原料的物品标签的资源路径。"
+                        }
+                    },
+                    "required": [
+                        "tag"
+                    ]
+                }
+            ]
+        },
+        "item_ingredient.compound": {
+            "type": "array",
+            "contains": {
+                "$ref": "#/definitions/item_ingredient.single"
+            }
+        },
+        "item_ingredient.typed": {
+            "type": "object",
+            "required": [
+                "type"
+            ],
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/general.resource_location"
+                }
+            }
+        },
+        "tconstruct.material_variant": {
+            "type": "string",
+            "pattern": "^([0-9a-z_\\-\\.]+:)?[0-9a-z_\\-\\./]+(#[0-9a-z_\\-\\./]+)?$"
+        },
+        "recipe.defined": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/recipe.tconstruct.material"
+                }
+            ]
+        },
+        "recipe": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/recipe.defined"
+                },
+                {
+                    "not": {
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "tconstruct:material"
+                                ]
+                            }
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "type"
+            ]
+        },
+        "recipe.tconstruct.material": {
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "tconstruct:material",
+                    "description": "A material recipe. Used in Part Builders to build parts or in Tinker's Stations to repair tools.\n材料配方。用于部件加工台中制作部件或工匠站中修复工具。"
+                },
+                "ingredient": {
+                    "$ref": "#/definitions/item_ingredient.basic",
+                    "description": "Items to associate with the material.\n要与材料关联的物品。"
+                },
+                "value": {
+                    "type": "integer",
+                    "description": "Value associated with this recipe, in comparison to the material’s base unit. For example, a block of metal would have a value of 9 compared to the base unit of ingots. If unset, defaults to 1.\n与该配方关联的材料值。例如，一个块的材料值为9，一个锭的材料值为。未设置时默认为1。"
+                },
+                "needed": {
+                    "type": "integer",
+                    "description": "Denominator of the value associated with this recipe, allows an item to represent a fraction of the base unit. For example, a nugget would have a value of 1 with needed set to 9 to indicate it represents 1/9 of the base unit of ingot. If unset, defaults to 1.\n与此配方关联的材料值的分母，允许用于表示基本单位的一个分数。例如，一个粒的材料值为1，此项设置为9，以表示它代表基本单位铸锭的1/9。未设置时默认为1。"
+                },
+                "material": {
+                    "$ref": "#/definitions/tconstruct.material_variant",
+                    "description": "Material variant produced by this recipe. Note that when repairing, just the material ID is matched; the variant is ignored.\n该配方产生的材料。注意，修复工具时，只匹配材料ID，忽略变种ID。"
+                }
+            }
+        }
+    }
+}
