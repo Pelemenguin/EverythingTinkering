@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 /**
- * @fileoverview Magma | 岩浆
+ * @fileoverview Heating | 岩浆
  * - - - - -
  * Append 1 extra damage.
  * 附加1点额外伤害。
@@ -20,7 +20,7 @@
 */
 
 // eslint-disable-next-line no-unused-vars
-let MAGMA = ModifierManager.registerCommonModifier("magma", "MagmaModifier", {
+let HEATING = ModifierManager.registerCommonModifier("heating", "HeatingModifier", {
     afterMeleeHit: (tool, modifier, context, _damageDealt) => {
         if (context.getLevel().isClientSide()) return;
         if (!context.getTarget().isLiving()) return;

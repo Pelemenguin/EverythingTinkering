@@ -15,11 +15,11 @@
     "command.kubejs.rescue.not_nan": "Player health is not NaN",
 
         "_comment_damage_types": " ----- Damage Types ----- ",
-    
+
     "death.attack.kubejs.papercut": "%1$s got a paper cut while tearing %2$s's armor",
     "death.attack.kubejs.papercut.player": "%1$s got a pepr cut from %3$s while tearing %2$s's armor",
 
-    "death.attack.kubejs.hot_tool": "%s thought their hands were heat-proof",
+    "death.attack.kubejs.hot_tool": "%s thought their hands were made of iron",
 
     "death.attack.kubejs.hot_tool_attack": "%1$s discovered %2$s's weapon was lava",
     "death.attack.kubejs.hot_tool_attack.item": "%1$s discovered %2$s's %3$s was lava",
@@ -178,9 +178,9 @@
     "modifier.kubejs.igniting.description": "Conveys fire from one enemy to another",
     "modifier.kubejs.igniting.tooltip": "Ignitng Time: %s",
 
-    "modifier.kubejs.magma": "Magma",
-    "modifier.kubejs.magma.flavor": "Not to be confused with \"lava\"...",
-    "modifier.kubejs.magma.description": "Adds 1 point of burn damage",
+    "modifier.kubejs.heating": "Heating",
+    "modifier.kubejs.heating.flavor": "Discovered the weapon was lava!",
+    "modifier.kubejs.heating.description": "Adds 1 point of burn damage",
 
     "modifier.kubejs.burning": "Burning",
     "modifier.kubejs.burning.flavor": "Hot! Hot! Hot!",
