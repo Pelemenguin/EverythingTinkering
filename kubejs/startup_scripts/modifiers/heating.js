@@ -28,5 +28,10 @@ let HEATING = ModifierManager.registerCommonModifier("heating", "HeatingModifier
         let target = context.getTarget();
         target.attack(KubeJSDamageSources.hotToolAttack(context.getLevel(), context.getAttacker(), context.getAttacker()), 1);
         target.playSound("minecraft:entity.player.hurt_on_fire");
+    },
+    __class__: {
+        post: (classCreator) => {
+            classCreator.extends("slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier");
+        }
     }
 });

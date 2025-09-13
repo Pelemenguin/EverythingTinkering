@@ -27,5 +27,10 @@ let BURNING = ModifierManager.registerCommonModifier("burning", "BurningModifier
             let source = KubeJSDamageSources.hotTool(world, holder, null, holder.pos);
             holder.attack(source, 1);
         }
+    },
+    __class__: {
+        post: (classCreator) => {
+            classCreator.extends("slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier");
+        }
     }
 });

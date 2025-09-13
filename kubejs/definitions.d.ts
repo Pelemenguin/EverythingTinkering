@@ -467,7 +467,7 @@ declare namespace Annotation {
              */
             __custom__?: CustomModifierHookArgument,
             /**
-             * Some custom methods on class definitions.
+             * Some custom methods on class definitions.  
              * 一些在类定义上的自定义方法。
              */
             __class__?: ClassModifierHookArgument
