@@ -33,7 +33,7 @@ let WHACKING_DURABILITY_PERCENTAGE = 0.05;
  * - - - - -
  * @constant
  */
-let WHACKING_DAMAGE_PERCENTAGE = 0.15;
+let WHACKING_DAMAGE_PERCENTAGE = 0.05;
 
 // eslint-disable-next-line no-unused-vars
 let WHACKING = ModifierManager.registerCommonModifier("whacking", "WhackingModifier", {

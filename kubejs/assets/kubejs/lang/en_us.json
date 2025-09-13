@@ -43,7 +43,7 @@
     "material.kubejs.brick": "Brick",
     "material.kubejs.brick.nether": "Nether Brick",
     "material.kubejs.brick.flavor": "Common building material...?",
-    "material.kubejs.brick.encyclopedia": "Damage get multiplied when falling. Multiplier is 1.5 at level 1, and increase 0.25 each level. Consumes 25% of remaining durability, at least 10 points",
+    "material.kubejs.brick.encyclopedia": "Deals multiplied damage on critical hits, 5% per level. Consumes 25% of remaining durability when triggered, at least 10 points",
 
     "material.kubejs.coal": "Coal",
     "material.kubejs.coal.charcoal": "Charcoal",

@@ -46,7 +46,7 @@
     "material.kubejs.brick": "红砖",
     "material.kubejs.brick.nether": "下界砖",
     "material.kubejs.brick.flavor": "普通建材...？",
-    "material.kubejs.brick.encyclopedia": "下落时伤害再翻倍。1级时倍率为1.5倍，每级增加0.25倍率。特性触发时消耗25%剩余耐久，至少10点",
+    "material.kubejs.brick.encyclopedia": "暴击时伤害再加倍，每级5%。特性触发时消耗25%剩余耐久，至少10点",
 
     "material.kubejs.coal": "煤炭",
     "material.kubejs.coal.charcoal": "木炭",
