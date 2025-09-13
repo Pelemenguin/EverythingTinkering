@@ -106,10 +106,10 @@ let calcIncludedAngleCosine = (first, second) => {
 // eslint-disable-next-line no-unused-vars
 let PAPERCUTTING = ModifierManager.registerCommonModifier("papercutting", "PapercuttingModifier", {
     onAttacked: (tool, modifier, context, slotType, source, amount/*, isDirectDamage*/) => {
-        if (context.getLevel().isClientSide()) return true;
+        if (context.getLevel().isClientSide()) return;
 
         let attacker = source.getImmediate();
-        if (attacker == null || !attacker.isLiving()) return true;
+        if (attacker == null || !attacker.isLiving()) return;
 
         let wearer = context.getEntity();
 
@@ -117,7 +117,7 @@ let PAPERCUTTING = ModifierManager.registerCommonModifier("papercutting", "Paper
             attacker.x - wearer.x,
             attacker.y - wearer.y,
             attacker.z - wearer.z
-        ))) > PAPERCUTTING_MAX_CONSINE_ABSOLUTE) return true;
+        ))) > PAPERCUTTING_MAX_CONSINE_ABSOLUTE) return;
 
         // let armor = view.getStats().get(ToolStats.ARMOR);
         let armor = tool.getStats().get(ToolStats.ARMOR);
@@ -130,7 +130,7 @@ let PAPERCUTTING = ModifierManager.registerCommonModifier("papercutting", "Paper
         let damageSource = KubeJSDamageSources.papercut(context.getLevel(), wearer, wearer);
         addPlannedDamage(attacker, returning, slotType, damageSource);
 
-        return false;
+        return;
     },
     __custom__: {
         onServerTick: (event) => {

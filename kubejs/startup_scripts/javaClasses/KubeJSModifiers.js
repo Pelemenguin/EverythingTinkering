@@ -82,7 +82,7 @@ const ModifierManager = {
         Object.keys(hooks).forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
             switch (hook) {
                 case "onDamageTool": {
-                    TinkerFunctionsSet.ToolDamgeFunction.addClassMethod(modifierClassCreator);
+                    TinkerFunctionsSet.ToolDamageFunction.addClassMethod(modifierClassCreator);
                     break;
                 }
                 case "onInventoryTick": {

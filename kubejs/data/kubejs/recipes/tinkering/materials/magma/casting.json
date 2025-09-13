@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material_fluid",
+    "fluid": {
+        "amount": 1000,
+        "tag": "tconstruct:magma"
+    },
+    "output": "kubejs:magma",
+    "temperature": 300
+}

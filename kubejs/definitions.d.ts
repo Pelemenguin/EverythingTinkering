@@ -153,7 +153,7 @@ declare namespace Annotation {
              * - - - - -
              * @example
              * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
-             *     onBreakSpeed: (tool, modifier, world, holder, itemSlot, isSelected, isCorrectSlot, stack) => {
+             *     onInventoryTick: (tool, modifier, world, holder, itemSlot, isSelected, isCorrectSlot, stack) => {
              *         tool.damage += 1; // Reduce 1 durability point every tick
              *                           // 每Tick损失一点耐久值
              *     }
@@ -467,7 +467,7 @@ declare namespace Annotation {
              */
             __custom__?: CustomModifierHookArgument,
             /**
-             * Some custom methods on class definitions.
+             * Some custom methods on class definitions.  
              * 一些在类定义上的自定义方法。
              */
             __class__?: ClassModifierHookArgument

@@ -1,0 +1,8 @@
+{
+    "color": "FFE66410",
+    "fallbacks": [
+        "nonmetal"
+    ],
+    "luminosity": 0,
+    "texture": "kubejs:magma"
+}

@@ -19,51 +19,43 @@
     ResourceKey
 */
 
+/**
+ * @param {Internal.ResourceKey<Internal.DamageType>} resKey
+ * @returns {(level: Internal.Level, direct: Internal.Entity, actual?: Internal.Entity, pos?: Vec3d) => DamageSource}
+ */
+let damageSourceCreatorHelper = (resKey) => {
+    return (level, direct, actual, pos) => {
+        let holder = level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(resKey);
+        if (actual === undefined && pos === undefined) return new DamageSource(holder, direct);
+        if (pos === undefined) return new DamageSource(holder, direct, actual);
+        return new DamageSource(holder, direct, actual, pos);
+    };
+};
+
+const KubeJSDamageTypes = {
+    PAPERCUT: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:papercut"),
+    HOT_TOOL: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:hot_tool"),
+    HOT_TOOL_ATTACK: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:hot_tool_attack")
+};
+
 const KubeJSDamageSources = {
 
     /**
      * - Create damage source of type `kubejs:papercut`.
      * - 创建一个类型为 `kubejs:papercut` 的伤害来源。
-     * - - - - -
-     * @param {Internal.Level} level
-     * @param {Internal.Entity | undefined} direct 
-     * @param {Internal.Entity | undefined} actual
-     * @param {Vec3d | undefined} pos
-     * - - - - -
-     * @returns {DamageSource}
      */
-    papercut: (level, direct, actual, pos) => {
-        return new DamageSource(
-            level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(KubeJSDamageTypes.PAPERCUT),
-            direct === undefined ? null : direct,
-            actual === undefined ? (direct === undefined ? null : direct) : actual,
-            pos === undefined ? (direct === undefined ? null : direct.pos) : pos,
-        );
-    },
+    papercut: damageSourceCreatorHelper(KubeJSDamageTypes.PAPERCUT),
 
     /**
-     * - - - - -
-     * @param {Internal.Level} level
-     * @param {!Internal.Entity} direct
-     * @param {Internal.Entity | undefined} actual
-     * @param {Vec3d | undefined} pos
-     * - - - - -
-     * @returns {DamageSource}
+     * - Create damage source of type `kubejs:hot_tool`.
+     * - 创建一个类型为 `kubejs:hot_tool` 的伤害来源。
      */
-    source: (level, direct, actual, pos) => {
-        let newDirect = direct === undefined ? null : direct;
-        let newActual = actual === undefined ? newDirect : actual;
-        let newPos = pos === undefined ? (newActual == null ? null : newActual.pos) : pos;
-        return new DamageSource(
-            level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(KubeJSDamageTypes.PAPERCUT),
-            newDirect,
-            newActual,
-            newPos
-        );
-    }
+    hotTool: damageSourceCreatorHelper(KubeJSDamageTypes.HOT_TOOL),
 
-};
+    /**
+     * - Create damage source of type `kubejs:hot_tool_attack`.
+     * - 创建一个类型为 `kubejs:hot_tool_attack` 的伤害来源。
+     */
+    hotToolAttack: damageSourceCreatorHelper(KubeJSDamageTypes.HOT_TOOL_ATTACK)
 
-const KubeJSDamageTypes = {
-    PAPERCUT: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:papercut")
 };

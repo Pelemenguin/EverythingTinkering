@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+        "item": "minecraft:magma_block"
+    },
+    "material": "kubejs:magma",
+    "needed": 1,
+    "value": 1
+}

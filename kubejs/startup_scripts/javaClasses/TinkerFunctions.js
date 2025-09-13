@@ -166,7 +166,7 @@ let addClassMethodHelper = (tinkerFunctionClass, methodDescriptor, implementingI
 
 const TinkerFunctionsSet = {
 
-    ToolDamgeFunction: {
+    ToolDamageFunction: {
         class: TinkerFunctions$ToolDamageFunction,
 
         /** @type {string} */
