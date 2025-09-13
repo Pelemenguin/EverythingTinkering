@@ -60,6 +60,7 @@ const MaterialStatsId = Java.loadClass("slimeknights.tconstruct.library.material
 const Modifier = Java.loadClass("slimeknights.tconstruct.library.modifiers.Modifier");
 const ModifierId = Java.loadClass('slimeknights.tconstruct.library.modifiers.ModifierId');
 const ToolMaterialHook = Java.loadClass("slimeknights.tconstruct.library.tools.definition.module.material.ToolMaterialHook");
+const ToolDamageUtil = Java.loadClass("slimeknights.tconstruct.library.tools.helper.ToolDamageUtil");
 const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ToolStack');
 const MaterialNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT');
 const MaterialNBTBuilder = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT$Builder');

@@ -16,8 +16,7 @@
 
 /* global
     ModifierManager
-    JavaMath
-    Player
+    ToolDamageUtil
 */
 
 /**
@@ -41,9 +40,9 @@ let WHACKING = ModifierManager.registerCommonModifier("whacking", "WhackingModif
     getMeleeDamage: (tool, modifier, context, baseDamage, damage) => {
         if (context.getLevel().isClientSide()) return damage;
         if (!context.isCritical()) return damage;
-        let durabilityPercentage = JavaMath["round(float)"](tool.getCurrentDurability() * WHACKING_DURABILITY_PERCENTAGE * modifier.level);
-        let durabilityLoss = JavaMath["max(int,int)"](durabilityPercentage, 10);
-        if (!(context.attacker instanceof Player && context.attacker.isCreative())) tool.setDamage(durabilityLoss + tool.getDamage() - 1);
+        let durabilityPercentage = Math.round(tool.getCurrentDurability() * WHACKING_DURABILITY_PERCENTAGE * modifier.level);
+        let durabilityLoss = Math.max(durabilityPercentage, 10);
+        ToolDamageUtil["damageAnimated(slimeknights.tconstruct.library.tools.nbt.IToolStackView,int,net.minecraft.world.entity.LivingEntity,net.minecraft.world.entity.EquipmentSlot)"](tool, durabilityLoss, context.attacker, context.getSlotType());
         return damage * (1 + modifier.level * WHACKING_DAMAGE_PERCENTAGE);
     }
 });

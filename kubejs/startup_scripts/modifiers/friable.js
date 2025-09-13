@@ -17,14 +17,16 @@
 /* global
     ModifierManager
     JavaMath
+    EquipmentSlot
+    ToolDamageUtil
 */
 
 // eslint-disable-next-line no-unused-vars
 let FIRABLE = ModifierManager.registerCommonModifier("friable", "FriableModifier", {
-    onInventoryTick: (tool, modifier, world, holder/*, itemSlot, isSelected, isCorrectSlot, stack*/) => {
+    onInventoryTick: (tool, modifier, world, holder, _itemSlot, _isSelected, _isCorrectSlot, stack) => {
         if (world.isClientSide()) return;
         if (holder.isPlayer() && holder.isCreative()) return;
         if (JavaMath.random() >= 0.2 * modifier.level) return;
-        tool.damage += modifier.level + JavaMath.round(modifier.level * 2 * JavaMath.random());
+        ToolDamageUtil["damageAnimated(slimeknights.tconstruct.library.tools.nbt.IToolStackView,int,net.minecraft.world.entity.LivingEntity,net.minecraft.world.entity.EquipmentSlot)"](tool, modifier.level + JavaMath.round(modifier.level * 2 * JavaMath.random()), holder, stack.getEquipmentSlot() || EquipmentSlot.MAINHAND);
     }
 });

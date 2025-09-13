@@ -48,7 +48,7 @@ let GLASS_SHARD = ModifierManager.registerCommonModifier("glass_shard", "GlassSh
     beforeMeleeHit: (tool, modifier, context, damageDealt, baseKnockback, knockback) => {
         let chance = (damageDealt - 5.0) * 0.2 * modifier.level;
         if (JavaMath.random() >= chance) return knockback;
-        
+
         let {x, y, z} = context.getTarget();
         let box = AABB.of(
             x - 1,
