@@ -64,7 +64,7 @@
 拥有**扭曲**（`warped`）特性，在诡异森林生物群系，增加防御。
 
 ### 幻翼膜
-> ID: `phantom_membrace`
+> ID: `phantom_membrane`
 >
 > 🛡️ **`2`**
 
