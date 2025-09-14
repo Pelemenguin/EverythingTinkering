@@ -81,6 +81,9 @@ const ModifierManager = {
 
         Object.keys(hooks).forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
             switch (hook) {
+                case "modifyStat": {
+                    TinkerFunctionsSet.ConditionalStatFunction.addClassMethod(modifierClassCreator);
+                }
                 case "onDamageTool": {
                     TinkerFunctionsSet.ToolDamageFunction.addClassMethod(modifierClassCreator);
                     break;
@@ -144,6 +147,9 @@ const ModifierManager = {
                                 // ==============================
 
                     switch (hook) {
+                        case "modifyStat": {
+                            return  ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "CONDITIONAL_STAT", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
+                        }
                         case "onDamageTool": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "TOOL_DAMAGE", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
@@ -217,6 +223,13 @@ const ModifierManager = {
                                 // =============================
 
             switch (hook) {
+                case "modifyStat": {
+                    modifierClass['modifyStatFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
+                    try {return hooks.modifyStat(arg0, arg1, arg2, arg3, arg4, arg5);}
+                    catch (e) {console.error(e); return arg4;}
+                    };
+                    break;
+                }
                 case "onDamageTool": {
                     modifierClass['onDamageToolFunction'] = (arg0, arg1, arg2, arg3, arg4) => {
                         try {return hooks.onDamageTool(arg0, arg1, arg2, arg3, arg4);}

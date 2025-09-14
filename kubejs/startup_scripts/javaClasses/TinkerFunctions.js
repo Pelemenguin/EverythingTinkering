@@ -44,6 +44,14 @@ let TinkerFunctions = (new ClassCreator("TinkerFunctions"))
     .createDefaultConstructor()
     .defineClass(JavaUtils.MethodHandles.lookup());
 
+let TinkerFunctions$ConditionalStatFunction = addFunctionalInterfaceAnnotation(
+    (new ClassCreator("TinkerFunctions$ConditionalStatFunction"))
+        .setIsInterface()
+        .addMethod("modifyStat", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/LivingEntity;Lslimeknights/tconstruct/library/tools/stat/FloatToolStat;FF)F", method => {
+            method.setAbstract();
+        })
+).defineClass(JavaUtils.MethodHandles.lookup());
+
 let TinkerFunctions$ToolDamageFunction = addFunctionalInterfaceAnnotation(
     (new ClassCreator("TinkerFunctions$ToolDamageFunction"))
         .setIsInterface()
@@ -165,6 +173,39 @@ let addClassMethodHelper = (tinkerFunctionClass, methodDescriptor, implementingI
 };
 
 const TinkerFunctionsSet = {
+
+    ConditionalStatFunction: {
+        class:TinkerFunctions$ConditionalStatFunction,
+
+        /** @type {string} */
+        internalName: TinkerFunctions$ConditionalStatFunction.__javaObject__.getName().replace('.', '/'),
+
+        addClassMethod: addClassMethodHelper(
+            TinkerFunctions$ConditionalStatFunction,
+            "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/LivingEntity;Lslimeknights/tconstruct/library/tools/stat/FloatToolStat;FF)F",
+            "slimeknights.tconstruct.library.modifiers.hook.build.ConditionalStatModifierHook",
+            "modifyStat",
+            7,
+            7,
+            (references) => [
+                0xb2, // 0: getstatic
+                    references[0], references[1],
+                0x2b, // 3: aload_1
+                0x2c, // 4: aload_2
+                0x2d, // 5: aload_3
+                0x19, // 6: aload #4
+                    0x04,
+                0x17, // 8: fload #5
+                    0x05,
+                0x17, // 10: flpad #6
+                    0x06,
+                0xb9, // 12: invokeinterface
+                    references[2], references[3],
+                    0x07, 0x00,
+                0xae, // 17: freturn
+            ]
+        )
+    },
 
     ToolDamageFunction: {
         class: TinkerFunctions$ToolDamageFunction,

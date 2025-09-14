@@ -85,12 +85,52 @@ declare namespace Annotation {
             | "projectileLaunch" | "tooltipSetting" | "onServerTick";
         type ModifierHookArgument = {
             /**
+             * Method to modify a stat as the tool is being used  
+             * 工具使用时修改属性的方法。
+             * - - - - -
+             * @param tool       Tool instance  
+             *                   工具实例
+             *
+             * @param modifier   Modifier instance  
+             *                   特性实例
+             *
+             * @param living     Entity holding the tool  
+             *                   持有工具的实体
+             *
+             * @param stat       Stat to be modified, safe to do instance equality  
+             *                   要修改的属性，可安全判断实例是否相等
+             *
+             * @param baseValue  Value before this hook modified the stat  
+             *                   在该钩子修改属性之前的值
+             *
+             * @param multiplier Global multiplier, same value contained in the tool, but fetched for convenience as it's commonly needed for stat bonuses  
+             *                   全局系数，工具中含有相同的值，但为了方便，仍然在此抓去，因为其广泛用于属性增幅
+             *
+             * @returns          New value of the stat, or baseValue if you choose not to modify this stat  
+             *                   该属性的新值，或`baseValue`若你不想修改
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     modifyStat: (tool, modifier, living, stat, baseValue, multiplier) => {
+             *         if (stat == ToolStats.ATTACK_DAMAGE) {
+             *             return baseValue + 1;
+             *             // Add 1 point of attack damage
+             *             // 添加1点攻击伤害
+             *         }
+             *         return baseDamage;
+             *         // Return baseDamage when modifying other stats
+             *         // 修改其它属性时返回baseDamage
+             *     }
+             * });
+             */ 
+            modifyStat: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, living: Internal.LivingEntity, stat: Internal.FloatToolStat, baseValue: number, multiplier: number) => number,
+            /**
              * Called when the tool is damaged.
              * Can be used to cancel, decrease, or increase the damage.  
              * 在工具消耗耐久时调用。
              * 可以被用于取消，减少，或增加损失的耐久值。
              * - - - - -
-             * @param tool     Tool stack  
+                 * @param tool     Tool stack  
              *                 工具堆叠
              * 
              * @param modifier Modifier running this hook  
@@ -120,7 +160,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            onDamageTool?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, amount: number, holder: Internal.LivingEntity | null, stack: Internal.ItemStack | null) => number;
+            onDamageTool?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, amount: number, holder: Internal.LivingEntity | null, stack: Internal.ItemStack | null) => number,
             /**
              * Triggers every tick in the inventory.
              * Not to be confused with {@link CustomModifierHookArgument.onServerTick `__custom__.onServerTick`}  
