@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+        "item": "minecraft:kelp"
+    },
+    "material": "kubejs:kelp",
+    "needed": 1,
+    "value": 1
+}
