@@ -130,6 +130,10 @@
     "material.kubejs.paper.flavor": "致《入门熔炼术》的忠实读者们：翻书的时候小心划伤手指。",
     "material.kubejs.paper.encyclopedia": "对于从侧面攻击的攻击者，造成相当于护甲值的伤害。盔甲韧性可以转化少量受到的伤害并攻击回去",
 
+    "material.kubejs.kelp": "海带",
+    "material.kubejs.kelp.flavor": "实验2-3：从海带中提取碘",
+    "material.kubejs.paper.encyclopedia": "Recover 1 durability point every 3 seconds under water",
+
     "material.kubejs.sugar_cane": "甘蔗",
     "material.kubejs.sugar_cane.flavor": "更便宜的蜂蜜替代品！",
     "material.kubejs.sugar_cane.encyclopedia": "靠近X轴方向使用时有最多25%的概率不消耗耐久",
@@ -204,6 +208,10 @@
     "modifier.kubejs.papercutting": "剪纸",
     "modifier.kubejs.papercutting.flavor": "并非儿童剪刀！",
     "modifier.kubejs.papercutting.description": "只会伤害从侧面攻击的攻击者",
+
+    "modifier.kubejs.algae": "海藻",
+    "modifier.kubejs.algae.flavor": "很久很久以前，人们用海藻砖来制作合金……",
+    "modifier.kubejs.algae.description": "工具在水下会被缓慢修复",
 
     "modifier.kubejs.relaying": "传动",
     "modifier.kubejs.relaying.flavor": "传递动量！",

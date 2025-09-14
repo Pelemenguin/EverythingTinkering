@@ -1,0 +1,8 @@
+{
+    "color": "FF59AB30",
+    "fallbacks": [
+        "primitive"
+    ],
+    "luminosity": 0,
+    "texture": "kubejs:kelp"
+}

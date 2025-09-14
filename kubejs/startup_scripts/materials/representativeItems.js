@@ -50,6 +50,7 @@ let reprItems = {
     "tconstruct:leather": "minecraft:leather",
     "kubejs:paper": "minecraft:paper",
     "tconstruct:vine": "minecraft:vine",
+    "kubejs:kelp": "minecraft:kelp",
     "tconstruct:ice": "minecraft:ice",
 
     // Tier 2

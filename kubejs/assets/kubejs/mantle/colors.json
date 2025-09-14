@@ -63,6 +63,8 @@
 
         "paper": "#FCFCF2",
 
+        "kelp": "#59AB30",
+
         "andesite_alloy": "#c9caba",
 
         "sea_alloy": "#C6DFD8"
@@ -108,6 +110,7 @@
         "burning": "#E66410",
         "fibrous": "#97F544",
         "papercutting": "#FCFCF2",
+        "algae": "#59AB30",
         "relaying": "#c9caba",
         "antifatigue": "#C6DFD8"
 

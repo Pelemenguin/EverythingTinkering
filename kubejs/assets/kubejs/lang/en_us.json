@@ -127,6 +127,10 @@
     "material.kubejs.paper.flavor": "To the loyal readers of 'Puny Smelting': Not to cut your finger when turning pages",
     "material.kubejs.paper.encyclopedia": "Deals damage equal to armor value to attackers hitting from the side. Converts a portion of taken damage using armor toughness to counterattack",
 
+    "material.kubejs.kelp": "Kelp",
+    "material.kubejs.kelp.flavor": "Experiment 2-3: Extract iodine from kelp",
+    "material.kubejs.paper.encyclopedia": "Recover 1 durability point every 3 seconds under water",
+
     "material.kubejs.sugar_cane": "Sugar Cane",
     "material.kubejs.sugar_cane.flavor": "A cheaper alternative to honey!",
     "material.kubejs.sugar_cane.encyclopedia": "Up to 25% chance to not consume durability when facing near the X-axis",
@@ -201,6 +205,10 @@
     "modifier.kubejs.papercutting": "Papercutting",
     "modifier.kubejs.papercutting.flavor": "Not children's scissors!",
     "modifier.kubejs.papercutting.description": "Only damages attackers that hit from the side",
+
+    "modifier.kubejs.algae": "Algae",
+    "modifier.kubejs.algae.flavor": "Long time ago, algae bricks are used to make alloys...",
+    "modifier.kubejs.algae.description": "Tools are slowly repaired under water",
 
     "modifier.kubejs.relaying": "Relaying",
     "modifier.kubejs.relaying.flavor": "Convey momentum!",
