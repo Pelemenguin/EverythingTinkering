@@ -24,6 +24,7 @@
     topLevelScope
     Utils
     CodeAttribute
+    logger
 */
 
 /** @type {Internal.Map<string, Internal.Class<?>>} */
@@ -146,7 +147,8 @@ ClassCreator.prototype.generateByteCode = function() {
         printer += `\n    ${m.name} ${m.descriptor}`;
     });
     printer += "\n---------------------------------------------------------------------";
-    console.info(printer);
+    logger.debug(printer);
+    console.info(`Byte Code Generated for class ${this.name}`);
 
     return result;
 };
@@ -229,7 +231,6 @@ ClassCreator.prototype.createDefaultConstructor = function() {
  * @returns {number}
  */
 ClassCreator.prototype.createConstant = function(tag, constant) {
-    // eslint-disable-next-line no-unused-vars
     let index = this.constantPool.findIndex(([checkTag, obj], _1, _2) => checkTag === tag && Object.keys(obj).every(k => k === 'generateByteCode' || constant[k] === obj[k]));
     if (index != -1) {
         console.debug(`Constant pushment rejected (to class ${this.name}) for the same constant found at #${index + 1} : ${tag}, ${constant}`);

@@ -563,3 +563,87 @@ declare namespace BookArguments {
         defaultMaterials: string[]
     }
 }
+
+declare class ClassCreator<T extends typeof any> {
+
+    name: string;
+    internalName: string;
+    constantPoolCounter: number;
+    methods: Method[];
+    attributes: [string, {generateByteCode: (classCreator: ClassCreator) => number[]}][];
+    fields: {name: string, descriptor: string, access: number}[];
+    access: number;
+    constantPool: [tag: number, {generateByteCode: () => number[]}][];
+    superClass: string;
+    superInterfaces: string[];
+
+    defineHiddenClass(lookup: Internal.MethodHandles$Lookup): T;
+    defineClass(lookup: Internal.MethodHandles$Lookup): T;
+    generateByteCode(): number[];
+    /**
+     * 生成一个默认的构造器方法，
+     * 若需指定父类，则必须要在生成该方法之前设置。
+     * 请确保父类有公开的无参数构造器，
+     * 生成构造器方法时我们不会检测。
+     * - - - - -
+     * Generate a default constructor method.
+     * If you want to set super class, do so before calling this method.
+     * Please ensure that the super class has a constructor with no arguments.
+     * We do not detect that when generating constructors.
+     */
+    createDefaultConstructor(): this;
+    /**
+     * - Push a constant into the Constant Pool, and return the index of this constant.
+     * - Directly return the index of the constant if it already exists.
+     * - 将一个常量放入常量池，并返回该常量的索引。
+     * - 当常量已存在时，直接返回该常量的索引。
+     */
+    createConstant(tag: number, constant: {generateByteCode: () => number[]}): number;
+    /**
+     * - Get constant from the Constant Pool at the specific index.
+     * - 从常量池获取指定索引的常量。
+     */
+    getConstant(index: number): {generateByteCode: () => number[]};
+    /**
+     * - Set the super class.
+     * - 设置父类。
+     */
+    extends(superClass: string): this;
+    /**
+     * - Add a superinterface.
+     * - 添加一个父接口。
+     */
+    implements(superInterface: string): this;
+    /**
+     * - Mark the class as an interface.
+     * - 将类标记为接口。
+     * - - - - -
+     * @returns {this}
+     */
+    setIsInterface(): this;
+    /**
+     * - Add a method.
+     * - 添加一个方法。
+     */
+    addMethod(name: string, descriptor: string, method: (method: Method) => void): this;
+    /**
+     * - Add an attribute.
+     * - 添加一个属性。
+     */
+    addAttribute(name: string, attribute: {generateByteCode: (classCreator: ClassCreator) => number[]}): this;
+    /**
+     * - Add a field.
+     * - 添加一个字段。
+     * - - - - -
+     * @param {string} name
+     * @param {string} descriptor
+     * @param {number} access
+     */
+    addField(name: string, descriptor: string, access: number): this;
+    CONSTANT_Utf8(str: string): number;
+    CONSTANT_NameAndType(name: string, type: string): number;
+    CONSTANT_Class(name: string): number;
+    CONSTANT_Methodref(className: string, methodName: string, methodDescriptor: string): number;
+    CONSTANT_Fieldref(className: string, fieldName: string, fieldDescriptor: string): number;
+    CONSTANT_InterfaceMethodref(className: string, methodName: string, methodDescriptor: string): number;
+}

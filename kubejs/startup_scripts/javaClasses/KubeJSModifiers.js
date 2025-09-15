@@ -72,6 +72,7 @@ const ModifierManager = {
      * })
      */
     registerCommonModifier: (name, className, hooks) => {
+        /** @type {ClassCreator<typeof Internal.Modifier>} */
         let modifierClassCreator = new ClassCreator(`Modifier$${className}`)
             .extends("slimeknights.tconstruct.library.modifiers.Modifier");
 
