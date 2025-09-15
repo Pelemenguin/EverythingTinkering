@@ -83,6 +83,7 @@ const ModifierManager = {
             switch (hook) {
                 case "modifyStat": {
                     TinkerFunctionsSet.ConditionalStatFunction.addClassMethod(modifierClassCreator);
+                    break;
                 }
                 case "onDamageTool": {
                     TinkerFunctionsSet.ToolDamageFunction.addClassMethod(modifierClassCreator);
@@ -225,8 +226,8 @@ const ModifierManager = {
             switch (hook) {
                 case "modifyStat": {
                     modifierClass['modifyStatFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
-                    try {return hooks.modifyStat(arg0, arg1, arg2, arg3, arg4, arg5);}
-                    catch (e) {console.error(e); return arg4;}
+                        try {return hooks.modifyStat(arg0, arg1, arg2, arg3, arg4, arg5);}
+                        catch (e) {console.error(e); return arg4;}
                     };
                     break;
                 }
