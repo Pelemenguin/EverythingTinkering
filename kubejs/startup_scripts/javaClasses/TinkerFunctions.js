@@ -17,14 +17,9 @@
     ClassCreator
     JavaUtils
     CodeAttribute
-    Java
 */
 
 /* eslint-disable no-unused-vars */
-
-let ModifierModules = {
-    ProtectionModule: Java.loadClass("slimeknights.tconstruct.library.modifiers.modules.armor.ProtectionModule")
-};
 
 /**
  * @type {<T>(classCreator: ClassCreator<T>) => ClassCreator<T>}

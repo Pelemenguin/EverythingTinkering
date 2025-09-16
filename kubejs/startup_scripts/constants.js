@@ -29,9 +29,9 @@
 const Class = Java.loadClass("java.lang.Object").__javaObject__.getClass();
 const NativeJavaClass = Java.loadClass("dev.latvian.mods.rhino.NativeJavaClass");
 
-const NonNullList = Java.loadClass("net.minecraft.core.NonNullList");
-
+// Minecraft
 const SimpleSoundInstance = Java.loadClass("net.minecraft.client.resources.sounds.SimpleSoundInstance");
+const NonNullList = Java.loadClass("net.minecraft.core.NonNullList");
 const Registries = Java.loadClass("net.minecraft.core.registries.Registries");
 const ResourceKey = Java.loadClass("net.minecraft.resources.ResourceKey");
 const TagKey = Java.loadClass("net.minecraft.tags.TagKey");
@@ -46,11 +46,13 @@ const LanguageManager = Java.loadClass("net.minecraft.client.resources.language.
 const ParticleOptions = Java.loadClass("net.minecraft.core.particles.ParticleOptions");
 const DustParticleOptions = Java.loadClass("net.minecraft.core.particles.DustParticleOptions");
 
+// Mantle
 const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
 const BookTransformer = Java.loadClass("slimeknights.mantle.client.book.transformer.BookTransformer");
 const ContentPageIconList = Java.loadClass("slimeknights.mantle.client.book.data.content.ContentPageIconList");
 const ContentPageIconList$PageWithIcon = Java.loadClass("slimeknights.mantle.client.book.data.content.ContentPageIconList$PageWithIcon");
 
+// Tinker's Construct
 const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialId');
 const MaterialVariant = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialVariant');
 const MaterialVariantId = Java.loadClass("slimeknights.tconstruct.library.materials.definition.MaterialVariantId");
@@ -75,18 +77,26 @@ const TinkerToolParts = Java.loadClass("slimeknights.tconstruct.tools.TinkerTool
 const TinkerTools = Java.loadClass("slimeknights.tconstruct.tools.TinkerTools");
 const ModifierDeferredRegister = Java.loadClass("slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister");
 
+// TiC Modifier Modules
+const ProtectionModule = Java.loadClass("slimeknights.tconstruct.library.modifiers.modules.armor.ProtectionModule");
+
+// KubeJS
 const KubeJS = Java.loadClass("dev.latvian.mods.kubejs.KubeJS");
 const Context = Java.loadClass("dev.latvian.mods.rhino.Context");
 const ConsoleJS = Java.loadClass("dev.latvian.mods.kubejs.util.ConsoleJS");
 
+// Logger
 const logger = KubeJS.LOGGER;
 
+// KubeJS Constants
 const startupContext = KubeJS.getStartupScriptManager().context;
 const topLevelScope = KubeJS.getStartupScriptManager().topLevelScope;
 
+// MantleJS
 const PageDataJS = Java.loadClass("pelemenguin.mantlejs.content.book.data.PageDataJS");
 const MantleJSTransformer = Java.loadClass("pelemenguin.mantlejs.content.book.transformer.MantleJSTransformer");
 
+// Java
 const JavaUtils = {
     ArrayList: Java.loadClass("java.util.ArrayList"),
     Collectors: Java.loadClass("java.util.stream.Collectors"),
@@ -107,6 +117,7 @@ const JavaUtils = {
     Thread: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.lang.Thread"))
 };
 
+// Forge
 /** @type {typeof Internal.FMLJavaModLoadingContext} */
 const FMLJavaModLoadingContext = new NativeJavaClass(startupContext, topLevelScope, Class.forName("net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext"));
 

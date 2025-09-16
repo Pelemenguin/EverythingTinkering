@@ -132,7 +132,7 @@
 
     "material.kubejs.kelp": "海带",
     "material.kubejs.kelp.flavor": "实验2-3：从海带中提取碘",
-    "material.kubejs.paper.encyclopedia": "Recover 1 durability point every 3 seconds under water",
+    "material.kubejs.kelp.encyclopedia": "Recover 1 durability point every 3 seconds under water",
 
     "material.kubejs.sugar_cane": "甘蔗",
     "material.kubejs.sugar_cane.flavor": "更便宜的蜂蜜替代品！",
@@ -220,6 +220,11 @@
     "modifier.kubejs.antifatigue": "抗疲劳",
     "modifier.kubejs.antifatigue.flavor": "横扫饥饿！",
     "modifier.kubejs.antifatigue.description": "抵消挖掘疲劳带来的影响，能够抵消的挖掘疲劳等级不超过该特性的等级",
+
+    "modifier.kubejs.warped": "扭曲",
+    "modifier.kubejs.warped.resistance": "诡异森林额外保护",
+    "modifier.kubejs.warped.flavor": "是谁在哭……",
+    "modifier.kubejs.warped.description": "在诡异森林中增加保护",
 
         "comment_artifacts": " ----- Artifacts ----- ",
 

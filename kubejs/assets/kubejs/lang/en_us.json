@@ -129,7 +129,7 @@
 
     "material.kubejs.kelp": "Kelp",
     "material.kubejs.kelp.flavor": "Experiment 2-3: Extract iodine from kelp",
-    "material.kubejs.paper.encyclopedia": "Recover 1 durability point every 3 seconds under water",
+    "material.kubejs.kelp.encyclopedia": "Recover 1 durability point every 3 seconds under water",
 
     "material.kubejs.sugar_cane": "Sugar Cane",
     "material.kubejs.sugar_cane.flavor": "A cheaper alternative to honey!",
@@ -217,6 +217,11 @@
     "modifier.kubejs.antifatigue": "Anti-Fatigue",
     "modifier.kubejs.antifatigue.flavor": "Combat exhaustion!",
     "modifier.kubejs.antifatigue.description": "Counteracts mining fatigue effects. The maximum fatigue level negated is equal to this modifier's level",
+
+    "modifier.kubejs.warped": "Warped",
+    "modifier.kubejs.warped.resistance": "Extra Protection in Warped Forests",
+    "modifier.kubejs.warped.flavor": "Who is crying...",
+    "modifier.kubejs.warped.description": "Grants protection in the Warped Forests",
 
         "_comment_artifacts": " ----- Artifacts ----- ",
 

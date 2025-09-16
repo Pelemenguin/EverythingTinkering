@@ -123,7 +123,7 @@ declare namespace Annotation {
              *     }
              * });
              */ 
-            modifyStat: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, living: Internal.LivingEntity, stat: Internal.FloatToolStat, baseValue: number, multiplier: number) => number,
+            modifyStat?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, living: Internal.LivingEntity, stat: Internal.FloatToolStat, baseValue: number, multiplier: number) => number,
             /**
              * Called when the tool is damaged.
              * Can be used to cancel, decrease, or increase the damage.  
