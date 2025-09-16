@@ -17,9 +17,14 @@
     ClassCreator
     JavaUtils
     CodeAttribute
+    Java
 */
 
 /* eslint-disable no-unused-vars */
+
+let ModifierModules = {
+    ProtectionModule: Java.loadClass("slimeknights.tconstruct.library.modifiers.modules.armor.ProtectionModule")
+};
 
 /**
  * @type {<T>(classCreator: ClassCreator<T>) => ClassCreator<T>}
@@ -107,6 +112,12 @@ let TinkerFunctions$AfterMeleeHitFunction = functionDefinitionHelper(
     "AfterMeleeHitFunction",
     "afterMeleeHit",
     "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/context/ToolAttackContext;F)V"
+);
+
+let TinkerFunctions$ProtectionFunction = functionDefinitionHelper(
+    "ProtectionFunction",
+    "getProtectionModifier",
+    "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/context/EquipmentContext;Lnet/minecraft/world/entity/EquipmentSlot;Lnet/minecraft/world/damagesource/DamageSource;F)F"
 );
 
 let TinkerFunctions$OnAttackedFunction = functionDefinitionHelper(
@@ -451,6 +462,39 @@ const TinkerFunctionsSet = {
                     references[2], references[3],
                     0x05, 0x00,
                 0xb1, // return
+            ]
+        )
+    },
+
+    ProtectionFunction: {
+        class: TinkerFunctions$ProtectionFunction,
+
+        /** @type {string} */
+        internalName: TinkerFunctions$ProtectionFunction.__javaObject__.getName().replace('.', '/'),
+
+        addClassMethod: addClassMethodHelper(
+            TinkerFunctions$ProtectionFunction,
+            "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/context/EquipmentContext;Lnet/minecraft/world/entity/EquipmentSlot;Lnet/minecraft/world/damagesource/DamageSource;F)F",
+            "slimeknights.tconstruct.library.modifiers.hook.armor.ProtectionModifierHook",
+            "getProtectionModifier",
+            7,
+            7,
+            (references) => [
+                0xb2, // getstatic thisClass.getProtectionModifierFunction
+                    references[0], references[1],
+                0x2b, // aload_1
+                0x2c, // aload_2
+                0x2d, // aload_3
+                0x19, // aload 4
+                    0x04,
+                0x19, // aload 5
+                    0x05,
+                0x17, // fload 6
+                    0x06,
+                0xb9, // invokeinterface
+                    references[2], references[3],
+                    0x07, 0x00,
+                0xae, // freturn
             ]
         )
     },

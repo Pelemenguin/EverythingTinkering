@@ -3,12 +3,7 @@
 /**
  * @fileoverview Uncertain | 未定
  * - - - - -
- * ## Uncertain
- * ### Description
  * Chance to replace the rock behind the one you mined with ores.
- * - - - - -
- * ## 未定
- * ### 描述
  * 有概率将你挖的方块后面的岩石替换为矿物。
  * - - - - -
  * @copyright Pelemenguin 2025

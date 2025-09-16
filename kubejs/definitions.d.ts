@@ -368,6 +368,46 @@ declare namespace Annotation {
              */
             afterMeleeHit?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, damageDealt: number) => void,
             /**
+             * Gets the protection value of the armor from this modifier.
+             * A value of 1 blocks about 4% of damage, equivalent to 1 level of the protection enchantment.
+             * Maximum effect is 80% reduction from a modifier value of 20.
+             * Can also go negative, up to 180% increase from a modifier value of -20  
+             * 该护甲从这个特性得到的保护值。
+             * 每`1`点值可以抵挡大约4%的伤害，等价于1级的原版保护附魔。
+             * 最大效果是80%伤害减免，即该值为`20`。
+             * 也可以变为负数，最小为`-20`，即受到180%伤害。
+             * - - - - -
+             * @param tool          Worn armor  
+             *                      穿戴的护甲
+             * 
+             * @param modifier      Modifier level  
+             *                      特性（及其）等级
+             * 
+             * @param context       Equipment context of the entity wearing the armor  
+             *                      穿戴护甲的实体的装备上下文
+             * 
+             * @param slotType      Slot containing the armor  
+             *                      护甲所在的栏位
+             * 
+             * @param source        Damage source  
+             *                      伤害来源
+             * 
+             * @param modifierValue Modifier value from previous modifiers to add  
+             *                      来自更优先的特性的特性值
+             * 
+             * @returns             New modifier value  
+             *                      要添加的新特性值
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     getProtectionModifier: (tool, modifier, context, slotType, source, modifierValue) => {
+             *         return modifierValue + modifier.level; // Add protection that equals to modifier's level
+             *                                                // 增加相当于特性等级的防护
+             *     }
+             * }
+             */
+            getProtectionModifier?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.EquipmentContext, slotType: Internal.EquipmentSlot, source: DamageSource, modifierValue: number) => number,
+            /**
              * Runs after an entity is attacked (and we know the attack will land).
              * Note you can attack the entity here,
              * but you are responsible for preventing infinite recursion if you do so (by detecting your own attack source for instance)  

@@ -114,6 +114,10 @@ const ModifierManager = {
                     TinkerFunctionsSet.AfterMeleeHitFunction.addClassMethod(modifierClassCreator);
                     break;
                 }
+                case "getProtectionModifier": {
+                    TinkerFunctionsSet.ProtectionFunction.addClassMethod(modifierClassCreator);
+                    break;
+                }
                 case "onAttacked":{
                     TinkerFunctionsSet.OnAttackedFunction.addClassMethod(modifierClassCreator);
                     break;
@@ -170,6 +174,9 @@ const ModifierManager = {
                         case "beforeMeleeHit": {/* fallthrough to `afterMeleeHit` */}
                         case "afterMeleeHit": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "MELEE_HIT", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
+                        }
+                        case "getProtectionModifier": {
+                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "PROTECTION", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
                         }
                         case "onAttacked": {
                             return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "ON_ATTACKED", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
@@ -278,6 +285,13 @@ const ModifierManager = {
                     modifierClass['afterMeleeHitFunction'] = (arg0, arg1, arg2, arg3) => {
                         try {hooks.afterMeleeHit(arg0, arg1, arg2, arg3);}
                         catch (e) {console.error(e);}
+                    };
+                    break;
+                }
+                case "getProtectionModifier": {
+                    modifierClass['getProtectionModifierFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
+                        try {return hooks.getProtectionModifier(arg0, arg1, arg2, arg3, arg4, arg5);}
+                        catch (e) {console.error(e); return arg5;}
                     };
                     break;
                 }
