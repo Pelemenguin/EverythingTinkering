@@ -67,7 +67,9 @@
 
         "andesite_alloy": "#c9caba",
 
-        "sea_alloy": "#C6DFD8"
+        "sea_alloy": "#C6DFD8",
+
+        "crying_obsidian": "#6006AB"
 
     },
     "material.tconstruct": {

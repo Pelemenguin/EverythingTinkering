@@ -78,6 +78,7 @@ let reprItems = {
     "tconstruct:plated_slimewood": "create:brass_ingot",
     "tconstruct:steel": "tconstruct:steel_ingot",
     "tconstruct:obsidian": "minecraft:obsidian",
+    "kubejs:crying_obsidian": "minecraft:crying_obsidian",
     "tconstruct:darkthread": "minecraft:obsidian",
     "tconstruct:cobalt": "tconstruct:cobalt_ingot",
     "tconstruct:ichorskin": "tconstruct:ichor_bucket",
