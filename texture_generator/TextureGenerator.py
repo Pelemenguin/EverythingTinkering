@@ -104,7 +104,7 @@ class TextureGenerator:
                 image = PIL.Image.open(this_input_path).convert("RGBA")
             except:
                 print(f"Unparsable input {this_input_path}")
-                continue
+                raise
             for c in self._childs:
                 if (c._priority <= 0): break
                 image = c.operate(image)
