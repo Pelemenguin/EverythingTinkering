@@ -22,7 +22,7 @@
 /* eslint-disable no-unused-vars */
 
 /**
- * @param {ClassCreator} classCreator 
+ * @type {<T>(classCreator: ClassCreator<T>) => ClassCreator<T>}
  */
 let addFunctionalInterfaceAnnotation = (classCreator) => {
     return classCreator.addAttribute('RuntimeVisibleAnnotations', {
@@ -40,105 +40,98 @@ let addFunctionalInterfaceAnnotation = (classCreator) => {
     });
 };
 
+/**
+ * 
+ * @param {string} funcName 
+ * @param {string} methodName 
+ * @param {string} descriptor 
+ * @returns {typeof any}
+ */
+let functionDefinitionHelper = (funcName, methodName, descriptor) => {
+    return addFunctionalInterfaceAnnotation(
+        (new ClassCreator(`TinkerFunctions$${funcName}`))
+            .setIsInterface()
+            .addMethod(methodName, descriptor, method => {
+                method.setAbstract();
+            })
+    ).defineClass(JavaUtils.MethodHandles.lookup());
+};
+
 let TinkerFunctions = (new ClassCreator("TinkerFunctions"))
     .createDefaultConstructor()
     .defineClass(JavaUtils.MethodHandles.lookup());
 
-let TinkerFunctions$ConditionalStatFunction = addFunctionalInterfaceAnnotation(
-    (new ClassCreator("TinkerFunctions$ConditionalStatFunction"))
-        .setIsInterface()
-        .addMethod("modifyStat", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/LivingEntity;Lslimeknights/tconstruct/library/tools/stat/FloatToolStat;FF)F", method => {
-            method.setAbstract();
-        })
-).defineClass(JavaUtils.MethodHandles.lookup());
+let TinkerFunctions$ConditionalStatFunction = functionDefinitionHelper(
+    "ConditionalStatFunction",
+    "modifyStat",
+    "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/LivingEntity;Lslimeknights/tconstruct/library/tools/stat/FloatToolStat;FF)F"
+);
 
-let TinkerFunctions$ToolDamageFunction = addFunctionalInterfaceAnnotation(
-    (new ClassCreator("TinkerFunctions$ToolDamageFunction"))
-        .setIsInterface()
-        .addMethod("onDamageTool", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;ILnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)I", method => {
-            method.setAbstract();
-        })
-).defineClass(JavaUtils.MethodHandles.lookup());
+let TinkerFunctions$ToolDamageFunction = functionDefinitionHelper(
+    "ToolDamageFunction",
+    "onDamageTool",
+    "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;ILnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)I"
+);
 
-let TinkerFunctions$InventoryTickFunction = addFunctionalInterfaceAnnotation(
-    (new ClassCreator("TinkerFunctions$InventoryTickFunction"))
-        .setIsInterface()
-        .addMethod("onInventoryTick", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;IZZLnet/minecraft/world/item/ItemStack;)V", method => {
-            method.setAbstract();
-        })
-).defineClass(JavaUtils.MethodHandles.lookup());
+let TinkerFunctions$InventoryTickFunction = functionDefinitionHelper(
+    "InventoryTickFunction",
+    "onInventoryTick",
+    "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;IZZLnet/minecraft/world/item/ItemStack;)V"
+);
 
-let TinkerFunctions$AddTooltipFunction = addFunctionalInterfaceAnnotation(
-    (new ClassCreator("TinkerFunctions$AddTooltipFunction"))
-        .setIsInterface()
-        .addMethod("addTooltip", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/player/Player;Ljava/util/List;Lslimeknights/mantle/client/TooltipKey;Lnet/minecraft/world/item/TooltipFlag;)V", method => {
-            method.setAbstract();
-        })
-).defineClass(JavaUtils.MethodHandles.lookup());
+let TinkerFunctions$AddTooltipFunction = functionDefinitionHelper(
+    "AddTooltipFunction",
+    "addTooltip",
+    "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/player/Player;Ljava/util/List;Lslimeknights/mantle/client/TooltipKey;Lnet/minecraft/world/item/TooltipFlag;)V"
+);
 
-let TinkerFunctions$ToolStatsFunction = addFunctionalInterfaceAnnotation(
-    (new ClassCreator("TinkerFunctions$ToolStatsFunction"))
-        .setIsInterface()
-        .addMethod("addToolStats", "(Lslimeknights/tconstruct/library/tools/nbt/IToolContext;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/stat/ModifierStatsBuilder;)V", method => {
-            method.setAbstract();
-        })
-).defineClass(JavaUtils.MethodHandles.lookup());
+let TinkerFunctions$ToolStatsFunction = functionDefinitionHelper(
+    "ToolStatsFunction",
+    "addToolStats",
+    "(Lslimeknights/tconstruct/library/tools/nbt/IToolContext;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/stat/ModifierStatsBuilder;)V"
+);
 
-let TinkerFunctions$MeleeDamageFunction = addFunctionalInterfaceAnnotation(
-    (new ClassCreator("TinkerFunctions$MeleeDamageFunction"))
-        .setIsInterface()
-        .addMethod("getMeleeDamage", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/context/ToolAttackContext;FF)F", method => {
-            method.setAbstract();
-        })
-).defineClass(JavaUtils.MethodHandles.lookup());
+let TinkerFunctions$MeleeDamageFunction = functionDefinitionHelper(
+    "MeleeDamageFunction",
+    "getMeleeDamage",
+    "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/context/ToolAttackContext;FF)F"
+);
 
-let TinkerFunctions$BeforeMeleeHitFunction = addFunctionalInterfaceAnnotation(
-    (new ClassCreator("TinkerFunctions$BeforeMeleeHitFunction"))
-        .setIsInterface()
-        .addMethod("beforeMeleeHit", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/context/ToolAttackContext;FFF)F", method => {
-            method.setAbstract();
-        })
-).defineClass(JavaUtils.MethodHandles.lookup());
+let TinkerFunctions$BeforeMeleeHitFunction = functionDefinitionHelper(
+    "BeforeMeleeHitFunction",
+    "beforeMeleeHit",
+    "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/context/ToolAttackContext;FFF)F"
+);
 
-let TinkerFunctions$AfterMeleeHitFunction = addFunctionalInterfaceAnnotation(
-    (new ClassCreator("TinkerFunctions$AfterMeleeHitFunction"))
-        .setIsInterface()
-        .addMethod("afterMeleeHit", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/context/ToolAttackContext;F)V", method => {
-            method.setAbstract();
-        })
-).defineClass(JavaUtils.MethodHandles.lookup());
+let TinkerFunctions$AfterMeleeHitFunction = functionDefinitionHelper(
+    "AfterMeleeHitFunction",
+    "afterMeleeHit",
+    "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/context/ToolAttackContext;F)V"
+);
 
-let TinkerFunctions$OnAttackedFunction = addFunctionalInterfaceAnnotation(
-    (new ClassCreator("TinkerFunctions$OnAttackedFunction"))
-        .setIsInterface()
-        .addMethod("onAttacked", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/context/EquipmentContext;Lnet/minecraft/world/entity/EquipmentSlot;Lnet/minecraft/world/damagesource/DamageSource;FZ)V", method => {
-            method.setAbstract();
-        })
-).defineClass(JavaUtils.MethodHandles.lookup());
+let TinkerFunctions$OnAttackedFunction = functionDefinitionHelper(
+    "OnAttackedFunction",
+    "onAttacked",
+    "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/context/EquipmentContext;Lnet/minecraft/world/entity/EquipmentSlot;Lnet/minecraft/world/damagesource/DamageSource;FZ)V"
+);
 
-let TinkerFunctions$BreakSpeedFunction = addFunctionalInterfaceAnnotation(
-    (new ClassCreator("TinkerFunctions$BreakSpeedFunction"))
-    .setIsInterface()
-    .addMethod("onBreakSpeed", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraftforge/event/entity/player/PlayerEvent$BreakSpeed;Lnet/minecraft/core/Direction;ZF)V", method => {
-        method.setAbstract();
-    })
-).defineClass(JavaUtils.MethodHandles.lookup());
+let TinkerFunctions$BreakSpeedFunction = functionDefinitionHelper(
+    "BreakSpeedFunction",
+    "onBreakSpeed",
+    "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraftforge/event/entity/player/PlayerEvent$BreakSpeed;Lnet/minecraft/core/Direction;ZF)V"
+);
 
-let TinkerFunctions$BlockBreakFunction = addFunctionalInterfaceAnnotation(
-    (new ClassCreator("TinkerFunctions$BlockBreakFunction"))
-    .setIsInterface()
-    .addMethod("afterBlockBreak", "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/context/ToolHarvestContext;)V", method => {
-        method.setAbstract();
-    })
-).defineClass(JavaUtils.MethodHandles.lookup());
+let TinkerFunctions$BlockBreakFunction = functionDefinitionHelper(
+    "BlockBreakFunction",
+    "afterBlockBreak",
+    "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lslimeknights/tconstruct/library/tools/context/ToolHarvestContext;)V"
+);
 
-let TinkerFunctions$ProjectileLaunchFunction = addFunctionalInterfaceAnnotation(
-    (new ClassCreator("TinkerFunctions$ProjectileLaunchFunction"))
-        .setIsInterface()
-        .addMethod('onProjectileLaunch', '(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/projectile/Projectile;Lnet/minecraft/world/entity/projectile/AbstractArrow;Lslimeknights/tconstruct/library/tools/nbt/ModDataNBT;Z)V', method => {
-            method.setAbstract();
-        })
-    ).defineClass(JavaUtils.MethodHandles.lookup());
+let TinkerFunctions$ProjectileLaunchFunction = functionDefinitionHelper(
+    "ProjectileLaunchFunction",
+    "onProjectileLaunch",
+    "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/projectile/Projectile;Lnet/minecraft/world/entity/projectile/AbstractArrow;Lslimeknights/tconstruct/library/tools/nbt/ModDataNBT;Z)V"
+);
 
 /**
  * @param {typeof any} tinkerFunctionClass
@@ -197,7 +190,7 @@ const TinkerFunctionsSet = {
                     0x04,
                 0x17, // 8: fload #5
                     0x05,
-                0x17, // 10: flpad #6
+                0x17, // 10: fload #6
                     0x06,
                 0xb9, // 12: invokeinterface
                     references[2], references[3],
