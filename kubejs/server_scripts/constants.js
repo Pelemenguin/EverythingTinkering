@@ -24,6 +24,7 @@ const ForgeRegistries = Java.loadClass('net.minecraftforge.registries.ForgeRegis
 const MaterialRegistry = Java.loadClass('slimeknights.tconstruct.library.materials.MaterialRegistry');
 const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialId');
 const MaterialVariant = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialVariant');
+const MaterialVariantId = Java.loadClass("slimeknights.tconstruct.library.materials.definition.MaterialVariantId");
 const ModifierId = Java.loadClass('slimeknights.tconstruct.library.modifiers.ModifierId');
 const ModifierNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ModifierNBT');
 const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
@@ -51,3 +52,10 @@ ForgeRegistries.ITEMS.getValues().forEach(item => {
 });
 
 global.CustomUtils.Tinker.TOOL_PARTS = toolParts;
+
+// Batch Recipes
+
+global.Recipes = {};
+
+/** @type {Internal.Map<string, BatchRecipe.PartBuilderCompositeRecipe>} */
+global.Recipes.PART_BUILDER_COMPOSITE = Utils.newMap();
