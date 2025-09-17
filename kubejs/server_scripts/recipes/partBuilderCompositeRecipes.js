@@ -18,12 +18,13 @@
 */
 
 /**
+ * @param {string} id
  * @param {string} input
  * @param {string} output
  * @param {string?} using
  */
-let addPartBuilderCompositeRecipes = (input, output, using) => {
-    global.Recipes.PART_BUILDER_COMPOSITE.push({
+let addPartBuilderCompositeRecipes = (id, input, output, using) => {
+    global.Recipes.PART_BUILDER_COMPOSITE.put(`kubejs:tinkering/part_builder_composite/${id}`, {
         input: MaterialVariantId.tryParse(input),
         output: MaterialVariantId.tryParse(output),
         material: MaterialVariantId.tryParse(using === undefined ? output : using)
@@ -31,4 +32,4 @@ let addPartBuilderCompositeRecipes = (input, output, using) => {
 }
 
 // Crying Obsidian
-addPartBuilderCompositeRecipes("tconstruct:obsidian", "kubejs:crying_obsidian");
+addPartBuilderCompositeRecipes("crying_obsidian", "tconstruct:obsidian", "kubejs:crying_obsidian");
