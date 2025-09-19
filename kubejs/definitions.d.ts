@@ -728,28 +728,3 @@ declare class ClassCreator<T extends typeof any> {
     CONSTANT_InterfaceMethodref(className: string, methodName: string, methodDescriptor: string): number;
 }
 
-declare namespace BatchRecipe {
-
-    /**
-     * A recipe allow compositing an item onto an existing tool part and converting it to another material.  
-     * 将一个物品复合到存在的工具部件上并转化为另一个材料的配方。
-     */
-    interface PartBuilderCompositeRecipe {
-        /**
-         * - Input material.
-         * - 输入材料。
-         */
-        input: Internal.MaterialVariantId;
-        /**
-         * - Output material.
-         * - 输出材料。
-         */
-        output: Internal.MaterialVariantId;
-        /**
-         * - Material required to composite into a part.
-         * - 复合用材料。
-         */
-        material?: Internal.MaterialVariantId;
-    }
-
-}
