@@ -21,9 +21,10 @@
     JavaMath
     Direction
     ResourceLocation
+    Component
 */
 
-let UNCERTAIN_ID = `kubejs:uncertain`;
+let UNCERTAIN_ID = "kubejs:uncertain";
 
 /**
  * - Controls initial probability of `uncertain`.
@@ -53,6 +54,13 @@ let UNCERTAIN_TAGS = {
     deepslate: new ResourceLocation("kubejs", "uncertain_can_duplicate/deepslate"),
     netherrack: new ResourceLocation("kubejs", "uncertain_can_duplicate/netherrack")
 };
+
+/**
+ * @param {number} mined 
+ * @param {number} level 
+ * @returns number
+ */
+let UNCERTAIN_GET_PROBABILITY = (mined, level) => UNCERTAIN_MAX_PROBABILITY - mined * UNCERTAIN_PROBABILITY_REDUCE / level;
 
 /**
  * - Add a tool with `uncertain`'s persistent data.
@@ -103,7 +111,7 @@ let addUncertainPersistent = (item, value) => {
  * - The direction of the block mined relative to the block to be set.
  * - 挖掘的方块相对于要被设置的方块的方向。
  */
-let run = (tag, duplicating, container, originalDirection) => {
+let runUncertain = (tag, duplicating, container, originalDirection) => {
     if (!duplicating.getTags().anyMatch((t) => (t.location() == tag))) return;
     let isBuried = true;
     Direction.ALL.forEach(direction => {
@@ -118,32 +126,65 @@ let run = (tag, duplicating, container, originalDirection) => {
     container.set(duplicating.getBlock().getId());
 };
 
+/**
+ * - Calculate tooltip color.
+ * - 计算工具提示颜色。
+ * - - - - -
+ * @param {number} percentage 
+ * - The `Current Probability / Max Probability`.
+ * - `当前概率 / 最大概率`。
+ * @returns {number}
+ */
+let calcUncertainColor = (percentage) => {
+    let easedProgress = percentage * percentage * (3 - 2 * percentage);
+
+    let start = [0, 127, 255];
+    let end = [127 + 128 * easedProgress, 0, 0];
+
+    // #7F0000 -> #007FFF
+    let r = Math.round(end[0] + (start[0] - end[0]) * easedProgress);
+    let g = Math.round(end[1] + (start[1] - end[1]) * easedProgress);
+    let b = Math.round(end[2] + (start[2] - end[2]) * easedProgress);
+
+    return ((r << 16) + (g << 8) + b);
+};
+
 // eslint-disable-next-line no-unused-vars
 let UNCERTAIN = ModifierManager.registerCommonModifier("uncertain", "UncertainModifier", {
     afterBlockBreak: (tool, modifier, context) => {
         if (context.getWorld().isClientSide()) return;
         let mined = 0;
         try {
-            mined = tool.persistentData.getInt("tic_persistent");
+            mined = tool.persistentData.getInt(UNCERTAIN_ID);
         // eslint-disable-next-line no-unused-vars
         } catch (e) { /* Do nothing */ }
-            context.getLiving().handSlots.forEach(item => {
-                addUncertainPersistent(item, 1);
-            });
-        if (JavaMath.random() >= UNCERTAIN_MAX_PROBABILITY - mined * UNCERTAIN_PROBABILITY_REDUCE / modifier.level) return;
+        context.getLiving().handSlots.forEach(item => {
+            addUncertainPersistent(item, 1);
+        });
+        if (JavaMath.random() >= UNCERTAIN_GET_PROBABILITY(mined, modifier.level)) return;
         let miningBlock = context.getWorld().getBlock(context.getPos());
         /** @type {Internal.BlockContainerJS} */
         let replacingBlock = miningBlock[context.sideHit.getOpposite().toString()];
         switch (replacingBlock.getBlockState().getBlock().getId()) {
             case "minecraft:stone":
-                run(UNCERTAIN_TAGS.stone, context.getState(), replacingBlock, context.getSideHit());
+                runUncertain(UNCERTAIN_TAGS.stone, context.getState(), replacingBlock, context.getSideHit());
                 break;
             case "minecraft:deepslate":
-                run(UNCERTAIN_TAGS.deepslate, context.getState(), replacingBlock, context.getSideHit());
+                runUncertain(UNCERTAIN_TAGS.deepslate, context.getState(), replacingBlock, context.getSideHit());
                 break;
             case "minecraft:netherrack":
-                run(UNCERTAIN_TAGS.netherrack, context.getState(), replacingBlock, context.getSideHit());
+                runUncertain(UNCERTAIN_TAGS.netherrack, context.getState(), replacingBlock, context.getSideHit());
                 break;
         }
+    },
+    addTooltip: (tool, modifier, player, tooltip, _tooltipKey, _tooltipFlag) => {
+        if (tool.persistentData.getInt(UNCERTAIN_ID) == null) player.getHandSlots().forEach(item => addUncertainPersistent(item, 0));
+        let probability = Math.max(UNCERTAIN_GET_PROBABILITY(tool.persistentData.getInt(UNCERTAIN_ID), modifier.level), 0);
+        let max = UNCERTAIN_GET_PROBABILITY(0, modifier.level);
+        tooltip.add(Component.translatable("modifier.kubejs.uncertain.tooltip", Component.literal("")
+            .append(Component.literal((probability * 100).toFixed(2) + '%').color(calcUncertainColor(probability / max)))
+            .append(Component.literal(' / ').gray())
+            .append(Component.literal((max * 100).toFixed(2) + '%').color(32767))
+        ));
     }
 });

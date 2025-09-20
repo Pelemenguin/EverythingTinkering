@@ -176,6 +176,7 @@
     "modifier.kubejs.uncertain": "Uncertain",
     "modifier.kubejs.uncertain.flavor": "Schrödinger's Ore!",
     "modifier.kubejs.uncertain.description": "Ores sometimes duplicate themselves when no one notices after being mined. However, probability of this will reduce and reach 0 at last",
+    "modifier.kubejs.uncertain.tooltip": "Uncertain Ores Probability: %s",
 
     "modifier.kubejs.empower": "Empower",
     "modifier.kubejs.empower.flavor": "Speed up!",

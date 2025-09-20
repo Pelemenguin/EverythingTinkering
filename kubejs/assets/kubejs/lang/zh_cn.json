@@ -184,6 +184,7 @@
     "modifier.kubejs.uncertain": "未定",
     "modifier.kubejs.uncertain.flavor": "薛定谔的矿！",
     "modifier.kubejs.uncertain.description": "无人注意时，矿石有时会在被挖掘后复制自身。但是，概率会逐渐减少并最终归零",
+    "modifier.kubejs.uncertain.tooltip": "未定矿石概率：%s",
 
     "modifier.kubejs.empower": "赋能",
     "modifier.kubejs.empower.flavor": "加速！",
