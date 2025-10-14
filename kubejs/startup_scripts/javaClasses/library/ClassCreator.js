@@ -17,7 +17,7 @@
     global: writable
     JavaUtils
     ConstantPoolEntries
-    Method
+    MethodLegacy
     console
     NativeJavaClass
     startupContext
@@ -34,13 +34,13 @@ if (global.CreatedClasses === undefined) global.CreatedClasses = Utils.newMap();
 /**
  * @param {string} name 
  */
-function ClassCreator(name) {
+function ClassCreatorLegacy(name) {
     this.name = "dev.latvian.mods.rhino." + name;
     this.internalName = this.name.replace(/\./g, '/');
     this.constantPoolCounter = 1;
-    /** @type {Method[]} */
+    /** @type {MethodLegacy[]} */
     this.methods = [];
-    /** @type {[string, {generateByteCode: (classCreator: ClassCreator) => number[]}][]} */
+    /** @type {[string, {generateByteCode: (classCreator: ClassCreatorLegacy) => number[]}][]} */
     this.attributes = [];
     /** @type {{name: string, descriptor: string, access: number}[]} */
     this.fields = [];
@@ -60,7 +60,7 @@ function ClassCreator(name) {
 /**
  * @returns {number[]}
  */
-ClassCreator.prototype.generateByteCode = function() {
+ClassCreatorLegacy.prototype.generateByteCode = function() {
     let thisClass = this.createConstant(7, new ConstantPoolEntries.Class(this.createConstant(1, new ConstantPoolEntries.Utf8(this.name.replace(/\./g, '/')))));
     let superClass = this.createConstant(7, new ConstantPoolEntries.Class(this.createConstant(1, new ConstantPoolEntries.Utf8(this.superClass.replace(/\./g, '/')))));
 
@@ -157,7 +157,7 @@ ClassCreator.prototype.generateByteCode = function() {
  * @param {Internal.MethodHandles$Lookup} lookup 
  * @returns {typeof any}
  */
-ClassCreator.prototype.defineHiddenClass = function(lookup) {
+ClassCreatorLegacy.prototype.defineHiddenClass = function(lookup) {
     if (global.CreatedClasses.containsKey(this.name)) {
         console.info(`\n    Class creation rejected: ${this.name.split('.').pop()} has been created before.`);
         return new NativeJavaClass(startupContext, topLevelScope, global.CreatedClasses.get(this.name));
@@ -177,7 +177,7 @@ ClassCreator.prototype.defineHiddenClass = function(lookup) {
  * @param {Internal.MethodHandles$Lookup} lookup
  * @returns {typeof any}
  */
-ClassCreator.prototype.defineClass = function(lookup) {
+ClassCreatorLegacy.prototype.defineClass = function(lookup) {
     if (global.CreatedClasses.containsKey(this.name)) {
         console.info(`\n    Class creation rejected: ${this.name.split('.').pop()} has been created before.`);
         return new NativeJavaClass(startupContext, topLevelScope, global.CreatedClasses.get(this.name));
@@ -204,7 +204,7 @@ ClassCreator.prototype.defineClass = function(lookup) {
  * Please ensure that the super class has a constructor with no arguments.
  * We do not detect that when generating constructors.
  */
-ClassCreator.prototype.createDefaultConstructor = function() {
+ClassCreatorLegacy.prototype.createDefaultConstructor = function() {
     let references = JavaUtils.ByteBuffer.allocate(2).putShort(0, this.CONSTANT_Methodref(this.superClass.replace(/\./g, '/'), "<init>", "()V")).array();
 
     this.addMethod('<init>', '()V', method => {
@@ -230,7 +230,7 @@ ClassCreator.prototype.createDefaultConstructor = function() {
  * - - - - -
  * @returns {number}
  */
-ClassCreator.prototype.createConstant = function(tag, constant) {
+ClassCreatorLegacy.prototype.createConstant = function(tag, constant) {
     let index = this.constantPool.findIndex(([checkTag, obj], _1, _2) => checkTag === tag && Object.keys(obj).every(k => k === 'generateByteCode' || constant[k] === obj[k]));
     if (index != -1) {
         console.debug(`Constant pushment rejected (to class ${this.name}) for the same constant found at #${index + 1} : ${tag}, ${constant}`);
@@ -249,7 +249,7 @@ ClassCreator.prototype.createConstant = function(tag, constant) {
  * - - - - -
  * @returns {{generateByteCode: () => number[]}}
  */
-ClassCreator.prototype.getConstant = function(index) {
+ClassCreatorLegacy.prototype.getConstant = function(index) {
     return this.constantPool[index - 1][1];
 };
 
@@ -261,7 +261,7 @@ ClassCreator.prototype.getConstant = function(index) {
  * - - - - -
  * @returns {this}
  */
-ClassCreator.prototype.extends = function(superClass) {
+ClassCreatorLegacy.prototype.extends = function(superClass) {
     this.superClass = superClass;
     return this;
 };
@@ -274,7 +274,7 @@ ClassCreator.prototype.extends = function(superClass) {
  * - - - - -
  * @returns {this}
  */
-ClassCreator.prototype.implements = function(superinterface) {
+ClassCreatorLegacy.prototype.implements = function(superinterface) {
     let intfname = superinterface.replace(/\./g, '/');
     if (this.superInterfaces.indexOf(intfname) >= 0) return this;
     this.superInterfaces.push(intfname);
@@ -287,7 +287,7 @@ ClassCreator.prototype.implements = function(superinterface) {
  * - - - - -
  * @returns {this}
  */
-ClassCreator.prototype.setIsInterface = function() {
+ClassCreatorLegacy.prototype.setIsInterface = function() {
     this.access |= 0x0200;
     this.access |= 0x0400;
     this.access -= (this.access & 0x0020);
@@ -300,12 +300,12 @@ ClassCreator.prototype.setIsInterface = function() {
  * - - - - -
  * @param {string} name
  * @param {string} descriptor
- * @param {(method: Method) => void} method
+ * @param {(method: MethodLegacy) => void} method
  * - - - - -
  * @returns {this}
  */
-ClassCreator.prototype.addMethod = function(name, descriptor, method) {
-    let rawMethod = new Method(name, descriptor, this);
+ClassCreatorLegacy.prototype.addMethod = function(name, descriptor, method) {
+    let rawMethod = new MethodLegacy(name, descriptor, this);
     method(rawMethod);
     this.methods.push(rawMethod);
     return this;
@@ -316,11 +316,11 @@ ClassCreator.prototype.addMethod = function(name, descriptor, method) {
  * - 添加一个属性。
  * - - - - -
  * @param {string} name
- * @param {{generateByteCode: (classCreator: ClassCreator) => number[]}} attribute
+ * @param {{generateByteCode: (classCreator: ClassCreatorLegacy) => number[]}} attribute
  * - - - - -
  * @returns {this}
  */
-ClassCreator.prototype.addAttribute = function(name, attribute) {
+ClassCreatorLegacy.prototype.addAttribute = function(name, attribute) {
     this.attributes.push([name, attribute]);
     return this;
 };
@@ -333,7 +333,7 @@ ClassCreator.prototype.addAttribute = function(name, attribute) {
  * @param {string} descriptor
  * @param {number} access
  */
-ClassCreator.prototype.addField = function(name, descriptor, access) {
+ClassCreatorLegacy.prototype.addField = function(name, descriptor, access) {
     this.fields.push({
         name: name,
         descriptor: descriptor,
@@ -346,7 +346,7 @@ ClassCreator.prototype.addField = function(name, descriptor, access) {
  * @param {string} str 
  * @returns {number}
  */
-ClassCreator.prototype.CONSTANT_Utf8 = function(str) {
+ClassCreatorLegacy.prototype.CONSTANT_Utf8 = function(str) {
     return this.createConstant(1, new ConstantPoolEntries.Utf8(str));
 };
 
@@ -356,7 +356,7 @@ ClassCreator.prototype.CONSTANT_Utf8 = function(str) {
  * @param {string} type 
  * @returns {number}
  */
-ClassCreator.prototype.CONSTANT_NameAndType = function(name, type) {
+ClassCreatorLegacy.prototype.CONSTANT_NameAndType = function(name, type) {
     return this.createConstant(12, new ConstantPoolEntries.NameAndType(
         this.CONSTANT_Utf8(name),
         this.CONSTANT_Utf8(type)
@@ -367,7 +367,7 @@ ClassCreator.prototype.CONSTANT_NameAndType = function(name, type) {
  * @param {string} name 
  * @returns 
  */
-ClassCreator.prototype.CONSTANT_Class = function(name) {
+ClassCreatorLegacy.prototype.CONSTANT_Class = function(name) {
     return this.createConstant(7, new ConstantPoolEntries.Class(this.CONSTANT_Utf8(name)));
 };
 
@@ -377,7 +377,7 @@ ClassCreator.prototype.CONSTANT_Class = function(name) {
  * @param {string} methodDescriptor 
  * @returns {number}
  */
-ClassCreator.prototype.CONSTANT_Methodref = function(className, methodName, methodDescriptor) {
+ClassCreatorLegacy.prototype.CONSTANT_Methodref = function(className, methodName, methodDescriptor) {
     return this.createConstant(10, new ConstantPoolEntries.Methodref(this.CONSTANT_Class(className), this.CONSTANT_NameAndType(methodName, methodDescriptor)));
 };
 
@@ -387,7 +387,7 @@ ClassCreator.prototype.CONSTANT_Methodref = function(className, methodName, meth
  * @param {string} fieldDescriptor 
  * @returns {number}
  */
-ClassCreator.prototype.CONSTANT_Fieldref = function(className, fieldName, fieldDescriptor) {
+ClassCreatorLegacy.prototype.CONSTANT_Fieldref = function(className, fieldName, fieldDescriptor) {
     return this.createConstant(9, new ConstantPoolEntries.Fieldref(this.CONSTANT_Class(className), this.CONSTANT_NameAndType(fieldName, fieldDescriptor)));
 };
 
@@ -397,6 +397,6 @@ ClassCreator.prototype.CONSTANT_Fieldref = function(className, fieldName, fieldD
  * @param {string} methodDescriptor 
  * @returns {number}
  */
-ClassCreator.prototype.CONSTANT_InterfaceMethodref = function(className, methodName, methodDescriptor) {
+ClassCreatorLegacy.prototype.CONSTANT_InterfaceMethodref = function(className, methodName, methodDescriptor) {
     return this.createConstant(11, new ConstantPoolEntries.InterfaceMethodref(this.CONSTANT_Class(className), this.CONSTANT_NameAndType(methodName, methodDescriptor)));
 };

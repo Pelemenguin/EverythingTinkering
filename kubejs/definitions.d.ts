@@ -615,7 +615,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            post?: (classCreator: ClassCreator) => void
+            post?: (classCreator: ClassCreatorLegacy) => void
         };
         type ModifierHooks = keyof ModifierHookArgument;
     }
@@ -644,13 +644,13 @@ declare namespace BookArguments {
     }
 }
 
-declare class ClassCreator<T extends typeof any> {
+declare class ClassCreatorLegacy<T extends typeof any> {
 
     name: string;
     internalName: string;
     constantPoolCounter: number;
-    methods: Method[];
-    attributes: [string, {generateByteCode: (classCreator: ClassCreator) => number[]}][];
+    methods: MethodLegacy[];
+    attributes: [string, {generateByteCode: (classCreator: ClassCreatorLegacy) => number[]}][];
     fields: {name: string, descriptor: string, access: number}[];
     access: number;
     constantPool: [tag: number, {generateByteCode: () => number[]}][];
@@ -705,12 +705,12 @@ declare class ClassCreator<T extends typeof any> {
      * - Add a method.
      * - 添加一个方法。
      */
-    addMethod(name: string, descriptor: string, method: (method: Method) => void): this;
+    addMethod(name: string, descriptor: string, method: (method: MethodLegacy) => void): this;
     /**
      * - Add an attribute.
      * - 添加一个属性。
      */
-    addAttribute(name: string, attribute: {generateByteCode: (classCreator: ClassCreator) => number[]}): this;
+    addAttribute(name: string, attribute: {generateByteCode: (classCreator: ClassCreatorLegacy) => number[]}): this;
     /**
      * - Add a field.
      * - 添加一个字段。

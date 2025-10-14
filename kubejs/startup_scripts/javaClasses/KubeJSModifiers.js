@@ -19,7 +19,7 @@
     FMLJavaModLoadingContext
     StartupEvents
     JavaUtils
-    ClassCreator
+    ClassCreatorLegacy
     TinkerFunctionsSet
     CodeAttribute
     Utils
@@ -32,7 +32,7 @@ global.TinkerFunctions = {};
 global.TinkerFunctions.onServerTickFunctions = Utils.newMap();
 
 // eslint-disable-next-line no-unused-vars
-let ModifierClass = new ClassCreator("Modifier")
+let ModifierClass = new ClassCreatorLegacy("Modifier")
     .createDefaultConstructor()
     .defineClass(JavaUtils.MethodHandles.lookup());
 
@@ -72,8 +72,8 @@ const ModifierManager = {
      * })
      */
     registerCommonModifier: (name, className, hooks) => {
-        /** @type {ClassCreator<typeof Internal.Modifier>} */
-        let modifierClassCreator = new ClassCreator(`Modifier$${className}`)
+        /** @type {ClassCreatorLegacy<typeof Internal.Modifier>} */
+        let modifierClassCreator = new ClassCreatorLegacy(`Modifier$${className}`)
             .extends("slimeknights.tconstruct.library.modifiers.Modifier");
 
                             // =============================

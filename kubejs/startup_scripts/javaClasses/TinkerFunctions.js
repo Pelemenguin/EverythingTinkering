@@ -22,7 +22,7 @@
 /* eslint-disable no-unused-vars */
 
 /**
- * @type {<T>(classCreator: ClassCreator<T>) => ClassCreator<T>}
+ * @type {<T>(classCreator: ClassCreatorLegacy<T>) => ClassCreatorLegacy<T>}
  */
 let addFunctionalInterfaceAnnotation = (classCreator) => {
     return classCreator.addAttribute('RuntimeVisibleAnnotations', {
@@ -49,7 +49,7 @@ let addFunctionalInterfaceAnnotation = (classCreator) => {
  */
 let functionDefinitionHelper = (funcName, methodName, descriptor) => {
     return addFunctionalInterfaceAnnotation(
-        (new ClassCreator(`TinkerFunctions$${funcName}`))
+        (new ClassCreatorLegacy(`TinkerFunctions$${funcName}`))
             .setIsInterface()
             .addMethod(methodName, descriptor, method => {
                 method.setAbstract();
@@ -57,7 +57,7 @@ let functionDefinitionHelper = (funcName, methodName, descriptor) => {
     ).defineClass(JavaUtils.MethodHandles.lookup());
 };
 
-let TinkerFunctions = (new ClassCreator("TinkerFunctions"))
+let TinkerFunctions = (new ClassCreatorLegacy("TinkerFunctions"))
     .createDefaultConstructor()
     .defineClass(JavaUtils.MethodHandles.lookup());
 
@@ -147,11 +147,11 @@ let TinkerFunctions$ProjectileLaunchFunction = functionDefinitionHelper(
  * @param {number} maxStack
  * @param {number} maxLocals
  * @param {((references: number[]) => number[])} byteCodeGenerator
- * @returns {((classCreator: ClassCreator) => void)}
+ * @returns {((classCreator: ClassCreatorLegacy) => void)}
  */
 let addClassMethodHelper = (tinkerFunctionClass, methodDescriptor, implementingInterface, functionName, maxStack, maxLocals, byteCodeGenerator) => {
     /**
-     * @param {ClassCreator} classCreator
+     * @param {ClassCreatorLegacy} classCreator
      */
     return (classCreator) => {
         let interfaceName = tinkerFunctionClass.__javaObject__.getName().replace('.', '/');
@@ -212,7 +212,7 @@ const TinkerFunctionsSet = {
         /** @type {string} */
         internalName: TinkerFunctions$ToolDamageFunction.__javaObject__.getName().replace('.', '/'),
 
-        addClassMethod: (/** @type {ClassCreator} */ classCreator) => {
+        addClassMethod: (/** @type {ClassCreatorLegacy} */ classCreator) => {
             addClassMethodHelper(
                 TinkerFunctions$ToolDamageFunction,
                 "(Lslimeknights/tconstruct/library/tools/nbt/IToolStackView;Lslimeknights/tconstruct/library/modifiers/ModifierEntry;ILnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)I",

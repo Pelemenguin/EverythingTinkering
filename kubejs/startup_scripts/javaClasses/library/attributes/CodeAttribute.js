@@ -27,7 +27,7 @@ const CodeAttribute = function(maxStack, maxLocals) {
     this.maxStack = maxStack;
     this.maxLocals = maxLocals;
     // this.generator = byteCodeGenerator;
-    /** @type {?(classCreator: ClassCreator) => number[]} */
+    /** @type {?(classCreator: ClassCreatorLegacy) => number[]} */
     this.customGenerator = () => [0xb1];
 
     /**
@@ -35,12 +35,12 @@ const CodeAttribute = function(maxStack, maxLocals) {
      */
     this.exceptions = [];
 
-    /** @type {[name: string, attr: {generateByteCode: (codeAttribute: CodeAttribute, classCreator: ClassCreator) => number[]}][]} */
+    /** @type {[name: string, attr: {generateByteCode: (codeAttribute: CodeAttribute, classCreator: ClassCreatorLegacy) => number[]}][]} */
     this.attributes = [];
 };
 
 /**
- * @param {(classCreator: ClassCreator) => number[]} generator
+ * @param {(classCreator: ClassCreatorLegacy) => number[]} generator
  */
 CodeAttribute.prototype.setCustomByteCodeGenerator = function(generator) {
     this.customGenerator = generator;
@@ -60,7 +60,7 @@ CodeAttribute.prototype.addExceptionHandler = function(start, end, handler, type
 
 /**
  * @param {string} name
- * @param {{generateByteCode: (codeAttribute: CodeAttribute, classCreator: ClassCreator) => number[]}} attribute
+ * @param {{generateByteCode: (codeAttribute: CodeAttribute, classCreator: ClassCreatorLegacy) => number[]}} attribute
  */
 CodeAttribute.prototype.addAttribute = function(name, attribute) {
     this.attributes.push([name, attribute]);
@@ -68,7 +68,7 @@ CodeAttribute.prototype.addAttribute = function(name, attribute) {
 };
 
 /**
- * @param {ClassCreator} classCreator
+ * @param {ClassCreatorLegacy} classCreator
  */
 CodeAttribute.prototype.generateByteCode = function(classCreator) {
     let content = this.customGenerator(classCreator).map(b => b > 127 ? b - 256 : b);

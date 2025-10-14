@@ -22,37 +22,37 @@
  * 
  * @param {string} name 
  * @param {string} descriptor
- * @param {ClassCreator} parent 
+ * @param {ClassCreatorLegacy} parent 
  */
-const Method = function(name, descriptor, parent) {
+const MethodLegacy = function(name, descriptor, parent) {
     this.name = name;
     this.descriptor = descriptor;
     this.parent = parent;
 
     this.access = 1;
 
-    /** @type {[string, {generateByteCode: (classCreator: ClassCreator) => number[]}][]} */
+    /** @type {[string, {generateByteCode: (classCreator: ClassCreatorLegacy) => number[]}][]} */
     this.attributes = [];
 };
 
-Method.prototype.setPublic = function() {
+MethodLegacy.prototype.setPublic = function() {
     this.access -= (this.access & 7);
     this.access |= 1;
     return this;
 };
 
-Method.prototype.setProtected = function() {
+MethodLegacy.prototype.setProtected = function() {
     this.access -= (this.access & 7);
     this.access |= 4;
     return this;
 };
 
-Method.prototype.setAbstract = function() {
+MethodLegacy.prototype.setAbstract = function() {
     this.access |= 0x0400;
     return this;
 };
 
-Method.prototype.generateByteCode = function() {
+MethodLegacy.prototype.generateByteCode = function() {
     return JavaUtils.ByteBuffer.allocate(8)
         .putShort(0, this.access)
         .putShort(2, this.createConstant(1, new ConstantPoolEntries.Utf8(this.name)))
@@ -78,7 +78,7 @@ Method.prototype.generateByteCode = function() {
  * @param {string} name 
  * @param {{generateByteCode: () => number[]}} attr 
  */
-Method.prototype.addAttribute = function(name, attr) {
+MethodLegacy.prototype.addAttribute = function(name, attr) {
     this.attributes.push([name, attr]);
 };
 
@@ -88,6 +88,6 @@ Method.prototype.addAttribute = function(name, attr) {
  * - - - - -
  * @returns {number}
  */
-Method.prototype.createConstant = function(tag, constant) {
+MethodLegacy.prototype.createConstant = function(tag, constant) {
     return this.parent.createConstant(tag, constant);
 };
