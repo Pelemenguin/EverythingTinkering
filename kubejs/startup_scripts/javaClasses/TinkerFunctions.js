@@ -14,7 +14,7 @@
  */
 
 /* global
-    ClassCreator
+    ClassCreatorLegacy
     JavaUtils
     CodeAttribute
 */

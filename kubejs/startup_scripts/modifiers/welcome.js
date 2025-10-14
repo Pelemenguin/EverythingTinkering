@@ -49,8 +49,6 @@ let WELCOME = ModifierManager.registerCommonModifier("welcome", "WelcomeModifier
         ToolStats.MINING_SPEED.add(builder, 1.5);
     },
     __class__: {
-        post: (classCreator) => {
-            classCreator.extends("slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier");
-        }
+        extending: "slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier"
     }
 });

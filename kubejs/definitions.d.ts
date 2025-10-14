@@ -591,13 +591,29 @@ declare namespace Annotation {
         };
         type ClassModifierHookArgument = {
             /**
-             * Called before finally defining the modifier class.
+             * Used for defining which class to extend from.  
+             * 用于定义要继承的类。
+             * - - - - -
+             * Related Link | 相关链接
+             * - ***(Will open browser)*** [`NoLevelsModifier`](https://github.com/SlimeKnights/TinkersConstruct/blob/1.20.1/src/main/java/slimeknights/tconstruct/library/modifiers/impl/NoLevelsModifier.java)
+             * @example
+             * let TEST = KubeJSModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     __class__: {
+             *         // Let the modifier class extends `NoLevelsModifier` to remove level display at the end of modifier name
+             *         // 让特性继承`NoLevelsModifier`来移除特性名称末尾的等级显示
+             *         extending: "slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier"
+             *     }
+             * }
+             */
+            extending: string,
+            implementing: string[],
+            /**
+             * @deprecated Use {@linkcode ClassModifierHookArgument.extending extending} instead.  
+             *             弃用。请改用{@linkcode ClassModifierHookArgument.extending extending}。
+             * - - - - -
+             * Called after the modifier class's methods are created.
              * For example, overriding class to extend from.
-             * Note this is called still before default constructor is created.
-             * You can manually add a custom constructor to cancel the creation of default constructor.  
-             * 在最后定义类之前调用，例如可以覆盖要继承的类。
-             * 注意，调用时间仍然在创建默认构造方法之前。
-             * 你可以在此时手动添加一个自定义构造方法来取消默认构造方法的创建。
+             * 在创建特性类的方法结束之后调用，例如可以覆盖要继承的类。
              * - - - - -
              * @param classCreator Class Creator object to define modifier class  
              *                     类创建器对象，用于创建特性类
@@ -608,14 +624,26 @@ declare namespace Annotation {
              * let TEST = KubeJSModifierManager.registerCommonModifier("test", "TestModifier", {
              *     __class__: {
              *         post: (classCreator) => {
-             *             classCreator.extends("slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier");
+             *             classCreator.extending("slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier");
              *             // Let the modifier class extends `NoLevelsModifier` to remove level display at the end of modifier name
              *             // 让特性继承`NoLevelsModifier`来移除特性名称末尾的等级显示
              *         }
              *     }
              * });
              */
-            post?: (classCreator: ClassCreatorLegacy) => void
+            post?: (classCreator: ClassCreator) => void,
+            /**
+             * Called after {@linkcode ClassModifierHookArgument.post post} to generate constructor method of the modifier class.
+             * You can define your own constructor here.
+             * If this method is not used, a default constructor will be generated that calls super constructor with no arguments.  
+             * 在{@linkcode ClassModifierHookArgument.post post}之后调用，用以创建特性类的构造器方法。
+             * 你可以在这里定义你自己的构造器。
+             * 若未使用该方法，则会生成一个默认构造器，该构造器调用无参数的父类构造器。
+             * - - - - -
+             * @param classCreator Class Creator instance to define the modifier class.
+             *                     类创建器实例，用于创建特性类
+             */
+            generateConstructor?: (classCreator: ClassCreator) => void,
         };
         type ModifierHooks = keyof ModifierHookArgument;
     }

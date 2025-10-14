@@ -14,6 +14,11 @@
  * @author Pelemenguin
  */
 
+/* global
+    ModifierManager
+    ToolDamageUtil
+*/
+
 /**
  * - Passed tick count every 1 durability point recovers.
  * - 每1回复耐久值经过的Tick数。
@@ -32,8 +37,6 @@ let ALGAE = ModifierManager.registerCommonModifier("algae", "AlgaeModifier", {
         }
     },
     __class__: {
-        post: (classCreator) => {
-            classCreator.extends("slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier");
-        }
+        extending: "slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier"
     }
 });

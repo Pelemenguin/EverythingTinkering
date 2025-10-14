@@ -18,23 +18,197 @@
     ModifierDeferredRegister
     FMLJavaModLoadingContext
     StartupEvents
-    JavaUtils
-    ClassCreatorLegacy
-    TinkerFunctionsSet
-    CodeAttribute
+    ClassCreator
     Utils
     console
 */
 
+/**
+ * Stores functions used in modifiers.
+ * 储存在特性中使用的函数。
+ */
 global.TinkerFunctions = {};
 
 /** @type {Internal.Map<string, (event: Internal.ServerEventJS) => void>} */
 global.TinkerFunctions.onServerTickFunctions = Utils.newMap();
 
-// eslint-disable-next-line no-unused-vars
-let ModifierClass = new ClassCreatorLegacy("Modifier")
-    .createDefaultConstructor()
-    .defineClass(JavaUtils.MethodHandles.lookup());
+/**
+ * @type {Object<Annotation.TinkerFunction.ModifierHooks, string>}
+ */
+let HOOK_TO_IMPLEMENTING_INTERFACE = {
+    "modifyStat": "slimeknights.tconstruct.library.modifiers.hook.build.ConditionalStatModifierHook",
+    "onDamageTool": "slimeknights.tconstruct.library.modifiers.hook.behavior.ToolDamageModifierHook",
+    "onInventoryTick": "slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook",
+    "addTooltip": "slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook",
+    "addToolStats": "slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook",
+    "getMeleeDamage": "slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook",
+    "beforeMeleeHit": "slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook",
+    "afterMeleeHit": "slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook",
+    "getProtectionModifier": "slimeknights.tconstruct.library.modifiers.hook.armor.ProtectionModifierHook",
+    "onAttacked": "slimeknights.tconstruct.library.modifiers.hook.armor.OnAttackedModifierHook",
+    "onBreakSpeed": "slimeknights.tconstruct.library.modifiers.hook.mining.BreakSpeedModifierHook",
+    "afterBlockBreak": "slimeknights.tconstruct.library.modifiers.hook.mining.BlockBreakModifierHook",
+    "onProjectileLaunch": "slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook"
+};
+
+/** @type {Object<string, [string[], string]>} */
+let HOOK_TO_METHOD_PARAMETERS = {
+    "modifyStat": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "net.minecraft.world.entity.LivingEntity",
+            "slimeknights.tconstruct.library.tools.stat.FloatToolStat",
+            "float",
+            "float"
+        ],
+        "float"
+    ],
+    "onDamageTool": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "int",
+            "net.minecraft.world.entity.LivingEntity",
+            "net.minecraft.world.item.ItemStack"
+        ],
+        "int"
+    ],
+    "onInventoryTick": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "net.minecraft.world.level.Level",
+            "net.minecraft.world.entity.LivingEntity",
+            "int",
+            "boolean",
+            "boolean",
+            "net.minecraft.world.item.ItemStack"
+        ],
+        "void"
+    ],
+    "addTooltip": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "net.minecraft.world.entity.player.Player",
+            "java.util.List",
+            "slimeknights.mantle.client.TooltipKey",
+            "net.minecraft.world.item.TooltipFlag"
+        ],
+        "void"
+    ],
+    "addToolStats": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolContext",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder"
+        ],
+        "void"
+    ],
+    "getMeleeDamage": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "slimeknights.tconstruct.library.tools.context.ToolAttackContext",
+            "float",
+            "float"
+        ],
+        "float"
+    ],
+    "beforeMeleeHit": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "slimeknights.tconstruct.library.tools.context.ToolAttackContext",
+            "float",
+            "float",
+            "float"
+        ],
+        "float"
+    ],
+    "afterMeleeHit": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "slimeknights.tconstruct.library.tools.context.ToolAttackContext",
+            "float"
+        ],
+        "void"
+    ],
+    "getProtectionModifier": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "slimeknights.tconstruct.library.tools.context.EquipmentContext",
+            "net.minecraft.world.entity.EquipmentSlot",
+            "net.minecraft.world.damagesource.DamageSource",
+            "float"
+        ],
+        "float"
+    ],
+    "onAttacked": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "slimeknights.tconstruct.library.tools.context.EquipmentContext",
+            "net.minecraft.world.entity.EquipmentSlot",
+            "net.minecraft.world.damagesource.DamageSource",
+            "float",
+            "boolean"
+        ],
+        "void"
+    ],
+    "onBreakSpeed": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "net.minecraftforge.event.entity.player.PlayerEvent$BreakSpeed",
+            "net.minecraft.core.Direction",
+            "boolean",
+            "float"
+        ],
+        "void"
+    ],
+    "afterBlockBreak": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "slimeknights.tconstruct.library.tools.context.ToolHarvestContext"
+        ],
+        "void"
+    ],
+    "onProjectileLaunch": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "net.minecraft.world.entity.LivingEntity",
+            "net.minecraft.world.item.ItemStack",
+            "net.minecraft.world.entity.projectile.Projectile",
+            "net.minecraft.world.entity.projectile.AbstractArrow",
+            "slimeknights.tconstruct.library.tools.nbt.ModDataNBT",
+            "boolean"
+        ],
+        "void"
+    ]
+};
+
+/** @type {{[x: string]: [string, string, string]}} */
+let HOOK_TO_FIELDS = {
+    "modifyStat": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "CONDITIONAL_STAT", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "onDamageTool": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "TOOL_DAMAGE", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "onInventoryTick": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "INVENTORY_TICK", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "addTooltip": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "TOOLTIP", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "addToolStats": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "TOOL_STATS", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "getMeleeDamage": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MELEE_DAMAGE", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "beforeMeleeHit": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MELEE_HIT", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "afterMeleeHit": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MELEE_HIT", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "getProtectionModifier": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "PROTECTION", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "onAttacked": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "ON_ATTACKED", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "onBreakSpeed": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "BREAK_SPEED", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "afterBlockBreak": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "BLOCK_BREAK", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "onProjectileLaunch": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "PROJECTILE_LAUNCH", "slimeknights.tconstruct.library.module.ModuleHook"]
+};
 
 const ModifierManager = {
     /** @type {Internal.Map<string, {className: string, modifierClass: typeof any, registerer: () => Internal.Modifier}} */
@@ -72,262 +246,86 @@ const ModifierManager = {
      * })
      */
     registerCommonModifier: (name, className, hooks) => {
-        /** @type {ClassCreatorLegacy<typeof Internal.Modifier>} */
-        let modifierClassCreator = new ClassCreatorLegacy(`Modifier$${className}`)
-            .extends("slimeknights.tconstruct.library.modifiers.Modifier");
+        /** @type {ClassCreator} */
+        let modifierClassCreator = ClassCreator.create(`Modifier.${className}`);
+        
+        if ("__class__" in hooks && "extending" in hooks.__class__) modifierClassCreator.extending(hooks.__class__.extending);
+        else modifierClassCreator.extending("slimeknights.tconstruct.library.modifiers.Modifier");
 
-                            // =============================
-                            // =     FIRST SWITCH-CASE     =
-                            // =============================
+        let seenInterfaces = new Set();
+        let hookKeys = Object.keys(hooks);
+        hookKeys.forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
+            if (hook == "__custom__") {
+                customHookHandler(name, hooks.__custom__);
+                return;
+            }
+            if (!(hook in HOOK_TO_IMPLEMENTING_INTERFACE)) return;
+            let implementing = HOOK_TO_IMPLEMENTING_INTERFACE[hook];
+            if (!seenInterfaces.has(implementing)) {
+                seenInterfaces.add(hook);
+                modifierClassCreator.implementing(implementing);
+            }
+        });
+        hookKeys.forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
+            if (!(hook in HOOK_TO_METHOD_PARAMETERS)) return;
+            let [parameters, returnType] = HOOK_TO_METHOD_PARAMETERS[hook];
 
-        Object.keys(hooks).forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
-            switch (hook) {
-                case "modifyStat": {
-                    TinkerFunctionsSet.ConditionalStatFunction.addClassMethod(modifierClassCreator);
-                    break;
-                }
-                case "onDamageTool": {
-                    TinkerFunctionsSet.ToolDamageFunction.addClassMethod(modifierClassCreator);
-                    break;
-                }
-                case "onInventoryTick": {
-                    TinkerFunctionsSet.InventoryTickFunction.addClassMethod(modifierClassCreator);
-                    break;
-                }
-                case "addTooltip": {
-                    TinkerFunctionsSet.AddTooltipFunction.addClassMethod(modifierClassCreator);
-                    break;
-                }
-                case "addToolStats": {
-                    TinkerFunctionsSet.ToolStatsFunction.addClassMethod(modifierClassCreator);
-                    break;
-                }
-                case "getMeleeDamage": {
-                    TinkerFunctionsSet.MeleeDamageFunction.addClassMethod(modifierClassCreator);
-                    break;
-                }
-                case "beforeMeleeHit": {
-                    TinkerFunctionsSet.BeforeMeleeHitFunction.addClassMethod(modifierClassCreator);
-                    break;
-                }
-                case "afterMeleeHit": {
-                    TinkerFunctionsSet.AfterMeleeHitFunction.addClassMethod(modifierClassCreator);
-                    break;
-                }
-                case "getProtectionModifier": {
-                    TinkerFunctionsSet.ProtectionFunction.addClassMethod(modifierClassCreator);
-                    break;
-                }
-                case "onAttacked":{
-                    TinkerFunctionsSet.OnAttackedFunction.addClassMethod(modifierClassCreator);
-                    break;
-                }
-                case "onBreakSpeed": {
-                    TinkerFunctionsSet.BreakSpeedFunction.addClassMethod(modifierClassCreator);
-                    break;
-                }
-                case "afterBlockBreak": {
-                    TinkerFunctionsSet.BlockBreakFunction.addClassMethod(modifierClassCreator);
-                    break;
-                }
-                case "onProjectileLaunch": {
-                    TinkerFunctionsSet.ProjectileLaunchFunction.addClassMethod(modifierClassCreator);
-                    break;
-                }
-                case "__custom__": {
-                    customHookHandler(name, hooks.__custom__);
-                }
+            modifierClassCreator.createMethod(hook, parameters, returnType)
+                .toPublic()
+                .codeJS(hooks[hook]);
+            
+            // SPECIAL HANDLING
+
+            // 1. ToolDamageModifierHook needs another method
+            if (hook == "onDamageTool") {
+                modifierClassCreator.createMethod("onDamageTool", 
+                    [
+                        "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+                        "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+                        "int",
+                        "net.minecraft.world.entity.LivingEntity"
+                    ],
+                    "int"
+                )
+                    .toPublic()
+                    .codeJS((arg0, arg1, arg2, arg3) => hooks.onDamageTool(arg0, arg1, arg2, arg3, null));
             }
         });
 
-        modifierClassCreator.addMethod("registerHooks", "(Lslimeknights/tconstruct/library/module/ModuleHookMap$Builder;)V", method => {
-            method.setProtected().addAttribute("Code", new CodeAttribute(3, 2).setCustomByteCodeGenerator(classCreator => {
-                let commonReferences = JavaUtils.ByteBuffer.allocate(2)
-                    .putShort(0, classCreator.CONSTANT_Methodref("slimeknights/tconstruct/library/module/ModuleHookMap$Builder", "addHook", "(Ljava/lang/Object;Lslimeknights/tconstruct/library/module/ModuleHook;)Lslimeknights/tconstruct/library/module/ModuleHookMap$Builder;"))
-                    .array();
-                
-                let hookAdder = Array.from(new Set(Object.keys(hooks).map((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
+        let registerHooksCodeBuilder = modifierClassCreator.createMethod("registerHooks", ["slimeknights/tconstruct/library/module/ModuleHookMap$Builder"], "void")
+            .toProtected()
+            .code()
+            .loadObject("arg0");
 
-                                // ==============================
-                                // =     SECOND SWITCH-CASE     =
-                                // ==============================
+        let seenHooks = new Set();
+        hookKeys.forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
+            if (!(hook in HOOK_TO_FIELDS)) return;
+            let fieldInfo = HOOK_TO_FIELDS[hook];
+            let concated = fieldInfo.join("");
+            if (seenHooks.has(concated)) return;
+            else seenHooks.add(concated);
 
-                    switch (hook) {
-                        case "modifyStat": {
-                            return  ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "CONDITIONAL_STAT", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
-                        }
-                        case "onDamageTool": {
-                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "TOOL_DAMAGE", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
-                        }
-                        case "onInventoryTick": {
-                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "INVENTORY_TICK", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
-                        }
-                        case "addTooltip": {
-                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "TOOLTIP", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
-                        }
-                        case "addToolStats": {
-                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "TOOL_STATS", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
-                        }
-                        case "getMeleeDamage": {
-                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "MELEE_DAMAGE", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
-                        }
-                        case "beforeMeleeHit": {/* fallthrough to `afterMeleeHit` */}
-                        case "afterMeleeHit": {
-                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "MELEE_HIT", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
-                        }
-                        case "getProtectionModifier": {
-                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "PROTECTION", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
-                        }
-                        case "onAttacked": {
-                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "ON_ATTACKED", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
-                        }
-                        case "onBreakSpeed": {
-                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "BREAK_SPEED", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
-                        }
-                        case "afterBlockBreak": {
-                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "BLOCK_BREAK", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
-                        }
-                        case "onProjectileLaunch": {
-                            return ["slimeknights/tconstruct/library/modifiers/ModifierHooks", "PROJECTILE_LAUNCH", "Lslimeknights/tconstruct/library/module/ModuleHook;"];
-                        }
-                        default: {
-                            return undefined;
-                        }
-                    }
-                }).filter(a => a !== undefined)
-                .map(a => JSON.stringify(a))))
-                .map(v => JSON.parse(v))
-                .map((/** @type {[string, string, string]} */attr) => {
-
-                    let ref = JavaUtils.ByteBuffer.allocate(2).putShort(0, classCreator.CONSTANT_Fieldref(attr[0], attr[1], attr[2])).array();
-
-                    return [
-                        0x2a, // aload_0
-                        0xb2, // getstatic
-                            ref[0], ref[1],
-                        0xb6, // invokevirtual
-                            commonReferences[0], commonReferences[1],
-                    ];
-                });
-
-                let result = [0x2b]; // aload_1
-                hookAdder.forEach(l => result = result.concat(l));
-                result.push(0xb1); // return
-                return result;
-            }));
+            registerHooksCodeBuilder
+                .loadObject("this")
+                .getStaticField(fieldInfo[0], fieldInfo[1], fieldInfo[2])
+                .invokeVirtual("slimeknights.tconstruct.library.module.ModuleHookMap$Builder", "addHook", ["java.lang.Object", "slimeknights.tconstruct.library.module.ModuleHook"], "slimeknights.tconstruct.library.module.ModuleHookMap$Builder");
         });
 
-        if ('__class__' in hooks && 'post' in hooks.__class__) {
+        registerHooksCodeBuilder.returnVoid().build();
+
+        if ("__class__" in hooks && "post" in hooks) {
             hooks.__class__.post(modifierClassCreator);
         }
 
-        if (modifierClassCreator.methods.findIndex(m => m.name === '<init>') == -1) modifierClassCreator.createDefaultConstructor();
-            
-        let modifierClass = modifierClassCreator.defineClass(JavaUtils.MethodHandles.lookup());
+        if ("__class__" in hooks && "generateConstructor" in hooks) {
+            hooks.__class__.generateConstructor(modifierClassCreator);
+        } else modifierClassCreator.defaultConstructor();
 
-        Object.keys(hooks).forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
+        /** @type {typeof Internal.Modifier} */
+        let modifierClass = modifierClassCreator.defineClass();
 
-                                // =============================
-                                // =     THIRD SWITCH-CASE     =
-                                // =============================
-
-            switch (hook) {
-                case "modifyStat": {
-                    modifierClass['modifyStatFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
-                        try {return hooks.modifyStat(arg0, arg1, arg2, arg3, arg4, arg5);}
-                        catch (e) {console.error(e); return arg4;}
-                    };
-                    break;
-                }
-                case "onDamageTool": {
-                    modifierClass['onDamageToolFunction'] = (arg0, arg1, arg2, arg3, arg4) => {
-                        try {return hooks.onDamageTool(arg0, arg1, arg2, arg3, arg4);}
-                        catch (e) {console.error(e); return arg2;}
-                    };
-                    break;
-                }
-                case "onInventoryTick": {
-                    modifierClass['onInventoryTickFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) => {
-                        try {hooks.onInventoryTick(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);}
-                        catch (e) {console.error(e);}
-                    };
-                    break;
-                }
-                case "addTooltip": {
-                    modifierClass['addTooltipFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
-                        try {hooks.addTooltip(arg0, arg1, arg2, arg3, arg4, arg5);}
-                        catch (e) {console.error(e);}
-                    };
-                    break;
-                }
-                case "addToolStats": {
-                    modifierClass['addToolStatsFunction'] = (arg0, arg1, arg2) => {
-                        try {hooks.addToolStats(arg0, arg1, arg2);}
-                        catch (e) {console.error(e);}
-                    };
-                    break;
-                }
-                case "getMeleeDamage": {
-                    modifierClass['getMeleeDamageFunction'] = (arg0, arg1, arg2, arg3, arg4) => {
-                        try {return hooks.getMeleeDamage(arg0, arg1, arg2, arg3, arg4);}
-                        catch (e) {console.error(e); return arg4;}
-                    };
-                    break;
-                }
-                case "beforeMeleeHit": {
-                    modifierClass['beforeMeleeHitFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
-                        try {return hooks.beforeMeleeHit(arg0, arg1, arg2, arg3, arg4, arg5);}
-                        catch (e) {console.error(e); return arg5;}
-                    };
-                    break;
-                }
-                case "afterMeleeHit": {
-                    modifierClass['afterMeleeHitFunction'] = (arg0, arg1, arg2, arg3) => {
-                        try {hooks.afterMeleeHit(arg0, arg1, arg2, arg3);}
-                        catch (e) {console.error(e);}
-                    };
-                    break;
-                }
-                case "getProtectionModifier": {
-                    modifierClass['getProtectionModifierFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
-                        try {return hooks.getProtectionModifier(arg0, arg1, arg2, arg3, arg4, arg5);}
-                        catch (e) {console.error(e); return arg5;}
-                    };
-                    break;
-                }
-                case "onAttacked": {
-                    modifierClass['onAttackedFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5, arg6) => {
-                        try {hooks.onAttacked(arg0, arg1, arg2, arg3, arg4, arg5, arg6);}
-                        catch (e) {console.error(e);}
-                    };
-                    break;
-                }
-                case "onBreakSpeed": {
-                    modifierClass['onBreakSpeedFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5) => {
-                        try {hooks.onBreakSpeed(arg0, arg1, arg2, arg3, arg4, arg5);}
-                        catch (e) {console.error(e);}
-                    };
-                    break;
-                }
-                case "afterBlockBreak": {
-                    modifierClass['afterBlockBreakFunction'] = (arg0, arg1, arg2) => {
-                        try {hooks.afterBlockBreak(arg0, arg1, arg2);}
-                        catch (e) {console.error(e);}
-                    };
-                    break;
-                }
-                case "onProjectileLaunch": {
-                    modifierClass['onProjectileLaunchFunction'] = (arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) => {
-                        try {hooks.onProjectileLaunch(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);}
-                        catch (e) {console.error(e);}
-                    };
-                    break;
-                }
-            }
-        });
-        
         ModifierManager.ALL_MODIFIERS[name] = {
-            className: modifierClassCreator.name,
+            className: modifierClassCreator.getClassName(),
             modifierClass: modifierClass,
             registerer: () => new modifierClass()
         };

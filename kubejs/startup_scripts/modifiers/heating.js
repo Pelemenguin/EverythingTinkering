@@ -30,8 +30,6 @@ let HEATING = ModifierManager.registerCommonModifier("heating", "HeatingModifier
         target.playSound("minecraft:entity.player.hurt_on_fire");
     },
     __class__: {
-        post: (classCreator) => {
-            classCreator.extends("slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier");
-        }
+        extending: "slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier"
     }
 });
