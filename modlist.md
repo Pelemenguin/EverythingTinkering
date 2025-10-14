@@ -2,6 +2,7 @@
 
 <!-- Generated from `build.py` -->
 - [Architectury API](https://www.curseforge.com/minecraft/mc-mods/architectury-api) *9.2.14* by shedaniel
+- [ClassJS](https://www.curseforge.com/minecraft/mc-mods/classjs) *0.1-alpha.1* by Pelemenguin
 - [Create](https://www.curseforge.com/minecraft/mc-mods/create) *6.0.4* by simibubi
 - [MmmMmmMmmMmm (Target Dummy)](https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm) *1.20-2.0.6* by MehVahdJukaar
 - [EventJS](https://www.curseforge.com/minecraft/mc-mods/eventjs) *1.4.0* by ZZZank
