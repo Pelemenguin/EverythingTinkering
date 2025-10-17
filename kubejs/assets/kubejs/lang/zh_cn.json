@@ -222,6 +222,10 @@
     "modifier.kubejs.relaying.flavor": "传递动量！",
     "modifier.kubejs.relaying.description": "攻击一条直线上的敌人",
 
+    "modifier.kubejs.night_owl": "夜猫子",
+    "modifier.kubejs.night_owl.flavor": "还在熬夜？",
+    "modifier.kubejs.night_owl.description": "在黑暗中持续获得夜视效果",
+
     "modifier.kubejs.antifatigue": "抗疲劳",
     "modifier.kubejs.antifatigue.flavor": "横扫饥饿！",
     "modifier.kubejs.antifatigue.description": "抵消挖掘疲劳带来的影响，能够抵消的挖掘疲劳等级不超过该特性的等级",

@@ -51,7 +51,7 @@ let HOOK_TO_IMPLEMENTING_INTERFACE = {
     "onProjectileLaunch": "slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook"
 };
 
-/** @type {Object<string, [string[], string]>} */
+/** @type {Object<string, [string[], string, <P extends any[], R>(func: (...args: P) => R) => (...args: P) => R]>} */
 let HOOK_TO_METHOD_PARAMETERS = {
     "modifyStat": [
         [
@@ -62,7 +62,17 @@ let HOOK_TO_METHOD_PARAMETERS = {
             "float",
             "float"
         ],
-        "float"
+        "float",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5) => {
+                try {
+                    return func(arg0, arg1, arg2, arg3, arg4, arg5);
+                } catch (e) {
+                    console.error(`Error in modifyStat of modifier ${arg1.getId().toString()}: ${e}`);
+                    return arg4;
+                }
+            };
+        }
     ],
     "onDamageTool": [
         [
@@ -72,7 +82,17 @@ let HOOK_TO_METHOD_PARAMETERS = {
             "net.minecraft.world.entity.LivingEntity",
             "net.minecraft.world.item.ItemStack"
         ],
-        "int"
+        "int",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4) => {
+                try {
+                    return func(arg0, arg1, arg2, arg3, arg4);
+                } catch (e) {
+                    console.error(`Error in onDamageTool of modifier ${arg1.getId().toString()}: ${e}`);
+                    return arg2;
+                }
+            };
+        }
     ],
     "onInventoryTick": [
         [
@@ -85,7 +105,16 @@ let HOOK_TO_METHOD_PARAMETERS = {
             "boolean",
             "net.minecraft.world.item.ItemStack"
         ],
-        "void"
+        "void",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5, arg6, arg7) => {
+                try {
+                    func(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+                } catch (e) {
+                    console.error(`Error in onInventoryTick of modifier ${arg1.getId().toString()}: ${e}`);
+                }
+            };
+        }
     ],
     "addTooltip": [
         [
@@ -96,7 +125,16 @@ let HOOK_TO_METHOD_PARAMETERS = {
             "slimeknights.mantle.client.TooltipKey",
             "net.minecraft.world.item.TooltipFlag"
         ],
-        "void"
+        "void",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5) => {
+                try {
+                    func(arg0, arg1, arg2, arg3, arg4, arg5);
+                } catch (e) {
+                    console.error(`Error in addTooltip of modifier ${arg1.getId().toString()}: ${e}`);
+                }
+            };
+        }
     ],
     "addToolStats": [
         [
@@ -104,7 +142,16 @@ let HOOK_TO_METHOD_PARAMETERS = {
             "slimeknights.tconstruct.library.modifiers.ModifierEntry",
             "slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder"
         ],
-        "void"
+        "void",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2) => {
+                try {
+                    func(arg0, arg1, arg2);
+                } catch (e) {
+                    console.error(`Error in addToolStats of modifier ${arg1.getId().toString()}: ${e}`);
+                }
+            };
+        }
     ],
     "getMeleeDamage": [
         [
@@ -114,7 +161,17 @@ let HOOK_TO_METHOD_PARAMETERS = {
             "float",
             "float"
         ],
-        "float"
+        "float",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4) => {
+                try {
+                    return func(arg0, arg1, arg2, arg3, arg4);
+                } catch (e) {
+                    console.error(`Error in getMeleeDamage of modifier ${arg1.getId().toString()}: ${e}`);
+                    return arg3;
+                }
+            };
+        }
     ],
     "beforeMeleeHit": [
         [
@@ -125,7 +182,17 @@ let HOOK_TO_METHOD_PARAMETERS = {
             "float",
             "float"
         ],
-        "float"
+        "float",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5) => {
+                try {
+                    return func(arg0, arg1, arg2, arg3, arg4, arg5);
+                } catch (e) {
+                    console.error(`Error in beforeMeleeHit of modifier ${arg1.getId().toString()}: ${e}`);
+                    return arg5;
+                }
+            };
+        }
     ],
     "afterMeleeHit": [
         [
@@ -134,7 +201,16 @@ let HOOK_TO_METHOD_PARAMETERS = {
             "slimeknights.tconstruct.library.tools.context.ToolAttackContext",
             "float"
         ],
-        "void"
+        "void",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3) => {
+                try {
+                    func(arg0, arg1, arg2, arg3);
+                } catch (e) {
+                    console.error(`Error in afterMeleeHit of modifier ${arg1.getId().toString()}: ${e}`);
+                }
+            };
+        }
     ],
     "getProtectionModifier": [
         [
@@ -145,7 +221,17 @@ let HOOK_TO_METHOD_PARAMETERS = {
             "net.minecraft.world.damagesource.DamageSource",
             "float"
         ],
-        "float"
+        "float",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5) => {
+                try {
+                    return func(arg0, arg1, arg2, arg3, arg4, arg5);
+                } catch (e) {
+                    console.error(`Error in getProtectionModifier of modifier ${arg1.getId().toString()}: ${e}`);
+                    return arg5;
+                }
+            };
+        }
     ],
     "onAttacked": [
         [
@@ -157,7 +243,16 @@ let HOOK_TO_METHOD_PARAMETERS = {
             "float",
             "boolean"
         ],
-        "void"
+        "void",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5, arg6) => {
+                try {
+                    func(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+                } catch (e) {
+                    console.error(`Error in onAttacked of modifier ${arg1.getId().toString()}: ${e}`);
+                }
+            };
+        }
     ],
     "onBreakSpeed": [
         [
@@ -168,7 +263,16 @@ let HOOK_TO_METHOD_PARAMETERS = {
             "boolean",
             "float"
         ],
-        "void"
+        "void",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5) => {
+                try {
+                    func(arg0, arg1, arg2, arg3, arg4, arg5);
+                } catch (e) {
+                    console.error(`Error in onBreakSpeed of modifier ${arg1.getId().toString()}: ${e}`);
+                }
+            };
+        }
     ],
     "afterBlockBreak": [
         [
@@ -176,7 +280,16 @@ let HOOK_TO_METHOD_PARAMETERS = {
             "slimeknights.tconstruct.library.modifiers.ModifierEntry",
             "slimeknights.tconstruct.library.tools.context.ToolHarvestContext"
         ],
-        "void"
+        "void",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2) => {
+                try {
+                    func(arg0, arg1, arg2);
+                } catch (e) {
+                    console.error(`Error in afterBlockBreak of modifier ${arg1.getId().toString()}: ${e}`);
+                }
+            };
+        }
     ],
     "onProjectileLaunch": [
         [
@@ -189,7 +302,16 @@ let HOOK_TO_METHOD_PARAMETERS = {
             "slimeknights.tconstruct.library.tools.nbt.ModDataNBT",
             "boolean"
         ],
-        "void"
+        "void",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5, arg6, arg7) => {
+                try {
+                    func(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+                } catch (e) {
+                    console.error(`Error in onProjectileLaunch of modifier ${arg1.getId().toString()}: ${e}`);
+                }
+            };
+        }
     ]
 };
 
@@ -268,11 +390,11 @@ const ModifierManager = {
         });
         hookKeys.forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
             if (!(hook in HOOK_TO_METHOD_PARAMETERS)) return;
-            let [parameters, returnType] = HOOK_TO_METHOD_PARAMETERS[hook];
+            let [parameters, returnType, transformer] = HOOK_TO_METHOD_PARAMETERS[hook];
 
             modifierClassCreator.createMethod(hook, parameters, returnType)
                 .toPublic()
-                .codeJS(hooks[hook]);
+                .codeJS(transformer(hooks[hook]));
             
             // SPECIAL HANDLING
 

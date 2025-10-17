@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 /**
- * @fileoverview Algea | 海藻
+ * @fileoverview Algae | 海藻
  * - - - - -
  * Recovers durability under water.
  * 在水下回复耐久

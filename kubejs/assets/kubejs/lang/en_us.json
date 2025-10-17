@@ -215,6 +215,10 @@
     "modifier.kubejs.algae.flavor": "Long time ago, algae bricks are used to make alloys...",
     "modifier.kubejs.algae.description": "Tools are slowly repaired under water",
 
+    "modifier.kubejs.night_owl": "Night Owl",
+    "modifier.kubejs.night_owl.flavor": "Still staying up late?",
+    "modifier.kubejs.night_owl.description": "Continuously gain night vision effect in the dark",
+
     "modifier.kubejs.relaying": "Relaying",
     "modifier.kubejs.relaying.flavor": "Convey momentum!",
     "modifier.kubejs.relaying.description": "Attack enemies in a row",
