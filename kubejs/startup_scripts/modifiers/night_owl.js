@@ -35,7 +35,7 @@ let NIGHT_OWL = ModifierManager.registerCommonModifier("night_owl", "NightOwlMod
         if (!isCorrectSlot) return;
         if (holder.isPlayer() && (world.isNight() || world.isThundering())) {
             if (holder.getBlock().getLight() > NIGHT_OWL_MIN_LIGHT) return;
-            holder.addEffect(new MobEffectInstance("minecraft:night_vision", 201, 0, true, true, true));
+            holder.addEffect(new MobEffectInstance("minecraft:night_vision", 401, 0, true, false, true));
             if (!holder.isCreative()) {
                 if (world.getTime() % 60 == 0) {
                     ToolDamageUtil.damage(tool, 1, holder, stack);
