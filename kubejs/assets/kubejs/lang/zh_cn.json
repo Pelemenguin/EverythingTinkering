@@ -134,6 +134,10 @@
     "material.kubejs.kelp.flavor": "实验2-3：从海带中提取碘",
     "material.kubejs.kelp.encyclopedia": "在水下每3秒恢复一点耐久",
 
+    "material.kubejs.phantom_membrane": "幻翼膜",
+    "material.kubejs.phantom_membrane.flavor": "为什么幻翼总是能找到夜猫子？",
+    "material.kubejs.phantom_membrane.encyclopedia": "在黑暗中持续获得夜视效果，每3秒消耗一点耐久",
+
     "material.kubejs.sugar_cane": "甘蔗",
     "material.kubejs.sugar_cane.flavor": "更便宜的蜂蜜替代品！",
     "material.kubejs.sugar_cane.encyclopedia": "靠近X轴方向使用时有最多25%的概率不消耗耐久",

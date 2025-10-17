@@ -131,6 +131,10 @@
     "material.kubejs.kelp.flavor": "Experiment 2-3: Extract iodine from kelp",
     "material.kubejs.kelp.encyclopedia": "Recover 1 durability point every 3 seconds under water",
 
+    "material.kubejs.phantom_membrane": "Phantom Membrane",
+    "material.kubejs.phantom_membrane.flavor": "Why do phantoms always find night owls?",
+    "material.kubejs.phantom_membrane.encyclopedia": "Continuously gain night vision effect in the dark, consuming 1 durability every 3 seconds",
+
     "material.kubejs.sugar_cane": "Sugar Cane",
     "material.kubejs.sugar_cane.flavor": "A cheaper alternative to honey!",
     "material.kubejs.sugar_cane.encyclopedia": "Up to 25% chance to not consume durability when facing near the X-axis",

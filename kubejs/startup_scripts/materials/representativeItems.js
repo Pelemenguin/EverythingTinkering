@@ -49,6 +49,7 @@ let reprItems = {
     "tconstruct:string": "minecraft:string",
     "tconstruct:leather": "minecraft:leather",
     "kubejs:paper": "minecraft:paper",
+    "kubejs:phantom_membrane": "minecraft:phantom_membrane",
     "tconstruct:vine": "minecraft:vine",
     "kubejs:kelp": "minecraft:kelp",
     "tconstruct:ice": "minecraft:ice",

@@ -30,12 +30,13 @@ let NIGHT_OWL_MIN_LIGHT = 7;
 
 // eslint-disable-next-line no-unused-vars
 let NIGHT_OWL = ModifierManager.registerCommonModifier("night_owl", "NightOwlModifier", {
-    onInventoryTick: (tool, _modifier, world,/** @type {Internal.Player} */ holder, _itemSlot, _isSelected, _isCorrectSlot, stack) => {
+    onInventoryTick: (tool, _modifier, world,/** @type {Internal.Player} */ holder, _itemSlot, _isSelected, isCorrectSlot, stack) => {
         if (world.isClientSide()) return;
+        if (!isCorrectSlot) return;
         if (holder.isPlayer() && (world.isNight() || world.isThundering())) {
             if (holder.getBlock().getLight() > NIGHT_OWL_MIN_LIGHT) return;
-            holder.addEffect(new MobEffectInstance("minecraft:night_vision", 60, 0, true, true, true));
-            if (holder.isCreative()) {
+            holder.addEffect(new MobEffectInstance("minecraft:night_vision", 201, 0, true, true, true));
+            if (!holder.isCreative()) {
                 if (world.getTime() % 60 == 0) {
                     ToolDamageUtil.damage(tool, 1, holder, stack);
                 }
