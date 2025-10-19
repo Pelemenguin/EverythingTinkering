@@ -61,6 +61,18 @@
             "version": "1.20-2.0.6"
         },
         {
+            "name": "EntityJS",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/entityjs",
+            "author": "Liopyu",
+            "curse_id": {
+                "project": 967617,
+                "file": 6923410
+            },
+            "raw_file_name": "entityjs-0.6.3-1.20.1.jar",
+            "mod_id": "entityjs",
+            "version": "0.6.3-1.20.1"
+        },
+        {
             "name": "EventJS",
             "url": "https://www.curseforge.com/minecraft/mc-mods/eventjs",
             "author": "ZZZank",
@@ -71,6 +83,18 @@
             "raw_file_name": "EventJS-1.20.1-1.4.0.jar",
             "mod_id": "eventjs",
             "version": "1.4.0"
+        },
+        {
+            "name": "GeckoLib",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/geckolib",
+            "author": "Gecko",
+            "curse_id": {
+                "project": 388172,
+                "file": 7025129
+            },
+            "raw_file_name": "geckolib-forge-1.20.1-4.8.2.jar",
+            "mod_id": "geckolib",
+            "version": "4.8.2"
         },
         {
             "name": "Jade 🔍",

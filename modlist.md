@@ -5,7 +5,9 @@
 - [ClassJS](https://www.curseforge.com/minecraft/mc-mods/classjs) *0.1-alpha.4* by Pelemenguin
 - [Create](https://www.curseforge.com/minecraft/mc-mods/create) *6.0.4* by simibubi
 - [MmmMmmMmmMmm (Target Dummy)](https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm) *1.20-2.0.6* by MehVahdJukaar
+- [EntityJS](https://www.curseforge.com/minecraft/mc-mods/entityjs) *0.6.3-1.20.1* by Liopyu
 - [EventJS](https://www.curseforge.com/minecraft/mc-mods/eventjs) *1.4.0* by ZZZank
+- [GeckoLib](https://www.curseforge.com/minecraft/mc-mods/geckolib) *4.8.2* by Gecko
 - [Jade 🔍](https://www.curseforge.com/minecraft/mc-mods/jade) *${file.jarVersion}* by Snownee
 - [Just Enough Items (JEI)](https://www.curseforge.com/minecraft/mc-mods/jei) *15.20.0.106* by mezz
 - [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) *2001.6.5-build.16* by LatvianModder
