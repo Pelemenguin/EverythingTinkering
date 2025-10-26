@@ -651,6 +651,57 @@ declare namespace Annotation {
     namespace JavaClass {
     }
 
+    namespace Entities {
+        namespace AiCaches {
+            type ALL = "IcyTerracube";
+            type IcyTerracube = {
+                /**
+                 * - The Icy Terracube's attack target
+                 * - 寒冰粘土怪的攻击目标
+                 */
+                attackTarget?: Internal.Player,
+                /**
+                 * - The Icy Terracube's current status
+                 * - 寒冰粘土怪的当前状态
+                 * - - - - - -
+                 * - `IDLE`
+                 *   - The Icy Terracube is idle.
+                 *   - 寒冰粘土怪处于闲置状态。
+                 * - `MELEE_ATTACK`
+                 *   - The Icy Terracube is performing a melee attack.
+                 *     During this state, it will leap towards its target.
+                 *     When close enough, it will deal damage to the target.
+                 *   - 寒冰粘土怪正在进行近战攻击。
+                 *     在此状态下，它会跳向目标。
+                 *     当足够进时，它会对目标造成伤害。
+                 * - `SMASH_ATTACK`
+                 *   - The Icy Terracube is performing a smash attack.
+                 *     During this state, it will jump high into the air and slam down onto the ground,
+                 *     dealing area damage upon landing.
+                 *   - 寒冰粘土怪正在进行猛击攻击。
+                 *     在此状态下，它会高高跳起并猛然落地，
+                 *     在落地时造成范围伤害。
+                 * - `DESPAWNING`
+                 *   - The Icy Terracube is in the process of despawning.
+                 *     When time reaches the limit and the timer is not interrupted by other states, it will despawn.
+                 *   - 寒冰粘土怪正在计时消失时间。
+                 *     当时间达到时，若计时未被其它状态打断，则直接消失
+                 */
+                status?: "IDLE" | "MELEE_ATTACK" | "SMASH_ATTACK" | "DESPAWNING",
+                /**
+                 * - The last time the Icy Terracube landed on the ground
+                 * - 寒冰粘土怪上次落地的时间
+                 */
+                lastJump?: number,
+                /**
+                 * - The timestamp when the Icy Terracube started the despawn timer
+                 * - 寒冰粘土怪开始消失计时器的时间戳
+                 */
+                despawnTimer?: number
+            }
+        }
+    }
+
 }
 
 declare namespace BookArguments {
@@ -756,3 +807,6 @@ declare class ClassCreatorLegacy<T extends typeof any> {
     CONSTANT_InterfaceMethodref(className: string, methodName: string, methodDescriptor: string): number;
 }
 
+interface Function {
+    static __javaObject__: Internal.Class<?>;
+}

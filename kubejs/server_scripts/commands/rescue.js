@@ -33,7 +33,7 @@ let rescue = (event) => {
                     command.source.sendFailure(Component.translatable("command.kubejs.rescue.not_nan"));
                     return 0;
                 }
-                player.setHealth(1);
+                player.setHealth(0);
                 command.source.sendSuccess(Component.translatable("command.kubejs.rescue.success"), true);
                 return 1;
             })
