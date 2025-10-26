@@ -40,7 +40,6 @@ global.Entities.AiFunctions = {};
  */
 global.Entities.AiCaches = {};
 
-// eslint-disable-next-line no-unused-vars
 const KubeJSAiHelper = {
 
     boundingBoxInflateConstant: Math.sqrt(2.04) - 0.6,
