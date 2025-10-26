@@ -15,6 +15,7 @@
 
 /* global
     global: writable
+    console
 */
 
 /**
@@ -72,6 +73,7 @@ const KubeJSAiHelper = {
      * ) => (entity: Internal.LivingEntity) => void}
      */
     removeCache: (entityName) => (entity) => {
+        console.info("Cache removed for entity " + entity);
         global.Entities.AiCaches[entityName].remove(entity);
     },
 

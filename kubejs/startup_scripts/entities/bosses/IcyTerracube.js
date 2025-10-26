@@ -24,6 +24,10 @@
     Vec3d
 */
 
+let TERRACUBE_CONFIG = {
+    DESPAWN_TIME: 300
+};
+
 /**
  * @type {Internal.Map<Internal.LivingEntity, Annotation.Entities.AiCaches.IcyTerracube>}
  */
@@ -65,24 +69,29 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
     let attackTarget;
     if (!("attackTarget" in cache)) {
         attackTarget = level.getNearestPlayer(entity.x, entity.y, entity.z, MAX_TARGET_DISTANCE, TARGET_PREDICATE);
-        if (attackTarget == null) return;
-        console.info(`Found target: ${attackTarget}`);
         if (attackTarget == null) {
-            cache.status = "WATING_FOR_DESPAWN";
+            global.Entities.AiFunctions.IcyTerracube.checkDespawn(entity, level, cache);
+            return;
         }
+        console.info(`Found target: ${attackTarget}`);
         cache.attackTarget = attackTarget;
         dataStorage.putUUID("attackTarget", attackTarget.getUuid());
+        delete cache.despawnTimer;
     } else {
         attackTarget = level.getPlayerByUUID(dataStorage.getUUID("attackTarget"));
         if (!ADVANCED_PREDICATE(attackTarget)) {
             delete cache.attackTarget;
             console.info(`Targegt lost: ${attackTarget}`);
+            global.Entities.AiFunctions.IcyTerracube.checkDespawn(entity, level, cache);
+        } else {
+            delete cache.despawnTimer;
         }
     }
 
     /** @type {Annotation.Entities.AiCaches.IcyTerracube["status"]} */
     let status;
     if (!("status" in cache)) {
+        cache.status = "IDLE";
         status = "IDLE";
     } else {
         status = cache.status;
@@ -123,6 +132,23 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
         }
     }
 
+};
+
+/**
+ * @param {Internal.LivingEntity} entity 
+ * @param {Internal.Level} level 
+ * @param {Annotation.Entities.AiCaches.IcyTerracube} cache 
+ */
+global.Entities.AiFunctions.IcyTerracube.checkDespawn = (entity, level, cache) => {
+    if ("despawnTimer" in cache) {
+        if (level.getTime() - cache.despawnTimer > TERRACUBE_CONFIG.DESPAWN_TIME) {
+            console.info("Icy Terracube despawned!");
+            entity.discard();
+        }
+        return;
+    }
+    cache.despawnTimer = level.getTime();
+    console.info("Begin despawn timer at tick " + level.getTime());
 };
 
 StartupEvents.registry("minecraft:entity_type", event => {

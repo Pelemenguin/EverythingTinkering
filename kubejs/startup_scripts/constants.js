@@ -38,6 +38,7 @@ const TagKey = Java.loadClass("net.minecraft.tags.TagKey");
 const LivingEntity = Java.loadClass("net.minecraft.world.entity.LivingEntity");
 const Player = Java.loadClass("net.minecraft.world.entity.player.Player");
 const Entity = Java.loadClass("net.minecraft.world.entity.Entity");
+const Entity$RemovalReason = Java.loadClass("net.minecraft.world.entity.Entity$RemovalReason");
 const EquipmentSlot = Java.loadClass("net.minecraft.world.entity.EquipmentSlot");
 const ItemStack = Java.loadClass("net.minecraft.world.item.ItemStack");
 const MobEffectInstance = Java.loadClass("net.minecraft.world.effect.MobEffectInstance");
