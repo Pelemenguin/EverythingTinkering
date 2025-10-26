@@ -697,7 +697,33 @@ declare namespace Annotation {
                  * - Big jump cooldown, timestamp when it can be used again
                  * - 大跳冷却，下次可用时的时间戳
                  */
-                nextBigJump?: number
+                nextBigJump?: number,
+                /**
+                 * - Failed jump count.
+                 *   If the Icy Terracube fails to move much during a jump,
+                 *   (For example, blocked by a wall)
+                 *   Then the jump is considered failed.
+                 * - 失败跳跃计数。
+                 *   如果寒冰粘土怪在跳跃过程中未能移动太多，
+                 *   （例如，被墙壁阻挡）
+                 *   则该跳跃被视为失败。
+                 */
+                failedJumps?: number,
+                /**
+                 * - The starting position of a small jump
+                 * - 小跳的起始位置。
+                 */
+                jumpStartPos?: Vec3d,
+                /**
+                 * - The duration of current smash attack
+                 * - 当前猛击攻击的持续时间
+                 */
+                smashDuration?: number
+                /**
+                 * - The smash target position.
+                 * - 猛击目标位置。
+                 */
+                smashTarget?: Vec3d
             }
         }
     }

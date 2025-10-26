@@ -43,6 +43,8 @@ global.Entities.AiCaches = {};
 // eslint-disable-next-line no-unused-vars
 const KubeJSAiHelper = {
 
+    boundingBoxInflateConstant: Math.sqrt(2.04) - 0.6,
+
     /**
      * @type {(
      *     entityName: Annotation.Entities.AiCaches.ALL
@@ -86,22 +88,30 @@ const KubeJSAiHelper = {
      * The target of the melee attack.  
      * 近战攻击的目标。
      * 
-     * @param {number} reachDistance
-     * The reach distance.  
-     * 攻击距离。
-     * 
      * @returns {boolean}
      * Whether the attack was successful.  
      * 攻击是否成功。
      */
-    tryMeleeAttack: (entity, target, reachDistance) => {
-        if (entity.distanceToEntitySqr(target) <= reachDistance * reachDistance) {
-            let attribute = entity.getAttribute("minecraft:generic.attack_damage");
-            let damage = attribute == null ? 1 : attribute.getValue();
-            let source = target.damageSources().mobAttack(entity);
-            return target.attack(source, damage);
+    tryMeleeAttack: (entity, target) => {
+        if (entity.getBoundingBox().inflate(KubeJSAiHelper.boundingBoxInflateConstant).intersects(target.boundingBox)) {
+            return entity.doHurtTarget(target);
         }
         return false;
     },
+
+    /**
+     * @param {Internal.LivingEntity} entity
+     * The entity performing melee attacks on touched players.  
+     * 执行对触碰到的玩家进行近战攻击的实体。
+     */
+    meleeAttackTouchedPlayers: (entity) => {
+        entity.getLevel().getEntitiesWithin(entity.getBoundingBox().inflate(KubeJSAiHelper.boundingBoxInflateConstant)).forEach(/** @param {Internal.LivingEntity} e */ e => {
+            // e.attack(e.damageSources().mobAttack(entity), entity.getAttribute("minecraft:generic.attack_damage").getValue())
+            if (e == entity) return;
+            if (!e.isAttackable()) return;
+            if (!e.isLiving()) return;
+            entity.doHurtTarget(e);
+        });
+    }
 
 };

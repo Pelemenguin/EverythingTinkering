@@ -22,6 +22,8 @@
     console
     NBT
     Vec3d
+    ParticleTypes
+    MobEffectInstance
 */
 
 let ICY_TERRACUBE_CONFIG = {
@@ -30,7 +32,8 @@ let ICY_TERRACUBE_CONFIG = {
     BIG_JUMP_INTERVAL: 30,
     BIG_JUMP_MAX_DISTANCE: 7,
     BIG_JUMP_COOLDOWN: 60,
-    MAX_TARGET_DISTANCE: 50
+    MAX_TARGET_DISTANCE: 50,
+    FAILED_JUMP_DISTANCE_SQR: 1
 };
 
 /**
@@ -44,7 +47,13 @@ global.Entities.AiCaches.IcyTerracube = Utils.newMap();
  */
 global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
 
+    // Stop AI when dead
     if (entity.isDeadOrDying()) return;
+
+    // Prevent boat / minecart trick
+    if (entity.isPassenger()) {
+        entity.stopRiding();
+    }
 
     /** @param {Internal.Entity} target */
     const TARGET_PREDICATE = (target) => {
@@ -58,6 +67,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
 
     let level = entity.getLevel();
 
+    // No client operations
     if (level.isClientSide()) return;
 
     // Initialization
@@ -83,6 +93,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
         dataStorage.putUUID("attackTarget", attackTarget.getUuid());
         delete cache.despawnTimer;
     } else {
+        if (!dataStorage.contains("attackTarget")) return;
         attackTarget = level.getPlayerByUUID(dataStorage.getUUID("attackTarget"));
         if (!ADVANCED_PREDICATE(attackTarget)) {
             delete cache.attackTarget;
@@ -102,6 +113,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
         status = cache.status;
     }
 
+    // Control
     CONTROL:
     switch (status) {
         case "IDLE": {
@@ -110,7 +122,27 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
             break;
         }
         case "MELEE_ATTACK":{
+            // Keeps damaging
+            KubeJSAiHelper.tryMeleeAttack(entity, attackTarget);
+
             if (entity.onGround()) {
+
+                // Failed Jumps
+                if ("jumpStartPos" in cache) {
+                    let delta = entity.getPosition(1).subtract(cache.jumpStartPos);
+                    if (delta.horizontalDistanceSqr() < ICY_TERRACUBE_CONFIG.FAILED_JUMP_DISTANCE_SQR) {
+                        cache.failedJumps = ("failedJumps" in cache) ? cache.failedJumps + 1 : 1;
+                        if (cache.failedJumps >= 3) {
+                            // GOTO: SMASH_ATTACK
+                            cache.status = "SMASH_ATTACK";
+                            cache.smashDuration = 0;
+                            break CONTROL;
+                        }
+                    } else {
+                        cache.failedJumps = 0;
+                    }
+                }
+
                 let bigJump = false;
                 if ("nextBigJump" in cache) {
                     if (level.getTime() >= cache.nextBigJump) {
@@ -122,6 +154,8 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 } else {
                     cache.nextBigJump = level.getTime() + ICY_TERRACUBE_CONFIG.BIG_JUMP_COOLDOWN;
                 }
+
+                cache.jumpStartPos = entity.getPosition(1);
 
                 if (!("nextJump" in cache)) {
                     cache.nextJump = level.getTime();
@@ -136,12 +170,69 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 entity.addDeltaMovement([0, entity.getBlockStateOn().getBlock().getJumpFactor() * jumpMultiplier, 0]);
                 let direction = entity.getViewVector(1);
                 entity.addDeltaMovement(new Vec3d(direction.x(), 0, direction.z()).normalize().scale(moveMultiplier));
-                let succeeded = KubeJSAiHelper.tryMeleeAttack(entity, attackTarget, entity.reachDistance);
-                if (succeeded) cache.status = "IDLE";
+                if (bigJump) {
+                    delete cache.attackTarget;
+                    dataStorage.remove("attackTarget");
+                }
             }
             break;
         }
         case "SMASH_ATTACK": {
+
+            if (cache.smashDuration == 0) {
+                // Wait 1 second
+                console.info("[Icy Terracube] Smash attack begin!");
+                cache.smashTarget = attackTarget.getPosition(1);
+            } else if (cache.smashDuration == 20) {
+                // Jump up
+                entity.addDeltaMovement([0, 2, 0]);
+
+                // Horizontal speed
+                let differece = attackTarget.getPosition(1).subtract(entity.getPosition(1));
+                entity.addDeltaMovement(new Vec3d(differece.x(), 0, differece.y()).scale(0.05));
+            } else if (cache.smashDuration == 25) {
+                // Invisibility
+                entity.addEffect(new MobEffectInstance("minecraft:invisibility", 5));
+            } else if (cache.smashDuration == 28) {
+                // Teleport
+                console.info("[Icy Terracube] Teleported!");
+                entity.setPosition(cache.smashTarget.x(), cache.smashTarget.y() + 10, cache.smashTarget.z());
+
+                entity.modifyAttribute("minecraft:generic.attack_damage", "Smash attack damage boost", 4, "addition");
+                entity.modifyAttribute("forge:entity_gravity", "Smash attack gravity boost", 0.24, "addition");
+            } else if (cache.smashDuration > 28 && entity.onGround()) {
+                // Back to IDLE state
+                console.info("[Icy Terracube] Smashed!");
+                delete cache.smashDuration;
+                delete cache.smashTarget;
+                cache.failedJumps = 0;
+
+                // Ban 5 seconds big jumps
+                cache.nextBigJump = level.getTime() + 100;
+
+                // Deal squash damage
+                level.getEntitiesWithin(entity.getBoundingBox().expandTowards(0, -5, 0)).forEach(e => {
+                    if (e == entity) return;
+                    if (!e.isAttackable()) return;
+                    entity.doHurtTarget(e);
+                });
+
+                entity.removeAttribute("minecraft:generic.attack_damage", "Smash attack damage boost");
+                entity.removeAttribute("forge:entity_gravity", "Smash attack gravity boost");
+
+                entity.addDeltaMovement([Math.random(), 1, Math.random()]);
+
+                // GOTO: IDLE
+                cache.status = "IDLE";
+                return;
+            }
+            ++ cache.smashDuration;
+
+            /** @type {Internal.ServerLevel} */
+            let serverLevel = level;
+            serverLevel.sendParticles(ParticleTypes.ITEM_SNOWBALL, entity.x, entity.y, entity.z, 1, 1, 1, 50, 1);
+            serverLevel.sendParticles(ParticleTypes.ITEM_SNOWBALL, cache.smashTarget.x(), cache.smashTarget.y() + attackTarget.eyeHeight, cache.smashTarget.z(), 0, 1, 0, 100, 0.2);
+
             break;
         }
     }
@@ -184,7 +275,7 @@ EntityJSEvents.attributes(event => {
     event.modify("kubejs:icy_terracube", attr => {
         attr.add("minecraft:generic.max_health", 100);
         attr.add("minecraft:generic.attack_damage", 8);
-        attr.add("forge:entity_reach", 5.0);
-        attr.add("forge:block_reach", 5.0);
+        attr.add("forge:entity_reach", 3.0);
+        attr.add("forge:block_reach", 3.0);
     });
 });

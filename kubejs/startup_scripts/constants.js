@@ -45,6 +45,7 @@ const MobEffectInstance = Java.loadClass("net.minecraft.world.effect.MobEffectIn
 const ChatFormatting = Java.loadClass("net.minecraft.ChatFormatting");
 const LanguageManager = Java.loadClass("net.minecraft.client.resources.language.LanguageManager");
 const ParticleOptions = Java.loadClass("net.minecraft.core.particles.ParticleOptions");
+const ParticleTypes = Java.loadClass("net.minecraft.core.particles.ParticleTypes");
 const DustParticleOptions = Java.loadClass("net.minecraft.core.particles.DustParticleOptions");
 
 // Mantle
