@@ -24,8 +24,13 @@
     Vec3d
 */
 
-let TERRACUBE_CONFIG = {
-    DESPAWN_TIME: 300
+let ICY_TERRACUBE_CONFIG = {
+    DESPAWN_TIME: 300,
+    SMALL_JUMP_INTERVAL: 10,
+    BIG_JUMP_INTERVAL: 30,
+    BIG_JUMP_MAX_DISTANCE: 7,
+    BIG_JUMP_COOLDOWN: 60,
+    MAX_TARGET_DISTANCE: 50
 };
 
 /**
@@ -39,7 +44,7 @@ global.Entities.AiCaches.IcyTerracube = Utils.newMap();
  */
 global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
 
-    const MAX_TARGET_DISTANCE = 100;
+    if (entity.isDeadOrDying()) return;
 
     /** @param {Internal.Entity} target */
     const TARGET_PREDICATE = (target) => {
@@ -48,7 +53,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
 
     /** @param {Internal.Entity} */
     const ADVANCED_PREDICATE = (target) => {
-        return (TARGET_PREDICATE(target) && entity.distanceToEntitySqr(target) <= MAX_TARGET_DISTANCE * MAX_TARGET_DISTANCE);
+        return (TARGET_PREDICATE(target) && entity.distanceToEntitySqr(target) <= ICY_TERRACUBE_CONFIG.MAX_TARGET_DISTANCE * ICY_TERRACUBE_CONFIG.MAX_TARGET_DISTANCE);
     };
 
     let level = entity.getLevel();
@@ -68,12 +73,12 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
 
     let attackTarget;
     if (!("attackTarget" in cache)) {
-        attackTarget = level.getNearestPlayer(entity.x, entity.y, entity.z, MAX_TARGET_DISTANCE, TARGET_PREDICATE);
+        attackTarget = level.getNearestPlayer(entity.x, entity.y, entity.z, ICY_TERRACUBE_CONFIG.MAX_TARGET_DISTANCE, TARGET_PREDICATE);
         if (attackTarget == null) {
             global.Entities.AiFunctions.IcyTerracube.checkDespawn(entity, level, cache);
             return;
         }
-        console.info(`Found target: ${attackTarget}`);
+        console.info(`[Icy Terracube] Found target: ${attackTarget}`);
         cache.attackTarget = attackTarget;
         dataStorage.putUUID("attackTarget", attackTarget.getUuid());
         delete cache.despawnTimer;
@@ -81,7 +86,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
         attackTarget = level.getPlayerByUUID(dataStorage.getUUID("attackTarget"));
         if (!ADVANCED_PREDICATE(attackTarget)) {
             delete cache.attackTarget;
-            console.info(`Targegt lost: ${attackTarget}`);
+            console.info(`[Icy Terracube] Targegt lost: ${attackTarget}`);
             global.Entities.AiFunctions.IcyTerracube.checkDespawn(entity, level, cache);
         } else {
             delete cache.despawnTimer;
@@ -97,10 +102,6 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
         status = cache.status;
     }
 
-    const JUMP_HEIGHT = (Math.random() / 4) + 0.5;
-    const MOVE_SPEED = 0.3;
-    const JUMP_INTERVAL = 20;
-
     CONTROL:
     switch (status) {
         case "IDLE": {
@@ -110,18 +111,31 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
         }
         case "MELEE_ATTACK":{
             if (entity.onGround()) {
-                // 10 ticks between last land and next jump
-                if (!("lastJump" in cache)) {
-                    cache.lastJump = level.getTime();
-                    break CONTROL;
+                let bigJump = false;
+                if ("nextBigJump" in cache) {
+                    if (level.getTime() >= cache.nextBigJump) {
+                        if (entity.distanceToEntitySqr(attackTarget) < ICY_TERRACUBE_CONFIG.BIG_JUMP_MAX_DISTANCE * ICY_TERRACUBE_CONFIG.BIG_JUMP_MAX_DISTANCE) {
+                            bigJump = true;
+                            cache.nextBigJump = level.getTime() + ICY_TERRACUBE_CONFIG.BIG_JUMP_COOLDOWN;
+                        }
+                    }
                 } else {
-                    if ((level.getTime() - cache.lastJump) < JUMP_INTERVAL) break CONTROL;
+                    cache.nextBigJump = level.getTime() + ICY_TERRACUBE_CONFIG.BIG_JUMP_COOLDOWN;
                 }
-                cache.lastJump = level.getTime();
+
+                if (!("nextJump" in cache)) {
+                    cache.nextJump = level.getTime();
+                    break CONTROL;
+                } else if (level.getTime() < cache.nextJump) break CONTROL;
+
+                let jumpMultiplier = bigJump ? 1.2 : 0.5;
+                let moveMultiplier = bigJump ? 0.4 : 0.5;
+
+                cache.nextJump = level.getTime() + (bigJump ? ICY_TERRACUBE_CONFIG.BIG_JUMP_INTERVAL : ICY_TERRACUBE_CONFIG.SMALL_JUMP_INTERVAL);
                 entity.lookAt("eyes", attackTarget.getEyePosition());
-                entity.addDeltaMovement([0, entity.getBlockStateOn().getBlock().getJumpFactor() * JUMP_HEIGHT, 0]);
+                entity.addDeltaMovement([0, entity.getBlockStateOn().getBlock().getJumpFactor() * jumpMultiplier, 0]);
                 let direction = entity.getViewVector(1);
-                entity.addDeltaMovement(new Vec3d(direction.x(), 0, direction.z()).normalize().scale(MOVE_SPEED));
+                entity.addDeltaMovement(new Vec3d(direction.x(), 0, direction.z()).normalize().scale(moveMultiplier));
                 let succeeded = KubeJSAiHelper.tryMeleeAttack(entity, attackTarget, entity.reachDistance);
                 if (succeeded) cache.status = "IDLE";
             }
@@ -141,14 +155,14 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
  */
 global.Entities.AiFunctions.IcyTerracube.checkDespawn = (entity, level, cache) => {
     if ("despawnTimer" in cache) {
-        if (level.getTime() - cache.despawnTimer > TERRACUBE_CONFIG.DESPAWN_TIME) {
-            console.info("Icy Terracube despawned!");
+        if (level.getTime() - cache.despawnTimer > ICY_TERRACUBE_CONFIG.DESPAWN_TIME) {
+            console.info("[Icy Terracube] Despawned!");
             entity.discard();
         }
         return;
     }
     cache.despawnTimer = level.getTime();
-    console.info("Begin despawn timer at tick " + level.getTime());
+    console.info("[Icy Terracube] Begin despawn timer at tick " + level.getTime());
 };
 
 StartupEvents.registry("minecraft:entity_type", event => {

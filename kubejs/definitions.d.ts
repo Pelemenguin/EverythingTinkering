@@ -681,23 +681,23 @@ declare namespace Annotation {
                  *   - 寒冰粘土怪正在进行猛击攻击。
                  *     在此状态下，它会高高跳起并猛然落地，
                  *     在落地时造成范围伤害。
-                 * - `DESPAWNING`
-                 *   - The Icy Terracube is in the process of despawning.
-                 *     When time reaches the limit and the timer is not interrupted by other states, it will despawn.
-                 *   - 寒冰粘土怪正在计时消失时间。
-                 *     当时间达到时，若计时未被其它状态打断，则直接消失
                  */
-                status?: "IDLE" | "MELEE_ATTACK" | "SMASH_ATTACK" | "DESPAWNING",
+                status?: "IDLE" | "MELEE_ATTACK" | "SMASH_ATTACK",
                 /**
                  * - The last time the Icy Terracube landed on the ground
                  * - 寒冰粘土怪上次落地的时间
                  */
-                lastJump?: number,
+                nextJump?: number,
                 /**
                  * - The timestamp when the Icy Terracube started the despawn timer
                  * - 寒冰粘土怪开始消失计时器的时间戳
                  */
-                despawnTimer?: number
+                despawnTimer?: number,
+                /**
+                 * - Big jump cooldown, timestamp when it can be used again
+                 * - 大跳冷却，下次可用时的时间戳
+                 */
+                nextBigJump?: number
             }
         }
     }
