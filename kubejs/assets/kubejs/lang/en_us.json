@@ -24,6 +24,8 @@
     "death.attack.kubejs.hot_tool_attack": "%1$s discovered %2$s's weapon was lava",
     "death.attack.kubejs.hot_tool_attack.item": "%1$s discovered %2$s's %3$s was lava",
 
+    "death.attack.kubejs.icy_terracube_smash": "%1$s was smashed by %2$s and became part of the earth",
+
         "_comment_materials": " ----- Materials ----- ",
 
     "material.kubejs.soil": "Soil",

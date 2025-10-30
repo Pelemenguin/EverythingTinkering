@@ -31,6 +31,7 @@ const NativeJavaClass = Java.loadClass("dev.latvian.mods.rhino.NativeJavaClass")
 
 // Minecraft
 const SimpleSoundInstance = Java.loadClass("net.minecraft.client.resources.sounds.SimpleSoundInstance");
+const $Holder = Java.loadClass("net.minecraft.core.Holder");
 const NonNullList = Java.loadClass("net.minecraft.core.NonNullList");
 const Registries = Java.loadClass("net.minecraft.core.registries.Registries");
 const ResourceKey = Java.loadClass("net.minecraft.resources.ResourceKey");

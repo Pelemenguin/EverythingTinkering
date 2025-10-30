@@ -58,6 +58,7 @@ const KubeJSAiHelper = {
      * AI步骤回调。
      */
     aiStepCallbackHelper: (entityName) => (entity) => {
+        if (entity.getLevel().isClientSide()) return;
         let callback = global.Entities.AiFunctions[entityName];
         let cacheMap = global.Entities.AiCaches[entityName];
         let cache = cacheMap.get(entity);
@@ -74,12 +75,13 @@ const KubeJSAiHelper = {
      * ) => (entity: Internal.LivingEntity) => void}
      */
     removeCache: (entityName) => (entity) => {
+        if (entity.getLevel().isClientSide()) return;
         console.info("Cache removed for entity " + entity);
         global.Entities.AiCaches[entityName].remove(entity);
     },
 
     /**
-     * @param {Internal.LivingEntity} entity 
+     * @param {Internal.Mob} entity 
      * The entity performing a melee attack.  
      * 执行近战攻击的实体。
      * 
@@ -92,7 +94,9 @@ const KubeJSAiHelper = {
      * 攻击是否成功。
      */
     tryMeleeAttack: (entity, target) => {
-        if (entity.getBoundingBox().inflate(KubeJSAiHelper.boundingBoxInflateConstant).intersects(target.boundingBox)) {
+        let d = entity.getPerceivedTargetDistanceSquareForMeleeAttack(target);
+        let atkReachSqr = entity.getBbWidth() * 2 + target.getBbWidth();
+        if (d <= atkReachSqr) {
             return entity.doHurtTarget(target);
         }
         return false;
@@ -105,11 +109,7 @@ const KubeJSAiHelper = {
      */
     meleeAttackTouchedPlayers: (entity) => {
         entity.getLevel().getEntitiesWithin(entity.getBoundingBox().inflate(KubeJSAiHelper.boundingBoxInflateConstant)).forEach(/** @param {Internal.LivingEntity} e */ e => {
-            // e.attack(e.damageSources().mobAttack(entity), entity.getAttribute("minecraft:generic.attack_damage").getValue())
-            if (e == entity) return;
-            if (!e.isAttackable()) return;
-            if (!e.isLiving()) return;
-            entity.doHurtTarget(e);
+            KubeJSAiHelper.tryMeleeAttack(entity, e);
         });
     }
 

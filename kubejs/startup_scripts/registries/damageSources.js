@@ -15,8 +15,10 @@
 
 /* global
     DamageSource
+    Entity
     Registries
     ResourceKey
+    $Holder
 */
 
 /**
@@ -26,7 +28,7 @@
 let damageSourceCreatorHelper = (resKey) => {
     return (level, direct, actual, pos) => {
         let holder = level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(resKey);
-        if (actual === undefined && pos === undefined) return new DamageSource(holder, direct);
+        if (actual === undefined && pos === undefined) return DamageSource.__javaObject__.getConstructor($Holder, Entity).newInstance(holder, direct);
         if (pos === undefined) return new DamageSource(holder, direct, actual);
         return new DamageSource(holder, direct, actual, pos);
     };
@@ -35,7 +37,8 @@ let damageSourceCreatorHelper = (resKey) => {
 const KubeJSDamageTypes = {
     PAPERCUT: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:papercut"),
     HOT_TOOL: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:hot_tool"),
-    HOT_TOOL_ATTACK: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:hot_tool_attack")
+    HOT_TOOL_ATTACK: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:hot_tool_attack"),
+    ICY_TERRACUBE_SMASH: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:icy_terracube_smash")
 };
 
 const KubeJSDamageSources = {
@@ -56,6 +59,12 @@ const KubeJSDamageSources = {
      * - Create damage source of type `kubejs:hot_tool_attack`.
      * - 创建一个类型为 `kubejs:hot_tool_attack` 的伤害来源。
      */
-    hotToolAttack: damageSourceCreatorHelper(KubeJSDamageTypes.HOT_TOOL_ATTACK)
+    hotToolAttack: damageSourceCreatorHelper(KubeJSDamageTypes.HOT_TOOL_ATTACK),
+
+    /**
+     * - Create damage source of type `kubejs:icy_terracube_smash`.
+     * - 创建一个类型为 `kubejs:icy_terracube_smash` 的伤害来源。
+     */
+    icyTerracubeSmash: damageSourceCreatorHelper(KubeJSDamageTypes.ICY_TERRACUBE_SMASH)
 
 };

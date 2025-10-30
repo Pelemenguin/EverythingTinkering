@@ -24,6 +24,7 @@
     Vec3d
     ParticleTypes
     MobEffectInstance
+    KubeJSDamageSources
 */
 
 let ICY_TERRACUBE_CONFIG = {
@@ -214,7 +215,8 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 level.getEntitiesWithin(entity.getBoundingBox().expandTowards(0, -5, 0)).forEach(e => {
                     if (e == entity) return;
                     if (!e.isAttackable()) return;
-                    entity.doHurtTarget(e);
+                    let atk = entity.getAttribute("minecraft:generic.attack_damage").getValue();
+                    e.attack(KubeJSDamageSources.icyTerracubeSmash(level, entity), atk);
                 });
 
                 entity.removeAttribute("minecraft:generic.attack_damage", "Smash attack damage boost");
