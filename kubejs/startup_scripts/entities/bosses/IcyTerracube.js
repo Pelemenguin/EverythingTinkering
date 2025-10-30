@@ -199,7 +199,16 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 console.info("[Icy Terracube] Teleported!");
                 entity.setPosition(cache.smashTarget.x(), cache.smashTarget.y() + 10, cache.smashTarget.z());
 
-                entity.modifyAttribute("minecraft:generic.attack_damage", "Smash attack damage boost", 4, "addition");
+                let damageBoost;
+                switch (entity.getLevel().getDifficulty().getId()) {
+                    case 0: damageBoost = 0; break;
+                    case 1: damageBoost = 5; break;
+                    case 2: damageBoost = 10; break;
+                    case 3: damageBoost = 15; break;
+                    default: console.info("Unknown difficulty: " + entity.getLevel().getDifficulty().getId());
+                }
+
+                entity.modifyAttribute("minecraft:generic.attack_damage", "Smash attack damage boost", damageBoost, "addition");
                 entity.modifyAttribute("forge:entity_gravity", "Smash attack gravity boost", 0.24, "addition");
             } else if (cache.smashDuration > 28 && entity.onGround()) {
                 // Back to IDLE state

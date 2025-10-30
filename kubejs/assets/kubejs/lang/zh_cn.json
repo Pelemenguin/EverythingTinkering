@@ -25,7 +25,7 @@
     "death.attack.kubejs.hot_tool_attack": "%1$s发现了%2$s的武器是熔岩做的",
     "death.attack.kubejs.hot_tool_attack.item": "%1$s发现了%2$s的%3$s是熔岩做的",
 
-    "death.attack.kubejs.icy_terracube_smash": "%1$s被%2$s砸死了",
+    "death.attack.kubejs.icy_terracube_smash": "%1$s被%2$s变成了大地的一部分",
 
         "_comment_materials": " ----- 材料 ----- ",
 
