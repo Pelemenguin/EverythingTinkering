@@ -28,7 +28,6 @@
 */
 
 let ICY_TERRACUBE_CONFIG = {
-    DESPAWN_TIME: 300,
     SMALL_JUMP_INTERVAL: 10,
     BIG_JUMP_INTERVAL: 30,
     BIG_JUMP_MAX_DISTANCE: 7,
@@ -84,22 +83,26 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
 
     let attackTarget;
     if (!("attackTarget" in cache)) {
-        attackTarget = level.getNearestPlayer(entity.x, entity.y, entity.z, ICY_TERRACUBE_CONFIG.MAX_TARGET_DISTANCE, TARGET_PREDICATE);
-        if (attackTarget == null) {
-            global.Entities.AiFunctions.IcyTerracube.checkDespawn(entity, level, cache);
-            return;
+        if (dataStorage.contains("attackTarget")) {
+            attackTarget = level.getPlayerByUUID(dataStorage.getUUID("attackTarget"));
+        } else {
+            attackTarget = level.getNearestPlayer(entity.x, entity.y, entity.z, ICY_TERRACUBE_CONFIG.MAX_TARGET_DISTANCE, TARGET_PREDICATE);
+            if (attackTarget == null) {
+                entity.discard();
+                return;
+            }
+            console.info(`[Icy Terracube] Found target: ${attackTarget}`);
+            cache.attackTarget = attackTarget;
+            dataStorage.putUUID("attackTarget", attackTarget.getUuid());
+            delete cache.despawnTimer;
         }
-        console.info(`[Icy Terracube] Found target: ${attackTarget}`);
-        cache.attackTarget = attackTarget;
-        dataStorage.putUUID("attackTarget", attackTarget.getUuid());
-        delete cache.despawnTimer;
     } else {
         if (!dataStorage.contains("attackTarget")) return;
         attackTarget = level.getPlayerByUUID(dataStorage.getUUID("attackTarget"));
         if (!ADVANCED_PREDICATE(attackTarget)) {
             delete cache.attackTarget;
             console.info(`[Icy Terracube] Targegt lost: ${attackTarget}`);
-            global.Entities.AiFunctions.IcyTerracube.checkDespawn(entity, level, cache);
+            entity.discard();
         } else {
             delete cache.despawnTimer;
         }
@@ -250,23 +253,6 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
 
 };
 
-/**
- * @param {Internal.LivingEntity} entity 
- * @param {Internal.Level} level 
- * @param {Annotation.Entities.AiCaches.IcyTerracube} cache 
- */
-global.Entities.AiFunctions.IcyTerracube.checkDespawn = (entity, level, cache) => {
-    if ("despawnTimer" in cache) {
-        if (level.getTime() - cache.despawnTimer > ICY_TERRACUBE_CONFIG.DESPAWN_TIME) {
-            console.info("[Icy Terracube] Despawned!");
-            entity.discard();
-        }
-        return;
-    }
-    cache.despawnTimer = level.getTime();
-    console.info("[Icy Terracube] Begin despawn timer at tick " + level.getTime());
-};
-
 StartupEvents.registry("minecraft:entity_type", event => {
 
     const FALL_DAMAGE_RESOURCE_KEY = ResourceKey.create(Registries.DAMAGE_TYPE, "minecraft:fall");
@@ -278,6 +264,8 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .isInvulnerableTo(ctx => ctx.damageSource.is(FALL_DAMAGE_RESOURCE_KEY))
         .aiStep(KubeJSAiHelper.aiStepCallbackHelper("IcyTerracube"))
         .onRemovedFromWorld(KubeJSAiHelper.removeCache("IcyTerracube"))
+        .fallSounds("minecraft:entity.slime.squish", "minecraft:entity.slime.squish")
+        .setHurtSound(() => "minecraft:entity.slime.hurt")
     ;
 
 });
