@@ -33,6 +33,7 @@ let ICY_TERRACUBE_CONFIG = {
     BIG_JUMP_INTERVAL: 30,
     BIG_JUMP_MAX_DISTANCE: 7,
     BIG_JUMP_COOLDOWN: 60,
+    LONG_THROW_COOLDOWN: 140,
     MAX_TARGET_DISTANCE: 50,
     FAILED_JUMP_DISTANCE_SQR: 1
 };
@@ -68,9 +69,6 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
 
     let level = entity.getLevel();
 
-    // No client operations
-    if (level.isClientSide()) return;
-
     // Initialization
     let persistent = entity.getForgePersistentData();
     /** @type {Internal.CompoundTag} */
@@ -98,7 +96,9 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
             delete cache.despawnTimer;
         }
     } else {
-        if (!dataStorage.contains("attackTarget")) return;
+        if (!dataStorage.contains("attackTarget")) {
+            dataStorage.putUUID(cache.attackTarget.getUuid());
+        }
         attackTarget = level.getPlayerByUUID(dataStorage.getUUID("attackTarget"));
         if (!ADVANCED_PREDICATE(attackTarget)) {
             delete cache.attackTarget;
@@ -131,6 +131,13 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
             KubeJSAiHelper.tryMeleeAttack(entity, attackTarget);
 
             if (entity.onGround()) {
+
+                if (cache.nextBigJump <= level.getTime() && entity.distanceToEntitySqr(attackTarget) >= 400) {
+                    cache.status = "LONG_THROW";
+                    cache.nextBigJump = level.getTime() + ICY_TERRACUBE_CONFIG.LONG_THROW_COOLDOWN;
+                    cache.longThrowLasted = 0;
+                    break CONTROL;
+                }
 
                 // Failed Jumps
                 if ("jumpStartPos" in cache) {
@@ -248,6 +255,29 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
             serverLevel.sendParticles(ParticleTypes.ITEM_SNOWBALL, entity.x, entity.y, entity.z, 1, 1, 1, 50, 1);
             serverLevel.sendParticles(ParticleTypes.ITEM_SNOWBALL, cache.smashTarget.x(), cache.smashTarget.y() + attackTarget.eyeHeight, cache.smashTarget.z(), 0, 1, 0, 100, 0.2);
 
+            break;
+        }
+        case "LONG_THROW": {
+            if (cache.longThrowLasted >= 100) {
+                delete cache.longThrowLasted;
+                cache.status = "SMASH_ATTACK";
+                cache.smashDuration = 0;
+                break CONTROL;
+            }
+            if (cache.longThrowLasted % 2 == 0) {
+                let facing = entity.getViewVector(1);
+                let throwPosition = entity.getEyePosition().add(facing);
+                /** @type {Internal.Projectile} */
+                let projectile = level.createEntity("kubejs:icy_clay_ball");
+                projectile.setPosition(throwPosition.x(), throwPosition.y(), throwPosition.z());
+                projectile.addDeltaMovement(facing.scale(entity.distanceToEntity(attackTarget) / 10));
+                level.addFreshEntity(projectile);
+                console.info("Created projectile: " + projectile);
+            }
+            if (cache.longThrowLasted % 5 == 0) {
+                entity.lookAt("eyes", attackTarget.position());
+            }
+            ++ cache.longThrowLasted;
             break;
         }
     }

@@ -681,8 +681,11 @@ declare namespace Annotation {
                  *   - 寒冰粘土怪正在进行猛击攻击。
                  *     在此状态下，它会高高跳起并猛然落地，
                  *     在落地时造成范围伤害。
+                 * - `LONG_THROW`
+                 *   - The Icy Terracube is throwing Icy Clay Balls to deal damage to far away players.
+                 *   - 寒冰粘土怪正在投掷寒冰粘土球以对远处的玩家造成伤害。
                  */
-                status?: "IDLE" | "MELEE_ATTACK" | "SMASH_ATTACK",
+                status?: "IDLE" | "MELEE_ATTACK" | "SMASH_ATTACK" | "LONG_THROW",
                 /**
                  * - The last time the Icy Terracube landed on the ground
                  * - 寒冰粘土怪上次落地的时间
@@ -718,12 +721,22 @@ declare namespace Annotation {
                  * - The duration of current smash attack
                  * - 当前猛击攻击的持续时间
                  */
-                smashDuration?: number
+                smashDuration?: number,
                 /**
                  * - The smash target position.
                  * - 猛击目标位置。
                  */
-                smashTarget?: Vec3d
+                smashTarget?: Vec3d,
+                /**
+                 * - The tick count lasted during long throw attack
+                 * - 远程投掷攻击已持续的Tick计数
+                 */
+                longThrowLasted?: number,
+                /**
+                 * - The next tick when the Icy Terracube can throw an Icy Clay Ball
+                 * - 寒冰粘土怪下次可以投掷寒冰粘土球的Tick
+                 */
+                nextLongThrow?: number,
             }
         }
     }
