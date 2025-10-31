@@ -19,6 +19,9 @@
     MobEffectInstance
     JavaUtils
     ResourceLocation
+    Direction
+    TagKey
+    Registries
 */
 
 global.Entities.CommonFunctions.IcyClayBall = {
@@ -52,7 +55,7 @@ global.Entities.CommonFunctions.IcyClayBall = {
         let {x: offsetX, y: offsetY, z: offsetZ} = context.result.getDirection();
         let placingPos = context.result.getBlockPos().offset(offsetX, offsetY, offsetZ);
         let placingBlock = context.entity.getLevel().getBlock(placingPos.getX(), placingPos.getY(), placingPos.getZ());
-        if (placingBlock.getBlockState().isAir() && placingBlock.getDown().getBlockState().isSolid()) {
+        if (placingBlock.getBlockState().isAir() && placingBlock.getDown().getBlockState().isFaceSturdy(context.entity.getLevel().getChunkSource().getLevel(), placingBlock.getPos().below(), Direction.UP)) {
             context.entity.getLevel().setBlockAndUpdate(placingBlock.getPos(), Blocks.SNOW.defaultBlockState());
         }
         context.entity.discard();
@@ -65,9 +68,11 @@ global.Entities.CommonFunctions.IcyClayBall = {
         context.entity.discard();
         /** @type {Internal.LivingEntity} */
         let living = context.result.getEntity();
-        if (living.isLiving() && context.result.getEntity().isAttackable()) {
+        if (living.getType() === "kubejs:icy_terracube") {
+            living.heal(4);
+        } else if (context.result.getEntity().isAttackable()) {
             if (living.attack(context.entity.damageSources().freeze(), global.Entities.CommonFunctions.IcyClayBall.DAMAGE)) {
-                living.addEffect(new MobEffectInstance("minecraft:slowness", 20, 0));
+                if (living.isLiving()) living.addEffect(new MobEffectInstance("minecraft:slowness", 20, 0));
             }
         }
     },
@@ -75,6 +80,8 @@ global.Entities.CommonFunctions.IcyClayBall = {
     DAMAGE: 4
 
 };
+
+global.Entities.TagKeys.ICY_CLAY_BALL = TagKey.create(Registries.ENTITY_TYPE, "kubejs:icy_clay_ball");
 
 StartupEvents.registry("minecraft:entity_type", event => {
     event.create("kubejs:icy_clay_ball", "entityjs:projectile")
@@ -84,6 +91,5 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .onHitEntity(context => global.Entities.CommonFunctions.IcyClayBall.onHitEntity(context))
         .tick(entity => global.Entities.CommonFunctions.IcyClayBall.tick(entity))
         .sized(0.25, 0.25)
-        // .item(builder => builder.projectileVelocity(1.5))
     ;
 });

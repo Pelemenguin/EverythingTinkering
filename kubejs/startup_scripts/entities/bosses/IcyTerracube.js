@@ -25,6 +25,7 @@
     ParticleTypes
     MobEffectInstance
     KubeJSDamageSources
+    TagKey
 */
 
 let ICY_TERRACUBE_CONFIG = {
@@ -252,6 +253,8 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
     }
 
 };
+
+global.Entities.TagKeys.ICY_TERRACUBE = TagKey.create(Registries.ENTITY_TYPE, "kubejs:icy_terracube");
 
 StartupEvents.registry("minecraft:entity_type", event => {
 

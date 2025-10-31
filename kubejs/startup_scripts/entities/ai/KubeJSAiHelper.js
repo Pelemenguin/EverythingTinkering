@@ -25,6 +25,12 @@
 global.Entities = {};
 
 /**
+ * - Stores entity `TagKey`s.
+ * - 储存实体的`TagKey`。
+ */
+global.Entities.TagKeys = {};
+
+/**
  * - Stores AI related functions for entities.
  * - 储存实体的AI相关函数。
  */
