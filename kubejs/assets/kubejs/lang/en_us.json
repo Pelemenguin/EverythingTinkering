@@ -1,6 +1,16 @@
 {
     "generator.kubejs.default": "Modpack Default Preset",
 
+        "_comment_items": " ----- Items ----- ",
+
+    "item.kubejs.icy_terracube": "Icy Terracube Spawn Egg",
+    "item.kubejs.icy_clay_ball": "Icy Clay Ball",
+
+        "_comment_entities": " ----- Entities ----- ",
+
+    "entity.kubejs.icy_terracube": "Icy Terracube",
+    "entity.kubejs.icy_clay_ball": "Thrown Icy Clay Ball",
+
         "_comment_command": " ----- Command ---- ",
 
     "command.kubejs.item_list.parts.name": "Part list of %s",

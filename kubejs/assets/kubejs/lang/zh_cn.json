@@ -2,6 +2,16 @@
 
     "generator.kubejs.default": "整合包默认预设",
 
+        "_comment_items": " ----- 物品 ----- ",
+
+    "item.kubejs.icy_terracube": "寒冰粘土怪刷怪蛋",
+    "item.kubejs.icy_clay_ball": "冰粘土球",
+
+        "_comment_entities": " ----- 实体 ----- ",
+
+    "entity.kubejs.icy_terracube": "寒冰粘土怪",
+    "entity.kubejs.icy_clay_ball": "掷出的冰粘土球",
+
         "_comment_command": " ----- 命令 ---- ",
 
     "command.kubejs.item_list.parts.name": "%s的部件列表",

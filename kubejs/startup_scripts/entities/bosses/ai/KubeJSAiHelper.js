@@ -40,6 +40,12 @@ global.Entities.AiFunctions = {};
  */
 global.Entities.AiCaches = {};
 
+/**
+ * - Stores common functions.
+ * - 储存一般函数。
+ */
+global.Entities.CommonFunctions = {};
+
 const KubeJSAiHelper = {
 
     boundingBoxInflateConstant: Math.sqrt(2.04) - 0.6,
