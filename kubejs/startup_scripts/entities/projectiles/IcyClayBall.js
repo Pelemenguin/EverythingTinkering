@@ -70,6 +70,8 @@ global.Entities.CommonFunctions.IcyClayBall = {
         let living = context.result.getEntity();
         if (living.getType() === "kubejs:icy_terracube") {
             living.heal(4);
+        } else if (living.getType() === "tconstruct:terracube") {
+            return;
         } else if (context.result.getEntity().isAttackable()) {
             if (living.attack(context.entity.damageSources().freeze(), global.Entities.CommonFunctions.IcyClayBall.DAMAGE)) {
                 if (living.isLiving()) living.addEffect(new MobEffectInstance("minecraft:slowness", 20, 0));

@@ -684,8 +684,11 @@ declare namespace Annotation {
                  * - `LONG_THROW`
                  *   - The Icy Terracube is throwing Icy Clay Balls to deal damage to far away players.
                  *   - 寒冰粘土怪正在投掷寒冰粘土球以对远处的玩家造成伤害。
+                 * - `CIRCULAR_THROW`
+                 *   - The Icy Terracube is throwing Icy Clay Balls in a circular pattern around itself.
+                 *   - 寒冰粘土怪正在围绕自身以圆形模式投掷寒冰粘土球。
                  */
-                status?: "IDLE" | "MELEE_ATTACK" | "SMASH_ATTACK" | "LONG_THROW",
+                status?: "IDLE" | "MELEE_ATTACK" | "SMASH_ATTACK" | "LONG_THROW" | "CIRCULAR_THROW",
                 /**
                  * - The last time the Icy Terracube landed on the ground
                  * - 寒冰粘土怪上次落地的时间
@@ -737,6 +740,11 @@ declare namespace Annotation {
                  * - 寒冰粘土怪下次可以投掷寒冰粘土球的Tick
                  */
                 nextLongThrow?: number,
+                /**
+                 * - The tick count lasted during circular throw attack
+                 * - 环绕投掷攻击已持续的Tick计数
+                 */
+                circularThrowLasted?: number,
             }
         }
     }

@@ -26,13 +26,15 @@
     MobEffectInstance
     KubeJSDamageSources
     TagKey
+    ResourceLocation
+    JavaMath
 */
 
 let ICY_TERRACUBE_CONFIG = {
     SMALL_JUMP_INTERVAL: 10,
     BIG_JUMP_INTERVAL: 30,
     BIG_JUMP_MAX_DISTANCE: 7,
-    BIG_JUMP_COOLDOWN: 60,
+    BIG_JUMP_COOLDOWN: 160,
     LONG_THROW_COOLDOWN: 140,
     MAX_TARGET_DISTANCE: 50,
     FAILED_JUMP_DISTANCE_SQR: 1
@@ -183,8 +185,9 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 let direction = entity.getViewVector(1);
                 entity.addDeltaMovement(new Vec3d(direction.x(), 0, direction.z()).normalize().scale(moveMultiplier));
                 if (bigJump) {
-                    delete cache.attackTarget;
-                    dataStorage.remove("attackTarget");
+                    cache.status = "CIRCULAR_THROW";
+                    cache.circularThrowLasted = 0;
+                    break CONTROL;
                 }
             }
             break;
@@ -280,6 +283,36 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
             ++ cache.longThrowLasted;
             break;
         }
+        case "CIRCULAR_THROW": {
+            if (cache.circularThrowLasted >= 100) {
+                delete cache.circularThrowLasted;
+                cache.status = "IDLE";
+                delete cache.attackTarget;
+                dataStorage.remove("attackTarget");
+                break CONTROL;
+            }
+            if (cache.circularThrowLasted % 20 == 0) {
+                for (let i = 0; i < 20; i ++) {
+                    let angle = JavaMath.PI * (i + cache.circularThrowLasted % 40 / 20) / 10;
+                    let direction = new Vec3d(Math.cos(angle), 0, Math.sin(angle));
+                    let throwing;
+                    if (Math.random() < 0.1) {
+                        /** @type {Internal.Slime} */
+                        let created = level.createEntity("tconstruct:terracube");
+                        created.setSize(2, false);
+                        throwing = created;
+                    } else {
+                        throwing = level.createEntity("kubejs:icy_clay_ball");
+                    }
+                    let throwingPosition = entity.position().add(direction.scale(2)).add(0, 2, 0);
+                    throwing.setPosition(throwingPosition.x(), throwingPosition.y(), throwingPosition.z());
+                    throwing.addDeltaMovement(direction);
+                    level.addFreshEntity(throwing);
+                }
+            }
+            ++ cache.circularThrowLasted;
+            break;
+        }
     }
 
 };
@@ -297,7 +330,7 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .isInvulnerableTo(ctx => ctx.damageSource.is(FALL_DAMAGE_RESOURCE_KEY))
         .aiStep(KubeJSAiHelper.aiStepCallbackHelper("IcyTerracube"))
         .onRemovedFromWorld(KubeJSAiHelper.removeCache("IcyTerracube"))
-        .fallSounds("minecraft:entity.slime.squish", "minecraft:entity.slime.squish")
+        .fallSounds(ResourceLocation.tryParse("minecraft:entity.slime.squish"), ResourceLocation.tryParse("minecraft:entity.slime.squish"))
         .setHurtSound(() => "minecraft:entity.slime.hurt")
     ;
 
