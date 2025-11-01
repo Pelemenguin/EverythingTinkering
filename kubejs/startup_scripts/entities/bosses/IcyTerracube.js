@@ -46,13 +46,14 @@ let ICY_TERRACUBE_CONFIG = {
 global.Entities.AiCaches.IcyTerracube = Utils.newMap();
 
 /**
- * @param {Internal.LivingEntity} entity
+ * @param {Internal.Mob} entity
  * @param {Annotation.Entities.AiCaches.IcyTerracube} cache
  */
 global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
 
-    // Stop AI when dead
+    // Stop AI when dead or No AI
     if (entity.isDeadOrDying()) return;
+    if (entity.isNoAi()) return;
 
     // Prevent boat / minecart trick
     if (entity.isPassenger()) {
@@ -134,6 +135,11 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
 
             if (entity.onGround()) {
 
+                if (entity.getHealth() < entity.getMaxHealth() * 0.5 && Math.random() < 0.05) {
+                    cache.terracubesAte = 0;
+                    cache.status = "HEAL";
+                }
+
                 if (cache.nextBigJump <= level.getTime() && entity.distanceToEntitySqr(attackTarget) >= 400) {
                     cache.status = "LONG_THROW";
                     cache.nextBigJump = level.getTime() + ICY_TERRACUBE_CONFIG.LONG_THROW_COOLDOWN;
@@ -185,9 +191,14 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 let direction = entity.getViewVector(1);
                 entity.addDeltaMovement(new Vec3d(direction.x(), 0, direction.z()).normalize().scale(moveMultiplier));
                 if (bigJump) {
-                    cache.status = "CIRCULAR_THROW";
-                    cache.circularThrowLasted = 0;
-                    break CONTROL;
+                    if (entity.getHealth() > entity.getMaxHealth() * 0.25) {
+                        cache.status = "CIRCULAR_THROW";
+                        cache.circularThrowLasted = 0;
+                        break CONTROL;
+                    } else {
+                        cache.status = "IDLE";
+                        break CONTROL;
+                    }
                 }
             }
             break;
@@ -299,7 +310,8 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                     if (Math.random() < 0.1) {
                         /** @type {Internal.Slime} */
                         let created = level.createEntity("tconstruct:terracube");
-                        created.setSize(2, false);
+                        created.setSize(2, true);
+                        created.setHealth(created.getMaxHealth());
                         throwing = created;
                     } else {
                         throwing = level.createEntity("kubejs:icy_clay_ball");
@@ -311,6 +323,75 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 }
             }
             ++ cache.circularThrowLasted;
+            break;
+        }
+        case "HEAL": {
+            let eatTarget;
+
+            if (!("eatTarget" in cache)) {
+                /** @type {Internal.Entity[]} */
+                let possibleEatTargets = level.getEntitiesWithin(entity.getBoundingBox().inflate(10)).filter(e => e.getType() == "tconstruct:terracube").toArray();
+
+                if (possibleEatTargets.length == 0) {
+                    cache.status = "IDLE";
+                    break CONTROL;
+                }
+
+                let distance = +Infinity;
+                let nearestEntityIndex = 0;
+                possibleEatTargets.map(e => entity.distanceToEntitySqr(e)).forEach((v, i) => {
+                    if (v < distance) {
+                        distance = v;
+                        nearestEntityIndex = i;
+                    }
+                });
+                eatTarget = possibleEatTargets[nearestEntityIndex];
+                console.info("Found eat target: " + eatTarget);
+                cache.eatTarget = eatTarget;
+            } else {
+                eatTarget = cache.eatTarget;
+                if (eatTarget.isDeadOrDying()) {
+                    delete cache.eatTarget;
+                    delete cache.jumpsForEat;
+                    cache.status = "IDLE";
+                    break CONTROL;
+                }
+            }
+
+            if (entity.onGround()) {
+
+                if (cache.terracubesAte >= 5 || cache.jumpsForEat >= 5) {
+                    delete cache.eatTarget;
+                    delete cache.terracubesAte;
+                    delete cache.jumpsForEat;
+                    cache.status = "IDLE";
+                    break CONTROL;
+                }
+
+                cache.nextJump = level.getTime() + (ICY_TERRACUBE_CONFIG.SMALL_JUMP_INTERVAL);
+                entity.lookAt("eyes", eatTarget.getEyePosition());
+                entity.addDeltaMovement([0, entity.getBlockStateOn().getBlock().getJumpFactor() * 0.5, 0]);
+                let direction = entity.getViewVector(1);
+                entity.addDeltaMovement(new Vec3d(direction.x(), 0, direction.z()).normalize().scale(0.5));
+
+                if (entity.distanceToEntitySqr(eatTarget) <= 16) {
+                    entity.heal(eatTarget.getHealth());
+                    eatTarget.discard();
+                    console.info("Ate: " + eatTarget);
+                    cache.jumpsForEat = 0;
+                    delete cache.eatTarget;
+                    ++ cache.terracubesAte;
+                    if (Math.random() >= 0.5) {
+                        delete cache.jumpsForEat;
+                        entity.lookAt("eyes", attackTarget.position());
+                        status = "MELEE_ATTACK";
+                        break CONTROL;
+                    }
+                }
+
+                ++ cache.jumpsForEat;
+
+            }
             break;
         }
     }
@@ -338,7 +419,7 @@ StartupEvents.registry("minecraft:entity_type", event => {
 
 EntityJSEvents.attributes(event => {
     event.modify("kubejs:icy_terracube", attr => {
-        attr.add("minecraft:generic.max_health", 100);
+        attr.add("minecraft:generic.max_health", 200);
         attr.add("minecraft:generic.attack_damage", 8);
         attr.add("forge:entity_reach", 3.0);
         attr.add("forge:block_reach", 3.0);

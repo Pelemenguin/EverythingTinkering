@@ -687,8 +687,11 @@ declare namespace Annotation {
                  * - `CIRCULAR_THROW`
                  *   - The Icy Terracube is throwing Icy Clay Balls in a circular pattern around itself.
                  *   - 寒冰粘土怪正在围绕自身以圆形模式投掷寒冰粘土球。
+                 * - `HEAL`
+                 *   - The Icy Terracube is chasing nearest Terracube and try to eat them to increase the Icy Terracube itself's health.
+                 *   - 寒冰粘土怪正在追逐最近的粘土怪并试图吞噬它们以提升自身的生命值。
                  */
-                status?: "IDLE" | "MELEE_ATTACK" | "SMASH_ATTACK" | "LONG_THROW" | "CIRCULAR_THROW",
+                status?: "IDLE" | "MELEE_ATTACK" | "SMASH_ATTACK" | "LONG_THROW" | "CIRCULAR_THROW" | "HEAL",
                 /**
                  * - The last time the Icy Terracube landed on the ground
                  * - 寒冰粘土怪上次落地的时间
@@ -745,6 +748,21 @@ declare namespace Annotation {
                  * - 环绕投掷攻击已持续的Tick计数
                  */
                 circularThrowLasted?: number,
+                /**
+                 * - The target Terracube to eat for healing
+                 * - 用于吞噬以进行治疗的目标粘土怪
+                 */
+                eatTarget?: Internal.Mob,
+                /**
+                 * - Jumps tried to eat a small Terracube
+                 * - 尝试吞噬小粘土怪的跳跃次数
+                 */
+                jumpsForEat?: number,
+                /**
+                 * - Ate Terracube counts
+                 * - 吞噬的粘土怪数量
+                 */
+                terracubesAte?: number,
             }
         }
     }
