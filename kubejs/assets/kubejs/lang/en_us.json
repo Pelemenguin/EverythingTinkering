@@ -8,6 +8,10 @@
 
         "_comment_entities": " ----- Entities ----- ",
 
+    "entity.kubejs.boss.despawn": "%s has lost all its targets",
+    "entity.kubejs.boss.challenging": "You are now challenging %s",
+    "entity.kubejs.boss.defeat": "%s has been defeated!",
+
     "entity.kubejs.icy_terracube": "Icy Terracube",
     "entity.kubejs.icy_clay_ball": "Thrown Icy Clay Ball",
 

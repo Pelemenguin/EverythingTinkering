@@ -16,6 +16,7 @@
 /* global
     global: writable
     console
+    Component
 */
 
 /**
@@ -35,6 +36,12 @@ global.Entities.TagKeys = {};
  * - 储存实体的AI相关函数。
  */
 global.Entities.AiFunctions = {};
+
+/**
+ * - Stores functions being called on entity's removal.
+ * - 储存实体移除时调用的函数。
+ */
+global.Entities.RemovalFunctions = {};
 
 /**
  * - Caches for AI functions.
@@ -90,6 +97,25 @@ const KubeJSAiHelper = {
      * @type {(
      *     entityName: Annotation.Entities.AiCaches.ALL
      * ) => (entity: Internal.LivingEntity) => void}
+     * 
+     * @param entityName 
+     * The entity type name.
+     * 实体类型名称。
+     * 
+     * @returns
+     * The on remove from world callback.
+     * 实体移除时的回调。
+     */
+    onRemovedFromWorldCallbackHelper: (entityName) => (entity) => {
+        if (entity.getLevel().isClientSide()) return;
+        global.Entities.RemovalFunctions[entityName](entity, global.Entities.AiCaches[entityName].get(entity));
+        KubeJSAiHelper.removeCache(entityName)(entity);
+    },
+
+    /**
+     * @type {(
+     *     entityName: Annotation.Entities.AiCaches.ALL
+     * ) => (entity: Internal.LivingEntity) => void}
      */
     removeCache: (entityName) => (entity) => {
         if (entity.getLevel().isClientSide()) return;
@@ -128,6 +154,43 @@ const KubeJSAiHelper = {
         entity.getLevel().getEntitiesWithin(entity.getBoundingBox().inflate(KubeJSAiHelper.boundingBoxInflateConstant)).forEach(/** @param {Internal.LivingEntity} e */ e => {
             KubeJSAiHelper.tryMeleeAttack(entity, e);
         });
+    },
+
+    /**
+     * @param {Internal.Mob} entity 
+     * The boss entity to despawn.  
+     * 要消失的Boss。
+     * @param {Internal.Player[]} receivers
+     * The players to receive the message.  
+     * 接收消息的玩家。
+     */
+    bossDespawn: (entity, receivers) => {
+        receivers.forEach(p => p.sendSystemMessage(Component.translate("entity.kubejs.boss.despawn", entity.getName().copy().gold()).lightPurple()));
+        entity.discard();
+    },
+
+    /**
+     * @param {Internal.Mob} entity 
+     * The boss entity defeated.  
+     * 被击败的Boss。
+     * @param {Internal.Player[]} receivers
+     * The players to receive the message.  
+     * 接收消息的玩家。
+     */
+    bossDefeat: (entity, receivers) => {
+        receivers.forEach(p => p.sendSystemMessage(Component.translate("entity.kubejs.boss.defeat", entity.getName().copy().gold()).lightPurple()));
+    },
+
+    /**
+     * @param {Internal.Player} player 
+     * The player to be considered as challenger.  
+     * 被选中的玩家
+     * @param {Internal.Mob} boss 
+     * The boss.
+     * Boss。
+     */
+    chosenAsTarget: (player, boss) => {
+        player.sendSystemMessage(Component.translate("entity.kubejs.boss.challenging", boss.getName().copy().gold()).lightPurple());
     }
 
 };

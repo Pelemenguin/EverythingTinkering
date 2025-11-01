@@ -661,6 +661,11 @@ declare namespace Annotation {
                  */
                 attackTarget?: Internal.Player,
                 /**
+                 * - The players challenging Icy Terracube
+                 * - 挑战寒冰粘土怪的玩家
+                 */
+                challengingPlayers?: Internal.Player[],
+                /**
                  * - The Icy Terracube's current status
                  * - 寒冰粘土怪的当前状态
                  * - - - - - -

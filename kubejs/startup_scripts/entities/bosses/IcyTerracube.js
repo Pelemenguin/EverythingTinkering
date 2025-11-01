@@ -28,6 +28,7 @@
     TagKey
     ResourceLocation
     JavaMath
+    Entity$RemovalReason
 */
 
 let ICY_TERRACUBE_CONFIG = {
@@ -37,7 +38,8 @@ let ICY_TERRACUBE_CONFIG = {
     BIG_JUMP_COOLDOWN: 160,
     LONG_THROW_COOLDOWN: 140,
     MAX_TARGET_DISTANCE: 50,
-    FAILED_JUMP_DISTANCE_SQR: 1
+    FAILED_JUMP_DISTANCE_SQR: 1,
+    CHALLENGING_PLAYERS_TAG: "ChallengingPlayers"
 };
 
 /**
@@ -79,30 +81,53 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
         dataStorage = persistent.getCompound("kubejs:icy_terracube");
     }
 
+    if (!("challengingPlayers" in cache)) {
+        let challenging = 1;
+        if (dataStorage.contains(ICY_TERRACUBE_CONFIG.CHALLENGING_PLAYERS_TAG)) {
+            cache.challengingPlayers = dataStorage.getList(ICY_TERRACUBE_CONFIG.CHALLENGING_PLAYERS_TAG, 10).toArray(); // CompoundTag
+            challenging = cache.challengingPlayers.length;
+        } else {
+            let challengers = level.getEntitiesWithin(entity.getBoundingBox().inflate(100)).filter(TARGET_PREDICATE);
+            challengers.forEach(p => KubeJSAiHelper.chosenAsTarget(p, entity));
+            challenging = challengers.size();
+            dataStorage.put(ICY_TERRACUBE_CONFIG.CHALLENGING_PLAYERS_TAG, NBT.listTag(challengers.stream().map(e => {
+                /** @type {Internal.CompoundTag} */
+                let newTag = NBT.compoundTag();
+                newTag.putUUID("UUID", e.getUuid());
+                return newTag;
+            }).toArray()));
+            cache.challengingPlayers = challengers.toArray();
+        }
+        if (challenging > 1) {
+            entity.modifyAttribute("minecraft:generic.max_health", "Multiplayer health boost", 100 * (challenging - 1), "addition");
+            entity.setHealth(entity.getMaxHealth());
+        }
+    }
+
     let attackTarget;
     if (!("attackTarget" in cache)) {
-        if (dataStorage.contains("attackTarget")) {
-            attackTarget = level.getPlayerByUUID(dataStorage.getUUID("attackTarget"));
+        if (dataStorage.contains("AttackTarget")) {
+            attackTarget = level.getPlayerByUUID(dataStorage.getUUID("AttackTarget"));
         } else {
             attackTarget = level.getNearestPlayer(entity.x, entity.y, entity.z, ICY_TERRACUBE_CONFIG.MAX_TARGET_DISTANCE, TARGET_PREDICATE);
             if (attackTarget == null) {
-                entity.discard();
+                KubeJSAiHelper.bossDespawn(entity, cache.challengingPlayers);
                 return;
             }
             console.info(`[Icy Terracube] Found target: ${attackTarget}`);
             cache.attackTarget = attackTarget;
-            dataStorage.putUUID("attackTarget", attackTarget.getUuid());
+            dataStorage.putUUID("AttackTarget", attackTarget.getUuid());
             delete cache.despawnTimer;
         }
     } else {
-        if (!dataStorage.contains("attackTarget")) {
+        if (!dataStorage.contains("AttackTarget")) {
             dataStorage.putUUID(cache.attackTarget.getUuid());
         }
-        attackTarget = level.getPlayerByUUID(dataStorage.getUUID("attackTarget"));
+        attackTarget = level.getPlayerByUUID(dataStorage.getUUID("AttackTarget"));
         if (!ADVANCED_PREDICATE(attackTarget)) {
             delete cache.attackTarget;
             console.info(`[Icy Terracube] Targegt lost: ${attackTarget}`);
-            entity.discard();
+            KubeJSAiHelper.bossDespawn(entity, cache.challengingPlayers);
         } else {
             delete cache.despawnTimer;
         }
@@ -295,7 +320,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 delete cache.circularThrowLasted;
                 cache.status = "IDLE";
                 delete cache.attackTarget;
-                dataStorage.remove("attackTarget");
+                dataStorage.remove("AttackTarget");
                 break CONTROL;
             }
             if (cache.circularThrowLasted % 20 == 0) {
@@ -394,6 +419,16 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
 
 };
 
+/**
+ * @param {Internal.Mob} entity
+ * @param {Annotation.Entities.AiCaches.IcyTerracube} cache
+ */
+global.Entities.RemovalFunctions.IcyTerracube = (entity, cache) => {
+    if (entity.removalReason === Entity$RemovalReason.KILLED) {
+        KubeJSAiHelper.bossDefeat(entity, cache.challengingPlayers);
+    }
+};
+
 global.Entities.TagKeys.ICY_TERRACUBE = TagKey.create(Registries.ENTITY_TYPE, "kubejs:icy_terracube");
 
 StartupEvents.registry("minecraft:entity_type", event => {
@@ -404,11 +439,11 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .sized(4, 4)
         .modelSize(4, 4)
         .spawnPlacement("on_ground", "world_surface", () => false)
-        .isInvulnerableTo(ctx => ctx.damageSource.is(FALL_DAMAGE_RESOURCE_KEY))
-        .aiStep(KubeJSAiHelper.aiStepCallbackHelper("IcyTerracube"))
-        .onRemovedFromWorld(KubeJSAiHelper.removeCache("IcyTerracube"))
         .fallSounds(ResourceLocation.tryParse("minecraft:entity.slime.squish"), ResourceLocation.tryParse("minecraft:entity.slime.squish"))
         .setHurtSound(() => "minecraft:entity.slime.hurt")
+        .isInvulnerableTo(ctx => ctx.damageSource.is(FALL_DAMAGE_RESOURCE_KEY))
+        .aiStep(KubeJSAiHelper.aiStepCallbackHelper("IcyTerracube"))
+        .onRemovedFromWorld(KubeJSAiHelper.onRemovedFromWorldCallbackHelper("IcyTerracube"))
     ;
 
 });

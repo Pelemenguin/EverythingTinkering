@@ -9,6 +9,10 @@
 
         "_comment_entities": " ----- 实体 ----- ",
 
+    "entity.kubejs.boss.despawn": "%s丢失了其所有目标",
+    "entity.kubejs.boss.challenging": "你现在正在挑战%s",
+    "entity.kubejs.boss.defeat": "%s已被击败！",
+
     "entity.kubejs.icy_terracube": "寒冰粘土怪",
     "entity.kubejs.icy_clay_ball": "掷出的冰粘土球",
 
