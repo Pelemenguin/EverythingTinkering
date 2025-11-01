@@ -114,7 +114,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 KubeJSAiHelper.bossDespawn(entity, cache.challengingPlayers);
                 return;
             }
-            console.info(`[Icy Terracube] Found target: ${attackTarget}`);
+            // console.info(`[Icy Terracube] Found target: ${attackTarget}`);
             cache.attackTarget = attackTarget;
             dataStorage.putUUID("AttackTarget", attackTarget.getUuid());
             delete cache.despawnTimer;
@@ -126,7 +126,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
         attackTarget = level.getPlayerByUUID(dataStorage.getUUID("AttackTarget"));
         if (!ADVANCED_PREDICATE(attackTarget)) {
             delete cache.attackTarget;
-            console.info(`[Icy Terracube] Targegt lost: ${attackTarget}`);
+            // console.info(`[Icy Terracube] Targegt lost: ${attackTarget}`);
             KubeJSAiHelper.bossDespawn(entity, cache.challengingPlayers);
         } else {
             delete cache.despawnTimer;
@@ -233,7 +233,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
 
             if (cache.smashDuration == 0) {
                 // Wait 1 second
-                console.info("[Icy Terracube] Smash attack begin!");
+                // console.info("[Icy Terracube] Smash attack begin!");
                 cache.smashTarget = attackTarget.getPosition(1);
             } else if (cache.smashDuration == 20) {
                 // Jump up
@@ -247,7 +247,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 entity.addEffect(new MobEffectInstance("minecraft:invisibility", 5));
             } else if (cache.smashDuration == 28) {
                 // Teleport
-                console.info("[Icy Terracube] Teleported!");
+                // console.info("[Icy Terracube] Teleported!");
                 entity.setPosition(cache.smashTarget.x(), cache.smashTarget.y() + 10, cache.smashTarget.z());
 
                 let damageBoost;
@@ -256,14 +256,14 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                     case 1: damageBoost = 5; break;
                     case 2: damageBoost = 10; break;
                     case 3: damageBoost = 15; break;
-                    default: console.info("Unknown difficulty: " + entity.getLevel().getDifficulty().getId());
+                    default: console.error("Unknown difficulty: " + entity.getLevel().getDifficulty().getId());
                 }
 
                 entity.modifyAttribute("minecraft:generic.attack_damage", "Smash attack damage boost", damageBoost, "addition");
                 entity.modifyAttribute("forge:entity_gravity", "Smash attack gravity boost", 0.24, "addition");
             } else if (cache.smashDuration > 28 && entity.onGround()) {
                 // Back to IDLE state
-                console.info("[Icy Terracube] Smashed!");
+                // console.info("[Icy Terracube] Smashed!");
                 delete cache.smashDuration;
                 delete cache.smashTarget;
                 cache.failedJumps = 0;
@@ -312,7 +312,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 projectile.setPosition(throwPosition.x(), throwPosition.y(), throwPosition.z());
                 projectile.addDeltaMovement(facing.scale(entity.distanceToEntity(attackTarget) / 10));
                 level.addFreshEntity(projectile);
-                console.info("Created projectile: " + projectile);
+                // console.info("Created projectile: " + projectile);
             }
             if (cache.longThrowLasted % 5 == 0) {
                 entity.lookAt("eyes", attackTarget.position());
@@ -372,7 +372,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                     }
                 });
                 eatTarget = possibleEatTargets[nearestEntityIndex];
-                console.info("Found eat target: " + eatTarget);
+                // console.info("Found eat target: " + eatTarget);
                 cache.eatTarget = eatTarget;
             } else {
                 eatTarget = cache.eatTarget;
@@ -403,7 +403,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 if (entity.distanceToEntitySqr(eatTarget) <= 16) {
                     entity.heal(eatTarget.getHealth());
                     eatTarget.discard();
-                    console.info("Ate: " + eatTarget);
+                    // console.info("Ate: " + eatTarget);
                     cache.jumpsForEat = 0;
                     delete cache.eatTarget;
                     ++ cache.terracubesAte;
