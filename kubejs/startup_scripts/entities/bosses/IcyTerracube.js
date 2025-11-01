@@ -40,7 +40,8 @@ let ICY_TERRACUBE_CONFIG = {
     LONG_THROW_COOLDOWN: 140,
     MAX_TARGET_DISTANCE: 50,
     FAILED_JUMP_DISTANCE_SQR: 1,
-    CHALLENGING_PLAYERS_TAG: "ChallengingPlayers"
+    CHALLENGING_PLAYERS_TAG: "ChallengingPlayers",
+    CAN_DESPAWN_TAG: "CanDespawn"
 };
 
 /**
@@ -112,6 +113,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
         } else {
             attackTarget = level.getNearestPlayer(entity.x, entity.y, entity.z, ICY_TERRACUBE_CONFIG.MAX_TARGET_DISTANCE, TARGET_PREDICATE);
             if (attackTarget == null) {
+                if ((!dataStorage.contains(ICY_TERRACUBE_CONFIG.CAN_DESPAWN_TAG)) || dataStorage.getByte(ICY_TERRACUBE_CONFIG.CAN_DESPAWN_TAG) == 0) return;
                 KubeJSAiHelper.bossDespawn(entity, cache.challengingPlayers);
                 return;
             }
@@ -127,7 +129,9 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
         attackTarget = level.getPlayerByUUID(dataStorage.getUUID("AttackTarget"));
         if (!ADVANCED_PREDICATE(attackTarget)) {
             delete cache.attackTarget;
+            dataStorage.remove("AttackTarget");
             // console.info(`[Icy Terracube] Targegt lost: ${attackTarget}`);
+            if ((!dataStorage.contains(ICY_TERRACUBE_CONFIG.CAN_DESPAWN_TAG)) || dataStorage.getByte(ICY_TERRACUBE_CONFIG.CAN_DESPAWN_TAG) == 0) return;
             KubeJSAiHelper.bossDespawn(entity, cache.challengingPlayers);
         } else {
             delete cache.despawnTimer;
