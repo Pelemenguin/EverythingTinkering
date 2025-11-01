@@ -70,6 +70,11 @@ const KubeJSAiHelper = {
      * AI步骤回调。
      */
     aiStepCallbackHelper: (entityName) => (entity) => {
+
+        // Stop AI when dead or No AI
+        if (entity.isDeadOrDying()) return;
+        if (entity.isNoAi()) return;
+
         if (entity.getLevel().isClientSide()) return;
         let callback = global.Entities.AiFunctions[entityName];
         let cacheMap = global.Entities.AiCaches[entityName];

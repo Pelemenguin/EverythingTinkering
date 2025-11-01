@@ -51,10 +51,6 @@ global.Entities.AiCaches.IcyTerracube = Utils.newMap();
  */
 global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
 
-    // Stop AI when dead or No AI
-    if (entity.isDeadOrDying()) return;
-    if (entity.isNoAi()) return;
-
     // Prevent boat / minecart trick
     if (entity.isPassenger()) {
         entity.stopRiding();
