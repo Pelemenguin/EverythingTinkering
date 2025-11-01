@@ -166,7 +166,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                     cache.status = "HEAL";
                 }
 
-                if (cache.nextBigJump <= level.getTime() && entity.distanceToEntitySqr(attackTarget) >= 400) {
+                if (cache.nextBigJump <= level.getTime() && entity.distanceToEntitySqr(attackTarget) >= 225) {
                     cache.status = "LONG_THROW";
                     cache.nextBigJump = level.getTime() + ICY_TERRACUBE_CONFIG.LONG_THROW_COOLDOWN;
                     cache.longThrowLasted = 0;
