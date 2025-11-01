@@ -768,6 +768,11 @@ declare namespace Annotation {
                  * - 吞噬的粘土怪数量
                  */
                 terracubesAte?: number,
+                /**
+                 * - Whether the Icy Terracube should force circular throw next
+                 * - 接下来是否要强制进行圆形模式投掷
+                 */
+                shouldForceCircularThrow?: boolean,
             }
         }
     }

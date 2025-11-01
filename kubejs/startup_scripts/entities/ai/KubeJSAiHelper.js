@@ -44,6 +44,12 @@ global.Entities.AiFunctions = {};
 global.Entities.RemovalFunctions = {};
 
 /**
+ * - Stores functions being called on entity being hurt.
+ * - 储存实体受伤时调用的函数。
+ */
+global.Entities.HurtFunctions = {};
+
+/**
  * - Caches for AI functions.
  *     Keys of this object are entity type.
  *     Values of this object are maps from entity instances to cached data.
@@ -91,6 +97,7 @@ const KubeJSAiHelper = {
             cacheMap.put(entity, cache);
         }
         callback(entity, cache);
+
     },
 
     /**
@@ -110,6 +117,30 @@ const KubeJSAiHelper = {
         if (entity.getLevel().isClientSide()) return;
         global.Entities.RemovalFunctions[entityName](entity, global.Entities.AiCaches[entityName].get(entity));
         KubeJSAiHelper.removeCache(entityName)(entity);
+    },
+
+    /**
+     * @param {Annotation.Entities.AiCaches.ALL} entityName 
+     * @returns {(context: Internal.ContextUtils$EntityDamageContext) => void}
+     */
+    onHurtCallbackHelper: (entityName) => (context) => {
+
+        let entity = context.entity;
+
+        // Stop AI when dead or No AI
+        if (entity.isDeadOrDying()) return;
+        if (entity.isNoAi()) return;
+
+        if (entity.getLevel().isClientSide()) return;
+        let callback = global.Entities.HurtFunctions[entityName];
+        let cacheMap = global.Entities.AiCaches[entityName];
+        let cache = cacheMap.get(entity);
+        if (cache == null) {
+            cache = {};
+            cacheMap.put(entity, cache);
+        }
+        callback(context, cache);
+
     },
 
     /**

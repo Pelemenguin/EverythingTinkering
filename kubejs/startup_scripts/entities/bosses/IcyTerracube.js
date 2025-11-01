@@ -84,7 +84,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
     if (!("challengingPlayers" in cache)) {
         let challenging = 1;
         if (dataStorage.contains(ICY_TERRACUBE_CONFIG.CHALLENGING_PLAYERS_TAG)) {
-            cache.challengingPlayers = dataStorage.getList(ICY_TERRACUBE_CONFIG.CHALLENGING_PLAYERS_TAG, 10).toArray(); // CompoundTag
+            cache.challengingPlayers = dataStorage.getList(ICY_TERRACUBE_CONFIG.CHALLENGING_PLAYERS_TAG, 10).toArray().map(/** @param {Internal.CompoundTag} ct */ ct => level.getPlayerByUUID(ct.getUUID("UUID"))); // CompoundTag
             challenging = cache.challengingPlayers.length;
         } else {
             let challengers = level.getEntitiesWithin(entity.getBoundingBox().inflate(100)).filter(TARGET_PREDICATE);
@@ -220,6 +220,11 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                         cache.status = "IDLE";
                         break CONTROL;
                     }
+                } else if ("shouldForceCircularThrow" in cache && cache.shouldForceCircularThrow) {
+                    cache.status = "CIRCULAR_THROW";
+                    cache.circularThrowLasted = 0;
+                    cache.shouldForceCircularThrow = false;
+                    break CONTROL;
                 }
             }
             break;
@@ -429,6 +434,19 @@ global.Entities.RemovalFunctions.IcyTerracube = (entity, cache) => {
     }
 };
 
+/**
+ * @param {Internal.ContextUtils$EntityDamageContext} context
+ * @param {Annotation.Entities.AiCaches.IcyTerracube} cache
+ */
+global.Entities.HurtFunctions.IcyTerracube = (context, cache) => {
+    let entity = context.entity;
+    let threshold = entity.getMaxHealth() * 0.5;
+
+    if ((entity.getHealth() - context.damageAmount < threshold) && (entity.getHealth() >= threshold)) {
+        cache.shouldForceCircularThrow = true;
+    }
+};
+
 global.Entities.TagKeys.ICY_TERRACUBE = TagKey.create(Registries.ENTITY_TYPE, "kubejs:icy_terracube");
 
 StartupEvents.registry("minecraft:entity_type", event => {
@@ -443,6 +461,7 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .setHurtSound(() => "minecraft:entity.slime.hurt")
         .isInvulnerableTo(ctx => ctx.damageSource.is(FALL_DAMAGE_RESOURCE_KEY))
         .aiStep(KubeJSAiHelper.aiStepCallbackHelper("IcyTerracube"))
+        .onHurt(KubeJSAiHelper.onHurtCallbackHelper("IcyTerracube"))
         .onRemovedFromWorld(KubeJSAiHelper.onRemovedFromWorldCallbackHelper("IcyTerracube"))
     ;
 
