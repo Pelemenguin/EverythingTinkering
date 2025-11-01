@@ -29,6 +29,7 @@
     ResourceLocation
     JavaMath
     Entity$RemovalReason
+    $Difficulty
 */
 
 let ICY_TERRACUBE_CONFIG = {
@@ -251,12 +252,12 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 entity.setPosition(cache.smashTarget.x(), cache.smashTarget.y() + 10, cache.smashTarget.z());
 
                 let damageBoost;
-                switch (entity.getLevel().getDifficulty().getId()) {
-                    case 0: damageBoost = 0; break;
-                    case 1: damageBoost = 5; break;
-                    case 2: damageBoost = 10; break;
-                    case 3: damageBoost = 15; break;
-                    default: console.error("Unknown difficulty: " + entity.getLevel().getDifficulty().getId());
+                switch (entity.getLevel().getDifficulty()) {
+                    case $Difficulty.PEACEFUL : damageBoost = 0  ; break;
+                    case $Difficulty.EASY     : damageBoost = 5  ; break;
+                    case $Difficulty.NORMAL   : damageBoost = 10 ; break;
+                    case $Difficulty.HARD     : damageBoost = 15 ; break;
+                    default: console.error("Unknown difficulty: " + entity.getLevel().getDifficulty());
                 }
 
                 entity.modifyAttribute("minecraft:generic.attack_damage", "Smash attack damage boost", damageBoost, "addition");
@@ -333,7 +334,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                     let angle = JavaMath.PI * (i + cache.circularThrowLasted % 40 / 20) / 10;
                     let direction = new Vec3d(Math.cos(angle), 0, Math.sin(angle));
                     let throwing;
-                    if (Math.random() < 0.1) {
+                    if (entity.getLevel().getDifficulty() !== $Difficulty.PEACEFUL && Math.random() < 0.1) {
                         /** @type {Internal.Slime} */
                         let created = level.createEntity("tconstruct:terracube");
                         created.setSize(2, true);

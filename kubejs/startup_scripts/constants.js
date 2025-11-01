@@ -48,6 +48,7 @@ const LanguageManager = Java.loadClass("net.minecraft.client.resources.language.
 const ParticleOptions = Java.loadClass("net.minecraft.core.particles.ParticleOptions");
 const ParticleTypes = Java.loadClass("net.minecraft.core.particles.ParticleTypes");
 const DustParticleOptions = Java.loadClass("net.minecraft.core.particles.DustParticleOptions");
+const $Difficulty = Java.loadClass("net.minecraft.world.Difficulty");
 const $TargetingConditions = Java.loadClass("net.minecraft.world.entity.ai.targeting.TargetingConditions");
 
 // Mantle
