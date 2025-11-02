@@ -775,6 +775,59 @@ declare namespace Annotation {
                 shouldForceCircularThrow?: boolean,
             }
         }
+
+        type AiAction<A extends string> = (entity: Internal.Mob, controller: ActionsController<A>, timeLasted: number, persistent: Internal.CompoundTag) => void;
+        type AiActionsMap<M extends string> = {
+            actions: {[K in M]: AiAction<M>},
+            initAction: M
+        };
+
+        class ActionsController<A extends string> {
+            constructor(actions: AiActionsMap);
+
+            /**
+             * Activates an action by name.  
+             * 通过名称激活一个动作。
+             * - - - - -
+             * @param actionName The name of the action to activate.
+             *                   要激活的动作名称。
+             */
+            activate(actionName: A): void;
+
+            /**
+             * Deactivates an action by name.
+             * 通过名称停用一个动作。
+             * - - - - -
+             * @param actionName The name of the action to deactivate.
+             *                   要停用的动作名称。
+             */
+            deactivate(actionName: A): void;
+
+            /**
+             * Ticks the AI actions controller.  
+             * 将AI动作控制器步进一tick。
+             * - - - - -
+             * @param mob The mob to tick.
+             *            要执行tick的生物。
+             */
+            tick(mob: Internal.Mob): void;
+
+            /**
+             * An object mapping action names to action functions.  
+             * 一个将动作名称映射到动作函数的对象。
+             */
+            actions: {[K in A]: AiAction<A>};
+            /**
+             * The currently activated actions with their lasted tick counts.
+             * 当前已激活的动作及其持续的Tick计数。
+             */
+            ticking: {[K in A]: number};
+            /**
+             * Actions to remove at the end of the tick.
+             * 在Tick结束时要移除的动作。
+             */
+            toRemove: Set<A>;
+        }
     }
 
 }
@@ -796,6 +849,23 @@ declare namespace BookArguments {
         isEncyclopedia: boolean,
         defaultMaterials: string[]
     }
+}
+
+declare const KubeJSAiFactory: {
+    /**
+     * Creates an AI step function.  
+     * 创建一个AI步骤函数。
+     * - - - - -
+     * @param actionsList An object mapping action names to action functions.
+     *                    一个将动作名称映射到动作函数的对象。
+     * 
+     * @returns           A function that can be used in `aiStep` method.
+     *                    可在`aiStep`方法中使用的函数。
+     */
+    createAi<A extends string>(actionsList: () => Annotation.Entities.AiActionsMap<A>) : (entity: Internal.Mob) => void,
+
+    ActionsController: typeof Annotation.Entities.ActionsController,
+
 }
 
 declare class ClassCreatorLegacy<T extends typeof any> {

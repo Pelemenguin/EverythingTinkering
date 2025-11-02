@@ -30,6 +30,7 @@
     JavaMath
     Entity$RemovalReason
     $Difficulty
+    KubeJSAiFactory
 */
 
 let ICY_TERRACUBE_CONFIG = {
@@ -53,7 +54,8 @@ global.Entities.AiCaches.IcyTerracube = Utils.newMap();
  * @param {Internal.Mob} entity
  * @param {Annotation.Entities.AiCaches.IcyTerracube} cache
  */
-global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
+// global.Entities.AiFunctions.IcyTerracube = 
+(entity, cache) => {
 
     // Prevent boat / minecart trick
     if (entity.isPassenger()) {
@@ -462,6 +464,27 @@ global.Entities.HurtFunctions.IcyTerracube = (context, cache) => {
 
 global.Entities.TagKeys.ICY_TERRACUBE = TagKey.create(Registries.ENTITY_TYPE, "kubejs:icy_terracube");
 
+/** @type {Annotation.Entities.AiActionsMap<"IDLE" | "MELEE_ATTACK" | "SMASH_ATTACK" | "LONG_THROW" | "CIRCULAR_THROW" | "HEAL">} */
+let ICY_TERRACUBE_AI_STEP = {
+    actions: {
+        IDLE: (_mob, controller, _ticks, _persistent) => {
+            console.info("Test!AAAB");
+            controller.activate("MELEE_ATTACK");
+        },
+        MELEE_ATTACK: (_mob, controller, ticks, _persistent) => {
+            console.info("Test in Melee Attack!");
+            console.info(ticks);
+            if (ticks > 100) {
+                controller.deactivate("MELEE_ATTACK");
+                controller.deactivate("IDLE");
+            }
+        },
+    },
+    initAction: "IDLE"
+};
+
+global.Entities.AiFunctions.IcyTerracube = KubeJSAiFactory.createAi(ICY_TERRACUBE_AI_STEP);
+
 StartupEvents.registry("minecraft:entity_type", event => {
 
     const FALL_DAMAGE_RESOURCE_KEY = ResourceKey.create(Registries.DAMAGE_TYPE, "minecraft:fall");
@@ -474,7 +497,7 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .fallSounds(ResourceLocation.tryParse("minecraft:entity.slime.squish"), ResourceLocation.tryParse("minecraft:entity.slime.squish"))
         .setHurtSound(() => "minecraft:entity.slime.hurt")
         .isInvulnerableTo(ctx => ctx.damageSource.is(FALL_DAMAGE_RESOURCE_KEY))
-        .aiStep(KubeJSAiHelper.aiStepCallbackHelper("IcyTerracube"))
+        .aiStep(mob => global.Entities.AiFunctions.IcyTerracube(mob))
         .onHurt(KubeJSAiHelper.onHurtCallbackHelper("IcyTerracube"))
         .onRemovedFromWorld(KubeJSAiHelper.onRemovedFromWorldCallbackHelper("IcyTerracube"))
     ;
