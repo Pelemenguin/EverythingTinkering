@@ -339,11 +339,14 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 break CONTROL;
             }
             if (cache.circularThrowLasted % 20 == 0) {
+                let enoughTerracubes = level.getEntitiesWithin(entity.getBoundingBox().inflate(50)).stream().filter(e => e.getType() == "tconstruct:terracube").count() > 20;
+
                 for (let i = 0; i < 20; i ++) {
                     let angle = JavaMath.PI * (i + cache.circularThrowLasted % 40 / 20) / 10;
                     let direction = new Vec3d(Math.cos(angle), 0, Math.sin(angle));
+
                     let throwing;
-                    if (entity.getLevel().getDifficulty() !== $Difficulty.PEACEFUL && Math.random() < 0.1) {
+                    if (entity.getLevel().getDifficulty() !== $Difficulty.PEACEFUL && !enoughTerracubes && Math.random() < 0.1) {
                         /** @type {Internal.Slime} */
                         let created = level.createEntity("tconstruct:terracube");
                         created.setSize(2, true);
