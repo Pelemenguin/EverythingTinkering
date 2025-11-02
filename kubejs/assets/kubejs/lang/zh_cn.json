@@ -4,8 +4,8 @@
 
         "_comment_items": " ----- 物品 ----- ",
 
-    "item.kubejs.icy_terracube": "寒冰粘土怪刷怪蛋",
-    "item.kubejs.icy_clay_ball": "冰粘土球",
+    "item.kubejs.icy_terracube": "寒冰黏土怪刷怪蛋",
+    "item.kubejs.icy_clay_ball": "冰黏土球",
 
         "_comment_entities": " ----- 实体 ----- ",
 
@@ -13,8 +13,8 @@
     "entity.kubejs.boss.challenging": "你现在正在挑战%s",
     "entity.kubejs.boss.defeat": "%s已被击败！",
 
-    "entity.kubejs.icy_terracube": "寒冰粘土怪",
-    "entity.kubejs.icy_clay_ball": "掷出的冰粘土球",
+    "entity.kubejs.icy_terracube": "寒冰黏土怪",
+    "entity.kubejs.icy_clay_ball": "掷出的冰黏土球",
 
         "_comment_command": " ----- 命令 ---- ",
 

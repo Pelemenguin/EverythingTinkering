@@ -657,54 +657,54 @@ declare namespace Annotation {
             type IcyTerracube = {
                 /**
                  * - The Icy Terracube's attack target
-                 * - 寒冰粘土怪的攻击目标
+                 * - 寒冰黏土怪的攻击目标
                  */
                 attackTarget?: Internal.Player,
                 /**
                  * - The players challenging Icy Terracube
-                 * - 挑战寒冰粘土怪的玩家
+                 * - 挑战寒冰黏土怪的玩家
                  */
                 challengingPlayers?: Internal.Player[],
                 /**
                  * - The Icy Terracube's current status
-                 * - 寒冰粘土怪的当前状态
+                 * - 寒冰黏土怪的当前状态
                  * - - - - - -
                  * - `IDLE`
                  *   - The Icy Terracube is idle.
-                 *   - 寒冰粘土怪处于闲置状态。
+                 *   - 寒冰黏土怪处于闲置状态。
                  * - `MELEE_ATTACK`
                  *   - The Icy Terracube is performing a melee attack.
                  *     During this state, it will leap towards its target.
                  *     When close enough, it will deal damage to the target.
-                 *   - 寒冰粘土怪正在进行近战攻击。
+                 *   - 寒冰黏土怪正在进行近战攻击。
                  *     在此状态下，它会跳向目标。
                  *     当足够进时，它会对目标造成伤害。
                  * - `SMASH_ATTACK`
                  *   - The Icy Terracube is performing a smash attack.
                  *     During this state, it will jump high into the air and slam down onto the ground,
                  *     dealing area damage upon landing.
-                 *   - 寒冰粘土怪正在进行猛击攻击。
+                 *   - 寒冰黏土怪正在进行猛击攻击。
                  *     在此状态下，它会高高跳起并猛然落地，
                  *     在落地时造成范围伤害。
                  * - `LONG_THROW`
                  *   - The Icy Terracube is throwing Icy Clay Balls to deal damage to far away players.
-                 *   - 寒冰粘土怪正在投掷寒冰粘土球以对远处的玩家造成伤害。
+                 *   - 寒冰黏土怪正在投掷寒冰黏土球以对远处的玩家造成伤害。
                  * - `CIRCULAR_THROW`
                  *   - The Icy Terracube is throwing Icy Clay Balls in a circular pattern around itself.
-                 *   - 寒冰粘土怪正在围绕自身以圆形模式投掷寒冰粘土球。
+                 *   - 寒冰黏土怪正在围绕自身以圆形模式投掷寒冰黏土球。
                  * - `HEAL`
                  *   - The Icy Terracube is chasing nearest Terracube and try to eat them to increase the Icy Terracube itself's health.
-                 *   - 寒冰粘土怪正在追逐最近的粘土怪并试图吞噬它们以提升自身的生命值。
+                 *   - 寒冰黏土怪正在追逐最近的黏土怪并试图吞噬它们以提升自身的生命值。
                  */
                 status?: "IDLE" | "MELEE_ATTACK" | "SMASH_ATTACK" | "LONG_THROW" | "CIRCULAR_THROW" | "HEAL",
                 /**
                  * - The last time the Icy Terracube landed on the ground
-                 * - 寒冰粘土怪上次落地的时间
+                 * - 寒冰黏土怪上次落地的时间
                  */
                 nextJump?: number,
                 /**
                  * - The timestamp when the Icy Terracube started the despawn timer
-                 * - 寒冰粘土怪开始消失计时器的时间戳
+                 * - 寒冰黏土怪开始消失计时器的时间戳
                  */
                 despawnTimer?: number,
                 /**
@@ -718,7 +718,7 @@ declare namespace Annotation {
                  *   (For example, blocked by a wall)
                  *   Then the jump is considered failed.
                  * - 失败跳跃计数。
-                 *   如果寒冰粘土怪在跳跃过程中未能移动太多，
+                 *   如果寒冰黏土怪在跳跃过程中未能移动太多，
                  *   （例如，被墙壁阻挡）
                  *   则该跳跃被视为失败。
                  */
@@ -745,7 +745,7 @@ declare namespace Annotation {
                 longThrowLasted?: number,
                 /**
                  * - The next tick when the Icy Terracube can throw an Icy Clay Ball
-                 * - 寒冰粘土怪下次可以投掷寒冰粘土球的Tick
+                 * - 寒冰黏土怪下次可以投掷寒冰黏土球的Tick
                  */
                 nextLongThrow?: number,
                 /**
@@ -755,17 +755,17 @@ declare namespace Annotation {
                 circularThrowLasted?: number,
                 /**
                  * - The target Terracube to eat for healing
-                 * - 用于吞噬以进行治疗的目标粘土怪
+                 * - 用于吞噬以进行治疗的目标黏土怪
                  */
                 eatTarget?: Internal.Mob,
                 /**
                  * - Jumps tried to eat a small Terracube
-                 * - 尝试吞噬小粘土怪的跳跃次数
+                 * - 尝试吞噬小黏土怪的跳跃次数
                  */
                 jumpsForEat?: number,
                 /**
                  * - Ate Terracube counts
-                 * - 吞噬的粘土怪数量
+                 * - 吞噬的黏土怪数量
                  */
                 terracubesAte?: number,
                 /**
