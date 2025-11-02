@@ -217,7 +217,7 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
                 let direction = entity.getViewVector(1);
                 entity.addDeltaMovement(new Vec3d(direction.x(), 0, direction.z()).normalize().scale(moveMultiplier));
                 if (bigJump) {
-                    if (entity.getHealth() > entity.getMaxHealth() * 0.25) {
+                    if (entity.getHealth() > entity.getMaxHealth() * 0.25 && Math.random() < 0.2) {
                         cache.status = "CIRCULAR_THROW";
                         cache.circularThrowLasted = 0;
                         break CONTROL;
@@ -311,11 +311,16 @@ global.Entities.AiFunctions.IcyTerracube = (entity, cache) => {
             }
             if (cache.longThrowLasted % 2 == 0) {
                 let facing = entity.getViewVector(1);
+
+                let h = entity.getEyePosition().y() - attackTarget.getEyePosition().y();
+                let dSqr = entity.distanceToEntitySqr(attackTarget);
+                let iniVel = Math.sqrt(dSqr * 0.015 / h);
+
                 let throwPosition = entity.getEyePosition().add(facing);
                 /** @type {Internal.Projectile} */
                 let projectile = level.createEntity("kubejs:icy_clay_ball");
                 projectile.setPosition(throwPosition.x(), throwPosition.y(), throwPosition.z());
-                projectile.addDeltaMovement(facing.scale(entity.distanceToEntity(attackTarget) / 10));
+                projectile.addDeltaMovement(facing.scale(iniVel));
                 level.addFreshEntity(projectile);
                 // console.info("Created projectile: " + projectile);
             }
@@ -459,6 +464,7 @@ StartupEvents.registry("minecraft:entity_type", event => {
     const FALL_DAMAGE_RESOURCE_KEY = ResourceKey.create(Registries.DAMAGE_TYPE, "minecraft:fall");
 
     event.create("kubejs:icy_terracube", "entityjs:mob")
+        .eggItem(egg => egg.backgroundColor(0xa8c2cf).highlightColor(0x62ddf3))
         .sized(4, 4)
         .modelSize(4, 4)
         .spawnPlacement("on_ground", "world_surface", () => false)
