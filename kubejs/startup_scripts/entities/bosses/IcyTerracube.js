@@ -55,6 +55,8 @@ global.Entities.AiCaches.IcyTerracube = Utils.newMap();
 /**
  * @param {Internal.Mob} entity
  * @param {Annotation.Entities.AiCaches.IcyTerracube} cache
+ * 
+ * @deprecated
  */
 // global.Entities.AiFunctions.IcyTerracube = 
 (entity, cache) => {
@@ -517,9 +519,7 @@ let ICY_TERRACUBE_AI_STEP = {
             }
         },
         MoveTowardsTarget: (entity, controller, _timeLasted, _persistent) => {
-            let level = entity.getLevel();
-
-            if (!controller.isMemoryPresent("core/attackTarget")) return;
+            if (!controller.isMemoryPresent("move/moveTarget")) return;
             let time = entity.getLevel().getTime();
             if (entity.onGround()) {
 
@@ -535,20 +535,13 @@ let ICY_TERRACUBE_AI_STEP = {
                         return;
                     }
                     controller.removeMemory("move/jumpStartPos");
-                }
-
-                if (controller.isActive("CircularRangedAttack") && level.getTime() - controller.getMemoryOrSetDefault("attack/lastLongRanged", -Infinity) > 300 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) > 144) {
-                    controller.activate("LongRangedAttack");
-                    return;
-                }
-                if (level.getTime() - controller.getMemoryOrSetDefault("attack/lastCircularRanged", -Infinity) > 200 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) <= 16) {
-                    controller.activate("CircularRangedAttack");
+                    controller.setMemory("eat/hasJustLanded", true);
                 }
 
                 entity.setJumping(false);
                 controller.activate("LookAtTarget");
-                controller.setMemory("move/lookTarget", controller.getMemory("core/attackTarget").position());
-                entity.lookAt("eyes", controller.getMemory("core/attackTarget").position());
+                controller.setMemory("move/lookTarget", controller.getMemory("move/moveTarget"));
+                entity.lookAt("eyes", controller.getMemory("move/moveTarget"));
                 if (time - controller.getMemoryOrSetDefault("move/jumpTimer", time) < 20) return;
 
                 if (Math.random() < 0.05) {
@@ -686,15 +679,66 @@ let ICY_TERRACUBE_AI_STEP = {
             }
         },
         MeleeAttack: (entity, controller, _timeLasted, _persistent) => {
-            if (entity.getLevel().isClientSide()) return;
+            let level = entity.getLevel();
             if (!controller.isMemoryPresent("core/attackTarget")) return;
             KubeJSAiHelper.tryMeleeAttack(entity, controller.getMemory("core/attackTarget"));
+            controller.setMemory("move/moveTarget", controller.getMemory("core/attackTarget"));
+
+            if (controller.isActive("CircularRangedAttack") && level.getTime() - controller.getMemoryOrSetDefault("attack/lastLongRanged", -Infinity) > 300 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) > 144) {
+                controller.activate("LongRangedAttack");
+                return;
+            }
+            if (level.getTime() - controller.getMemoryOrSetDefault("attack/lastCircularRanged", -Infinity) > 200 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) <= 16) {
+                controller.activate("CircularRangedAttack");
+            }
+
+            if (entity.getHealth() < entity.getMaxHealth() * 0.25) {
+                if (Math.random() < 0.01) {
+                    controller.activate("EatTerracubes");
+                }
+            }
         },
         LookAtTarget: (entity, controller, _timeLasted, _persistent) => {
             if (entity.getLevel().isClientSide()) return;
             if (!controller.isMemoryPresent("move/lookTarget")) return;
             entity.lookAt("feet", controller.getMemory("move/lookTarget"));
         },
+        EatTerracubes: (entity, controller, _timeLasted, _persistent) => {
+            let level = entity.getLevel();
+            controller.deactivate("MeleeAttack");
+
+            if (controller.getMemory("eat/hasJustLanded")) {
+                /** @type {Internal.LivingEntity[]} */
+                let terracubes = level.getEntitiesWithin(entity.getBoundingBox().inflate(20)).filter(e => e.getType() == "tconstruct:terracube").toArray().sort((e1, e2) => entity.distanceToEntitySqr(e1) - entity.distanceToEntitySqr(e2));
+                if (terracubes.length == 0) {
+                    controller.deactivate("EatTerracubes");
+                    controller.activate("MeleeAttack");
+                    return;
+                }
+                let eatTarget = terracubes[0];
+                console.info(eatTarget);
+                if (!eatTarget.isAlive()) controller.removeMemory("move/moveTarget");
+                else controller.setMemory("move/moveTarget", eatTarget.position());
+
+                if (entity.getBoundingBox().inflate(1).intersects(eatTarget.getBoundingBox())) {
+                    eatTarget.discard();
+
+                    entity.heal(eatTarget.getHealth());
+                    controller.setMemory("eat/terracubesEaten", controller.getMemoryOrSetDefault("eat/terracubesEaten", 0) + 1);
+                    controller.setMemory("eat/jumpsToEat", 0);
+                } else {
+                    controller.setMemory("eat/jumpsToEat", controller.getMemoryOrSetDefault("eat/jumpsToEat", 0) + 1);
+                }
+
+                if (controller.getMemory("eat/jumpsToEat") >= 5 || controller.getMemory("eat/terracubesEaten") >= 5 || entity.getHealth() > entity.getMaxHealth() * 0.5) {
+                    controller.deactivate("EatTerracubes");
+                    controller.activate("MeleeAttack");
+                    return;
+                }
+
+                controller.setMemory("eat/hasJustLanded", false);
+            }
+        }
     },
     initAction: "Init"
 };

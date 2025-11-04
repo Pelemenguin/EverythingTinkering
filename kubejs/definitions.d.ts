@@ -803,13 +803,17 @@ declare namespace Annotation {
              * - `LookAtTarget`
              *   - Makes the Icy Terracube look at its attack target.
              *   - 让寒冰黏土怪注视其攻击目标。
+             * - `EatTerracubes`
+             *   - Eats nearby Terracubes for healing.
+             *   - 吞噬附近的黏土怪以进行治疗。
              */
-            type IcyTerracube = "Init" | "Core" | "MoveTowardsTarget" | "SmashAttack" | "LongRangedAttack" | "CircularRangedAttack" | "MeleeAttack" | "LookAtTarget";
+            type IcyTerracube = "Init" | "Core" | "MoveTowardsTarget" | "SmashAttack" | "LongRangedAttack" | "CircularRangedAttack" | "MeleeAttack" | "LookAtTarget" | "EatTerracubes";
         }
 
         namespace AiMemories {
             type IcyTerracube = {
                 "core/attackTarget": Internal.Mob,
+                "move/moveTarget": Vec3d,
                 "move/jumpTimer": number,
                 "move/lookTarget": Vec3d,
                 "move/jumpStartPos": Vec3d,
@@ -817,6 +821,9 @@ declare namespace Annotation {
                 "attack/smashTarget": Vec3d,
                 "attack/lastLongRanged": number,
                 "attack/lastCircularRanged": number,
+                "eat/terracubesEaten": number,
+                "eat/jumpsToEat": number,
+                "eat/hasJustLanded": boolean
             };
         }
 
