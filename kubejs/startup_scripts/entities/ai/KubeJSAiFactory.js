@@ -18,6 +18,7 @@
 /* global
     NBT
     Utils
+    console
 */
 
 const KubeJSAiFactory = {};
@@ -28,6 +29,10 @@ KubeJSAiFactory.createAi = (actionsList) => {
     const CONTROLLERS = Utils.newMap();
 
     return (entity) => {
+        if (entity.getLevel().isClientSide()) return;
+        if (entity.isDeadOrDying()) return;
+        if (entity.isNoAi()) return;
+
         let controller;
         if (CONTROLLERS.containsKey(entity)) {
             controller = CONTROLLERS.get(entity);
@@ -35,8 +40,10 @@ KubeJSAiFactory.createAi = (actionsList) => {
             controller = new KubeJSAiFactory.ActionsController(actionsList);
             CONTROLLERS.put(entity, controller);
         }
-        
+
         controller.tick(entity);
+
+        if (!entity.isAlive()) CONTROLLERS.remove(entity);
     };
 };
 

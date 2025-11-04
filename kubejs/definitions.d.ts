@@ -787,6 +787,13 @@ declare namespace Annotation {
              * - `MoveTowardsTarget`
              *   - Moves the Icy Terracube towards its attack target.
              *   - 将寒冰黏土怪移动到其攻击目标附近。
+             * - `SmashAttack`
+             *   - Jumps high into the air and slams down onto the ground,
+             *     dealing area damage upon landing.
+             *   - 高高跳起并猛然落地，造成范围伤害。
+             * - `LongRangedAttack`
+             *   - Throws Icy Clay Balls to deal damage to far away players.
+             *   - 投掷寒冰黏土球以对远处的玩家造成伤害。
              * - `MeleeAttack`
              *   - Performs a melee attack on the target.
              *   - 对目标造成接触伤害。
@@ -794,7 +801,7 @@ declare namespace Annotation {
              *   - Makes the Icy Terracube look at its attack target.
              *   - 让寒冰黏土怪注视其攻击目标。
              */
-            type IcyTerracube = "Init" | "Core" | "MoveTowardsTarget" | "SmashAttack" | "MeleeAttack" | "LookAtTarget";
+            type IcyTerracube = "Init" | "Core" | "MoveTowardsTarget" | "SmashAttack" | "LongRangedAttack" | "MeleeAttack" | "LookAtTarget";
         }
 
         namespace AiMemories {
@@ -805,6 +812,7 @@ declare namespace Annotation {
                 "move/jumpStartPos": Vec3d,
                 "move/jumpsFailed": number,
                 "attack/smashTarget": Vec3d,
+                "attack/lastLongRanged": number,
             };
         }
 
@@ -893,7 +901,7 @@ declare namespace Annotation {
              * - - - - -
              * @param key The key of the memory.  
              *            记忆的键。
-             * @returns   True if the memory is present, false otherwise.
+             * @returns   True if the memory is present, false otherwise.  
              *            如果记忆存在则为真，否则为假。
              */
             isMemoryPresent<K extends keyof M>(key: K): boolean;

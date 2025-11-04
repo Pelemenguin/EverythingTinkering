@@ -476,6 +476,7 @@ let ICY_TERRACUBE_NBT = {
 let ICY_TERRACUBE_AI_STEP = {
     actions: {
         Init: (entity, controller, _timeLasted, _persistent) => {
+            if (entity.getLevel().isClientSide()) return;
             console.info(`[Terracube] Init for ${entity}`);
 
             controller.deactivate("Init");
@@ -485,8 +486,6 @@ let ICY_TERRACUBE_AI_STEP = {
         },
         Core: (entity, controller, _timeLasted, persistent) => {
             let level = entity.getLevel();
-
-            if (level.isClientSide()) return;
     
             if (!controller.isMemoryPresent("core/attackTarget")) {
                 if (persistent.contains(ICY_TERRACUBE_NBT.attackTarget)) {
@@ -519,7 +518,6 @@ let ICY_TERRACUBE_AI_STEP = {
         },
         MoveTowardsTarget: (entity, controller, _timeLasted, _persistent) => {
             let level = entity.getLevel();
-            if (level.isClientSide()) return;
 
             if (!controller.isMemoryPresent("core/attackTarget")) return;
             let time = entity.getLevel().getTime();
@@ -533,11 +531,15 @@ let ICY_TERRACUBE_AI_STEP = {
                         controller.setMemory("move/jumpsFailed", 0);
                     }
                     if (controller.getMemory("move/jumpsFailed", 0) >= 3) {
-                        controller.setMemory("move/jumpsFailed", 0);
                         controller.activate("SmashAttack");
                         return;
                     }
                     controller.removeMemory("move/jumpStartPos");
+                }
+
+                if (level.getTime() - controller.getMemoryOrSetDefault("attack/lastLongRanged", -Infinity) > 300 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) > 144) {
+                    controller.activate("LongRangedAttack");
+                    return;
                 }
 
                 entity.setJumping(false);
@@ -565,29 +567,29 @@ let ICY_TERRACUBE_AI_STEP = {
             }
         },
         SmashAttack: (entity, controller, timeLasted, _persistent) => {
-            let isClientSide = entity.getLevel().isClientSide();
             if (!controller.isMemoryPresent("core/attackTarget")) {
-                if (isClientSide) return;
                 controller.deactivate("SmashAttack");
                 return;
             }
             if (timeLasted == 0) {
-                if (isClientSide) return;
                 controller.deactivate("MoveTowardsTarget");
                 controller.deactivate("MeleeAttack");
-                controller.setMemory("attack/smashTarget", controller.getMemory("core/attackTarget").position());
+                if (!controller.isMemoryPresent("attack/smashTarget")) controller.setMemory("attack/smashTarget", controller.getMemory("core/attackTarget").position());
             } else if (0 < timeLasted && timeLasted < 60) {
-                if (isClientSide) return;
+                if (!controller.isMemoryPresent("attack/smashTarget")) {
+                    controller.activate("MeleeAttack");
+                    controller.activate("MoveTowardsTarget");
+                    controller.deactivate("SmashAttack");
+                    return;
+                }
                 let smashTarget = controller.getMemory("attack/smashTarget");
-                entity.getLevel().spawnParticles(new DustParticleOptions(new Vec3f(1, 0, 0), 1), false, smashTarget.x(), smashTarget.y(), smashTarget.z(), 0.5, 1, 0.5, 20, 0.1);
+                entity.getLevel().spawnParticles(new DustParticleOptions(new Vec3f(1, 0, 0), 1), false, smashTarget.x(), smashTarget.y() + 0.1, smashTarget.z(), 1.2, 0, 1.2, 20, 0.1);
             } else if (timeLasted == 60) {
                 entity.addDeltaMovement([0, 2, 0]);
             } else if (timeLasted == 70) {
                 let smashTarget = controller.getMemory("attack/smashTarget");
-                entity.setPosition(smashTarget.x(), smashTarget.y() + 20, smashTarget.z());
+                entity.setPosition(smashTarget.x(), smashTarget.y() + 15, smashTarget.z());
                 entity.setMotionY(0);
-
-                if (isClientSide) return;
 
                 let damageBoost;
                 switch (entity.getLevel().getDifficulty()) {
@@ -601,7 +603,6 @@ let ICY_TERRACUBE_AI_STEP = {
                 entity.modifyAttribute("minecraft:generic.attack_damage", "Smash attack damage boost", damageBoost, "addition");
                 entity.modifyAttribute("forge:entity_gravity", "Smash attack gravity boost", 0.24, "addition");
             } else if (timeLasted > 70 && entity.onGround()) {
-                if (isClientSide) return;
 
                 let level = entity.getLevel();
                 let atk = entity.getAttribute("minecraft:generic.attack_damage").getValue();
@@ -614,10 +615,43 @@ let ICY_TERRACUBE_AI_STEP = {
                 entity.removeAttribute("minecraft:generic.attack_damage", "Smash attack damage boost");
                 entity.removeAttribute("forge:entity_gravity", "Smash attack gravity boost");
 
+                entity.addDeltaMovement([Math.random(), 1, Math.random()]);
+
+                controller.removeMemory("attack/smashTarget");
+                controller.setMemory("move/jumpsFailed", 0);
+
                 controller.activate("MeleeAttack");
                 controller.activate("MoveTowardsTarget");
                 controller.deactivate("SmashAttack");
             }
+        },
+        LongRangedAttack: (entity, controller, timeLasted, _persistent) => {
+            if (!controller.isMemoryPresent("core/attackTarget")) return;
+            if (timeLasted >= 100) {
+                controller.deactivate("LookAtTarget");
+                controller.deactivate("LongRangedAttack");
+                controller.activate("SmashAttack");
+                controller.setMemory("attack/lastLongRanged", entity.getLevel().getTime());
+                return;
+            }
+            controller.deactivate("MeleeAttack");
+            controller.deactivate("MoveTowardsTarget");
+            controller.activate("LookAtTarget");
+            let difference = controller.getMemory("core/attackTarget").getEyePosition().subtract(entity.getEyePosition());
+            let h = difference.y();
+            let created = entity.getLevel().createEntity("kubejs:icy_clay_ball");
+
+            let start = entity.getEyePosition();
+            created.setPosition(start.x(), start.y(), start.z());
+            let velSize = Math.min(Math.sqrt(difference.horizontalDistanceSqr() * 0.015 / Math.abs(h)), 10);
+
+            // 我真求你了别崩了
+            // 算个初速度崩多少回了
+            if (isNaN(velSize) || !isFinite(velSize)) return;
+
+            let vel = new Vec3d(difference.x(), 0, difference.z()).normalize().scale(velSize);
+            created.addDeltaMovement(vel);
+            entity.getLevel().addFreshEntity(created);
         },
         MeleeAttack: (entity, controller, _timeLasted, _persistent) => {
             if (entity.getLevel().isClientSide()) return;
