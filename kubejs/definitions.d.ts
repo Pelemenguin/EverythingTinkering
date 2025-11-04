@@ -793,7 +793,10 @@ declare namespace Annotation {
              *   - 高高跳起并猛然落地，造成范围伤害。
              * - `LongRangedAttack`
              *   - Throws Icy Clay Balls to deal damage to far away players.
-             *   - 投掷寒冰黏土球以对远处的玩家造成伤害。
+             *   - 投掷冰黏土球以对远处的玩家造成伤害。
+             * - `CircularRangedAttack`
+             *   - Throws Icy Clay Balls / medium Terracubes to deal damage to nearby players.
+             *   - 围绕自身投掷冰黏土球/中型黏土怪以对附近的玩家造成伤害。
              * - `MeleeAttack`
              *   - Performs a melee attack on the target.
              *   - 对目标造成接触伤害。
@@ -801,7 +804,7 @@ declare namespace Annotation {
              *   - Makes the Icy Terracube look at its attack target.
              *   - 让寒冰黏土怪注视其攻击目标。
              */
-            type IcyTerracube = "Init" | "Core" | "MoveTowardsTarget" | "SmashAttack" | "LongRangedAttack" | "MeleeAttack" | "LookAtTarget";
+            type IcyTerracube = "Init" | "Core" | "MoveTowardsTarget" | "SmashAttack" | "LongRangedAttack" | "CircularRangedAttack" | "MeleeAttack" | "LookAtTarget";
         }
 
         namespace AiMemories {
@@ -813,6 +816,7 @@ declare namespace Annotation {
                 "move/jumpsFailed": number,
                 "attack/smashTarget": Vec3d,
                 "attack/lastLongRanged": number,
+                "attack/lastCircularRanged": number,
             };
         }
 
@@ -908,7 +912,7 @@ declare namespace Annotation {
 
             /**
              * Retrieve a memory from the controller, or return a default value if not present.  
-             * **Note**: This will store the default value into the controller.
+             * **Note**: This will store the default value into the controller.  
              * 从控制器中检索一个记忆，若不存在则返回默认值。  
              * **注意**：这会将默认值存储到控制器中。
              * - - - - -

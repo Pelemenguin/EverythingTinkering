@@ -30,7 +30,12 @@ KubeJSAiFactory.createAi = (actionsList) => {
 
     return (entity) => {
         if (entity.getLevel().isClientSide()) return;
-        if (entity.isDeadOrDying()) return;
+        if (entity.isDeadOrDying()) {
+            if (CONTROLLERS.remove(entity) != null) {
+                console.info("Controller removed for entity " + entity);
+            }
+            return;
+        }
         if (entity.isNoAi()) return;
 
         let controller;
@@ -42,8 +47,6 @@ KubeJSAiFactory.createAi = (actionsList) => {
         }
 
         controller.tick(entity);
-
-        if (!entity.isAlive()) CONTROLLERS.remove(entity);
     };
 };
 

@@ -541,6 +541,9 @@ let ICY_TERRACUBE_AI_STEP = {
                     controller.activate("LongRangedAttack");
                     return;
                 }
+                if (level.getTime() - controller.getMemoryOrSetDefault("attack/lastCircularRanged", -Infinity) > 200 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) <= 16) {
+                    controller.activate("CircularRangedAttack");
+                }
 
                 entity.setJumping(false);
                 controller.activate("LookAtTarget");
@@ -575,7 +578,7 @@ let ICY_TERRACUBE_AI_STEP = {
                 controller.deactivate("MoveTowardsTarget");
                 controller.deactivate("MeleeAttack");
                 if (!controller.isMemoryPresent("attack/smashTarget")) controller.setMemory("attack/smashTarget", controller.getMemory("core/attackTarget").position());
-            } else if (0 < timeLasted && timeLasted < 60) {
+            } else if (0 < timeLasted && timeLasted < 40) {
                 if (!controller.isMemoryPresent("attack/smashTarget")) {
                     controller.activate("MeleeAttack");
                     controller.activate("MoveTowardsTarget");
@@ -584,9 +587,9 @@ let ICY_TERRACUBE_AI_STEP = {
                 }
                 let smashTarget = controller.getMemory("attack/smashTarget");
                 entity.getLevel().spawnParticles(new DustParticleOptions(new Vec3f(1, 0, 0), 1), false, smashTarget.x(), smashTarget.y() + 0.1, smashTarget.z(), 1.2, 0, 1.2, 20, 0.1);
-            } else if (timeLasted == 60) {
+            } else if (timeLasted == 40) {
                 entity.addDeltaMovement([0, 2, 0]);
-            } else if (timeLasted == 70) {
+            } else if (timeLasted == 50) {
                 let smashTarget = controller.getMemory("attack/smashTarget");
                 entity.setPosition(smashTarget.x(), smashTarget.y() + 15, smashTarget.z());
                 entity.setMotionY(0);
@@ -602,7 +605,7 @@ let ICY_TERRACUBE_AI_STEP = {
 
                 entity.modifyAttribute("minecraft:generic.attack_damage", "Smash attack damage boost", damageBoost, "addition");
                 entity.modifyAttribute("forge:entity_gravity", "Smash attack gravity boost", 0.24, "addition");
-            } else if (timeLasted > 70 && entity.onGround()) {
+            } else if (timeLasted > 50 && entity.onGround()) {
 
                 let level = entity.getLevel();
                 let atk = entity.getAttribute("minecraft:generic.attack_damage").getValue();
@@ -650,8 +653,34 @@ let ICY_TERRACUBE_AI_STEP = {
             if (isNaN(velSize) || !isFinite(velSize)) return;
 
             let vel = new Vec3d(difference.x(), 0, difference.z()).normalize().scale(velSize);
-            created.addDeltaMovement(vel);
+            created.addDeltaMovement(vel.add(Math.random() * 0.1, Math.random() * 0.1, Math.random() * 0.1));
             entity.getLevel().addFreshEntity(created);
+        },
+        CircularRangedAttack: (entity, controller, timeLasted, _persistent) => {
+            if (timeLasted > 100) {
+                controller.setMemory("attack/lastCircularRanged", entity.getLevel().getTime());
+                controller.deactivate("CircularRangedAttack");
+            }
+            if (timeLasted % 20 == 0) {
+                for (let i = 0; i < 20; i ++) {
+                    let rad = JavaMath.PI * i / 10;
+                    let created;
+                    if (Math.random() < 0.05) {
+                        /** @type {Internal.Slime} */ // Currently the typings of the class Terracube are not generated
+                        let terracube = entity.getLevel().createEntity("tconstruct:terracube");
+                        terracube.setSize(2, true);
+                        terracube.setHealth(terracube.getMaxHealth());
+                        created = terracube;
+                    } else {
+                        created = entity.getLevel().createEntity("kubejs:icy_clay_ball");
+                    }
+                    let direction = new Vec3d(Math.cos(rad), 0, Math.sin(rad));
+                    let pos = entity.getEyePosition().add(direction);
+                    created.setPos(pos);
+                    created.setDeltaMovement(direction);
+                    entity.getLevel().addFreshEntity(created);
+                }
+            }
         },
         MeleeAttack: (entity, controller, _timeLasted, _persistent) => {
             if (entity.getLevel().isClientSide()) return;
