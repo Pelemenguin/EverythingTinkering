@@ -542,7 +542,9 @@ let ICY_TERRACUBE_AI_STEP = {
                 controller.activate("LookAtTarget");
                 controller.setMemory("move/lookTarget", controller.getMemory("move/moveTarget"));
                 entity.lookAt("eyes", controller.getMemory("move/moveTarget"));
-                if (time - controller.getMemoryOrSetDefault("move/jumpTimer", time) < 20) return;
+
+                let jumpInterval = (entity.getHealth() / entity.getMaxHealth() - 0.5) * 40;
+                if (time - controller.getMemoryOrSetDefault("move/jumpTimer", time) < jumpInterval) return;
 
                 if (Math.random() < 0.05) {
                     controller.activate("SmashAttack");
