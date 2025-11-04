@@ -537,7 +537,7 @@ let ICY_TERRACUBE_AI_STEP = {
                     controller.removeMemory("move/jumpStartPos");
                 }
 
-                if (level.getTime() - controller.getMemoryOrSetDefault("attack/lastLongRanged", -Infinity) > 300 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) > 144) {
+                if (controller.isActive("CircularRangedAttack") && level.getTime() - controller.getMemoryOrSetDefault("attack/lastLongRanged", -Infinity) > 300 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) > 144) {
                     controller.activate("LongRangedAttack");
                     return;
                 }
@@ -591,7 +591,7 @@ let ICY_TERRACUBE_AI_STEP = {
                 entity.addDeltaMovement([0, 2, 0]);
             } else if (timeLasted == 50) {
                 let smashTarget = controller.getMemory("attack/smashTarget");
-                entity.setPosition(smashTarget.x(), smashTarget.y() + 15, smashTarget.z());
+                entity.setPos(smashTarget.x(), smashTarget.y() + 15, smashTarget.z());
                 entity.setMotionY(0);
 
                 let damageBoost;
@@ -630,6 +630,7 @@ let ICY_TERRACUBE_AI_STEP = {
         },
         LongRangedAttack: (entity, controller, timeLasted, _persistent) => {
             if (!controller.isMemoryPresent("core/attackTarget")) return;
+            controller.setMemory("move/lookTarget", controller.getMemory("core/attackTarget").position());
             if (timeLasted >= 100) {
                 controller.deactivate("LookAtTarget");
                 controller.deactivate("LongRangedAttack");
@@ -658,14 +659,16 @@ let ICY_TERRACUBE_AI_STEP = {
         },
         CircularRangedAttack: (entity, controller, timeLasted, _persistent) => {
             if (timeLasted > 100) {
+                controller.removeMemory("move/lookTarget");
                 controller.setMemory("attack/lastCircularRanged", entity.getLevel().getTime());
                 controller.deactivate("CircularRangedAttack");
             }
+
             if (timeLasted % 20 == 0) {
                 for (let i = 0; i < 20; i ++) {
                     let rad = JavaMath.PI * i / 10;
                     let created;
-                    if (Math.random() < 0.05) {
+                    if (entity.getLevel().getDifficulty() !== $Difficulty.PEACEFUL && Math.random() < 0.05) {
                         /** @type {Internal.Slime} */ // Currently the typings of the class Terracube are not generated
                         let terracube = entity.getLevel().createEntity("tconstruct:terracube");
                         terracube.setSize(2, true);
