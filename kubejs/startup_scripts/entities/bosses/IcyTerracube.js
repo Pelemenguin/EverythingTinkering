@@ -31,6 +31,8 @@
     Entity$RemovalReason
     $Difficulty
     KubeJSAiFactory
+    DustParticleOptions
+    Vec3f
 */
 
 let ICY_TERRACUBE_CONFIG = {
@@ -464,23 +466,171 @@ global.Entities.HurtFunctions.IcyTerracube = (context, cache) => {
 
 global.Entities.TagKeys.ICY_TERRACUBE = TagKey.create(Registries.ENTITY_TYPE, "kubejs:icy_terracube");
 
-/** @type {Annotation.Entities.AiActionsMap<"IDLE" | "MELEE_ATTACK" | "SMASH_ATTACK" | "LONG_THROW" | "CIRCULAR_THROW" | "HEAL">} */
+let ICY_TERRACUBE_NBT = {
+    attackTarget: "AttackTarget"
+};
+
+/**
+ * @type {Annotation.Entities.AiActionsMap<Annotation.Entities.AiActions.IcyTerracube, Annotation.Entities.AiMemories.IcyTerracube>}
+ */
 let ICY_TERRACUBE_AI_STEP = {
     actions: {
-        IDLE: (_mob, controller, _ticks, _persistent) => {
-            console.info("Test!AAAB");
-            controller.activate("MELEE_ATTACK");
+        Init: (entity, controller, _timeLasted, _persistent) => {
+            console.info(`[Terracube] Init for ${entity}`);
+
+            controller.deactivate("Init");
+            controller.activate("Core");
+            controller.activate("MeleeAttack");
+            controller.activate("MoveTowardsTarget");
         },
-        MELEE_ATTACK: (_mob, controller, ticks, _persistent) => {
-            console.info("Test in Melee Attack!");
-            console.info(ticks);
-            if (ticks > 100) {
-                controller.deactivate("MELEE_ATTACK");
-                controller.deactivate("IDLE");
+        Core: (entity, controller, _timeLasted, persistent) => {
+            let level = entity.getLevel();
+
+            if (level.isClientSide()) return;
+    
+            if (!controller.isMemoryPresent("core/attackTarget")) {
+                if (persistent.contains(ICY_TERRACUBE_NBT.attackTarget)) {
+                    let attackTarget = entity.getLevel().getPlayerByUUID(persistent.getUUID(ICY_TERRACUBE_NBT.attackTarget));
+                    if (attackTarget != null) {
+                        controller.setMemory("core/attackTarget", attackTarget);
+                        controller.activate("MoveTowardsTarget");
+                    }
+                    else persistent.remove(ICY_TERRACUBE_NBT.attackTarget);
+                } else {
+                    let attackTarget = level.getNearestPlayer(entity.x, entity.y, entity.z, ICY_TERRACUBE_CONFIG.MAX_TARGET_DISTANCE, entity => entity.isPlayer() && !entity.isCreative() && !entity.isSpectator());
+
+                    if (attackTarget != null) {
+                        persistent.putUUID(ICY_TERRACUBE_NBT.attackTarget, attackTarget.getUuid());
+                        controller.setMemory("core/attackTarget", attackTarget);
+                        controller.activate("MoveTowardsTarget");
+                        return;
+                    }
+                }
+            } else {
+                let attackTarget = controller.getMemory("core/attackTarget");
+                if (attackTarget.isDeadOrDying() || attackTarget.isCreative() || attackTarget.isSpectator() || attackTarget.distanceToEntitySqr(entity) > 2500) {
+                    controller.removeMemory("core/attackTarget");
+                    persistent.remove(ICY_TERRACUBE_NBT.attackTarget);
+
+                    controller.deactivate("MoveTowardsTarget");
+                    return;
+                }
             }
         },
+        MoveTowardsTarget: (entity, controller, _timeLasted, _persistent) => {
+            let level = entity.getLevel();
+            if (level.isClientSide()) return;
+
+            if (!controller.isMemoryPresent("core/attackTarget")) return;
+            let time = entity.getLevel().getTime();
+            if (entity.onGround()) {
+
+                if (controller.isMemoryPresent("move/jumpStartPos")) {
+                    let differece = entity.position().subtract(controller.getMemory("move/jumpStartPos"));
+                    if (differece.horizontalDistanceSqr() <= 1) {
+                        controller.setMemory("move/jumpsFailed", controller.getMemoryOrSetDefault("move/jumpsFailed", 0) + 1);
+                    } else {
+                        controller.setMemory("move/jumpsFailed", 0);
+                    }
+                    if (controller.getMemory("move/jumpsFailed", 0) >= 3) {
+                        controller.setMemory("move/jumpsFailed", 0);
+                        controller.activate("SmashAttack");
+                        return;
+                    }
+                    controller.removeMemory("move/jumpStartPos");
+                }
+
+                entity.setJumping(false);
+                controller.activate("LookAtTarget");
+                controller.setMemory("move/lookTarget", controller.getMemory("core/attackTarget").position());
+                entity.lookAt("eyes", controller.getMemory("core/attackTarget").position());
+                if (time - controller.getMemoryOrSetDefault("move/jumpTimer", time) < 20) return;
+
+                if (Math.random() < 0.05) {
+                    controller.activate("SmashAttack");
+                    return;
+                }
+
+                controller.removeMemory("move/jumpTimer");
+                controller.removeMemory("move/lookTarget");
+                controller.deactivate("LookAtTarget");
+                entity.setJumping(true);
+
+                let direction = entity.getViewVector(1);
+
+                entity.addDeltaMovement(new Vec3d(direction.x(), 0, direction.z()).normalize());
+                entity.addDeltaMovement([0, 0.5, 0]);
+
+                controller.setMemory("move/jumpStartPos", entity.position());
+            }
+        },
+        SmashAttack: (entity, controller, timeLasted, _persistent) => {
+            let isClientSide = entity.getLevel().isClientSide();
+            if (!controller.isMemoryPresent("core/attackTarget")) {
+                if (isClientSide) return;
+                controller.deactivate("SmashAttack");
+                return;
+            }
+            if (timeLasted == 0) {
+                if (isClientSide) return;
+                controller.deactivate("MoveTowardsTarget");
+                controller.deactivate("MeleeAttack");
+                controller.setMemory("attack/smashTarget", controller.getMemory("core/attackTarget").position());
+            } else if (0 < timeLasted && timeLasted < 60) {
+                if (isClientSide) return;
+                let smashTarget = controller.getMemory("attack/smashTarget");
+                entity.getLevel().spawnParticles(new DustParticleOptions(new Vec3f(1, 0, 0), 1), false, smashTarget.x(), smashTarget.y(), smashTarget.z(), 0.5, 1, 0.5, 20, 0.1);
+            } else if (timeLasted == 60) {
+                entity.addDeltaMovement([0, 2, 0]);
+            } else if (timeLasted == 70) {
+                let smashTarget = controller.getMemory("attack/smashTarget");
+                entity.setPosition(smashTarget.x(), smashTarget.y() + 20, smashTarget.z());
+                entity.setMotionY(0);
+
+                if (isClientSide) return;
+
+                let damageBoost;
+                switch (entity.getLevel().getDifficulty()) {
+                    case $Difficulty.PEACEFUL : damageBoost = 0  ; break;
+                    case $Difficulty.EASY     : damageBoost = 5  ; break;
+                    case $Difficulty.NORMAL   : damageBoost = 10 ; break;
+                    case $Difficulty.HARD     : damageBoost = 15 ; break;
+                    default: console.error("Unknown difficulty: " + entity.getLevel().getDifficulty());
+                }
+
+                entity.modifyAttribute("minecraft:generic.attack_damage", "Smash attack damage boost", damageBoost, "addition");
+                entity.modifyAttribute("forge:entity_gravity", "Smash attack gravity boost", 0.24, "addition");
+            } else if (timeLasted > 70 && entity.onGround()) {
+                if (isClientSide) return;
+
+                let level = entity.getLevel();
+                let atk = entity.getAttribute("minecraft:generic.attack_damage").getValue();
+                level.getEntitiesWithin(entity.getBoundingBox().expandTowards(0, -5, 0)).forEach(e => {
+                    if (e == entity) return;
+                    if (!e.isAttackable()) return;
+                    e.attack(KubeJSDamageSources.icyTerracubeSmash(level, entity), atk);
+                });
+
+                entity.removeAttribute("minecraft:generic.attack_damage", "Smash attack damage boost");
+                entity.removeAttribute("forge:entity_gravity", "Smash attack gravity boost");
+
+                controller.activate("MeleeAttack");
+                controller.activate("MoveTowardsTarget");
+                controller.deactivate("SmashAttack");
+            }
+        },
+        MeleeAttack: (entity, controller, _timeLasted, _persistent) => {
+            if (entity.getLevel().isClientSide()) return;
+            if (!controller.isMemoryPresent("core/attackTarget")) return;
+            KubeJSAiHelper.tryMeleeAttack(entity, controller.getMemory("core/attackTarget"));
+        },
+        LookAtTarget: (entity, controller, _timeLasted, _persistent) => {
+            if (entity.getLevel().isClientSide()) return;
+            if (!controller.isMemoryPresent("move/lookTarget")) return;
+            entity.lookAt("feet", controller.getMemory("move/lookTarget"));
+        },
     },
-    initAction: "IDLE"
+    initAction: "Init"
 };
 
 global.Entities.AiFunctions.IcyTerracube = KubeJSAiFactory.createAi(ICY_TERRACUBE_AI_STEP);

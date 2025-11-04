@@ -776,14 +776,47 @@ declare namespace Annotation {
             }
         }
 
-        type AiAction<A extends string> = (entity: Internal.Mob, controller: ActionsController<A>, timeLasted: number, persistent: Internal.CompoundTag) => void;
-        type AiActionsMap<M extends string> = {
-            actions: {[K in M]: AiAction<M>},
-            initAction: M
+        namespace AiActions {
+            /**
+             * - `Init`
+             *   - Initializes the Icy Terracube's AI.
+             *   - 初始化寒冰黏土怪的AI。
+             * - `Core`
+             *   - Core AI logic for the Icy Terracube.
+             *   - 寒冰黏土怪的核心AI逻辑。
+             * - `MoveTowardsTarget`
+             *   - Moves the Icy Terracube towards its attack target.
+             *   - 将寒冰黏土怪移动到其攻击目标附近。
+             * - `MeleeAttack`
+             *   - Performs a melee attack on the target.
+             *   - 对目标造成接触伤害。
+             * - `LookAtTarget`
+             *   - Makes the Icy Terracube look at its attack target.
+             *   - 让寒冰黏土怪注视其攻击目标。
+             */
+            type IcyTerracube = "Init" | "Core" | "MoveTowardsTarget" | "SmashAttack" | "MeleeAttack" | "LookAtTarget";
+        }
+
+        namespace AiMemories {
+            type IcyTerracube = {
+                "core/attackTarget": Internal.Mob,
+                "move/jumpTimer": number,
+                "move/lookTarget": Vec3d,
+                "move/jumpStartPos": Vec3d,
+                "move/jumpsFailed": number,
+                "attack/smashTarget": Vec3d,
+            };
+        }
+
+        type AiAction<A extends string, M> = (entity: Internal.Mob, controller: ActionsController<A, M>, timeLasted: number, persistent: Internal.CompoundTag) => void;
+        type AiActionsMap<A extends string, M> = {
+            actions: {[K in A]: AiAction<A, M>},
+            memories: M,
+            initAction: A
         };
 
-        class ActionsController<A extends string> {
-            constructor(actions: AiActionsMap);
+        class ActionsController<A extends string, M> {
+            constructor(actions: AiActionsMap<A, M>);
 
             /**
              * Activates an action by name.  
@@ -795,13 +828,24 @@ declare namespace Annotation {
             activate(actionName: A): void;
 
             /**
-             * Deactivates an action by name.
+             * Deactivates an action by name.  
              * 通过名称停用一个动作。
              * - - - - -
              * @param actionName The name of the action to deactivate.
              *                   要停用的动作名称。
              */
             deactivate(actionName: A): void;
+
+            /**
+             * Checks if an action is currently active.  
+             * 检查一个动作当前是否处于激活状态。
+             * - - - - -
+             * @param actionName The name of the action to check.
+             *                   要检查的动作名称。
+             * @returns          True if the action is active, false otherwise.
+             *                   如果动作处于激活状态则为真，否则为假。
+             */
+            isActive(actionName: A): boolean;
 
             /**
              * Ticks the AI actions controller.  
@@ -813,10 +857,67 @@ declare namespace Annotation {
             tick(mob: Internal.Mob): void;
 
             /**
+             * Store a memory into the controller.  
+             * 将一个记忆存储到控制器中。
+             * - - - - -
+             * @param key   The key of the memory.  
+             *              记忆的键。
+             * @param value The value of the memory.  
+             *              记忆的值。
+             */
+            setMemory<K extends keyof M>(key: K, value: M[K]): void;
+
+            /**
+             * Retrieve a memory from the controller.  
+             * 从控制器中检索一个记忆。
+             * - - - - -
+             * @param key The key of the memory.  
+             *            记忆的键。
+             * @returns   The value of the memory.  
+             *            记忆的值。
+             */
+            getMemory<K extends keyof M>(key: K): M[K];
+
+            /**
+             * Removes a memory from the controller.  
+             * 从控制器中移除一个记忆。
+             * - - - - -
+             * @param key The key of the memory.  
+             *            记忆的键。
+             */
+            removeMemory<K extends keyof M>(key: K): void;
+
+            /**
+             * Checks if a memory is present in the controller.
+             * 检查控制器中是否存在某个记忆。
+             * - - - - -
+             * @param key The key of the memory.  
+             *            记忆的键。
+             * @returns   True if the memory is present, false otherwise.
+             *            如果记忆存在则为真，否则为假。
+             */
+            isMemoryPresent<K extends keyof M>(key: K): boolean;
+
+            /**
+             * Retrieve a memory from the controller, or return a default value if not present.  
+             * **Note**: This will store the default value into the controller.
+             * 从控制器中检索一个记忆，若不存在则返回默认值。  
+             * **注意**：这会将默认值存储到控制器中。
+             * - - - - -
+             * @param key          The key of the memory.  
+             *                     记忆的键。
+             * @param defaultValue The default value to return if the memory is not present.  
+             *                     如果记忆不存在则返回的默认值。
+             * @returns            The value of the memory, or the default value if not present.  
+             *                     记忆的值，或在不存在时的默认值。
+             */
+            getMemoryOrSetDefault<K extends keyof M>(key: K, defaultValue: M[K]): M[K];
+
+            /**
              * An object mapping action names to action functions.  
              * 一个将动作名称映射到动作函数的对象。
              */
-            actions: {[K in A]: AiAction<A>};
+            actions: {[K in A]: AiAction<A, M>};
             /**
              * The currently activated actions with their lasted tick counts.
              * 当前已激活的动作及其持续的Tick计数。
@@ -827,6 +928,11 @@ declare namespace Annotation {
              * 在Tick结束时要移除的动作。
              */
             toRemove: Set<A>;
+            /**
+             * Memories of the entity stored in the controller, but not in NBT.  
+             * 实体存储在控制器中的记忆，但不存储在NBT中。
+             */
+            memories: M;
         }
     }
 
@@ -862,7 +968,7 @@ declare const KubeJSAiFactory: {
      * @returns           A function that can be used in `aiStep` method.
      *                    可在`aiStep`方法中使用的函数。
      */
-    createAi<A extends string>(actionsList: () => Annotation.Entities.AiActionsMap<A>) : (entity: Internal.Mob) => void,
+    createAi<A extends string>(actionsList: () => Annotation.Entities.AiActionsMap<A, any>) : (entity: Internal.Mob) => void,
 
     ActionsController: typeof Annotation.Entities.ActionsController,
 
