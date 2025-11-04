@@ -831,7 +831,8 @@ declare namespace Annotation {
         type AiActionsMap<A extends string, M> = {
             actions: {[K in A]: AiAction<A, M>},
             memories: M,
-            initAction: A
+            initAction: A,
+            onHurt: (context: Internal.ContextUtils$EntityDamageContext, controller: ActionsController<A, M>) => void
         };
 
         class ActionsController<A extends string, M> {
@@ -953,6 +954,24 @@ declare namespace Annotation {
              */
             memories: M;
         }
+
+        type AiFunctions = {
+            /**
+             * Method for `aiStep`  
+             * 用于`aiStep`的方法
+             * - - - - -
+             * @param entity The entity to tick  
+             *               要执行tick的实体
+             */
+            aiStep: (entity: Internal.Mob) => void,
+            /**
+             * Method for `onHurt`  
+             * 用于`onHurt`的方法
+             * @param context The hurt context  
+             *                受伤上下文
+             */
+            onHurt?: (context: Internal.ContextUtils$EntityDamageContext) => void
+        }
     }
 
 }
@@ -987,7 +1006,7 @@ declare const KubeJSAiFactory: {
      * @returns           A function that can be used in `aiStep` method.
      *                    可在`aiStep`方法中使用的函数。
      */
-    createAi<A extends string>(actionsList: () => Annotation.Entities.AiActionsMap<A, any>) : (entity: Internal.Mob) => void,
+    createAi<A extends string>(actionsList: Annotation.Entities.AiActionsMap<A, any>) : Annotation.Entities.AiFunctions,
 
     ActionsController: typeof Annotation.Entities.ActionsController,
 

@@ -682,7 +682,7 @@ let ICY_TERRACUBE_AI_STEP = {
             let level = entity.getLevel();
             if (!controller.isMemoryPresent("core/attackTarget")) return;
             KubeJSAiHelper.tryMeleeAttack(entity, controller.getMemory("core/attackTarget"));
-            controller.setMemory("move/moveTarget", controller.getMemory("core/attackTarget"));
+            controller.setMemory("move/moveTarget", controller.getMemory("core/attackTarget").position());
 
             if (controller.isActive("CircularRangedAttack") && level.getTime() - controller.getMemoryOrSetDefault("attack/lastLongRanged", -Infinity) > 300 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) > 144) {
                 controller.activate("LongRangedAttack");
@@ -692,11 +692,6 @@ let ICY_TERRACUBE_AI_STEP = {
                 controller.activate("CircularRangedAttack");
             }
 
-            if (entity.getHealth() < entity.getMaxHealth() * 0.25) {
-                if (Math.random() < 0.01) {
-                    controller.activate("EatTerracubes");
-                }
-            }
         },
         LookAtTarget: (entity, controller, _timeLasted, _persistent) => {
             if (entity.getLevel().isClientSide()) return;
@@ -740,6 +735,15 @@ let ICY_TERRACUBE_AI_STEP = {
             }
         }
     },
+    onHurt: (context, controller) => {
+        let entity = context.entity;
+
+        if (entity.getHealth() < entity.getMaxHealth() * 0.25) {
+            if (Math.random() < 0.2) {
+                controller.activate("EatTerracubes");
+            }
+        }
+    },
     initAction: "Init"
 };
 
@@ -757,9 +761,8 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .fallSounds(ResourceLocation.tryParse("minecraft:entity.slime.squish"), ResourceLocation.tryParse("minecraft:entity.slime.squish"))
         .setHurtSound(() => "minecraft:entity.slime.hurt")
         .isInvulnerableTo(ctx => ctx.damageSource.is(FALL_DAMAGE_RESOURCE_KEY))
-        .aiStep(mob => global.Entities.AiFunctions.IcyTerracube(mob))
-        .onHurt(KubeJSAiHelper.onHurtCallbackHelper("IcyTerracube"))
-        .onRemovedFromWorld(KubeJSAiHelper.onRemovedFromWorldCallbackHelper("IcyTerracube"))
+        .aiStep(mob => global.Entities.AiFunctions.IcyTerracube.aiStep(mob))
+        .onHurt(mob => global.Entities.AiFunctions.IcyTerracube.onHurt(mob))
     ;
 
 });

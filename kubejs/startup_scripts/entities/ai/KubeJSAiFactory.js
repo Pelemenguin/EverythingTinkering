@@ -28,26 +28,39 @@ KubeJSAiFactory.createAi = (actionsList) => {
     /** @type {Internal.Map<Internal.Mob, KubeJSAiFactory.ActionsController>} */
     const CONTROLLERS = Utils.newMap();
 
-    return (entity) => {
-        if (entity.getLevel().isClientSide()) return;
-        if (entity.isDeadOrDying()) {
-            if (CONTROLLERS.remove(entity) != null) {
-                console.info("Controller removed for entity " + entity);
+    /** @type {Annotation.Entities.AiFunctions} */
+    let result = {
+        aiStep: (entity) => {
+            if (entity.getLevel().isClientSide()) return;
+            if (entity.isDeadOrDying()) {
+                if (CONTROLLERS.remove(entity) != null) {
+                    console.info("Controller removed for entity " + entity);
+                }
+                return;
             }
-            return;
-        }
-        if (entity.isNoAi()) return;
+            if (entity.isNoAi()) return;
 
-        let controller;
-        if (CONTROLLERS.containsKey(entity)) {
-            controller = CONTROLLERS.get(entity);
-        } else {
-            controller = new KubeJSAiFactory.ActionsController(actionsList);
-            CONTROLLERS.put(entity, controller);
-        }
+            let controller;
+            if (CONTROLLERS.containsKey(entity)) {
+                controller = CONTROLLERS.get(entity);
+            } else {
+                controller = new KubeJSAiFactory.ActionsController(actionsList);
+                CONTROLLERS.put(entity, controller);
+            }
 
-        controller.tick(entity);
+            controller.tick(entity);
+        }
     };
+    if ("onHurt" in actionsList) {
+        result.onHurt = (context) => {
+            let entity = context.entity;
+            if (entity.getLevel().isClientSide()) return;
+            if (entity.isDeadOrDying()) return;
+
+            actionsList.onHurt(context, CONTROLLERS.get(entity));
+        };
+    }
+    return result;
 };
 
 KubeJSAiFactory.ActionsController = function(/** @type {Annotation.Entities.AiActionsMap<?, ?>} */ actions) {
