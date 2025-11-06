@@ -146,11 +146,18 @@ let ICY_TERRACUBE_AI_STEP = {
                 controller.deactivate("SmashAttack");
                 return;
             }
+            let warningTime;
+            if (!controller.isMemoryPresent("attack/smashWarningTime")) {
+                warningTime = Math.round(entity.getHealth() / entity.getMaxHealth() * 30 + 10);
+                controller.setMemory("attack/smashWarningTime", warningTime);
+            } else {
+                warningTime = controller.getMemory("attack/smashWarningTime");
+            }
             if (timeLasted == 0) {
                 controller.deactivate("MoveTowardsTarget");
                 controller.deactivate("MeleeAttack");
                 if (!controller.isMemoryPresent("attack/smashTarget")) controller.setMemory("attack/smashTarget", controller.getMemory("core/attackTarget").position());
-            } else if (0 < timeLasted && timeLasted < 40) {
+            } else if (0 < timeLasted && timeLasted < warningTime) {
                 if (!controller.isMemoryPresent("attack/smashTarget")) {
                     controller.activate("MeleeAttack");
                     controller.activate("MoveTowardsTarget");
@@ -159,9 +166,9 @@ let ICY_TERRACUBE_AI_STEP = {
                 }
                 let smashTarget = controller.getMemory("attack/smashTarget");
                 entity.getLevel().spawnParticles(new DustParticleOptions(new Vec3f(1, 0, 0), 1), false, smashTarget.x(), smashTarget.y() + 0.1, smashTarget.z(), 1.2, 0, 1.2, 20, 0.1);
-            } else if (timeLasted == 40) {
+            } else if (timeLasted == warningTime) {
                 entity.addDeltaMovement([0, 2, 0]);
-            } else if (timeLasted == 50) {
+            } else if (timeLasted == warningTime + 10) {
                 let smashTarget = controller.getMemory("attack/smashTarget");
                 entity.setPos(smashTarget.x(), smashTarget.y() + 15, smashTarget.z());
                 entity.setMotionY(0);
@@ -177,7 +184,7 @@ let ICY_TERRACUBE_AI_STEP = {
 
                 entity.modifyAttribute("minecraft:generic.attack_damage", "Smash attack damage boost", damageBoost, "addition");
                 entity.modifyAttribute("forge:entity_gravity", "Smash attack gravity boost", 0.24, "addition");
-            } else if (timeLasted > 50 && entity.onGround()) {
+            } else if (timeLasted > warningTime + 10 && entity.onGround()) {
 
                 let level = entity.getLevel();
                 let atk = entity.getAttribute("minecraft:generic.attack_damage").getValue();
@@ -193,6 +200,7 @@ let ICY_TERRACUBE_AI_STEP = {
                 entity.addDeltaMovement([Math.random(), 1, Math.random()]);
 
                 controller.removeMemory("attack/smashTarget");
+                controller.removeMemory("attack/smashWarningTime");
                 controller.setMemory("move/jumpsFailed", 0);
 
                 controller.activate("MeleeAttack");

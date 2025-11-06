@@ -652,6 +652,9 @@ declare namespace Annotation {
     }
 
     namespace Entities {
+        /**
+         * @deprecated
+         */
         namespace AiCaches {
             type ALL = "IcyTerracube";
             type IcyTerracube = {
@@ -819,6 +822,7 @@ declare namespace Annotation {
                 "move/jumpStartPos": Vec3d,
                 "move/jumpsFailed": number,
                 "attack/smashTarget": Vec3d,
+                "attack/smashWarningTime": number,
                 "attack/lastLongRanged": number,
                 "attack/lastCircularRanged": number,
                 "eat/terracubesEaten": number,
@@ -939,18 +943,20 @@ declare namespace Annotation {
              */
             actions: {[K in A]: AiAction<A, M>};
             /**
-             * The currently activated actions with their lasted tick counts.
+             * The currently activated actions with their lasted tick counts.  
              * 当前已激活的动作及其持续的Tick计数。
              */
             ticking: {[K in A]: number};
             /**
-             * Actions to remove at the end of the tick.
+             * Actions to remove at the end of the tick.  
              * 在Tick结束时要移除的动作。
              */
             toRemove: Set<A>;
             /**
-             * Memories of the entity stored in the controller, but not in NBT.  
+             * Memories of the entity stored in the controller, but not in NBT.
+             * That means, memories stored in the controller will be lost after reloading or restarting the game.  
              * 实体存储在控制器中的记忆，但不存储在NBT中。
+             * 也就是说，存储在控制器中的记忆在重新加载或重启游戏后将会丢失。
              */
             memories: M;
         }
@@ -967,6 +973,7 @@ declare namespace Annotation {
             /**
              * Method for `onHurt`  
              * 用于`onHurt`的方法
+             * - - - - -
              * @param context The hurt context  
              *                受伤上下文
              */
