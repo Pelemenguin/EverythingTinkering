@@ -148,7 +148,8 @@ let ICY_TERRACUBE_AI_STEP = {
             }
             let warningTime;
             if (!controller.isMemoryPresent("attack/smashWarningTime")) {
-                warningTime = Math.round(entity.getHealth() / entity.getMaxHealth() * 30 + 10);
+                // Always 40 in Peaceful and Easy
+                warningTime = entity.getLevel().getDifficulty().getId() <= 1 ? 40 : Math.round(entity.getHealth() / entity.getMaxHealth() * 30 + 10);
                 controller.setMemory("attack/smashWarningTime", warningTime);
             } else {
                 warningTime = controller.getMemory("attack/smashWarningTime");
