@@ -24,6 +24,7 @@ let THAWING = ModifierManager.registerCommonModifier("thawing", "ThawingModifier
     onInventoryTick: (_tool, _modifier, world, holder, _itemSlot, _isSelected, isCorrectSlot, _stack) => {
         if (world.isClientSide()) return;
         if (!isCorrectSlot) return;
+        if (!holder.onGround()) return;
         let holderPos = holder.blockPosition();
         for (let x = -2; x <= 2; x++) {
             for (let z = -2; z <= 2; z++) {
