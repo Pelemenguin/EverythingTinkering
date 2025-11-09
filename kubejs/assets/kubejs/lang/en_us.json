@@ -219,6 +219,10 @@
     "modifier.kubejs.burning.flavor": "Hot! Hot! Hot!",
     "modifier.kubejs.burning.description": "Burns yourself while wielding",
 
+    "modifier.kubejs.thawing": "Thawing",
+    "modifier.kubejs.thawing.flavor": "Some kind of lite snowplow. Seemingly a little bit hot underfoot?",
+    "modifier.kubejs.thawing.description": "移除周围的雪",
+
     "modifier.kubejs.glass_shard": "Glass Shard",
     "modifier.kubejs.glass_shard.flavor": "Fragile products!",
     "modifier.kubejs.glass_shard.description": "Attack costs more durability points. When this happens, enemies near the direct target will be hurt",

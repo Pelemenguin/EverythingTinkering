@@ -1,0 +1,25 @@
+{
+    "type": "tconstruct:modifier",
+    "tools": {
+        "tag": "tconstruct:modifiable/armor/boots"
+    },
+    "inputs": [
+        {
+            "item": "minecraft:snowball",
+            "amount_needed": 4
+        },
+        {
+            "item": "minecraft:magma_block",
+            "amount_needed": 4
+        }
+    ],
+    "slots": {
+        "upgrades": 1
+    },
+    "result": "kubejs:thawing",
+    "level": {
+        "max": 1
+    },
+    "check_trait_level": true,
+    "allow_crystal": true
+}

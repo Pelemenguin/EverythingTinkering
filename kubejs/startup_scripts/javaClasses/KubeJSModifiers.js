@@ -369,7 +369,7 @@ const ModifierManager = {
      */
     registerCommonModifier: (name, className, hooks) => {
         /** @type {ClassCreator} */
-        let modifierClassCreator = ClassCreator.create(`Modifier.${className}`);
+        let modifierClassCreator = ClassCreator.create(`modifier.${className}`);
         
         if ("__class__" in hooks && "extending" in hooks.__class__) modifierClassCreator.extending(hooks.__class__.extending);
         else modifierClassCreator.extending("slimeknights.tconstruct.library.modifiers.Modifier");

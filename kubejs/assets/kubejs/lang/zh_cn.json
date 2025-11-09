@@ -218,6 +218,10 @@
     "modifier.kubejs.heating.flavor": "发现了武器是熔岩做的！",
     "modifier.kubejs.heating.description": "追加1点灼烧伤害",
 
+    "modifier.kubejs.thawing": "融雪",
+    "modifier.kubejs.thawing.flavor": "某种简易版除雪车，但是好像有点烫脚？",
+    "modifier.kubejs.thawing.description": "移除周围的雪",
+
     "modifier.kubejs.burning": "烫伤",
     "modifier.kubejs.burning.flavor": "锟斤拷烫烫烫！",
     "modifier.kubejs.burning.description": "手持时烫伤自己",
