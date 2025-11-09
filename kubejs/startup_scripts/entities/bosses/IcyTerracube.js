@@ -99,6 +99,12 @@ let ICY_TERRACUBE_AI_STEP = {
             let time = entity.getLevel().getTime();
             if (entity.onGround()) {
 
+                if (controller.getMemory("animation/hasJustLanded")) {
+                    controller.setMemory("animation/hasJustLanded", false);
+                } else {
+                    controller.setMemory("animation/hasJustLanded", true);
+                }
+
                 if (controller.isMemoryPresent("move/jumpStartPos")) {
                     let differece = entity.position().subtract(controller.getMemory("move/jumpStartPos"));
                     if (differece.horizontalDistanceSqr() <= 1) {
@@ -272,7 +278,7 @@ let ICY_TERRACUBE_AI_STEP = {
             KubeJSAiHelper.tryMeleeAttack(entity, controller.getMemory("core/attackTarget"));
             controller.setMemory("move/moveTarget", controller.getMemory("core/attackTarget").position());
 
-            if (controller.isActive("CircularRangedAttack") && level.getTime() - controller.getMemoryOrSetDefault("attack/lastLongRanged", -Infinity) > 300 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) > 144) {
+            if (!controller.isActive("CircularRangedAttack") && level.getTime() - controller.getMemoryOrSetDefault("attack/lastLongRanged", -Infinity) > 300 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) > 144) {
                 controller.activate("LongRangedAttack");
                 return;
             }
@@ -342,15 +348,16 @@ let ICY_TERRACUBE_AI_STEP = {
 global.Entities.AiFunctions.IcyTerracube = KubeJSAiFactory.createAi(ICY_TERRACUBE_AI_STEP);
 /** @type {Internal.BaseLivingEntityBuilder$IAnimationPredicateJS_<Internal.MobEntityJS>} */
 global.Entities.AiFunctions.IcyTerracube.JumpController = (event) => {
-    // let actionsController = global.Entities.AiFunctions.IcyTerracube.getController(event.getEntity());
+    let actionsController = global.Entities.AiFunctions.IcyTerracube.getController(event.getEntity());
+    if (actionsController === undefined) return false;
     if (!event.getEntity().onGround()) {
-        if (event.getEntity().getMotionY() > 0) {
-            event.thenLoop("animation.icy_terracube.jump");
-            return true;
-        }
+        event.thenPlay("animation.icy_terracube.jump");
         return true;
     }
-    event.getController().stop();
+    if (actionsController.getMemory("animation/hasJustLanded")) {
+        event.thenPlay("animation.icy_terracube.land");
+        return true;
+    }
     return false;
 };
 
@@ -370,7 +377,7 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .onHurt(mob => global.Entities.AiFunctions.IcyTerracube.onHurt(mob))
         .addAnimationController("jumpController", 10, event => {
             try {return global.Entities.AiFunctions.IcyTerracube.JumpController(event);}
-            catch (e) {console.info("Curretly undefined: " + e); return false;}
+            catch (e) {console.info("Error on Icy Terracube animation controller tick: " + e); return false;}
         })
     ;
 

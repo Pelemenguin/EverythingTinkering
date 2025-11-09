@@ -827,7 +827,8 @@ declare namespace Annotation {
                 "attack/lastCircularRanged": number,
                 "eat/terracubesEaten": number,
                 "eat/jumpsToEat": number,
-                "eat/hasJustLanded": boolean
+                "eat/hasJustLanded": boolean,
+                "animation/hasJustLanded": boolean,
             };
         }
 
