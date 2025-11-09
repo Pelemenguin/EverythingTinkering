@@ -49,6 +49,9 @@ KubeJSAiFactory.createAi = (actionsList) => {
             }
 
             controller.tick(entity);
+        },
+        getController: (entity) => {
+            return CONTROLLERS.getOrDefault(entity, undefined);
         }
     };
     if ("onHurt" in actionsList) {

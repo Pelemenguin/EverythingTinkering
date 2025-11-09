@@ -831,7 +831,7 @@ declare namespace Annotation {
             };
         }
 
-        type AiAction<A extends string, M> = (entity: Internal.Mob, controller: ActionsController<A, M>, timeLasted: number, persistent: Internal.CompoundTag) => void;
+        type AiAction<A extends string, M> = (entity: Internal.MobEntityJS, controller: ActionsController<A, M>, timeLasted: number, persistent: Internal.CompoundTag) => void;
         type AiActionsMap<A extends string, M> = {
             actions: {[K in A]: AiAction<A, M>},
             memories: M,
@@ -961,7 +961,7 @@ declare namespace Annotation {
             memories: M;
         }
 
-        type AiFunctions = {
+        type AiFunctions<A extends string, M> = {
             /**
              * Method for `aiStep`  
              * 用于`aiStep`的方法
@@ -970,6 +970,17 @@ declare namespace Annotation {
              *               要执行tick的实体
              */
             aiStep: (entity: Internal.Mob) => void,
+            /**
+             * Get the `ActionsController` of an entity  
+             * 获取实体的`ActionsController`
+             * - - - - -
+             * @param entity The entity to get controller for  
+             *               要获取控制器的实体
+             * 
+             * @returns      The `ActionsController` of the entity, `undefined` if not found  
+             *               实体的`ActionsController`，若未找到则为`undefined`
+             */
+            getController: (entity: Internal.Mob) => ActionsController<A, M>?,
             /**
              * Method for `onHurt`  
              * 用于`onHurt`的方法
@@ -1013,7 +1024,7 @@ declare const KubeJSAiFactory: {
      * @returns           A function that can be used in `aiStep` method.
      *                    可在`aiStep`方法中使用的函数。
      */
-    createAi<A extends string>(actionsList: Annotation.Entities.AiActionsMap<A, any>) : Annotation.Entities.AiFunctions,
+    createAi<A extends string, M>(actionsList: Annotation.Entities.AiActionsMap<A, M>) : Annotation.Entities.AiFunctions<A, M>,
 
     ActionsController: typeof Annotation.Entities.ActionsController,
 

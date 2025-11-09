@@ -340,6 +340,19 @@ let ICY_TERRACUBE_AI_STEP = {
 };
 
 global.Entities.AiFunctions.IcyTerracube = KubeJSAiFactory.createAi(ICY_TERRACUBE_AI_STEP);
+/** @type {Internal.BaseLivingEntityBuilder$IAnimationPredicateJS_<Internal.MobEntityJS>} */
+global.Entities.AiFunctions.IcyTerracube.JumpController = (event) => {
+    // let actionsController = global.Entities.AiFunctions.IcyTerracube.getController(event.getEntity());
+    if (!event.getEntity().onGround()) {
+        if (event.getEntity().getMotionY() > 0) {
+            event.thenLoop("animation.icy_terracube.jump");
+            return true;
+        }
+        return true;
+    }
+    event.getController().stop();
+    return false;
+};
 
 StartupEvents.registry("minecraft:entity_type", event => {
 
@@ -355,6 +368,10 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .isInvulnerableTo(ctx => ctx.damageSource.is(FALL_DAMAGE_RESOURCE_KEY))
         .aiStep(mob => global.Entities.AiFunctions.IcyTerracube.aiStep(mob))
         .onHurt(mob => global.Entities.AiFunctions.IcyTerracube.onHurt(mob))
+        .addAnimationController("jumpController", 10, event => {
+            try {return global.Entities.AiFunctions.IcyTerracube.JumpController(event);}
+            catch (e) {console.info("Curretly undefined: " + e); return false;}
+        })
     ;
 
 });
