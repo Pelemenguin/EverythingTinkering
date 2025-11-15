@@ -234,20 +234,48 @@ let ICY_TERRACUBE_AI_STEP = {
             controller.deactivate("MeleeAttack");
             controller.deactivate("MoveTowardsTarget");
             controller.activate("LookAtTarget");
-            let difference = controller.getMemory("core/attackTarget").getEyePosition().subtract(entity.getEyePosition());
-            let h = difference.y();
+
+            // Gravitational acceleration
+            const g = 0.03;
+
+            const p0 = entity.getEyePosition();                                    // Boss Position
+            const p1 = controller.getMemory("core/attackTarget").getEyePosition(); // Player Position
+
+            const d = p1.subtract(p0); // Relative position
+            const h = d.y();           // Height difference
+            const hd = d.horizontalDistance(); // Horizontal distance
+
+            const tanTheta = Math.max(Math.abs(hd - 10) * -0.05 + 1, 0); // Angle
+
+            const delta = -h + hd * tanTheta;
+            if (delta <= 0) {
+                console.info("Unable to find a proper initial velocity for projectile. Delta: " + delta);
+                return;
+            }
+            const t = Math.sqrt(2 * delta / g);
+
+            let vel = d.scale(1 / t).add([0, 0.5 * g * t, 0]); // Final velocity
+
+            if (hd >= 15) {
+                vel = vel.scale(1.1); // Air resistance
+            }
+
+            // Final check
+            // NaN and Infinity leads to a broken level
+            let err = false;
+            ["x", "y", "z"].forEach(/** @param {"x" | "y" | "z"} f */ f => {
+                let n = vel[f]();
+                if (isNaN(n) || !isFinite(n)) {
+                    console.error("Wrong calculation for velocity: " + vel);
+                    err = true;
+                    return;
+                }
+            });
+            if (err) return;
+
             let created = entity.getLevel().createEntity("kubejs:icy_clay_ball");
-
-            let start = entity.getEyePosition();
-            created.setPosition(start.x(), start.y(), start.z());
-            let velSize = Math.min(Math.sqrt(difference.horizontalDistanceSqr() * 0.015 / Math.abs(h)), 10);
-
-            // 我真求你了别崩了
-            // 算个初速度崩多少回了
-            if (isNaN(velSize) || !isFinite(velSize)) return;
-
-            let vel = new Vec3d(difference.x(), 0, difference.z()).normalize().scale(velSize);
-            created.addDeltaMovement(vel.add(Math.random() * 0.1, Math.random() * 0.1, Math.random() * 0.1));
+            created.setPos(p0);
+            created.addDeltaMovement(vel.add(Math.random() * 0.05 - 0.025, Math.random() * 0.05 - 0.025, Math.random() * 0.05 - 0.025));
             entity.getLevel().addFreshEntity(created);
         },
         CircularRangedAttack: (entity, controller, timeLasted, _persistent) => {
