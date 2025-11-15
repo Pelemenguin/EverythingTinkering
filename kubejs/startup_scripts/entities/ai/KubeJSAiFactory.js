@@ -92,6 +92,16 @@ KubeJSAiFactory.ActionsController.prototype.isActive = function(actionName) {
     return this.ticking != undefined && this.ticking[actionName] >= 0;
 };
 
+/** @type {Annotation.Entities.ActionsController["schedule"]} */
+KubeJSAiFactory.ActionsController.prototype.schedule = function(actionName, ticksUntilActivate) {
+    if (this.isActive(actionName)) return;
+    if (this.ticking[actionName] === undefined) {
+        this.ticking[actionName] = -ticksUntilActivate;
+        return;
+    }
+    this.ticking[actionName] = Math.max(-ticksUntilActivate, this.ticking[actionName]);
+};
+
 /** @type {Annotation.Entities.ActionsController["setMemory"]} */
 KubeJSAiFactory.ActionsController.prototype.setMemory = function(key, value) {
     this.memories[key] = value;
@@ -135,8 +145,9 @@ KubeJSAiFactory.ActionsController.prototype.tick = function(mob) {
     }
 
     for (let i in this.ticking) {
-        if (!this.isActive(i)) continue;
-        this.actions[i](mob, this, this.ticking[i], dataStorage);
+        let time = this.ticking[i];
+        if (time === undefined) continue;
+        if (time >= 0) this.actions[i](mob, this, time, dataStorage);
         ++ this.ticking[i];
     }
 

@@ -794,6 +794,9 @@ declare namespace Annotation {
              *   - Jumps high into the air and slams down onto the ground,
              *     dealing area damage upon landing.
              *   - 高高跳起并猛然落地，造成范围伤害。
+             * - `BigJumpAfterSmashAttack`
+             *   - Force to jump after smash attack.
+             *   - 在猛击攻击后强制跳跃。
              * - `LongRangedAttack`
              *   - Throws Icy Clay Balls to deal damage to far away players.
              *   - 投掷冰黏土球以对远处的玩家造成伤害。
@@ -810,7 +813,7 @@ declare namespace Annotation {
              *   - Eats nearby Terracubes for healing.
              *   - 吞噬附近的黏土怪以进行治疗。
              */
-            type IcyTerracube = "Init" | "Core" | "MoveTowardsTarget" | "SmashAttack" | "LongRangedAttack" | "CircularRangedAttack" | "MeleeAttack" | "LookAtTarget" | "EatTerracubes";
+            type IcyTerracube = "Init" | "Core" | "MoveTowardsTarget" | "SmashAttack" | "BigJumpAfterSmashAttack" | "LongRangedAttack" | "CircularRangedAttack" | "MeleeAttack" | "LookAtTarget" | "EatTerracubes";
         }
 
         namespace AiMemories {
@@ -871,6 +874,15 @@ declare namespace Annotation {
              *                   如果动作处于激活状态则为真，否则为假。
              */
             isActive(actionName: A): boolean;
+
+            /**
+             * Schedules an action to be activated after a certain number of ticks.
+             * 通过一定的Tick数后调度一个动作以激活它。
+             * - - - - -
+             * @param actionName 
+             * @param ticksUntilActivate 
+             */
+            schedule(actionName: A, ticksUntilActivate: number): void;
 
             /**
              * Ticks the AI actions controller.  

@@ -93,17 +93,20 @@ let ICY_TERRACUBE_AI_STEP = {
                     return;
                 }
             }
-        },
-        MoveTowardsTarget: (entity, controller, _timeLasted, _persistent) => {
-            if (!controller.isMemoryPresent("move/moveTarget")) return;
-            let time = entity.getLevel().getTime();
-            if (entity.onGround()) {
 
+            // Animations
+            if (entity.onGround()) {
                 if (controller.getMemory("animation/hasJustLanded")) {
                     controller.setMemory("animation/hasJustLanded", false);
                 } else {
                     controller.setMemory("animation/hasJustLanded", true);
                 }
+            }
+        },
+        MoveTowardsTarget: (entity, controller, _timeLasted, _persistent) => {
+            if (!controller.isMemoryPresent("move/moveTarget")) return;
+            let time = entity.getLevel().getTime();
+            if (entity.onGround()) {
 
                 if (controller.isMemoryPresent("move/jumpStartPos")) {
                     let differece = entity.position().subtract(controller.getMemory("move/jumpStartPos"));
@@ -143,6 +146,8 @@ let ICY_TERRACUBE_AI_STEP = {
 
                 entity.addDeltaMovement(new Vec3d(direction.x(), 0, direction.z()).normalize().scale(jumpStrength));
                 entity.addDeltaMovement([0, 0.5, 0]);
+
+                entity.triggerAnimation("JumpController", "animation.icy_terracube.jump");
 
                 controller.setMemory("move/jumpStartPos", entity.position());
             }
@@ -204,7 +209,7 @@ let ICY_TERRACUBE_AI_STEP = {
                 entity.removeAttribute("minecraft:generic.attack_damage", "Smash attack damage boost");
                 entity.removeAttribute("forge:entity_gravity", "Smash attack gravity boost");
 
-                entity.addDeltaMovement([Math.random(), 1, Math.random()]);
+                controller.schedule("BigJumpAfterSmashAttack", 5);
 
                 controller.removeMemory("attack/smashTarget");
                 controller.removeMemory("attack/smashWarningTime");
@@ -214,6 +219,10 @@ let ICY_TERRACUBE_AI_STEP = {
                 controller.activate("MoveTowardsTarget");
                 controller.deactivate("SmashAttack");
             }
+        },
+        BigJumpAfterSmashAttack: (entity, controller, _timeLasted, _persistent) => {
+            entity.addDeltaMovement([Math.random(), 1, Math.random()]);
+            controller.deactivate("BigJumpAfterSmashAttack");
         },
         LongRangedAttack: (entity, controller, timeLasted, _persistent) => {
             if (!controller.isMemoryPresent("core/attackTarget")) return;
@@ -349,10 +358,13 @@ global.Entities.AiFunctions.IcyTerracube = KubeJSAiFactory.createAi(ICY_TERRACUB
 /** @type {Internal.BaseLivingEntityBuilder$IAnimationPredicateJS_<Internal.MobEntityJS>} */
 global.Entities.AiFunctions.IcyTerracube.JumpController = (event) => {
     let actionsController = global.Entities.AiFunctions.IcyTerracube.getController(event.getEntity());
-    if (actionsController === undefined) return false;
+    let animationController = event.getController();
+    if (actionsController == undefined || animationController == undefined) return false;
     if (!event.getEntity().onGround()) {
-        event.thenPlay("animation.icy_terracube.jump");
+        event.thenPlayAndHold("animation.icy_terracube.jump");
         return true;
+    } else {
+        animationController.stop();
     }
     if (actionsController.getMemory("animation/hasJustLanded")) {
         event.thenPlay("animation.icy_terracube.land");
@@ -375,10 +387,12 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .isInvulnerableTo(ctx => ctx.damageSource.is(FALL_DAMAGE_RESOURCE_KEY))
         .aiStep(mob => global.Entities.AiFunctions.IcyTerracube.aiStep(mob))
         .onHurt(mob => global.Entities.AiFunctions.IcyTerracube.onHurt(mob))
-        .addAnimationController("jumpController", 10, event => {
+        .addAnimationController("jumpController", 0, event => {
             try {return global.Entities.AiFunctions.IcyTerracube.JumpController(event);}
             catch (e) {console.info("Error on Icy Terracube animation controller tick: " + e); return false;}
         })
+        // .addTriggerableAnimationController("JumpController", 0, "animation.icy_terracube.jump", "animation.icy_terracube.jump", "HOLD_ON_LAST_FRAME")
+        // .addTriggerableAnimationController("LandController", 0, "animation.")
     ;
 
 });
