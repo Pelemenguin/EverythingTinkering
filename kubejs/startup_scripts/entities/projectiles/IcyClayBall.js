@@ -22,6 +22,7 @@
     Direction
     TagKey
     Registries
+    KubeJSDamageSources
 */
 
 global.Entities.CommonFunctions.IcyClayBall = {
@@ -71,9 +72,11 @@ global.Entities.CommonFunctions.IcyClayBall = {
         if (living.getType() === "kubejs:icy_terracube") {
             living.heal(4);
         } else if (living.getType() === "tconstruct:terracube") {
-            return;
+            living.heal(2);
         } else if (context.result.getEntity().isAttackable()) {
-            if (living.attack(context.entity.damageSources().freeze(), global.Entities.CommonFunctions.IcyClayBall.DAMAGE)) {
+            let thrower = context.entity.getOwner();
+            let source = KubeJSDamageSources.icyClayBall(context.entity.getLevel(), context.entity, thrower == null ? undefined : thrower);
+            if (living.attack(source, global.Entities.CommonFunctions.IcyClayBall.DAMAGE)) {
                 if (living.isLiving()) living.addEffect(new MobEffectInstance("minecraft:slowness", 20, 0));
             }
         }

@@ -41,6 +41,9 @@
 
     "death.attack.kubejs.icy_terracube_smash": "%1$s被%2$s变成了大地的一部分",
 
+    "death.attack.kubejs.icy_clay_ball": "%1$s被%2$s冻死了",
+    "death.attack.kubejs.icy_clay_ball.item": "%1$s被%2$s用%3$s冻死了",
+
         "_comment_materials": " ----- 材料 ----- ",
 
     "material.tconstruct.wood.cherry": "樱花木",

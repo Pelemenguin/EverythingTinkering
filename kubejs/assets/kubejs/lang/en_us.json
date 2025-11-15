@@ -40,6 +40,9 @@
 
     "death.attack.kubejs.icy_terracube_smash": "%1$s was smashed by %2$s and became part of the earth",
 
+    "death.attack.kubejs.icy_clay_ball": "%1$s was frozen by %2$s",
+    "death.attack.kubejs.icy_clay_ball.item": "%1$s was frozen by %2$s using %3$s",
+
         "_comment_materials": " ----- Materials ----- ",
 
     "material.kubejs.soil": "Soil",

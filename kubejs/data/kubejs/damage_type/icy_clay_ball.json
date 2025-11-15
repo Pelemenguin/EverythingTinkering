@@ -1,0 +1,7 @@
+{
+    "death_message_type": "default",
+    "effects": "freeze",
+    "exhaustion": 0,
+    "message_id": "kubejs.icy_clay_ball",
+    "scaling": "never"
+}

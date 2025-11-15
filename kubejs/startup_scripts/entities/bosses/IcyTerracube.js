@@ -273,9 +273,11 @@ let ICY_TERRACUBE_AI_STEP = {
             });
             if (err) return;
 
+            /** @type {Internal.Projectile} */
             let created = entity.getLevel().createEntity("kubejs:icy_clay_ball");
             created.setPos(p0);
             created.addDeltaMovement(vel.add(Math.random() * 0.05 - 0.025, Math.random() * 0.05 - 0.025, Math.random() * 0.05 - 0.025));
+            created.setOwner(entity);
             entity.getLevel().addFreshEntity(created);
         },
         CircularRangedAttack: (entity, controller, timeLasted, _persistent) => {
@@ -297,6 +299,7 @@ let ICY_TERRACUBE_AI_STEP = {
                         created = terracube;
                     } else {
                         created = entity.getLevel().createEntity("kubejs:icy_clay_ball");
+                        created.setOwner(entity);
                     }
                     let direction = new Vec3d(Math.cos(rad), 0, Math.sin(rad));
                     let pos = entity.getEyePosition().add(direction);

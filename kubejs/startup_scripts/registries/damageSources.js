@@ -38,7 +38,8 @@ const KubeJSDamageTypes = {
     PAPERCUT: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:papercut"),
     HOT_TOOL: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:hot_tool"),
     HOT_TOOL_ATTACK: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:hot_tool_attack"),
-    ICY_TERRACUBE_SMASH: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:icy_terracube_smash")
+    ICY_TERRACUBE_SMASH: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:icy_terracube_smash"),
+    ICY_CLAY_BALL: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:icy_clay_ball")
 };
 
 const KubeJSDamageSources = {
@@ -65,6 +66,12 @@ const KubeJSDamageSources = {
      * - Create damage source of type `kubejs:icy_terracube_smash`.
      * - 创建一个类型为 `kubejs:icy_terracube_smash` 的伤害来源。
      */
-    icyTerracubeSmash: damageSourceCreatorHelper(KubeJSDamageTypes.ICY_TERRACUBE_SMASH)
+    icyTerracubeSmash: damageSourceCreatorHelper(KubeJSDamageTypes.ICY_TERRACUBE_SMASH),
+
+    /**
+     * - Create damage source of type `kubejs:icy_clay_ball`.
+     * - 创建一个类型为 `kubejs:icy_clay_ball` 的伤害来源。
+     */
+    icyClayBall: damageSourceCreatorHelper(KubeJSDamageTypes.ICY_CLAY_BALL)
 
 };
