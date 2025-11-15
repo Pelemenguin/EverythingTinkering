@@ -126,7 +126,7 @@ let ICY_TERRACUBE_AI_STEP = {
                 entity.setJumping(false);
                 controller.activate("LookAtTarget");
                 controller.setMemory("move/lookTarget", controller.getMemory("move/moveTarget"));
-                entity.lookAt("eyes", controller.getMemory("move/moveTarget"));
+                entity.lookAt("eyes", controller.getMemory("move/lookTarget"));
 
                 let jumpInterval = (entity.getHealth() / entity.getMaxHealth() - 0.5) * 40;
                 let jumpStrength = (entity.getHealth() / entity.getMaxHealth()) * 0.5 + 0.5;
@@ -146,8 +146,6 @@ let ICY_TERRACUBE_AI_STEP = {
 
                 entity.addDeltaMovement(new Vec3d(direction.x(), 0, direction.z()).normalize().scale(jumpStrength));
                 entity.addDeltaMovement([0, 0.5, 0]);
-
-                entity.triggerAnimation("JumpController", "animation.icy_terracube.jump");
 
                 controller.setMemory("move/jumpStartPos", entity.position());
             }
@@ -215,14 +213,14 @@ let ICY_TERRACUBE_AI_STEP = {
                 controller.removeMemory("attack/smashWarningTime");
                 controller.setMemory("move/jumpsFailed", 0);
 
-                controller.activate("MeleeAttack");
-                controller.activate("MoveTowardsTarget");
                 controller.deactivate("SmashAttack");
             }
         },
         BigJumpAfterSmashAttack: (entity, controller, _timeLasted, _persistent) => {
             entity.addDeltaMovement([Math.random(), 1, Math.random()]);
             controller.deactivate("BigJumpAfterSmashAttack");
+            controller.activate("MeleeAttack");
+            controller.activate("MoveTowardsTarget");
         },
         LongRangedAttack: (entity, controller, timeLasted, _persistent) => {
             if (!controller.isMemoryPresent("core/attackTarget")) return;
@@ -359,7 +357,8 @@ global.Entities.AiFunctions.IcyTerracube = KubeJSAiFactory.createAi(ICY_TERRACUB
 global.Entities.AiFunctions.IcyTerracube.JumpController = (event) => {
     let actionsController = global.Entities.AiFunctions.IcyTerracube.getController(event.getEntity());
     let animationController = event.getController();
-    if (actionsController == undefined || animationController == undefined) return false;
+    if (actionsController === undefined) return false;
+    if (animationController === undefined) return false;
     if (!event.getEntity().onGround()) {
         event.thenPlayAndHold("animation.icy_terracube.jump");
         return true;
@@ -391,8 +390,19 @@ StartupEvents.registry("minecraft:entity_type", event => {
             try {return global.Entities.AiFunctions.IcyTerracube.JumpController(event);}
             catch (e) {console.info("Error on Icy Terracube animation controller tick: " + e); return false;}
         })
-        // .addTriggerableAnimationController("JumpController", 0, "animation.icy_terracube.jump", "animation.icy_terracube.jump", "HOLD_ON_LAST_FRAME")
-        // .addTriggerableAnimationController("LandController", 0, "animation.")
+        .textureResource(entity => {
+            try {
+                let healthPercent = entity.getHealth() / entity.getMaxHealth();
+                if (healthPercent > 0.25) {
+                    return "kubejs:textures/entity/icy_terracube.png";
+                } else {
+                    return "kubejs:textures/entity/icy_terracube_damaged.png";
+                }
+            } catch (e) {
+                console.error("Failed to return texture resource for Icy Terracube: " + e);
+                return "kubejs:textures/entity/icy_terracube.png";
+            }
+        })
     ;
 
 });
