@@ -15,7 +15,6 @@
     global: writable
     StartupEvents
     EntityJSEvents
-    ResourceKey
     Registries
     KubeJSAiHelper
     console
@@ -374,8 +373,6 @@ global.Entities.AiFunctions.IcyTerracube.JumpController = (event) => {
 
 StartupEvents.registry("minecraft:entity_type", event => {
 
-    const FALL_DAMAGE_RESOURCE_KEY = ResourceKey.create(Registries.DAMAGE_TYPE, "minecraft:fall");
-
     event.create("kubejs:icy_terracube", "entityjs:mob")
         .eggItem(egg => egg.backgroundColor(0xa8c2cf).highlightColor(0x62ddf3))
         .sized(4, 4)
@@ -383,7 +380,7 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .spawnPlacement("on_ground", "world_surface", () => false)
         .fallSounds(ResourceLocation.tryParse("minecraft:entity.slime.squish"), ResourceLocation.tryParse("minecraft:entity.slime.squish"))
         .setHurtSound(() => "minecraft:entity.slime.hurt")
-        .isInvulnerableTo(ctx => ctx.damageSource.is(FALL_DAMAGE_RESOURCE_KEY))
+        .isInvulnerableTo(ctx => ctx.damageSource.is(TagKey.create(Registries.DAMAGE_TYPE, "kubejs:boss_immune")))
         .aiStep(mob => global.Entities.AiFunctions.IcyTerracube.aiStep(mob))
         .onHurt(mob => global.Entities.AiFunctions.IcyTerracube.onHurt(mob))
         .addAnimationController("jumpController", 0, event => {
