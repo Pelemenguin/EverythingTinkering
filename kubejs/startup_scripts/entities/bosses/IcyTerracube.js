@@ -182,7 +182,7 @@ let ICY_TERRACUBE_AI_STEP = {
                 entity.setPos(smashTarget.x(), smashTarget.y() + 15, smashTarget.z());
                 entity.setMotionY(0);
 
-                let damageBoost;
+                let damageBoost = 0;
                 switch (entity.getLevel().getDifficulty()) {
                     case $Difficulty.PEACEFUL : damageBoost = 0  ; break;
                     case $Difficulty.EASY     : damageBoost = 5  ; break;
@@ -337,13 +337,20 @@ let ICY_TERRACUBE_AI_STEP = {
                 /** @type {Internal.LivingEntity[]} */
                 let terracubes = level.getEntitiesWithin(entity.getBoundingBox().inflate(20)).filter(e => e.getType() == "tconstruct:terracube").toArray().sort((e1, e2) => entity.distanceToEntitySqr(e1) - entity.distanceToEntitySqr(e2));
                 if (terracubes.length == 0) {
+                    controller.removeMemory("move/moveTarget");
                     controller.deactivate("EatTerracubes");
                     controller.activate("MeleeAttack");
                     return;
                 }
                 let eatTarget = terracubes[0];
-                if (!eatTarget.isAlive()) controller.removeMemory("move/moveTarget");
-                else controller.setMemory("move/moveTarget", eatTarget.position());
+                if (!eatTarget.isAlive()) {
+                    controller.removeMemory("move/moveTarget");
+                    controller.deactivate("EatTerracubes");
+                    controller.activate("MeleeAttack");
+                    return;
+                } else {
+                    controller.setMemory("move/moveTarget", eatTarget.position());
+                }
 
                 if (entity.getBoundingBox().inflate(1).intersects(eatTarget.getBoundingBox())) {
                     eatTarget.discard();
@@ -356,6 +363,7 @@ let ICY_TERRACUBE_AI_STEP = {
                 }
 
                 if (controller.getMemory("eat/jumpsToEat") >= 5 || controller.getMemory("eat/terracubesEaten") >= 5 || entity.getHealth() > entity.getMaxHealth() * 0.5) {
+                    controller.removeMemory("move/moveTarget");
                     controller.deactivate("EatTerracubes");
                     controller.activate("MeleeAttack");
                     return;
@@ -371,6 +379,7 @@ let ICY_TERRACUBE_AI_STEP = {
         if (entity.getHealth() < entity.getMaxHealth() * 0.25) {
             if (Math.random() < 0.2) {
                 if (controller.isActive("EatTerracubes")) {
+                    controller.removeMemory("move/moveTarget");
                     controller.deactivate("EatTerracubes");
                     controller.activate("MeleeAttack");
                 } else {

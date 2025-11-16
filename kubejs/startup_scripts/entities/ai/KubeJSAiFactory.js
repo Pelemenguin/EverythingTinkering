@@ -83,6 +83,7 @@ KubeJSAiFactory.ActionsController = function(/** @type {Annotation.Entities.AiAc
 /** @type {Annotation.Entities.ActionsController["activate"]} */
 KubeJSAiFactory.ActionsController.prototype.activate = function(actionName) {
     if (!this.isActive(actionName)) this.ticking[actionName] = 0;
+    this.toRemove.delete(actionName);
 };
 
 /** @type {Annotation.Entities.ActionsController["activate"]} */
