@@ -16,7 +16,6 @@
     StartupEvents
     Blocks
     BlockProperties
-    MobEffectInstance
     JavaUtils
     ResourceLocation
     Direction
@@ -77,7 +76,8 @@ global.Entities.CommonFunctions.IcyClayBall = {
             let thrower = context.entity.getOwner();
             let source = KubeJSDamageSources.icyClayBall(context.entity.getLevel(), context.entity, thrower == null ? undefined : thrower);
             if (living.attack(source, global.Entities.CommonFunctions.IcyClayBall.DAMAGE)) {
-                if (living.isLiving()) living.addEffect(new MobEffectInstance("minecraft:slowness", 20, 0));
+                let ticksFrozen = living.getTicksFrozen();
+                living.setTicksFrozen(Math.max(Math.min(500, ticksFrozen + 100), ticksFrozen));
             }
         }
     },

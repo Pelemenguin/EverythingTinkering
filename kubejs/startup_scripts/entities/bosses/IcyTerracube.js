@@ -420,7 +420,7 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .spawnPlacement("on_ground", "world_surface", () => false)
         .fallSounds(ResourceLocation.tryParse("minecraft:entity.slime.squish"), ResourceLocation.tryParse("minecraft:entity.slime.squish"))
         .setHurtSound(() => "minecraft:entity.slime.hurt")
-        .isInvulnerableTo(ctx => ctx.damageSource.is(TagKey.create(Registries.DAMAGE_TYPE, "kubejs:boss_immune")))
+        .isInvulnerableTo(ctx => ctx.damageSource.is(TagKey.create(Registries.DAMAGE_TYPE, "kubejs:boss_immune/icy_terracube")))
         .aiStep(mob => global.Entities.AiFunctions.IcyTerracube.aiStep(mob))
         .onHurt(mob => global.Entities.AiFunctions.IcyTerracube.onHurt(mob))
         .addAnimationController("jumpController", 0, event => {
