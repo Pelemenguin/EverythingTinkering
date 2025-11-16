@@ -19,7 +19,7 @@
     JavaUtils
     ResourceLocation
     Direction
-    TagKey
+    ResourceKey
     Registries
     KubeJSDamageSources
 */
@@ -86,7 +86,7 @@ global.Entities.CommonFunctions.IcyClayBall = {
 
 };
 
-global.Entities.TagKeys.ICY_CLAY_BALL = TagKey.create(Registries.ENTITY_TYPE, "kubejs:icy_clay_ball");
+global.Entities.ResourceKeys.ICY_CLAY_BALL = ResourceKey.create(Registries.ENTITY_TYPE, "kubejs:icy_clay_ball");
 
 StartupEvents.registry("minecraft:entity_type", event => {
     event.create("kubejs:icy_clay_ball", "entityjs:projectile")

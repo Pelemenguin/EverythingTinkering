@@ -27,6 +27,7 @@
     KubeJSAiFactory
     DustParticleOptions
     Vec3f
+    ResourceKey
 */
 
 let ICY_TERRACUBE_CONFIG = {
@@ -41,7 +42,7 @@ let ICY_TERRACUBE_CONFIG = {
     CAN_DESPAWN_TAG: "CanDespawn"
 };
 
-global.Entities.TagKeys.ICY_TERRACUBE = TagKey.create(Registries.ENTITY_TYPE, "kubejs:icy_terracube");
+global.Entities.ResourceKeys.ICY_TERRACUBE = ResourceKey.create(Registries.ENTITY_TYPE, "kubejs:icy_terracube");
 
 let ICY_TERRACUBE_NBT = {
     attackTarget: "AttackTarget"
