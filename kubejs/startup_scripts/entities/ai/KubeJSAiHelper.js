@@ -17,6 +17,7 @@
     global: writable
     console
     Component
+    NBT
 */
 
 /**
@@ -221,7 +222,85 @@ const KubeJSAiHelper = {
      * Boss。
      */
     chosenAsTarget: (player, boss) => {
+        /** @type {Internal.CompoundTag} */
+        const newPlayer = NBT.compoundTag();
+        newPlayer.putUUID("UUID", player.getUuid());
+        newPlayer.putDouble("DamageTaken", 0);
+
+        const persistent = boss.getForgePersistentData();
+        if (persistent.contains("kubejs:boss_targets")) {
+            let bossTarget = persistent.getList("kubejs:boss_targets", 10); // 10 refers to CompoundTag
+            bossTarget.add(newPlayer);
+        } else {
+            boss.getForgePersistentData().merge(NBT.compoundTag({
+                "kubejs:boss_targets": NBT.listTag([newPlayer])
+            }));
+        }
         player.sendSystemMessage(Component.translate("entity.kubejs.boss.challenging", boss.getName().copy().gold()).lightPurple());
+
+        /** @type {Internal.CompoundTag} */
+        const newBoss = NBT.compoundTag();
+        newBoss.putUUID("UUID", boss.getUuid());
+
+        const playerPersistent = player.getForgePersistentData();
+        if (playerPersistent.contains("kubejs:challenging_bosses")) {
+            const challenging = playerPersistent.getList("kubejs:challenging_bosses", 10);
+            challenging.add(newBoss);
+        } else {
+            player.getForgePersistentData().merge(NBT.compoundTag({
+                "kubejs:challenging_bosses": NBT.listTag([newBoss])
+            }));
+        }
+    },
+
+    /**
+     * 
+     * @param {Internal.Player} player 
+     * The player to be checked.  
+     * 被检查的玩家。
+     * @param {Internal.Mob} boss 
+     * The boss.  
+     * Boss。
+     */
+    isTargetOf: (player, boss) => {
+        const persistent = boss.getForgePersistentData();
+        if (!persistent.contains("kubejs:boss_targets")) return false;
+        /** @type {Internal.CompoundTag[]} */
+        let targets = persistent.getList("kubejs:boss_targets", 10).toArray();
+        for (let target of targets) {
+            if (target.getUUID("UUID").equals(player.getUuid())) return true;
+        }
+        return false;
+    },
+
+    /**
+     * @param {Internal.Mob} boss
+     * The boss entity.  
+     * Boss实体。
+     * @param {Internal.UUID} playerUUID
+     * The UUID of the player taken damage.  
+     * 受到伤害的玩家的UUID。
+     * @param {number} amount
+     * The damage amount to send.  
+     * 发送的伤害数值。
+     */
+    sendDamageTakenToBoss: (boss, playerUUID, amount) => {
+        const persistent = boss.getForgePersistentData();
+        if (!persistent.contains("kubejs:boss_targets")) return;
+
+        /** @type {Internal.CompoundTag[]} */
+        let targets = persistent.getList("kubejs:boss_targets", 10).toArray();
+        for (let target of targets) {
+            if (target.getUUID("UUID").equals(playerUUID)) {
+                let currentDamage = target.getDouble("DamageTaken");
+                target.putDouble("DamageTaken", currentDamage + amount);
+                console.info(currentDamage + amount);
+                break;
+            }
+        }
     }
 
 };
+
+// Pass to server_scripts
+global.Entities.KubeJSAiHelper = KubeJSAiHelper;

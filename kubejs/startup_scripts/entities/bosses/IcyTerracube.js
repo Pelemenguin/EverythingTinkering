@@ -54,13 +54,18 @@ let ICY_TERRACUBE_NBT = {
 let ICY_TERRACUBE_AI_STEP = {
     actions: {
         Init: (entity, controller, _timeLasted, _persistent) => {
-            if (entity.getLevel().isClientSide()) return;
             console.info(`[Terracube] Init for ${entity}`);
 
             controller.deactivate("Init");
             controller.activate("Core");
             controller.activate("MeleeAttack");
             controller.activate("MoveTowardsTarget");
+
+            entity.getLevel().getEntitiesWithin(entity.getBoundingBox().inflate(50)).forEach(e => {
+                if (e.isPlayer() && !e.isCreative() && !e.isSpectator()) {
+                    KubeJSAiHelper.chosenAsTarget(e, entity);
+                }
+            });
         },
         Core: (entity, controller, _timeLasted, persistent) => {
             let level = entity.getLevel();
@@ -70,6 +75,7 @@ let ICY_TERRACUBE_AI_STEP = {
                     let attackTarget = entity.getLevel().getPlayerByUUID(persistent.getUUID(ICY_TERRACUBE_NBT.attackTarget));
                     if (attackTarget != null) {
                         controller.setMemory("core/attackTarget", attackTarget);
+                        if (!KubeJSAiHelper.isTargetOf(attackTarget, entity)) KubeJSAiHelper.chosenAsTarget(attackTarget, entity);
                         controller.activate("MoveTowardsTarget");
                     }
                     else persistent.remove(ICY_TERRACUBE_NBT.attackTarget);
@@ -79,6 +85,7 @@ let ICY_TERRACUBE_AI_STEP = {
                     if (attackTarget != null) {
                         persistent.putUUID(ICY_TERRACUBE_NBT.attackTarget, attackTarget.getUuid());
                         controller.setMemory("core/attackTarget", attackTarget);
+                        if (!KubeJSAiHelper.isTargetOf(attackTarget, entity)) KubeJSAiHelper.chosenAsTarget(attackTarget, entity);
                         controller.activate("MoveTowardsTarget");
                         return;
                     }
