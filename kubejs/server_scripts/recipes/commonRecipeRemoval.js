@@ -22,4 +22,8 @@ ServerEvents.recipes(event => {
     event.remove({id: "tconstruct:tools/materials/wood/planks/default"});
     event.remove({id: "tconstruct:tools/materials/wood/logs/default"});
 
+    // Remove grout recipes
+    event.remove({id: "tconstruct:smeltery/seared/grout"});
+    event.remove({id: "tconstruct:smeltery/seared/grout_multiple"});
+
 });
