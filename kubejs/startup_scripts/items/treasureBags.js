@@ -28,6 +28,7 @@ global.ItemUseFunctions.TreasureBags = {};
  */
 global.ItemUseFunctions.TreasureBags.BUILDER = (treasureBagType) => {
     return (itemStack, level,/** @type {Internal.Player} */ entity) => {
+        itemStack.shrink(1);
         if (level.isClientSide()) return;
         const lootTable = level.getServer().getLootData().getLootTable(`kubejs:treasure_bag/${treasureBagType}`);
         lootTable.getRandomItems(new $LootParams$Builder(level)
