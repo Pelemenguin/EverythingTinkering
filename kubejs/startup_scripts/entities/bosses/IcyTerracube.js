@@ -398,7 +398,18 @@ let ICY_TERRACUBE_AI_STEP = {
         }
     },
     onRemovedFromWorld: (entity) => {
-        if (entity.getRemovalReason() === Entity$RemovalReason.KILLED) KubeJSAiHelper.bossDefeat(entity, KubeJSAiHelper.getChallengers(entity));
+        if (entity.getRemovalReason() === Entity$RemovalReason.KILLED) {
+            const level = entity.getLevel();
+            const challengers = KubeJSAiHelper.getRawChallengersList(entity);
+            const challengingPlayers = [];
+            for (let c of challengers) {
+                const player = level.getPlayerByUUID(c.getUUID("UUID"));
+                if (player == null || !player.isAlive()) continue;
+                challengingPlayers.push(player);
+                player.give("kubejs:icy_terracube_treasure_bag");
+            }
+            KubeJSAiHelper.bossDefeat(entity, challengingPlayers);
+        }
     },
     initAction: "Init"
 };

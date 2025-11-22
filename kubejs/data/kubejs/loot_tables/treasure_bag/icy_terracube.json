@@ -1,0 +1,27 @@
+{
+    "type": "empty",
+    "random_sequence": "kubejs:treasure_bag/icy_terracube",
+    "pools": [
+        {
+            "rolls": 4,
+            "bonus_rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "add": false,
+                            "count": {
+                                "min": 58,
+                                "max": 64
+                            }
+                        }
+                    ],
+                    "name": "kubejs:icy_clay_ball",
+                    "quality": 0
+                }
+            ]
+        }
+    ]
+}

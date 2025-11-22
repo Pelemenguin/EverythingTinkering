@@ -344,6 +344,20 @@ const KubeJSAiHelper = {
             }
         });
         return result;
+    },
+
+    /**
+     * @param {Internal.Mob} boss 
+     * The boss entity.  
+     * Boss实体。
+     * @returns {Internal.CompoundTag[]}
+     * All raw challengers data of the boss.  
+     * Boss的所有原始挑战者数据。
+     */
+    getRawChallengersList: (boss) => {
+        const persistent = boss.getForgePersistentData();
+        if (!persistent.contains("kubejs:boss_targets")) return [];
+        return persistent.getList("kubejs:boss_targets", 10).toArray();
     }
 
 };
