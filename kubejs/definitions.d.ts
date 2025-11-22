@@ -840,7 +840,8 @@ declare namespace Annotation {
             actions: {[K in A]: AiAction<A, M>},
             memories: M,
             initAction: A,
-            onHurt: (context: Internal.ContextUtils$EntityDamageContext, controller: ActionsController<A, M>) => void
+            onHurt?: (context: Internal.ContextUtils$EntityDamageContext, controller: ActionsController<A, M>) => void,
+            onRemovedFromWorld?: (entity: Internal.LivingEntity, controller: ActionsController<A, M>) => void
         };
 
         class ActionsController<A extends string, M> {
@@ -1001,7 +1002,15 @@ declare namespace Annotation {
              * @param context The hurt context  
              *                受伤上下文
              */
-            onHurt?: (context: Internal.ContextUtils$EntityDamageContext) => void
+            onHurt?: (context: Internal.ContextUtils$EntityDamageContext) => void,
+            /**
+             * Method for `onRemovedFromWorld`  
+             * 用于`onRemovedFromWorld`的方法
+             * - - - - -
+             * @param entity The entity being removed from world  
+             *               要从世界中移除的实体
+             */
+            onRemovedFromWorld: (entity: Internal.LivingEntity) => void
         }
     }
 

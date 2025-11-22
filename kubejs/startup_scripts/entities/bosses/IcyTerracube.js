@@ -28,6 +28,7 @@
     DustParticleOptions
     Vec3f
     ResourceKey
+    Entity$RemovalReason
 */
 
 let ICY_TERRACUBE_CONFIG = {
@@ -396,6 +397,9 @@ let ICY_TERRACUBE_AI_STEP = {
             }
         }
     },
+    onRemovedFromWorld: (entity) => {
+        if (entity.getRemovalReason() === Entity$RemovalReason.KILLED) KubeJSAiHelper.bossDefeat(entity, KubeJSAiHelper.getChallengers(entity));
+    },
     initAction: "Init"
 };
 
@@ -431,6 +435,7 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .isInvulnerableTo(ctx => ctx.damageSource.is(TagKey.create(Registries.DAMAGE_TYPE, "kubejs:boss_immune/icy_terracube")))
         .aiStep(mob => global.Entities.AiFunctions.IcyTerracube.aiStep(mob))
         .onHurt(mob => global.Entities.AiFunctions.IcyTerracube.onHurt(mob))
+        .onRemovedFromWorld(mob => global.Entities.AiFunctions.IcyTerracube.onRemovedFromWorld(mob))
         .addAnimationController("jumpController", 0, event => {
             try {return global.Entities.AiFunctions.IcyTerracube.JumpController(event);}
             catch (e) {console.info("Error on Icy Terracube animation controller tick: " + e); return false;}

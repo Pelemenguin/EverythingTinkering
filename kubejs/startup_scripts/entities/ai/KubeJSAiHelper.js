@@ -298,6 +298,30 @@ const KubeJSAiHelper = {
                 break;
             }
         }
+    },
+
+    /**
+     * @param {Internal.Mob} boss 
+     * The boss entity.  
+     * Boss实体。
+     * @returns {Internal.Player[]}
+     * All challengers of the boss.  
+     * Boss的所有挑战者。
+     */
+    getChallengers: (boss) => {
+        const persistent = boss.getForgePersistentData();
+        if (!persistent.contains("kubejs:boss_targets")) return [];
+        /** @type {Internal.CompoundTag[]} */
+        let targets = persistent.getList("kubejs:boss_targets", 10).toArray();
+        const result = [];
+        const level = boss.getLevel();
+        targets.forEach(tag => {
+            const player = level.getPlayerByUUID(tag.getUUID("UUID"));
+            if (player != null && player.isAlive()) {
+                result.push(player);
+            }
+        });
+        return result;
     }
 
 };

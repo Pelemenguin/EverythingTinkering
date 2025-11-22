@@ -28,16 +28,11 @@ KubeJSAiFactory.createAi = (actionsList) => {
     /** @type {Internal.Map<Internal.Mob, KubeJSAiFactory.ActionsController>} */
     const CONTROLLERS = Utils.newMap();
 
-    /** @type {Annotation.Entities.AiFunctions} */
+    /** @type {Annotation.Entities.AiFunctions<?, ?>} */
     let result = {
         aiStep: (entity) => {
             if (entity.getLevel().isClientSide()) return;
-            if (entity.isDeadOrDying()) {
-                if (CONTROLLERS.remove(entity) != null) {
-                    console.info("Controller removed for entity " + entity);
-                }
-                return;
-            }
+            if (entity.isDeadOrDying()) return;
             if (entity.isNoAi()) return;
 
             let controller;
@@ -64,6 +59,22 @@ KubeJSAiFactory.createAi = (actionsList) => {
             if (entity.isDeadOrDying()) return;
 
             actionsList.onHurt(context, CONTROLLERS.get(entity));
+        };
+    }
+    if ("onRemovedFromWorld" in actionsList) {
+        result.onRemovedFromWorld = (entity) => {
+            if (entity.getLevel().isClientSide()) return;
+            actionsList.onRemovedFromWorld(entity, CONTROLLERS.get(entity));
+            if (CONTROLLERS.remove(entity) != null) {
+                console.info("Controller removed for entity " + entity);
+            }
+        };
+    } else {
+        result.onRemovedFromWorld = (entity) => {
+            if (entity.getLevel().isClientSide()) return;
+            if (CONTROLLERS.remove(entity) != null) {
+                console.info("Controller removed for entity " + entity);
+            }
         };
     }
     return result;

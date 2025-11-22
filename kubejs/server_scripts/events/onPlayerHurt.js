@@ -38,7 +38,7 @@ NativeEvents.onEvent(LivingHurtEvent, /** @param {Internal.LivingHurtEvent} even
         if (bossEntity == undefined) return false;
         if (!bossEntity.isAlive()) return false;
         if (!KubeJSAiHelper.isTargetOf(player, bossEntity)) return false;
-        
+
         // Increase DamageTaken field
         KubeJSAiHelper.sendDamageTakenToBoss(bossEntity, player.getUuid(), amount);
 
