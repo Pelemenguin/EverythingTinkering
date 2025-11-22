@@ -16,6 +16,7 @@
 
     "entity.kubejs.icy_terracube": "寒冰黏土怪",
     "entity.kubejs.icy_clay_ball": "掷出的冰黏土球",
+    "entity.kubejs.ice_spike": "冰刺",
 
         "_comment_command": " ----- 命令 ---- ",
 
@@ -44,6 +45,8 @@
 
     "death.attack.kubejs.icy_clay_ball": "%1$s被%2$s冻死了",
     "death.attack.kubejs.icy_clay_ball.item": "%1$s被%2$s用%3$s冻死了",
+
+    "death.attack.kubejs.ice_spike": "%1$s被%2$s的冰刺戳穿了",
 
         "_comment_materials": " ----- 材料 ----- ",
 

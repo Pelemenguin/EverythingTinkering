@@ -15,6 +15,9 @@
 
     "entity.kubejs.icy_terracube": "Icy Terracube",
     "entity.kubejs.icy_clay_ball": "Thrown Icy Clay Ball",
+    "entity.kubejs.ice_spike": "Ice Spike",
+
+    "death.attack.kubejs.ice_spike": "%1$s was pierced by %2$s's ice spike",
 
         "_comment_command": " ----- Command ---- ",
 

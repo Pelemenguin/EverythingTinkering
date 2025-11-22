@@ -50,6 +50,7 @@ const ParticleTypes = Java.loadClass("net.minecraft.core.particles.ParticleTypes
 const DustParticleOptions = Java.loadClass("net.minecraft.core.particles.DustParticleOptions");
 const $Difficulty = Java.loadClass("net.minecraft.world.Difficulty");
 const $TargetingConditions = Java.loadClass("net.minecraft.world.entity.ai.targeting.TargetingConditions");
+const $EvokerFangs = Java.loadClass("net.minecraft.world.entity.projectile.EvokerFangs");
 const $LootParams$Builder = Java.loadClass("net.minecraft.world.level.storage.loot.LootParams$Builder");
 const $LootContextParams = Java.loadClass("net.minecraft.world.level.storage.loot.parameters.LootContextParams");
 const $LootContextParamSets = Java.loadClass("net.minecraft.world.level.storage.loot.parameters.LootContextParamSets");
