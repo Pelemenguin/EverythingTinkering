@@ -76,7 +76,7 @@ let ICY_TERRACUBE_AI_STEP = {
                     let attackTarget = entity.getLevel().getPlayerByUUID(persistent.getUUID(ICY_TERRACUBE_NBT.attackTarget));
                     if (attackTarget != null) {
                         controller.setMemory("core/attackTarget", attackTarget);
-                        if (!KubeJSAiHelper.isTargetOf(attackTarget, entity)) KubeJSAiHelper.chosenAsTarget(attackTarget, entity);
+                        KubeJSAiHelper.chosenAsTarget(attackTarget, entity);
                         controller.activate("MoveTowardsTarget");
                     }
                     else persistent.remove(ICY_TERRACUBE_NBT.attackTarget);
@@ -86,7 +86,7 @@ let ICY_TERRACUBE_AI_STEP = {
                     if (attackTarget != null) {
                         persistent.putUUID(ICY_TERRACUBE_NBT.attackTarget, attackTarget.getUuid());
                         controller.setMemory("core/attackTarget", attackTarget);
-                        if (!KubeJSAiHelper.isTargetOf(attackTarget, entity)) KubeJSAiHelper.chosenAsTarget(attackTarget, entity);
+                        KubeJSAiHelper.chosenAsTarget(attackTarget, entity);
                         controller.activate("MoveTowardsTarget");
                         return;
                     }

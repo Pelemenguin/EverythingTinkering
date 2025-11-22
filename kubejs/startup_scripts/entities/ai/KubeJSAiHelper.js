@@ -222,34 +222,38 @@ const KubeJSAiHelper = {
      * Boss。
      */
     chosenAsTarget: (player, boss) => {
-        /** @type {Internal.CompoundTag} */
-        const newPlayer = NBT.compoundTag();
-        newPlayer.putUUID("UUID", player.getUuid());
-        newPlayer.putDouble("DamageTaken", 0);
+        if (!KubeJSAiHelper.isTargetOf(player, boss)) {
+            /** @type {Internal.CompoundTag} */
+            const newPlayer = NBT.compoundTag();
+            newPlayer.putUUID("UUID", player.getUuid());
+            newPlayer.putDouble("DamageTaken", 0);
 
-        const persistent = boss.getForgePersistentData();
-        if (persistent.contains("kubejs:boss_targets")) {
-            let bossTarget = persistent.getList("kubejs:boss_targets", 10); // 10 refers to CompoundTag
-            bossTarget.add(newPlayer);
-        } else {
-            boss.getForgePersistentData().merge(NBT.compoundTag({
-                "kubejs:boss_targets": NBT.listTag([newPlayer])
-            }));
+            const persistent = boss.getForgePersistentData();
+            if (persistent.contains("kubejs:boss_targets")) {
+                let bossTarget = persistent.getList("kubejs:boss_targets", 10); // 10 refers to CompoundTag
+                bossTarget.add(newPlayer);
+            } else {
+                boss.getForgePersistentData().merge(NBT.compoundTag({
+                    "kubejs:boss_targets": NBT.listTag([newPlayer])
+                }));
+            }
         }
-        player.sendSystemMessage(Component.translate("entity.kubejs.boss.challenging", boss.getName().copy().gold()).lightPurple());
 
-        /** @type {Internal.CompoundTag} */
-        const newBoss = NBT.compoundTag();
-        newBoss.putUUID("UUID", boss.getUuid());
+        if (!KubeJSAiHelper.isChallenging(player, boss)) {
+            /** @type {Internal.CompoundTag} */
+            const newBoss = NBT.compoundTag();
+            newBoss.putUUID("UUID", boss.getUuid());
 
-        const playerPersistent = player.getForgePersistentData();
-        if (playerPersistent.contains("kubejs:challenging_bosses")) {
-            const challenging = playerPersistent.getList("kubejs:challenging_bosses", 10);
-            challenging.add(newBoss);
-        } else {
-            player.getForgePersistentData().merge(NBT.compoundTag({
-                "kubejs:challenging_bosses": NBT.listTag([newBoss])
-            }));
+            const playerPersistent = player.getForgePersistentData();
+            if (playerPersistent.contains("kubejs:challenging_bosses")) {
+                const challenging = playerPersistent.getList("kubejs:challenging_bosses", 10);
+                challenging.add(newBoss);
+            } else {
+                player.getForgePersistentData().merge(NBT.compoundTag({
+                    "kubejs:challenging_bosses": NBT.listTag([newBoss])
+                }));
+            }
+            player.sendSystemMessage(Component.translate("entity.kubejs.boss.challenging", boss.getName().copy().gold()).lightPurple());
         }
     },
 
@@ -261,6 +265,7 @@ const KubeJSAiHelper = {
      * @param {Internal.Mob} boss 
      * The boss.  
      * Boss。
+     * @returns {boolean}
      */
     isTargetOf: (player, boss) => {
         const persistent = boss.getForgePersistentData();
@@ -269,6 +274,24 @@ const KubeJSAiHelper = {
         let targets = persistent.getList("kubejs:boss_targets", 10).toArray();
         for (let target of targets) {
             if (target.getUUID("UUID").equals(player.getUuid())) return true;
+        }
+        return false;
+    },
+
+    /**
+     * @param {Internal.Player} player
+     * 
+     * @param {Internal.Mob} boss
+     * The boss to be checked.  
+     * 被检查的Boss。
+     * @param {boolean}
+     */
+    isChallenging: (player, boss) => {
+        const playerData = player.getForgePersistentData();
+        /** @type {Internal.CompoundTag[]} */
+        const challengingBosses = playerData.getList("kubejs:challenging_bosses", 10).toArray();
+        for (let data of challengingBosses) {
+            if (data.getUUID("UUID").equals(boss.getUuid())) return true;
         }
         return false;
     },
@@ -294,7 +317,6 @@ const KubeJSAiHelper = {
             if (target.getUUID("UUID").equals(playerUUID)) {
                 let currentDamage = target.getDouble("DamageTaken");
                 target.putDouble("DamageTaken", currentDamage + amount);
-                console.info(currentDamage + amount);
                 break;
             }
         }
