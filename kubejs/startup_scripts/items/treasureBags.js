@@ -17,6 +17,7 @@
     $LootParams$Builder
     $LootContextParams
     $LootContextParamSets
+    Items
 */
 
 global.ItemUseFunctions.TreasureBags = {};
@@ -28,15 +29,21 @@ global.ItemUseFunctions.TreasureBags = {};
  */
 global.ItemUseFunctions.TreasureBags.BUILDER = (treasureBagType) => {
     return (itemStack, level,/** @type {Internal.Player} */ entity) => {
-        itemStack.shrink(1);
-        if (level.isClientSide()) return;
-        const lootTable = level.getServer().getLootData().getLootTable(`kubejs:treasure_bag/${treasureBagType}`);
-        lootTable.getRandomItems(new $LootParams$Builder(level)
-            .withParameter($LootContextParams.ORIGIN, entity.position())
-            .withParameter($LootContextParams.THIS_ENTITY, entity)
-            .create($LootContextParamSets.CHEST)
-        ).forEach(itemStack => entity.give(itemStack));
-        return itemStack;
+        let isConsuming = !entity.isPlayer() || !(entity.isCreative() || entity.isSpectator());
+        let isReplacing = isConsuming && itemStack.getCount() == 1;
+        let resultStack = itemStack;
+        if (!level.isClientSide()) {
+            let lootTable = level.getServer().getLootData().getLootTable(`kubejs:treasure_bag/${treasureBagType}`);
+            let items = lootTable.getRandomItems(new $LootParams$Builder(level)
+                .withParameter($LootContextParams.ORIGIN, entity.position())
+                .withParameter($LootContextParams.THIS_ENTITY, entity)
+                .create($LootContextParamSets.CHEST)
+            ).toArray();
+            items.forEach(isReplacing ? (i, index) => {if (index != 0) entity.give(i);} : i => entity.give(i));
+            if (isReplacing) resultStack = items.length == 0 ? Items.AIR.getDefaultInstance() : items[0];
+        }
+        if (isConsuming) resultStack.shrink(1);
+        return resultStack;
     };
 };
 
@@ -56,15 +63,14 @@ for (let type of global.ItemUseFunctions.TreasureBags.TYPES) {
 }
 
 StartupEvents.registry("minecraft:item", event => {
-    const treasureBagTypes = global.ItemUseFunctions.TreasureBags.TYPES;
-
-    for (let treasureBagType of treasureBagTypes) {
+    for (let treasureBagType of global.ItemUseFunctions.TreasureBags.TYPES) {
         event.create(`kubejs:${treasureBagType}_treasure_bag`)
             .maxStackSize(16)
             .useAnimation("none")
             .useDuration(() => 1)
             .use(() => true)
             .finishUsing((i, l, e) => global.ItemUseFunctions.TreasureBags.INSTANCES.icy_terracube(i, l, e))
+            .rarity("rare")
         ;
     }
 });
