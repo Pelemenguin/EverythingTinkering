@@ -6,21 +6,45 @@
             "bones": {
                 "main": {
                     "position": {
-                        "0.25": {
+                        "0.0": {
                             "vector": [0, -32, 0]
                         },
-                        "0.5": {
+                        "0.25": {
                             "vector": [0, 0, 0],
                             "easing": "easeInQuad"
                         }
                     },
                     "scale": {
+                        "0.25": {
+                            "vector": [1, 1, 1]
+                        },
+                        "0.75": {
+                            "vector": [0, 0, 0]
+                        }
+                    }
+                },
+                "base": {
+                    "scale": {
+                        "0.0": {
+                            "vector": [1, 1, 1]
+                        },
                         "0.5": {
                             "vector": [1, 1, 1]
                         },
-                        "1.0": {
+                        "0.75": {
                             "vector": [0, 0, 0]
                         }
+                    }
+                }
+            }
+        },
+        "animation.ice_spike.appear": {
+            "loop": "hold_on_last_frame",
+            "animation_length": 0.25,
+            "bones": {
+                "main": {
+                    "position": {
+                        "vector": [0, -32, 0]
                     }
                 },
                 "base": {
@@ -30,12 +54,6 @@
                         },
                         "0.25": {
                             "vector": [1, 1, 1]
-                        },
-                        "0.75": {
-                            "vector": [1, 1, 1]
-                        },
-                        "1.0": {
-                            "vector": [0, 0, 0]
                         }
                     }
                 }

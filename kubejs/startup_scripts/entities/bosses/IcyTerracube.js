@@ -191,7 +191,7 @@ let ICY_TERRACUBE_AI_STEP = {
                 entity.setPos(smashTarget.x(), smashTarget.y() + 15, smashTarget.z());
                 entity.setMotionY(0);
 
-                let damageBoost = 0;
+                let damageBoost = 15;
                 switch (entity.getLevel().getDifficulty()) {
                     case $Difficulty.PEACEFUL : damageBoost = 0  ; break;
                     case $Difficulty.EASY     : damageBoost = 5  ; break;
@@ -331,7 +331,9 @@ let ICY_TERRACUBE_AI_STEP = {
             if (level.getTime() - controller.getMemoryOrSetDefault("attack/lastCircularRanged", -Infinity) > 200 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) <= 16) {
                 controller.activate("CircularRangedAttack");
             }
-
+            if (Math.random() < 1) {
+                controller.activate("RandomSpikes");
+            }
         },
         LookAtTarget: (entity, controller, _timeLasted, _persistent) => {
             if (entity.getLevel().isClientSide()) return;
@@ -379,6 +381,21 @@ let ICY_TERRACUBE_AI_STEP = {
                 }
 
                 controller.setMemory("eat/hasJustLanded", false);
+            }
+        },
+        RandomSpikes: (entity, controller, timeLasted, _persistent) => {
+            let targetPos = controller.getMemory("core/attackTarget").blockPosition();
+            let world = entity.getLevel();
+            if (timeLasted % 20 != 0) return;
+            if (timeLasted >= 200) {
+                controller.deactivate("RandomSpikes");
+            }
+            for (let x = -2; x <= 2; ++ x) {
+                iteration:
+                for (let z = -2; z <= 2; ++z) {
+                    if (Math.random() < 0.4) continue iteration;
+                    global.Entities.AiFunctions.IceSpike.createIceSpikeAt(world, targetPos.offset(x, 1, z), entity);
+                }
             }
         }
     },

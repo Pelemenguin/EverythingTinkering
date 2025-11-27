@@ -812,8 +812,11 @@ declare namespace Annotation {
              * - `EatTerracubes`
              *   - Eats nearby Terracubes for healing.
              *   - 吞噬附近的黏土怪以进行治疗。
+             * - `RandomSpikes`
+             *   - Summons ice spikes randomly on the ground around the player.
+             *   - 在玩家周围地面随机召唤冰刺。
              */
-            type IcyTerracube = "Init" | "Core" | "MoveTowardsTarget" | "SmashAttack" | "BigJumpAfterSmashAttack" | "LongRangedAttack" | "CircularRangedAttack" | "MeleeAttack" | "LookAtTarget" | "EatTerracubes";
+            type IcyTerracube = "Init" | "Core" | "MoveTowardsTarget" | "SmashAttack" | "BigJumpAfterSmashAttack" | "LongRangedAttack" | "CircularRangedAttack" | "MeleeAttack" | "LookAtTarget" | "EatTerracubes" | "RandomSpikes";
         }
 
         namespace AiMemories {
