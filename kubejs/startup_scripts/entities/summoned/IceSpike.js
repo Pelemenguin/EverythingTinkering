@@ -15,6 +15,7 @@
     global: writable
     StartupEvents
     KubeJSDamageSources
+    ParticleTypes
 */
 
 global.Entities.AiFunctions.IceSpike = {
@@ -40,8 +41,13 @@ global.Entities.AiFunctions.IceSpike = {
 
             entity.getLevel().getEntitiesWithin(entity.getBoundingBox().expandTowards(0, 1, 0)).forEach(e => {
                 if (!e.isAttackable()) return;
-                e.attack(damageSource, 4);
+                if (e.attack(damageSource, 4)) {
+                    const ticksFrozen = e.getTicksFrozen();
+                    if (ticksFrozen <= 300) e.setTicksFrozen(ticksFrozen + 200);
+                }
             });
+
+            entity.getLevel().spawnParticles(ParticleTypes.SNOWFLAKE, false, entity.getX(), entity.getY() + 1.5, entity.getZ(), 0, 0, 0, 20, 0.1);
         }
         if (entity.age >= 20) {
             entity.discard();
