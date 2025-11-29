@@ -27,7 +27,7 @@ PlayerEvents.tick((() => {
     /** @type {Internal.Map<Internal.Player, Internal.Mob[]>} */
     let playerToBossesCache = Utils.newMap();
     /** @type {Internal.Map<Internal.Player, number>} */
-    let lastTickBarCount = Utils.newMap();
+    let lastTickBarCount = Utils.newMap(); // Clear extra unnecessary boss bars
 
     return (event) => {
 
