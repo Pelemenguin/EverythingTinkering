@@ -71,6 +71,7 @@ const KubeJSAiHelper = {
     boundingBoxInflateConstant: Math.sqrt(2.04) - 0.6,
 
     /**
+     * @deprecated Entity AI cache system deprecated.
      * @type {(
      *     entityName: Annotation.Entities.AiCaches.ALL
      * ) => (entity: Internal.LivingEntity) => void}
@@ -102,6 +103,7 @@ const KubeJSAiHelper = {
     },
 
     /**
+     * @deprecated Entity AI cache system deprecated.
      * @type {(
      *     entityName: Annotation.Entities.AiCaches.ALL
      * ) => (entity: Internal.LivingEntity) => void}
@@ -121,6 +123,7 @@ const KubeJSAiHelper = {
     },
 
     /**
+     * @deprecated Entity AI cache system deprecated.
      * @param {Annotation.Entities.AiCaches.ALL} entityName 
      * @returns {(context: Internal.ContextUtils$EntityDamageContext) => void}
      */
@@ -145,6 +148,8 @@ const KubeJSAiHelper = {
     },
 
     /**
+     * @deprecated Entity AI cache system deprecated.
+     * - - - - -
      * @type {(
      *     entityName: Annotation.Entities.AiCaches.ALL
      * ) => (entity: Internal.LivingEntity) => void}
@@ -358,6 +363,27 @@ const KubeJSAiHelper = {
         const persistent = boss.getForgePersistentData();
         if (!persistent.contains("kubejs:boss_targets")) return [];
         return persistent.getList("kubejs:boss_targets", 10).toArray();
+    },
+
+    /**
+     * @param {Internal.Player} player 
+     * @returns {Internal.Mob[]}
+     */
+    getChallengingBosses: (player) => {
+        let persistent = player.getForgePersistentData();
+        if (!persistent.contains("kubejs:challenging_bosses")) return [];
+        /** @type {Internal.CompoundTag[]} */
+        let targets = persistent.getList("kubejs:challenging_bosses", 10).toArray();
+        let result = [];
+        let level = player.getLevel();
+        targets.forEach(tag => {
+            let uuid = tag.getUUID("UUID");
+            let boss = level.getEntities().toArray().find((/** @type {Internal.Entity} */ entity) => entity.getUuid().equals(uuid));
+            if (boss != null && boss.isAlive()) {
+                result.push(boss);
+            }
+        });
+        return result;
     }
 
 };
