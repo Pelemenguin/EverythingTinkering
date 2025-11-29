@@ -31,17 +31,7 @@
     Entity$RemovalReason
 */
 
-let ICY_TERRACUBE_CONFIG = {
-    SMALL_JUMP_INTERVAL: 10,
-    BIG_JUMP_INTERVAL: 30,
-    BIG_JUMP_MAX_DISTANCE: 7,
-    BIG_JUMP_COOLDOWN: 160,
-    LONG_THROW_COOLDOWN: 140,
-    MAX_TARGET_DISTANCE: 50,
-    FAILED_JUMP_DISTANCE_SQR: 1,
-    CHALLENGING_PLAYERS_TAG: "ChallengingPlayers",
-    CAN_DESPAWN_TAG: "CanDespawn"
-};
+/** */
 
 global.Entities.ResourceKeys.ICY_TERRACUBE = ResourceKey.create(Registries.ENTITY_TYPE, "kubejs:icy_terracube");
 
@@ -82,7 +72,7 @@ let ICY_TERRACUBE_AI_STEP = {
                     }
                     else persistent.remove(ICY_TERRACUBE_NBT.attackTarget);
                 } else {
-                    let attackTarget = level.getNearestPlayer(entity.x, entity.y, entity.z, ICY_TERRACUBE_CONFIG.MAX_TARGET_DISTANCE, entity => entity.isPlayer() && !entity.isCreative() && !entity.isSpectator());
+                    let attackTarget = level.getNearestPlayer(entity.x, entity.y, entity.z, 50, entity => entity.isPlayer() && !entity.isCreative() && !entity.isSpectator());
 
                     if (attackTarget != null) {
                         persistent.putUUID(ICY_TERRACUBE_NBT.attackTarget, attackTarget.getUuid());
