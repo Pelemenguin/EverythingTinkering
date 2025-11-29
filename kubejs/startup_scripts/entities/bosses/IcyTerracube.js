@@ -46,7 +46,8 @@ let ICY_TERRACUBE_CONFIG = {
 global.Entities.ResourceKeys.ICY_TERRACUBE = ResourceKey.create(Registries.ENTITY_TYPE, "kubejs:icy_terracube");
 
 let ICY_TERRACUBE_NBT = {
-    attackTarget: "AttackTarget"
+    attackTarget: "AttackTarget",
+    canDespawn: "CanDespawn"
 };
 
 /**
@@ -88,8 +89,10 @@ let ICY_TERRACUBE_AI_STEP = {
                         controller.setMemory("core/attackTarget", attackTarget);
                         KubeJSAiHelper.chosenAsTarget(attackTarget, entity);
                         controller.activate("MoveTowardsTarget");
-                        return;
+                    } else if (persistent.contains(ICY_TERRACUBE_NBT.canDespawn) && persistent.getByte(ICY_TERRACUBE_NBT.canDespawn) != 0) {
+                        KubeJSAiHelper.bossDespawn(entity, entity.getServer().getPlayers().toArray());
                     }
+
                 }
             } else {
                 let attackTarget = controller.getMemory("core/attackTarget");
@@ -318,7 +321,7 @@ let ICY_TERRACUBE_AI_STEP = {
                 }
             }
         },
-        MeleeAttack: (entity, controller, _timeLasted, _persistent) => {
+        MeleeAttack: (entity, controller, timeLasted, _persistent) => {
             let level = entity.getLevel();
             if (!controller.isMemoryPresent("core/attackTarget")) return;
             KubeJSAiHelper.tryMeleeAttack(entity, controller.getMemory("core/attackTarget"));
@@ -331,7 +334,7 @@ let ICY_TERRACUBE_AI_STEP = {
             if (level.getTime() - controller.getMemoryOrSetDefault("attack/lastCircularRanged", -Infinity) > 200 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) <= 16) {
                 controller.activate("CircularRangedAttack");
             }
-            if (Math.random() < 1) {
+            if (timeLasted >= 100 && Math.random() < 0.01) {
                 controller.activate("RandomSpikes");
             }
         },

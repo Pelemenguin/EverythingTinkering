@@ -197,7 +197,7 @@ const KubeJSAiHelper = {
      * 接收消息的玩家。
      */
     bossDespawn: (entity, receivers) => {
-        receivers.forEach(p => p.sendSystemMessage(Component.translate("entity.kubejs.boss.despawn", entity.getName().copy().gold()).lightPurple()));
+        receivers.forEach(p => p.sendSystemMessage(Component.translate("entity.kubejs.boss.despawn", entity.getDisplayName().copy().gold()).lightPurple()));
         entity.discard();
     },
 
@@ -210,7 +210,7 @@ const KubeJSAiHelper = {
      * 接收消息的玩家。
      */
     bossDefeat: (entity, receivers) => {
-        receivers.forEach(p => p.sendSystemMessage(Component.translate("entity.kubejs.boss.defeat", entity.getName().copy().gold()).lightPurple()));
+        receivers.forEach(p => p.sendSystemMessage(Component.translate("entity.kubejs.boss.defeat", entity.getDisplayName().copy().gold()).lightPurple()));
     },
 
     /**
@@ -253,7 +253,7 @@ const KubeJSAiHelper = {
                     "kubejs:challenging_bosses": NBT.listTag([newBoss])
                 }));
             }
-            player.sendSystemMessage(Component.translate("entity.kubejs.boss.challenging", boss.getName().copy().gold()).lightPurple());
+            player.sendSystemMessage(Component.translate("entity.kubejs.boss.challenging", boss.getDisplayName().copy().gold()).lightPurple());
         }
     },
 
