@@ -16,6 +16,8 @@
     PlayerEvents
     Utils
     Painter
+    ResourceLocation
+    Component
 */
 
 Painter.clear();
@@ -53,16 +55,17 @@ PlayerEvents.tick((() => {
         for (let index = 0; index < bosses.length; ++ index) {
 
             let boss = bosses[index];
+            let bossType = ResourceLocation.tryParse(boss.getType());
 
             let bossHealth = boss.getHealth() / boss.getMaxHealth();
 
             let painting = {};
-            
+
             painting[`bossBar_${index}`] = {
                 type: "rectangle",
-                texture: "kubejs:textures/gui/boss_bars/icy_terracube.png",
+                texture: `${bossType.getNamespace()}:textures/gui/boss_bars/${bossType.getPath()}.png`,
                 alignX: "center",
-                y: index * 24,
+                y: 4 + index * 24,
                 w: 256,
                 u0: 0,
                 v0: 0.5,
@@ -72,16 +75,42 @@ PlayerEvents.tick((() => {
 
             painting[`bossHealth_${index}`] = {
                 type: "rectangle",
-                texture: "kubejs:textures/gui/boss_bars/icy_terracube.png",
+                texture: `${bossType.getNamespace()}:textures/gui/boss_bars/${bossType.getPath()}.png`,
                 alignX: "center",
                 w: 200 * bossHealth,
                 h: 4,
                 x: -100 * (1 - bossHealth),
-                y: 8 + index * 24,
+                y: 12 + index * 24,
                 u0: 0,
                 v0: 0,
-                u1: 0.078125 * bossHealth,
-                v1: 0.09375
+                u1: 0.78125 * bossHealth,
+                v1: 0.125
+            };
+
+            painting[`bossName_${index}`] = {
+                type: "text",
+                text: Component.translatable(`entity.${bossType.getNamespace()}.${bossType.getPath()}`).getString(),
+                x: "$screenW/2-96",
+                y: 18 + index * 24,
+                shadow: true
+            };
+
+            painting[`bossHealthNumber_${index}`] = {
+                type: "text",
+                text: `${Math.round(boss.getHealth())} / ${boss.getMaxHealth()}`,
+                x: `-$screenW/2+48`,
+                alignX: "right",
+                y: 18 + index * 24,
+                shadow: true
+            };
+
+            painting[`bossHealthPercentage_${index}`] = {
+                type: "text",
+                text: `${(bossHealth * 100).toFixed(2)}%`,
+                x: `-$screenW/2+96`,
+                alignX: "right",
+                y: 18 + index * 24,
+                shadow: true
             };
 
             player.paint(painting);
@@ -92,6 +121,9 @@ PlayerEvents.tick((() => {
                 let remover = {};
                 remover[`bossBar_${i}`] = {remove: true};
                 remover[`bossHealth_${i}`] = {remove: true};
+                remover[`bossName_${i}`] = {remove: true};
+                remover[`bossHealthNumber_${i}`] = {remove: true};
+                remover[`bossHealthPercentage_${i}`] = {remove: true};
                 player.paint(remover);
             }
         }
