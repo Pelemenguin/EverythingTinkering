@@ -52,6 +52,8 @@ PlayerEvents.tick((() => {
             bosses = playerToBossesCache.put(player, global.Entities.KubeJSAiHelper.getChallengingBosses(player));
         }
 
+        if (bosses == null) return;
+
         bosses = bosses.slice(0, 5);
 
         for (let index = 0; index < bosses.length; ++ index) {

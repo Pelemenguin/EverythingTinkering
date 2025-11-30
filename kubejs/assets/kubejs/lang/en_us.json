@@ -4,6 +4,8 @@
         "_comment_items": " ----- Items ----- ",
 
     "item.kubejs.icy_terracube": "Icy Terracube Spawn Egg",
+    "item.kubejs.frozen_terracube_core": "Frozen Terracube Core",
+    "item.kubejs.frozen_terracube_core.tooltip": "Dropped when a Terracube is killed by freezing damage. Use in cold biomes to summon the Icy Terracube",
     "item.kubejs.icy_clay_ball": "Icy Clay Ball",
     "item.kubejs.icy_terracube_treasure_bag": "Icy Terracube Treasure Bag",
 

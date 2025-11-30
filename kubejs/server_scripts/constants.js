@@ -19,6 +19,8 @@
     Item
 */
 
+const $LootContextParams = Java.loadClass("net.minecraft.world.level.storage.loot.parameters.LootContextParams");
+
 const ToolPartItem = Java.loadClass('slimeknights.tconstruct.library.tools.part.ToolPartItem');
 const ForgeRegistries = Java.loadClass('net.minecraftforge.registries.ForgeRegistries');
 const MaterialRegistry = Java.loadClass('slimeknights.tconstruct.library.materials.MaterialRegistry');

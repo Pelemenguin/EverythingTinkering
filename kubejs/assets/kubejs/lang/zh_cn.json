@@ -5,8 +5,10 @@
         "_comment_items": " ----- 物品 ----- ",
 
     "item.kubejs.icy_terracube": "寒冰黏土怪刷怪蛋",
+    "item.kubejs.frozen_terracube_core": "冰冻黏土怪核心",
+    "item.kubejs.frozen_terracube_core.tooltip": "黏土怪被冰冻伤害杀死时掉落，在寒冷的生物群系中使用以召唤寒冰黏土怪",
     "item.kubejs.icy_clay_ball": "冰黏土球",
-    "item.kubejs.icy_terracube_treasure_bag": "寒冰粘土怪宝藏袋",
+    "item.kubejs.icy_terracube_treasure_bag": "寒冰黏土怪宝藏袋",
 
         "_comment_entities": " ----- 实体 ----- ",
 

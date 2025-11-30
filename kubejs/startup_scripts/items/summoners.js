@@ -15,6 +15,7 @@
     global: writable
     StartupEvents
     NBT
+    Component
 */
 
 global.ItemUseFunctions.BossSummoners = {};
@@ -40,11 +41,12 @@ global.ItemUseFunctions.BossSummoners.Criterias.IcyTerracube = (level, player) =
 };
 
 StartupEvents.registry("minecraft:item", event => {
-    event.create("kubejs:cold_grout")
+    event.create("kubejs:frozen_terracube_core")
         .useDuration(() => 20)
         .use((level, player, hand) => global.ItemUseFunctions.BossSummoners.Criterias.IcyTerracube(level, player, hand))
         .useAnimation("bow")
         .finishUsing((item, level, entity) => global.ItemUseFunctions.BossSummoners.IcyTerracube(item, level, entity))
         .unstackable()
+        .tooltip(Component.translatable("item.kubejs.frozen_terracube_core.tooltip").gray())
     ;
 });
