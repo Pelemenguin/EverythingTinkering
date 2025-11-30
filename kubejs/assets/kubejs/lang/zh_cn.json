@@ -9,6 +9,7 @@
     "item.kubejs.frozen_terracube_core.tooltip": "黏土怪被冰冻伤害杀死时掉落，在寒冷的生物群系中使用以召唤寒冰黏土怪",
     "item.kubejs.icy_clay_ball": "冰黏土球",
     "item.kubejs.icy_terracube_treasure_bag": "寒冰黏土怪宝藏袋",
+    "item.kubejs.icy_terracube_treasure_bag_no_hit": "寒冰黏土怪宝藏袋（无伤）",
 
         "_comment_entities": " ----- 实体 ----- ",
 

@@ -409,14 +409,15 @@ let ICY_TERRACUBE_AI_STEP = {
     },
     onRemovedFromWorld: (entity) => {
         if (entity.getRemovalReason() === Entity$RemovalReason.KILLED) {
-            const level = entity.getLevel();
-            const challengers = KubeJSAiHelper.getRawChallengersList(entity);
-            const challengingPlayers = [];
+            let level = entity.getLevel();
+            let challengers = KubeJSAiHelper.getRawChallengersList(entity);
+            let challengingPlayers = [];
             for (let c of challengers) {
-                const player = level.getPlayerByUUID(c.getUUID("UUID"));
+                let player = level.getPlayerByUUID(c.getUUID("UUID"));
                 if (player == null || !player.isAlive()) continue;
                 challengingPlayers.push(player);
-                player.give("kubejs:icy_terracube_treasure_bag");
+                if (c.getDouble("DamageTaken") <= 0) player.give("kubejs:icy_terracube_treasure_bag_no_hit");
+                else player.give("kubejs:icy_terracube_treasure_bag");
             }
             KubeJSAiHelper.bossDefeat(entity, challengingPlayers);
         }
