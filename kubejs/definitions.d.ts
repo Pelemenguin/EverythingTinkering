@@ -831,6 +831,7 @@ declare namespace Annotation {
                 "attack/smashWarningTime": number,
                 "attack/lastLongRanged": number,
                 "attack/lastCircularRanged": number,
+                "attack/lastRandomSpike": number,
                 "eat/terracubesEaten": number,
                 "eat/jumpsToEat": number,
                 "eat/hasJustLanded": boolean,

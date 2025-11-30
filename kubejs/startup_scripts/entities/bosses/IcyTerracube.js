@@ -317,14 +317,14 @@ let ICY_TERRACUBE_AI_STEP = {
             KubeJSAiHelper.tryMeleeAttack(entity, controller.getMemory("core/attackTarget"));
             controller.setMemory("move/moveTarget", controller.getMemory("core/attackTarget").position());
 
-            if (!controller.isActive("CircularRangedAttack") && level.getTime() - controller.getMemoryOrSetDefault("attack/lastLongRanged", -Infinity) > 300 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) > 144) {
+            if (entity.age >= 600 && !controller.isActive("CircularRangedAttack") && level.getTime() - controller.getMemoryOrSetDefault("attack/lastLongRanged", -Infinity) > 300 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) > 144) {
                 controller.activate("LongRangedAttack");
                 return;
             }
             if (level.getTime() - controller.getMemoryOrSetDefault("attack/lastCircularRanged", -Infinity) > 200 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) <= 16) {
                 controller.activate("CircularRangedAttack");
             }
-            if (timeLasted >= 100 && Math.random() < 0.01) {
+            if (level.getDifficulty().getId() >= 2 && timeLasted >= 100 && Math.random() < 0.01 && level.getTime() - controller.getMemoryOrSetDefault("attack/lastRandomSpike", -Infinity) >= 200) {
                 controller.activate("RandomSpikes");
             }
         },
@@ -380,7 +380,7 @@ let ICY_TERRACUBE_AI_STEP = {
             let targetPos = controller.getMemory("core/attackTarget").blockPosition();
             let world = entity.getLevel();
             if (timeLasted % 20 != 0) return;
-            if (timeLasted >= 200) {
+            if (timeLasted >= 100) {
                 controller.deactivate("RandomSpikes");
             }
             for (let x = -2; x <= 2; ++ x) {
