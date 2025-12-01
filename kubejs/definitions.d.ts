@@ -550,7 +550,12 @@ declare namespace Annotation {
              * Some custom methods on class definitions.  
              * 一些在类定义上的自定义方法。
              */
-            __class__?: ClassModifierHookArgument
+            __class__?: ClassModifierHookArgument,
+            /**
+             * Some custom methods used for registering and listening to custom key bindings.  
+             * 一些用于注册与监听自定义按键的方法。
+             */
+            __keybind__?: KeyModifierHookArgument
         };
         type CustomModifierHookArgument = {
             /**
@@ -580,14 +585,32 @@ declare namespace Annotation {
              * @example
              * let TEST = KubeJSModifierManager.registerCommonModifier("test", "TestModifier", {
              *     __custom__: {
-             *         ServerTick: (event) => {
+             *         onServerTick: (event) => {
              *             console.info("Test message"); // Send `Test message` to console
              *                                           // 向控制台发送`Test message`
              *         }
              *     }
              * });
              */
-            onServerTick?: (event: Internal.ServerEventJS) => void
+            onServerTick?: (event: Internal.ServerEventJS) => void,
+            /**
+             * Triggers **every tick** on client side.
+             * 在客户端**每个tick**触发一次。
+             * - - - - -
+             * @param event Client tick event  
+             *              客户端tick事件
+             * - - - - -
+             * @example
+             * let TEST = KubeJSModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     __custom__: {
+             *         onClientTick: (event) => {
+             *             console.info("Test message"); // Send `Test message` to console
+             *                                           // 向控制台发送`Test message`
+             *         }
+             *     }
+             * }
+             */
+            onClientTick?: (event: Internal.ClientEventJS) => void,
         };
         type ClassModifierHookArgument = {
             /**
@@ -644,6 +667,31 @@ declare namespace Annotation {
              *                     类创建器实例，用于创建特性类
              */
             generateConstructor?: (classCreator: ClassCreator) => void,
+        };
+        type KeyModifierHookArgument = {
+            /**
+             * **Required for `__keybind__` property!**  
+             * **使用`__keybind__`属性时必填！**
+             * - - - - -
+             * Called to register keys.  
+             * 注册按键时调用
+             * - - - - -
+             * Related Links | 相关链接
+             * - {@linkcode KubeJSKeybindHelper}  
+             *     Tool for registering keys  
+             *     用于注册按键的工具
+             * @example
+             * let TEST = KubeJSModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     __keybind__: {
+             *         registerKeys: () => {
+             *             KubeJSKeybindHelper.register("example_key", 71);
+             *             // Register `example_key`, default to G (71)
+             *             // 注册`example_key`按键，默认按键为 G (71)
+             *         }
+             *     }
+             * }
+             */
+            registerKeys: () => void,
         };
         type ModifierHooks = keyof ModifierHookArgument;
     }

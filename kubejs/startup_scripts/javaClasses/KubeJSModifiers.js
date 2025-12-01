@@ -32,6 +32,9 @@ global.TinkerFunctions = {};
 /** @type {Internal.Map<string, (event: Internal.ServerEventJS) => void>} */
 global.TinkerFunctions.onServerTickFunctions = Utils.newMap();
 
+/** @type {Internal.Map<string, (event: Internal.ClientEventJS) => void>} */
+global.TinkerFunctions.onClientTickFunctions = Utils.newMap();
+
 /**
  * @type {Object<Annotation.TinkerFunction.ModifierHooks, string>}
  */
@@ -381,6 +384,10 @@ const ModifierManager = {
                 customHookHandler(name, hooks.__custom__);
                 return;
             }
+            if (hook == "__keybind__") {
+                keybindHookHandler(name, hooks.__keybind__);
+                return;
+            }
             if (!(hook in HOOK_TO_IMPLEMENTING_INTERFACE)) return;
             let implementing = HOOK_TO_IMPLEMENTING_INTERFACE[hook];
             if (!seenInterfaces.has(implementing)) {
@@ -478,7 +485,20 @@ let customHookHandler = (modifierId, hook) => {
         switch (customHook) {
             case "onServerTick": {
                 global.TinkerFunctions.onServerTickFunctions.put(`kubejs:${modifierId}`, hook.onServerTick);
+                break;
+            }
+            case "onClientTick": {
+                global.TinkerFunctions.onClientTickFunctions.put(`kubejs:${modifierId}`, hook.onClientTick);
+                break;
             }
         }
     });
+};
+
+/**
+ * @param {string} modifierId 
+ * @param {Annotation.TinkerFunction.KeyModifierHookArgument} hook 
+ */
+let keybindHookHandler = (modifierId, hook) => {
+    hook.registerKeys();
 };

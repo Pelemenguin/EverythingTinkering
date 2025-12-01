@@ -35,11 +35,11 @@ if (global.KubeJSNetworkHelper == undefined) {
     /** @type {{[className: string]: typeof any}} */
     global.KubeJSNetworkHelper.REGISTERED_MESSAGES = {};
 
+    /** @type {{[className: string]: number}} */
+    global.KubeJSNetworkHelper.MESSAGE_IDS = {};
+
     /** @type {{[className: string]: Internal.NetworkDirection}} */
     global.KubeJSNetworkHelper.NETWORK_DIRECTIONS = {};
-
-    /** @type {number} */
-    global.KubeJSNetworkHelper.MESSAGE_ID = 1;
 }
 
 /** @type {string} */
@@ -48,8 +48,8 @@ global.KubeJSNetworkHelper.PROTOCOL_VERSION;
 global.KubeJSNetworkHelper.REGISTERED_MESSAGES;
 /** @type {{[className: string]: Internal.NetworkDirection}} */
 global.KubeJSNetworkHelper.NETWORK_DIRECTIONS;
-/** @type {number} */
-global.KubeJSNetworkHelper.MESSAGE_ID;
+/** @type {{[className: string]: number}} */
+global.KubeJSNetworkHelper.MESSAGE_IDS;
 
 /**
  * Creates a Java class for the new message type, and register it.  
@@ -58,6 +58,12 @@ global.KubeJSNetworkHelper.MESSAGE_ID;
  * @param {string} className 
  * The class name of the message class.  
  * 消息类的类名。
+ * 
+ * @param {number} messageTypeId
+ * The id of the message type.
+ * Specified manually to avoid depending on script loading order.  
+ * 消息类型的ID。
+ * 手动指定以避免依赖脚本加载顺序。
  * 
  * @param {{[field: string]: {
  *     className: string,
@@ -79,7 +85,7 @@ global.KubeJSNetworkHelper.MESSAGE_ID;
  * The class created.  
  * 创建的类。
  */
-global.KubeJSNetworkHelper.register = (className, dataAndTypes, networkDirection, handle) => {
+global.KubeJSNetworkHelper.register = (className, messageTypeId, dataAndTypes, networkDirection, handle) => {
     let classCreator = ClassCreator.create(`network.message.${className}`)
         .toPublic();
     
@@ -149,6 +155,7 @@ global.KubeJSNetworkHelper.register = (className, dataAndTypes, networkDirection
     let messageClass = classCreator.defineClass();
 
     // Keep the class in a map
+    global.KubeJSNetworkHelper.MESSAGE_IDS[className] = messageTypeId;
     global.KubeJSNetworkHelper.REGISTERED_MESSAGES[className] = messageClass;
     global.KubeJSNetworkHelper.NETWORK_DIRECTIONS[className] = networkDirection;
 
@@ -182,7 +189,7 @@ StartupEvents.init(() => {
         let messageClass = global.KubeJSNetworkHelper.REGISTERED_MESSAGES[className];
         console.info(`Registered new message type: ${className}`);
         global.KubeJSNetworkHelper.CHANNEL.registerMessage(
-            global.KubeJSNetworkHelper.MESSAGE_ID ++,
+            global.KubeJSNetworkHelper.MESSAGE_IDS[className],
             messageClass,
             (msg, buf) => msg.encode(buf),
             (buf) => new messageClass(buf),

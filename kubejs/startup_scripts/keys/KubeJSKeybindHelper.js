@@ -36,6 +36,9 @@ const KubeJSKeybindHelper = {
      * keys in the same category and having the same name will not be created twice.
      * When reloading, new `KeyMapping`s are not created, the original ones are returned instead.  
      * 注册一个新的按键。
+     * 为了在重载后保持按键可用，
+     * 同一类别且具有相同名称的按键不会被创建两次。
+     * 在重载时，不会创建新的`KeyMapping`，而是返回原始的按键映射。
      * - - - - -
      * @param {string} keyName 
      * The name of the key.  
@@ -47,8 +50,8 @@ const KubeJSKeybindHelper = {
      * 
      * @param {string | undefined} category 
      * The key's category. Emit or use `undefined` to place the key in the modpack's main category.  
-     * 按键类别，省略或传入`undefined`以将按键放置在模组包的主类别中。
-     * - - - - -
+     * 按键类别，省略或传入`undefined`以将按键放置在整合包的主类别中。
+     * 
      * @returns {Internal.KeyMapping | null} 
      * The key mapping created.
      * `null` is returned on a dedicated server.  
@@ -66,6 +69,26 @@ const KubeJSKeybindHelper = {
         );
         global.KeyMappings[name] = result;
         return result;
+    },
+    /**
+     * Gets a registered key.
+     * 获取一个已注册的按键。
+     * - - - - -
+     * @param {string} keyName 
+     * The name of the key.  
+     * 按键名称。
+     * 
+     * @param {string | undefined} category 
+     * The key's category. Emit or use `undefined` to place the key in the modpack's main category.  
+     * 按键类别，省略或传入`undefined`以将按键放置在整合包的主类别中。
+     * 
+     * @returns {Internal.KeyMapping | undefined} 
+     * The key mapping registered, or `undefined` if not found.  
+     * 已注册的按键映射，未找到则返回`undefined`。
+     */
+    get: (keyName, category) => {
+        let name = category == undefined ? keyName : `${category}.${keyName}`;
+        return global.KeyMappings[name];
     }
 };
 

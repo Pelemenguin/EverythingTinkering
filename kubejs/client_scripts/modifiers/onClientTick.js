@@ -12,17 +12,17 @@
 
 /* global
     global: writable
-    ServerEvents
+    ClientEvents
     console
 */
 
-ServerEvents.tick(event => {
+ClientEvents.tick(event => {
 
-    global.TinkerFunctions.onServerTickFunctions.forEach((id, consumer) => {
+    global.TinkerFunctions.onClientTickFunctions.forEach((id, consumer) => {
         try {
             consumer(event);
         } catch (e) {
-            console.error(`Exception occured while server ticking ${id}! ${e}`);
+            console.error(`Exception occured while client ticking ${id}! ${e}`);
         }
     });
 
