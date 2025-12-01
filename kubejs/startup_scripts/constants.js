@@ -50,6 +50,8 @@ const ParticleTypes = Java.loadClass("net.minecraft.core.particles.ParticleTypes
 const $BlockParticleOption = Java.loadClass("net.minecraft.core.particles.BlockParticleOption");
 const DustParticleOptions = Java.loadClass("net.minecraft.core.particles.DustParticleOptions");
 const $ItemParticleOption = Java.loadClass("net.minecraft.core.particles.ItemParticleOption");
+const $FriendlyByteBuf = Java.loadClass("net.minecraft.network.FriendlyByteBuf");
+const $NetworkDirection = Java.loadClass("net.minecraftforge.network.NetworkDirection");
 const $Difficulty = Java.loadClass("net.minecraft.world.Difficulty");
 const $TargetingConditions = Java.loadClass("net.minecraft.world.entity.ai.targeting.TargetingConditions");
 const $EvokerFangs = Java.loadClass("net.minecraft.world.entity.projectile.EvokerFangs");
@@ -127,10 +129,12 @@ const JavaUtils = {
     /** @type {typeof Internal.Thread} */
     Thread: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.lang.Thread"))
 };
+const $Optional = Java.loadClass("java.util.Optional");
 
 // Forge
 /** @type {typeof Internal.FMLJavaModLoadingContext} */
 const FMLJavaModLoadingContext = new NativeJavaClass(startupContext, topLevelScope, Class.forName("net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext"));
+const $NetworkRegistry = Java.loadClass("net.minecraftforge.network.NetworkRegistry");
 
 // ---------- Utils ---------- //
 
