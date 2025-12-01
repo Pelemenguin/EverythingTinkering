@@ -1,10 +1,12 @@
 /* eslint-disable */
 
 ClientEvents.tick(event => {
-    if (global.KeyMappings.Test.consumeClick()) {
+    if (global.KeyMappings.test.consumeClick()) {
         console.info("Pressed");
 
-        const TestMessage = ClassJSUtils.loadClass("network.message.TestMessage");
-        global.NetworkChannel.testChannel.sendToServer(new TestMessage("This is a message", null));
+        let message = global.KubeJSNetworkHelper.createMessage("TestMessage", {value: "Test message"});
+        console.info(message.value);
+        console.info(message);
+        global.KubeJSNetworkHelper.CHANNEL.sendToServer(message);
     }
 })
