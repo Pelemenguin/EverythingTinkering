@@ -19,7 +19,12 @@
     NativeEvents
 */
 
-/** @type {{[name: string]: Internal.KeyMapping}} */
+/** 
+ * @type {{[name: string]: {
+ *     key: Internal.KeyMapping,
+ *     consumed: boolean
+ * }}}
+ */
 global.KeyMappings;
 
 if (global.KeyMappings == undefined) global.KeyMappings = {};
@@ -67,7 +72,10 @@ const KubeJSKeybindHelper = {
             defaultKey,
             category == undefined ? "category.kubejs.keys" : `category.kubejs.keys.${category}`
         );
-        global.KeyMappings[name] = result;
+        global.KeyMappings[name] = {
+            consumed: false,
+            key: result
+        };
         return result;
     },
     /**
@@ -88,7 +96,17 @@ const KubeJSKeybindHelper = {
      */
     get: (keyName, category) => {
         let name = category == undefined ? keyName : `${category}.${keyName}`;
-        return global.KeyMappings[name];
+        return global.KeyMappings[name].key;
+    },
+    consumeClick: (keyName, category) => {
+        let name = category == undefined ? keyName : `${category}.${keyName}`;
+        let obj = global.KeyMappings[name];
+
+        if (obj.key.isDown() && !obj.consumed) {
+            obj.consumed = true;
+            return true;
+        }
+        return false;
     }
 };
 
@@ -97,7 +115,7 @@ global.KubeJSKeybindHelper = KubeJSKeybindHelper;
 if ($RegisterKeyMappingsEvent != null) {
     NativeEvents.onEvent($RegisterKeyMappingsEvent, /** @param {Internal.RegisterKeyMappingsEvent} event */ event => {
         for (let key in global.KeyMappings) {
-            event.register(global.KeyMappings[key]);
+            event.register(global.KeyMappings[key].key);
         }
     });
 }

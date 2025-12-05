@@ -89,6 +89,7 @@ const MaterialRecipeCache = Java.loadClass("slimeknights.tconstruct.library.reci
 const TinkerToolParts = Java.loadClass("slimeknights.tconstruct.tools.TinkerToolParts");
 const TinkerTools = Java.loadClass("slimeknights.tconstruct.tools.TinkerTools");
 const ModifierDeferredRegister = Java.loadClass("slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister");
+const $ModifiableItem = Java.loadClass("slimeknights.tconstruct.library.tools.item.ModifiableItem");
 
 // TiC Modifier Modules
 const ProtectionModule = Java.loadClass("slimeknights.tconstruct.library.modifiers.modules.armor.ProtectionModule");
@@ -287,18 +288,20 @@ CustomUtils.Tinker.TOOL_PARTS = [];
 CustomUtils.Tinker.Persistent = function() {};
 
 /**
- * - Set the persistent data of an item.
- * - 设置一个物品的 Persistent 数据。
+ * Set the persistent data of an item.  
+ * 设置一个物品的 Persistent 数据。
  * - - - - -
  * @param {Internal.ItemStack} item -
- * - The item to set persistent data to.
- * - 要设置 Persistent 数据的物品。
+ * The item to set persistent data to.  
+ * 要设置 Persistent 数据的物品。
+ * 
  * @param {string} modifierId -
- * - The id of the modifier.
- * - 特性 ID。
+ * The id of the modifier.  
+ * 特性 ID。
+ * 
  * @param {any} value -
- * - The value of the persistent data.
- * - 要设置的 Persistent 数据的值。
+ * The value of the persistent data.  
+ * 要设置的 Persistent 数据的值。
  */
 CustomUtils.Tinker.Persistent.set = (item, modifierId, value) => {
     let newData = {tic_persistent: {}};
@@ -306,30 +309,67 @@ CustomUtils.Tinker.Persistent.set = (item, modifierId, value) => {
     item.nbt.merge(newData);
 };
 /**
- * - Get the persistent data from an item.
- * - 从一个物品上获取 Persistent 数据。
+ * Get the persistent data from an item.  
+ * 从一个物品上获取 Persistent 数据。
  * - - - - -
  * @param {Internal.ItemStack} item -
- * - The item to get persistent data from.
- * - 要获取 Persistent 数据的物品。
- * - - - - -
+ * The item to get persistent data from.  
+ * 要获取 Persistent 数据的物品。
+ * 
  * @param {string} modifierId -
- * - The id of the modifier.
- * - 特性 ID。
- * - - - - -
- * @return {?Internal.Tag} 
- * - Result of the persistent data of the given modifier of the item.
- * - 该物品的给定特性的 Persistent 数据结果。
+ * The id of the modifier.  
+ * 特性 ID。
+ * 
+ * @returns {?Internal.Tag} 
+ * Result of the persistent data of the given modifier of the item.  
+ * 该物品的给定特性的 Persistent 数据结果。
  */
 CustomUtils.Tinker.Persistent.get = (item, modifierId) => {
     /** @type {Internal.CompoundTag} */
     let persistent = item.nbt.get("tic_persistent");
-    if (persistent == null) return;
+    if (persistent == null) return null;
     try {
         return persistent.get(modifierId);
     } catch (e) {
         return null;
     }
+};
+
+/**
+ * Get or set default persistent data from an item.  
+ * 从一个物品上获取或设置默认 Persistent 数据。
+ * - - - - -
+ * @type {<T extends Internal.Tag>(
+ *     item: Internal.ItemStack,
+ *     modifierId: string,
+ *     defaultValue: T
+ * ) => T}
+ * - - - - -
+ * @param item 
+ * The item to get or set persistent data from.  
+ * 要获取或设置 Persistent 数据的物品。
+ * 
+ * @param modifierId 
+ * The id of the modifier.  
+ * 特性 ID。
+ * 
+ * @param defaultValue 
+ * The default value of the persistent data.  
+ * Persistent 数据的默认值。
+ * 
+ * @returns 
+ * Result of the persistent data of the given modifier of the item.
+ * If not found, set to `defaultValue` and return it.  
+ * 该物品的给定特性的 Persistent 数据结果。
+ * 若未找到，则设置为 `defaultValue` 并返回它。
+ */
+CustomUtils.Tinker.Persistent.getOrSetDefault = (item, modifierId, defaultValue) => {
+    let persistent = CustomUtils.Tinker.Persistent.get(item, modifierId);
+    if (persistent == null) {
+        CustomUtils.Tinker.Persistent.set(item, modifierId, defaultValue);
+        return defaultValue;
+    }
+    return persistent;
 };
 
 /**

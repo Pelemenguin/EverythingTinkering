@@ -445,6 +445,49 @@ declare namespace Annotation {
              */
             onAttacked?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.EquipmentContext, slotType: Internal.EquipmentSlot, source: DamageSource, amount: number, isDirectDamage: boolean) => void,
             /**
+             * Runs when an entity is about to take damage and allows modifying that damage.
+             * Note you can attack the entity here, but you are responsible for preventing infinite recursion if you do so
+             * (by detecting your own attack source for instance)  
+             * 当一个实体即将受到伤害时运行，并允许修改该伤害。
+             * 注意：你可以在此处攻击实体，但若这么做，你有责任防止无限递归（例如，检测你自己的攻击源）
+             * - - - - -
+             * @param tool           Tool being used  
+             *                       使用的工具
+             * 
+             * @param modifier       Level of the modifier  
+             *                       特性（及其）等级
+             * 
+             * @param context        Context of entity and other equipment  
+             *                       实体与其其它装备的上下文
+             * 
+             * @param slotType       Slot containing the tool  
+             *                       该工具的栏位
+             * 
+             * @param source         Damage source causing the attack  
+             *                       导致该攻击的伤害来源
+             * 
+             * @param amount         Amount of damage to be taken, as modified by previous hooks  
+             *                       要受到的伤害量，由更优先的钩子函数修改过
+             * 
+             * @param isDirectDamage If true, this attack is direct damage from an entity  
+             *                       若为真，则该攻击时来自实体的直接伤害
+             * 
+             * @returns              Replacement amount of damage, if 0 will stop further hooks  
+             *                       要替换的伤害量，若为`0`将停止更后面的钩子函数
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     modifyDamageTaken: (tool, modifier, context, slotType, source, amount, isDirectDamage) => {
+             *         if (source.is(TagKey.create(Registries.DAMAGE_TYPE, "minecraft:is_fall"))) {
+             *             return 0;
+             *         }
+             *         // Negate all fall damage
+             *         // 抵消所有掉落伤害
+             *     }
+             * }
+             */
+            modifyDamageTaken?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.EquipmentContext, slotType: Internal.EquipmentSlot, source: DamageSource, amount: number, isDirectDamage: boolean) => number,
+            /**
              * Triggers when mining blocks.
              * Note that modification on mining speed should be done on `newSpeed` field of {@link event `event`}.  
              * 挖掘方块时触发。

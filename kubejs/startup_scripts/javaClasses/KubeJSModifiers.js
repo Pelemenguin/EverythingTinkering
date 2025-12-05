@@ -49,6 +49,7 @@ let HOOK_TO_IMPLEMENTING_INTERFACE = {
     "afterMeleeHit": "slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook",
     "getProtectionModifier": "slimeknights.tconstruct.library.modifiers.hook.armor.ProtectionModifierHook",
     "onAttacked": "slimeknights.tconstruct.library.modifiers.hook.armor.OnAttackedModifierHook",
+    "modifyDamageTaken": "slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook",
     "onBreakSpeed": "slimeknights.tconstruct.library.modifiers.hook.mining.BreakSpeedModifierHook",
     "afterBlockBreak": "slimeknights.tconstruct.library.modifiers.hook.mining.BlockBreakModifierHook",
     "onProjectileLaunch": "slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook"
@@ -257,6 +258,28 @@ let HOOK_TO_METHOD_PARAMETERS = {
             };
         }
     ],
+    "modifyDamageTaken": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "slimeknights.tconstruct.library.tools.context.EquipmentContext",
+            "net.minecraft.world.entity.EquipmentSlot",
+            "net.minecraft.world.damagesource.DamageSource",
+            "float",
+            "boolean"
+        ],
+        "float",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5, arg6) => {
+                try {
+                    return func(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+                } catch (e) {
+                    console.error(`Error in onAttacked of modifier ${arg1.getId().toString()}: ${e}`);
+                    return arg5;
+                }
+            };
+        }
+    ],
     "onBreakSpeed": [
         [
             "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
@@ -330,6 +353,7 @@ let HOOK_TO_FIELDS = {
     "afterMeleeHit": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MELEE_HIT", "slimeknights.tconstruct.library.module.ModuleHook"],
     "getProtectionModifier": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "PROTECTION", "slimeknights.tconstruct.library.module.ModuleHook"],
     "onAttacked": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "ON_ATTACKED", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "modifyDamageTaken": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MODIFY_HURT", "slimeknights.tconstruct.library.module.ModuleHook"],
     "onBreakSpeed": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "BREAK_SPEED", "slimeknights.tconstruct.library.module.ModuleHook"],
     "afterBlockBreak": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "BLOCK_BREAK", "slimeknights.tconstruct.library.module.ModuleHook"],
     "onProjectileLaunch": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "PROJECTILE_LAUNCH", "slimeknights.tconstruct.library.module.ModuleHook"]
