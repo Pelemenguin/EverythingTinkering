@@ -18,6 +18,7 @@
     ParticleTypes
     $BlockParticleOption
     Blocks
+    console
 */
 
 global.Entities.AiFunctions.IceSpike = {
@@ -111,6 +112,7 @@ global.Entities.AiFunctions.IceSpike = {
         created.setPos(block.getPos().getCenter().add(0, surface + 0.5, 0));
         if (owner != undefined) global.Entities.AiFunctions.IceSpike.setOwner(created, owner);
         world.addFreshEntity(created);
+        return created;
     }
 };
 
@@ -118,6 +120,13 @@ StartupEvents.registry("minecraft:entity_type", event => {
     event.create("kubejs:ice_spike", "entityjs:nonliving")
         .sized(0.5, 0.5)
         .tick(entity => global.Entities.AiFunctions.IceSpike.tick(entity))
-        .addAnimationController("attackController", 0, context => global.Entities.AiFunctions.IceSpike.animationTick(context))
+        .addAnimationController("attackController", 0, context => {
+            try {
+                return global.Entities.AiFunctions.IceSpike.animationTick(context);
+            } catch (e) {
+                console.error(`Exception occured while ticking Ice Spike animation! ${e}`);
+                return false;
+            }
+        })
     ;
 });

@@ -269,6 +269,10 @@
     "modifier.kubejs.warped.flavor": "是谁在哭……",
     "modifier.kubejs.warped.description": "在诡异森林中增加保护",
 
+    "modifier.kubejs.glacial_strike": "冰滞冲击",
+    "modifier.kubejs.glacial_strike.flavor": "你有没有想象过一座冰山跳几千米高砸你？",
+    "modifier.kubejs.glacial_strike.description": "按下“冰滞冲击”按键跳起，再按一次以砸向地面。落地时对范围内的目标造成伤害",
+
         "comment_artifacts": " ----- Artifacts ----- ",
 
     "item.kubejs.artifact.startup.pickaxe.name": "初始之镐",

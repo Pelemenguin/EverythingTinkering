@@ -458,9 +458,13 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .aiStep(mob => global.Entities.AiFunctions.IcyTerracube.aiStep(mob))
         .onHurt(mob => global.Entities.AiFunctions.IcyTerracube.onHurt(mob))
         .onRemovedFromWorld(mob => global.Entities.AiFunctions.IcyTerracube.onRemovedFromWorld(mob))
-        .addAnimationController("jumpController", 0, event => {
-            try {return global.Entities.AiFunctions.IcyTerracube.JumpController(event);}
-            catch (e) {console.info("Error on Icy Terracube animation controller tick: " + e); return false;}
+        .addAnimationController("jumpController", 0, context => {
+            try {
+                return global.Entities.AiFunctions.IcyTerracube.JumpController(context);
+            } catch (e) {
+                console.error(`Exception occured while ticking Icy Terracube animation! ${e}`);
+                return false;
+            }
         })
         .textureResource(entity => {
             try {

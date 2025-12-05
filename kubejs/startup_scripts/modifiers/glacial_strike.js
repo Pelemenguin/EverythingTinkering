@@ -15,6 +15,7 @@
  */
 
 /* global
+    global: writable
     ModifierManager
     KubeJSKeybindHelper
     $NetworkDirection
@@ -26,6 +27,7 @@
     KubeJSDamageSources
     TagKey
     Registries
+    ParticleTypes
 */
 
 KubeJSNetworkHelper.register("GlacialStrikeMessage", 378294469, {
@@ -83,7 +85,11 @@ let GLACIAL_STRIKE = ModifierManager.registerCommonModifier("glacial_strike", "G
         if (tool.isBroken()) return;
 
         /** @type {Internal.CompoundTag} */
-        let persistent = tool.getPersistentData().getCompound("kubejs:glacial_strike");
+        let persistent = stack.getNbt().getCompound("tic_persistent").get("kubejs:glacial_strike");
+        if (persistent == null) {
+            persistent = NBT.compoundTag();
+            stack.getNbt().getCompound("tic_persistent").put("kubejs:glacial_strike", persistent);
+        }
 
         let jumpCooldown = persistent.getInt("SinceLastJump") + 1;
         let isJumping = persistent.getByte("IsJumping");
@@ -105,6 +111,11 @@ let GLACIAL_STRIKE = ModifierManager.registerCommonModifier("glacial_strike", "G
                     });
 
                     holder.addDeltaMovement([0, 1.2, 0]);
+                    world.spawnParticles(ParticleTypes.SNOWFLAKE, false, holder.getX(), holder.getY(), holder.getZ(), 1, 0, 1, 200, 0.1);
+
+                    for (let i = 0; i < 5; ++i) {
+                        global.Entities.AiFunctions.IceSpike.createIceSpikeAt(world, holder.blockPosition().offset(Math.round(Math.random() * 6 - 3), 5, Math.round(Math.random() * 6 - 3)), holder);
+                    }
                 }
             }
             if (holder.onGround()) {

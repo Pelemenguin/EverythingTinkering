@@ -16,8 +16,10 @@
 
 ClientEvents.tick(() => {
 
-    for (let key in global.KeyMappings) {
-        let obj = global.KeyMappings[key];
+    let KeyMappings = global.KeyMappings;
+
+    for (let key in KeyMappings) {
+        let obj = KeyMappings[key];
 
         if (!obj.key.isDown()) obj.consumed = false;
     }

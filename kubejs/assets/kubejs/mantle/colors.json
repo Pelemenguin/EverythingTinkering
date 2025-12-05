@@ -119,7 +119,9 @@
         "relaying": "#c9caba",
         "night_owl": "#C2FF66",
         "antifatigue": "#C6DFD8",
-        "warped": "#009185"
+        "warped": "#009185",
+
+        "glacial_strike": "#9dcff0"
 
     }
 }

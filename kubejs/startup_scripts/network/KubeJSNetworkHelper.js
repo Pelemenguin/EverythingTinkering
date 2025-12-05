@@ -155,9 +155,9 @@ global.KubeJSNetworkHelper.register = (className, messageTypeId, dataAndTypes, n
     let messageClass = classCreator.defineClass();
 
     // Keep the class in a map
-    global.KubeJSNetworkHelper.MESSAGE_IDS[className] = messageTypeId;
-    global.KubeJSNetworkHelper.REGISTERED_MESSAGES[className] = messageClass;
-    global.KubeJSNetworkHelper.NETWORK_DIRECTIONS[className] = networkDirection;
+    if (!(className in global.KubeJSNetworkHelper.MESSAGE_IDS)) global.KubeJSNetworkHelper.MESSAGE_IDS[className] = messageTypeId;
+    if (!(className in global.KubeJSNetworkHelper.REGISTERED_MESSAGES)) global.KubeJSNetworkHelper.REGISTERED_MESSAGES[className] = messageClass;
+    if (!(className in global.KubeJSNetworkHelper.NETWORK_DIRECTIONS)) global.KubeJSNetworkHelper.NETWORK_DIRECTIONS[className] = networkDirection;
 
     return messageClass;
 };

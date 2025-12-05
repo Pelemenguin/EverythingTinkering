@@ -1,5 +1,7 @@
 // priority: 2147483647
 
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 /**
  * @fileoverview Constants | 常量
  * - Because Rhino made `const`-defined objects global, use a special JS file to create these.
@@ -9,8 +11,6 @@
  * @license LGPL-3.0-or-later
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
- * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
  * - - - - -
  * @author Pelemenguin
  */
@@ -30,7 +30,8 @@ const Class = Java.loadClass("java.lang.Object").__javaObject__.getClass();
 const NativeJavaClass = Java.loadClass("dev.latvian.mods.rhino.NativeJavaClass");
 
 // Minecraft
-const SimpleSoundInstance = Java.loadClass("net.minecraft.client.resources.sounds.SimpleSoundInstance");
+/** @type {typeof Internal.SimpleSoundInstance} */
+const SimpleSoundInstance = Java.tryLoadClass("net.minecraft.client.resources.sounds.SimpleSoundInstance");
 const $Holder = Java.loadClass("net.minecraft.core.Holder");
 const NonNullList = Java.loadClass("net.minecraft.core.NonNullList");
 const Registries = Java.loadClass("net.minecraft.core.registries.Registries");
@@ -130,6 +131,7 @@ const JavaUtils = {
     /** @type {typeof Internal.Thread} */
     Thread: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.lang.Thread"))
 };
+const $ConcurrentHashMap = Java.loadClass("java.util.concurrent.ConcurrentHashMap");
 const $Optional = Java.loadClass("java.util.Optional");
 
 // Forge

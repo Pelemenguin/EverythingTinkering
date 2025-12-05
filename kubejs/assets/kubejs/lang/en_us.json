@@ -266,6 +266,10 @@
     "modifier.kubejs.warped.flavor": "Who is crying...",
     "modifier.kubejs.warped.description": "Grants protection in the Warped Forests",
 
+    "modifier.kubejs.glacial_strike": "Glacial Strike",
+    "modifier.kubejs.glacial_strike.flavor": "Ever imagined an iceberg jumping meters high to smash you?",
+    "modifier.kubejs.glacial_strike.description": "Press the “Glacial Strike” key to leap up, then press again while falling to slam into the ground. Damages targets in an area upon landing.",
+
         "_comment_artifacts": " ----- Artifacts ----- ",
 
     "item.kubejs.artifact.startup.pickaxe.name": "Starter Pickaxe",
