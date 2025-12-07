@@ -44,6 +44,8 @@ let HOOK_TO_IMPLEMENTING_INTERFACE = {
     "onInventoryTick": "slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook",
     "addTooltip": "slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook",
     "addToolStats": "slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook",
+    "validate": "slimeknights.tconstruct.library.modifiers.hook.build.ValidateModifierHook",
+    "onRemoved": "slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook",
     "getMeleeDamage": "slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook",
     "beforeMeleeHit": "slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook",
     "afterMeleeHit": "slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook",
@@ -153,6 +155,38 @@ let HOOK_TO_METHOD_PARAMETERS = {
                     func(arg0, arg1, arg2);
                 } catch (e) {
                     console.error(`Error in addToolStats of modifier ${arg1.getId().toString()}: ${e}`);
+                }
+            };
+        }
+    ],
+    "validate": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry"
+        ],
+        "net.minecraft.network.chat.Component",
+        (func) => {
+            return (arg0, /** @type {Internal.ModifierEntry} */ arg1) => {
+                try {
+                    return func(arg0, arg1);
+                } catch (e) {
+                    console.error(`Error in validate of modifier ${arg1.getId().toString()}: ${e}`);
+                }
+            };
+        }
+    ],
+    "onRemoved": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.Modifier"
+        ],
+        "net.minecraft.network.chat.Component",
+        (func) => {
+            return (arg0, /** @type {Internal.Modifier} */ arg1) => {
+                try {
+                    return func(arg0, arg1);
+                } catch (e) {
+                    console.error(`Error in onRemoved of modifier ${arg1.getId().toString()}: ${e}`);
                 }
             };
         }
@@ -348,6 +382,8 @@ let HOOK_TO_FIELDS = {
     "onInventoryTick": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "INVENTORY_TICK", "slimeknights.tconstruct.library.module.ModuleHook"],
     "addTooltip": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "TOOLTIP", "slimeknights.tconstruct.library.module.ModuleHook"],
     "addToolStats": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "TOOL_STATS", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "validate": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "VALIDATE", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "onRemoved": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "REMOVE", "slimeknights.tconstruct.library.module.ModuleHook"],
     "getMeleeDamage": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MELEE_DAMAGE", "slimeknights.tconstruct.library.module.ModuleHook"],
     "beforeMeleeHit": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MELEE_HIT", "slimeknights.tconstruct.library.module.ModuleHook"],
     "afterMeleeHit": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MELEE_HIT", "slimeknights.tconstruct.library.module.ModuleHook"],
@@ -493,7 +529,7 @@ StartupEvents.init(() => {
     console.info("Modifier Registration Begin:");
 
     ModifierManager.ALL_MODIFIERS.forEach((modifierName, modifierObject) => {
-        console.info(`New Modifier: ${modifierName} (className: ${modifierObject.className})`);
+        console.info(`New Modifier: ${modifierName} (${modifierObject.modifierClass.__javaObject__})`);
         KUBEJS_MODIFIERS.register(modifierName, modifierObject.registerer);
     });
 

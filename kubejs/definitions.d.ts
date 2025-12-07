@@ -265,6 +265,62 @@ declare namespace Annotation {
              */
             addToolStats?: (context: Internal.IToolContext, modifier: Internal.ModifierEntry, builder: Internal.ModifierStatsBuilder) => void,
             /**
+             * Called when modifiers or tool materials change to validate the tool. You are free to modify persistent data in this hook if needed.
+             * This hook will not be called when a modifier is removed, to validate if a removal can be done, use {@linkcode onRemoved}.
+             * Do not validate max level here, simply ignore levels over max if needed.  
+             * 在特性或工具材料改变时调用以验证工具。如果需要，你可以在此钩子中修改持久化数据。
+             * 当一个特性被移除时不会调用此钩子函数，若要验证是否可以移除，请使用{@linkcode onRemoved}。
+             * 不要在此处验证最大等级，直接忽略超过最大等级的部分。
+             * - - - - -
+             * @param tool     Current tool instance  
+             *                 当前工具实例
+             * 
+             * @param modifier Modifier being validated  
+             *                 正在被检验的特性
+             * 
+             * @returns        `null` if no validation errors, text component with error message if there was an error  
+             *                 若无错误则返回`null`，若有错误则返回带有错误信息的文本组件
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     validate: (tool, modifier) => {
+             *         return Component.literal("Tool cannot be modified!");
+             *         // Always invalid, with message "Tool cannot be modified!"
+             *         // You must use `Component.translatable` in practical modifiers for localization support!
+             *         // 总是无效，错误信息为“Tool cannot be modified!”
+             *         // 实际的特性中你必须使用`Component.translatable`以支持本地化！
+             *     }
+             * });
+             */
+            validate?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry) => Internal.Component | null,
+            /**
+             * Called after this modifier is removed (and after stats are rebuilt) to clean up persistent data and validate removal.  
+             * 在该特性被移除后（且属性重建后）调用以清理持久化数据并验证移除。
+             * - - - - -
+             * @param tool     Tool instance  
+             *                 工具实例
+             * 
+             * @param modifier Modifier being removed  
+             *                 正在被移除的特性
+             * 
+             * @returns        `null` if the modifier can be removed, text component with error message if there was an error  
+             *                 若该特性可以被移除则返回`null`，若有错误则返回带有错误信息的文本组件
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     onRemoved: (tool, modifier) => {
+             *         tool.getPersistentData().remove("kubejs:test");
+             *         // Clean up persistent data with key `kubejs:test`
+             *         // 清理持久化数据，键为`kubejs:test`
+             * 
+             *         return null;
+             *         // Allow removal
+             *         // 允许移除
+             *     }
+             * });
+             */
+            onRemoved?: (tool: Internal.IToolStackView, modifier: Internal.Modifier) => Internal.Component | null,
+            /**
              * Called when an entity is attacked, before critical hit damage is calculated.
              * Allows modifying the damage dealt.
              * Do not modify the entity here,

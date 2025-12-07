@@ -273,6 +273,11 @@
     "modifier.kubejs.glacial_strike.flavor": "你有没有想象过一座冰山跳几米高砸你？",
     "modifier.kubejs.glacial_strike.description": "按下“冰滞冲击”按键跳起，再按一次以砸向地面。落地时对范围内的目标造成伤害",
 
+    "modifier.kubejs.immutable": "不可变",
+    "modifier.kubejs.immutable.flavor": "要用“.copy()”吗？",
+    "modifier.kubejs.immutable.description": "拒绝任何更改工具材料或特性的尝试",
+    "modifier.kubejs.immutable.error": "该工具不可变",
+
         "comment_artifacts": " ----- Artifacts ----- ",
 
     "item.kubejs.artifact.startup.pickaxe.name": "初始之镐",

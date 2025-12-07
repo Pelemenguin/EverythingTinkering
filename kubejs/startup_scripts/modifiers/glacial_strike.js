@@ -20,7 +20,6 @@
     KubeJSKeybindHelper
     $NetworkDirection
     KubeJSNetworkHelper
-    CustomUtils
     NBT
     console
     KubeJSDamageSources
@@ -38,8 +37,7 @@ KubeJSNetworkHelper.register("GlacialStrikeMessage", 378294469, {
 }, $NetworkDirection.PLAY_TO_SERVER, (message, context) => {
     context.get().enqueueWork(() => {
         let item = context.get().getSender().getFeetArmorItem();
-        /** @type {Internal.CompoundTag} */
-        let persistent = CustomUtils.Tinker.Persistent.getOrSetDefault(item, "kubejs:glacial_strike", NBT.compoundTag());
+        let persistent = item.getNbt().getCompound("tic_persistent").getCompound("kubejs:glacial_strike");
 
         /** @type {0 | 1} */
         let action = message.action;
@@ -85,23 +83,25 @@ let GLACIAL_STRIKE = ModifierManager.registerCommonModifier("glacial_strike", "G
         if (tool.isBroken()) return;
         if (holder.isSpectator()) return;
 
-        /** @type {Internal.CompoundTag} */
-        let persistent = stack.getNbt().getCompound("tic_persistent").get("kubejs:glacial_strike");
-        if (persistent == null) {
-            persistent = NBT.compoundTag();
-            stack.getNbt().getCompound("tic_persistent").put("kubejs:glacial_strike", persistent);
+        if (!stack.getNbt().getCompound("tic_persistent").contains("kubejs:glacial_strike")) {
+            stack.getNbt().getCompound("tic_persistent").put("kubejs:glacial_strike", NBT.compoundTag());
         }
+
+        /** @type {Internal.CompoundTag} */
+        let persistent = stack.getNbt().getCompound("tic_persistent").getCompound("kubejs:glacial_strike");
 
         let jumpCooldown = persistent.getInt("SinceLastJump") + 1;
         let isJumping = persistent.getByte("IsJumping");
         let isFalling = persistent.getByte("IsFalling");
 
-        if (jumpCooldown <= 20) persistent.putInt("SinceLastJump", jumpCooldown);
-
         if (!world.isClientSide()) {
+            if (jumpCooldown <= 20) persistent.putInt("SinceLastJump", jumpCooldown);
+            if (holder.onGround()) {
+                persistent.putByte("IsJumping", 0);
+                persistent.putByte("IsFalling", 0);
+            }
             if (isFalling) {
                 let fallDistance = persistent.getDouble("FallPosition") - holder.getY();
-                holder.fallDistance = fallDistance;
                 if (holder.onGround()) {
                     persistent.putByte("IsFalling", 0);
 
@@ -112,7 +112,11 @@ let GLACIAL_STRIKE = ModifierManager.registerCommonModifier("glacial_strike", "G
                         e.attack(KubeJSDamageSources.icyTerracubeSmash(world, holder, holder), damage);
                     });
 
-                    if (!holder.isShiftKeyDown()) holder.addDeltaMovement([0, 1.2, 0]);
+                    if (!holder.isShiftKeyDown()) {
+                        holder.getServer().scheduleInTicks(1, () => {
+                            holder.addMotion(0, 1.2, 0);
+                        });
+                    }
                     world.spawnParticles(ParticleTypes.SNOWFLAKE, false, holder.getX(), holder.getY(), holder.getZ(), 1, 0, 1, 200, 0.1);
 
                     for (let i = 0; i < 5; ++i) {
@@ -122,26 +126,23 @@ let GLACIAL_STRIKE = ModifierManager.registerCommonModifier("glacial_strike", "G
                     ToolDamageUtil.damageAnimated(tool, 1, holder);
                 }
             }
-            if (holder.onGround()) {
-                persistent.putByte("IsJumping", 0);
-                persistent.putByte("IsFalling", 0);
-            }
         } else {
             let isPressing = KubeJSKeybindHelper.consumeClick("glacial_strike", "modifier");
-            if (isJumping && isPressing) {
-                KubeJSNetworkHelper.CHANNEL.sendToServer(KubeJSNetworkHelper.createMessage("GlacialStrikeMessage", {
-                    action: 1
-                }));
-                holder.addDeltaMovement([0, -3, 0]);
-            }
-            if (jumpCooldown >= 20 && isPressing) {
-                KubeJSNetworkHelper.CHANNEL.sendToServer(KubeJSNetworkHelper.createMessage("GlacialStrikeMessage", {
-                    action: 0
-                }));
-                holder.addDeltaMovement([0, 1, 0]);
+            if (isPressing) {
+                if (isJumping) {
+                    KubeJSNetworkHelper.CHANNEL.sendToServer(KubeJSNetworkHelper.createMessage("GlacialStrikeMessage", {
+                        action: 1
+                    }));
+                    holder.addDeltaMovement([0, -3, 0]);
+                } else if (jumpCooldown >= 20) {
+                    KubeJSNetworkHelper.CHANNEL.sendToServer(KubeJSNetworkHelper.createMessage("GlacialStrikeMessage", {
+                        action: 0
+                    }));
+                    holder.addDeltaMovement([0, 1, 0]);
+                }
             }
             if (isFalling && holder.onGround() && !holder.isShiftKeyDown()) {
-                holder.addDeltaMovement([0, 1.2, 0]);
+                holder.addMotion(0, 1.2, 0);
             }
         }
     },

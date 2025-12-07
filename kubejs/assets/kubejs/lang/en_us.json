@@ -270,6 +270,11 @@
     "modifier.kubejs.glacial_strike.flavor": "Ever imagined an iceberg jumping meters high to smash you?",
     "modifier.kubejs.glacial_strike.description": "Press the “Glacial Strike” key to leap up, then press again while falling to slam into the ground. Damages targets in an area upon landing.",
 
+    "modifier.kubejs.immutable": "Immutable",
+    "modifier.kubejs.immutable.flavor": "Need to use “.copy()”?",
+    "modifier.kubejs.immutable.description": "Rejects any attempts to alter the tool's materials or traits",
+    "modifier.kubejs.immutable.error": "This tool is immutable",
+
         "_comment_artifacts": " ----- Artifacts ----- ",
 
     "item.kubejs.artifact.startup.pickaxe.name": "Starter Pickaxe",

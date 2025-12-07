@@ -121,7 +121,9 @@
         "antifatigue": "#C6DFD8",
         "warped": "#009185",
 
-        "glacial_strike": "#9dcff0"
+        "glacial_strike": "#9dcff0",
+
+        "immutable": "#ff0000"
 
     }
 }
