@@ -154,5 +154,8 @@ let GLACIAL_STRIKE = ModifierManager.registerCommonModifier("glacial_strike", "G
             return 0;
         }
         return amount;
+    },
+    __class__: {
+        extending: "slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier"
     }
 });

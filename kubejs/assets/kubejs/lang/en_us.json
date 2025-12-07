@@ -281,6 +281,10 @@
     "item.kubejs.artifact.startup.sword.name": "Starter Sword",
     "item.kubejs.artifact.startup.sword.lore": "A gift to beginners.",
 
+    "item.kubejs.artifact.boss_no_hit.icy_terracube.name": "Glacial Strike",
+    "item.kubejs.artifact.boss_no_hit.icy_terracube.lore": "Ever imagined an iceberg jumping meters high to smash you?",
+    "item.kubejs.artifact.boss_no_hit.icy_terracube.extra": "[Icy Terracube's no-hit loot]",
+
         "_comment_book": " ----- Book ----- ",
 
     "book.kubejs.material.title.general.1": "Tier 1 General Material",

@@ -270,7 +270,7 @@
     "modifier.kubejs.warped.description": "在诡异森林中增加保护",
 
     "modifier.kubejs.glacial_strike": "冰滞冲击",
-    "modifier.kubejs.glacial_strike.flavor": "你有没有想象过一座冰山跳几千米高砸你？",
+    "modifier.kubejs.glacial_strike.flavor": "你有没有想象过一座冰山跳几米高砸你？",
     "modifier.kubejs.glacial_strike.description": "按下“冰滞冲击”按键跳起，再按一次以砸向地面。落地时对范围内的目标造成伤害",
 
         "comment_artifacts": " ----- Artifacts ----- ",
@@ -283,6 +283,10 @@
 
     "item.kubejs.artifact.startup.sword.name": "初始之剑",
     "item.kubejs.artifact.startup.sword.lore": "一份致新手的礼物。",
+
+    "item.kubejs.artifact.boss_no_hit.icy_terracube.name": "冰滞冲击",
+    "item.kubejs.artifact.boss_no_hit.icy_terracube.lore": "你有没有想象过一座冰山跳几米高砸你？",
+    "item.kubejs.artifact.boss_no_hit.icy_terracube.extra": "[寒冰黏土怪的无伤战利品]",
 
         "_comment_book": " ----- 书本 ----- ",
 

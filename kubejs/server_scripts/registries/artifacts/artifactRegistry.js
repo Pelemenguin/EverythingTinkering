@@ -61,24 +61,13 @@ function Artifact(id, item, definition, materials) {
     this.name = null;
     /** @type {Internal.Component | null} */
     this.lore = null;
+    /** @type {Internal.Component[]} */
+    this.extraTooltips = [];
 
     /** @type {Internal.MaterialVariant_[]} */
     this.materials = materials.map(rawString => {
-        let variantSpliterIndex = rawString.indexOf('#');
-        let rawMaterialString = "";
-        /** @type {string | null} */
-        let variantString = null;
-        if (variantSpliterIndex == -1) rawMaterialString = rawString;
-        else {
-            rawMaterialString = rawString.substring(0, variantSpliterIndex);
-            variantString = rawString.substring(variantSpliterIndex+1);
-        }
-        let rawMaterialId = MaterialId["tryParse(java.lang.String)"](rawMaterialString);
-        if (variantString == null) {
-            return MaterialVariant["of(slimeknights.tconstruct.library.materials.definition.MaterialId)"](rawMaterialId);
-        } else {
-            return MaterialVariant["of(slimeknights.tconstruct.library.materials.definition.MaterialId,java.lang.String)"](rawMaterialId, variantString);
-        }
+        let rawMaterialId = MaterialId.parse(rawString);
+        return MaterialVariant["of(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](rawMaterialId);
     });
     /** @type {Internal.Map<Internal.ModifierId, number>} */
     this.modifiers = Utils.newMap();
@@ -139,6 +128,14 @@ Artifact.prototype.getLore = function() {
     return Component.translatable(`item.kubejs.${this.translationId}.lore`);
 };
 
+/**
+ * - Add one line of extra tooltip to the artifact.
+ * - 向 Artifact 添加一行工具提示
+ */
+Artifact.prototype.addTooltip = function(component) {
+    this.extraTooltips.push(component);
+};
+
 Artifact.prototype.init = function() {
     this.name = this.getName();
     this.lore = this.getLore();
@@ -181,7 +178,7 @@ Artifact.prototype.createStack = function(count) {
     if (!this.initialized) this.init();
     ToolStack.ensureInitialized(result, this.definition);
     result = result.withName(this.name);
-    result = result.withLore(this.lore);
+    result = result.withLore([this.lore].concat(this.extraTooltips));
     return result;
 };
 
