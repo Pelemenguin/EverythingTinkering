@@ -251,7 +251,7 @@ let ICY_TERRACUBE_AI_STEP = {
 
             const delta = -h + hd * tanTheta;
             if (delta <= 0) {
-                console.info("Unable to find a proper initial velocity for projectile. Delta: " + delta);
+                // console.info("Unable to find a proper initial velocity for projectile. Delta: " + delta);
                 return;
             }
             const t = Math.sqrt(2 * delta / g);

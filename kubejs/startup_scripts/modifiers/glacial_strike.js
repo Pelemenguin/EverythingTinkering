@@ -105,9 +105,10 @@ let GLACIAL_STRIKE = ModifierManager.registerCommonModifier("glacial_strike", "G
                     persistent.putByte("IsFalling", 0);
 
                     let size = Math.min(5, Math.max(1, fallDistance * 0.25)) / 2;
+                    let damage = Math.min(fallDistance, 50);
                     world.getEntitiesWithin(holder.getBoundingBox().inflate(size, 0, size)).forEach(e => {
                         if (e === holder || !e.isAttackable()) return;
-                        e.attack(KubeJSDamageSources.icyTerracubeSmash(world, holder, holder), fallDistance);
+                        e.attack(KubeJSDamageSources.icyTerracubeSmash(world, holder, holder), damage);
                     });
 
                     if (!holder.isShiftKeyDown()) holder.addDeltaMovement([0, 1.2, 0]);
