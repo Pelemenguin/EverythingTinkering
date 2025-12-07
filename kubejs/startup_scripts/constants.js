@@ -34,9 +34,9 @@ const NativeJavaClass = Java.loadClass("dev.latvian.mods.rhino.NativeJavaClass")
 const SimpleSoundInstance = Java.tryLoadClass("net.minecraft.client.resources.sounds.SimpleSoundInstance");
 const $Holder = Java.loadClass("net.minecraft.core.Holder");
 const NonNullList = Java.loadClass("net.minecraft.core.NonNullList");
-const Registries = Java.loadClass("net.minecraft.core.registries.Registries");
+const $Registries = Java.loadClass("net.minecraft.core.registries.Registries");
 const ResourceKey = Java.loadClass("net.minecraft.resources.ResourceKey");
-const TagKey = Java.loadClass("net.minecraft.tags.TagKey");
+const $TagKey = Java.loadClass("net.minecraft.tags.TagKey");
 const LivingEntity = Java.loadClass("net.minecraft.world.entity.LivingEntity");
 const Player = Java.loadClass("net.minecraft.world.entity.player.Player");
 const Entity = Java.loadClass("net.minecraft.world.entity.Entity");
@@ -153,7 +153,7 @@ const CustomUtils = function() {};
 CustomUtils.toString = () => "CustomUtils";
 
 /**
- * - n interface for tinker things.
+ * - An interface for tinker things.
  * - 用于匠魂相关的接口。
  * - - - - -
  * @class

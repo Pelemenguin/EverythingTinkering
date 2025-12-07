@@ -16,7 +16,7 @@
 /* global
     DamageSource
     Entity
-    Registries
+    $Registries
     ResourceKey
     $Holder
 */
@@ -27,7 +27,7 @@
  */
 let damageSourceCreatorHelper = (resKey) => {
     return (level, direct, actual, pos) => {
-        let holder = level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(resKey);
+        let holder = level.registryAccess().registryOrThrow($Registries.DAMAGE_TYPE).getHolderOrThrow(resKey);
         if (actual === undefined && pos === undefined) return DamageSource.__javaObject__.getConstructor($Holder, Entity).newInstance(holder, direct);
         if (pos === undefined) return new DamageSource(holder, direct, actual);
         return new DamageSource(holder, direct, actual, pos);
@@ -35,12 +35,12 @@ let damageSourceCreatorHelper = (resKey) => {
 };
 
 const KubeJSDamageTypes = {
-    PAPERCUT: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:papercut"),
-    HOT_TOOL: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:hot_tool"),
-    HOT_TOOL_ATTACK: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:hot_tool_attack"),
-    ICY_TERRACUBE_SMASH: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:icy_terracube_smash"),
-    ICY_CLAY_BALL: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:icy_clay_ball"),
-    ICE_SPIKE: ResourceKey.create(Registries.DAMAGE_TYPE, "kubejs:ice_spike")
+    PAPERCUT: ResourceKey.create($Registries.DAMAGE_TYPE, "kubejs:papercut"),
+    HOT_TOOL: ResourceKey.create($Registries.DAMAGE_TYPE, "kubejs:hot_tool"),
+    HOT_TOOL_ATTACK: ResourceKey.create($Registries.DAMAGE_TYPE, "kubejs:hot_tool_attack"),
+    ICY_TERRACUBE_SMASH: ResourceKey.create($Registries.DAMAGE_TYPE, "kubejs:icy_terracube_smash"),
+    ICY_CLAY_BALL: ResourceKey.create($Registries.DAMAGE_TYPE, "kubejs:icy_clay_ball"),
+    ICE_SPIKE: ResourceKey.create($Registries.DAMAGE_TYPE, "kubejs:ice_spike")
 };
 
 const KubeJSDamageSources = {

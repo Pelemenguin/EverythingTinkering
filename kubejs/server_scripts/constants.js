@@ -31,6 +31,7 @@ const ModifierNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.Mo
 const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
 const TextColor = Java.loadClass('net.minecraft.network.chat.TextColor');
 const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ToolStack');
+const $ArmorDefinitions = Java.loadClass("slimeknights.tconstruct.tools.ArmorDefinitions");
 const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDefinitions');
 const MaterialNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT');
 const MaterialNBTBuilder = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT$Builder');

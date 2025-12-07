@@ -309,6 +309,11 @@
     "book.kubejs.material.recipes.composite.description": "Craftable by pouring fluid onto parts of other materials",
     "book.kubejs.material.recipes.composite.fluid": "%1$smB of %2$s",
     "book.kubejs.material.recipes.composite.amount": "%smB",
-    "book.kubejs.material.recipes.composite.fluid.unknown": "Unknown Fluid"
+    "book.kubejs.material.recipes.composite.fluid.unknown": "Unknown Fluid",
+
+        "_comment_controls": " ----- Controls ----- ",
+
+    "key.categories.kubejs.modifier": "Modpack | Tinker's Construct Modifiers",
+    "key.kubejs.modifier.glacial_strike": "Glacial Strike"
 
 }

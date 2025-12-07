@@ -312,6 +312,11 @@
     "book.kubejs.material.recipes.composite.description": "能通过向其它材料的部件浇铸流体制作",
     "book.kubejs.material.recipes.composite.fluid": "%1$smB的%2$s",
     "book.kubejs.material.recipes.composite.amount": "%smB",
-    "book.kubejs.material.recipes.composite.fluid.unknown": "未知流体"
+    "book.kubejs.material.recipes.composite.fluid.unknown": "未知流体",
+
+        "_comment_controls": " ----- 控制 ----- ",
+
+    "key.categories.kubejs.modifier": "整合包 | 匠魂特性",
+    "key.kubejs.modifier.glacial_strike": "冰滞冲击"
 
 }

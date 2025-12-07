@@ -70,7 +70,7 @@ const KubeJSKeybindHelper = {
         let result = new $KeyMapping(
             `key.kubejs.${name}`,
             defaultKey,
-            category == undefined ? "category.kubejs.keys" : `category.kubejs.keys.${category}`
+            category == undefined ? "key.categories.kubejs" : `key.categories.kubejs.${category}`
         );
         global.KeyMappings[name] = {
             consumed: false,

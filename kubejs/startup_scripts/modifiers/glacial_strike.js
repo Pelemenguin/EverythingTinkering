@@ -22,12 +22,11 @@
     KubeJSNetworkHelper
     CustomUtils
     NBT
-    Client
     console
     KubeJSDamageSources
-    TagKey
-    Registries
+    TagKeys
     ParticleTypes
+    ToolDamageUtil
 */
 
 KubeJSNetworkHelper.register("GlacialStrikeMessage", 378294469, {
@@ -52,6 +51,7 @@ KubeJSNetworkHelper.register("GlacialStrikeMessage", 378294469, {
                 persistent.putInt("SinceLastJump", 0);
                 persistent.putByte("IsJumping", 1);
                 persistent.putByte("IsFalling", 0);
+                context.get().getSender().damageEquipment("feet");
 
                 break;
             }
@@ -110,12 +110,14 @@ let GLACIAL_STRIKE = ModifierManager.registerCommonModifier("glacial_strike", "G
                         e.attack(KubeJSDamageSources.icyTerracubeSmash(world, holder, holder), fallDistance);
                     });
 
-                    holder.addDeltaMovement([0, 1.2, 0]);
+                    if (!holder.isShiftKeyDown()) holder.addDeltaMovement([0, 1.2, 0]);
                     world.spawnParticles(ParticleTypes.SNOWFLAKE, false, holder.getX(), holder.getY(), holder.getZ(), 1, 0, 1, 200, 0.1);
 
                     for (let i = 0; i < 5; ++i) {
                         global.Entities.AiFunctions.IceSpike.createIceSpikeAt(world, holder.blockPosition().offset(Math.round(Math.random() * 6 - 3), 5, Math.round(Math.random() * 6 - 3)), holder);
                     }
+
+                    ToolDamageUtil.damageAnimated(tool, 1, holder);
                 }
             }
             if (holder.onGround()) {
@@ -128,26 +130,25 @@ let GLACIAL_STRIKE = ModifierManager.registerCommonModifier("glacial_strike", "G
                 KubeJSNetworkHelper.CHANNEL.sendToServer(KubeJSNetworkHelper.createMessage("GlacialStrikeMessage", {
                     action: 1
                 }));
-                Client.player.addDeltaMovement([0, -3, 0]);
+                holder.addDeltaMovement([0, -3, 0]);
             }
             if (jumpCooldown >= 20 && isPressing) {
                 KubeJSNetworkHelper.CHANNEL.sendToServer(KubeJSNetworkHelper.createMessage("GlacialStrikeMessage", {
                     action: 0
                 }));
-                Client.player.addDeltaMovement([0, 1, 0]);
+                holder.addDeltaMovement([0, 1, 0]);
             }
-            if (isFalling && holder.onGround()) {
-                Client.player.addDeltaMovement([0, 1.2, 0]);
+            if (isFalling && holder.onGround() && !holder.isShiftKeyDown()) {
+                holder.addDeltaMovement([0, 1.2, 0]);
             }
         }
     },
-    modifyDamageTaken: (tool, _modifier, context, _slotType, source, amount, isDirectDamage) => {
+    modifyDamageTaken: (tool, _modifier, _context, _slotType, source, amount, isDirectDamage) => {
         if (tool.isBroken()) return;
-        if (source.is(TagKey.create(Registries.DAMAGE_TYPE, "minecraft:is_fall"))) {
-            return 0;
+        if (source.is(TagKeys.DamageType.IS_FALL)) {
+            return Math.max(0, amount - 20);
         }
         if (isDirectDamage && tool.getPersistentData().getCompound("kubejs:glacial_strike").getByte("IsFalling")) {
-            context.getEntity().invulnerableTime = 20;
             return 0;
         }
         return amount;

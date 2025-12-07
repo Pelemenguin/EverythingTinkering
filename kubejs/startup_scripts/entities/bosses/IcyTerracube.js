@@ -15,12 +15,12 @@
     global: writable
     StartupEvents
     EntityJSEvents
-    Registries
+    $Registries
     KubeJSAiHelper
     console
     Vec3d
     KubeJSDamageSources
-    TagKey
+    TagKeys
     ResourceLocation
     JavaMath
     $Difficulty
@@ -33,7 +33,7 @@
 
 /** */
 
-global.Entities.ResourceKeys.ICY_TERRACUBE = ResourceKey.create(Registries.ENTITY_TYPE, "kubejs:icy_terracube");
+global.Entities.ResourceKeys.ICY_TERRACUBE = ResourceKey.create($Registries.ENTITY_TYPE, "kubejs:icy_terracube");
 
 let ICY_TERRACUBE_NBT = {
     attackTarget: "AttackTarget",
@@ -454,7 +454,7 @@ StartupEvents.registry("minecraft:entity_type", event => {
         .spawnPlacement("on_ground", "world_surface", () => false)
         .fallSounds(ResourceLocation.tryParse("minecraft:entity.slime.squish"), ResourceLocation.tryParse("minecraft:entity.slime.squish"))
         .setHurtSound(() => "minecraft:entity.slime.hurt")
-        .isInvulnerableTo(ctx => ctx.damageSource.is(TagKey.create(Registries.DAMAGE_TYPE, "kubejs:boss_immune/icy_terracube")))
+        .isInvulnerableTo(ctx => ctx.damageSource.is(TagKeys.DamageType.BossImmune.ICY_TERRACUBE))
         .aiStep(mob => global.Entities.AiFunctions.IcyTerracube.aiStep(mob))
         .onHurt(mob => global.Entities.AiFunctions.IcyTerracube.onHurt(mob))
         .onRemovedFromWorld(mob => global.Entities.AiFunctions.IcyTerracube.onRemovedFromWorld(mob))
