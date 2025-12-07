@@ -103,11 +103,15 @@ global.Entities.AiFunctions.IceSpike = {
         let pos = targetPos;
         let block = world.getBlock(pos);
         let surface = -Infinity;
-        do {
+        let lastSurface = block.getBlockState().getCollisionShape(world.getChunkSource().getLevel(), pos.offset(0, 1, 0)).max("y");
+        for (;;) {
             surface = block.getBlockState().getCollisionShape(world.getChunkSource().getLevel(), pos).max("y");
             block = block.getDown();
+            pos = pos.offset(0, -1, 0);
             if (block.getY() < minY) return null;
-        } while (surface <= 0);
+            if (surface > 0 && lastSurface <= 0) break;
+            lastSurface = surface;
+        }
         let created = world.createEntity("kubejs:ice_spike");
         created.setPos(block.getPos().getCenter().add(0, surface + 0.5, 0));
         if (owner != undefined) global.Entities.AiFunctions.IceSpike.setOwner(created, owner);

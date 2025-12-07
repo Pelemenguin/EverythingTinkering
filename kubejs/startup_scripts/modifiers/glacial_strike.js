@@ -83,6 +83,7 @@ let GLACIAL_STRIKE = ModifierManager.registerCommonModifier("glacial_strike", "G
         if (!stack.canEquip("feet", holder)) return;
         if (!isCorrectSlot) return;
         if (tool.isBroken()) return;
+        if (holder.isSpectator()) return;
 
         /** @type {Internal.CompoundTag} */
         let persistent = stack.getNbt().getCompound("tic_persistent").get("kubejs:glacial_strike");
