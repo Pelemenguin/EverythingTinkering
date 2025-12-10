@@ -325,6 +325,15 @@
         "_comment_controls": " ----- Controls ----- ",
 
     "key.categories.kubejs.modifier": "Modpack | Tinker's Construct Modifiers",
-    "key.kubejs.modifier.glacial_strike": "Glacial Strike"
+    "key.kubejs.modifier.glacial_strike": "Glacial Strike",
+
+        "_comment_quests": " ----- Quests ----- ",
+
+    "quest.readme.welcome.title": "Welcome",
+    "quest.readme.welcome.description.1": "&6Welcome to &eEverything Tinkering&6!",
+    "quest.readme.welcome.description.2": "",
+    "quest.readme.welcome.description.3": "",
+
+        "_comment_end": "I don't want to remove commasat the end of the JSON  any more you know? I just place one line here so that all lines above can hava a comma"
 
 }

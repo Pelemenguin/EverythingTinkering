@@ -1,0 +1,194 @@
+{
+	autofocus_id: "46CA933E70671E83"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "chapter1"
+	group: "43F07E96C8672AA1"
+	icon: "tconstruct:materials_and_you"
+	id: "511690462ED2A4F7"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["37BFF5CC64E72C93"]
+			description: [""]
+			hide_until_deps_complete: true
+			icon: "tconstruct:materials_and_you"
+			id: "46CA933E70671E83"
+			shape: "square"
+			subtitle: "{quest.chapters.1.begin.subtitle}"
+			tasks: [{
+				id: "18EB767CA25179DE"
+				title: "{quest.chapters.1.begin.title}"
+				type: "checkmark"
+			}]
+			title: "{quest.chapters.1.begin.title}"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["46CA933E70671E83"]
+			description: ["{quest.chapters.1.patterns.description}"]
+			id: "3139C1207C7BC52F"
+			tasks: [{
+				count: 9L
+				id: "53719D9E7B13D9BD"
+				item: "tconstruct:pattern"
+				type: "item"
+			}]
+			title: "{quest.chapters.1.patterns.title}"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["3139C1207C7BC52F"]
+			description: ["{quest.chapters.1.part_builder.description}"]
+			id: "0ADFAF04FCF99444"
+			rewards: [{
+				count: 6
+				id: "12979057EB60D881"
+				item: "tconstruct:pattern"
+				type: "item"
+			}]
+			tasks: [{
+				id: "24B0D5A399A269B8"
+				item: "tconstruct:part_builder"
+				type: "item"
+			}]
+			title: "{quest.chapters.1.part_builder.title}"
+			x: 4.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["3139C1207C7BC52F"]
+			description: ["{quest.chapters.1.tinker_station.description}"]
+			id: "18B07660589D106A"
+			rewards: [{
+				count: 6
+				id: "6BE0D22B71AA5D9C"
+				item: "tconstruct:pattern"
+				type: "item"
+			}]
+			tasks: [{
+				id: "5A50F472F7935DA2"
+				item: "tconstruct:tinker_station"
+				type: "item"
+			}]
+			title: "{quest.chapters.1.tinker_station.title}"
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["3139C1207C7BC52F"]
+			description: ["{quest.chapters.1.crafting_station.description}"]
+			id: "7650D4EDFABB5B0C"
+			optional: true
+			shape: "none"
+			tasks: [{
+				id: "275509D17F9BE8EF"
+				item: "tconstruct:crafting_station"
+				type: "item"
+			}]
+			title: "{quest.chapters.1.crafting_station.title}"
+			x: 3.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["3139C1207C7BC52F"]
+			description: ["{quest.chapters.1.part_chest.description}"]
+			id: "0B0738CDDA088B91"
+			shape: "none"
+			tasks: [{
+				id: "677C168FB447A3C4"
+				item: "tconstruct:part_chest"
+				type: "item"
+			}]
+			title: "{quest.chapters.1.part_chest.title}"
+			x: 3.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["0ADFAF04FCF99444"]
+			description: [
+				"{quest.chapters.1.tutorial_parts.description.page1}"
+				"{@pagebreak}"
+				"{image:kubejs:textures/gui/quests/part_builder_interface.png width:304 height:194 align:center fit:true}"
+				""
+				"{quest.chapters.1.tutorial_parts.description.page2}"
+			]
+			icon: {
+				Count: 1
+				id: "tconstruct:pick_head"
+				tag: {
+					Material: "tconstruct:wood"
+				}
+			}
+			id: "5B6FA9F8DD32AA27"
+			tasks: [
+				{
+					id: "4D4E6E1A667E036F"
+					item: {
+						Count: 1
+						id: "tconstruct:pick_head"
+						tag: {
+							Material: "tconstruct:wood"
+						}
+					}
+					match_nbt: false
+					title: "{quest.chapters.1.tutorial_parts.requirement.pick_head}"
+					type: "item"
+				}
+				{
+					id: "70251E68D1B7F6A5"
+					item: {
+						Count: 1
+						id: "tconstruct:tool_handle"
+						tag: {
+							Material: "tconstruct:wood"
+						}
+					}
+					match_nbt: false
+					title: "{quest.chapters.1.tutorial_parts.requirement.tool_handle}"
+					type: "item"
+				}
+				{
+					id: "4FAAD5DAA3EE0B1B"
+					item: {
+						Count: 1
+						id: "tconstruct:tool_binding"
+						tag: {
+							Material: "tconstruct:wood"
+						}
+					}
+					match_nbt: false
+					title: "{quest.chapters.1.tutorial_parts.requirement.tool_binding}"
+					type: "item"
+				}
+			]
+			title: "{quest.chapters.1.tutorial_parts.title}"
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["5B6FA9F8DD32AA27"]
+			description: [
+				""
+				"{image:kubejs:textures/gui/quests/part_builder_uncraftable.png width:304 height:73 align:center fit:true}"
+				""
+				"{quest.chapters.1.part_builder_uncraftable.description}"
+			]
+			icon: "minecraft:iron_ingot"
+			id: "73C0BCD9D6397A99"
+			shape: "none"
+			tasks: [{
+				id: "0969F377BF3E80DE"
+				title: "{quest.chapters.1.part_builder_uncraftable.title}"
+				type: "checkmark"
+			}]
+			title: "{quest.chapters.1.part_builder_uncraftable.title}"
+			x: 6.0d
+			y: -3.0d
+		}
+	]
+	title: "{quest.chapters.1.title}"
+}

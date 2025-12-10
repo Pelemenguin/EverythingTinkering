@@ -116,7 +116,7 @@ let GLACIAL_STRIKE = ModifierManager.registerCommonModifier("glacial_strike", "G
                     });
 
                     if (!holder.isShiftKeyDown()) {
-                        holder.getServer().scheduleInTicks(1, () => {
+                        holder.getServer().scheduleInTicks(2, () => {
                             holder.addMotion(0, 1.2, 0);
                         });
                     }

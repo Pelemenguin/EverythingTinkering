@@ -1,0 +1,115 @@
+{
+	autofocus_id: "55E9F5527A8B5772"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "readme"
+	group: ""
+	icon: "minecraft:oak_sign"
+	id: "1EA6EEBEFC177662"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			description: ["{quest.readme.welcome.description}"]
+			icon: {
+				Count: 1
+				id: "create:brass_hand"
+				tag: { }
+			}
+			id: "55E9F5527A8B5772"
+			tasks: [{
+				id: "2666C68BA291BF9A"
+				title: "{quest.readme.welcome.title}"
+				type: "checkmark"
+			}]
+			title: "{quest.readme.welcome.title}"
+			x: -1.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["55E9F5527A8B5772"]
+			description: ["{quest.readme.main_line.description}"]
+			hide_until_deps_complete: true
+			icon: "minecraft:filled_map"
+			id: "40B5939E22DF8A67"
+			tasks: [{
+				id: "5C48146CFAEAF97B"
+				title: "{quest.readme.main_line.title}"
+				type: "checkmark"
+			}]
+			title: "{quest.readme.main_line.title}"
+			x: 0.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["40B5939E22DF8A67"]
+			description: ["{quest.readme.technology_line.description}"]
+			hide_until_deps_complete: true
+			icon: "create:wrench"
+			id: "7C3F920520EC3F93"
+			tasks: [{
+				id: "19996DEF3CB6C1E5"
+				title: "{quest.readme.technology_line.title}"
+				type: "checkmark"
+			}]
+			title: "{quest.readme.technology_line.title}"
+			x: 2.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["40B5939E22DF8A67"]
+			description: ["{quest.readme.adventure_line.description}"]
+			hide_until_deps_complete: true
+			icon: {
+				Count: 1
+				id: "tconstruct:plate_boots"
+				tag: {
+					Damage: 0
+					tic_broken: 0b
+					tic_display: 1b
+					tic_materials: [
+						"tconstruct:gold"
+						"tconstruct:gold"
+					]
+					tic_persistent: { }
+				}
+			}
+			id: "0174035AC9E04FE4"
+			tasks: [{
+				id: "56E6829086E0932D"
+				title: "{quest.readme.adventure_line.title}"
+				type: "checkmark"
+			}]
+			title: "{quest.readme.adventure_line.title}"
+			x: 1.5d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"7C3F920520EC3F93"
+				"0174035AC9E04FE4"
+			]
+			dependency_requirement: "one_completed"
+			description: ["{quest.readme.begin.description}"]
+			hide_dependency_lines: true
+			hide_until_deps_complete: true
+			icon: "minecraft:oxeye_daisy"
+			id: "79C06FD13D835F0A"
+			rewards: [{
+				id: "152F636AAE82FCDB"
+				item: "tconstruct:encyclopedia"
+				type: "item"
+			}]
+			size: 4.0d
+			tasks: [{
+				id: "6D4DA9331DBE5348"
+				title: "{quest.readme.begin.title}"
+				type: "checkmark"
+			}]
+			title: "{quest.readme.begin.title}"
+			x: 0.0d
+			y: 0.0d
+		}
+	]
+	title: "{quest.readme.title}"
+}

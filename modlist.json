@@ -85,6 +85,54 @@
             "version": "1.4.0"
         },
         {
+            "name": "FTB Library (Forge)",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge",
+            "author": "FTB",
+            "curse_id": {
+                "project": 404465,
+                "file": 6807424
+            },
+            "raw_file_name": "ftb-library-forge-2001.2.10.jar",
+            "mod_id": "ftblibrary",
+            "version": "2001.2.10"
+        },
+        {
+            "name": "FTB Quests (NeoForge)",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/ftb-quests-forge",
+            "author": "FTB",
+            "curse_id": {
+                "project": 289412,
+                "file": 7260736
+            },
+            "raw_file_name": "ftb-quests-forge-2001.4.17.jar",
+            "mod_id": "ftbquests",
+            "version": "2001.4.17"
+        },
+        {
+            "name": "FTB Teams (NeoForge)",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge",
+            "author": "FTB",
+            "curse_id": {
+                "project": 404468,
+                "file": 6130786
+            },
+            "raw_file_name": "ftb-teams-forge-2001.3.1.jar",
+            "mod_id": "ftbteams",
+            "version": "2001.3.1"
+        },
+        {
+            "name": "FTB Quest Localizer",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge",
+            "author": "Litchiiiiiii",
+            "curse_id": {
+                "project": 1071737,
+                "file": 6933560
+            },
+            "raw_file_name": "ftbquestlocalizer-1.20.1-forge-3.2.2.jar",
+            "mod_id": "ftbquestlocalizer",
+            "version": "3.2.2"
+        },
+        {
             "name": "GeckoLib",
             "url": "https://www.curseforge.com/minecraft/mc-mods/geckolib",
             "author": "Gecko",

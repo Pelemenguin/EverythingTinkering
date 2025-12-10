@@ -36,7 +36,7 @@ global.TinkerFunctions.onServerTickFunctions = Utils.newMap();
 global.TinkerFunctions.onClientTickFunctions = Utils.newMap();
 
 /**
- * @type {Object<Annotation.TinkerFunction.ModifierHooks, string>}
+ * @type {{[hook in Annotation.TinkerFunction.ModifierHooks]: string}}
  */
 let HOOK_TO_IMPLEMENTING_INTERFACE = {
     "modifyStat": "slimeknights.tconstruct.library.modifiers.hook.build.ConditionalStatModifierHook",
@@ -56,7 +56,7 @@ let HOOK_TO_IMPLEMENTING_INTERFACE = {
     "modifyDamageTaken": "slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook",
     "onBreakSpeed": "slimeknights.tconstruct.library.modifiers.hook.mining.BreakSpeedModifierHook",
     "afterBlockBreak": "slimeknights.tconstruct.library.modifiers.hook.mining.BlockBreakModifierHook",
-    "onProjectileLaunch": "slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook"
+    "onProjectileLaunch": "slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook",
 };
 
 /** @type {Object<string, [string[], string, <P extends any[], R>(func: (...args: P) => R) => (...args: P) => R]>} */
@@ -485,11 +485,10 @@ const ModifierManager = {
                 return;
             }
             if (!(hook in HOOK_TO_IMPLEMENTING_INTERFACE)) return;
-            let implementing = HOOK_TO_IMPLEMENTING_INTERFACE[hook];
-            if (!seenInterfaces.has(implementing)) {
-                seenInterfaces.add(hook);
-                modifierClassCreator.implementing(implementing);
-            }
+            seenInterfaces.add(HOOK_TO_IMPLEMENTING_INTERFACE[hook]);
+        });
+        seenInterfaces.forEach(v => {
+            modifierClassCreator.implementing(v);
         });
         hookKeys.forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
             if (!(hook in HOOK_TO_METHOD_PARAMETERS)) return;

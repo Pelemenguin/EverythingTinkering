@@ -1,0 +1,51 @@
+{
+	autofocus_id: "781ACB0842A2605D"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "overview"
+	group: ""
+	id: "5521CC6489050036"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["781ACB0842A2605D"]
+			description: ["{quest.chapters.1.begin.description}"]
+			icon: "tconstruct:materials_and_you"
+			id: "37BFF5CC64E72C93"
+			rewards: [{
+				id: "1C201BD754FC4C1B"
+				item: "tconstruct:materials_and_you"
+				type: "item"
+			}]
+			shape: "square"
+			tasks: [{
+				id: "2EB650E17947C1D8"
+				title: "{quest.chapters.1.begin.title}"
+				type: "checkmark"
+			}]
+			title: "{quest.chapters.1.begin.title}"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["79C06FD13D835F0A"]
+			description: [""]
+			disable_toast: true
+			hide_until_deps_complete: true
+			icon: "ftbquests:book"
+			id: "781ACB0842A2605D"
+			size: 2.0d
+			tasks: [{
+				id: "178A6ECC779F0CC9"
+				optional_task: true
+				title: "{quest.readme.begin.title}"
+				type: "checkmark"
+			}]
+			title: "{quest.overview.begin.title}"
+			x: 0.0d
+			y: 0.0d
+		}
+	]
+	title: "{quest.overview.title}"
+}
