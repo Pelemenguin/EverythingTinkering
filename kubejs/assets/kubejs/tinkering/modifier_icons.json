@@ -1,3 +1,4 @@
 {
-    "kubejs:thawing": "kubejs:gui/modifiers/armor/thawing"
+    "kubejs:thawing": "kubejs:gui/modifiers/armor/thawing",
+    "kubejs:glacial_strike": "kubejs:gui/modifiers/armor/glacial_strike"
 }
