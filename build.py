@@ -74,11 +74,12 @@ def build_modpack(args: list[str]):
 
     read = 0
     for m in mods:
-        manifest["files"].append({
-        "projectID": m['curse_id']['project'],
-        "fileID": m['curse_id']['file'],
-        "required": True
-    })
+        if "tags" in m and "DeveloperOnly" in m["tags"]:
+            manifest["files"].append({
+                "projectID": m['curse_id']['project'],
+                "fileID": m['curse_id']['file'],
+                "required": True
+            })
         read += 1
         percent = read/len(mods)
         print(f"Creating manifest.json --------- [{'#'*round(percent*20): <20}] {read}/{len(mods)} {percent:.2%}", end="\r")
@@ -113,6 +114,7 @@ Build time: {BUILD_TIME}""")
 
     zipping = []
     zipping.extend(os.walk(os.path.join(curdir, "kubejs")))
+    zipping.extend(os.walk(os.path.join(curdir, "config/ftbquests")))
     # zipping.extend(os.walk(os.path.join(curdir, "config")))
     zipping.extend(os.walk(os.path.join(curdir, "LICENSES")))
 
