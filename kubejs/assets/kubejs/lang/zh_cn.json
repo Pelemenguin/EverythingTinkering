@@ -369,13 +369,13 @@
     "quest.chapters.1.patterns.description": "&e模具&6&7 (Pattern) &6是每一个新手工匠所必备的物品。\n\n模具只需要&e木板&6和&e木棍&6制作，造价低廉，可以进行简单的&e材料塑形&6。",
 
     "quest.chapters.1.part_builder.title": "部件制造台",
-    "quest.chapters.1.part_builder.description": "&e部件制造台&6&7 (Part Builder) &6能够让你制作基本的&e工具部件&6\n\n部件制造台需要&e模具&6和&e木板&6制作。",
+    "quest.chapters.1.part_builder.description": "&e部件制造台&6&7 (Part Builder) &6能够让你制作基本的&e工具部件&6。\n\n部件制造台需要&e模具&6和&e木板&6制作。",
 
     "quest.chapters.1.tinker_station.title": "工匠站",
-    "quest.chapters.1.tinker_station.description": "&e工匠站&6&7 (Tinker Station) &6能够让你将&e工具部件&6组合为&e匠魂工具&6\n\n工匠站需要&e模具&6和&e木板&6制作。",
+    "quest.chapters.1.tinker_station.description": "&e工匠站&6&7 (Tinker Station) &6能够让你将&e工具部件&6组合为&e匠魂工具&6。\n\n工匠站需要&e模具&6和&e木板&6制作。",
 
     "quest.chapters.1.crafting_station.title": "工作站",
-    "quest.chapters.1.crafting_station.description": "&e工作站&6&7 (Crafting Station) &6是一种升级版的&e工作台&6\n\n工匠站需要&e模板&6和&e工作台&6制作，或者直接通过&e原木&6和模具合成而来。",
+    "quest.chapters.1.crafting_station.description": "&e工作站&6&7 (Crafting Station) &6是一种升级版的&e工作台&6。在关闭GUI时，物品仍能被&e保留在合成网格中&6。\n\n工匠站需要&e模板&6和&e工作台&6制作，或者直接通过&e原木&6和&e模具&6合成而来。",
 
     "quest.chapters.1.part_chest.title": "部件箱",
     "quest.chapters.1.part_chest.description": "&e部件箱&6&7 (Part Chest) &6能够储存&e大量&6的无用部件。\n\n部件箱需要&e模具&6、&e箱子&6、&e木板&6和&e木棍&6制作。\n\n如果你不小心做了错误的部件，或者在探索时捡到了一些不需要的部件，都可以放在部件箱里。",
@@ -388,7 +388,7 @@
     "quest.chapters.1.tutorial_parts.description.page2": "&6如上图所示。你需要在部件加工台界面的&e最左侧&6一格放置&e模具&6，在模具的右边放置&e需要锻造的材料&6。在中间&e选择好需要制造的部件&6后，即可获得对应的部件。\n\n来自己制作&e镐&6所需要的部件实践一下吧！\n\n&c&l注意：&r&6制作部件时，模具是&c会消耗&6的。如果你要制造大量部件，记得准备&e大量模具&6！",
 
     "quest.chapters.1.part_builder_uncraftable.title": "无法打造？",
-    "quest.chapters.1.part_builder_uncraftable.description": "&6有时，你可能放入了一些&e过于坚硬&6的材料，例如&e铁&6等金属。\n\n&6这些材料&c无法&6通过部件制造台制作。这需要后续章节所提供的&e更好的锻造方法&6。",
+    "quest.chapters.1.part_builder_uncraftable.description": "&6有时，你可能放入了一些&e过于坚硬&6的材料，例如&e铁&6等金属。\n\n&6这些材料&c无法&6通过部件制造台制作。这需要后续章节所提供的&e更好的锻造方法&6。\n\n&c&l注意：&e铜&6仍然能够在部件加工台中制作，是既便宜又利于挖掘的好材料。",
 
         "_comment_end": "我不想再在JSON末尾手动去逗号了你知道吗，我就在这放一行，这样前面的就可以都加上逗号了"
 

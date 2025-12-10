@@ -327,12 +327,65 @@
     "key.categories.kubejs.modifier": "Modpack | Tinker's Construct Modifiers",
     "key.kubejs.modifier.glacial_strike": "Glacial Strike",
 
-        "_comment_quests": " ----- Quests ----- ",
+        "_comment_quests": " ----- 任务 ----- ",
+
+    "quest.title": "Everything Tinkering",
+
+    "quest.readme.title": "&cREADME!",
 
     "quest.readme.welcome.title": "Welcome",
-    "quest.readme.welcome.description.1": "&6Welcome to &eEverything Tinkering&6!",
-    "quest.readme.welcome.description.2": "",
-    "quest.readme.welcome.description.3": "",
+    "quest.readme.welcome.description": "&6Welcome to &eEverything Tinkering&6!\n\n&eEverything Tinkering&6 is a modpack centered around &eTinker's Construct3&7 (TiC) &6.\n\n&c&lNote: &r&6The modpack is still developing. If any bug occurs, report it on the Issue page of the GitHub repository.\n\n&a&lGitHub repository URL: &r&ehttps://github.com/Pelemenguin/EverythingTinkering",
+
+    "quest.readme.main_line.title": "Main Line",
+    "quest.readme.main_line.description": "&6The &eMain Line&6 is the primary questline of the modpack.\n\n&eForging methods&6 are mainly discussed in the &eMain Line&6. For example: &ePart Builder&6, &ecasting&6, &ealloying&6 and so on.\n\nHowever, the Main Line will &cNOT&6 tell you the particular way to get Tinker's materials. You need to choose &eone or more&6 lines among the three &eMaterial Lines&6, to obtain materials and then progress the Main Line.",
+
+    "quest.readme.technology_line.title": "Technology Line",
+    "quest.readme.technology_line.description": "&6The &eTechnology Line&6 is a Material Line featuring &eautomation&6.\n\n&6In the &eTechnology Line&6, you need to:\n\n&6 - Build &evarious machines\n&6 - Design &eproduction lines\n&6 - &eBuild your production line&6 via these machines\n&6 - Realize &eautomated production\n&6 - Then build new machines and &eupgrade your production line",
+
+    "quest.readme.adventure_line.title": "Adventure Line",
+    "quest.readme.adventure_line.description": "&6The &eAdventure Line&6 is a Material Line featuring &eexploration&6.\n\n&6In the &eAdventure Line&6, you need to:\n\n&6 - Explore &evarious biomes&6\n&6 - Find &enatural TiC materials\n&6 - Explore &ebuildings or relics&6\n&6 - Look for TiC materials in &echests&6\n&6 - Defeat &evarious mobs\n&6 - Get TiC material from &eloot&6",
+
+    "quest.readme.begin.title": "Begin your adventure!",
+    "quest.readme.begin.description": "&6Now begin your adventure in &eEverything Tinkering&6!",
+
+    "quest.overview.title": "&30 &bOverview",
+
+    "quest.overview.begin.title": "Start here",
+
+    "quest.overview.chapter1.title": "A Beginner of Tinkering",
+    "quest.overview.chapter1.description": "&e“A Beginner of Tinkering”&6 is the &efirst&6 chapter of the modpack.\n\nIn &e“A Beginner of Tinkering”&6, we will start from &ebasic items&6 of Tinker's Construct and learn the usage of four &eTinker's Tables&6, then build the first &eTinker's tool&6 of your own.",
+
+    "quest.chapters.title": "Chapters",
+
+    "quest.chapters.1.title": "&31 &bA Beginner of Tinkering",
+
+    "quest.chapters.1.begin.title": "A Beginner of Tinkering",
+    "quest.chapters.1.begin.subtitle": "Simple material shaping",
+
+    "quest.chapters.1.patterns.title": "Pattern",
+    "quest.chapters.1.patterns.description": "&6The &ePattern&6 is an essential item for all novice tinkers.\n\nPatterns only require &eplanks&6 and &esticks&6 to craft. Cheap to make and useful to simple &ematerial shaping&6.",
+
+    "quest.chapters.1.part_builder.title": "Part Builder",
+    "quest.chapters.1.part_builder.description": "&ePart Builder&6 can let you craft basic &etool parts&6.\n\nPart Builders require &ePatterns&6 and &eplanks&6 to craft.",
+
+    "quest.chapters.1.tinker_station.title": "Tinker Station",
+    "quest.chapters.1.tinker_station.description": "&eTinker Station&6 can let you combine &etool parts&6 into &eTinker's tools&6.\n\nTinker Stations require &ePatterns&6 and &eplanks&6 to craft.",
+
+    "quest.chapters.1.crafting_station.title": "Crafting Station",
+    "quest.chapters.1.crafting_station.description": "&eCrafting Stations&6 can be seen as upgraded &eCrafting Tables&6. After closing the GUI, items can be &ekept in the crafting grid&6.\n\nCrafting Stations require a &ePattern&6 and a &eCrafting Table&6 to craft. Or directly craft from a &elog&6 and a &ePattern&6.",
+
+    "quest.chapters.1.part_chest.title": "Part Chest",
+    "quest.chapters.1.part_chest.description": "&ePart Chest&6 can store &elarge amount&6 of extra parts.\n\nPart Chests require a &ePattern&6, a &eChest&6, &eplanks&6 and &esticks&6 to craft.\n\nIf you accidentally made some wrong parts or picked up some useless parts, you can place them in the Part Chest.",
+
+    "quest.chapters.1.tutorial_parts.title": "Tool Parts",
+    "quest.chapters.1.tutorial_parts.description.page1": "&eTool parts&6 can be combined into &eTinker's tools&6. Simple tool parts can be crafted in the &ePart Builder&6.\n\nTo make a &ePickaxe&6 for instance, we need to make:\n\n&6 - A &ePick Head\n\n&6 - A &eTool Handle\n\n&6 - A &eTool Binding\n\n&a[View the image example on the next page]",
+    "quest.chapters.1.tutorial_parts.requirement.pick_head": "Any Pick Head",
+    "quest.chapters.1.tutorial_parts.requirement.tool_handle": "Any Tool Handle",
+    "quest.chapters.1.tutorial_parts.requirement.tool_binding": "Any Tool Binding",
+    "quest.chapters.1.tutorial_parts.description.page2": "&6As shown in the image above, &ePatterns&6 should be placed in the &eleftmost&6 slot in the Part Builder, while the &ematerial to be used&6 are placed to the right of the Patterns. After choosing &ethe part to craft&6 in the middle, you can get the corresponding part.\n\nLet’s try to make all three parts of a &ePickaxe&6 by yourself!\n\n&c&lNote: &r&6When crafting parts, Patterns are &cCONSUMED&6. Prepare &emore&6 patterns to craft more parts!",
+
+    "quest.chapters.1.part_builder_uncraftable.title": "Cannot shape?",
+    "quest.chapters.1.part_builder_uncraftable.description": "&6Somtimes, you may try to shape some materials &etoo hard&6 to shape, &eiron&6 or other metal for instance.\n\n&6These materials &ccannot&6 be crafted in the Part Builder. This requires better &eforging methods&6 provided in future chapters.\n\n&c&lNote: &eCopper&6 is still craftable in the Part Builder, which is both cheap and effective for mining.",
 
         "_comment_end": "I don't want to remove commasat the end of the JSON  any more you know? I just place one line here so that all lines above can hava a comma"
 
