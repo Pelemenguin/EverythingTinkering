@@ -269,6 +269,8 @@
     "modifier.kubejs.glacial_strike": "Glacial Strike",
     "modifier.kubejs.glacial_strike.flavor": "Ever imagined an iceberg jumping meters high to smash you?",
     "modifier.kubejs.glacial_strike.description": "Press the “Glacial Strike” key to leap up, then press again while falling to slam into the ground. Damages targets in an area upon landing.",
+    "modifier.kubejs.glacial_strike.remove": "Glacial Strike cannot be removed",
+    "modifier.kubejs.glacial_strike.requirements": "Glacial Strike requires Shiny, Protection II and Reinforced II to apply",
 
     "modifier.kubejs.immutable": "Immutable",
     "modifier.kubejs.immutable.flavor": "Need to use “.copy()”?",

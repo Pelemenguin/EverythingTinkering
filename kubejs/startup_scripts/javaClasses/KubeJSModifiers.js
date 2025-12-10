@@ -43,6 +43,8 @@ let HOOK_TO_IMPLEMENTING_INTERFACE = {
     "onDamageTool": "slimeknights.tconstruct.library.modifiers.hook.behavior.ToolDamageModifierHook",
     "onInventoryTick": "slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook",
     "addTooltip": "slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook",
+    "displayModifiers": "slimeknights.tconstruct.library.modifiers.hook.display.RequirementsModifierHook",
+    "requirementsError": "slimeknights.tconstruct.library.modifiers.hook.display.RequirementsModifierHook",
     "addToolStats": "slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook",
     "validate": "slimeknights.tconstruct.library.modifiers.hook.build.ValidateModifierHook",
     "onRemoved": "slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook",
@@ -138,6 +140,38 @@ let HOOK_TO_METHOD_PARAMETERS = {
                     func(arg0, arg1, arg2, arg3, arg4, arg5);
                 } catch (e) {
                     console.error(`Error in addTooltip of modifier ${arg1.getId().toString()}: ${e}`);
+                }
+            };
+        }
+    ],
+    "displayModifiers": [
+        [
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry"
+        ],
+        "java.util.List",
+        (func) => {
+            return (arg0) => {
+                try {
+                    return func(arg0);
+                } catch (e) {
+                    console.error(`Error in displayModifiers of modifier ${arg0.getId().toString()}: ${e}`);
+                    return Utils.newList();
+                }
+            };
+        }
+    ],
+    "requirementsError": [
+        [
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry"
+        ],
+        "net.minecraft.network.chat.Component",
+        (func) => {
+            return (arg0) => {
+                try {
+                    return func(arg0);
+                } catch (e) {
+                    console.error(`Error in requirementsError of modifier ${arg0.getId().toString()}: ${e}`);
+                    return null;
                 }
             };
         }
@@ -381,6 +415,8 @@ let HOOK_TO_FIELDS = {
     "onDamageTool": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "TOOL_DAMAGE", "slimeknights.tconstruct.library.module.ModuleHook"],
     "onInventoryTick": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "INVENTORY_TICK", "slimeknights.tconstruct.library.module.ModuleHook"],
     "addTooltip": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "TOOLTIP", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "displayModifiers": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "REQUIREMENTS", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "requirementsError": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "REQUIREMENTS", "slimeknights.tconstruct.library.module.ModuleHook"],
     "addToolStats": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "TOOL_STATS", "slimeknights.tconstruct.library.module.ModuleHook"],
     "validate": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "VALIDATE", "slimeknights.tconstruct.library.module.ModuleHook"],
     "onRemoved": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "REMOVE", "slimeknights.tconstruct.library.module.ModuleHook"],

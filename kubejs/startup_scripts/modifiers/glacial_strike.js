@@ -26,6 +26,9 @@
     TagKeys
     ParticleTypes
     ToolDamageUtil
+    Component
+    $ModifierId
+    $ModifierEntry
 */
 
 KubeJSNetworkHelper.register("GlacialStrikeMessage", 378294469, {
@@ -155,6 +158,27 @@ let GLACIAL_STRIKE = ModifierManager.registerCommonModifier("glacial_strike", "G
             return 0;
         }
         return amount;
+    },
+    onRemoved: (_tool, _modifier) => {
+        return Component.translatable("modifier.kubejs.glacial_strike.remove");
+    },
+    validate: (tool, _modifier) => {
+        if (
+            tool.getModifierLevel(new $ModifierId("tconstruct", "shiny")) < 1 ||
+            tool.getModifierLevel(new $ModifierId("tconstruct", "protection")) < 2 ||
+            tool.getModifierLevel(new $ModifierId("tconstruct", "reinforced")) < 2
+        ) return Component.translatable("modifier.kubejs.glacial_strike.requirements");
+        return null;
+    },
+    displayModifiers: (_entry) => {
+        return [
+            new $ModifierEntry(new $ModifierId("tconstruct", "shiny"), 1),
+            new $ModifierEntry(new $ModifierId("tconstruct", "protection"), 2),
+            new $ModifierEntry(new $ModifierId("tconstruct", "reinforced"), 2)
+        ];
+    },
+    requirementsError: (_entry) => {
+        return Component.translatable("modifier.kubejs.glacial_strike.requirements");
     },
     __class__: {
         extending: "slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier"

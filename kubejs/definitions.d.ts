@@ -234,6 +234,53 @@ declare namespace Annotation {
              */
             addTooltip?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, player: Internal.Player | null, tooltip: Internal.List<Internal.Component>, tooltipKey: Internal.TooltipKey, tooltipFlag: Internal.TooltipFlag) => void,
             /**
+             * Gets the list of required modifiers to display on tools in recipe viewers.
+             * Note that the actual requirement are implemented via {@linkcode ModifierHookArgument.validate validate}.  
+             * 获取在配方查看器中显示在工具上的所需特性列表。
+             * 注意：实际的需求是通过{@linkcode ModifierHookArgument.validate validate}实现的。
+             * - - - - -
+             * @param entry Modifier entry
+             *              特性条目
+             * 
+             * @returns     The list of modifiers to display on tools in recipe viewers
+             *              在配方查看器中显示在工具上的特性列表
+             * - - - - -
+             * @example
+             * const $ModifierEntry = Java.loadClass("slimeknights.tconstruct.library.modifiers.ModifierEntry");
+             * const $ModifierId = Java.loadClass("slimeknights.tconstruct.library.modifiers.ModifierId");
+             * 
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     displayModifiers: (entry) => {
+             *         return [new $ModifierEntry(new $ModifierId("kubejs", "required"), 1)];
+             *         // Display the `kubejs:required` modifier at level 1 in recipe viewers as required modifier
+             *         // 在配方查看器中显示`kubejs:required`特性，等级为1，作为所需特性
+             *     }
+             * });
+             */
+            displayModifiers?: (entry: Internal.ModifierEntry) => Internal.List<Internal.ModifierEntry>,
+            /**
+             * Gets the hint about the modifier requirements, or `null` if no hint
+             * Note that the actual requirement are implemented via {@linkcode ModifierHookArgument.validate validate}.  
+             * 获取关于特性需求的提示，若无提示则返回`null`。
+             * 注意：实际的需求是通过{@linkcode ModifierHookArgument.validate validate}实现的。
+             * - - - - -
+             * @param entry Modifier entry
+             *              特性条目
+             * 
+             * @returns     Component about the modifier requirements, or `null` if no hint
+             *              关于特性需求的组件，若无提示则返回`null`
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     requirementsError: (entry) => {
+             *         return null;
+             *         // No hint about requirements
+             *         // 无关于需求的提示
+             *     }
+             * });
+             */
+            requirementsError?: (entry: Internal.ModifierEntry) => Internal.Component | null,
+            /**
              * Adds raw stats to the tool. Called whenever tool stats are rebuilt.  
              * 向工具添加直接属性数据。在工具属性重建时调用。
              * - - - - -
@@ -255,10 +302,11 @@ declare namespace Annotation {
              *     A Java class that records all Tinker's Construct tool stat types  
              *     记录了所有匠魂工具属性类型的Java类
              * @example
-             * // const ToolStats = Java.loadClass("slimeknights.tconstruct.library.tools.stat.ToolStats");
+             * const $ToolStats = Java.loadClass("slimeknights.tconstruct.library.tools.stat.ToolStats");
+             * 
              * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
              *     addToolStats: (context, modifier, builder) => {
-             *         ToolStats.ATTACK_DAMAGE.add(builder, 1.0); // Add 1.0 attack damage
+             *         $ToolStats.ATTACK_DAMAGE.add(builder, 1.0); // Add 1.0 attack damage
              *                                                    // 增加1.0攻击伤害
              *     }
              * });
@@ -266,10 +314,10 @@ declare namespace Annotation {
             addToolStats?: (context: Internal.IToolContext, modifier: Internal.ModifierEntry, builder: Internal.ModifierStatsBuilder) => void,
             /**
              * Called when modifiers or tool materials change to validate the tool. You are free to modify persistent data in this hook if needed.
-             * This hook will not be called when a modifier is removed, to validate if a removal can be done, use {@linkcode onRemoved}.
+             * This hook will not be called when a modifier is removed, to validate if a removal can be done, use {@linkcode ModifierHookArgument.onRemoved onRemoved}.
              * Do not validate max level here, simply ignore levels over max if needed.  
              * 在特性或工具材料改变时调用以验证工具。如果需要，你可以在此钩子中修改持久化数据。
-             * 当一个特性被移除时不会调用此钩子函数，若要验证是否可以移除，请使用{@linkcode onRemoved}。
+             * 当一个特性被移除时不会调用此钩子函数，若要验证是否可以移除，请使用{@linkcode ModifierHookArgument.onRemoved onRemoved}。
              * 不要在此处验证最大等级，直接忽略超过最大等级的部分。
              * - - - - -
              * @param tool     Current tool instance  

@@ -26,7 +26,7 @@
     Utils
     Component
     MaterialNBT
-    ModifierId
+    $ModifierId
     LootEntry
 */
 
@@ -85,7 +85,7 @@ function Artifact(id, item, definition, materials) {
  * - 特性等级。
  */
 Artifact.prototype.addModifier = function(modifier, level) {
-    let modifierId = ModifierId.tryParse(modifier);
+    let modifierId = $ModifierId.tryParse(modifier);
     this.modifiers.put(modifierId, level);
 };
 

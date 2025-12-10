@@ -17,7 +17,7 @@
 /* global
     ModifierManager
     ToolStack
-    ModifierId
+    $ModifierId
     CustomUtils
     ToolStats
     Component
@@ -40,7 +40,7 @@ let WELCOME = ModifierManager.registerCommonModifier("welcome", "WelcomeModifier
         let darkenedColorChannels = [Math.round(((colorNumber & 0xFF0000) >> 16) / 2), Math.round(((colorNumber & 0x00FF00) >> 8) / 2), Math.round((colorNumber & 0x0000FF) / 2)];
         let darkenedColor = (darkenedColorChannels[0] << 16) + (darkenedColorChannels[1] << 8) + darkenedColorChannels[2];
         if (world.getTime() > WELCOME_DISAPPEAR_TIME) {
-            ToolStack.from(stack).removeModifier(ModifierId.tryBuild("kubejs", "welcome"), 1);
+            ToolStack.from(stack).removeModifier($ModifierId.tryBuild("kubejs", "welcome"), 1);
             holder.sendSystemMessage(Component.translatable("modifier.kubejs.welcome.hint", Component.of(stack.hoverName).color(darkenedColor)).color(traitColor));
         }
     },
