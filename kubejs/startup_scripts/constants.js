@@ -42,7 +42,7 @@ const Player = Java.loadClass("net.minecraft.world.entity.player.Player");
 const Entity = Java.loadClass("net.minecraft.world.entity.Entity");
 const Entity$RemovalReason = Java.loadClass("net.minecraft.world.entity.Entity$RemovalReason");
 const EquipmentSlot = Java.loadClass("net.minecraft.world.entity.EquipmentSlot");
-const ItemStack = Java.loadClass("net.minecraft.world.item.ItemStack");
+const $ItemStack = Java.loadClass("net.minecraft.world.item.ItemStack");
 const MobEffectInstance = Java.loadClass("net.minecraft.world.effect.MobEffectInstance");
 const ChatFormatting = Java.loadClass("net.minecraft.ChatFormatting");
 const LanguageManager = Java.loadClass("net.minecraft.client.resources.language.LanguageManager");
@@ -81,7 +81,7 @@ const ToolDamageUtil = Java.loadClass("slimeknights.tconstruct.library.tools.hel
 const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ToolStack');
 const MaterialNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT');
 const MaterialNBTBuilder = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT$Builder');
-const ModifierNBT = Java.loadClass("slimeknights.tconstruct.library.tools.nbt.ModifierNBT");
+const $ModifierNBT = Java.loadClass("slimeknights.tconstruct.library.tools.nbt.ModifierNBT");
 const ToolStatId = Java.loadClass("slimeknights.tconstruct.library.tools.stat.ToolStatId");
 const ToolStats = Java.loadClass('slimeknights.tconstruct.library.tools.stat.ToolStats');
 const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDefinitions');
@@ -199,7 +199,7 @@ CustomUtils.Tinker.isBroken = (item) => {
 CustomUtils.Tinker.getModifiersFromItem = function(item) {
     let raw = item.nbt.get("tic_modifiers");
     if (raw == null) return;
-    let modNbt = ModifierNBT.readFromNBT(raw);
+    let modNbt = $ModifierNBT.readFromNBT(raw);
     /** @type {Object<string, number>} */
     let result = {};
     modNbt.forEach(modifier => {

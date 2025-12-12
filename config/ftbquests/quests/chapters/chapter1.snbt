@@ -1,5 +1,5 @@
 {
-	autofocus_id: "46CA933E70671E83"
+	autofocus_id: "3139C1207C7BC52F"
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "chapter1"
@@ -11,23 +11,6 @@
 	quests: [
 		{
 			dependencies: ["37BFF5CC64E72C93"]
-			description: [""]
-			hide_until_deps_complete: true
-			icon: "tconstruct:materials_and_you"
-			id: "46CA933E70671E83"
-			shape: "square"
-			subtitle: "{quest.chapters.1.begin.subtitle}"
-			tasks: [{
-				id: "18EB767CA25179DE"
-				title: "{quest.chapters.1.begin.title}"
-				type: "checkmark"
-			}]
-			title: "{quest.chapters.1.begin.title}"
-			x: 0.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["46CA933E70671E83"]
 			description: ["{quest.chapters.1.patterns.description}"]
 			id: "3139C1207C7BC52F"
 			tasks: [{
@@ -81,6 +64,7 @@
 		{
 			dependencies: ["3139C1207C7BC52F"]
 			description: ["{quest.chapters.1.crafting_station.description}"]
+			hide_until_deps_complete: true
 			id: "7650D4EDFABB5B0C"
 			optional: true
 			shape: "none"
@@ -96,7 +80,9 @@
 		{
 			dependencies: ["3139C1207C7BC52F"]
 			description: ["{quest.chapters.1.part_chest.description}"]
+			hide_until_deps_complete: true
 			id: "0B0738CDDA088B91"
+			optional: true
 			shape: "none"
 			tasks: [{
 				id: "677C168FB447A3C4"
@@ -110,11 +96,13 @@
 		{
 			dependencies: ["0ADFAF04FCF99444"]
 			description: [
-				"{quest.chapters.1.tutorial_parts.description.page1}"
+				"{quest.chapters.1.tutorial_parts.description.1}"
+				""
+				"{quest.common.view_next_page}"
 				"{@pagebreak}"
 				"{image:kubejs:textures/gui/quests/part_builder_interface.png width:304 height:194 align:center fit:true}"
 				""
-				"{quest.chapters.1.tutorial_parts.description.page2}"
+				"{quest.chapters.1.tutorial_parts.description.2}"
 			]
 			icon: {
 				Count: 1
@@ -129,39 +117,39 @@
 					id: "4D4E6E1A667E036F"
 					item: {
 						Count: 1
-						id: "tconstruct:pick_head"
+						id: "ftbfiltersystem:smart_filter"
 						tag: {
-							Material: "tconstruct:wood"
+							"ftbfiltersystem:filter": "item(tconstruct:pick_head)custom(PartMaterialTest/tconstruct:wood)"
 						}
 					}
-					match_nbt: false
-					title: "{quest.chapters.1.tutorial_parts.requirement.pick_head}"
+					match_nbt: true
+					title: "{quest.chapters.1.tutorial_parts.task.pick_head}"
 					type: "item"
 				}
 				{
 					id: "70251E68D1B7F6A5"
 					item: {
 						Count: 1
-						id: "tconstruct:tool_handle"
+						id: "ftbfiltersystem:smart_filter"
 						tag: {
-							Material: "tconstruct:wood"
+							"ftbfiltersystem:filter": "item(tconstruct:tool_handle)custom(PartMaterialTest/tconstruct:wood)"
 						}
 					}
-					match_nbt: false
-					title: "{quest.chapters.1.tutorial_parts.requirement.tool_handle}"
+					match_nbt: true
+					title: "{quest.chapters.1.tutorial_parts.task.tool_handle}"
 					type: "item"
 				}
 				{
 					id: "4FAAD5DAA3EE0B1B"
 					item: {
 						Count: 1
-						id: "tconstruct:tool_binding"
+						id: "ftbfiltersystem:smart_filter"
 						tag: {
-							Material: "tconstruct:wood"
+							"ftbfiltersystem:filter": "item(tconstruct:tool_binding)custom(PartMaterialTest/tconstruct:wood)"
 						}
 					}
-					match_nbt: false
-					title: "{quest.chapters.1.tutorial_parts.requirement.tool_binding}"
+					match_nbt: true
+					title: "{quest.chapters.1.tutorial_parts.task.tool_binding}"
 					type: "item"
 				}
 			]
@@ -170,15 +158,17 @@
 			y: -1.0d
 		}
 		{
-			dependencies: ["5B6FA9F8DD32AA27"]
+			dependencies: ["5C90E8F5D385534B"]
 			description: [
 				""
 				"{image:kubejs:textures/gui/quests/part_builder_uncraftable.png width:304 height:73 align:center fit:true}"
 				""
 				"{quest.chapters.1.part_builder_uncraftable.description}"
 			]
+			hide_until_deps_complete: true
 			icon: "minecraft:iron_ingot"
 			id: "73C0BCD9D6397A99"
+			optional: true
 			shape: "none"
 			tasks: [{
 				id: "0969F377BF3E80DE"
@@ -186,8 +176,520 @@
 				type: "checkmark"
 			}]
 			title: "{quest.chapters.1.part_builder_uncraftable.title}"
+			x: 9.0d
+			y: -2.0d
+		}
+		{
+			dependencies: [
+				"18B07660589D106A"
+				"5B6FA9F8DD32AA27"
+			]
+			description: [
+				"{quest.chapters.1.tutorial_tools.description.1}"
+				""
+				"{image:kubejs:textures/gui/quests/tinker_station_interface.png width:143 height:101 align:center fit:true}"
+				""
+				"{quest.common.view_next_page}"
+				"{@pagebreak}"
+				"{quest.chapters.1.tutorial_tools.description.2}"
+				""
+				"{image:kubejs:textures/gui/quests/tinker_station_building.png width:143 height:101 align:center fit:true}"
+			]
+			id: "4520B4806C8DDCE4"
+			tasks: [{
+				icon: {
+					Count: 1
+					id: "tconstruct:pickaxe"
+					tag: {
+						Damage: 0
+						tic_broken: 0b
+						tic_materials: [
+							"tconstruct:wood"
+							"tconstruct:wood"
+							"tconstruct:wood"
+						]
+						tic_modifiers: [
+							{
+								level: 3
+								name: "tconstruct:cultivated"
+							}
+							{
+								level: 1
+								name: "tconstruct:pierce"
+							}
+						]
+						tic_persistent: { }
+						tic_stats: {
+							"tconstruct:attack_damage": 1.0f
+							"tconstruct:attack_speed": 1.2f
+							"tconstruct:durability": 60.0f
+							"tconstruct:mining_speed": 2.0f
+						}
+						tic_volatile_data: {
+							abilities: 1
+							upgrades: 3
+						}
+					}
+				}
+				id: "3C82235456424472"
+				item: {
+					Count: 1
+					id: "ftbfiltersystem:smart_filter"
+					tag: {
+						"ftbfiltersystem:filter": "custom(ToolMaterialTest/tconstruct:wood#*,tconstruct:wood#*,tconstruct:wood#*)item(tconstruct:pickaxe)"
+					}
+				}
+				title: "{quest.chapters.1.tutorial_tools.task}"
+				type: "item"
+				weak_nbt_match: true
+			}]
+			title: "{quest.chapters.1.tutorial_tools.title}"
 			x: 6.0d
-			y: -3.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["4520B4806C8DDCE4"]
+			description: ["{quest.chapters.1.other_tools.description}"]
+			hide_until_deps_complete: true
+			icon: {
+				Count: 1
+				id: "tconstruct:sword"
+				tag: {
+					Damage: 0
+					tic_broken: 0b
+					tic_display: 1b
+					tic_materials: [
+						"tconstruct:ui_render#head"
+						"tconstruct:ui_render#handle"
+						"tconstruct:ui_render#extra"
+					]
+					tic_persistent: { }
+				}
+			}
+			id: "2EF6E16A031FB29B"
+			optional: true
+			rewards: [{
+				count: 4
+				id: "4E6EBBDC91599A12"
+				item: "minecraft:enchanted_golden_apple"
+				type: "item"
+			}]
+			shape: "none"
+			tasks: [
+				{
+					id: "345ACEB753CC7B2C"
+					item: {
+						Count: 1
+						id: "tconstruct:hand_axe"
+						tag: {
+							Damage: 0
+							tic_broken: 0b
+							tic_display: 1b
+							tic_materials: [
+								"tconstruct:ui_render#head"
+								"tconstruct:ui_render#handle"
+								"tconstruct:ui_render#extra"
+							]
+							tic_persistent: { }
+						}
+					}
+					match_nbt: false
+					type: "item"
+				}
+				{
+					id: "32D737EBD0BFDB4E"
+					item: {
+						Count: 1
+						id: "tconstruct:sword"
+						tag: {
+							Damage: 0
+							tic_broken: 0b
+							tic_display: 1b
+							tic_materials: [
+								"tconstruct:ui_render#head"
+								"tconstruct:ui_render#handle"
+								"tconstruct:ui_render#extra"
+							]
+							tic_persistent: { }
+						}
+					}
+					match_nbt: false
+					type: "item"
+				}
+				{
+					id: "1496FAE9E1089524"
+					item: {
+						Count: 1
+						id: "tconstruct:crossbow"
+						tag: {
+							Damage: 0
+							tic_broken: 0b
+							tic_display: 1b
+							tic_materials: [
+								"tconstruct:ui_render#head"
+								"tconstruct:ui_render#handle"
+								"tconstruct:ui_render#extra"
+							]
+							tic_persistent: { }
+						}
+					}
+					match_nbt: false
+					type: "item"
+				}
+			]
+			title: "{quest.chapters.1.other_tools.title}"
+			x: 8.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["4520B4806C8DDCE4"]
+			description: ["{quest.chapters.1.more_materials.description}"]
+			icon: {
+				Count: 1
+				id: "tconstruct:repair_kit"
+				tag: {
+					Material: "tconstruct:rock"
+				}
+			}
+			id: "5C90E8F5D385534B"
+			rewards: [
+				{
+					count: 4
+					id: "38055D3FE7EFDF6E"
+					item: {
+						Count: 1
+						id: "tconstruct:repair_kit"
+						tag: {
+							Material: "tconstruct:rock"
+						}
+					}
+					type: "item"
+				}
+				{
+					count: 4
+					id: "32A4AF9421A4F6FD"
+					item: {
+						Count: 1
+						id: "tconstruct:repair_kit"
+						tag: {
+							Material: "tconstruct:copper"
+						}
+					}
+					type: "item"
+				}
+			]
+			tasks: [
+				{
+					id: "0743D288D923F2A3"
+					item: {
+						Count: 1
+						id: "ftbfiltersystem:smart_filter"
+						tag: {
+							"ftbfiltersystem:filter": "custom(PartMaterialTest/tconstruct:rock)"
+						}
+					}
+					title: "{quest.chapters.1.more_materials.task.rock}"
+					type: "item"
+				}
+				{
+					id: "40587CF22D7F39B7"
+					item: {
+						Count: 1
+						id: "ftbfiltersystem:smart_filter"
+						tag: {
+							"ftbfiltersystem:filter": "custom(PartMaterialTest/tconstruct:copper)"
+						}
+					}
+					title: "{quest.chapters.1.more_materials.task.copper}"
+					type: "item"
+				}
+			]
+			title: "{quest.chapters.1.more_materials.title}"
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5C90E8F5D385534B"]
+			description: ["{quest.chapters.1.distinct_materials.description}"]
+			hide_until_deps_complete: true
+			id: "2C79EF2F4864F6E4"
+			optional: true
+			shape: "none"
+			tasks: [{
+				icon: {
+					Count: 1
+					id: "tconstruct:pickaxe"
+					tag: {
+						Damage: 0
+						tic_broken: 0b
+						tic_display: 1
+						tic_materials: [
+							"tconstruct:copper"
+							"kubejs:andesite_alloy"
+							"kubejs:coal"
+						]
+						tic_persistent: { }
+					}
+				}
+				id: "480DCA396AE7260F"
+				item: {
+					Count: 1
+					id: "ftbfiltersystem:smart_filter"
+					tag: {
+						"ftbfiltersystem:filter": "custom(DistinctMaterialTest)item_tag(tconstruct:modifiable)"
+					}
+				}
+				title: "{quest.chapters.1.distinct_materials.task}"
+				type: "item"
+			}]
+			title: "{quest.chapters.1.distinct_materials.title}"
+			x: 10.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["5C90E8F5D385534B"]
+			description: ["{quest.chapters.1.travelers_set.description}"]
+			hide_until_deps_complete: true
+			icon: {
+				Count: 1
+				id: "tconstruct:travelers_chestplate"
+				tag: {
+					Damage: 0
+					tic_broken: 0b
+					tic_materials: [
+						"tconstruct:copper"
+						"tconstruct:leather"
+					]
+					tic_modifiers: [
+						{
+							level: 1
+							name: "tconstruct:tanned"
+						}
+						{
+							level: 1
+							name: "tconstruct:depth_protection"
+						}
+					]
+					tic_multipliers: {
+						"tconstruct:attack_damage": 0.55f
+						"tconstruct:durability": 0.75f
+					}
+					tic_persistent: { }
+					tic_stats: {
+						"tconstruct:armor": 2.25f
+						"tconstruct:durability": 117.0f
+					}
+					tic_volatile_data: {
+						abilities: 1
+						defense: 2
+						upgrades: 2
+					}
+				}
+			}
+			id: "71797208D9382F3C"
+			optional: true
+			shape: "none"
+			tasks: [
+				{
+					id: "2DE20CD5130D8D97"
+					item: {
+						Count: 1
+						id: "tconstruct:travelers_helmet"
+						tag: {
+							Damage: 0
+							tic_broken: 0b
+							tic_display: 1
+							tic_materials: [
+								"tconstruct:ui_render#head"
+								"tconstruct:leather"
+							]
+							tic_persistent: { }
+						}
+					}
+					match_nbt: false
+					type: "item"
+				}
+				{
+					id: "1D6648C92AE9D106"
+					item: {
+						Count: 1
+						id: "tconstruct:travelers_chestplate"
+						tag: {
+							Damage: 0
+							tic_broken: 0b
+							tic_display: 1
+							tic_materials: [
+								"tconstruct:ui_render#head"
+								"tconstruct:leather"
+							]
+							tic_persistent: { }
+						}
+					}
+					match_nbt: false
+					type: "item"
+				}
+				{
+					id: "0029FC40E14F4315"
+					item: {
+						Count: 1
+						id: "tconstruct:travelers_leggings"
+						tag: {
+							Damage: 0
+							tic_broken: 0b
+							tic_display: 1
+							tic_materials: [
+								"tconstruct:ui_render#head"
+								"tconstruct:leather"
+							]
+							tic_persistent: { }
+						}
+					}
+					match_nbt: false
+					type: "item"
+				}
+				{
+					id: "1BFD814786AD9CBD"
+					item: {
+						Count: 1
+						id: "tconstruct:travelers_boots"
+						tag: {
+							Damage: 0
+							tic_broken: 0b
+							tic_display: 1
+							tic_materials: [
+								"tconstruct:ui_render#head"
+								"tconstruct:leather"
+							]
+							tic_persistent: { }
+						}
+					}
+					match_nbt: false
+					type: "item"
+				}
+			]
+			title: "{quest.chapters.1.travelers_set.title}"
+			x: 10.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["64562CBE441782CA"]
+			description: [
+				"{quest.chapters.1.ready.description.1}"
+				""
+				"{quest.common.view_next_page}"
+				"{@pagebreak}"
+				"{quest.chapters.1.ready.description.2}"
+			]
+			id: "608734E4B47936CE"
+			size: 2.0d
+			tasks: [{
+				id: "78B4E81CD98EF964"
+				title: "{quest.chapters.1.ready.task}"
+				type: "checkmark"
+			}]
+			title: "{quest.chapters.1.ready.title}"
+			x: 13.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5C90E8F5D385534B"]
+			description: [
+				"{quest.chapters.1.modifiers.description.1}"
+				""
+				"{quest.common.view_next_page}"
+				"{@pagebreak}"
+				"{image:kubejs:textures/gui/quests/apply_swiftstrike.png width:108 height:74 align:center fit:true}"
+				""
+				"{quest.chapters.1.modifiers.description.2}"
+			]
+			id: "64562CBE441782CA"
+			tasks: [{
+				icon: {
+					Count: 1
+					id: "ftbquests:custom_icon"
+					tag: {
+						Icon: "tconstruct:gui/modifiers/melee/swiftstrike"
+					}
+				}
+				id: "5710972CFED22E5B"
+				item: {
+					Count: 1
+					id: "ftbfiltersystem:smart_filter"
+					tag: {
+						"ftbfiltersystem:filter": "custom(ToolModifiedTest/{\"tconstruct:swiftstrike\":1})"
+					}
+				}
+				title: "{quest.chapters.1.modifiers.task}"
+				type: "item"
+			}]
+			title: "{quest.chapters.1.modifiers.title}"
+			x: 11.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["608734E4B47936CE"]
+			description: ["{quest.chapters.1.frozen_terracube_core.description}"]
+			hide_until_deps_complete: true
+			id: "78AFDF31C00B6799"
+			tasks: [{
+				id: "6EAE1E1930948D2D"
+				item: "kubejs:frozen_terracube_core"
+				type: "item"
+			}]
+			title: "{quest.chapters.1.frozen_terracube_core.title}"
+			x: 15.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["78AFDF31C00B6799"]
+			description: ["{quest.chapters.1.defeat_icy_terracube.description}"]
+			id: "1145FAA9B55AB1D8"
+			shape: "octagon"
+			size: 2.0d
+			tasks: [{
+				icon: "kubejs:icy_terracube_treasure_bag"
+				id: "54FE08CC0B2EB0BB"
+				item: {
+					Count: 1
+					id: "ftbfiltersystem:smart_filter"
+					tag: {
+						"ftbfiltersystem:filter": "ftbfiltersystem:item_tag(kubejs:treasure_bags/icy_terracube)"
+					}
+				}
+				title: "Any #kubejs:treasure_bags/icy_terracube"
+				type: "item"
+			}]
+			title: "{quest.chapters.1.defeat_icy_terracube.title}"
+			x: 17.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1145FAA9B55AB1D8"]
+			description: ["{quest.chapters.1.icy_terracube_no_hit.description}"]
+			id: "7F90A70929379474"
+			optional: true
+			shape: "none"
+			tasks: [{
+				id: "7A0A45614755AA6A"
+				item: "kubejs:icy_terracube_treasure_bag_no_hit"
+				type: "item"
+			}]
+			title: "{quest.chapters.1.icy_terracube_no_hit.title}"
+			x: 17.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["4520B4806C8DDCE4"]
+			description: ["{quest.chapters.1.target_dummy.description}"]
+			id: "0E5BD3469C31473D"
+			tasks: [{
+				id: "2650CC498EB6FCAC"
+				item: "dummmmmmy:target_dummy"
+				type: "item"
+			}]
+			title: "{quest.chapters.1.target_dummy.title}"
+			x: 8.0d
+			y: 1.0d
 		}
 	]
 	title: "{quest.chapters.1.title}"

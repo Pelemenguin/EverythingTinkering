@@ -85,6 +85,18 @@
             "version": "1.4.0"
         },
         {
+            "name": "FTB Filter System",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/ftb-filter-system",
+            "author": "FTB",
+            "curse_id": {
+                "project": 943925,
+                "file": 6466153
+            },
+            "raw_file_name": "ftb-filter-system-forge-20.0.1.jar",
+            "mod_id": "ftbfiltersystem",
+            "version": "20.0.1"
+        },
+        {
             "name": "FTB Library (Forge)",
             "url": "https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge",
             "author": "FTB",
@@ -119,6 +131,18 @@
             "raw_file_name": "ftb-teams-forge-2001.3.1.jar",
             "mod_id": "ftbteams",
             "version": "2001.3.1"
+        },
+        {
+            "name": "FTB XMod Compat",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat",
+            "author": "FTB",
+            "curse_id": {
+                "project": 889915,
+                "file": 6402486
+            },
+            "raw_file_name": "ftb-xmod-compat-forge-2.1.3.jar",
+            "mod_id": "ftbxmodcompat",
+            "version": "2.1.3"
         },
         {
             "name": "FTB Quest Localizer",
@@ -229,18 +253,6 @@
             "version": "1.20-2.14.1"
         },
         {
-            "name": "Rhino",
-            "url": "https://www.curseforge.com/minecraft/mc-mods/rhino",
-            "author": "LatvianModder",
-            "curse_id": {
-                "project": 416294,
-                "file": 6186971
-            },
-            "raw_file_name": "rhino-forge-2001.2.3-build.10.jar",
-            "mod_id": "rhino",
-            "version": "2001.2.3-build.10"
-        },
-        {
             "name": "ProbeJS",
             "url": "https://www.curseforge.com/minecraft/mc-mods/probejs",
             "author": "Amygdaloideae",
@@ -252,6 +264,30 @@
             "raw_file_name": "probejs-6.0.1-forge.jar",
             "mod_id": "probejs",
             "version": "6.0.1"
+        },
+        {
+            "name": "Quests Additions (Forge)",
+            "author": "NaturaSpell",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/quests-additions",
+            "curse_id": {
+                "project": 580129,
+                "file": 6004490
+            },
+            "raw_file_name": "questsadditions-1.4.7.jar",
+            "mod_id": "questsadditions",
+            "version": "${file.jarVersion}"
+        },
+        {
+            "name": "Rhino",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/rhino",
+            "author": "LatvianModder",
+            "curse_id": {
+                "project": 416294,
+                "file": 6186971
+            },
+            "raw_file_name": "rhino-forge-2001.2.3-build.10.jar",
+            "mod_id": "rhino",
+            "version": "2001.2.3-build.10"
         },
         {
             "name": "Tinkers Construct",

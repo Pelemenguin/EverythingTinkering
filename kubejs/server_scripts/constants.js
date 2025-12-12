@@ -19,6 +19,9 @@
     Item
 */
 
+const $Registries = Java.loadClass("net.minecraft.core.registries.Registries");
+const $TagKey = Java.loadClass("net.minecraft.tags.TagKey");
+const $ItemStack = Java.loadClass("net.minecraft.world.item.ItemStack");
 const $LootContextParams = Java.loadClass("net.minecraft.world.level.storage.loot.parameters.LootContextParams");
 
 const ToolPartItem = Java.loadClass('slimeknights.tconstruct.library.tools.part.ToolPartItem');
@@ -27,7 +30,7 @@ const MaterialRegistry = Java.loadClass('slimeknights.tconstruct.library.materia
 const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialId');
 const MaterialVariant = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialVariant');
 const $ModifierId = Java.loadClass('slimeknights.tconstruct.library.modifiers.ModifierId');
-const ModifierNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ModifierNBT');
+const $ModifierNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ModifierNBT');
 const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
 const TextColor = Java.loadClass('net.minecraft.network.chat.TextColor');
 const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ToolStack');

@@ -162,7 +162,7 @@ RecipeDisplay.prototype = {
         ingredient.y = pattern.y;
         ingredient.itemCycle = NonNullList.of(
             recipe.getIngredient().first.withCount(recipe.needed),
-            recipe.getIngredient().getItemTypes().toArray().map(item => new ItemStack(item, recipe.getNeeded()))
+            recipe.getIngredient().getItemTypes().toArray().map(item => new $ItemStack(item, recipe.getNeeded()))
         );
         elements.add(ingredient);
 
@@ -205,7 +205,7 @@ RecipeDisplay.prototype = {
         /** @type {Internal.TinkerItemElement} */
         let displayItem;
         try {
-            displayItem = new TinkerItemElement(new ItemStack(fluid.get().getBucket()));
+            displayItem = new TinkerItemElement(new $ItemStack(fluid.get().getBucket()));
         }
         catch (e) {
             console.error(e);
@@ -286,7 +286,7 @@ RecipeDisplay.prototype = {
         /** @type {Internal.TinkerItemElement} */
         let displayItem;
         try {
-            displayItem = new TinkerItemElement(new ItemStack(fluid.get().getBucket()));
+            displayItem = new TinkerItemElement(new $ItemStack(fluid.get().getBucket()));
         }
         catch (e) {
             console.error(e);

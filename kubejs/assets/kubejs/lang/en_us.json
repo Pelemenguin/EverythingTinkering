@@ -5,7 +5,7 @@
 
     "item.kubejs.icy_terracube": "Icy Terracube Spawn Egg",
     "item.kubejs.frozen_terracube_core": "Frozen Terracube Core",
-    "item.kubejs.frozen_terracube_core.tooltip": "Dropped when a Terracube is killed by freezing damage. Use in cold biomes to summon the Icy Terracube",
+    "item.kubejs.frozen_terracube_core.tooltip": "Dropped when a large Terracube is killed by freezing damage. Use in cold biomes to summon the Icy Terracube",
     "item.kubejs.icy_clay_ball": "Icy Clay Ball",
     "item.kubejs.icy_terracube_treasure_bag": "Icy Terracube Treasure Bag",
     "item.kubejs.icy_terracube_treasure_bag_no_hit": "Icy Terracube Treasure Bag (No Hit)",
@@ -331,13 +331,18 @@
 
     "quest.title": "Everything Tinkering",
 
+    "quest.common.view_next_page": "&b[Click “→” for the next page]",
+
     "quest.readme.title": "&cREADME!",
 
     "quest.readme.welcome.title": "Welcome",
-    "quest.readme.welcome.description": "&6Welcome to &eEverything Tinkering&6!\n\n&eEverything Tinkering&6 is a modpack centered around &eTinker's Construct3&7 (TiC) &6.\n\n&c&lNote: &r&6The modpack is still developing. If any bug occurs, report it on the Issue page of the GitHub repository.\n\n&a&lGitHub repository URL: &r&ehttps://github.com/Pelemenguin/EverythingTinkering",
+    "quest.readme.welcome.description": "&6Welcome to &eEverything Tinkering&6!\n\n&eEverything Tinkering&6 is a modpack centered around &eTinker's Construct3&7 (TiC) &6.\n\n&c&lNote: &r&6The modpack is still in development. If any bugs occur, please report them on the &eIssues&6 page of the &eGitHub&6 repository.\n\n&a&lGitHub repository URL: &r&ehttps://github.com/Pelemenguin/EverythingTinkering",
+
+    "quest.readme.translation.title": "Translations",
+    "quest.readme.translation.description": "The English translation of the modpack is provided by the &emodpack author&6 with &eAI assistance&6. &cInaccurate translations&6 or &cgrammar mistakes&6 may exist. You can report them also on &eGitHub&6.",
 
     "quest.readme.main_line.title": "Main Line",
-    "quest.readme.main_line.description": "&6The &eMain Line&6 is the primary questline of the modpack.\n\n&eForging methods&6 are mainly discussed in the &eMain Line&6. For example: &ePart Builder&6, &ecasting&6, &ealloying&6 and so on.\n\nHowever, the Main Line will &cNOT&6 tell you the particular way to get Tinker's materials. You need to choose &eone or more&6 lines among the three &eMaterial Lines&6, to obtain materials and then progress the Main Line.",
+    "quest.readme.main_line.description": "&6The &eMain Line&6 is the primary questline of the modpack.\n\n&eForging methods&6 are mainly discussed in the &eMain Line&6. For example: &ePart Builder&6, &ecasting&6, &ealloying&6 and so on.\n\nHowever, the Main Line will &cNOT&6 tell you the particular way to get Tinker's materials. You need to choose &eone or more&6 lines among the three &eMaterial Lines&6, to obtain materials and then progress the Main Line.\n\nAll chapters except &ethe first chapter&6 have &ethree Material Lines&6.",
 
     "quest.readme.technology_line.title": "Technology Line",
     "quest.readme.technology_line.description": "&6The &eTechnology Line&6 is a Material Line featuring &eautomation&6.\n\n&6In the &eTechnology Line&6, you need to:\n\n&6 - Build &evarious machines\n&6 - Design &eproduction lines\n&6 - &eBuild your production line&6 via these machines\n&6 - Realize &eautomated production\n&6 - Then build new machines and &eupgrade your production line",
@@ -363,7 +368,7 @@
     "quest.chapters.1.begin.subtitle": "Simple material shaping",
 
     "quest.chapters.1.patterns.title": "Pattern",
-    "quest.chapters.1.patterns.description": "&6The &ePattern&6 is an essential item for all novice tinkers.\n\nPatterns only require &eplanks&6 and &esticks&6 to craft. Cheap to make and useful to simple &ematerial shaping&6.",
+    "quest.chapters.1.patterns.description": "&6&ePatterns&6 are an essential item for all novice tinkers.\n\nPatterns only require &eplanks&6 and &esticks&6 to craft. Cheap to make and useful to simple &ematerial shaping&6.",
 
     "quest.chapters.1.part_builder.title": "Part Builder",
     "quest.chapters.1.part_builder.description": "&ePart Builder&6 can let you craft basic &etool parts&6.\n\nPart Builders require &ePatterns&6 and &eplanks&6 to craft.",
@@ -378,14 +383,60 @@
     "quest.chapters.1.part_chest.description": "&ePart Chest&6 can store &elarge amount&6 of extra parts.\n\nPart Chests require a &ePattern&6, a &eChest&6, &eplanks&6 and &esticks&6 to craft.\n\nIf you accidentally made some wrong parts or picked up some useless parts, you can place them in the Part Chest.",
 
     "quest.chapters.1.tutorial_parts.title": "Tool Parts",
-    "quest.chapters.1.tutorial_parts.description.page1": "&eTool parts&6 can be combined into &eTinker's tools&6. Simple tool parts can be crafted in the &ePart Builder&6.\n\nTo make a &ePickaxe&6 for instance, we need to make:\n\n&6 - A &ePick Head\n\n&6 - A &eTool Handle\n\n&6 - A &eTool Binding\n\n&a[View the image example on the next page]",
-    "quest.chapters.1.tutorial_parts.requirement.pick_head": "Any Pick Head",
-    "quest.chapters.1.tutorial_parts.requirement.tool_handle": "Any Tool Handle",
-    "quest.chapters.1.tutorial_parts.requirement.tool_binding": "Any Tool Binding",
-    "quest.chapters.1.tutorial_parts.description.page2": "&6As shown in the image above, &ePatterns&6 should be placed in the &eleftmost&6 slot in the Part Builder, while the &ematerial to be used&6 are placed to the right of the Patterns. After choosing &ethe part to craft&6 in the middle, you can get the corresponding part.\n\nLet’s try to make all three parts of a &ePickaxe&6 by yourself!\n\n&c&lNote: &r&6When crafting parts, Patterns are &cCONSUMED&6. Prepare &emore&6 patterns to craft more parts!",
+    "quest.chapters.1.tutorial_parts.description.1": "&eTool parts&6 can be combined into &eTinker's tools&6. Simple tool parts can be crafted in the &ePart Builder&6.\n\nTo make a &ePickaxe&6 for instance, we need to make:\n\n&6 - A &ePick Head\n\n&6 - A &eTool Handle\n\n&6 - A &eTool Binding",
+    "quest.chapters.1.tutorial_parts.task.pick_head": "Any Pick Head",
+    "quest.chapters.1.tutorial_parts.task.tool_handle": "Any Tool Handle",
+    "quest.chapters.1.tutorial_parts.task.tool_binding": "Any Tool Binding",
+    "quest.chapters.1.tutorial_parts.description.2": "&6As shown in the image above, &ePatterns&6 should be placed in the &eleftmost&6 slot in the Part Builder, while the &ematerial to be used&6 are placed to the right of the Patterns. After choosing &ethe part to craft&6 in the middle, you can get the corresponding part.\n\nLet’s try to make all three parts of a &ePickaxe&6 by yourself!\n\n&c&lNote: &r&6When crafting parts, Patterns are &cCONSUMED&6. Prepare &emore&6 patterns to craft more parts!",
 
     "quest.chapters.1.part_builder_uncraftable.title": "Cannot shape?",
-    "quest.chapters.1.part_builder_uncraftable.description": "&6Somtimes, you may try to shape some materials &etoo hard&6 to shape, &eiron&6 or other metal for instance.\n\n&6These materials &ccannot&6 be crafted in the Part Builder. This requires better &eforging methods&6 provided in future chapters.\n\n&c&lNote: &eCopper&6 is still craftable in the Part Builder, which is both cheap and effective for mining.",
+    "quest.chapters.1.part_builder_uncraftable.description": "&6Somtimes, you may try to shape some materials &etoo hard&6 to shape, &eiron&6 or other metal for instance.\n\n&6These materials &cCANNOT&6 be crafted in the Part Builder. This requires better &eforging methods&6 provided in future chapters.\n\n&c&lNote: &r&eCopper&6 is still craftable in the Part Builder, which is both cheap and effective for mining.",
+
+    "quest.chapters.1.tutorial_tools.title": "Your First Tool",
+    "quest.chapters.1.tutorial_tools.task": "Wooden Pickaxe and all parts' materials are Wood",
+    "quest.chapters.1.tutorial_tools.description.1": "&6After preparing all parts needed, you can combine them into a tool at a &eTinker Station&6. The interface of the Tinker Station is shown below:",
+    "quest.chapters.1.tutorial_tools.description.2": "&6However, the default view is not helpful us to know how to build the tool. Click the button with a &ePickaxe&6 icon on the left, then you can see &e3 slots&6 to fill on the interface. Put &ecorresponding tool part&6 into the slots to build your own tool.",
+
+    "quest.chapters.1.other_tools.title": "Other tools",
+    "quest.chapters.1.other_tools.description": "&6Try to make some other tools! They may require &edifferent types of parts&6. You can check the requirements in the &eTinker Station&6.",
+
+    "quest.chapters.1.target_dummy.title": "Target Dummy",
+    "quest.chapters.1.target_dummy.description": "&6Ever wondered how many damage is your tool dealing? Make a &eTarget Dummy&6 to test that!",
+
+    "quest.chapters.1.more_materials.title": "More Materials",
+    "quest.chapters.1.more_materials.description": "&6Tools can made of not only wood, but &eother materials&6 as well.\n\nMaybe you can try to use &eRock&e and &eCopper&6 to make tools?\n\n&e“Knowledge is power.”&6 You can get inspirations from the books provided, such as &e“Materials And You”&6.",
+    "quest.chapters.1.more_materials.task.rock": "Any Rock part",
+    "quest.chapters.1.more_materials.task.copper": "Any Copper part",
+
+    "quest.chapters.1.distinct_materials.title": "Permutation \\& Combination",
+    "quest.chapters.1.distinct_materials.description": "&6You can use &edifferent&6 materials in differnt parts of the tool.",
+    "quest.chapters.1.distinct_materials.task": "Any tool with all parts’ materials different",
+
+    "quest.chapters.1.travelers_set.title": "Traveler's Set",
+    "quest.chapters.1.travelers_set.description": "&ePlate Armor&6 specializes in &eprotection&6, but require better forging method.\n\n&eTraveler's Set&6 seems to be a good starter armor for beginners. These armor can provide &ea little protection&6 (about &e75%&6 of Plate Armor), but better than nothing.",
+    "quest.chapters.1.travelers_set.task.helmet": "Any Traveler's Goggles",
+    "quest.chapters.1.travelers_set.task.chestplate": "Any Traveler's Vest",
+    "quest.chapters.1.travelers_set.task.leggings": "Any Traveler's Pants",
+    "quest.chapters.1.travelers_set.task.boots": "Any Traveler's Boots",
+
+    "quest.chapters.1.modifiers.title": "Modifiers",
+    "quest.chapters.1.modifiers.description.1": "&eModifiers&6 may &eenhance your tool&6. You can apply modifiers at a &eTinker Station&6.\n\nLet's apply a &e“Swiftstrike”&6 modifier as an example.",
+    "quest.chapters.1.modifiers.task": "Any tool with modifier “Swiftstrike”",
+    "quest.chapters.1.modifiers.description.2": "&6As the image shown above, among the four slots on the left side of the arrow, your tool should be placed in the &erightmost&6 slot. Then the items required for the modifier should be placed in the &eleft 3 slots&6.\n\nIn this case, you need &e18 Blocks of Amethyst&6 or &e72 Amethyst Shards&6.",
+
+    "quest.chapters.1.ready.title": "I'm Ready",
+    "quest.chapters.1.ready.description.1": "&6Explore the &etinkering system&6 by yourself.\n\nWhen you are ready for the coming &eBoss challenge&6, click the checkmark above.",
+    "quest.chapters.1.ready.description.2": "&aHow do I know whether I'm ready or not?\n\n&6 - Attack damage reach &e8 points&6 per hit or above\n&6 - Have a full set of &eTraveler's Set&6\n&6 - Obtain at least &e20%%&6 movement speed boost\n\nOr you can ignore these criteria if you are skilled enough.",
+    "quest.chapters.1.ready.task": "&cDON'T CLICK&r before you're ready",
+
+    "quest.chapters.1.frozen_terracube_core.title": "Frozen Terracube Core",
+    "quest.chapters.1.frozen_terracube_core.description": "&6Use &efreezing damage&6 to kill a &elarge Terracube&6 to obtain a &eFrozen Terracube Core&6.\n\nWhen you're ready, use the Frozen Terracube Core in &ecold biomes&6 to summon the &eIcy Terracube&6.",
+
+    "quest.chapters.1.defeat_icy_terracube.title": "Icy Terracube",
+    "quest.chapters.1.defeat_icy_terracube.description": "&6Defeat an &eIcy Terracube&6.",
+
+    "quest.chapters.1.icy_terracube_no_hit.title": "No Hit Challenge",
+    "quest.chapters.1.icy_terracube_no_hit.description": "&6Defeat an &eIcy Terracube&6 without &etaking ANY damage&6.",
 
         "_comment_end": "I don't want to remove commasat the end of the JSON  any more you know? I just place one line here so that all lines above can hava a comma"
 

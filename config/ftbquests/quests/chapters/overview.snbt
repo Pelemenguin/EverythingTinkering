@@ -4,6 +4,7 @@
 	default_quest_shape: ""
 	filename: "overview"
 	group: ""
+	icon: "ftbquests:book"
 	id: "5521CC6489050036"
 	order_index: 1
 	quest_links: [ ]
@@ -38,12 +39,31 @@
 			size: 2.0d
 			tasks: [{
 				id: "178A6ECC779F0CC9"
-				optional_task: true
 				title: "{quest.readme.begin.title}"
 				type: "checkmark"
 			}]
 			title: "{quest.overview.begin.title}"
 			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"78AFDF31C00B6799"
+				"37BFF5CC64E72C93"
+			]
+			description: ["{quest.chapters.1.defeat_icy_terracube.description}"]
+			disable_toast: true
+			id: "2FD4D71448481A04"
+			shape: "octagon"
+			tasks: [{
+				entity: "kubejs:icy_terracube"
+				icon: "kubejs:icy_terracube_treasure_bag"
+				id: "7A6DA9CF5A11AD65"
+				title: "{quest.chapters.1.defeat_icy_terracube.title}"
+				type: "kill"
+				value: 1L
+			}]
+			x: 4.0d
 			y: 0.0d
 		}
 	]

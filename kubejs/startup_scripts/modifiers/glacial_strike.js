@@ -49,6 +49,8 @@ KubeJSNetworkHelper.register("GlacialStrikeMessage", 378294469, {
             case 0: {
                 context.get().getSender().addDeltaMovement([0, 1, 0]);
 
+                if (persistent.getInt("SinceLastJump") < 20) return;
+
                 persistent.putInt("SinceLastJump", 0);
                 persistent.putByte("IsJumping", 1);
                 persistent.putByte("IsFalling", 0);
@@ -59,6 +61,8 @@ KubeJSNetworkHelper.register("GlacialStrikeMessage", 378294469, {
             // Fall
             case 1: {
                 context.get().getSender().addDeltaMovement([0, -3, 0]);
+
+                if (persistent.getByte("IsJumping") == 0) return;
 
                 persistent.putDouble("FallPosition", context.get().getSender().getY());
                 persistent.putByte("IsFalling", 1);
@@ -116,9 +120,7 @@ let GLACIAL_STRIKE = ModifierManager.registerCommonModifier("glacial_strike", "G
                     });
 
                     if (!holder.isShiftKeyDown()) {
-                        holder.getServer().scheduleInTicks(2, () => {
-                            holder.addMotion(0, 1.2, 0);
-                        });
+                        holder.setMotionY(1.2);
                     }
                     world.spawnParticles(ParticleTypes.SNOWFLAKE, false, holder.getX(), holder.getY(), holder.getZ(), 1, 0, 1, 200, 0.1);
 
@@ -145,7 +147,7 @@ let GLACIAL_STRIKE = ModifierManager.registerCommonModifier("glacial_strike", "G
                 }
             }
             if (isFalling && holder.onGround() && !holder.isShiftKeyDown()) {
-                holder.addMotion(0, 1.2, 0);
+                holder.setMotionY(1.2);
             }
         }
     },

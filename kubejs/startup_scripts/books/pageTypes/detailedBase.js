@@ -252,7 +252,7 @@ const DetailedBase = {
 
             let itemStack;
             if (anyUsed) itemStack = ToolStack.createTool(item, item.getToolDefinition(), materialBuilder.build()).createStack();
-            else itemStack = new ItemStack(item, 1, {});
+            else itemStack = new $ItemStack(item, 1, {});
             let itemElement = new TinkerItemElement(itemStack);
             itemElement.x = x;
             itemElement.y = y;
