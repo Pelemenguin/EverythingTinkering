@@ -335,7 +335,7 @@
     "quest.title": "Everything Tinkering",
 
     "quest.common.view_next_page": "&b[点击“→”查看下一页]",
-    
+
     "quest.readme.title": "&c读我！",
 
     "quest.readme.welcome.title": "欢迎",
@@ -362,6 +362,7 @@
 
     "quest.overview.chapter1.title": "工匠学徒",
     "quest.overview.chapter1.description": "&e“工匠学徒”&6是整合包的&e第一个&6章节。\n\n在&e“工匠学徒”&6章节中，我们将会从匠魂的&e基本物品&6入手，学习四种&6功能台&e的用法，并制作出属于你的第一个&e匠魂工具&6。",
+    "quest.overview.chapter1.task": "开启第一章",
 
     "quest.chapters.title": "章节",
 
@@ -394,6 +395,9 @@
 
     "quest.chapters.1.part_builder_uncraftable.title": "无法打造？",
     "quest.chapters.1.part_builder_uncraftable.description": "&6有时，你可能放入了一些&e过于坚硬&6的材料，例如&e铁&6等金属。\n\n&6这些材料&c无法&6通过部件制造台制作。这需要后续章节所提供的&e更好的锻造方法&6。\n\n&c&l注意：&r&e铜&6仍然能够在部件加工台中制作，是既便宜又利于挖掘的好材料。",
+
+    "quest.chapters.1.part_switching.title": "更换部件",
+    "quest.chapters.1.part_switching.description": "&6现在，你有了相较于过去&e更好的部件&6，并想添加到工具上。\n\n但是重新制作整个工具&e成本较高&6，因此你可以使用&e工匠站&6的&e部件交换&7 (Part Switching) &6功能，如下图所示：",
 
     "quest.chapters.1.tutorial_tools.title": "你的第一个工具",
     "quest.chapters.1.tutorial_tools.description.1": "&6在准备好所有所需的部件后，你可以在&e工匠站&6中将它们组合为一个工具。工匠站的界面如下图所示：",

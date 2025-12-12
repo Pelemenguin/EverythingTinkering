@@ -22,7 +22,7 @@
 			shape: "square"
 			tasks: [{
 				id: "2EB650E17947C1D8"
-				title: "{quest.chapters.1.begin.title}"
+				title: "{quest.overview.chapter1.task}"
 				type: "checkmark"
 			}]
 			title: "{quest.chapters.1.begin.title}"

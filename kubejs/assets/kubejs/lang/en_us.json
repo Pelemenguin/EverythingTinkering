@@ -359,6 +359,7 @@
 
     "quest.overview.chapter1.title": "A Beginner of Tinkering",
     "quest.overview.chapter1.description": "&e“A Beginner of Tinkering”&6 is the &efirst&6 chapter of the modpack.\n\nIn &e“A Beginner of Tinkering”&6, we will start from &ebasic items&6 of Tinker's Construct and learn the usage of four &eTinker's Tables&6, then build the first &eTinker's tool&6 of your own.",
+    "quest.overview.chapter1.task": "Begin Chapter 1",
 
     "quest.chapters.title": "Chapters",
 
@@ -391,6 +392,9 @@
 
     "quest.chapters.1.part_builder_uncraftable.title": "Cannot shape?",
     "quest.chapters.1.part_builder_uncraftable.description": "&6Somtimes, you may try to shape some materials &etoo hard&6 to shape, &eiron&6 or other metal for instance.\n\n&6These materials &cCANNOT&6 be crafted in the Part Builder. This requires better &eforging methods&6 provided in future chapters.\n\n&c&lNote: &r&eCopper&6 is still craftable in the Part Builder, which is both cheap and effective for mining.",
+
+    "quest.chapters.1.part_switching.title": "Change Tool Parts",
+    "quest.chapters.1.part_switching.description": "&6Now you have &ebetter parts&6, and may want to apply them to your tools.\n\nBut rebuilding the entire tool &ecosts much&6. Thus, you can use &eTinker Station&6 for &epart switching&6, as shown below:",
 
     "quest.chapters.1.tutorial_tools.title": "Your First Tool",
     "quest.chapters.1.tutorial_tools.task": "Wooden Pickaxe and all parts' materials are Wood",

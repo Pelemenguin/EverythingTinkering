@@ -12,6 +12,7 @@
 		{
 			dependencies: ["37BFF5CC64E72C93"]
 			description: ["{quest.chapters.1.patterns.description}"]
+			hide_until_deps_complete: true
 			id: "3139C1207C7BC52F"
 			tasks: [{
 				count: 9L
@@ -172,7 +173,6 @@
 			shape: "none"
 			tasks: [{
 				id: "0969F377BF3E80DE"
-				title: "{quest.chapters.1.part_builder_uncraftable.title}"
 				type: "checkmark"
 			}]
 			title: "{quest.chapters.1.part_builder_uncraftable.title}"
@@ -690,6 +690,60 @@
 			title: "{quest.chapters.1.target_dummy.title}"
 			x: 8.0d
 			y: 1.0d
+		}
+		{
+			dependencies: ["5C90E8F5D385534B"]
+			description: [
+				"{quest.chapters.1.part_switching.description}"
+				""
+				"{image:kubejs:textures/gui/quests/part_switching.png width:306 height:209 align:center fit:true}"
+			]
+			hide_until_deps_complete: true
+			icon: {
+				Count: 1
+				id: "tconstruct:pickaxe"
+				tag: {
+					Damage: 0
+					tic_broken: 0b
+					tic_materials: [
+						"tconstruct:iron"
+						"tconstruct:iron"
+						"tconstruct:iron"
+					]
+					tic_modifiers: [
+						{
+							level: 3
+							name: "tconstruct:magnetic"
+						}
+						{
+							level: 1
+							name: "tconstruct:pierce"
+						}
+					]
+					tic_persistent: { }
+					tic_stats: {
+						"tconstruct:attack_damage": 3.0f
+						"tconstruct:attack_speed": 1.2f
+						"tconstruct:durability": 275.0f
+						"tconstruct:harvest_tier": "minecraft:iron"
+						"tconstruct:mining_speed": 6.0f
+					}
+					tic_volatile_data: {
+						abilities: 1
+						upgrades: 3
+					}
+				}
+			}
+			id: "3EF70C7CBEA2E2EF"
+			optional: true
+			shape: "none"
+			tasks: [{
+				id: "4D64508F271EF326"
+				type: "checkmark"
+			}]
+			title: "{quest.chapters.1.part_switching.title}"
+			x: 7.0d
+			y: -2.0d
 		}
 	]
 	title: "{quest.chapters.1.title}"

@@ -20,7 +20,6 @@
 			id: "55E9F5527A8B5772"
 			tasks: [{
 				id: "2666C68BA291BF9A"
-				title: "{quest.readme.welcome.title}"
 				type: "checkmark"
 			}]
 			title: "{quest.readme.welcome.title}"
@@ -37,7 +36,6 @@
 			id: "40B5939E22DF8A67"
 			tasks: [{
 				id: "5C48146CFAEAF97B"
-				title: "{quest.readme.main_line.title}"
 				type: "checkmark"
 			}]
 			title: "{quest.readme.main_line.title}"
@@ -54,7 +52,6 @@
 			id: "7C3F920520EC3F93"
 			tasks: [{
 				id: "19996DEF3CB6C1E5"
-				title: "{quest.readme.technology_line.title}"
 				type: "checkmark"
 			}]
 			title: "{quest.readme.technology_line.title}"
@@ -84,7 +81,6 @@
 			id: "0174035AC9E04FE4"
 			tasks: [{
 				id: "56E6829086E0932D"
-				title: "{quest.readme.adventure_line.title}"
 				type: "checkmark"
 			}]
 			title: "{quest.readme.adventure_line.title}"
@@ -105,6 +101,7 @@
 			icon: "minecraft:oxeye_daisy"
 			id: "79C06FD13D835F0A"
 			rewards: [{
+				count: 16
 				id: "152F636AAE82FCDB"
 				item: "minecraft:apple"
 				type: "item"
@@ -129,7 +126,6 @@
 			id: "1CED82E09BFBB5F5"
 			tasks: [{
 				id: "14154A01EE536368"
-				title: "{quest.readme.translation.title}"
 				type: "checkmark"
 			}]
 			x: -2.5d
