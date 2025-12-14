@@ -342,7 +342,7 @@
     "quest.readme.welcome.description": "&6欢迎来到&eEverything Tinkering&6！\n\n&eEverything Tinkering&6是一款以&e匠魂3&7 (Tinker's Construct 3) &6为核心的整合包。\n\n&c&l注意：&r&6整合包仍在开发阶段。若出现Bug，请前往&eGitHub&6的&eIssues&6页面进行报告。\n\n&a&lGitHub仓库地址：&r&ehttps://github.com/Pelemenguin/EverythingTinkering",
 
     "quest.readme.translation.title": "翻译",
-    "quest.readme.translation.description": "整合包英语翻译由&e整合包作者&6在&eAI辅助下提供，可能出现&c翻译不准确&6或&c语法错误&6等情况，你依然可以在&eGitHub&6上汇报。",
+    "quest.readme.translation.description": "&6整合包英语翻译由&e整合包作者&6在&eAI辅助下提供，可能出现&c翻译不准确&6或&c语法错误&6等情况，你依然可以在&eGitHub&6上汇报。",
 
     "quest.readme.main_line.title": "主线",
     "quest.readme.main_line.description": "&e主线&6是整合包最主要的任务线。\n\n&e主线&6主要探讨材料的&e锻造方法&6，例如：部件制造台&7 (Part Builder)&6、&e浇筑&7 (Casting) &6、&e合金&7 (Alloying) &6等等。\n\n但是，主线&c并不会&6提供具体的获取匠魂材料的方法。你需要从三条&e材料线&6中任选&e一条或多条&6，从材料线中获取所需的匠魂材料，并推进主线。\n\n除了&e第一章&6以外，其余章节均有&e三条材料线&6。",
@@ -386,11 +386,14 @@
     "quest.chapters.1.part_chest.title": "部件箱",
     "quest.chapters.1.part_chest.description": "&e部件箱&6&7 (Part Chest) &6能够储存&e大量&6的无用部件。\n\n部件箱需要&e模具&6、&e箱子&6、&e木板&6和&e木棍&6制作。\n\n如果你不小心做了错误的部件，或者在探索时捡到了一些不需要的部件，都可以放在部件箱里。",
 
+    "quest.chapters.1.tinkers_chest.title": "工匠箱",
+    "quest.chapters.1.tinkers_chest.description": "&e工匠箱&6&7 (Tinker’s Chest) &6能够储存&e任何物品&6。共有&e64&6个栏位，但每个栏位只能储存&e16&6个物品。它和皮革护甲一样，都是可以&e使用染料染色&6的。\n\n部件箱需要&e模具&6、&e箱子&6、&e木板&6和&e青金石&6制作。",
+
     "quest.chapters.1.tutorial_parts.title": "工具部件",
     "quest.chapters.1.tutorial_parts.description.1": "&e工具部件&6&7 (Tool Part) &6能够被组合为&e匠魂工具&6。简单的工具部件可以在&e部件制造台&6中制作。\n\n以制作&e镐&7 (Pickaxe) &6的部件为例，我们需要制作：\n\n&6 - &e镐头&7 (Pick Head)\n\n&6 - &e工具手柄&7 (Tool Handle)\n\n&6 - &e绑定结&7 (Tool Binding)\n\n&a[在下一页查看图像示例]",
-    "quest.chapters.1.tutorial_parts.task.pick_head": "任意镐头",
-    "quest.chapters.1.tutorial_parts.task.tool_handle": "任意工具手柄",
-    "quest.chapters.1.tutorial_parts.task.tool_binding": "任意绑定结",
+    "quest.chapters.1.tutorial_parts.task.pick_head": "木镐头",
+    "quest.chapters.1.tutorial_parts.task.tool_handle": "木工具手柄",
+    "quest.chapters.1.tutorial_parts.task.tool_binding": "木绑定结",
     "quest.chapters.1.tutorial_parts.description.2": "&6如上图所示。你需要在部件加工台界面的&e最左侧&6一格放置&e模具&6，在模具的右边放置&e需要锻造的材料&6。在中间&e选择好需要制造的部件&6后，即可获得对应的部件。\n\n来自己制作&e镐&6所需要的部件实践一下吧！\n\n&c&l注意：&r&6制作部件时，模具是&c会消耗&6的。如果你要制造大量部件，记得准备&e大量模具&6！",
 
     "quest.chapters.1.part_builder_uncraftable.title": "无法打造？",
@@ -402,7 +405,12 @@
     "quest.chapters.1.tutorial_tools.title": "你的第一个工具",
     "quest.chapters.1.tutorial_tools.description.1": "&6在准备好所有所需的部件后，你可以在&e工匠站&6中将它们组合为一个工具。工匠站的界面如下图所示：",
     "quest.chapters.1.tutorial_tools.description.2": "&6但是，这个默认视图对了解如何构建工具没有帮助。点击左侧的带有&e镐&6图标的按钮，现在工匠站的界面就会有&e三个栏位&6待填充。放入&e对应的工具部件&6，就可以构建你自己的镐了。",
-    "quest.chapters.1.tutorial_tools.task": "木镐且所有部件的材料都为木",
+    "quest.chapters.1.tutorial_tools.task": "木镐",
+
+    "quest.chapters.1.repair_kits.title": "修补件",
+    "quest.chapters.1.repair_kits.description.1": "&6你可以在&e工匠站n&6中使用你工具头部的材料来修复工具。",
+    "quest.chapters.1.repair_kits.description.2": "&6但是&e修补件&6似乎是个更方便的选择，因为它们能直接在&e合成网格&6中修复你的工具。你可以像其它部件一样，直接在&e部件制造台&6中制作修补件。",
+    "quest.chapters.1.repair_kits.task": "任意修补件",
 
     "quest.chapters.1.target_dummy.title": "训练假人",
     "quest.chapters.1.target_dummy.description": "&6有没有好奇过自己的工具到底能打出多少伤害？做一个&e训练假人&7 (Target Dummy) &6来测试一下吧!",
@@ -427,13 +435,18 @@
     "quest.chapters.1.travelers_set.task.boots": "任意旅行者靴子",
 
     "quest.chapters.1.modifiers.title": "强化",
-    "quest.chapters.1.modifiers.description.1": "&e强化&7 (Modifier) &6能够&e增强你的工具&6。你可以在&e工匠站&6为工具添加强化。\n\n让我们以添加&e“迅捷打击”&6强化为例。",
-    "quest.chapters.1.modifiers.task": "任意带有“迅捷打击”特性的工具",
+    "quest.chapters.1.modifiers.description.1": "&e强化&7 (Modifier) &6能够&e增强你的工具&6。你可以在&e工匠站&6为工具添加强化。\n\n让我们以添加&e迅捷打击&7 (Swiftstrike) &6强化为例，你可以在&eJEI&6中查看强化的配方。",
+    "quest.chapters.1.modifiers.task": "任意带有“迅捷打击”强化的工具",
     "quest.chapters.1.modifiers.description.2": "&6如上图所示，在箭头左侧的四个栏位中，你的工具应该被放在&e最右边&6的栏位，再将特性所需要的物品放在&e左侧的三个栏位中&6。\n\n在这个例子中，你需要&e18个紫水晶块&6或者&e72个紫水晶碎片&6。",
+
+    "quest.chapters.1.more_modifiers.title": "更多强化",
+    "quest.chapters.1.more_modifiers.description": "&6也许你可以试一试&e更多强化&6，例如&e迅捷&7 (Speedy) &6、&e急迫&7 (Haste) &6或者&e锋利&7 (Sharpness) &6。\n\n将&e同一个强化配方&6应用在&e不同工具类型&6上，添加的强化&e可能不同&6。例如，同样是&e红石&6作为强化物品，应用在&e镐&6等工具上时，添加的强化为&e急迫&6，而应用在&e护腿&6上时则为&e迅捷&6。",
+    "quest.chapters.1.more_modifiers.task.speedy": "任意带有“迅捷”或“急迫”强化的工具",
+    "quest.chapters.1.more_modifiers.task.sharpness": "任意带有“锋利”强化的工具",
 
     "quest.chapters.1.ready.title": "我准备好了",
     "quest.chapters.1.ready.description.1": "&6自由探索&e锻造系统&6。\n\n当你认为你已经准备好迎接&eBoss挑战&6了，勾选上面的复选框。",
-    "quest.chapters.1.ready.description.2": "&a我怎么知道我是否准备好了？\n\n&6 - 攻击伤害达到每击&e8点&6或以上\n&6 - 拥有一套完整的&e旅行者套装&6\n\n&6 - 至少获得&e20%%&6移动速度加成\n\n或者如果你足够有技术，就可以忽略上面的条件。",
+    "quest.chapters.1.ready.description.2": "&a我怎么知道我是否准备好了？\n\n&6 - 攻击伤害达到每击&e8点&6或以上\n&6 - 拥有一套完整的&e旅行者套装&6\n&6 - 至少获得&e20%%&6移动速度加成\n\n或者如果你足够有技术，就可以忽略上面的条件。",
     "quest.chapters.1.ready.task": "&c不要点&r，除非你准备好了",
 
     "quest.chapters.1.frozen_terracube_core.title": "冰冻黏土怪核心",

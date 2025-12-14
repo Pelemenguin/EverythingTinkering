@@ -68,6 +68,12 @@
 			hide_until_deps_complete: true
 			id: "7650D4EDFABB5B0C"
 			optional: true
+			rewards: [{
+				count: 6
+				id: "358055FBAA3C008D"
+				item: "tconstruct:pattern"
+				type: "item"
+			}]
 			shape: "none"
 			tasks: [{
 				id: "275509D17F9BE8EF"
@@ -84,6 +90,12 @@
 			hide_until_deps_complete: true
 			id: "0B0738CDDA088B91"
 			optional: true
+			rewards: [{
+				count: 6
+				id: "2416A1EB434042E1"
+				item: "tconstruct:pattern"
+				type: "item"
+			}]
 			shape: "none"
 			tasks: [{
 				id: "677C168FB447A3C4"
@@ -338,8 +350,8 @@
 				}
 			]
 			title: "{quest.chapters.1.other_tools.title}"
-			x: 8.0d
-			y: 2.0d
+			x: 7.0d
+			y: 3.0d
 		}
 		{
 			dependencies: ["4520B4806C8DDCE4"]
@@ -488,6 +500,12 @@
 			}
 			id: "71797208D9382F3C"
 			optional: true
+			rewards: [{
+				count: 45
+				id: "2013C6486F415616"
+				item: "minecraft:redstone"
+				type: "item"
+			}]
 			shape: "none"
 			tasks: [
 				{
@@ -572,7 +590,7 @@
 			y: -1.0d
 		}
 		{
-			dependencies: ["64562CBE441782CA"]
+			dependencies: ["5C90E8F5D385534B"]
 			description: [
 				"{quest.chapters.1.ready.description.1}"
 				""
@@ -588,7 +606,7 @@
 				type: "checkmark"
 			}]
 			title: "{quest.chapters.1.ready.title}"
-			x: 13.0d
+			x: 11.0d
 			y: 0.0d
 		}
 		{
@@ -602,7 +620,10 @@
 				""
 				"{quest.chapters.1.modifiers.description.2}"
 			]
+			hide_until_deps_complete: true
 			id: "64562CBE441782CA"
+			optional: true
+			shape: "none"
 			tasks: [{
 				icon: {
 					Count: 1
@@ -623,8 +644,8 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.modifiers.title}"
-			x: 11.0d
-			y: 0.0d
+			x: 9.0d
+			y: 2.0d
 		}
 		{
 			dependencies: ["608734E4B47936CE"]
@@ -637,7 +658,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.frozen_terracube_core.title}"
-			x: 15.0d
+			x: 14.0d
 			y: 0.0d
 		}
 		{
@@ -660,7 +681,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.defeat_icy_terracube.title}"
-			x: 17.0d
+			x: 16.0d
 			y: 0.0d
 		}
 		{
@@ -675,13 +696,22 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.icy_terracube_no_hit.title}"
-			x: 17.0d
+			x: 16.0d
 			y: -1.5d
 		}
 		{
 			dependencies: ["4520B4806C8DDCE4"]
 			description: ["{quest.chapters.1.target_dummy.description}"]
+			hide_until_deps_complete: true
 			id: "0E5BD3469C31473D"
+			optional: true
+			rewards: [{
+				count: 15
+				id: "5C2D2F05F15E30AB"
+				item: "dummmmmmy:target_dummy"
+				type: "item"
+			}]
+			shape: "none"
 			tasks: [{
 				id: "2650CC498EB6FCAC"
 				item: "dummmmmmy:target_dummy"
@@ -689,7 +719,7 @@
 			}]
 			title: "{quest.chapters.1.target_dummy.title}"
 			x: 8.0d
-			y: 1.0d
+			y: 2.0d
 		}
 		{
 			dependencies: ["5C90E8F5D385534B"]
@@ -744,6 +774,135 @@
 			title: "{quest.chapters.1.part_switching.title}"
 			x: 7.0d
 			y: -2.0d
+		}
+		{
+			dependencies: ["64562CBE441782CA"]
+			description: ["{quest.chapters.1.more_modifiers.description}"]
+			icon: {
+				Count: 1
+				id: "ftbquests:custom_icon"
+				tag: {
+					Icon: "tconstruct:gui/modifiers/melee/sharpness"
+				}
+			}
+			id: "6C273325D8AC34FC"
+			optional: true
+			shape: "none"
+			tasks: [
+				{
+					icon: {
+						Count: 1
+						id: "ftbquests:custom_icon"
+						tag: {
+							Icon: "tconstruct:gui/modifiers/armor/speedy"
+						}
+					}
+					id: "33B2EE27789EE540"
+					item: {
+						Count: 1
+						id: "ftbfiltersystem:smart_filter"
+						tag: {
+							"ftbfiltersystem:filter": "or(custom(ToolModifiedTest/{\"tconstruct:speedy\":1})custom(ToolModifiedTest/{\"tconstruct:haste\":1}))"
+						}
+					}
+					title: "{quest.chapters.1.more_modifiers.task.speedy}"
+					type: "item"
+				}
+				{
+					icon: {
+						Count: 1
+						id: "ftbquests:custom_icon"
+						tag: {
+							Icon: "tconstruct:gui/modifiers/melee/sharpness"
+						}
+					}
+					id: "17A54D1D01ABB16F"
+					item: {
+						Count: 1
+						id: "ftbfiltersystem:smart_filter"
+						tag: {
+							display: {
+								Name: "{\"text\":\"Sharpness Tool Filter\"}"
+							}
+							"ftbfiltersystem:filter": "custom(ToolModifiedTest/{\"tconstruct:sharpness\":1})"
+						}
+					}
+					title: "{quest.chapters.1.more_modifiers.task.sharpness}"
+					type: "item"
+				}
+			]
+			title: "{quest.chapters.1.more_modifiers.title}"
+			x: 11.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["3139C1207C7BC52F"]
+			description: ["{quest.chapters.1.tinkers_chest.description}"]
+			hide_until_deps_complete: true
+			id: "0953424E61AEC0BB"
+			optional: true
+			rewards: [{
+				count: 16
+				id: "3AA8EB45DCF2E5C4"
+				item: "minecraft:lapis_lazuli"
+				type: "item"
+			}]
+			shape: "none"
+			tasks: [{
+				id: "71C3EC491AC481A9"
+				item: "tconstruct:tinkers_chest"
+				type: "item"
+			}]
+			title: "{quest.chapters.1.tinkers_chest.title}"
+			x: 1.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["4520B4806C8DDCE4"]
+			description: [
+				"{quest.chapters.1.repair_kits.description.1}"
+				""
+				""
+				"{image:kubejs:textures/gui/quests/tool_repair.png width:108 height:74 align:center fit:true}"
+				""
+				"{quest.common.view_next_page}"
+				"{@pagebreak}"
+				"{quest.chapters.1.repair_kits.description.2}"
+				""
+				"{image:kubejs:textures/gui/quests/repair_kit.png width:86 height:60 align:center fit:true}"
+			]
+			hide_until_deps_complete: true
+			id: "4AE05760D4E7C3CD"
+			optional: true
+			rewards: [{
+				count: 4
+				id: "5282678671205687"
+				item: {
+					Count: 1
+					id: "tconstruct:repair_kit"
+					tag: {
+						Material: "tconstruct:wood"
+					}
+				}
+				type: "item"
+			}]
+			shape: "none"
+			tasks: [{
+				id: "036A4560CB99BE1C"
+				item: {
+					Count: 1
+					id: "tconstruct:repair_kit"
+					tag: {
+						Material: "tconstruct:wood"
+					}
+				}
+				match_nbt: false
+				title: "{quest.chapters.1.repair_kits.task}"
+				type: "item"
+			}]
+			title: "{quest.chapters.1.repair_kits.title}"
+			x: 5.0d
+			y: 3.0d
 		}
 	]
 	title: "{quest.chapters.1.title}"

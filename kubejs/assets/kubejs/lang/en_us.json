@@ -268,12 +268,12 @@
 
     "modifier.kubejs.glacial_strike": "Glacial Strike",
     "modifier.kubejs.glacial_strike.flavor": "Ever imagined an iceberg jumping meters high to smash you?",
-    "modifier.kubejs.glacial_strike.description": "Press the “Glacial Strike” key to leap up, then press again while falling to slam into the ground. Damages targets in an area upon landing.",
+    "modifier.kubejs.glacial_strike.description": "Press the \"Glacial Strike\" key to leap up, then press again while falling to slam into the ground. Damages targets in an area upon landing.",
     "modifier.kubejs.glacial_strike.remove": "Glacial Strike cannot be removed",
     "modifier.kubejs.glacial_strike.requirements": "Glacial Strike requires Shiny, Protection II and Reinforced II to apply",
 
     "modifier.kubejs.immutable": "Immutable",
-    "modifier.kubejs.immutable.flavor": "Need to use “.copy()”?",
+    "modifier.kubejs.immutable.flavor": "Need to use \".copy()\"?",
     "modifier.kubejs.immutable.description": "Rejects any attempts to alter the tool's materials or traits",
     "modifier.kubejs.immutable.error": "This tool is immutable",
 
@@ -327,11 +327,11 @@
     "key.categories.kubejs.modifier": "Modpack | Tinker's Construct Modifiers",
     "key.kubejs.modifier.glacial_strike": "Glacial Strike",
 
-        "_comment_quests": " ----- 任务 ----- ",
+        "_comment_quests": " ----- Quests ----- ",
 
     "quest.title": "Everything Tinkering",
 
-    "quest.common.view_next_page": "&b[Click “→” for the next page]",
+    "quest.common.view_next_page": "&b[Click \"→\" for the next page]",
 
     "quest.readme.title": "&cREADME!",
 
@@ -339,7 +339,7 @@
     "quest.readme.welcome.description": "&6Welcome to &eEverything Tinkering&6!\n\n&eEverything Tinkering&6 is a modpack centered around &eTinker's Construct3&7 (TiC) &6.\n\n&c&lNote: &r&6The modpack is still in development. If any bugs occur, please report them on the &eIssues&6 page of the &eGitHub&6 repository.\n\n&a&lGitHub repository URL: &r&ehttps://github.com/Pelemenguin/EverythingTinkering",
 
     "quest.readme.translation.title": "Translations",
-    "quest.readme.translation.description": "The English translation of the modpack is provided by the &emodpack author&6 with &eAI assistance&6. &cInaccurate translations&6 or &cgrammar mistakes&6 may exist. You can report them also on &eGitHub&6.",
+    "quest.readme.translation.description": "&6The English translation of the modpack is provided by the &emodpack author&6 with &eAI assistance&6. &cInaccurate translations&6 or &cgrammar mistakes&6 may exist. You can report them also on &eGitHub&6.",
 
     "quest.readme.main_line.title": "Main Line",
     "quest.readme.main_line.description": "&6The &eMain Line&6 is the primary questline of the modpack.\n\n&eForging methods&6 are mainly discussed in the &eMain Line&6. For example: &ePart Builder&6, &ecasting&6, &ealloying&6 and so on.\n\nHowever, the Main Line will &cNOT&6 tell you the particular way to get Tinker's materials. You need to choose &eone or more&6 lines among the three &eMaterial Lines&6, to obtain materials and then progress the Main Line.\n\nAll chapters except &ethe first chapter&6 have &ethree Material Lines&6.",
@@ -358,7 +358,7 @@
     "quest.overview.begin.title": "Start here",
 
     "quest.overview.chapter1.title": "A Beginner of Tinkering",
-    "quest.overview.chapter1.description": "&e“A Beginner of Tinkering”&6 is the &efirst&6 chapter of the modpack.\n\nIn &e“A Beginner of Tinkering”&6, we will start from &ebasic items&6 of Tinker's Construct and learn the usage of four &eTinker's Tables&6, then build the first &eTinker's tool&6 of your own.",
+    "quest.overview.chapter1.description": "&e\"A Beginner of Tinkering\"&6 is the &efirst&6 chapter of the modpack.\n\nIn &e\"A Beginner of Tinkering\"&6, we will start from &ebasic items&6 of Tinker's Construct and learn the usage of four &eTinker's Tables&6, then build the first &eTinker's tool&6 of your own.",
     "quest.overview.chapter1.task": "Begin Chapter 1",
 
     "quest.chapters.title": "Chapters",
@@ -378,17 +378,20 @@
     "quest.chapters.1.tinker_station.description": "&eTinker Station&6 can let you combine &etool parts&6 into &eTinker's tools&6.\n\nTinker Stations require &ePatterns&6 and &eplanks&6 to craft.",
 
     "quest.chapters.1.crafting_station.title": "Crafting Station",
-    "quest.chapters.1.crafting_station.description": "&eCrafting Stations&6 can be seen as upgraded &eCrafting Tables&6. After closing the GUI, items can be &ekept in the crafting grid&6.\n\nCrafting Stations require a &ePattern&6 and a &eCrafting Table&6 to craft. Or directly craft from a &elog&6 and a &ePattern&6.",
+    "quest.chapters.1.crafting_station.description": "&eCrafting Stations&6 can be seen as upgraded &eCrafting Tables&6. After closing the GUI, items can be &ekept in the crafting grid&6.\n\nCrafting Stations require &ePatterns&6 and &eCrafting Tables&6 to craft. Or directly craft from &elogs&6 and &ePatterns&6.",
 
     "quest.chapters.1.part_chest.title": "Part Chest",
-    "quest.chapters.1.part_chest.description": "&ePart Chest&6 can store &elarge amount&6 of extra parts.\n\nPart Chests require a &ePattern&6, a &eChest&6, &eplanks&6 and &esticks&6 to craft.\n\nIf you accidentally made some wrong parts or picked up some useless parts, you can place them in the Part Chest.",
+    "quest.chapters.1.part_chest.description": "&ePart Chest&6 can store &elarge amount&6 of extra parts.\n\nPart Chests require &ePatterns&6, &eChests&6, &eplanks&6 and &esticks&6 to craft.\n\nIf you accidentally made some wrong parts or picked up some useless parts, you can place them in the Part Chest.",
+
+    "quest.chapters.1.tinkers_chest.title": "Tinker's Chest",
+    "quest.chapters.1.tinkers_chest.description": "&eTinker's Chest&6 can store &eany items&6. It has &e64&6 slots, but each slot can only store &e16&6 items. It can be &edyed using dyes&6. \n\nPart Chests require &ePatterns&6, &eChests&6, &eplanks&6 and &eLapis Lazuli&6 to craft.",
 
     "quest.chapters.1.tutorial_parts.title": "Tool Parts",
     "quest.chapters.1.tutorial_parts.description.1": "&eTool parts&6 can be combined into &eTinker's tools&6. Simple tool parts can be crafted in the &ePart Builder&6.\n\nTo make a &ePickaxe&6 for instance, we need to make:\n\n&6 - A &ePick Head\n\n&6 - A &eTool Handle\n\n&6 - A &eTool Binding",
-    "quest.chapters.1.tutorial_parts.task.pick_head": "Any Pick Head",
-    "quest.chapters.1.tutorial_parts.task.tool_handle": "Any Tool Handle",
-    "quest.chapters.1.tutorial_parts.task.tool_binding": "Any Tool Binding",
-    "quest.chapters.1.tutorial_parts.description.2": "&6As shown in the image above, &ePatterns&6 should be placed in the &eleftmost&6 slot in the Part Builder, while the &ematerial to be used&6 are placed to the right of the Patterns. After choosing &ethe part to craft&6 in the middle, you can get the corresponding part.\n\nLet’s try to make all three parts of a &ePickaxe&6 by yourself!\n\n&c&lNote: &r&6When crafting parts, Patterns are &cCONSUMED&6. Prepare &emore&6 patterns to craft more parts!",
+    "quest.chapters.1.tutorial_parts.task.pick_head": "Wooden Pick Head",
+    "quest.chapters.1.tutorial_parts.task.tool_handle": "Wooden Tool Handle",
+    "quest.chapters.1.tutorial_parts.task.tool_binding": "Wooden Tool Binding",
+    "quest.chapters.1.tutorial_parts.description.2": "&6As shown in the image above, &ePatterns&6 should be placed in the &eleftmost&6 slot in the Part Builder, while the &ematerial to be used&6 are placed to the right of the Patterns. After choosing &ethe part to craft&6 in the middle, you can get the corresponding part.\n\nLet's try to make all three parts of a &ePickaxe&6 by yourself!\n\n&c&lNote: &r&6When crafting parts, Patterns are &cCONSUMED&6. Prepare &emore&6 patterns to craft more parts!",
 
     "quest.chapters.1.part_builder_uncraftable.title": "Cannot shape?",
     "quest.chapters.1.part_builder_uncraftable.description": "&6Somtimes, you may try to shape some materials &etoo hard&6 to shape, &eiron&6 or other metal for instance.\n\n&6These materials &cCANNOT&6 be crafted in the Part Builder. This requires better &eforging methods&6 provided in future chapters.\n\n&c&lNote: &r&eCopper&6 is still craftable in the Part Builder, which is both cheap and effective for mining.",
@@ -397,9 +400,14 @@
     "quest.chapters.1.part_switching.description": "&6Now you have &ebetter parts&6, and may want to apply them to your tools.\n\nBut rebuilding the entire tool &ecosts much&6. Thus, you can use &eTinker Station&6 for &epart switching&6, as shown below:",
 
     "quest.chapters.1.tutorial_tools.title": "Your First Tool",
-    "quest.chapters.1.tutorial_tools.task": "Wooden Pickaxe and all parts' materials are Wood",
     "quest.chapters.1.tutorial_tools.description.1": "&6After preparing all parts needed, you can combine them into a tool at a &eTinker Station&6. The interface of the Tinker Station is shown below:",
-    "quest.chapters.1.tutorial_tools.description.2": "&6However, the default view is not helpful us to know how to build the tool. Click the button with a &ePickaxe&6 icon on the left, then you can see &e3 slots&6 to fill on the interface. Put &ecorresponding tool part&6 into the slots to build your own tool.",
+    "quest.chapters.1.tutorial_tools.description.2": "&6However, the default view is not helpful for us to know how to build the tool. Click the button with a &ePickaxe&6 icon on the left, then you can see &e3 slots&6 with icons of tool parts. Put &ecorresponding tool part&6 into the slots to build your own tool.",
+    "quest.chapters.1.tutorial_tools.task": "Wooden Pickaxe",
+
+    "quest.chapters.1.repair_kits.title": "Repair Kits",
+    "quest.chapters.1.repair_kits.description.1": "&6You can repair your tool at a &eTinker Station&6 using the material of your tool's head part.",
+    "quest.chapters.1.repair_kits.description.2": "&6However, &eRepair Kits&6 seem to be a more convenient choice, as they can directly repair tools in the &ecrafting grid&6. You can make Repair Kits at a &ePart Builder&6 just like common tool parts.",
+    "quest.chapters.1.repair_kits.task": "Any Repair Kit",
 
     "quest.chapters.1.other_tools.title": "Other tools",
     "quest.chapters.1.other_tools.description": "&6Try to make some other tools! They may require &edifferent types of parts&6. You can check the requirements in the &eTinker Station&6.",
@@ -408,13 +416,13 @@
     "quest.chapters.1.target_dummy.description": "&6Ever wondered how many damage is your tool dealing? Make a &eTarget Dummy&6 to test that!",
 
     "quest.chapters.1.more_materials.title": "More Materials",
-    "quest.chapters.1.more_materials.description": "&6Tools can made of not only wood, but &eother materials&6 as well.\n\nMaybe you can try to use &eRock&e and &eCopper&6 to make tools?\n\n&e“Knowledge is power.”&6 You can get inspirations from the books provided, such as &e“Materials And You”&6.",
+    "quest.chapters.1.more_materials.description": "&6Tools can made of not only wood, but &eother materials&6 as well.\n\nMaybe you can try to use &eRock&e and &eCopper&6 to make tools?\n\n&e\"Knowledge is power.\"&6 You can get inspirations from the books provided, such as &e\"Materials And You\"&6.",
     "quest.chapters.1.more_materials.task.rock": "Any Rock part",
     "quest.chapters.1.more_materials.task.copper": "Any Copper part",
 
     "quest.chapters.1.distinct_materials.title": "Permutation \\& Combination",
     "quest.chapters.1.distinct_materials.description": "&6You can use &edifferent&6 materials in differnt parts of the tool.",
-    "quest.chapters.1.distinct_materials.task": "Any tool with all parts’ materials different",
+    "quest.chapters.1.distinct_materials.task": "Any tool with all parts' materials different",
 
     "quest.chapters.1.travelers_set.title": "Traveler's Set",
     "quest.chapters.1.travelers_set.description": "&ePlate Armor&6 specializes in &eprotection&6, but require better forging method.\n\n&eTraveler's Set&6 seems to be a good starter armor for beginners. These armor can provide &ea little protection&6 (about &e75%&6 of Plate Armor), but better than nothing.",
@@ -424,9 +432,14 @@
     "quest.chapters.1.travelers_set.task.boots": "Any Traveler's Boots",
 
     "quest.chapters.1.modifiers.title": "Modifiers",
-    "quest.chapters.1.modifiers.description.1": "&eModifiers&6 may &eenhance your tool&6. You can apply modifiers at a &eTinker Station&6.\n\nLet's apply a &e“Swiftstrike”&6 modifier as an example.",
-    "quest.chapters.1.modifiers.task": "Any tool with modifier “Swiftstrike”",
+    "quest.chapters.1.modifiers.description.1": "&eModifiers&6 may &eenhance your tool&6. You can apply modifiers at a &eTinker Station&6.\n\nLet's apply a &eSwiftstrike&6 modifier as an example.\n\nYou can view recipes of modifiers in the &eJEI&6.",
+    "quest.chapters.1.modifiers.task": "Any tool with Swiftstrike modifier",
     "quest.chapters.1.modifiers.description.2": "&6As the image shown above, among the four slots on the left side of the arrow, your tool should be placed in the &erightmost&6 slot. Then the items required for the modifier should be placed in the &eleft 3 slots&6.\n\nIn this case, you need &e18 Blocks of Amethyst&6 or &e72 Amethyst Shards&6.",
+
+    "quest.chapters.1.more_modifiers.title": "More modifiers",
+    "quest.chapters.1.more_modifiers.description.1": "&6Maybe you can try &emore modifiers&6. For example, &eSpeedy&6, &eHaste&6 or &eSharpness&6.\n\nApplying &ethe same modifier recipe&6 on &edifferent tool types&6, the modifier applied &emay differs&6. Using &eRedstone&6 as modifier item, &eHaste&6 is applied on &ePixkaxes&6 or other tools, while &eSpeedy&6 is applied on &eLeggings&6.",
+    "quest.chapters.1.more_modifiers.task.speedy": "Any tool with Speedy modifier or Haste modifier",
+    "quest.chapters.1.more_modifiers.task.sharpness": "Any tool with Sharpness modifier",
 
     "quest.chapters.1.ready.title": "I'm Ready",
     "quest.chapters.1.ready.description.1": "&6Explore the &etinkering system&6 by yourself.\n\nWhen you are ready for the coming &eBoss challenge&6, click the checkmark above.",
