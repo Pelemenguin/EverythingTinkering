@@ -687,6 +687,70 @@ declare namespace Annotation {
              */
             onProjectileLaunch?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, shooter: Internal.LivingEntity, ammo: Internal.ItemStack, projectile: Internal.Projectile, arrow: Internal.AbstractArrow | null, persistent: Internal.ModDataNBT, isPrimary: boolean) => void,
             /**
+             * Called when interacting with a block before calling the block's interaction method.
+             * In general, it's better to use {@linkcode ModifierHookArgument.afterBlockUse afterBlockUse} for consistency with vanilla behavior.  
+             * 在调用方块的交互方法之前与方块交互时调用。
+             * 一般来说，为了与原版行为保持一致，最好使用{@linkcode ModifierHookArgument.afterBlockUse afterBlockUse}。
+             * - - - - -
+             * @param tool     Tool performing interaction
+             *                 执行交互的工具
+             * 
+             * @param modifier Modifier instance
+             *                 特性实例
+             * 
+             * @param context  Usage context
+             *                 使用上下文
+             * 
+             * @param source   Source of the interaction  
+             *                 交互的来源
+             * 
+             * @returns        Return `PASS` or `FAIL` to allow vanilla handling, any other to stop vanilla and later modifiers from running.
+             *                 返回`PASS`或`FAIL`以允许原版处理，返回其它任何值将阻止原版和更后面的特性运行。
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     beforeBlockUse: (tool, modifier, context, source) => {
+             *         context.getPlayer().heal(4);
+             *         // Heal 2 hearts when using the tool on a block
+             *         // 在方块上使用工具时治疗2颗心
+             * 
+             *         return "pass";
+             *     }
+             * });
+             */
+            beforeBlockUse?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.UseOnContext, source: Internal.InteractionSource) => Internal.InteractionResult_,
+            /**
+             * Called when interacting with a block after calling the block's interaction method.  
+             * 在调用方块的交互方法之后与方块交互时调用。
+             * - - - - -
+             * @param tool     Tool performing interaction
+             *                 执行交互的工具
+             * 
+             * @param modifier Modifier instance
+             *                 特性实例
+             * 
+             * @param context  Usage context
+             *                 使用上下文
+             * 
+             * @param source   Source of the interaction  
+             *                 交互的来源
+             * 
+             * @returns        Return `PASS` or `FAIL` to allow vanilla handling, any other to stop vanilla and later modifiers from running.
+             *                 返回`PASS`或`FAIL`以允许原版处理，返回其它任何值将阻止原版和更后面的特性运行。
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     beforeBlockUse: (tool, modifier, context, source) => {
+             *         context.getPlayer().heal(4);
+             *         // Heal 2 hearts when using the tool on a block
+             *         // 在方块上使用工具时治疗2颗心
+             * 
+             *         return "pass";
+             *     }
+             * });
+             */
+            afterBlockUse?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.UseOnContext, source: Internal.InteractionSource) => Internal.InteractionResult_,
+            /**
              * Some custom methods for modifiers written by our KubeJS scripts.
              * These are not standard Tinker's Construct modifier hooks.  
              * 使用我们的KubeJS脚本编写的一些自定义方法，

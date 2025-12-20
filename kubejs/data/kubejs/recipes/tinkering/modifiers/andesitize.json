@@ -1,0 +1,30 @@
+{
+    "type": "tconstruct:modifier",
+    "tools": {
+        "tag": "tconstruct:modifiable/interactable"
+    },
+    "inputs": [
+        {
+            "item": "minecraft:stone",
+            "amount_needed": 4
+        },
+        {
+            "item": "minecraft:lava_bucket",
+            "amount_needed": 1
+        },
+        {
+            "item": "create:andesite_alloy",
+            "amount_needed": 4
+        }
+    ],
+    "slots": {
+        "abilities": 1
+    },
+    "result": "kubejs:andesitize",
+    "level": {
+        "max": 1
+    },
+    "check_trait_level": true,
+    "allow_crystal": true
+
+}

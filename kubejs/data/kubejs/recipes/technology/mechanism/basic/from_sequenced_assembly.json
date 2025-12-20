@@ -1,0 +1,67 @@
+{
+    "type": "create:sequenced_assembly",
+    "ingredient": {
+        "item": "tconstruct:pattern"
+    },
+    "loops": 1,
+    "results": [
+        {
+            "chance": 100,
+            "item": "kubejs:basic_mechanism",
+            "count": 2
+        }
+    ],
+    "sequence": [
+        {
+            "type": "create:deploying",
+            "ingredients": [
+                {
+                    "item": "kubejs:basic_mechanism"
+                },
+                {
+                    "item": "create:andesite_alloy"
+                }
+            ],
+            "results": [
+                {
+                    "item": "kubejs:basic_mechanism"
+                }
+            ]
+        },
+        {
+            "type": "create:deploying",
+            "ingredients": [
+                {
+                    "item": "kubejs:basic_mechanism"
+                },
+                {
+                    "item": "create:andesite_alloy"
+                }
+            ],
+            "results": [
+                {
+                    "item": "kubejs:basic_mechanism"
+                }
+            ]
+        },
+        {
+            "type": "create:deploying",
+            "ingredients": [
+                {
+                    "item": "kubejs:basic_mechanism"
+                },
+                {
+                    "item": "create:andesite_alloy"
+                }
+            ],
+            "results": [
+                {
+                    "item": "kubejs:basic_mechanism"
+                }
+            ]
+        }
+    ],
+    "transitionalItem": {
+        "item": "kubejs:incomplete_basic_mechanism"
+    }
+}

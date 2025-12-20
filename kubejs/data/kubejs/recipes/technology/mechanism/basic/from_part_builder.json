@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:item_part_builder",
+    "pattern": "kubejs:mechanism",
+    "material": "kubejs:andesite_alloy",
+    "cost": 4,
+    "result": {
+        "item": "kubejs:basic_mechanism"
+    }
+}

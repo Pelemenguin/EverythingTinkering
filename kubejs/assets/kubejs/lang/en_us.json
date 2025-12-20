@@ -10,6 +10,9 @@
     "item.kubejs.icy_terracube_treasure_bag": "Icy Terracube Treasure Bag",
     "item.kubejs.icy_terracube_treasure_bag_no_hit": "Icy Terracube Treasure Bag (No Hit)",
 
+    "item.kubejs.basic_mechanism": "Basic Mechanism",
+    "item.kubejs.incomplete_basic_mechanism": "Incomplete Basic Mechanism",
+
         "_comment_entities": " ----- Entities ----- ",
 
     "entity.kubejs.boss.despawn": "%s has lost all its targets",
@@ -266,6 +269,10 @@
     "modifier.kubejs.warped.flavor": "Who is crying...",
     "modifier.kubejs.warped.description": "Grants protection in the Warped Forests",
 
+    "modifier.kubejs.andesitize": "Andesitize", 
+    "modifier.kubejs.andesitize.flavor": "What's this? ...Diorite?",
+    "modifier.kubejs.andesitize.description": "Interact with Stone blocks to convert them to Andesite",
+
     "modifier.kubejs.glacial_strike": "Glacial Strike",
     "modifier.kubejs.glacial_strike.flavor": "Ever imagined an iceberg jumping meters high to smash you?",
     "modifier.kubejs.glacial_strike.description": "Press the \"Glacial Strike\" key to leap up, then press again while falling to slam into the ground. Damages targets in an area upon landing.",
@@ -358,10 +365,10 @@
     "quest.overview.begin.title": "Start here",
 
     "quest.overview.chapter1.title": "A Beginner of Tinkering",
-    "quest.overview.chapter1.description": "&e\"A Beginner of Tinkering\"&6 is the &efirst&6 chapter of the modpack.\n\nIn &e\"A Beginner of Tinkering\"&6, we will start from &ebasic items&6 of Tinker's Construct and learn the usage of four &eTinker's Tables&6, then build the first &eTinker's tool&6 of your own.",
+    "quest.overview.chapter1.description": "&e\"A Beginner of Tinkering\"&6 is the &efirst&6 chapter of the Main Line.\n\nIn &e\"A Beginner of Tinkering\"&6, we will start from &ebasic items&6 of Tinker's Construct and learn the usage of four &eTinker's Tables&6, then build the first &eTinker's tool&6 of your own.",
     "quest.overview.chapter1.task": "Begin Chapter 1",
 
-    "quest.chapters.title": "Chapters",
+    "quest.chapters.title": "Main Line",
 
     "quest.chapters.1.title": "&31 &bA Beginner of Tinkering",
 
@@ -424,8 +431,8 @@
     "quest.chapters.1.distinct_materials.description": "&6You can use &edifferent&6 materials in differnt parts of the tool.",
     "quest.chapters.1.distinct_materials.task": "Any tool with all parts' materials different",
 
-    "quest.chapters.1.travelers_set.title": "Traveler's Set",
-    "quest.chapters.1.travelers_set.description": "&ePlate Armor&6 specializes in &eprotection&6, but require better forging method.\n\n&eTraveler's Set&6 seems to be a good starter armor for beginners. These armor can provide &ea little protection&6 (about &e75%&6 of Plate Armor), but better than nothing.",
+    "quest.chapters.1.travelers_set.title": "Traveler's Armor",
+    "quest.chapters.1.travelers_set.description": "&ePlate Armor&6 specializes in &eprotection&6, but require better forging method.\n\n&eTraveler's Armor&6 seems to be a good starter armor for beginners. These armor can provide &ea little protection&6 (about &e75%&6 of Plate Armor), but better than nothing.",
     "quest.chapters.1.travelers_set.task.helmet": "Any Traveler's Goggles",
     "quest.chapters.1.travelers_set.task.chestplate": "Any Traveler's Vest",
     "quest.chapters.1.travelers_set.task.leggings": "Any Traveler's Pants",
@@ -443,7 +450,7 @@
 
     "quest.chapters.1.ready.title": "I'm Ready",
     "quest.chapters.1.ready.description.1": "&6Explore the &etinkering system&6 by yourself.\n\nWhen you are ready for the coming &eBoss challenge&6, click the checkmark above.",
-    "quest.chapters.1.ready.description.2": "&aHow do I know whether I'm ready or not?\n\n&6 - Attack damage reach &e8 points&6 per hit or above\n&6 - Have a full set of &eTraveler's Set&6\n&6 - Obtain at least &e20%%&6 movement speed boost\n\nOr you can ignore these criteria if you are skilled enough.",
+    "quest.chapters.1.ready.description.2": "&aHow do I know whether I'm ready or not?\n\n&6 - Attack damage reach &e8 points&6 per hit or above\n&6 - Have a full set of &eTraveler's Armor&6\n&6 - Obtain at least &e20%%&6 movement speed boost\n\nOr you can ignore these criteria if you are skilled enough.",
     "quest.chapters.1.ready.task": "&cDON'T CLICK&r before you're ready",
 
     "quest.chapters.1.frozen_terracube_core.title": "Frozen Terracube Core",
@@ -455,6 +462,33 @@
     "quest.chapters.1.icy_terracube_no_hit.title": "No Hit Challenge",
     "quest.chapters.1.icy_terracube_no_hit.description": "&6Defeat an &eIcy Terracube&6 without &etaking ANY damage&6.",
 
-        "_comment_end": "I don't want to remove commasat the end of the JSON  any more you know? I just place one line here so that all lines above can hava a comma"
+    "quest.technology_chapters.title": "Technology Line",
+    
+    "quest.technology_chapters.1.title": "&2T1 &aFundamentals of Mechanics",
+
+    "quest.technology_chapters.1.andesite_alloy.title": "Andesite Alloy",
+    "quest.technology_chapters.1.andesite_alloy.description": "&6Make some &eAndesite Alloy&6 by crafting from &eAndesite&6 and &eIron Nuggets&6, which is the fundamental for developing &eCreate&6.",
+
+    "quest.technology_chapters.1.andesitize.title": "Andesitize",
+    "quest.technology_chapters.1.andesitize.description": "&6The &eAndesitize&6 modifier allows you to &etransform Stone into Andesite&6. This enables &eautomated Andesite production&6, simply have a &eDeployer&6 right-click Stone for you.",
+    "quest.technology_chapters.1.andesitize.task": "Any tool with Andesitize modifier",
+
+    "quest.technology_chapters.1.basic_mechanism.title": "Basic Mechanism",
+    "quest.technology_chapters.1.basic_mechanism.description": "&6Craft a &eBasic Mechanism&6 from &eAndesite Alloy&6 in a &ePart Builder&6.\n\nThe Basic Mechanism is used to create a series of machines with &eAndesite Casing&6 as their housing. These machines facilitate the &eautomation&6 of Basic Mechanism production.",
+
+    "quest.technology_chapters.1.andesite_casing.title": "Andesite Casing",
+    "quest.technology_chapters.1.andesite_casing.description": "&6The &eAndesite Casing&6 forms the housing for most basic machines.\n\nTo craft one, &einteract with a placed Stripped Log while holding Andesite Alloy&6.",
+
+    "quest.technology_chapters.1.mechanical_press.title": "Mechanical Press",
+    "quest.technology_chapters.1.mechanical_press.description": "&6The &eMechanical Press&6 can &ecompress items&6, such as pressing metal ingots into &esheets&6.",
+
+    "quest.technology_chapters.1.deployer.title": "Deployer",
+    "quest.technology_chapters.1.deployer.description": "&6The &eDeployer&6 can &emimic a player using an item&6. Sometimes, it can perform actions &eunavailable to players&6, as certain recipes &emust be completed by a Deployer&6.\n\n&e\"What are you pointing at? Huh? What are you pointing at?\"",
+
+        "_comment_recipes": " ----- Recipes ----- ",
+    
+    "pattern.kubejs.mechanism": "Mechanism",
+
+        "_comment_end": "I don't want to remove commas at the end of the JSON  any more you know? I just place one line here so that all lines above can hava a comma"
 
 }

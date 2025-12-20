@@ -1,0 +1,17 @@
+{
+    "type": "create:filling",
+    "ingredients": [
+        {
+            "item": "minecraft:andesite"
+        },
+        {
+            "amount": 10,
+            "fluid": "tconstruct:molten_zinc"
+        }
+    ],
+    "results": [
+        {
+            "item": "create:andesite_alloy"
+        }
+    ]
+}

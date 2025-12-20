@@ -1,0 +1,116 @@
+{
+	autofocus_id: "373CAC58538A4432"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "technology_chapter1"
+	group: "2ED0E2423D5B5BA9"
+	icon: "kubejs:basic_mechanism"
+	id: "004D354E13832EF7"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["4A2993793923C62D"]
+			description: ["{quest.technology_chapters.1.andesite_alloy.description}"]
+			hide_until_deps_complete: true
+			id: "373CAC58538A4432"
+			tasks: [{
+				id: "4020698DB9D763D7"
+				item: "create:andesite_alloy"
+				type: "item"
+			}]
+			title: "{quest.technology_chapters.1.andesite_alloy.title}"
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"373CAC58538A4432"
+				"0ADFAF04FCF99444"
+			]
+			description: ["{quest.technology_chapters.1.basic_mechanism.description}"]
+			id: "4DCEC57DF2B5852E"
+			tasks: [{
+				id: "7F35B80BB4244348"
+				item: "kubejs:basic_mechanism"
+				type: "item"
+			}]
+			title: "{quest.technology_chapters.1.basic_mechanism.title}"
+			x: 2.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["373CAC58538A4432"]
+			description: ["{quest.technology_chapters.1.andesite_casing.description}"]
+			id: "58C7E2EAA389A846"
+			tasks: [{
+				id: "3D3CD7EA26318C83"
+				item: "create:andesite_casing"
+				type: "item"
+			}]
+			title: "{quest.technology_chapters.1.andesite_casing.title}"
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"4DCEC57DF2B5852E"
+				"58C7E2EAA389A846"
+			]
+			description: ["{quest.technology_chapters.1.mechanical_press.description}"]
+			id: "248DDAFC830C883A"
+			tasks: [{
+				id: "07102D4991C35D0C"
+				item: "create:mechanical_press"
+				type: "item"
+			}]
+			title: "{quest.technology_chapters.1.mechanical_press.title}"
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["248DDAFC830C883A"]
+			description: ["{quest.technology_chapters.1.deployer.description}"]
+			id: "4028AB7CCF3C0BCA"
+			tasks: [{
+				id: "7E5768D20E24CA63"
+				item: "create:deployer"
+				type: "item"
+			}]
+			title: "{quest.technology_chapters.1.deployer.title}"
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"373CAC58538A4432"
+				"4028AB7CCF3C0BCA"
+			]
+			description: ["{quest.technology_chapters.1.andesitize.description}"]
+			id: "0798705C62D88A2A"
+			tasks: [{
+				icon: {
+					Count: 1
+					id: "ftbquests:custom_icon"
+					tag: {
+						Icon: "kubejs:gui/modifiers/andesitize"
+					}
+				}
+				id: "24A580FADA4BDE9F"
+				item: {
+					Count: 1
+					id: "ftbfiltersystem:smart_filter"
+					tag: {
+						"ftbfiltersystem:filter": "custom(ToolModifiedTest/{\"kubejs:andesitize\":1})"
+					}
+				}
+				title: "{quest.technology_chapters.1.andesitize.task}"
+				type: "item"
+			}]
+			title: "{quest.technology_chapters.1.andesitize.title}"
+			x: 4.0d
+			y: 2.0d
+		}
+	]
+	title: "{quest.technology_chapters.1.title}"
+}

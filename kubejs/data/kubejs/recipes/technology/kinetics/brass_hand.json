@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "M": {
+            "item": "kubejs:basic_mechanism"
+        },
+        "G": {
+            "tag": "forge:plates/gold"
+        }
+    },
+    "pattern": [
+        " M ",
+        "GGG",
+        " G "
+    ],
+    "result": {
+        "item": "create:brass_hand"
+    },
+    "show_notification": true
+}

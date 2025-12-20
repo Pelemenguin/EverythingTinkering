@@ -11,6 +11,9 @@
     "item.kubejs.icy_terracube_treasure_bag": "寒冰黏土怪宝藏袋",
     "item.kubejs.icy_terracube_treasure_bag_no_hit": "寒冰黏土怪宝藏袋（无伤）",
 
+    "item.kubejs.basic_mechanism": "基础构件",
+    "item.kubejs.incomplete_basic_mechanism": "基础构建（半成品）",
+
         "_comment_entities": " ----- 实体 ----- ",
 
     "entity.kubejs.boss.despawn": "%s丢失了其所有目标",
@@ -269,6 +272,10 @@
     "modifier.kubejs.warped.flavor": "是谁在哭……",
     "modifier.kubejs.warped.description": "在诡异森林中增加保护",
 
+    "modifier.kubejs.andesitize": "安山化", 
+    "modifier.kubejs.andesitize.flavor": "这是什么？……闪长岩？",
+    "modifier.kubejs.andesitize.description": "与石头方块交互后将其转化为安山岩",
+
     "modifier.kubejs.glacial_strike": "冰滞冲击",
     "modifier.kubejs.glacial_strike.flavor": "你有没有想象过一座冰山跳几米高砸你？",
     "modifier.kubejs.glacial_strike.description": "按下“冰滞冲击”按键跳起，再按一次以砸向地面。落地时对范围内的目标造成伤害",
@@ -361,15 +368,16 @@
     "quest.overview.begin.title": "从这里出发",
 
     "quest.overview.chapter1.title": "工匠学徒",
-    "quest.overview.chapter1.description": "&e“工匠学徒”&6是整合包的&e第一个&6章节。\n\n在&e“工匠学徒”&6章节中，我们将会从匠魂的&e基本物品&6入手，学习四种&6功能台&e的用法，并制作出属于你的第一个&e匠魂工具&6。",
+    "quest.overview.chapter1.description": "&e“工匠学徒”&6是主线的&e第一个&6章节。\n\n在&e“工匠学徒”&6章节中，我们将会从匠魂的&e基本物品&6入手，学习四种&6功能台&e的用法，并制作出属于你的第一个&e匠魂工具&6。",
     "quest.overview.chapter1.task": "开启第一章",
+
+    "quest.overview.technology_chapter1.title": "机械学初步",
+    "quest.overview.technology_chapter1.description": "&e“机械学”&6是科技线的&e第一个&6章节。\n\n在&e“机械学”&6章节中，我们通过&e机械动力&7 (Create) &6制造出&e基础构件&6，并制作&e安山系列机械&6。",
+    "quest.overview.technology_chapter1.task": "开启科技线第一章",
 
     "quest.chapters.title": "章节",
 
     "quest.chapters.1.title": "&31 &b工匠学徒",
-
-    "quest.chapters.1.begin.title": "工匠学徒",
-    "quest.chapters.1.begin.subtitle": "简单的材料塑形",
 
     "quest.chapters.1.patterns.title": "模具",
     "quest.chapters.1.patterns.description": "&e模具&6&7 (Pattern) &6是每一个新手工匠所必备的物品。\n\n模具只需要&e木板&6和&e木棍&6制作，造价低廉，可以进行简单的&e材料塑形&6。",
@@ -457,6 +465,33 @@
 
     "quest.chapters.1.icy_terracube_no_hit.title": "无伤挑战",
     "quest.chapters.1.icy_terracube_no_hit.description": "&6在不受到&e任何伤害&6的情况下击败一只&e寒冰黏土怪&6。",
+
+    "quest.technology_chapters.title": "科技线",
+    
+    "quest.technology_chapters.1.title": "&2T1 &a机械学初步",
+
+    "quest.technology_chapters.1.andesite_alloy.title": "安山合金",
+    "quest.technology_chapters.1.andesite_alloy.description": "&6将&e安山岩&7 (Andesite) &6与&e铁粒&7 (Iron Nugget) &6制作为&e安山合金&7 (Andesite Alloy) &6。安山合金是发展&e机械动力&6的基础。",
+
+    "quest.technology_chapters.1.andesitize.title": "安山化",
+    "quest.technology_chapters.1.andesitize.description": "&e安山化&7 (Andesitize) &6特性能够&e将石头转化为安山岩&6。这能帮助你&e自动化获取安山岩&6，你只需要让&e机械手&6帮你右键石头即可。",
+    "quest.technology_chapters.1.andesitize.task": "任意带有“安山化”强化的工具",
+
+    "quest.technology_chapters.1.basic_mechanism.title": "基础构件",
+    "quest.technology_chapters.1.basic_mechanism.description": "&6在&e部件加工台&6中，可以将&e安山合金&6制作为&e基础构件&7 (Basic Mechanism) &6。\n\n基础构件能够制作一系列以&e安山机壳&6为外壳的机械。这些机械有利于实现基础构件的&e自动化&6。",
+
+    "quest.technology_chapters.1.andesite_casing.title": "安山机壳",
+    "quest.technology_chapters.1.andesite_casing.description": "&e安山机壳&7 (Andesite Casing) &6是大多数初级机械的外壳。\n\n要制作安山机壳，你需要&e手持安山合金&6对着&e放置的去皮原木&6交互。",
+
+    "quest.technology_chapters.1.mechanical_press.title": "动力冲压机",
+    "quest.technology_chapters.1.mechanical_press.description": "&e动力冲压机&7 (Mechanical Press) &6能够将&e压缩物品&6，例如将金属&e压制成板&6。",
+
+    "quest.technology_chapters.1.deployer.title": "机械手",
+    "quest.technology_chapters.1.deployer.description": "&e机械手&7 (Deployer) &6能够&e模拟玩家使用物品&6。有些时候，机械手能够做到玩家&e做不到的事情&6，因为部分配方必须&e由机械手完成&6。\n\n&e“指什么指？指什么指？”",
+
+        "_comment_recipes": " ----- 配方 ----- ",
+    
+    "pattern.kubejs.mechanism": "构件",
 
         "_comment_end": "我不想再在JSON末尾手动去逗号了你知道吗，我就在这放一行，这样前面的就可以都加上逗号了"
 

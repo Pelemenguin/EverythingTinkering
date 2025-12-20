@@ -26,4 +26,8 @@ ServerEvents.recipes(event => {
     event.remove({id: "tconstruct:smeltery/seared/grout"});
     event.remove({id: "tconstruct:smeltery/seared/grout_multiple"});
 
+    // Remove Create mechines
+    event.remove({id: "create:crafting/kinetics/mechanical_press"});
+    event.remove({id: "create:crafting/kinetics/deployer"});
+
 });

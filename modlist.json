@@ -193,6 +193,18 @@
             "version": "15.20.0.106"
         },
         {
+            "name": "KubeJS Create",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/kubejs-create",
+            "author": "LatvianModder",
+            "curse_id": {
+                "project": 429371,
+                "file": 6265498
+            },
+            "raw_file_name": "kubejs-create-forge-2001.3.0-build.8.jar",
+            "mod_id": "kubejs_create",
+            "version": "2001.3.0-build.8"
+        },
+        {
             "name": "KubeJS",
             "url": "https://www.curseforge.com/minecraft/mc-mods/kubejs",
             "author": "LatvianModder",

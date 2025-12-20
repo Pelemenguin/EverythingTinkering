@@ -1,3 +1,6 @@
 {
-	chapter_groups: [{ id: "43F07E96C8672AA1", title: "{quest.chapters.title}" }]
+	chapter_groups: [
+		{ id: "43F07E96C8672AA1", title: "{quest.chapters.title}" }
+		{ id: "2ED0E2423D5B5BA9", title: "{quest.technology_chapters.title}" }
+	]
 }

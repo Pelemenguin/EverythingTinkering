@@ -26,7 +26,7 @@
 				type: "checkmark"
 			}]
 			title: "{quest.chapters.1.begin.title}"
-			x: 2.0d
+			x: 4.0d
 			y: 0.0d
 		}
 		{
@@ -63,8 +63,23 @@
 				type: "kill"
 				value: 1L
 			}]
-			x: 4.0d
+			x: 8.0d
 			y: 0.0d
+		}
+		{
+			dependencies: ["37BFF5CC64E72C93"]
+			description: ["{quest.overview.technology_chapter1.description}"]
+			id: "4A2993793923C62D"
+			optional: true
+			shape: "square"
+			tasks: [{
+				id: "1FFC76A0ADBF346C"
+				title: "{quest.overview.technology_chapter1.task}"
+				type: "checkmark"
+			}]
+			title: "{quest.overview.technology_chapter1.title}"
+			x: 2.14d
+			y: -1.5d
 		}
 	]
 	title: "{quest.overview.title}"

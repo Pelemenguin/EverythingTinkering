@@ -57,9 +57,11 @@ let HOOK_TO_IMPLEMENTING_INTERFACE = {
     "onBreakSpeed": "slimeknights.tconstruct.library.modifiers.hook.mining.BreakSpeedModifierHook",
     "afterBlockBreak": "slimeknights.tconstruct.library.modifiers.hook.mining.BlockBreakModifierHook",
     "onProjectileLaunch": "slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook",
+    "beforeBlockUse": "slimeknights.tconstruct.library.modifiers.hook.interaction.BlockInteractionModifierHook",
+    "afterBlockUse": "slimeknights.tconstruct.library.modifiers.hook.interaction.BlockInteractionModifierHook"
 };
 
-/** @type {Object<string, [string[], string, <P extends any[], R>(func: (...args: P) => R) => (...args: P) => R]>} */
+/** @type {{[hook in Annotation.TinkerFunction.ModifierHooks]: [string[], string, (func: Annotation.TinkerFunction.ModifierHookArgument[hook]) => Annotation.TinkerFunction.ModifierHookArgument[hook]]}} */
 let HOOK_TO_METHOD_PARAMETERS = {
     "modifyStat": [
         [
@@ -72,7 +74,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "float",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5) => {
+            return (arg0, arg1, arg2, arg3, arg4, arg5) => {
                 try {
                     return func(arg0, arg1, arg2, arg3, arg4, arg5);
                 } catch (e) {
@@ -92,7 +94,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "int",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4) => {
+            return (arg0, arg1, arg2, arg3, arg4) => {
                 try {
                     return func(arg0, arg1, arg2, arg3, arg4);
                 } catch (e) {
@@ -115,7 +117,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "void",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5, arg6, arg7) => {
+            return (arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) => {
                 try {
                     func(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
                 } catch (e) {
@@ -135,7 +137,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "void",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5) => {
+            return (arg0, arg1, arg2, arg3, arg4, arg5) => {
                 try {
                     func(arg0, arg1, arg2, arg3, arg4, arg5);
                 } catch (e) {
@@ -184,7 +186,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "void",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2) => {
+            return (arg0, arg1, arg2) => {
                 try {
                     func(arg0, arg1, arg2);
                 } catch (e) {
@@ -200,7 +202,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "net.minecraft.network.chat.Component",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1) => {
+            return (arg0, arg1) => {
                 try {
                     return func(arg0, arg1);
                 } catch (e) {
@@ -235,7 +237,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "float",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4) => {
+            return (arg0, arg1, arg2, arg3, arg4) => {
                 try {
                     return func(arg0, arg1, arg2, arg3, arg4);
                 } catch (e) {
@@ -256,7 +258,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "float",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5) => {
+            return (arg0, arg1, arg2, arg3, arg4, arg5) => {
                 try {
                     return func(arg0, arg1, arg2, arg3, arg4, arg5);
                 } catch (e) {
@@ -275,7 +277,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "void",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3) => {
+            return (arg0, arg1, arg2, arg3) => {
                 try {
                     func(arg0, arg1, arg2, arg3);
                 } catch (e) {
@@ -295,7 +297,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "float",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5) => {
+            return (arg0, arg1, arg2, arg3, arg4, arg5) => {
                 try {
                     return func(arg0, arg1, arg2, arg3, arg4, arg5);
                 } catch (e) {
@@ -317,7 +319,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "void",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5, arg6) => {
+            return (arg0, arg1, arg2, arg3, arg4, arg5, arg6) => {
                 try {
                     func(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
                 } catch (e) {
@@ -338,7 +340,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "float",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5, arg6) => {
+            return (arg0, arg1, arg2, arg3, arg4, arg5, arg6) => {
                 try {
                     return func(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
                 } catch (e) {
@@ -359,7 +361,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "void",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5) => {
+            return (arg0, arg1, arg2, arg3, arg4, arg5) => {
                 try {
                     func(arg0, arg1, arg2, arg3, arg4, arg5);
                 } catch (e) {
@@ -376,7 +378,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "void",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2) => {
+            return (arg0, arg1, arg2) => {
                 try {
                     func(arg0, arg1, arg2);
                 } catch (e) {
@@ -398,7 +400,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
         ],
         "void",
         (func) => {
-            return (arg0, /** @type {Internal.ModifierEntry} */ arg1, arg2, arg3, arg4, arg5, arg6, arg7) => {
+            return (arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) => {
                 try {
                     func(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
                 } catch (e) {
@@ -406,10 +408,48 @@ let HOOK_TO_METHOD_PARAMETERS = {
                 }
             };
         }
+    ],
+    "beforeBlockUse": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "net.minecraft.world.item.context.UseOnContext",
+            "slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource"
+        ],
+        "net.minecraft.world.InteractionResult",
+        (func) => {
+            return (arg0, arg1, arg2, arg3) => {
+                try {
+                    return func(arg0, arg1, arg2, arg3);
+                } catch (e) {
+                    console.error(`Error in beforeBlockUse of modifier ${arg1.getId().toString()}: ${e}`);
+                    return "pass";
+                }
+            };
+        }
+    ],
+    "afterBlockUse": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "net.minecraft.world.item.context.UseOnContext",
+            "slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource"
+        ],
+        "net.minecraft.world.InteractionResult",
+        (func) => {
+            return (arg0, arg1, arg2, arg3) => {
+                try {
+                    return func(arg0, arg1, arg2, arg3);
+                } catch (e) {
+                    console.error(`Error in beforeBlockUse of modifier ${arg1.getId().toString()}: ${e}`);
+                    return "pass";
+                }
+            };
+        }
     ]
 };
 
-/** @type {{[x: string]: [string, string, string]}} */
+/** @type {{[x in Annotation.TinkerFunction.ModifierHooks]: [string, string, string]}} */
 let HOOK_TO_FIELDS = {
     "modifyStat": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "CONDITIONAL_STAT", "slimeknights.tconstruct.library.module.ModuleHook"],
     "onDamageTool": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "TOOL_DAMAGE", "slimeknights.tconstruct.library.module.ModuleHook"],
@@ -428,7 +468,9 @@ let HOOK_TO_FIELDS = {
     "modifyDamageTaken": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MODIFY_HURT", "slimeknights.tconstruct.library.module.ModuleHook"],
     "onBreakSpeed": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "BREAK_SPEED", "slimeknights.tconstruct.library.module.ModuleHook"],
     "afterBlockBreak": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "BLOCK_BREAK", "slimeknights.tconstruct.library.module.ModuleHook"],
-    "onProjectileLaunch": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "PROJECTILE_LAUNCH", "slimeknights.tconstruct.library.module.ModuleHook"]
+    "onProjectileLaunch": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "PROJECTILE_LAUNCH", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "beforeBlockUse": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "BLOCK_INTERACT", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "afterBlockUse": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "BLOCK_INTERACT", "slimeknights.tconstruct.library.module.ModuleHook"],
 };
 
 const ModifierManager = {

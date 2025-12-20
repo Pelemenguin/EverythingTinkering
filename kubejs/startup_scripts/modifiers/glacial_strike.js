@@ -47,9 +47,9 @@ KubeJSNetworkHelper.register("GlacialStrikeMessage", 378294469, {
         switch (action) {
             // Jump
             case 0: {
-                context.get().getSender().addDeltaMovement([0, 1, 0]);
-
                 if (persistent.getInt("SinceLastJump") < 20) return;
+
+                context.get().getSender().addDeltaMovement([0, 1, 0]);
 
                 persistent.putInt("SinceLastJump", 0);
                 persistent.putByte("IsJumping", 1);
@@ -60,9 +60,9 @@ KubeJSNetworkHelper.register("GlacialStrikeMessage", 378294469, {
             }
             // Fall
             case 1: {
-                context.get().getSender().addDeltaMovement([0, -3, 0]);
-
                 if (persistent.getByte("IsJumping") == 0) return;
+
+                context.get().getSender().addDeltaMovement([0, -3, 0]);
 
                 persistent.putDouble("FallPosition", context.get().getSender().getY());
                 persistent.putByte("IsFalling", 1);

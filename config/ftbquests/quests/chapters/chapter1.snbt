@@ -21,7 +21,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.patterns.title}"
-			x: 2.0d
+			x: 1.0d
 			y: 0.0d
 		}
 		{
@@ -40,7 +40,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.part_builder.title}"
-			x: 4.0d
+			x: 3.0d
 			y: -1.0d
 		}
 		{
@@ -59,7 +59,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.tinker_station.title}"
-			x: 4.0d
+			x: 3.0d
 			y: 1.0d
 		}
 		{
@@ -81,7 +81,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.crafting_station.title}"
-			x: 3.0d
+			x: 2.0d
 			y: -2.0d
 		}
 		{
@@ -103,7 +103,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.part_chest.title}"
-			x: 3.0d
+			x: 2.0d
 			y: 2.0d
 		}
 		{
@@ -167,7 +167,7 @@
 				}
 			]
 			title: "{quest.chapters.1.tutorial_parts.title}"
-			x: 6.0d
+			x: 5.0d
 			y: -1.0d
 		}
 		{
@@ -188,7 +188,7 @@
 				type: "checkmark"
 			}]
 			title: "{quest.chapters.1.part_builder_uncraftable.title}"
-			x: 9.0d
+			x: 8.0d
 			y: -2.0d
 		}
 		{
@@ -256,7 +256,7 @@
 				weak_nbt_match: true
 			}]
 			title: "{quest.chapters.1.tutorial_tools.title}"
-			x: 6.0d
+			x: 5.0d
 			y: 1.0d
 		}
 		{
@@ -350,7 +350,7 @@
 				}
 			]
 			title: "{quest.chapters.1.other_tools.title}"
-			x: 7.0d
+			x: 6.0d
 			y: 3.0d
 		}
 		{
@@ -417,7 +417,7 @@
 				}
 			]
 			title: "{quest.chapters.1.more_materials.title}"
-			x: 8.0d
+			x: 7.0d
 			y: 0.0d
 		}
 		{
@@ -455,7 +455,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.distinct_materials.title}"
-			x: 10.0d
+			x: 9.0d
 			y: 1.0d
 		}
 		{
@@ -586,7 +586,7 @@
 				}
 			]
 			title: "{quest.chapters.1.travelers_set.title}"
-			x: 10.0d
+			x: 9.0d
 			y: -1.0d
 		}
 		{
@@ -606,7 +606,7 @@
 				type: "checkmark"
 			}]
 			title: "{quest.chapters.1.ready.title}"
-			x: 11.0d
+			x: 10.0d
 			y: 0.0d
 		}
 		{
@@ -644,7 +644,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.modifiers.title}"
-			x: 9.0d
+			x: 8.0d
 			y: 2.0d
 		}
 		{
@@ -658,7 +658,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.frozen_terracube_core.title}"
-			x: 14.0d
+			x: 13.0d
 			y: 0.0d
 		}
 		{
@@ -681,7 +681,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.defeat_icy_terracube.title}"
-			x: 16.0d
+			x: 15.0d
 			y: 0.0d
 		}
 		{
@@ -696,7 +696,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.icy_terracube_no_hit.title}"
-			x: 16.0d
+			x: 15.0d
 			y: -1.5d
 		}
 		{
@@ -718,7 +718,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.target_dummy.title}"
-			x: 8.0d
+			x: 7.0d
 			y: 2.0d
 		}
 		{
@@ -772,7 +772,7 @@
 				type: "checkmark"
 			}]
 			title: "{quest.chapters.1.part_switching.title}"
-			x: 7.0d
+			x: 6.0d
 			y: -2.0d
 		}
 		{
@@ -832,7 +832,7 @@
 				}
 			]
 			title: "{quest.chapters.1.more_modifiers.title}"
-			x: 11.0d
+			x: 10.0d
 			y: 2.0d
 		}
 		{
@@ -854,7 +854,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.tinkers_chest.title}"
-			x: 1.0d
+			x: 0.0d
 			y: 2.0d
 		}
 		{
@@ -901,7 +901,7 @@
 				type: "item"
 			}]
 			title: "{quest.chapters.1.repair_kits.title}"
-			x: 5.0d
+			x: 4.0d
 			y: 3.0d
 		}
 	]
