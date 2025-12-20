@@ -400,7 +400,7 @@
     "quest.chapters.1.part_builder_uncraftable.description": "&6有时，你可能放入了一些&e过于坚硬&6的材料，例如&e铁&6等金属。\n\n&6这些材料&c无法&6通过部件制造台制作。这需要后续章节所提供的&e更好的锻造方法&6。\n\n&c&l注意：&r&e铜&6仍然能够在部件加工台中制作，是既便宜又利于挖掘的好材料。",
 
     "quest.chapters.1.part_switching.title": "更换部件",
-    "quest.chapters.1.part_switching.description": "&6现在，你有了相较于过去&e更好的部件&6，并想添加到工具上。\n\n但是重新制作整个工具&e成本较高&6，因此你可以使用&e工匠站&6的&e部件交换&7 (Part Switching) &6功能，如下图所示：",
+    "quest.chapters.1.part_switching.description": "&6现在，你有了相较于过去&e更好的部件&6，并想添加到工具上。\n\n但是重新制作整个工具&e成本较高&6，因此你可以使用&e工匠站&6的&e部件交换&7 (Part Swapping) &6功能，如下图所示：",
 
     "quest.chapters.1.tutorial_tools.title": "你的第一个工具",
     "quest.chapters.1.tutorial_tools.description.1": "&6在准备好所有所需的部件后，你可以在&e工匠站&6中将它们组合为一个工具。工匠站的界面如下图所示：",
@@ -408,7 +408,7 @@
     "quest.chapters.1.tutorial_tools.task": "木镐",
 
     "quest.chapters.1.repair_kits.title": "修补件",
-    "quest.chapters.1.repair_kits.description.1": "&6你可以在&e工匠站n&6中使用你工具头部的材料来修复工具。",
+    "quest.chapters.1.repair_kits.description.1": "&6你可以在&e工匠站&6中使用你工具头部的材料来修复工具。",
     "quest.chapters.1.repair_kits.description.2": "&6但是&e修补件&6似乎是个更方便的选择，因为它们能直接在&e合成网格&6中修复你的工具。你可以像其它部件一样，直接在&e部件制造台&6中制作修补件。",
     "quest.chapters.1.repair_kits.task": "任意修补件",
 
