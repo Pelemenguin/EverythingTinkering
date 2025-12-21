@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "C": {
+            "item": "create:andesite_casing"
+        },
+        "P": {
+            "item": "create:propeller"
+        },
+        "S": {
+            "item": "create:shaft"
+        },
+        "M": {
+            "item": "kubejs:basic_mechanism"
+        }
+    },
+    "pattern": [
+        "MSM",
+        " C ",
+        "MPM"
+    ],
+    "result": {
+        "item": "create:encased_fan"
+    },
+    "show_notification": true
+}

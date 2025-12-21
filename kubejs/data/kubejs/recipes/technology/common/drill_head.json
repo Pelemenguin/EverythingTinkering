@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "P": {
+            "tag": "forge:plates/iron"
+        },
+        "I": {
+            "tag": "forge:ingots/copper"
+        }
+    },
+    "pattern": [
+        " P ",
+        "PIP",
+        "PPP"
+    ],
+    "result": {
+        "item": "thermal:drill_head"
+    },
+    "show_notification": true
+}

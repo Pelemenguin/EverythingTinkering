@@ -37,7 +37,7 @@
 			}]
 			title: "{quest.technology_chapters.1.basic_mechanism.title}"
 			x: 2.0d
-			y: -2.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["373CAC58538A4432"]
@@ -82,10 +82,7 @@
 			y: 0.0d
 		}
 		{
-			dependencies: [
-				"373CAC58538A4432"
-				"4028AB7CCF3C0BCA"
-			]
+			dependencies: ["373CAC58538A4432"]
 			description: ["{quest.technology_chapters.1.andesitize.description}"]
 			id: "0798705C62D88A2A"
 			tasks: [{
@@ -108,7 +105,204 @@
 				type: "item"
 			}]
 			title: "{quest.technology_chapters.1.andesitize.title}"
-			x: 4.0d
+			x: 2.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["248DDAFC830C883A"]
+			description: ["{quest.technology_chapters.1.mechanical_drill.description}"]
+			hide_until_deps_complete: true
+			id: "58A8A1AEA0E3C28A"
+			optional: true
+			shape: "none"
+			tasks: [{
+				id: "406CB2BB6D22D7A4"
+				item: "create:mechanical_drill"
+				type: "item"
+			}]
+			title: "{quest.technology_chapters.1.mechanical_drill.title}"
+			x: 3.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["248DDAFC830C883A"]
+			description: ["{quest.technology_chapters.1.mechanical_bearing.description}"]
+			hide_until_deps_complete: true
+			id: "76A8FC58D1690712"
+			optional: true
+			shape: "none"
+			tasks: [{
+				id: "7A8A8659B6A8E4A7"
+				item: "create:mechanical_bearing"
+				type: "item"
+			}]
+			title: "{quest.technology_chapters.1.mechanical_bearing.title}"
+			x: 3.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["4028AB7CCF3C0BCA"]
+			description: ["{quest.technology_chapters.1.ready.description}"]
+			id: "57A96456AC2C73AF"
+			size: 2.0d
+			tasks: [{
+				id: "59296491499B9CD9"
+				type: "checkmark"
+			}]
+			title: "{quest.technology_chapters.1.ready.title}"
+			x: 9.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["57A96456AC2C73AF"]
+			description: [
+				"{quest.technology_chapters.1.log_automation.description}"
+				""
+				"{image:kubejs:textures/gui/quests/automation/log.png width:640 height:339 align:center fit:true}"
+			]
+			hide_until_deps_complete: true
+			icon: "minecraft:oak_log"
+			id: "7027EFE455D60D52"
+			tasks: [
+				{
+					icon: "minecraft:oak_log"
+					id: "62C63CADBF9253DF"
+					item: {
+						Count: 1
+						id: "ftbfiltersystem:smart_filter"
+						tag: {
+							"ftbfiltersystem:filter": "ftbfiltersystem:item_tag(minecraft:logs)"
+						}
+					}
+					title: "{block.minecraft.oak_log}"
+					type: "item"
+				}
+				{
+					id: "108A4CFC9BC9E3E1"
+					title: "{quest.common.automated}"
+					type: "checkmark"
+				}
+			]
+			title: "{quest.technology_chapters.1.log_automation.title}"
+			x: 12.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["57A96456AC2C73AF"]
+			description: [
+				"{quest.technology_chapters.1.cobblestone_automation.description}"
+				""
+				"{image:kubejs:textures/gui/quests/automation/cobblestone.png width:16 height:9 align:center fit:true}"
+			]
+			hide_until_deps_complete: true
+			icon: "minecraft:cobblestone"
+			id: "39CBE430312A1505"
+			tasks: [
+				{
+					id: "23ED5CCCC959BAE6"
+					item: "minecraft:cobblestone"
+					type: "item"
+				}
+				{
+					id: "3B03CB8EC9BFE8D4"
+					title: "{quest.common.automated}"
+					type: "checkmark"
+				}
+			]
+			title: "{quest.technology_chapters.1.cobblestone_automation.title}"
+			x: 12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["57A96456AC2C73AF"]
+			description: [
+				"{quest.technology_chapters.1.andesite_automation.description}"
+				""
+				"{image:kubejs:textures/gui/quests/automation/andesite.png width:16 height:9 align:center fit:true}"
+			]
+			hide_until_deps_complete: true
+			icon: "minecraft:andesite"
+			id: "50AFCF58CE5ECC1B"
+			tasks: [
+				{
+					id: "531C7066DF3118C3"
+					item: "minecraft:andesite"
+					type: "item"
+				}
+				{
+					id: "3B04DE37B7071473"
+					title: "{quest.common.automated}"
+					type: "checkmark"
+				}
+			]
+			title: "{quest.technology_chapters.1.andesite_automation.title}"
+			x: 12.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["373CAC58538A4432"]
+			description: ["{quest.technology_chapters.1.millstone.description}"]
+			id: "660114CD167AB3A9"
+			tasks: [{
+				id: "0DB643560EBF1C47"
+				item: "create:millstone"
+				type: "item"
+			}]
+			title: "{quest.technology_chapters.1.millstone.title}"
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["248DDAFC830C883A"]
+			description: ["{quest.technology_chapters.1.mechanical_saw.description}"]
+			id: "360AD6BD6D625E8B"
+			tasks: [{
+				id: "0D9DFEA5D65A4066"
+				item: "create:mechanical_saw"
+				type: "item"
+			}]
+			title: "{quest.technology_chapters.1.mechanical_saw.title}"
+			x: 5.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["248DDAFC830C883A"]
+			description: ["{quest.technology_chapters.1.mechanical_mixer.description}"]
+			id: "74084A7D3BE97D67"
+			tasks: [{
+				id: "18C88BFDC83E7C26"
+				item: "create:mechanical_mixer"
+				type: "item"
+			}]
+			title: "{quest.technology_chapters.1.mechanical_mixer.title}"
+			x: 5.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["248DDAFC830C883A"]
+			description: ["{quest.technology_chapters.1.encased_fan.description}"]
+			id: "00A2612C84F41D50"
+			tasks: [{
+				id: "08EA133F26BA40BC"
+				item: "create:encased_fan"
+				type: "item"
+			}]
+			title: "{quest.technology_chapters.1.encased_fan.title}"
+			x: 6.5d
+			y: -2.0d
+		}
+		{
+			dependencies: ["4A2993793923C62D"]
+			description: ["{quest.technology_chapters.1.mechanical_belt.description}"]
+			hide_until_deps_complete: true
+			id: "55C47F884EBCD78F"
+			tasks: [{
+				id: "43CC0947A6F01233"
+				item: "create:belt_connector"
+				type: "item"
+			}]
+			title: "{quest.technology_chapters.1.mechanical_belt.title}"
+			x: 0.0d
 			y: 2.0d
 		}
 	]

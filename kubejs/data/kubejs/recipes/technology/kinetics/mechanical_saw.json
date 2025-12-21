@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "C": {
+            "item": "create:andesite_casing"
+        },
+        "S": {
+            "item": "thermal:saw_blade"
+        },
+        "M": {
+            "item": "kubejs:basic_mechanism"
+        },
+        "H": {
+            "item": "create:shaft"
+        }
+    },
+    "pattern": [
+        "MHM",
+        " C ",
+        "MSM"
+    ],
+    "result": {
+        "item": "create:mechanical_saw"
+    },
+    "show_notification": true
+}

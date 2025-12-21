@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "C": {
+            "item": "create:andesite_casing"
+        },
+        "D": {
+            "item": "thermal:drill_head"
+        },
+        "M": {
+            "item": "kubejs:basic_mechanism"
+        },
+        "S": {
+            "item": "create:shaft"
+        }
+    },
+    "pattern": [
+        "MSM",
+        " C ",
+        "MDM"
+    ],
+    "result": {
+        "item": "create:mechanical_drill"
+    },
+    "show_notification": true
+}

@@ -69,6 +69,7 @@
 		{
 			dependencies: ["37BFF5CC64E72C93"]
 			description: ["{quest.overview.technology_chapter1.description}"]
+			icon: "kubejs:basic_mechanism"
 			id: "4A2993793923C62D"
 			optional: true
 			shape: "square"

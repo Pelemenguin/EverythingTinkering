@@ -1318,3 +1318,9 @@ declare const KubeJSAiFactory: {
 interface Function {
     static __javaObject__: Internal.Class<?>;
 }
+
+namespace Internal {
+    interface SceneBuilder {
+        world: Internal.WorldInstructions;
+    }
+}

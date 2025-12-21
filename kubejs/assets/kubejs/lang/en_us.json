@@ -339,6 +339,7 @@
     "quest.title": "Everything Tinkering",
 
     "quest.common.view_next_page": "&b[Click \"→\" for the next page]",
+    "quest.common.automated": "Automated",
 
     "quest.readme.title": "&cREADME!",
 
@@ -469,6 +470,9 @@
     "quest.technology_chapters.1.andesite_alloy.title": "Andesite Alloy",
     "quest.technology_chapters.1.andesite_alloy.description": "&6Make some &eAndesite Alloy&6 by crafting from &eAndesite&6 and &eIron Nuggets&6, which is the fundamental for developing &eCreate&6.",
 
+    "quest.technology_chapters.1.mechanical_belt.title": "Mechanical Belt",
+    "quest.technology_chapters.1.mechanical_belt.description": "&eMechanical Belt&6 can transport items when placed flat, serving as an important early-game &elogistics tool&6.",
+
     "quest.technology_chapters.1.andesitize.title": "Andesitize",
     "quest.technology_chapters.1.andesitize.description": "&6The &eAndesitize&6 modifier allows you to &etransform Stone into Andesite&6. This enables &eautomated Andesite production&6, simply have a &eDeployer&6 right-click Stone for you.",
     "quest.technology_chapters.1.andesitize.task": "Any tool with Andesitize modifier",
@@ -482,8 +486,38 @@
     "quest.technology_chapters.1.mechanical_press.title": "Mechanical Press",
     "quest.technology_chapters.1.mechanical_press.description": "&6The &eMechanical Press&6 can &ecompress items&6, such as pressing metal ingots into &esheets&6.",
 
+    "quest.technology_chapters.1.mechanical_mixer.title": "Mechanical Mixer",
+    "quest.technology_chapters.1.mechanical_mixer.description": "&eMechanical Mixer&6 can &emix items together&6 or process many &eshapeless recipes&6.",
+
+    "quest.technology_chapters.1.encased_fan.title": "Encased Fan",
+    "quest.technology_chapters.1.encased_fan.description": "&eEncased Fan&6 can &ecreate airstreams&6, but is more commonly used for &eBulk Washing&6, &eBulk Blasting&6, &eBulk Smoking&6, or &eBulk Haunting&6 (see Ponder interface for details).",
+
     "quest.technology_chapters.1.deployer.title": "Deployer",
     "quest.technology_chapters.1.deployer.description": "&6The &eDeployer&6 can &emimic a player using an item&6. Sometimes, it can perform actions &eunavailable to players&6, as certain recipes &emust be completed by a Deployer&6.\n\n&e\"What are you pointing at? Huh? What are you pointing at?\"",
+
+    "quest.technology_chapters.1.mechanical_drill.title": "Mechanical Drill",
+    "quest.technology_chapters.1.mechanical_drill.description": "&6The &eMechanical Saw&6 can &eautomatically mine blocks&6, which is helpful to the automation of &eAndesite&6. \n\nYou can use &eKinetic Contraptions to squeeze&6 blocks and collect them. Thus, this quest is optional.",
+
+    "quest.technology_chapters.1.mechanical_saw.title": "Mechanical Saw",
+    "quest.technology_chapters.1.mechanical_saw.description": "&6The &eMechanical Saw&6 can &ebreak wooden blocks&6 and chop down &ean entire tree&6, and can also process &emechanical cutting&6 recipes.",
+
+    "quest.technology_chapters.1.millstone.title": "Millstone",
+    "quest.technology_chapters.1.millstone.description": "&eMillstone&6 can &egrind items&6 and serves as an early-game alternative to the &eCrushing Wheel&6.",
+
+    "quest.technology_chapters.1.mechanical_bearing.title": "Mechanical Bearing",
+    "quest.technology_chapters.1.mechanical_bearing.description": "&eMechanical Bearing&6 can &emake your contraptions rotate&6. Check the &ePonder&6 interface for detailed usage, and check other machines' Ponder interfaces to see their functions in rotational structures.",
+
+    "quest.technology_chapters.1.ready.title": "Begin Automating",
+    "quest.technology_chapters.1.ready.description": "&6Start automating &eBasic Mechanisms&6!\n\n&c&lNote:&r&6 All automation images are &efor demonstration only&6. They are for reference but &edo not specify exact build methods&6. These diagrams are &enot optimal solutions&6; you can design more efficient or aesthetically pleasing contraptions.",
+
+    "quest.technology_chapters.1.log_automation.title": "Log Automation",
+    "quest.technology_chapters.1.log_automation.description": "&eLogs&6 are raw materials for crafting &epatterns&6.\n\nThe image below is an automation example, using a &eDeployer&6 to place saplings and a &eMechanical Saw&6 to collect logs. A &eMechanical Bearing&6 below the structure makes it rotate.",
+
+    "quest.technology_chapters.1.cobblestone_automation.title": "Cobblestone Automation",
+    "quest.technology_chapters.1.cobblestone_automation.description": "&eCobblestone&6 can be used to automate &eIron Nuggets&6.\n\nThe diagram below is an automation example, where a &eMechanical Drill&6 faces the position where Cobblestones are generated to mine it, with a &eMechanical Belt&6 directly below for collection.",
+
+    "quest.technology_chapters.1.andesite_automation.title": "Andesite Automation",
+    "quest.technology_chapters.1.andesite_automation.description": "&eAndesite&6 is essential for crafting &eAndesite Alloy&6.\n\nThe diagram below is an automation example, where a &eDeployer&6 holding a tool with the &eAndesitize&6 modifier first turns stone into andesite, then a &eMechanical Drill&6 collects it.\n\nFor better visibility, the image shows a cross-section of the contraption; the actual build is approximately hemispherical.",
 
         "_comment_recipes": " ----- Recipes ----- ",
     

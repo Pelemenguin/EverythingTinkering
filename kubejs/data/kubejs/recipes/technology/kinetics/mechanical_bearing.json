@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "C": {
+            "item": "create:andesite_casing"
+        },
+        "W": {
+            "tag": "minecraft:wooden_slabs"
+        },
+        "S": {
+            "item": "create:shaft"
+        },
+        "M": {
+            "item": "kubejs:basic_mechanism"
+        }
+    },
+    "pattern": [
+        "MWM",
+        " C ",
+        "MSM"
+    ],
+    "result": {
+        "item": "create:mechanical_bearing"
+    },
+    "show_notification": true
+}

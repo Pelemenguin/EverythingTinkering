@@ -342,6 +342,7 @@
     "quest.title": "Everything Tinkering",
 
     "quest.common.view_next_page": "&b[点击“→”查看下一页]",
+    "quest.common.automated": "已自动化",
 
     "quest.readme.title": "&c读我！",
 
@@ -473,6 +474,9 @@
     "quest.technology_chapters.1.andesite_alloy.title": "安山合金",
     "quest.technology_chapters.1.andesite_alloy.description": "&6将&e安山岩&7 (Andesite) &6与&e铁粒&7 (Iron Nugget) &6制作为&e安山合金&7 (Andesite Alloy) &6。安山合金是发展&e机械动力&6的基础。",
 
+    "quest.technology_chapters.1.mechanical_belt.title": "传送带",
+    "quest.technology_chapters.1.mechanical_belt.description": "&e传送带&7 (Mechanical Belt) &6在平放时能够传输物品，是前期重要的&e物流工具&6。",
+
     "quest.technology_chapters.1.andesitize.title": "安山化",
     "quest.technology_chapters.1.andesitize.description": "&e安山化&7 (Andesitize) &6特性能够&e将石头转化为安山岩&6。这能帮助你&e自动化获取安山岩&6，你只需要让&e机械手&6帮你右键石头即可。",
     "quest.technology_chapters.1.andesitize.task": "任意带有“安山化”强化的工具",
@@ -486,8 +490,38 @@
     "quest.technology_chapters.1.mechanical_press.title": "动力冲压机",
     "quest.technology_chapters.1.mechanical_press.description": "&e动力冲压机&7 (Mechanical Press) &6能够将&e压缩物品&6，例如将金属&e压制成板&6。",
 
+    "quest.technology_chapters.1.mechanical_mixer.title": "动力搅拌器",
+    "quest.technology_chapters.1.mechanical_mixer.description": "&e动力搅拌器&7 (Mechanical Mixer) &6能够将&e物品混合在一起&6，或处理很多&e无序合成配方&6。",
+
+    "quest.technology_chapters.1.encased_fan.title": "鼓风机",
+    "quest.technology_chapters.1.encased_fan.description": "&e鼓风机&7 (Encased Fan) &6能够&e吹出或吸入&6气流，但更常用于&e批量洗涤&6、&e批量熔炼&6、&e批量烟熏&6或&e批量缠魂&6（详见思索界面）。",
+
     "quest.technology_chapters.1.deployer.title": "机械手",
     "quest.technology_chapters.1.deployer.description": "&e机械手&7 (Deployer) &6能够&e模拟玩家使用物品&6。有些时候，机械手能够做到玩家&e做不到的事情&6，因为部分配方必须&e由机械手完成&6。\n\n&e“指什么指？指什么指？”",
+
+    "quest.technology_chapters.1.mechanical_drill.title": "动力钻头",
+    "quest.technology_chapters.1.mechanical_drill.description": "&e动力钻头&7 (Mechanical Drill) &6能够&e自动挖掘方块&6，这对&e安山岩&6的自动化有所帮助。\n\n当然你也可以通过&e动力结构挤压&6的方式收集方块，因此该任务为可选任务。",
+
+    "quest.technology_chapters.1.mechanical_saw.title": "动力锯",
+    "quest.technology_chapters.1.mechanical_saw.description": "&e动力锯&7 (Mechanical Saw) &6能够&e破坏木质方块&6并砍下&e一整棵树&6，也能处理&e动力切割&6配方。",
+
+    "quest.technology_chapters.1.millstone.title": "石磨",
+    "quest.technology_chapters.1.millstone.description": "&e石磨&7 (Milestone) &6能够&e磨碎物品&6，是&e粉碎轮&6的前期替代品。",
+
+    "quest.technology_chapters.1.mechanical_bearing.title": "动力轴承",
+    "quest.technology_chapters.1.mechanical_bearing.description": "&e动力轴承&6能够&e让你的机械旋转起来&6。进入&e思索&6界面可以查看其详细用法，进入&e其它机械&6的思索界面可以查看它们在旋转结构上的功能。",
+
+    "quest.technology_chapters.1.ready.title": "开始自动化",
+    "quest.technology_chapters.1.ready.description": "&6开始&e基础构件&6的自动化！\n\n&c&l注意：&r&6所有自动化装置的图像&e仅为示例&6。可供参考，但&e不会指明具体搭建方法&6。这些图像也&e不是最优解&6，你可以设计效率更高或更美观的装置。",
+
+    "quest.technology_chapters.1.log_automation.title": "原木自动化",
+    "quest.technology_chapters.1.log_automation.description": "&e原木&7 (Log) &6是制作&e模具&6的原材料。\n\n下图是一个自动化示例，使用&e机械手&6放置树苗，并使用&e动力锯&6收集原木。在结构下方，有一个&e动力轴承&6让结构旋转起来。",
+
+    "quest.technology_chapters.1.cobblestone_automation.title": "圆石自动化",
+    "quest.technology_chapters.1.cobblestone_automation.description": "&e圆石&7 (Cobblestone) &6能够用于自动化&e铁粒&6。\n\n下图是一个自动化示例，将&e动力钻头&6对准圆石产生的位置以挖掘圆石，并在正下方使用&e传送带&6进行收集。",
+
+    "quest.technology_chapters.1.andesite_automation.title": "安山岩自动化",
+    "quest.technology_chapters.1.andesite_automation.description": "&e安山岩&7 (Andesite) &6是制作&e安山合金&6的必需材料。\n\n下图是一个自动化示例，手持带有&e安山化&6特性的&e机械手&6先将石头转变为安山岩，再用&e动力钻头&6收集。\n\n为了方便观察，下图展示的是装置的一个截面，实际装置近似半球形。",
 
         "_comment_recipes": " ----- 配方 ----- ",
     

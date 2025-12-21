@@ -37,16 +37,28 @@
             "version": "0.1-alpha.4"
         },
         {
+            "name": "CoFH Core",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/cofh-core",
+            "author": "TeamCoFH",
+            "curse_id": {
+                "project": 69162,
+                "file": 5374122
+            },
+            "raw_file_name": "cofh-core-1.20.1-11.0.2.56.jar",
+            "mod_id": "cofh_core",
+            "version": "11.0.2"
+        },
+        {
             "name": "Create",
             "url": "https://www.curseforge.com/minecraft/mc-mods/create",
             "author": "simibubi",
             "curse_id": {
                 "project": 328085,
-                "file": 6323270
+                "file": 7178761
             },
-            "raw_file_name": "create-1.20.1-6.0.4.jar",
+            "raw_file_name": "create-1.20.1-6.0.8.jar",
             "mod_id": "create",
-            "version": "6.0.4"
+            "version": "6.0.8"
         },
         {
             "name": "MmmMmmMmmMmm (Target Dummy)",
@@ -265,6 +277,18 @@
             "version": "1.20-2.14.1"
         },
         {
+            "name": "Ponder for KubeJS",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/ponder",
+            "author": "Lytho",
+            "curse_id": {
+                "project": 622888,
+                "file": 7188949
+            },
+            "raw_file_name": "ponderjs-1.20.1-2.1.0.jar",
+            "mod_id": "ponderjs",
+            "version": "2.1.0"
+        },
+        {
             "name": "ProbeJS",
             "url": "https://www.curseforge.com/minecraft/mc-mods/probejs",
             "author": "Amygdaloideae",
@@ -312,6 +336,54 @@
             "raw_file_name": "TConstruct-1.20.1-3.10.2.92.jar",
             "mod_id": "tconstruct",
             "version": "3.10.2.92"
+        },
+        {
+            "name": "Thermal Dynamics",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/thermal-dynamics",
+            "author": "TeamCoFH",
+            "curse_id": {
+                "project": 227443,
+                "file": 5372747
+            },
+            "raw_file_name": "thermal_dynamics-1.20.1-11.0.1.23.jar",
+            "mod_id": "thermal_dynamics",
+            "version": "11.0.1"
+        },
+        {
+            "name": "Thermal Expansion",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/thermal-expansion",
+            "author": "TeamCoFH",
+            "curse_id": {
+                "project": 69163,
+                "file": 5372749
+            },
+            "raw_file_name": "thermal_expansion-1.20.1-11.0.1.29.jar",
+            "mod_id": "thermal_expansion",
+            "version": "11.0.1"
+        },
+        {
+            "name": "Thermal Foundation",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/thermal-foundation",
+            "author": "TeamCoFH",
+            "curse_id": {
+                "project": 222880,
+                "file": 5443583
+            },
+            "raw_file_name": "thermal_foundation-1.20.1-11.0.6.70.jar",
+            "mod_id": "thermal_foundation",
+            "version": "11.0.6"
+        },
+        {
+            "name": "Thermal Intergration",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/thermal-intergration",
+            "author": "TeamCoFH",
+            "curse_id": {
+                "project": 626708,
+                "file": 5374210
+            },
+            "raw_file_name": "thermal_integration-1.20.1-11.0.1.27.jar",
+            "mod_id": "thermal_integration",
+            "version": "11.0.1"
         }
     ]
 }
