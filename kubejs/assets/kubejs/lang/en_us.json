@@ -512,6 +512,7 @@
 
     "quest.technology_chapters.1.log_automation.title": "Log Automation",
     "quest.technology_chapters.1.log_automation.description": "&eLogs&6 are raw materials for crafting &epatterns&6.\n\nThe image below is an automation example, using a &eDeployer&6 to place saplings and a &eMechanical Saw&6 to collect logs. A &eMechanical Bearing&6 below the structure makes it rotate.",
+    "quest.technology_chapters.1.log_automation.task.1": "Any Log",
 
     "quest.technology_chapters.1.cobblestone_automation.title": "Cobblestone Automation",
     "quest.technology_chapters.1.cobblestone_automation.description": "&eCobblestone&6 can be used to automate &eIron Nuggets&6.\n\nThe diagram below is an automation example, where a &eMechanical Drill&6 faces the position where Cobblestones are generated to mine it, with a &eMechanical Belt&6 directly below for collection.",
@@ -519,8 +520,26 @@
     "quest.technology_chapters.1.andesite_automation.title": "Andesite Automation",
     "quest.technology_chapters.1.andesite_automation.description": "&eAndesite&6 is essential for crafting &eAndesite Alloy&6.\n\nThe diagram below is an automation example, where a &eDeployer&6 holding a tool with the &eAndesitize&6 modifier first turns stone into andesite, then a &eMechanical Drill&6 collects it.\n\nFor better visibility, the image shows a cross-section of the contraption; the actual build is approximately hemispherical.",
 
+    "quest.technology_chapters.1.pattern_automation.title": "Pattern Automation",
+    "quest.technology_chapters.1.pattern_automation.description": "&6Use a &eMechanical Saw&6 to cut a &elog&6 &ethree times&6 to obtain a &ePattern&6.\n\n&c&lNote:&r&6 The raw material may be cut into &edifferent items&6, so you need to mark the desired product in the &eRecipe Filter&6.",
+
+    "quest.technology_chapters.1.gravel_automation.title": "Gravel Automation",
+    "quest.technology_chapters.1.gravel_automation.description": "&6Crush &ecobblestone&6 to obtain &eGravel&6.\n\nIn Chapter 1, the &eMillstone&6 is the only machine for crushing items. You can also replace Millstones with the &eCrushing Wheels&6 after getting them in later chapters.",
+
+    "quest.technology_chapters.1.iron_nugget_automation.title": "Iron Nugget Automation",
+    "quest.technology_chapters.1.iron_nugget_automation.description": "&6Wash &eGravel&6 with an &eEncased Fan&6 to obtain a small amount of &eIron Nuggets&6.\n\n&6Washing gravel produces a large amount of &eFlint&6, which you need to remove by some method, such as the &eBrass Funnel&6, &eBrass Tunnel&6, etc. introduced in later chapters.\n\n&c&lNote:&r&6 Gravel takes &esome time&6 to be washed into Iron Nuggets. You need to ensure the Mechanical Belt's speed is &eslow enough&6 to allow all Gravel to be processed.",
+
+    "quest.technology_chapters.1.andesite_alloy_automation.title": "Andesite Alloy Automation",
+    "quest.technology_chapters.1.andesite_alloy_automation.description": "&6Mix &eAndesite&6 and &eIron Nuggets&6 using a &eMechanical Mixer&6 to obtain &eAndesite Alloy&6.",
+
+    "quest.technology_chapters.1.basic_mechanism_automation.title": "Basic Mechanism Automation",
+    "quest.technology_chapters.1.basic_mechanism_automation.description": "&6Apply &ethree Andesite Alloys&6 on a &ePattern&6 to craft a &eBasic Mechanism&6.",
+
+    "quest.technology_chapters.1.materials.andesite_alloy.description": "Tool made of &eAndesite Alloy&6 can &eattack targets in a straight line&6.",
+    "quest.technology_chapters.1.materials.andesite_alloy.task": "Any Andesite Alloy Tool Part",
+
         "_comment_recipes": " ----- Recipes ----- ",
-    
+
     "pattern.kubejs.mechanism": "Mechanism",
 
         "_comment_end": "I don't want to remove commas at the end of the JSON  any more you know? I just place one line here so that all lines above can hava a comma"

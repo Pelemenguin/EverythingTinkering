@@ -174,7 +174,7 @@
 							"ftbfiltersystem:filter": "ftbfiltersystem:item_tag(minecraft:logs)"
 						}
 					}
-					title: "{block.minecraft.oak_log}"
+					title: "{quest.technology_chapters.1.log_automation.task.1}"
 					type: "item"
 				}
 				{
@@ -304,6 +304,175 @@
 			title: "{quest.technology_chapters.1.mechanical_belt.title}"
 			x: 0.0d
 			y: 2.0d
+		}
+		{
+			dependencies: ["7027EFE455D60D52"]
+			description: [
+				"{quest.technology_chapters.1.pattern_automation.description}"
+				""
+				"{image:kubejs:textures/gui/quests/automation/pattern.png width:16 height:9 align:center fit:true}"
+			]
+			icon: "tconstruct:pattern"
+			id: "6EE2FEE8F2547A62"
+			tasks: [
+				{
+					id: "5840F691E79762E1"
+					item: "tconstruct:pattern"
+					type: "item"
+				}
+				{
+					id: "192B9F29A89202C1"
+					title: "{quest.common.automated}"
+					type: "checkmark"
+				}
+			]
+			title: "{quest.technology_chapters.1.pattern_automation.title}"
+			x: 14.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["39CBE430312A1505"]
+			description: [
+				"{quest.technology_chapters.1.gravel_automation.description}"
+				""
+				"{image:kubejs:textures/gui/quests/automation/gravel.png width:16 height:9 align:center fit:true}"
+			]
+			icon: "minecraft:gravel"
+			id: "35675B8EBAD4DC66"
+			tasks: [
+				{
+					id: "13676A998DE17D74"
+					item: "minecraft:gravel"
+					type: "item"
+				}
+				{
+					id: "51DB6E63412AC6D1"
+					title: "{quest.common.automated}"
+					type: "checkmark"
+				}
+			]
+			title: "{quest.technology_chapters.1.gravel_automation.title}"
+			x: 14.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["35675B8EBAD4DC66"]
+			description: [
+				"{quest.technology_chapters.1.iron_nugget_automation.description}"
+				""
+				"{image:kubejs:textures/gui/quests/automation/iron_nugget.png width:16 height:9 align:center fit:true}"
+			]
+			icon: "minecraft:iron_nugget"
+			id: "0ACF30AD5DC521AD"
+			tasks: [
+				{
+					id: "5A2DF4834E24A100"
+					item: {
+						Count: 1
+						id: "ftbfiltersystem:smart_filter"
+						tag: {
+							"ftbfiltersystem:filter": "ftbfiltersystem:item_tag(forge:nuggets/iron)"
+						}
+					}
+					title: "{item.minecraft.iron_nugget}"
+					type: "item"
+				}
+				{
+					id: "2310DCBD12D269C2"
+					title: "{quest.common.automated}"
+					type: "checkmark"
+				}
+			]
+			title: "{quest.technology_chapters.1.iron_nugget_automation.title}"
+			x: 16.0d
+			y: 0.0d
+		}
+		{
+			dependencies: [
+				"0ACF30AD5DC521AD"
+				"50AFCF58CE5ECC1B"
+			]
+			description: [
+				"{quest.technology_chapters.1.andesite_alloy_automation.description}"
+				""
+				"{image:kubejs:textures/gui/quests/automation/andesite_alloy.png width:16 height:9 align:center fit:true}"
+			]
+			icon: "create:andesite_alloy"
+			id: "406A9E3EA7A79353"
+			tasks: [
+				{
+					id: "5A82FD11D5D934AF"
+					item: "create:andesite_alloy"
+					type: "item"
+				}
+				{
+					id: "2E0510F11A4D3599"
+					title: "{quest.common.automated}"
+					type: "checkmark"
+				}
+			]
+			title: "{quest.technology_chapters.1.andesite_alloy_automation.title}"
+			x: 18.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"406A9E3EA7A79353"
+				"6EE2FEE8F2547A62"
+			]
+			description: [
+				"{quest.technology_chapters.1.basic_mechanism_automation.description}"
+				""
+				"{image:kubejs:textures/gui/quests/automation/basic_mechanism.png width:16 height:9 align:center fit:true}"
+			]
+			icon: "kubejs:basic_mechanism"
+			id: "4CC48BA97A41BEBB"
+			shape: "octagon"
+			size: 2.0d
+			tasks: [
+				{
+					id: "7E67A623C044F62C"
+					item: "kubejs:basic_mechanism"
+					type: "item"
+				}
+				{
+					id: "4DB6192E3697513F"
+					title: "{quest.common.automated}"
+					type: "checkmark"
+				}
+			]
+			title: "{quest.technology_chapters.1.basic_mechanism_automation.title}"
+			x: 20.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["373CAC58538A4432"]
+			description: ["{quest.technology_chapters.1.materials.andesite_alloy.description}"]
+			icon: {
+				Count: 1
+				id: "tconstruct:large_plate"
+				tag: {
+					Material: "kubejs:andesite_alloy"
+				}
+			}
+			id: "67CA86A7A06DBFF9"
+			optional: true
+			shape: "hexagon"
+			tasks: [{
+				id: "2E2F445D269AABDC"
+				item: {
+					Count: 1
+					id: "ftbfiltersystem:smart_filter"
+					tag: {
+						"ftbfiltersystem:filter": "custom(PartMaterialTest/kubejs:andesite_alloy)"
+					}
+				}
+				title: "{quest.technology_chapters.1.materials.andesite_alloy.task}"
+				type: "item"
+			}]
+			title: "{material.kubejs.andesite_alloy}"
+			x: 0.0d
+			y: -2.0d
 		}
 	]
 	title: "{quest.technology_chapters.1.title}"

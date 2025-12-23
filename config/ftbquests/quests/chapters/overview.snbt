@@ -26,7 +26,7 @@
 				type: "checkmark"
 			}]
 			title: "{quest.chapters.1.begin.title}"
-			x: 4.0d
+			x: 2.0d
 			y: 0.0d
 		}
 		{
@@ -63,7 +63,7 @@
 				type: "kill"
 				value: 1L
 			}]
-			x: 8.0d
+			x: 4.0d
 			y: 0.0d
 		}
 		{
@@ -79,8 +79,8 @@
 				type: "checkmark"
 			}]
 			title: "{quest.overview.technology_chapter1.title}"
-			x: 2.14d
-			y: -1.5d
+			x: 2.0d
+			y: -2.0d
 		}
 	]
 	title: "{quest.overview.title}"

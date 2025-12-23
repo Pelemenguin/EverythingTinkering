@@ -506,7 +506,7 @@
     "quest.technology_chapters.1.mechanical_saw.description": "&e动力锯&7 (Mechanical Saw) &6能够&e破坏木质方块&6并砍下&e一整棵树&6，也能处理&e动力切割&6配方。",
 
     "quest.technology_chapters.1.millstone.title": "石磨",
-    "quest.technology_chapters.1.millstone.description": "&e石磨&7 (Milestone) &6能够&e磨碎物品&6，是&e粉碎轮&6的前期替代品。",
+    "quest.technology_chapters.1.millstone.description": "&e石磨&7 (Millstone) &6能够&e磨碎物品&6，是&e粉碎轮&6的前期替代品。",
 
     "quest.technology_chapters.1.mechanical_bearing.title": "动力轴承",
     "quest.technology_chapters.1.mechanical_bearing.description": "&e动力轴承&6能够&e让你的机械旋转起来&6。进入&e思索&6界面可以查看其详细用法，进入&e其它机械&6的思索界面可以查看它们在旋转结构上的功能。",
@@ -516,12 +516,31 @@
 
     "quest.technology_chapters.1.log_automation.title": "原木自动化",
     "quest.technology_chapters.1.log_automation.description": "&e原木&7 (Log) &6是制作&e模具&6的原材料。\n\n下图是一个自动化示例，使用&e机械手&6放置树苗，并使用&e动力锯&6收集原木。在结构下方，有一个&e动力轴承&6让结构旋转起来。",
+    "quest.technology_chapters.1.log_automation.task.1": "任意原木",
 
     "quest.technology_chapters.1.cobblestone_automation.title": "圆石自动化",
     "quest.technology_chapters.1.cobblestone_automation.description": "&e圆石&7 (Cobblestone) &6能够用于自动化&e铁粒&6。\n\n下图是一个自动化示例，将&e动力钻头&6对准圆石产生的位置以挖掘圆石，并在正下方使用&e传送带&6进行收集。",
 
     "quest.technology_chapters.1.andesite_automation.title": "安山岩自动化",
     "quest.technology_chapters.1.andesite_automation.description": "&e安山岩&7 (Andesite) &6是制作&e安山合金&6的必需材料。\n\n下图是一个自动化示例，手持带有&e安山化&6特性的&e机械手&6先将石头转变为安山岩，再用&e动力钻头&6收集。\n\n为了方便观察，下图展示的是装置的一个截面，实际装置近似半球形。",
+
+    "quest.technology_chapters.1.pattern_automation.title": "模具自动化",
+    "quest.technology_chapters.1.pattern_automation.description": "&6使用&e动力锯&6切割&e三次&6原木即可获得&e模具&6。\n\n&c&l注意：&r&6这些原材料可能被切割为&e不同物品&6，因此你需要在&e配方过滤器&6中标记好你需要的产物。",
+
+    "quest.technology_chapters.1.gravel_automation.title": "沙砾自动化",
+    "quest.technology_chapters.1.gravel_automation.description": "&6将&e圆石&6粉碎以获得&e沙砾&6。\n\n在第一章，&e磨石&6是唯一用于粉碎物品的机械。你也可以在之后的章节中，获取&e粉碎轮&6以代替磨石。",
+
+    "quest.technology_chapters.1.iron_nugget_automation.title": "铁粒自动化",
+    "quest.technology_chapters.1.iron_nugget_automation.description": "&6将&e沙砾&6通过&e鼓风机&6洗涤后可以得到少量&e铁粒&6。\n\n&6沙砾洗涤会产生大量&e燧石&6，你需要通过某些方法将它们去除，例如后续章节中介绍的&e黄铜漏斗&6、&e黄铜隧道&6等。\n\n&c&l注意：&r&6沙砾被洗涤转化为铁粒&e需要一定时间&6。你需要确保传送带的速度&e足够慢&6，让所有沙砾都得到处理。",
+
+    "quest.technology_chapters.1.andesite_alloy_automation.title": "安山合金自动化",
+    "quest.technology_chapters.1.andesite_alloy_automation.description": "&6将&e安山岩&6与&e铁粒&6通过&e动力搅拌器&6混合在一起获得&e安山合金&6。",
+
+    "quest.technology_chapters.1.basic_mechanism_automation.title": "基础构件自动化",
+    "quest.technology_chapters.1.basic_mechanism_automation.description": "&6为一个&e模具&6安装&e三个安山合金&6以制作&e基础构件&6。",
+
+    "quest.technology_chapters.1.materials.andesite_alloy.description": "&e安山合金&6材料制作的工具能够&e攻击一条直线上的目标&6。",
+    "quest.technology_chapters.1.materials.andesite_alloy.task": "任意安山合金部件",
 
         "_comment_recipes": " ----- 配方 ----- ",
     
