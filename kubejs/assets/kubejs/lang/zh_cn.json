@@ -4,6 +4,8 @@
 
         "_comment_items": " ----- 物品 ----- ",
 
+    "creative_mode_tab.kubejs.artifacts": "Artifacts",
+
     "item.kubejs.icy_terracube": "寒冰黏土怪刷怪蛋",
     "item.kubejs.frozen_terracube_core": "冰冻黏土怪核心",
     "item.kubejs.frozen_terracube_core.tooltip": "大型黏土怪被冰冻伤害杀死时掉落，在寒冷的生物群系中使用以召唤寒冰黏土怪",

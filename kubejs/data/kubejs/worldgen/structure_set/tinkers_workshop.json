@@ -1,0 +1,17 @@
+{
+    "structures": [
+        {
+            "structure": "kubejs:tinkers_workshop",
+            "weight": 1
+        }
+    ],
+    "placement": {
+        "type": "minecraft:random_spread",
+        "spacing": 16,
+        "separation": 8,
+        "spread_type": "linear",
+        "salt": 1304858,
+        "frequency_reduction_method": "default",
+        "frequency": 0.5
+    }
+}

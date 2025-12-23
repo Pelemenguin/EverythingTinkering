@@ -1,0 +1,29 @@
+{
+    "fallback": "minecraft:empty",
+    "elements": [
+        {
+            "element": {
+                "element_type": "minecraft:single_pool_element",
+                "projection": "rigid",
+                "location": "kubejs:tinkers_workshop",
+                "processors": [
+                    {
+                        "processor_type": "minecraft:block_rot",
+                        "integrity": 0.9,
+                        "rottable_blocks": [
+                            "minecraft:oak_slab"
+                        ]
+                    },
+                    {
+                        "processor_type": "minecraft:block_rot",
+                        "integrity": 0.5,
+                        "rottable_blocks": [
+                            "minecraft:oak_planks"
+                        ]
+                    }
+                ]
+            },
+            "weight": 1
+        }
+    ]
+}
