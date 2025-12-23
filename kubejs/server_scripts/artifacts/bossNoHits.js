@@ -1,4 +1,4 @@
-// priority: 1000
+// priority: 999
 
 /**
  * @fileoverview Boss No Hit | Boss无伤

@@ -3,6 +3,8 @@
 
         "_comment_items": " ----- Items ----- ",
 
+    "creative_mode_tab.kubejs.artifacts": "Artifacts",
+
     "item.kubejs.icy_terracube": "Icy Terracube Spawn Egg",
     "item.kubejs.frozen_terracube_core": "Frozen Terracube Core",
     "item.kubejs.frozen_terracube_core.tooltip": "Dropped when a large Terracube is killed by freezing damage. Use in cold biomes to summon the Icy Terracube",

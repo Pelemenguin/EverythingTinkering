@@ -222,6 +222,8 @@ function ArtifactGroup(id) {
     /** @type {Internal.Map<string, Annotation.ArtifactOrGroup>} */
     this.children = Utils.newMap();
     this.translationId = id;
+    /** @type {Internal.ItemStack[]} */
+    this.allArtifacts = null;
 }
 
 /**
@@ -253,6 +255,7 @@ ArtifactGroup.prototype.createArtifact = function(id, item, definition, material
     registered.translationId = this.translationId + '.' + id;
     this.children.put(id, registered);
     console.info(`[Artifact] Registered new artifact "${id}", type ${definition.getId().toString()}, materials: [${materials}]`);
+    this.allArtifacts = null;
     return registered;
 };
 
@@ -301,11 +304,29 @@ ArtifactGroup.prototype.createArtifactGroup = function(id) {
     registered.translationId = this.translationId + '.' + id;
     this.children.put(id, registered);
     console.info(`[Artifact] Registered new artifact group "${id}"`);
+    this.allArtifacts = null;
     return registered;
 };
 
 ArtifactGroup.prototype.toString = function() {
     return `${this.id}${this.children.entrySet().map(a => a.value.toString()).toString()}`;
+};
+
+ArtifactGroup.prototype.getAllArtifacts = function() {
+    if (this.allArtifacts != null) {
+        return this.allArtifacts;
+    }
+    /** @type {Internal.ItemStack[]} */
+    let result = [];
+    this.children.forEach((_id, child) => {
+        if (child instanceof ArtifactGroup) {
+            result = result.concat(child.getAllArtifacts());
+        } else {
+            result.push(child.createStack(1));
+        }
+    });
+    this.allArtifacts = result;
+    return result;
 };
 
 /**
