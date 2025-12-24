@@ -558,6 +558,17 @@ const ModifierManager = {
             }
         });
 
+        if ("getPriority" in hooks) {
+            // Due to a ClassJS bug, parameter type list cannot be empty
+            modifierClassCreator.createMethod("getPriority", ["java.lang.Object"], "int")
+                .toPublic().codeJS(hooks.getPriority);
+        }
+
+        if ("getDisplayNameFromTool" in hooks) {
+            modifierClassCreator.createMethod("getDisplayName", ["slimeknights.tconstruct.library.tools.nbt.IToolStackView", "slimeknights.tconstruct.library.modifiers.ModifierEntry", "net.minecraft.core.RegistryAccess"], "net.minecraft.network.chat.Component")
+                .codeJS(hooks.getDisplayNameFromTool);
+        }
+
         let registerHooksCodeBuilder = modifierClassCreator.createMethod("registerHooks", ["slimeknights/tconstruct/library/module/ModuleHookMap$Builder"], "void")
             .toProtected()
             .code()
@@ -577,13 +588,18 @@ const ModifierManager = {
                 .invokeVirtual("slimeknights.tconstruct.library.module.ModuleHookMap$Builder", "addHook", ["java.lang.Object", "slimeknights.tconstruct.library.module.ModuleHook"], "slimeknights.tconstruct.library.module.ModuleHookMap$Builder");
         });
 
+        if ("__class__" in hooks && "addModule" in hooks.__class__) {
+            registerHooksCodeBuilder.loadObject("this").loadObject("arg0")
+                .invokeJS(["slimeknights.tconstruct.library.modifiers.Modifier", "slimeknights.tconstruct.library.module.ModuleHookMap$Builder"], "void", hooks.__class__.addModule);
+        }
+
         registerHooksCodeBuilder.returnVoid().build();
 
-        if ("__class__" in hooks && "post" in hooks) {
+        if ("__class__" in hooks && "post" in hooks.__class__) {
             hooks.__class__.post(modifierClassCreator);
         }
 
-        if ("__class__" in hooks && "generateConstructor" in hooks) {
+        if ("__class__" in hooks && "generateConstructor" in hooks.__class__) {
             hooks.__class__.generateConstructor(modifierClassCreator);
         } else modifierClassCreator.defaultConstructor();
 

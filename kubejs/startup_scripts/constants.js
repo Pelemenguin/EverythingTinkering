@@ -61,10 +61,14 @@ const $LootContextParams = Java.loadClass("net.minecraft.world.level.storage.loo
 const $LootContextParamSets = Java.loadClass("net.minecraft.world.level.storage.loot.parameters.LootContextParamSets");
 
 // Mantle
-const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
-const BookTransformer = Java.loadClass("slimeknights.mantle.client.book.transformer.BookTransformer");
-const ContentPageIconList = Java.loadClass("slimeknights.mantle.client.book.data.content.ContentPageIconList");
-const ContentPageIconList$PageWithIcon = Java.loadClass("slimeknights.mantle.client.book.data.content.ContentPageIconList$PageWithIcon");
+/** @type {typeof Internal.ResourceColorManager} */
+const ResourceColorManager = Java.tryLoadClass('slimeknights.mantle.client.ResourceColorManager');
+/** @type {typeof Internal.BookTransformer} */
+const BookTransformer = Java.tryLoadClass("slimeknights.mantle.client.book.transformer.BookTransformer");
+/** @type {typeof Internal.ContentPageIconList} */
+const ContentPageIconList = Java.tryLoadClass("slimeknights.mantle.client.book.data.content.ContentPageIconList");
+/** @type {typeof Internal.ContentPageIconList$PageWithIcon} */
+const ContentPageIconList$PageWithIcon = Java.tryLoadClass("slimeknights.mantle.client.book.data.content.ContentPageIconList$PageWithIcon");
 
 // Tinker's Construct
 const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialId');
@@ -85,12 +89,17 @@ const $ModifierNBT = Java.loadClass("slimeknights.tconstruct.library.tools.nbt.M
 const ToolStatId = Java.loadClass("slimeknights.tconstruct.library.tools.stat.ToolStatId");
 const ToolStats = Java.loadClass('slimeknights.tconstruct.library.tools.stat.ToolStats');
 const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDefinitions');
-const TinkerItemElement = Java.loadClass("slimeknights.tconstruct.library.client.book.elements.TinkerItemElement");
+/** @type {typeof Internal.TinkerItemElement} */
+const TinkerItemElement = Java.tryLoadClass("slimeknights.tconstruct.library.client.book.elements.TinkerItemElement");
+const $LevelingInt = Java.loadClass("slimeknights.tconstruct.library.json.LevelingInt");
 const MaterialCastingLookup = Java.loadClass("slimeknights.tconstruct.library.recipe.casting.material.MaterialCastingLookup");
 const MaterialRecipeCache = Java.loadClass("slimeknights.tconstruct.library.recipe.material.MaterialRecipeCache");
 const TinkerToolParts = Java.loadClass("slimeknights.tconstruct.tools.TinkerToolParts");
 const TinkerTools = Java.loadClass("slimeknights.tconstruct.tools.TinkerTools");
 const ModifierDeferredRegister = Java.loadClass("slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister");
+const $ModifierHooks = Java.loadClass("slimeknights.tconstruct.library.modifiers.ModifierHooks");
+const $CapacityBarModule = Java.loadClass("slimeknights.tconstruct.library.modifiers.modules.capacity.CapacityBarModule");
+const $DurabilityShieldModule = Java.loadClass("slimeknights.tconstruct.library.modifiers.modules.capacity.DurabilityShieldModule");
 const $ModifiableItem = Java.loadClass("slimeknights.tconstruct.library.tools.item.ModifiableItem");
 
 // TiC Modifier Modules

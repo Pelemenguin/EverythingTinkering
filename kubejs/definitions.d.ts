@@ -85,6 +85,41 @@ declare namespace Annotation {
             | "projectileLaunch" | "tooltipSetting" | "onServerTick";
         type ModifierHookArgument = {
             /**
+             * Override this method to make your modifier run earlier or later.
+             * Higher numbers run earlier, `100` is default.  
+             * 重写此方法以使你的特性更早或更晚运行。
+             * 更高的数字更早运行，`100`为默认值。
+             * - - - - -
+             * @returns Priority  
+             *          优先级
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     getPriority: () => 100
+             *     // Default priority of 100
+             *     // 默认优先级100
+             * });
+             */
+            getPriority?(): number,
+            /**
+             * Stack sensitive version of `getDisplayName(int)`. Useful for displaying persistent data such as overslime or redstone amount.  
+             * 工具堆叠敏感版本的`getDisplayName(int)`。可用于显示持久化数据，如黏液覆层或红石数量。
+             * - - - - -
+             * @param tool   Tool instance  
+             *               工具实例
+             * 
+             * @param entry  Tool level  
+             *               特性等级
+             * 
+             * @param access Registry access intance (Nullable)
+             *               注册表访问实例（可为`null`）
+             * 
+             * @returns      Stack sensitive display name  
+             *               堆叠敏感的显示名称
+             * - - - - -
+             */
+            getDisplayNameFromTool?(tool: Internal.IToolStackView, entry: Internal.ModifierEntry, access: Internal.RegistryAccess): Internal.Component,
+            /**
              * Method to modify a stat as the tool is being used  
              * 工具使用时修改属性的方法。
              * - - - - -
@@ -123,7 +158,7 @@ declare namespace Annotation {
              *     }
              * });
              */ 
-            modifyStat?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, living: Internal.LivingEntity, stat: Internal.FloatToolStat, baseValue: number, multiplier: number) => number,
+            modifyStat?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, living: Internal.LivingEntity, stat: Internal.FloatToolStat, baseValue: number, multiplier: number): number,
             /**
              * Called when the tool is damaged.
              * Can be used to cancel, decrease, or increase the damage.  
@@ -160,7 +195,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            onDamageTool?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, amount: number, holder: Internal.LivingEntity | null, stack: Internal.ItemStack | null) => number,
+            onDamageTool?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, amount: number, holder: Internal.LivingEntity | null, stack: Internal.ItemStack | null): number,
             /**
              * Triggers every tick in the inventory.
              * Not to be confused with {@link CustomModifierHookArgument.onServerTick `__custom__.onServerTick`}  
@@ -199,7 +234,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            onInventoryTick?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, world: Internal.Level, holder: Internal.LivingEntity, itemSlot: number, isSelected: boolean, isCorrectSlot: boolean, stack: Internal.ItemStack) => void,
+            onInventoryTick?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, world: Internal.Level, holder: Internal.LivingEntity, itemSlot: number, isSelected: boolean, isCorrectSlot: boolean, stack: Internal.ItemStack): void,
             /**
              * Adds additional information from the modifier to the tooltip.
              * Shown when holding `shift` on a tool, or in the stats area of the tinker station  
@@ -232,7 +267,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            addTooltip?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, player: Internal.Player | null, tooltip: Internal.List<Internal.Component>, tooltipKey: Internal.TooltipKey, tooltipFlag: Internal.TooltipFlag) => void,
+            addTooltip?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, player: Internal.Player | null, tooltip: Internal.List<Internal.Component>, tooltipKey: Internal.TooltipKey, tooltipFlag: Internal.TooltipFlag): void,
             /**
              * Gets the list of required modifiers to display on tools in recipe viewers.
              * Note that the actual requirement are implemented via {@linkcode ModifierHookArgument.validate validate}.  
@@ -257,7 +292,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            displayModifiers?: (entry: Internal.ModifierEntry) => Internal.List<Internal.ModifierEntry>,
+            displayModifiers?(entry: Internal.ModifierEntry): Internal.List<Internal.ModifierEntry>,
             /**
              * Gets the hint about the modifier requirements, or `null` if no hint
              * Note that the actual requirement are implemented via {@linkcode ModifierHookArgument.validate validate}.  
@@ -279,7 +314,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            requirementsError?: (entry: Internal.ModifierEntry) => Internal.Component | null,
+            requirementsError?(entry: Internal.ModifierEntry): Internal.Component | null,
             /**
              * Adds raw stats to the tool. Called whenever tool stats are rebuilt.  
              * 向工具添加直接属性数据。在工具属性重建时调用。
@@ -311,7 +346,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            addToolStats?: (context: Internal.IToolContext, modifier: Internal.ModifierEntry, builder: Internal.ModifierStatsBuilder) => void,
+            addToolStats?(context: Internal.IToolContext, modifier: Internal.ModifierEntry, builder: Internal.ModifierStatsBuilder): void,
             /**
              * Called when modifiers or tool materials change to validate the tool. You are free to modify persistent data in this hook if needed.
              * This hook will not be called when a modifier is removed, to validate if a removal can be done, use {@linkcode ModifierHookArgument.onRemoved onRemoved}.
@@ -340,7 +375,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            validate?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry) => Internal.Component | null,
+            validate?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry): Internal.Component | null,
             /**
              * Called after this modifier is removed (and after stats are rebuilt) to clean up persistent data and validate removal.  
              * 在该特性被移除后（且属性重建后）调用以清理持久化数据并验证移除。
@@ -367,7 +402,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            onRemoved?: (tool: Internal.IToolStackView, modifier: Internal.Modifier) => Internal.Component | null,
+            onRemoved?(tool: Internal.IToolStackView, modifier: Internal.Modifier): Internal.Component | null,
             /**
              * Called when an entity is attacked, before critical hit damage is calculated.
              * Allows modifying the damage dealt.
@@ -403,7 +438,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            getMeleeDamage?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, baseDamage: number, damage: number) => number,
+            getMeleeDamage?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, baseDamage: number, damage: number): number,
             /**
              * Called right before an entity is hit, used to modify knockback applied or to apply special effects that need to run before damage.
              * {@linkcode damage} is final damage including critical damage.
@@ -441,7 +476,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            beforeMeleeHit?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, damage: number, baseKnockback: number, knockback: number) => number,
+            beforeMeleeHit?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, damage: number, baseKnockback: number, knockback: number): number,
             /**
              * Called after a living entity is successfully attacked.
              * Used to apply special effects on hit.  
@@ -470,7 +505,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            afterMeleeHit?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, damageDealt: number) => void,
+            afterMeleeHit?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, damageDealt: number): void,
             /**
              * Gets the protection value of the armor from this modifier.
              * A value of 1 blocks about 4% of damage, equivalent to 1 level of the protection enchantment.
@@ -510,7 +545,7 @@ declare namespace Annotation {
              *     }
              * }
              */
-            getProtectionModifier?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.EquipmentContext, slotType: Internal.EquipmentSlot, source: DamageSource, modifierValue: number) => number,
+            getProtectionModifier?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.EquipmentContext, slotType: Internal.EquipmentSlot, source: DamageSource, modifierValue: number): number,
             /**
              * Runs after an entity is attacked (and we know the attack will land).
              * Note you can attack the entity here,
@@ -547,7 +582,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            onAttacked?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.EquipmentContext, slotType: Internal.EquipmentSlot, source: DamageSource, amount: number, isDirectDamage: boolean) => void,
+            onAttacked?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.EquipmentContext, slotType: Internal.EquipmentSlot, source: DamageSource, amount: number, isDirectDamage: boolean): void,
             /**
              * Runs when an entity is about to take damage and allows modifying that damage.
              * Note you can attack the entity here, but you are responsible for preventing infinite recursion if you do so
@@ -590,7 +625,7 @@ declare namespace Annotation {
              *     }
              * }
              */
-            modifyDamageTaken?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.EquipmentContext, slotType: Internal.EquipmentSlot, source: DamageSource, amount: number, isDirectDamage: boolean) => number,
+            modifyDamageTaken?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.EquipmentContext, slotType: Internal.EquipmentSlot, source: DamageSource, amount: number, isDirectDamage: boolean): number,
             /**
              * Triggers when mining blocks.
              * Note that modification on mining speed should be done on `newSpeed` field of {@link event `event`}.  
@@ -623,7 +658,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            onBreakSpeed?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, event: Internal.PlayerEvent$BreakSpeed, sideHit: Internal.Direction, isEffective: boolean, miningSpeedModifier: number) => void,
+            onBreakSpeed?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, event: Internal.PlayerEvent$BreakSpeed, sideHit: Internal.Direction, isEffective: boolean, miningSpeedModifier: number): void,
             /**
              * Called after a block is broken to apply special effects  
              * 在方块被破坏后调用来添加特殊效果
@@ -645,7 +680,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            afterBlockBreak?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolHarvestContext) => void,
+            afterBlockBreak?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolHarvestContext): void,
             /**
              * Triggers when launching a projectile.
              * 发射弹射物时触发。
@@ -685,7 +720,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            onProjectileLaunch?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, shooter: Internal.LivingEntity, ammo: Internal.ItemStack, projectile: Internal.Projectile, arrow: Internal.AbstractArrow | null, persistent: Internal.ModDataNBT, isPrimary: boolean) => void,
+            onProjectileLaunch?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, shooter: Internal.LivingEntity, ammo: Internal.ItemStack, projectile: Internal.Projectile, arrow: Internal.AbstractArrow | null, persistent: Internal.ModDataNBT, isPrimary: boolean): void,
             /**
              * Called when interacting with a block before calling the block's interaction method.
              * In general, it's better to use {@linkcode ModifierHookArgument.afterBlockUse afterBlockUse} for consistency with vanilla behavior.  
@@ -718,7 +753,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            beforeBlockUse?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.UseOnContext, source: Internal.InteractionSource) => Internal.InteractionResult_,
+            beforeBlockUse?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.UseOnContext, source: Internal.InteractionSource): Internal.InteractionResult_,
             /**
              * Called when interacting with a block after calling the block's interaction method.  
              * 在调用方块的交互方法之后与方块交互时调用。
@@ -749,7 +784,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            afterBlockUse?: (tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.UseOnContext, source: Internal.InteractionSource) => Internal.InteractionResult_,
+            afterBlockUse(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.UseOnContext, source: Internal.InteractionSource): Internal.InteractionResult_,
             /**
              * Some custom methods for modifiers written by our KubeJS scripts.
              * These are not standard Tinker's Construct modifier hooks.  
@@ -803,7 +838,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            onServerTick?: (event: Internal.ServerEventJS) => void,
+            onServerTick?(event: Internal.ServerEventJS): void,
             /**
              * Triggers **every tick** on client side.
              * 在客户端**每个tick**触发一次。
@@ -821,9 +856,19 @@ declare namespace Annotation {
              *     }
              * }
              */
-            onClientTick?: (event: Internal.ClientEventJS) => void,
+            onClientTick?(event: Internal.ClientEventJS): void,
         };
         type ClassModifierHookArgument = {
+            /**
+             * Called when adding modules to the modifier.  
+             * 用于向特性添加模块时调用。
+             * - - - - -
+             * @param thisModifier `this` object when adding modules  
+             *                     添加模块时的`this`对象
+             * @param builder      The builder  
+             *                     构建器
+             */
+            addModule?(thisModifier: Internal.Modifier, builder: Internal.ModuleHookMap$Builder): void,
             /**
              * Used for defining which class to extend from.  
              * 用于定义要继承的类。
@@ -839,12 +884,9 @@ declare namespace Annotation {
              *     }
              * }
              */
-            extending: string,
-            implementing: string[],
+            extending?: string,
+            implementing?: string[],
             /**
-             * @deprecated Use {@linkcode ClassModifierHookArgument.extending extending} instead.  
-             *             弃用。请改用{@linkcode ClassModifierHookArgument.extending extending}。
-             * - - - - -
              * Called after the modifier class's methods are created.
              * For example, overriding class to extend from.
              * 在创建特性类的方法结束之后调用，例如可以覆盖要继承的类。
@@ -865,7 +907,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            post?: (classCreator: ClassCreator) => void,
+            post?(classCreator: ClassCreator): void,
             /**
              * Called after {@linkcode ClassModifierHookArgument.post post} to generate constructor method of the modifier class.
              * You can define your own constructor here.
@@ -877,7 +919,7 @@ declare namespace Annotation {
              * @param classCreator Class Creator instance to define the modifier class.
              *                     类创建器实例，用于创建特性类
              */
-            generateConstructor?: (classCreator: ClassCreator) => void,
+            generateConstructor?(classCreator: ClassCreator): void,
         };
         type KeyModifierHookArgument = {
             /**
@@ -902,7 +944,7 @@ declare namespace Annotation {
              *     }
              * }
              */
-            registerKeys: () => void,
+            registerKeys(): void,
         };
         type ModifierHooks = keyof ModifierHookArgument;
     }

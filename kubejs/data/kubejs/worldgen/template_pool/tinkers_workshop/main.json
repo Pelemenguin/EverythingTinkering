@@ -1,0 +1,53 @@
+{
+    "fallback": "minecraft:empty",
+    "elements": [
+        {
+            "element": {
+                "element_type": "minecraft:single_pool_element",
+                "projection": "rigid",
+                "location": "kubejs:tinkers_workshop/main_1",
+                "processors": [
+                    {
+                        "processor_type": "minecraft:block_rot",
+                        "integrity": 0.9,
+                        "rottable_blocks": [
+                            "minecraft:oak_slab"
+                        ]
+                    },
+                    {
+                        "processor_type": "minecraft:block_rot",
+                        "integrity": 0.5,
+                        "rottable_blocks": [
+                            "create:polished_cut_andesite"
+                        ]
+                    }
+                ]
+            },
+            "weight": 1
+        },
+        {
+            "element": {
+                "element_type": "minecraft:single_pool_element",
+                "projection": "rigid",
+                "location": "kubejs:tinkers_workshop/main_2",
+                "processors": [
+                    {
+                        "processor_type": "minecraft:block_rot",
+                        "integrity": 0.9,
+                        "rottable_blocks": [
+                            "minecraft:spruce_slab"
+                        ]
+                    },
+                    {
+                        "processor_type": "minecraft:block_rot",
+                        "integrity": 0.5,
+                        "rottable_blocks": [
+                            "create:polished_cut_limestone"
+                        ]
+                    }
+                ]
+            },
+            "weight": 1
+        }
+    ]
+}

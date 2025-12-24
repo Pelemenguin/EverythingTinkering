@@ -16,6 +16,8 @@
     "item.kubejs.basic_mechanism": "基础构件",
     "item.kubejs.incomplete_basic_mechanism": "基础构建（半成品）",
 
+    "item.kubejs.deserted_tinker_metal": "废弃工匠金属",
+
         "_comment_entities": " ----- 实体 ----- ",
 
     "entity.kubejs.boss.despawn": "%s丢失了其所有目标",
@@ -260,6 +262,12 @@
     "modifier.kubejs.relaying": "传动",
     "modifier.kubejs.relaying.flavor": "传递动量！",
     "modifier.kubejs.relaying.description": "攻击一条直线上的敌人",
+
+    "modifier.kubejs.tinker_coating": "工匠镀层",
+    "modifier.kubejs.tinker_coating.flavor": "某个远古的工匠发明了这个镀层……",
+    "modifier.kubejs.tinker_coating.description": "提供吸收耐久消耗的护盾，在完全消耗的一段时间后恢复",
+    "modifier.kubejs.tinker_coating.tooltip.shield": "工匠镀层剩余量：%s",
+    "modifier.kubejs.tinker_coating.tooltip.recovery": "工匠镀层恢复时间：%s",
 
     "modifier.kubejs.night_owl": "夜猫子",
     "modifier.kubejs.night_owl.flavor": "还在熬夜？",

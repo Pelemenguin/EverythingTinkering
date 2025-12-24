@@ -4,7 +4,7 @@
     "spawn_overrides": {},
     "step": "surface_structures",
     "terrain_adaptation": "beard_thin",
-    "start_pool": "kubejs:tinkers_workshop",
+    "start_pool": "kubejs:tinkers_workshop/main",
     "start_height": {
         "absolute": 0
     },

@@ -246,11 +246,11 @@
             "author": "mDiyo",
             "curse_id": {
                 "project": 74924,
-                "file": 6819217
+                "file": 7367477
             },
-            "raw_file_name": "Mantle-1.20.1-1.11.79.jar",
+            "raw_file_name": "Mantle-1.20.1-1.11.95.jar",
             "mod_id": "mantle",
-            "version": "1.11.79"
+            "version": "1.11.95"
         },
         {
             "name": "MantleJS",
@@ -331,11 +331,11 @@
             "author": "mDiyo",
             "curse_id": {
                 "project": 74072,
-                "file": 6777068
+                "file": 7371800
             },
-            "raw_file_name": "TConstruct-1.20.1-3.10.2.92.jar",
+            "raw_file_name": "TConstruct-1.20.1-3.11.0.148.jar",
             "mod_id": "tconstruct",
-            "version": "3.10.2.92"
+            "version": "3.11.0.148"
         },
         {
             "name": "Thermal Dynamics",

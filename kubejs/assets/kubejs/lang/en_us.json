@@ -15,6 +15,8 @@
     "item.kubejs.basic_mechanism": "Basic Mechanism",
     "item.kubejs.incomplete_basic_mechanism": "Incomplete Basic Mechanism",
 
+    "item.kubejs.deserted_tinker_metal": "Deserted Tinker Metal",
+
         "_comment_entities": " ----- Entities ----- ",
 
     "entity.kubejs.boss.despawn": "%s has lost all its targets",
@@ -261,6 +263,12 @@
     "modifier.kubejs.relaying": "Relaying",
     "modifier.kubejs.relaying.flavor": "Convey momentum!",
     "modifier.kubejs.relaying.description": "Attack enemies in a row",
+
+    "modifier.kubejs.tinker_coating": "Tinker Coating",
+    "modifier.kubejs.tinker_coating.flavor": "Some ancient tinker has invented this coating...",
+    "modifier.kubejs.tinker_coating.description": "Provides a durability shield that absorbs damage to durability, which will recover after a period of complete consumption",
+    "modifier.kubejs.tinker_coating.tooltip.shield": "Tinker Coating Amount: %s",
+    "modifier.kubejs.tinker_coating.tooltip.recovery": "Tinker Coating Recovers in: %s",
 
     "modifier.kubejs.antifatigue": "Anti-Fatigue",
     "modifier.kubejs.antifatigue.flavor": "Combat exhaustion!",

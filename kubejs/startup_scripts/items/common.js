@@ -19,4 +19,7 @@ StartupEvents.registry("minecraft:item", event => {
     // Technology Line
     event.create("kubejs:basic_mechanism");
     event.create("kubejs:incomplete_basic_mechanism", "create:sequenced_assembly");
+
+    // Adventure Line
+    event.create("kubejs:deserted_tinker_metal");
 });

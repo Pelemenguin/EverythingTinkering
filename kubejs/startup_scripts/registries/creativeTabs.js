@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 /**
  * @fileoverview Artifact Tab | Artifact 创造模式标签页
  * - - - - -
@@ -5,8 +7,6 @@
  * @license LGPL-3.0-or-later
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
- * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
  * - - - - -
  * @author Pelemenguin
  */
