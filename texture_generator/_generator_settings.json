@@ -40,6 +40,43 @@
         "stat_type": "tconstruct:repair_kit"
     },
     {
+        "path": "tconstruct:item/tool/parts/ingot",
+        "stat_type": "tconstruct:ingot"
+    },
+    {
+        "path": "tconstruct:block/storage/fallback",
+        "stat_type": "tconstruct:storage_block"
+    },
+    {
+        "path": "tconstruct:tinker_armor/fishing_hook/material",
+        "stat_type": "tconstruct:arrow_head"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:tinker_armor/travelers/metal_armor",
+        "stat_type": "tconstruct:armor_plating"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:tinker_armor/travelers/metal_leggings",
+        "stat_type": "tconstruct:armor_plating"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:tinker_armor/travelers/cuirass_armor",
+        "stat_type": "tconstruct:armor_cuirass"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:tinker_armor/travelers/cuirass_leggings",
+        "stat_type": "tconstruct:armor_cuirass"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:tinker_armor/travelers/cuirass_wings",
+        "stat_type": "tconstruct:armor_cuirass"
+    },
+    {
         "path": "tconstruct:item/tool/parts/maille",
         "stat_type": "tconstruct:maille"
     },
@@ -67,14 +104,6 @@
         "allow_animated": false,
         "path": "tconstruct:tinker_armor/plate/maille_wings",
         "stat_type": "tconstruct:armor_maille"
-    },
-    {
-        "path": "tconstruct:item/tool/armor/travelers/shield_modifiers/tconstruct_embellishment",
-        "stat_type": "tconstruct:wood"
-    },
-    {
-        "path": "tconstruct:item/tool/armor/travelers/shield_modifiers/broken/tconstruct_embellishment",
-        "stat_type": "tconstruct:wood"
     },
     {
         "path": "tconstruct:item/tool/staff/modifiers/tconstruct_embellishment",
@@ -138,6 +167,102 @@
         "allow_animated": false,
         "path": "tconstruct:tinker_armor/slime/wings",
         "stat_type": "tconstruct:slimesuit"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/goggles/cuirass",
+        "stat_type": "tconstruct:cuirass"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/goggles/cuirass_broken",
+        "stat_type": "tconstruct:cuirass"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/goggles/metal",
+        "stat_type": "tconstruct:plating_helmet"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/goggles/metal_broken",
+        "stat_type": "tconstruct:plating_helmet"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/vest/cuirass",
+        "stat_type": "tconstruct:cuirass"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/vest/cuirass_broken",
+        "stat_type": "tconstruct:cuirass"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/vest/metal",
+        "stat_type": "tconstruct:plating_chestplate"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/vest/metal_broken",
+        "stat_type": "tconstruct:plating_chestplate"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/pants/cuirass",
+        "stat_type": "tconstruct:cuirass"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/pants/cuirass_broken",
+        "stat_type": "tconstruct:cuirass"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/pants/metal",
+        "stat_type": "tconstruct:plating_leggings"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/pants/metal_broken",
+        "stat_type": "tconstruct:plating_leggings"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/boots/cuirass",
+        "stat_type": "tconstruct:cuirass"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/boots/cuirass_broken",
+        "stat_type": "tconstruct:cuirass"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/boots/metal",
+        "stat_type": "tconstruct:plating_boots"
+    },
+    {
+        "allow_animated": false,
+        "path": "tconstruct:item/tool/armor/travelers/boots/metal_broken",
+        "stat_type": "tconstruct:plating_boots"
+    },
+    {
+        "path": "tconstruct:item/tool/armor/travelers/shield/cuirass",
+        "stat_type": "tconstruct:cuirass"
+    },
+    {
+        "path": "tconstruct:item/tool/armor/travelers/shield/cuirass_broken",
+        "stat_type": "tconstruct:cuirass"
+    },
+    {
+        "path": "tconstruct:item/tool/armor/travelers/shield/wood",
+        "stat_type": "tconstruct:shield_core"
+    },
+    {
+        "path": "tconstruct:item/tool/armor/travelers/shield/wood_broken",
+        "stat_type": "tconstruct:shield_core"
     },
     {
         "allow_animated": false,
@@ -768,6 +893,94 @@
         "stat_type": "tconstruct:bowstring"
     },
     {
+        "path": "tconstruct:item/tool/fishing_rod/rod",
+        "stat_type": "tconstruct:limb"
+    },
+    {
+        "path": "tconstruct:item/tool/fishing_rod/string",
+        "stat_type": "tconstruct:bowstring"
+    },
+    {
+        "path": "tconstruct:item/tool/fishing_rod/string_broken",
+        "stat_type": "tconstruct:bowstring"
+    },
+    {
+        "path": "tconstruct:item/tool/fishing_rod/string_cast",
+        "stat_type": "tconstruct:bowstring"
+    },
+    {
+        "path": "tconstruct:item/tool/fishing_rod/hook",
+        "stat_type": "tconstruct:arrow_head"
+    },
+    {
+        "path": "tconstruct:item/tool/fishing_rod/hook_broken",
+        "stat_type": "tconstruct:arrow_head"
+    },
+    {
+        "path": "tconstruct:item/tool/javelin/head",
+        "stat_type": "tconstruct:head"
+    },
+    {
+        "path": "tconstruct:item/tool/javelin/head_broken",
+        "stat_type": "tconstruct:head"
+    },
+    {
+        "path": "tconstruct:item/tool/javelin/guard",
+        "stat_type": "tconstruct:limb"
+    },
+    {
+        "path": "tconstruct:item/tool/javelin/handle",
+        "stat_type": "tconstruct:handle"
+    },
+    {
+        "path": "tconstruct:item/tool/javelin/grip",
+        "stat_type": "tconstruct:grip"
+    },
+    {
+        "path": "tconstruct:item/tool/javelin/large/head",
+        "stat_type": "tconstruct:head"
+    },
+    {
+        "path": "tconstruct:item/tool/javelin/large/head_broken",
+        "stat_type": "tconstruct:head"
+    },
+    {
+        "path": "tconstruct:item/tool/javelin/large/guard",
+        "stat_type": "tconstruct:limb"
+    },
+    {
+        "path": "tconstruct:item/tool/javelin/large/handle",
+        "stat_type": "tconstruct:handle"
+    },
+    {
+        "path": "tconstruct:item/tool/javelin/large/grip",
+        "stat_type": "tconstruct:grip"
+    },
+    {
+        "path": "tconstruct:item/tool/ammo/arrow_head",
+        "stat_type": "tconstruct:arrow_head"
+    },
+    {
+        "path": "tconstruct:item/tool/ammo/arrow_shaft",
+        "stat_type": "tconstruct:arrow_shaft"
+    },
+    {
+        "path": "tconstruct:item/tool/ammo/arrow_feather",
+        "stat_type": "tconstruct:fletching"
+    },
+    {
+        "path": "tconstruct:item/tool/ammo/shuriken_top",
+        "stat_type": "tconstruct:arrow_head"
+    },
+    {
+        "path": "tconstruct:item/tool/ammo/shuriken_bottom",
+        "stat_type": "tconstruct:arrow_head"
+    },
+    {
+        "path": "tconstruct:item/tool/ammo/axe_head",
+        "stat_type": "tconstruct:arrow_head"
+    },
+    {
         "path": "tconstruct:item/tool/melting_pan/head",
         "skip_variants": true,
         "stat_type": "tconstruct:plating_shield"
@@ -861,5 +1074,20 @@
         "path": "tconstruct:item/tool/swasher/barrel_2",
         "skip_variants": true,
         "stat_type": "tconstruct:grip"
+    },
+    {
+        "path": "tconstruct:item/tool/minotaur_axe/front",
+        "skip_variants": true,
+        "stat_type": "tconstruct:head"
+    },
+    {
+        "path": "tconstruct:item/tool/minotaur_axe/front_broken",
+        "skip_variants": true,
+        "stat_type": "tconstruct:head"
+    },
+    {
+        "path": "tconstruct:item/tool/minotaur_axe/back",
+        "skip_variants": true,
+        "stat_type": "tconstruct:head"
     }
 ]
