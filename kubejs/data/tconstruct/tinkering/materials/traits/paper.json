@@ -1,0 +1,10 @@
+{
+    "perStat": {
+        "tconstruct:maille": [
+            {
+                "name": "kubejs:papercutting",
+                "level": 1
+            }
+        ]
+    }
+}

@@ -83,7 +83,7 @@
     "material.kubejs.coal.flavor": "Living Fuses!",
     "material.kubejs.coal.encyclopedia": "Attack an enemy can set your tool on fire. During this time, tool will continuously lose its durability points, and set fire to other enemies as you attack",
 
-    "material.kubejs.magma": "Magma",
+    "material.kubejs.magma": "Magma Block",
     "material.kubejs.magma.flavor": "Not to be confused with 'lava'...",
     "material.kubejs.magma.encyclopedia": "Deal 1 damage to the holder or the melee target, depending on the part type of this material",
 

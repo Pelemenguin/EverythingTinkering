@@ -193,6 +193,6 @@ generator = TextureGenerator(parts)
 generator.add_function(gen, "recolor", 0)
 generator.add_extra_file(lambda i, j: i+".mcmeta", lambda i, j: content)
 generator.set_fallback(["rock"])
-generator.generate("tconstruct_rock_prismarine", part_types=["tconstruct:head", "tconstruct:handle", "tconstruct:binding", "tconstruct:repair_kit"])
+generator.generate("tconstruct_prismarine", part_types=["tconstruct:arrow_head"])
 
 # print(generator._extra_files)

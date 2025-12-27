@@ -1,9 +1,0 @@
-{
-    "type": "tconstruct:material",
-    "ingredient": {
-        "item": "minecraft:amethyst_shard"
-    },
-    "material": "kubejs:amethyst",
-    "needed": 4,
-    "value": 1
-}
