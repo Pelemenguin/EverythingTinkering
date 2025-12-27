@@ -72,6 +72,26 @@ MantleJSEvents.pageTypeRegistry(event => {
             });
         });
     
+    event.create("kubejs:ammo_material_page_left")
+        .buildPage((/** @type {BookArguments.MaterialPageLeft} */ args, book, elements) => {
+            StatTypeBase.build(elements, book, args, {
+                stats: ["tconstruct:arrow_head", "tconstruct:arrow_shaft", "tconstruct:fletching"]
+            });
+        });
+    
+    event.create("kubejs:ammo_material_page_right")
+        .buildPage((/**@type {BookArguments.MaterialPageRight}*/args, book, elements) => {
+            DetailedBase.build(elements, book, args, {
+                tools: [
+                    TinkerTools.throwingAxe,
+                    TinkerTools.shuriken,
+                    TinkerTools.arrow,
+                    TinkerTools.fishingRod
+                ],
+                translationSuffix: "ammo"
+            });
+        });
+    
     event.create("kubejs:armor_material_page_left")
         .buildPage((/** @type {BookArguments.MaterialPageLeft} */ args, book, elements) => {
             ArmorStatPage.build(elements, book, args);

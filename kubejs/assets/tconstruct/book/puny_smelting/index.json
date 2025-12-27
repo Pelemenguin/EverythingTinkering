@@ -90,6 +90,38 @@
         }
     },
     {
+        "name": "ammo_materials",
+        "data": "no-load",
+        "extraData": {
+            "kubejs:material_tier": {
+                "type": "ammo",
+                "tier": 2,
+                "isEncyclopedia": false,
+                "defaultMaterials": [
+                    "tconstruct:glass",
+                    "tconstruct:slimewood",
+                    "tconstruct:feather"
+                ]
+            }
+        },
+        "icon": {
+            "item": {
+                "type": "forge:nbt",
+                "item": "tconstruct:arrow",
+                "nbt": {
+                    "tic_display": true,
+                    "tic_materials": [
+                        "tconstruct:glass",
+                        "tconstruct:slimewood",
+                        "tconstruct:feather"
+                    ],
+                    "tic_broken": false,
+                    "Damage": 0
+                }
+            }
+        }
+    },
+    {
         "name": "armor_materials",
         "data": "no-load",
         "extraData": {

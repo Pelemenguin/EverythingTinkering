@@ -90,6 +90,38 @@
         }
     },
     {
+        "name": "ammo_materials",
+        "data": "no-load",
+        "extraData": {
+            "kubejs:material_tier": {
+                "type": "ammo",
+                "tier": 4,
+                "isEncyclopedia": false,
+                "defaultMaterials": [
+                    "tconstruct:knightly",
+                    "tconstruct:end_rod",
+                    "tconstruct:feather"
+                ]
+            }
+        },
+        "icon": {
+            "item": {
+                "type": "forge:nbt",
+                "item": "tconstruct:arrow",
+                "nbt": {
+                    "tic_display": true,
+                    "tic_materials": [
+                        "tconstruct:knightly",
+                        "tconstruct:end_rod",
+                        "tconstruct:feather"
+                    ],
+                    "tic_broken": false,
+                    "Damage": 0
+                }
+            }
+        }
+    },
+    {
         "name": "armor_materials",
         "data": "no-load",
         "extraData": {

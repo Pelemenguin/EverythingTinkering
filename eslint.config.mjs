@@ -13,7 +13,8 @@ export default defineConfig([
                     {
                         "argsIgnorePattern": "^_"
                     }
-                ]
+                ],
+                "no-unexpected-multiline": "off"
             }
     },
     { files: ["**/*.js"], languageOptions: { sourceType: "script" } },

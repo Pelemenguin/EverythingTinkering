@@ -43,6 +43,11 @@ const PageType2ToolParts = {
         MaterialStatsId.tryParse("tconstruct:grip"),
         MaterialStatsId.tryParse("tconstruct:bowstring")
     ],
+    "ammo": [
+        MaterialStatsId.tryParse("tconstruct:arrow_head"),
+        MaterialStatsId.tryParse("tconstruct:arrow_shaft"),
+        MaterialStatsId.tryParse("tconstruct:fletching")
+    ],
     "armor": [
         MaterialStatsId.tryParse("tconstruct:plating_helmet"),
         MaterialStatsId.tryParse("tconstruct:plating_chestplate"),

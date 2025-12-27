@@ -20,7 +20,7 @@
     BookElement
     ImageData
     TinkerToolParts
-    ItemStack
+    $ItemStack
     BookTextData
     console
     JavaUtils
@@ -45,7 +45,7 @@ RecipeDisplay.DEFAULT_Y = 18;
 
 /**
  * @param {Internal.MaterialVariantId[]} referenceMaterials
- * @returns {Internal.ToolPartItem}
+ * @returns {Internal.ToolPartItem | Internal.RepairKitItem}
  */
 let getIndicatorToolPart = (referenceMaterials) => {
 
@@ -56,11 +56,14 @@ let getIndicatorToolPart = (referenceMaterials) => {
     if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.bowGrip.getOrNull();     else return item;
     if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.bowLimb.getOrNull();     else return item;
     if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.bowstring.getOrNull();   else return item;
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.arrowHead.getOrNull();   else return item;
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.arrowShaft.getOrNull();  else return item;
+    if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.fletching.getOrNull();   else return item;
     if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.maille.getOrNull();      else return item;
     if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.plating.values().get(0); else return item;
     if (materialId.some(m => !item.canUseMaterial(m))) item = TinkerToolParts.shieldCore.getOrNull();  else return item;
 
-    return item;
+    return TinkerToolParts.repairKit.getOrNull();
 };
 
 /**
@@ -102,9 +105,12 @@ RecipeDisplay.castIndicator = (referenceMaterial, x, y) => {
         case (TinkerToolParts.bowGrip.id):              item = Item.of("tconstruct:bow_grip_cast");       break;
         case (TinkerToolParts.bowLimb.id):              item = Item.of("tconstruct:bow_limb_cast");       break;
         case (TinkerToolParts.bowstring.id):            item = Item.of("minecraft:structure_void");       break;
+        case (TinkerToolParts.arrowHead.id):            item = Item.of("minecraft:structure_void");       break;
+        case (TinkerToolParts.arrowShaft.id):           item = Item.of("minecraft:structure_void");       break;
+        case (TinkerToolParts.fletching.id):            item = Item.of("minecraft:structure_void");       break;
         case (TinkerToolParts.maille.id):               item = Item.of("tconstruct:maille_cast");         break;
         case (TinkerToolParts.plating.values().get(0)): item = Item.of("tconstruct:helmet_plating_cast"); break;
-        case (TinkerToolParts.shieldCore.id):           item = Item.of("minecraft:barrier");              break;
+        case (TinkerToolParts.shieldCore.id):           item = Item.of("minecraft:structure_void");       break;
 
     }
 

@@ -39,12 +39,15 @@ let reprItems = {
     "kubejs:soil": "minecraft:dirt",
     "kubejs:terracotta": "minecraft:terracotta",
     "kubejs:brick": "minecraft:brick",
+    "tconstruct:feather": "minecraft:feather",
+    "tconstruct:leaves": "minecraft:oak_leaves",
+    "tconstruct:paper": "minecraft:paper",
+    "tconstruct:wool": "minecraft:white_wool",
 
     // Minerals
     "kubejs:coal": "minecraft:coal",
     "kubejs:lapis_lazuli": "minecraft:lapis_lazuli",
     "kubejs:redstone": "minecraft:redstone",
-    "kubejs:amethyst": "minecraft:amethyst_shard",
 
     // Other
     "tconstruct:flint": "minecraft:flint",
@@ -60,7 +63,6 @@ let reprItems = {
     "kubejs:sugar_cane": "minecraft:sugar_cane",
     "tconstruct:string": "minecraft:string",
     "tconstruct:leather": "minecraft:leather",
-    "kubejs:paper": "minecraft:paper",
     "tconstruct:vine": "minecraft:vine",
     "kubejs:kelp": "minecraft:kelp",
     "tconstruct:ice": "minecraft:ice",
@@ -73,14 +75,22 @@ let reprItems = {
     "tconstruct:seared_stone": "tconstruct:seared_brick",
     "tconstruct:scorched_stone": "tconstruct:scorched_brick",
     "tconstruct:slimewood": "tconstruct:greenheart_log",
+    "tconstruct:prismarine": "minecraft:prismarine_shard",
 
-    // Metals
+    // Metals & Minerals
     "tconstruct:iron": "minecraft:iron_ingot",
     "tconstruct:lead": "thermal:lead_ingot",
     "tconstruct:silver": "thermal:silver_ingot",
     "tconstruct:gold": "minecraft:gold_ingot",
+    "tconstruct:amethyst": "minecraft:amethyst_shard",
+    "tconstruct:earthslime": "tconstruct:earth_slime_crystal",
+    "tconstruct:skyslime": "tconstruct:sky_slime_crystal",
+    "tconstruct:slimeball": "minecraft:slime_ball",
 
     // Other
+    "tconstruct:gunpowder": "minecraft:gunpowder",
+    "tconstruct:ender_pearl": "minecraft:ender_pearl",
+    "tconstruct:blaze": "minecraft:blaze_rod",
     "tconstruct:venombone": "tconstruct:venombone",
     "tconstruct:necrotic_bone": "tconstruct:necrotic_bone",
     "tconstruct:whitestone": "minecraft:end_stone",
@@ -95,12 +105,17 @@ let reprItems = {
     // ========== Tier 3 ========== //
 
     // Non-Metal
+    "tconstruct:magma": "minecraft:magma_cream",
+    "tconstruct:quartz": "minecraft:quartz",
     "tconstruct:obsidian": "minecraft:obsidian",
     "kubejs:crying_obsidian": "minecraft:crying_obsidian",
+    "tconstruct:glowstone": "minecraft:glowstone_dust",
+    "tconstruct:ichor": "tconstruct:ichor_slime_crystal",
 
     // Metal
     "tconstruct:cobalt": "tconstruct:cobalt_ingot",
-    
+    "tconstruct:magnetite": "tconstruct:steel_shard",
+
     // Alloys
     "tconstruct:steel": "tconstruct:steel_ingot",
     "tconstruct:bronze": "thermal:bronze_ingot",
@@ -125,11 +140,17 @@ let reprItems = {
 
     // Tier 4
     "tconstruct:blazewood": "tconstruct:blazewood",
+    "tconstruct:shulker": "minecraft:shulker_shell",
     "tconstruct:hepatizon": "tconstruct:hepatizon_ingot",
     "tconstruct:manyullyn": "tconstruct:manyullyn_ingot",
+    "tconstruct:knightmetal": "tconstruct:knightmetal_ingot",
+    "tconstruct:knightly": "tconstruct:knightmetal_shard",
     "tconstruct:cinderslime": "tconstruct:cinderslime_ingot",
+    "tconstruct:enderslime": "tconstruct:ender_slime_crystal",
     "tconstruct:queens_slime": "tconstruct:queens_slime_ingot",
+    "tconstruct:end_rod": "minecraft:end_rod",
     "tconstruct:blazing_bone": "tconstruct:blazing_bone",
+    "tconstruct:dragon_scale": "tconstruct:dragon_scale",
     "tconstruct:ancient_hide": "minecraft:netherite_scrap",
     "tconstruct:enderslime_vine": "tconstruct:ender_slime_vine",
 

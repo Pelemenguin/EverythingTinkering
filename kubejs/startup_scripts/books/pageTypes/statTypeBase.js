@@ -39,7 +39,10 @@ let StatRepresentativeItem = {
     "tconstruct:binding": "tconstruct:tool_binding",
     "tconstruct:limb": "tconstruct:bow_limb",
     "tconstruct:grip": "tconstruct:bow_grip",
-    "tconstruct:bowstring": "tconstruct:bowstring"
+    "tconstruct:bowstring": "tconstruct:bowstring",
+    "tconstruct:arrow_head": "tconstruct:arrow_head",
+    "tconstruct:arrow_shaft": "tconstruct:arrow_shaft",
+    "tconstruct:fletching": "tconstruct:fletching"
 };
 
 /**
@@ -319,8 +322,8 @@ let addPlatingStats = (elements, materialId, y) => {
     
     let plateShield =  TinkerTools.plateShield.getOrNull();
     let shieldItem = ToolStack.createTool(plateShield, plateShield.getToolDefinition(), MaterialNBT.builder()
-        .add(MaterialId.tryParse("tconstruct:wood"))
-        .add(materialId)
+        ["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](MaterialId.tryParse("tconstruct:wood"))
+        ["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](materialId)
         .build()
     ).createStack();
 

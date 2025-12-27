@@ -29,7 +29,8 @@
     TinkerItemElement
     MaterialNBT
     ToolMaterialHook
-    ItemStack
+    $ItemStack
+    NBT
     MaterialVariantId
     JavaUtils
 */
@@ -221,7 +222,7 @@ const DetailedBase = {
      * @param {Internal.ArrayList<Internal.BookElement>} elements
      * @param {Internal.MaterialId} materialId
      * @param {Internal.MaterialVariantId[]} defaultMaterials
-     * @param {Internal.ItemObject<Internal.ModifiableItem>[]} tools
+     * @param {Internal.ItemObject<Internal.Item>[]} tools
      */
     drawExampleTools: (elements, materialId, defaultMaterials, tools) => {
         let x = BookScreen.PAGE_WIDTH - 16;
@@ -246,13 +247,13 @@ const DetailedBase = {
                         index ++;
                     }
                     if (index == defaultMaterials.length) materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](MaterialVariantId["tryParse(java.lang.String)"](materialId.toString()));
-                    materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](defaultMaterials[index]);
+                    else materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](defaultMaterials[index]);
                 }
             });
 
             let itemStack;
             if (anyUsed) itemStack = ToolStack.createTool(item, item.getToolDefinition(), materialBuilder.build()).createStack();
-            else itemStack = new $ItemStack(item, 1, {});
+            else itemStack = new $ItemStack(item, 1, {tic_display: NBT.byteTag(1)});
             let itemElement = new TinkerItemElement(itemStack);
             itemElement.x = x;
             itemElement.y = y;
@@ -282,7 +283,7 @@ const DetailedBase = {
      * @param {Internal.BookDataJS} book
      * @param {BookArguments.MaterialPageRight} pageArguments
      * @param {{
-     *     tools: Internal.ItemObject<Internal.ModifiableItem>[],
+     *     tools: Internal.ItemObject<Internal.Item>[],
      *     translationSuffix: string
      * }} displayArguments
      */

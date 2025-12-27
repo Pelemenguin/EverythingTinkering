@@ -62,6 +62,38 @@
         }
     },
     {
+        "name": "ammo_materials",
+        "data": "no-load",
+        "extraData": {
+            "kubejs:material_tier": {
+                "type": "ammo",
+                "tier": 1,
+                "isEncyclopedia": false,
+                "defaultMaterials": [
+                    "tconstruct:flint",
+                    "tconstruct:wood",
+                    "tconstruct:feather"
+                ]
+            }
+        },
+        "icon": {
+            "item": {
+                "type": "forge:nbt",
+                "item": "tconstruct:arrow",
+                "nbt": {
+                    "tic_display": true,
+                    "tic_materials": [
+                        "tconstruct:flint",
+                        "tconstruct:wood",
+                        "tconstruct:feather"
+                    ],
+                    "tic_broken": false,
+                    "Damage": 0
+                }
+            }
+        }
+    },
+    {
         "name": "modifiers",
         "data": "no-load",
         "icon": {
