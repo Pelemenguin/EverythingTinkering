@@ -11,7 +11,7 @@ import material_lapis_lazuli
 import material_magma
 import material_paper
 import material_redstone
-import material_rock_variants
+import material_prismarine
 import material_sea_alloy
 import material_soil
 import material_sugar_cane
