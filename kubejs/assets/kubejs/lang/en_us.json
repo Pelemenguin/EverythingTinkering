@@ -176,6 +176,10 @@
     "material.kubejs.andesite_alloy.flavor": "Just like a Shaft!",
     "material.kubejs.andesite_alloy.encyclopedia": "Attack targets in a row with distances between them less than 3 blocks. Damage gets multiplied by 0.2 times trait level and stops conveying when being less that 1.",
 
+    "material.kubejs.deserted_tinker_metal": "Deserted Tinker Metal",
+    "material.kubejs.deserted_tinker_metal.flavor": "Still usable?",
+    "material.kubejs.deserted_tinker_metal.encyclopedia": "Provides a durability shield absorbing 20 durability points per level. After complete consumption, the shield takes 30 seconds to recover",
+
     "material.kubejs.sea_alloy": "Sea Alloy",
     "material.kubejs.sea_alloy.flavor": "It's basically sea lanterns...",
     "material.kubejs.sea_alloy.encyclopedia": "Negates mining fatigue equivalent to the level of the Anti-Fatigue modifier",

@@ -68,6 +68,12 @@ let reprItems = {
     "tconstruct:ice": "minecraft:ice",
     "kubejs:phantom_membrane": "minecraft:phantom_membrane",
 
+    // Technology
+    "kubejs:andesite_alloy": "create:andesite_alloy",
+
+    // Adventure
+    "kubejs:deserted_tinker_metal": "kubejs:deserted_tinker_metal",
+
     // Tier 2
 
     // Non-Metal Materials
