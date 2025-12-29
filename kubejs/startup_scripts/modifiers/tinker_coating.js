@@ -63,5 +63,17 @@ let TINKER_COATING = ModifierManager.registerCommonModifier("tinker_coating", "T
                 )
             );
         }
+    },
+    validate: (tool, modifier) => {
+        let capacityBar = modifier.getHook($ModifierHooks.CAPACITY_BAR);
+        if (capacityBar.getAmount(tool) <= 0 && tool.getPersistentData().getInt("kubejs:tinker_coating_recovery") <= 0) {
+            capacityBar.setAmount(tool, modifier, capacityBar.getCapacity(tool, modifier));
+            tool.getPersistentData().putInt("kubejs:tinker_coating_recovery", 601);
+        }
+        return null;
+    },
+    onRemoved: (tool, _modifier) => {
+        tool.getPersistentData().remove("kubejs:tinker_coating_recovery");
+        return null;
     }
 });

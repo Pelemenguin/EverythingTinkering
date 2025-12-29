@@ -784,7 +784,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            afterBlockUse(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.UseOnContext, source: Internal.InteractionSource): Internal.InteractionResult_,
+            afterBlockUse?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.UseOnContext, source: Internal.InteractionSource): Internal.InteractionResult_,
             /**
              * Some custom methods for modifiers written by our KubeJS scripts.
              * These are not standard Tinker's Construct modifier hooks.  
