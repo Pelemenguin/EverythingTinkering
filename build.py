@@ -118,10 +118,13 @@ Build time: {BUILD_TIME}""")
     # zipping.extend(os.walk(os.path.join(curdir, "config")))
     zipping.extend(os.walk(os.path.join(curdir, "LICENSES")))
 
-# Exclude files here
+    # Exclude files here
     excluding = [
-        "./kubejs/probe/*",   # Generated ProbeJS data
-        "./kubejs/README.txt"   # KubeJS's README file
+        "./kubejs/probe/*",                 # Generated ProbeJS data
+        "./kubejs/README.txt"               # KubeJS's README file
+        "./kubejs/startup_scripts/docs.js", # File for ProbeJS Doc gen
+        "./kubejs/definitinos.d.ts",        # For developers, not necessary in modpacks
+        "./kubejs/jsconfig.json",           # JSConfig
     ]
 
     total = len(zipping)
