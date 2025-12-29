@@ -74,7 +74,7 @@ def build_modpack(args: list[str]):
 
     read = 0
     for m in mods:
-        if "tags" in m and "DeveloperOnly" in m["tags"]:
+        if "tags" not in m or "DeveloperOnly" not in m["tags"]:
             manifest["files"].append({
                 "projectID": m['curse_id']['project'],
                 "fileID": m['curse_id']['file'],
@@ -114,16 +114,17 @@ Build time: {BUILD_TIME}""")
 
     zipping = []
     zipping.extend(os.walk(os.path.join(curdir, "kubejs")))
-    zipping.extend(os.walk(os.path.join(curdir, "config/ftbquests")))
+    zipping.extend(os.walk(os.path.join(curdir, "config\\ftbquests")))
     # zipping.extend(os.walk(os.path.join(curdir, "config")))
     zipping.extend(os.walk(os.path.join(curdir, "LICENSES")))
 
     # Exclude files here
     excluding = [
         "./kubejs/probe/*",                 # Generated ProbeJS data
-        "./kubejs/README.txt"               # KubeJS's README file
+        "./kubejs/README.txt",              # KubeJS's README file
         "./kubejs/startup_scripts/docs.js", # File for ProbeJS Doc gen
-        "./kubejs/definitinos.d.ts",        # For developers, not necessary in modpacks
+        "./kubejs/definitions.d.ts",        # For developers, not necessary in modpacks
+        "./kubejs/config/*",                # KubeJS Config
         "./kubejs/jsconfig.json",           # JSConfig
     ]
 
