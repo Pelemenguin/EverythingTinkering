@@ -29,7 +29,7 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "kubejs:deserted_tinker_metal",
+                    "name": "kubejs:scrapped_tinker_metal",
                     "weight": 1,
                     "functions": [
                         {

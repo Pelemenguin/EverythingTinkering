@@ -72,7 +72,7 @@ let reprItems = {
     "kubejs:andesite_alloy": "create:andesite_alloy",
 
     // Adventure
-    "kubejs:deserted_tinker_metal": "kubejs:deserted_tinker_metal",
+    "kubejs:scrapped_tinker_metal": "kubejs:scrapped_tinker_metal",
 
     // Tier 2
 

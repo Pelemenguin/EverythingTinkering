@@ -16,7 +16,7 @@
     "item.kubejs.basic_mechanism": "基础构件",
     "item.kubejs.incomplete_basic_mechanism": "基础构建（半成品）",
 
-    "item.kubejs.deserted_tinker_metal": "废弃工匠金属",
+    "item.kubejs.scrapped_tinker_metal": "废弃工匠金属",
 
         "_comment_entities": " ----- 实体 ----- ",
 
@@ -179,9 +179,9 @@
     "material.kubejs.andesite_alloy.flavor": "就像一个传动轴！",
     "material.kubejs.andesite_alloy.encyclopedia": "攻击一条直线上距离不超过三格的敌人。每次传递，伤害会被乘以0.2倍特性等级。传递至小于1时停止。",
 
-    "material.kubejs.deserted_tinker_metal": "废弃工匠金属",
-    "material.kubejs.deserted_tinker_metal.flavor": "还能用？",
-    "material.kubejs.deserted_tinker_metal.encyclopedia": "提供一个耐久护盾，每级吸收20点耐久。完全消耗后，护盾需要30秒恢复",
+    "material.kubejs.scrapped_tinker_metal": "废弃工匠金属",
+    "material.kubejs.scrapped_tinker_metal.flavor": "还能用？",
+    "material.kubejs.scrapped_tinker_metal.encyclopedia": "提供一个耐久护盾，每级吸收20点耐久。完全消耗后，护盾需要30秒恢复",
 
     "material.kubejs.sea_alloy": "海洋合金",
     "material.kubejs.sea_alloy.flavor": "其实就是海晶灯......",

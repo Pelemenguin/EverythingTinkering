@@ -21,5 +21,5 @@ StartupEvents.registry("minecraft:item", event => {
     event.create("kubejs:incomplete_basic_mechanism", "create:sequenced_assembly");
 
     // Adventure Line
-    event.create("kubejs:deserted_tinker_metal");
+    event.create("kubejs:scrapped_tinker_metal");
 });

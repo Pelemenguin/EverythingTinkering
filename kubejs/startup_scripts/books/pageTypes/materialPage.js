@@ -66,7 +66,8 @@ MantleJSEvents.pageTypeRegistry(event => {
             DetailedBase.build(elements, book, args, {
                 tools: [
                     TinkerTools.crossbow,
-                    TinkerTools.longbow
+                    TinkerTools.longbow,
+                    TinkerTools.fishingRod
                 ],
                 translationSuffix: "ranged"
             });
@@ -83,10 +84,10 @@ MantleJSEvents.pageTypeRegistry(event => {
         .buildPage((/**@type {BookArguments.MaterialPageRight}*/args, book, elements) => {
             DetailedBase.build(elements, book, args, {
                 tools: [
-                    TinkerTools.throwingAxe,
-                    TinkerTools.shuriken,
+                    TinkerTools.fishingRod,
                     TinkerTools.arrow,
-                    TinkerTools.fishingRod
+                    TinkerTools.throwingAxe,
+                    TinkerTools.shuriken
                 ],
                 translationSuffix: "ammo"
             });
