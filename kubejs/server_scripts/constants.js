@@ -21,6 +21,7 @@
 
 const $Registries = Java.loadClass("net.minecraft.core.registries.Registries");
 const $TagKey = Java.loadClass("net.minecraft.tags.TagKey");
+const $MobSpawnType = Java.loadClass("net.minecraft.world.entity.MobSpawnType");
 const $ItemStack = Java.loadClass("net.minecraft.world.item.ItemStack");
 const $LootContextParams = Java.loadClass("net.minecraft.world.level.storage.loot.parameters.LootContextParams");
 
