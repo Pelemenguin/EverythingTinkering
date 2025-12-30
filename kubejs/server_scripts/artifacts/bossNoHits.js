@@ -1,7 +1,7 @@
-// priority: 999
+// priority: 998
 
 /**
- * @fileoverview Boss No Hit | Boss无伤
+ * @fileoverview Boss No Hit Artifacts | Boss无伤Artifact
  * - - - - -
  * @copyright Pelemenguin 2025
  * @license LGPL-3.0-or-later

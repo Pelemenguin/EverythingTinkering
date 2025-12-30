@@ -4,7 +4,7 @@
 
         "_comment_items": " ----- 物品 ----- ",
 
-    "creative_mode_tab.kubejs.artifacts": "Artifacts",
+    "creative_mode_tab.kubejs.artifacts": "工匠造物",
 
     "item.kubejs.icy_terracube": "寒冰黏土怪刷怪蛋",
     "item.kubejs.frozen_terracube_core": "冰冻黏土怪核心",
@@ -33,10 +33,10 @@
     "command.kubejs.item_list.parts.name": "%s的部件列表",
     "command.kubejs.item_list.parts.lore": "包含了该材料的所有部件",
 
-    "command.kubejs.artifact.not_found": "未找到 Artifact：“%s”",
-    "command.kubejs.artifact.is_group": "给定的命名路径是一个组：“%s” ，组中的 Artifact：",
+    "command.kubejs.artifact.not_found": "未找到工匠造物：“%s”",
+    "command.kubejs.artifact.is_group": "给定的命名路径是一个组：“%s” ，组中的工匠造物：",
     "command.kubejs.artifact.group_mark": "[组]",
-    "command.kubejs.artifact.success": "成功将%2$s个Artifact[%1$s]给予%3$s个目标",
+    "command.kubejs.artifact.success": "成功将%2$s个工匠造物[%1$s]给予%3$s个目标",
 
     "command.kubejs.rescue.success": "成功将玩家血量从NaN中恢复",
     "command.kubejs.rescue.not_nan": "玩家血量不是NaN",
@@ -296,6 +296,12 @@
     "modifier.kubejs.glacial_strike.remove": "冰滞冲击无法被移除",
     "modifier.kubejs.glacial_strike.requirements": "“冰滞冲击”需要“闪亮”、“保护 II”和“加固 II”作为前置",
 
+    "modifier.kubejs.artifact": "工匠造物",
+    "modifier.kubejs.artifact.tooltip": "工匠造物ID: %s",
+    "modifier.kubejs.artifact.flavor": "在世界各地随机出现……",
+    "modifier.kubejs.artifact.description": "该工具是在某个地方找到的工匠造物",
+    "modifier.kubejs.artifact.remove": "你是不是打算移除一个用来表示一个工具是工匠造物的特性？",
+
     "modifier.kubejs.immutable": "不可变",
     "modifier.kubejs.immutable.flavor": "要用“.copy()”吗？",
     "modifier.kubejs.immutable.description": "拒绝任何更改工具材料或特性的尝试",
@@ -303,14 +309,20 @@
 
         "comment_artifacts": " ----- Artifacts ----- ",
 
-    "item.kubejs.artifact.startup.pickaxe.name": "初始之镐",
-    "item.kubejs.artifact.startup.pickaxe.lore": "一份致新手的礼物。",
+    "item.kubejs.artifact.chest.startup.pickaxe.name": "初始之镐",
+    "item.kubejs.artifact.chest.startup.pickaxe.lore": "一份致新手的礼物。",
 
-    "item.kubejs.artifact.startup.hand_axe.name": "初始之斧",
-    "item.kubejs.artifact.startup.hand_axe.lore": "一份致新手的礼物。",
+    "item.kubejs.artifact.chest.startup.hand_axe.name": "初始之斧",
+    "item.kubejs.artifact.chest.startup.hand_axe.lore": "一份致新手的礼物。",
 
-    "item.kubejs.artifact.startup.sword.name": "初始之剑",
-    "item.kubejs.artifact.startup.sword.lore": "一份致新手的礼物。",
+    "item.kubejs.artifact.chest.startup.sword.name": "初始之剑",
+    "item.kubejs.artifact.chest.startup.sword.lore": "一份致新手的礼物。",
+
+    "item.kubejs.artifact.chest.tinkers_workshop.classic_pickaxe.name": "经典铁镐",
+    "item.kubejs.artifact.chest.tinkers_workshop.classic_pickaxe.lore": "这不是铁镐吗？",
+
+    "item.kubejs.artifact.chest.tinkers_workshop.non_classic_pickaxe.name": "非经典铁镐",
+    "item.kubejs.artifact.chest.tinkers_workshop.non_classic_pickaxe.lore": "这是铁镐吗？",
 
     "item.kubejs.artifact.boss_no_hit.icy_terracube.name": "冰滞冲击",
     "item.kubejs.artifact.boss_no_hit.icy_terracube.lore": "你有没有想象过一座冰山跳几米高砸你？",

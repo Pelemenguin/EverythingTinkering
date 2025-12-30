@@ -1,5 +1,7 @@
 {
     "kubejs:thawing": "kubejs:gui/modifiers/armor/thawing",
-    "kubejs:andesitize": "kubejs:gui/modifiers/andesitize",
+    "kubejs:andesitize": "kubejs:gui/modifiers/abilities/andesitize",
+
+    "kubejs:artifact": "kubejs:gui/modifiers/artifact",
     "kubejs:glacial_strike": "kubejs:gui/modifiers/armor/glacial_strike"
 }

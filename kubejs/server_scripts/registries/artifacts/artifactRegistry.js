@@ -33,21 +33,23 @@
 /** @typedef {Artifact | ArtifactGroup} Annotation.ArtifactOrGroup */
 
 /**
- * - Artifact.
- * - Artifact。
+ * Artifact.  
+ * Artifact。
  * - - - - -
- * @param {string} id -
- * - Id of the artifact. No `kubejs:` prefix.
- * - 该 Artifact 的 ID。无 `kubejs:` 前缀。
- * @param {Internal.Item} item -
- * - The item of the artifact.
- * - 该 Artifact 的物品。
- * @param {Internal.ToolDefinition_} definition -
- * - A tool definition.
- * - 工具定义。 
- * @param {string[]} materials -
- * - Materials of the tool.
- * - 工具材料列表。
+ * @param {string} id 
+ * Id of the artifact. No `kubejs:` prefix.  
+ * 该 Artifact 的 ID。无 `kubejs:` 前缀。
+ * 
+ * @param {Internal.Item} item 
+ * The item of the artifact.  
+ * 该 Artifact 的物品。
+ * 
+ * @param {Internal.ToolDefinition_} definition 
+ * A tool definition.  
+ * 工具定义。 
+ * @param {string[]} materials 
+ * Materials of the tool.  
+ * 工具材料列表。
  * - - - - -
  * @class
  */
@@ -71,22 +73,56 @@ function Artifact(id, item, definition, materials) {
     });
     /** @type {Internal.Map<Internal.ModifierId, number>} */
     this.modifiers = Utils.newMap();
+
+    /** @type {(artifact: Artifact, persistent: Internal.ModDataNBT) => void} */
+    this.persistentTransformation = (artifact, persistent) => {
+        persistent.putString("kubejs:artifact_id", artifact.translationId);
+    };
+
+    this.addModifier("kubejs:artifact", 1);
 }
 
 /**
- * - Add a modifier to the artifact.
- * - 为 Artifact 添加 Modifier.
+ * Add a modifier to the artifact.  
+ * 为 Artifact 添加 Modifier.
  * - - - - -
  * @param {string} modifier
- * - Modifier Id.
- * - 特性 ID。
+ * Modifier Id.  
+ * 特性 ID。
+ * 
  * @param {number} level
- * - Modifier level.
- * - 特性等级。
+ * Modifier level.  
+ * 特性等级。
+ * 
+ * @returns {this}
+ * The artifact itself.  
+ * 该 Artifact 本身。
  */
 Artifact.prototype.addModifier = function(modifier, level) {
     let modifierId = $ModifierId.tryParse(modifier);
     this.modifiers.put(modifierId, level);
+    return this;
+};
+
+/**
+ * Add a persistent transformation to the artifact.  
+ * 为 Artifact 添加持久化转换。
+ * - - - - -
+ * @param {(artifact: Artifact, persistent: Internal.ModDataNBT) => void} transformation 
+ * A transformation to the persistent mod data NBT.  
+ * 对持久化 Mod 数据 NBT 的转换。
+ * 
+ * @returns {this} 
+ * The artifact itself.
+ * 该 Artifact 本身。
+ */
+Artifact.prototype.persistent = function(transformation) {
+    let original = this.persistentTransformation;
+    this.persistentTransformation = (artifact, persistent) => {
+        original(artifact, persistent);
+        transformation(artifact, persistent);
+    };
+    return this;
 };
 
 /** @returns {string} @private */
@@ -109,8 +145,8 @@ Artifact.prototype.getTranslationId = function() {
 };
 
 /**
- * - Get the name of the artifact.
- * - 获取 Artifact 的名称。
+ * Get the name of the artifact.  
+ * 获取 Artifact 的名称。
  * - - - - -
  * @returns {Internal.Component}
  */
@@ -119,8 +155,8 @@ Artifact.prototype.getName = function() {
 };
 
 /**
- * - Get the lore of the artifact.
- * - 获取 Artifact 的详细信息。
+ * Get the lore of the artifact.  
+ * 获取 Artifact 的详细信息。
  * - - - - -
  * @returns {Internal.Component}
  */
@@ -129,8 +165,8 @@ Artifact.prototype.getLore = function() {
 };
 
 /**
- * - Add one line of extra tooltip to the artifact.
- * - 向 Artifact 添加一行工具提示
+ * Add one line of extra tooltip to the artifact.  
+ * 向 Artifact 添加一行工具提示
  */
 Artifact.prototype.addTooltip = function(component) {
     this.extraTooltips.push(component);
@@ -147,12 +183,12 @@ Artifact.prototype.reset = function() {
 };
 
 /**
- * - Create an instance Item Stack of the artifact.
- * - 创建 Artifact 的物品堆叠实例。
+ * Create an instance Item Stack of the artifact.  
+ * 创建 Artifact 的物品堆叠实例。
  * - - - - -
  * @param {number} count
- * - The count of the item stack.
- * - 物品堆叠的数量。
+ * The count of the item stack.  
+ * 物品堆叠的数量。
  * - - - - -
  * @returns {Internal.ItemStack}
  */
@@ -169,6 +205,8 @@ Artifact.prototype.createStack = function(count) {
     this.modifiers.forEach((id, level) => {
         stack.addModifier(id, level);
     });
+    stack.ensureHasData();
+    this.persistentTransformation(this, stack.getPersistentData());
     let result;
     if (count == undefined) {
         result = stack.createStack();
@@ -177,18 +215,19 @@ Artifact.prototype.createStack = function(count) {
     }
     if (!this.initialized) this.init();
     ToolStack.ensureInitialized(result, this.definition);
+    ToolStack.verifyTag(this.item, result.getNbt(), this.definition);
     result = result.withName(this.name);
     result = result.withLore([this.lore].concat(this.extraTooltips));
     return result;
 };
 
 /**
- * - Create a loot entry of the artifact.
- * - 创建一个该 Artifact 的战利品表条目。
+ * Create a loot entry of the artifact.  
+ * 创建一个该 Artifact 的战利品表条目。
  * - - - - -
- * @param {number} count -
- * - Item count.
- * - 物品数量
+ * @param {number} count 
+ * Item count.  
+ * 物品数量
  * - - - - -
  * @returns {Internal.LootEntry}
  */
@@ -196,8 +235,7 @@ Artifact.prototype.createLootEntry = function(count) {
     let stack = this.createStack();
     let item = stack.getItem();
     let nbt = stack.getNbt();
-    let result = LootEntry.of(item, count);
-    result.addNBT(nbt);
+    let result = LootEntry.of(item, count, nbt);
     return result;
 };
 
@@ -208,11 +246,11 @@ Artifact.prototype.toString = function() {
 // ---------- Artifact Group ---------- //
 
 /**
- * - A group of artifacts.
- * - Artifact 组。
+ * A group of artifacts.  
+ * Artifact 组。
  * @param {string} id -
- * - ID of the artifact group.
- * - Artifact 组的 ID.
+ * ID of the artifact group.  
+ * Artifact 组的 ID.
  * - - - - -
  * @class
  * @extends Artifact
@@ -235,18 +273,20 @@ ArtifactGroup.prototype.get = function(id) {
 };
 
 /**
- * - Create an artifact.
- * - 创建一个 Artifact.
+ * Create an artifact.  
+ * 创建一个 Artifact.
  * - - - - -
- * @param {string} id -
- * - Id of the artifact.
- * - 该 Artifact 的 ID。
- * @param {Internal.ToolDefinition_} definition -
- * - A tool definition.
- * - 工具定义。 
- * @param {string[]} materials -
- * - Materials of the tool.
- * - 工具材料列表。
+ * @param {string} id 
+ * Id of the artifact.  
+ * 该 Artifact 的 ID。
+ * 
+ * @param {Internal.ToolDefinition_} definition 
+ * A tool definition.  
+ * 工具定义。 
+ * 
+ * @param {string[]} materials 
+ * Materials of the tool.  
+ * 工具材料列表。
  * - - - - -
  * @returns {Artifact}
  */
@@ -260,8 +300,8 @@ ArtifactGroup.prototype.createArtifact = function(id, item, definition, material
 };
 
 /**
- * - Get an artifact (or group) from a name path.
- * - 通过命名路径获取一个 Artifact （或组）。
+ * Get an artifact (or group) from a name path.  
+ * 通过命名路径获取一个 Artifact （或组）。
  * - - - - -
  * @example
  * ```javascript
@@ -292,12 +332,25 @@ ArtifactGroup.prototype.getRecursive = function(namepath) {
 };
 
 /**
- * - Create an artifact group.
- * - 创建一个 Artifact 组。
+ * Get an artifact from a name path.  
+ * 通过命名路径获取一个 Artifact。
  * - - - - -
- * @param {string} id -
- * - Id of the artiface group.
- * - 该 Artifact 组的 ID。
+ * @param {string} namepath 
+ * - - - - -
+ * @returns {?Artifact}
+ */
+ArtifactGroup.prototype.getRecursiveArtifact = function(namepath) {
+    let result = this.getRecursive(namepath);
+    return result instanceof Artifact ? result : null;
+};
+
+/**
+ * Create an artifact group.
+ * 创建一个 Artifact 组。
+ * - - - - -
+ * @param {string} id 
+ * Id of the artiface group.  
+ * 该 Artifact 组的 ID。
  */
 ArtifactGroup.prototype.createArtifactGroup = function(id) {
     let registered = new ArtifactGroup(id);
@@ -330,8 +383,8 @@ ArtifactGroup.prototype.getAllArtifacts = function() {
 };
 
 /**
- * - Stores all registered artifacts.
- * - 储存所有已注册的 Artifact。
+ * Stores all registered artifacts.  
+ * 储存所有已注册的 Artifact。
  * - - - - -
  * @type {ArtifactGroup}
  */
