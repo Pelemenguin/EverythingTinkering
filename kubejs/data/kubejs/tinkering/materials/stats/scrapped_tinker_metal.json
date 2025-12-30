@@ -53,6 +53,7 @@
             "durability": 252,
             "toughness": 0,
             "knockback_resistance": 0.0
-        }
+        },
+        "tconstruct:maille": {}
     }
 }

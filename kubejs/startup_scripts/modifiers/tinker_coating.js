@@ -18,7 +18,6 @@
     ModifierManager
     $CapacityBarModule
     $DurabilityShieldModule
-    ToolStats
     $LevelingInt
     $ModifierHooks
     Component
@@ -29,7 +28,7 @@
 let TINKER_COATING = ModifierManager.registerCommonModifier("tinker_coating", "TinkerCoatingModifier", {
     __class__: {
         addModule: (_thisModifier, builder) => {
-            builder.addModule(new $CapacityBarModule("kubejs:tinker_coating_shield", $LevelingInt.eachLevel(20), ToolStats.DURABILITY));
+            builder.addModule(new $CapacityBarModule("kubejs:tinker_coating_shield", $LevelingInt.eachLevel(20), null));
             builder.addModule(new $DurabilityShieldModule(0xffa263));
         }
     },
