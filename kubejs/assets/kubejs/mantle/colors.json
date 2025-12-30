@@ -57,11 +57,7 @@
 
         "redstone": "#AA0F01",
 
-        "amethyst": "#8D6ACC",
-
         "sugar_cane": "#97F544",
-
-        "paper": "#FCFCF2",
 
         "kelp": "#59AB30",
 
@@ -77,8 +73,6 @@
 
     },
     "material.tconstruct": {
-
-        "rock.prismarine": "#9BCBBF",
 
         "glass.white_stained": "#ffffff",
         "glass.orange_stained": "#d87f33",

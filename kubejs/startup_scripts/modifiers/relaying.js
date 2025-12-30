@@ -88,5 +88,6 @@ let RELAYING = ModifierManager.registerCommonModifier("relaying", "RelayingModif
 
         return knockback;
 
-    }
+    },
+    onMonsterMeleeHit: ModifierManager.SYNC_NORMAL_TO_MONSTER
 });

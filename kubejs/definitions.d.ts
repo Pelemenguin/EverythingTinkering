@@ -80,6 +80,8 @@ declare namespace Annotation {
     }
 
     namespace TinkerFunction {
+        declare type SYNC_NORMAL_TO_MOSTER = {};
+
         /** @deprecated Use {@linkcode ModifierHooks} instead */
         type Hook = "addToolStats" | "armorTakeAttacked" | "getBreakSpeed" | "onAfterBreak" | "getMeleeDamage" | "onAfterMeleeHit" | "onBeforeMeleeHit" | "onInventoryTick"
             | "projectileLaunch" | "tooltipSetting" | "onServerTick";
@@ -492,10 +494,8 @@ declare namespace Annotation {
              * @param context     Attack context  
              *                    攻击上下文
              * 
-             * @param damageDealt Amount of damage successfully dealt
-             *                    (After testing, this is always `0.0`)  
-             *                    成功造成的伤害
-             *                    （经过测试，总为`0.0`）
+             * @param damageDealt Amount of damage successfully dealt  
+             *                    成功造成的伤害  
              * - - - - -
              * @example
              * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
@@ -506,6 +506,29 @@ declare namespace Annotation {
              * });
              */
             afterMeleeHit?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, damageDealt: number): void,
+            /**
+             * Called before a monster deals melee damage to a target with a modifiable melee weapon.
+             * It is too late for the hit to fail, but we also lack a post-hit callback.  
+             * 在一个怪物用可添加特性的近战武器对目标造成近战伤害之前调用。
+             * 此时攻击不可能失败，但我们也缺少一个后击回调。
+             * - - - - -
+             * Use `ModifierManager.SYNC_NORMAL_TO_MONSTER` to directly synchronize from {@linkcode ModifierHookArgument.beforeMeleeHit beforeMeleeHit}.  
+             * 使用`ModifierManager.SYNC_NORMAL_TO_MONSTER`直接从{@linkcode ModifierHookArgument.beforeMeleeHit beforeMeleeHit}同步。
+             * - - - - -
+             * @param tool     Tool used to attack  
+             *                 用于攻击的工具
+             * 
+             * @param modifier Modifier level  
+             *                 特性（及其）等级
+             * 
+             * @param context  Attack context  
+             *                 攻击上下文
+             * 
+             * @param damage   Amount of damage to deal. Should match exactly to the damage that will be taken, but has not been dealt yet  
+             *                 要造成的伤害。应与将要受到的伤害完全匹配，但尚未造成
+             * - - - - -
+             */
+            onMonsterMeleeHit?: TinkerFunction.SYNC_NORMAL_TO_MOSTER | ((tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, damage: float) => void);
             /**
              * Gets the protection value of the armor from this modifier.
              * A value of 1 blocks about 4% of damage, equivalent to 1 level of the protection enchantment.

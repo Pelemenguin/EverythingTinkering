@@ -51,6 +51,7 @@ let HOOK_TO_IMPLEMENTING_INTERFACE = {
     "getMeleeDamage": "slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook",
     "beforeMeleeHit": "slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook",
     "afterMeleeHit": "slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook",
+    "onMonsterMeleeHit": "slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook",
     "getProtectionModifier": "slimeknights.tconstruct.library.modifiers.hook.armor.ProtectionModifierHook",
     "onAttacked": "slimeknights.tconstruct.library.modifiers.hook.armor.OnAttackedModifierHook",
     "modifyDamageTaken": "slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook",
@@ -286,6 +287,24 @@ let HOOK_TO_METHOD_PARAMETERS = {
             };
         }
     ],
+    "onMonsterMeleeHit": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "slimeknights.tconstruct.library.tools.context.ToolAttackContext",
+            "float"
+        ],
+        "void",
+        (func) => {
+            return (arg0, arg1, arg2, arg3) => {
+                try {
+                    func(arg0, arg1, arg2, arg3);
+                } catch (e) {
+                    console.error(`Error in onMonsterMeleeHit of modifier ${arg1.getId().toString()}: ${e}`);
+                }
+            };
+        }
+    ],
     "getProtectionModifier": [
         [
             "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
@@ -463,6 +482,7 @@ let HOOK_TO_FIELDS = {
     "getMeleeDamage": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MELEE_DAMAGE", "slimeknights.tconstruct.library.module.ModuleHook"],
     "beforeMeleeHit": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MELEE_HIT", "slimeknights.tconstruct.library.module.ModuleHook"],
     "afterMeleeHit": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MELEE_HIT", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "onMonsterMeleeHit": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MONSTER_MELEE_HIT", "slimeknights.tconstruct.library.module.ModuleHook"],
     "getProtectionModifier": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "PROTECTION", "slimeknights.tconstruct.library.module.ModuleHook"],
     "onAttacked": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "ON_ATTACKED", "slimeknights.tconstruct.library.module.ModuleHook"],
     "modifyDamageTaken": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MODIFY_HURT", "slimeknights.tconstruct.library.module.ModuleHook"],
@@ -514,6 +534,13 @@ const ModifierManager = {
         
         if ("__class__" in hooks && "extending" in hooks.__class__) modifierClassCreator.extending(hooks.__class__.extending);
         else modifierClassCreator.extending("slimeknights.tconstruct.library.modifiers.Modifier");
+
+        // SYNC_NORMAL_TO_MONSTER processing
+        if ("onMonsterMeleeHit" in hooks && hooks.onMonsterMeleeHit === ModifierManager.SYNC_NORMAL_TO_MONSTER) {
+            hooks.onMonsterMeleeHit = hooks.beforeMeleeHit;
+
+            console.info(`Found a SYNC_NORMAL_TO_MONSTER in modifier ${name}, syncing normal melee hit to monster melee hit.`);
+        }
 
         let seenInterfaces = new Set();
         let hookKeys = Object.keys(hooks);
@@ -613,7 +640,14 @@ const ModifierManager = {
         };
 
         return modifierClass;
-    }
+    },
+    /**
+     * A special marker to sychronize normal attack hooks to monster attack hooks.  
+     * 该标记用于将普通攻击钩子同步到怪物攻击钩子。
+     * - - - - -
+     * @type {Annotation.TinkerFunction.SYNC_NORMAL_TO_MOSTER}
+     */
+    SYNC_NORMAL_TO_MONSTER: {}
 };
 
 StartupEvents.init(() => {
