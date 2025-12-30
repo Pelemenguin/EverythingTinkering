@@ -18,6 +18,9 @@
     ModifierManager
     AABB
     JavaMath
+    $BlockParticleOption
+    ParticleTypes
+    $ForgeRegistries
 */
 
 /** */
@@ -75,12 +78,12 @@ let GLASS_SHARD = ModifierManager.registerCommonModifier("glass_shard", "GlassSh
         tool.getMaterials().forEach(material => {
             // let material_name = material.getId().toString();
             let material_name = material.getVariant().toString();
-            if (material_name in GLASS_TYPE_TO_PARTICLE) {
-                let particle_block = GLASS_TYPE_TO_PARTICLE[material_name];
-                context.attacker.runCommandSilent("particle minecraft:block "+particle_block+" "+x+" "+y+" "+z+" 1 1 1 1 50");
-                context.target.playSound("block.glass.break", 5, 0.8);
-            }
+            let particle_block = GLASS_TYPE_TO_PARTICLE[material_name];
+            if (particle_block === undefined) particle_block = "minecraft:glass";
+            context.getLevel().spawnParticles(new $BlockParticleOption(ParticleTypes.BLOCK, $ForgeRegistries.BLOCKS.getValue(particle_block).defaultBlockState()), false, x, y, z, 1, 1, 1, 50, 1);
+            context.getTarget().playSound("block.glass.break", 5, 0.8);
         });
         return knockback;
-    }
+    },
+    onMonsterMeleeHit: ModifierManager.SYNC_NORMAL_TO_MONSTER
 });

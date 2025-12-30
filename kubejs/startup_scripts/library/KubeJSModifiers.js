@@ -480,6 +480,7 @@ let HOOK_TO_FIELDS = {
     "validate": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "VALIDATE", "slimeknights.tconstruct.library.module.ModuleHook"],
     "onRemoved": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "REMOVE", "slimeknights.tconstruct.library.module.ModuleHook"],
     "getMeleeDamage": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MELEE_DAMAGE", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "getMeleeDamageForMonster": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MONSTER_MELEE_DAMAGE", "slimeknights.tconstruct.library.module.ModuleHook"],
     "beforeMeleeHit": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MELEE_HIT", "slimeknights.tconstruct.library.module.ModuleHook"],
     "afterMeleeHit": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MELEE_HIT", "slimeknights.tconstruct.library.module.ModuleHook"],
     "onMonsterMeleeHit": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MONSTER_MELEE_HIT", "slimeknights.tconstruct.library.module.ModuleHook"],
@@ -534,12 +535,14 @@ const ModifierManager = {
         
         if ("__class__" in hooks && "extending" in hooks.__class__) modifierClassCreator.extending(hooks.__class__.extending);
         else modifierClassCreator.extending("slimeknights.tconstruct.library.modifiers.Modifier");
-
+        
         // SYNC_NORMAL_TO_MONSTER processing
         if ("onMonsterMeleeHit" in hooks && hooks.onMonsterMeleeHit === ModifierManager.SYNC_NORMAL_TO_MONSTER) {
-            hooks.onMonsterMeleeHit = hooks.beforeMeleeHit;
-
-            console.info(`Found a SYNC_NORMAL_TO_MONSTER in modifier ${name}, syncing normal melee hit to monster melee hit.`);
+            if ("beforeMeleeHit" in hooks) {
+                hooks.onMonsterMeleeHit = hooks.beforeMeleeHit;
+            } else {
+                hooks.onMonsterMeleeHit = hooks.afterMeleeHit;
+            }
         }
 
         let seenInterfaces = new Set();
@@ -556,11 +559,13 @@ const ModifierManager = {
             if (!(hook in HOOK_TO_IMPLEMENTING_INTERFACE)) return;
             seenInterfaces.add(HOOK_TO_IMPLEMENTING_INTERFACE[hook]);
         });
+
         seenInterfaces.forEach(v => {
             modifierClassCreator.implementing(v);
         });
         hookKeys.forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
             if (!(hook in HOOK_TO_METHOD_PARAMETERS)) return;
+
             let [parameters, returnType, transformer] = HOOK_TO_METHOD_PARAMETERS[hook];
 
             modifierClassCreator.createMethod(hook, parameters, returnType)
@@ -604,6 +609,7 @@ const ModifierManager = {
         let seenHooks = new Set();
         hookKeys.forEach((/** @type {Annotation.TinkerFunction.ModifierHooks} */ hook) => {
             if (!(hook in HOOK_TO_FIELDS)) return;
+            if (hook === "getMeleeDamage" && hooks.getMeleeDamageForMonster === ModifierManager.MONSTER_ONLY) return;
             let fieldInfo = HOOK_TO_FIELDS[hook];
             let concated = fieldInfo.join("");
             if (seenHooks.has(concated)) return;
@@ -647,7 +653,14 @@ const ModifierManager = {
      * - - - - -
      * @type {Annotation.TinkerFunction.SYNC_NORMAL_TO_MOSTER}
      */
-    SYNC_NORMAL_TO_MONSTER: {}
+    SYNC_NORMAL_TO_MONSTER: {},
+    /**
+     * A special marker to indicate that an attack hook is only for monsters.  
+     * 该标记用于指示攻击钩子仅适用于怪物。
+     * - - - - -
+     * @type {Annotation.TinkerFunction.MONSTER_ONLY}
+     */
+    MONSTER_ONLY: {}
 };
 
 StartupEvents.init(() => {

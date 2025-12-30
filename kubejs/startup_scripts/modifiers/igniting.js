@@ -20,60 +20,14 @@
 
 /* global
     ModifierManager
-    CustomUtils
-    NBT
     JavaMath
-    console
     Component
-    Utils
+    ToolDamageUtil
+    NBT
 */
 
 /** */
 let IGNITING_FIRE_PERCENTAGE_PER_LEVEL = 0.25;
-
-/**
- * - Set an item's `igniting` persistent data.
- * - 设置一个物品的 `点燃` 的 Persistent 数据。
- * - - - - -
- * @param {Internal.ItemStack} item
- * @param {number} current
- * @param {number} max
- */
-let ignitingSetTime = (item, current, max) => {
-    // In case of overflow
-    if (IGNITING_TIMER_COUNTER > 2147483600) {
-        IGNITING_TIMER_COUNTER = 0;
-        IGNITING_TIMER.clear();
-    }
-
-    let newObject = {
-        current: NBT.intTag(current),
-        max: NBT.intTag(max)
-    };
-    // CustomUtils.Tinker.Persistent.set(item, "kubejs:igniting", NBT.toTagCompound(newNbt));
-    IGNITING_TIMER.put(IGNITING_TIMER_COUNTER, newObject);
-    CustomUtils.Tinker.Persistent.set(item, "kubejs:igniting", NBT.intTag(IGNITING_TIMER_COUNTER));
-    IGNITING_TIMER_COUNTER++;
-};
-
-/**
- * - Read an item's `igniting` presistent data.
- * - 读取一个物品的 `点燃` 的 Persistent 数据。
- * - - - - -
- * @param {Internal.IToolStackView} item
- * @returns {Annotation.Tinker.IgnitingTimeRepresentation}
- */
-let ignitingGet = (item) => {
-    /** @type {Internal.CompoundTag} */
-    try {
-        let obj = IGNITING_TIMER.getOrDefault(item.getPersistentData().getInt("kubejs:igniting"), null);
-        return obj;
-    // eslint-disable-next-line no-unused-vars
-    } catch (e) {
-        ignitingSetTime(item, 0, 0);
-        return {current: 0, max: 0};
-    }
-};
 
 /**
  * - Calculate the color of the tooltip.
@@ -100,109 +54,65 @@ let calculateColor = (ratio) => {
     return color;
 };
 
-/**
- * - - - - -
- * @typedef {{
- *     current: number,
- *     max: number
- * }} Annotation.Tinker.IgnitingTimeRepresentation
- * - - - - -
- * @type {Internal.Map<number, Annotation.Tinker.IgnitingTimeRepresentation} 
- */
-let IGNITING_TIMER = Utils.newMap();
-let IGNITING_TIMER_COUNTER = 0;
-
 // eslint-disable-next-line no-unused-vars
 let IGNITING = ModifierManager.registerCommonModifier("igniting", "IgnitingModifier", {
-    afterMeleeHit: (tool, modifier, context/*, damageDealt*/) => {
+    afterMeleeHit: (tool, modifier, context, _damageDealt) => {
         if (context.getLevel().isClientSide()) return;
 
-        let item = context.attacker.getItemInHand(context.getHand());
-        if (CustomUtils.Tinker.getModifiersFromItem(item)["kubejs:igniting"] === undefined) return;
+        let targetFire = context.getTarget().getRemainingFireTicks();
 
-        /** @type {Internal.IntTag} */
-        let targetFireTag = context.target.nbt.get("Fire");
-        if (targetFireTag == null) return;
-
-        let targetFire = 0;
-        // eslint-disable-next-line no-unused-vars
-        try {targetFire = targetFireTag.asInt;} catch (e) {/* Do nothing */}
-
-        let ignitingPersistent = ignitingGet(tool);
-        if (ignitingPersistent == null) {
-            ignitingSetTime(item, targetFire, targetFire);
-            return;
-        }
-        let toolFire = 0;
-        try {
-            toolFire = ignitingPersistent.current;
-        // eslint-disable-next-line no-unused-vars
-        } catch (e) {
-            ignitingSetTime(item, targetFire, targetFire);
-            return;
-        }
+        let data = tool.getPersistentData().getCompound("kubejs:igniting");
+        let toolFire = data.getInt("Current");
 
         if (toolFire < targetFire) {
-            ignitingSetTime(item, targetFire, targetFire);
-            context.target.playSound("item.flintandsteel.use");
+            context.getTarget().playSound("item.flintandsteel.use");
+            data.putInt("Current", targetFire);
+            data.putInt("Max", targetFire);
             return;
         }
 
-        let spreadFire = toolFire * JavaMath["min(float,float)"](IGNITING_FIRE_PERCENTAGE_PER_LEVEL * modifier.level, 1.0);
+        let spreadFire = toolFire * Math.min(IGNITING_FIRE_PERCENTAGE_PER_LEVEL * modifier.getLevel(), 1.0);
         if (spreadFire > 0 && spreadFire > targetFire) {
-            context.target.setRemainingFireTicks(spreadFire);
-            context.target.playSound("item.firecharge.use");
+            context.getTarget().setRemainingFireTicks(spreadFire);
+            context.getTarget().playSound("item.firecharge.use");
             return;
         }
     },
-    onInventoryTick: (tool, modifier, world, holder, itemSlot, isSelected, isCorrectSlot, stack) => {
-        let repr = ignitingGet(tool);
-        if (repr == null) return;
-        let toolFire = repr.current;
+    onInventoryTick: (tool, _modifier, world, holder, _itemSlot, _isSelected, _isCorrectSlot, stack) => {
+        let data = tool.getPersistentData().getCompound("kubejs:igniting");
+
+        if (data.isEmpty()) {
+            stack.getNbt().getCompound("tic_persistent").put("kubejs:igniting", NBT.compoundTag({
+                Max: NBT.intTag(0),
+                Current: NBT.intTag(0)
+            }));
+            return;
+        }
+
+        let toolFire = data.getInt("Current");
         if (toolFire > 0) {
             if (toolFire % 10 == 0) {
                 if (world.isClientSide()) holder.playSound("block.fire.ambient", 1, 1);
-                else CustomUtils.Tinker.tryDamageItem(stack, 1, holder);
-            } else if (toolFire <= 1) {
+                else ToolDamageUtil.damageAnimated(tool, 1, holder);
+            } else if (toolFire == 1) {
                 if (world.isClientSide()) holder.playSound("block.fire.extinguish", 1, 1);
             }
+            data.putInt("Current", toolFire - 1);
         }
     },
     addTooltip: (tool, modifier, player, tooltip/*, tooltipKey, tooltipFlag*/) => {
-        try {
-            let reference = tool.persistentData.getInt("kubejs:igniting");
-            let persistent = IGNITING_TIMER.get(reference);
-            if (persistent == null) return;
-            let current = persistent.current;
-            if (current <= 0) return;
+        let data  = tool.getPersistentData().getCompound("kubejs:igniting");
+        let current = data.getInt("Current");
+        if (current == 0) return;
 
-            let max = persistent.max;
-            let color = calculateColor(current / max);
-            let progreeComponent = Component.literal("");
-            progreeComponent.append(Component.literal((current / 20).toFixed()).color(color));
-            progreeComponent.append(Component.literal(" / ").gray());
-            progreeComponent.append(Component.literal((max / 20).toFixed()));
-            let component = Component.translatable("modifier.kubejs.igniting.tooltip", progreeComponent);
-            tooltip.add(component);
-        } catch (e) {console.error(e); }
+        let max = data.getInt("Max");
+
+        let color = calculateColor(current / max);
+        let progreeComponent = Component.literal("");
+        progreeComponent.append(Component.literal((current / 20).toFixed()).color(color));
+        progreeComponent.append(Component.literal(" / ").gray());
+        progreeComponent.append(Component.literal((max / 20).toFixed()));
+        let component = Component.translatable("modifier.kubejs.igniting.tooltip", progreeComponent);
+        tooltip.add(component);
     },
-    __custom__: {
-        onServerTick: () => {
-            let removing = [];
-            IGNITING_TIMER.forEach((key, timer) => {
-                let {current} = timer;
-                if (current == 0) {
-                    removing.push(key);
-                } else {
-                    timer.current = current - 1;
-                }
-            });
-            removing.forEach(r => IGNITING_TIMER.remove(r));
-
-            if (IGNITING_TIMER_COUNTER > 2147483640) {
-                IGNITING_TIMER_COUNTER = 0;
-                IGNITING_TIMER.clear();
-            }
-        }
-    }
 });

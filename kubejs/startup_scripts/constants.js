@@ -148,6 +148,7 @@ const $Optional = Java.loadClass("java.util.Optional");
 /** @type {typeof Internal.FMLJavaModLoadingContext} */
 const FMLJavaModLoadingContext = new NativeJavaClass(startupContext, topLevelScope, Class.forName("net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext"));
 const $NetworkRegistry = Java.loadClass("net.minecraftforge.network.NetworkRegistry");
+const $ForgeRegistries = Java.loadClass('net.minecraftforge.registries.ForgeRegistries');
 
 // ---------- Utils ---------- //
 

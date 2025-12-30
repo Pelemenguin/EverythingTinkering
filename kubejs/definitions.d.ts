@@ -81,6 +81,7 @@ declare namespace Annotation {
 
     namespace TinkerFunction {
         declare type SYNC_NORMAL_TO_MOSTER = {};
+        declare type MONSTER_ONLY = {};
 
         /** @deprecated Use {@linkcode ModifierHooks} instead */
         type Hook = "addToolStats" | "armorTakeAttacked" | "getBreakSpeed" | "onAfterBreak" | "getMeleeDamage" | "onAfterMeleeHit" | "onBeforeMeleeHit" | "onInventoryTick"
@@ -442,6 +443,11 @@ declare namespace Annotation {
              */
             getMeleeDamage?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, baseDamage: number, damage: number): number,
             /**
+             * Synchronize `getMeleeDamage` to monsters using modifiable melee weapons.  
+             * 将`getMeleeDamage`同步到使用可添加特性的近战武器的怪物。
+             */
+            getMeleeDamageForMonster?: TinkerFunction.SYNC_NORMAL_TO_MOSTER | TinkerFunction.MONSTER_ONLY,
+            /**
              * Called right before an entity is hit, used to modify knockback applied or to apply special effects that need to run before damage.
              * {@linkcode damage} is final damage including critical damage.
              * Note there is still a chance this attack won't deal damage, if that happens {@linkcode ModifierHookArgument.failedMeleeHit} will run.  
@@ -512,8 +518,10 @@ declare namespace Annotation {
              * 在一个怪物用可添加特性的近战武器对目标造成近战伤害之前调用。
              * 此时攻击不可能失败，但我们也缺少一个后击回调。
              * - - - - -
-             * Use `ModifierManager.SYNC_NORMAL_TO_MONSTER` to directly synchronize from {@linkcode ModifierHookArgument.beforeMeleeHit beforeMeleeHit}.  
-             * 使用`ModifierManager.SYNC_NORMAL_TO_MONSTER`直接从{@linkcode ModifierHookArgument.beforeMeleeHit beforeMeleeHit}同步。
+             * Use `ModifierManager.SYNC_NORMAL_TO_MONSTER` to directly synchronize from {@linkcode ModifierHookArgument.beforeMeleeHit beforeMeleeHit} or {@linkcode ModifierHookArgument.afterMeleeHit afterMeleeHit}.
+             * When both exist, use `beforeMeleeHit` first.  
+             * 使用`ModifierManager.SYNC_NORMAL_TO_MONSTER`直接从{@linkcode ModifierHookArgument.beforeMeleeHit beforeMeleeHit}或{@linkcode ModifierHookArgument.afterMeleeHit afterMeleeHit}同步。
+             * 当两者都存在时，优先使用`beforeMeleeHit`。
              * - - - - -
              * @param tool     Tool used to attack  
              *                 用于攻击的工具
@@ -527,6 +535,16 @@ declare namespace Annotation {
              * @param damage   Amount of damage to deal. Should match exactly to the damage that will be taken, but has not been dealt yet  
              *                 要造成的伤害。应与将要受到的伤害完全匹配，但尚未造成
              * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     beforeMeleeHit: (tool, modifier, context, damageDealt) => {
+             *         console.info(`Damage dealt: ${damageDealt}`); // Display dealt damage in the console
+             *                                                       // 在控制台中显示造成的伤害
+             *     },
+             *     onMonsterMeleeHit: ModifierManager.SYNC_NORMAL_TO_MONSTER
+             *     // Synchronize from `beforeMeleeHit`
+             *     // 从`beforeMeleeHit`同步
+             * });
              */
             onMonsterMeleeHit?: TinkerFunction.SYNC_NORMAL_TO_MOSTER | ((tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.ToolAttackContext, damage: float) => void);
             /**

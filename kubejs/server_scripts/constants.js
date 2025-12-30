@@ -26,7 +26,7 @@ const $ItemStack = Java.loadClass("net.minecraft.world.item.ItemStack");
 const $LootContextParams = Java.loadClass("net.minecraft.world.level.storage.loot.parameters.LootContextParams");
 
 const ToolPartItem = Java.loadClass('slimeknights.tconstruct.library.tools.part.ToolPartItem');
-const ForgeRegistries = Java.loadClass('net.minecraftforge.registries.ForgeRegistries');
+const $ForgeRegistries = Java.loadClass('net.minecraftforge.registries.ForgeRegistries');
 const MaterialRegistry = Java.loadClass('slimeknights.tconstruct.library.materials.MaterialRegistry');
 const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialId');
 const MaterialVariant = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialVariant');
@@ -51,7 +51,7 @@ const JavaUtils = {
  * @type {Internal.Item[]}
  */
 var toolParts = [Item.of("tconstruct:repair_kit").item];
-ForgeRegistries.ITEMS.getValues().forEach(item => {
+$ForgeRegistries.ITEMS.getValues().forEach(item => {
     if (item instanceof ToolPartItem) {
         toolParts.push(item);
     }

@@ -24,5 +24,6 @@ let POTTERY = ModifierManager.registerCommonModifier("pottery", "PotteryModifier
     getMeleeDamage: (tool, modifier, context, baseDamage, damage) => {
         let boost = JavaMath.random() * (tool.damage / (tool.damage + tool.currentDurability) * modifier.level);
         return damage + Math.min(boost, damage);
-    }
+    },
+    getMeleeDamageForMonster: ModifierManager.SYNC_NORMAL_TO_MONSTER
 });

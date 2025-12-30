@@ -42,5 +42,6 @@ let RESONANCE = ModifierManager.registerCommonModifier("resonance", "ResonanceMo
             entity.playSound("minecraft:block.amethyst_block.resonate");
         });
         return knockback;
-    }
+    },
+    onMonsterMeleeHit: ModifierManager.SYNC_NORMAL_TO_MONSTER
 });
