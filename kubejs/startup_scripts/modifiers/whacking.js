@@ -37,7 +37,7 @@ let WHACKING_DAMAGE_PERCENTAGE = 0.05;
 
 // eslint-disable-next-line no-unused-vars
 let WHACKING = ModifierManager.registerCommonModifier("whacking", "WhackingModifier", {
-    getMeleeDamage: (tool, modifier, context, baseDamage, damage) => {
+    getMeleeDamage: (tool, modifier, context, _baseDamage, damage) => {
         if (context.getLevel().isClientSide()) return damage;
         if (!context.isCritical()) return damage;
         let durabilityPercentage = Math.round(tool.getCurrentDurability() * WHACKING_DURABILITY_PERCENTAGE * modifier.level);
