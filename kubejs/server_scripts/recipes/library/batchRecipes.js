@@ -53,11 +53,8 @@ BatchMaterialRecipes.Deploying = {
 };
 
 ServerEvents.recipes(event => {
-    // event.getRecipes().create.deploying(
-    //     [TinkerToolParts.largePlate.getOrNull().withMaterial($MaterialVariantId.parse("kubejs:andesite_alloy"))],
-    //     [$MaterialIngredient["of(net.minecraft.world.level.ItemLike,slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"]("tconstruct:large_plate", $MaterialVariantId.parse("tconstruct:rock")), Items.IRON_NUGGET.asIngredient()]
-    // );
 
+    // Deploying
     for (let recipeId in BatchMaterialRecipes.Deploying.ALL) {
         let entry = BatchMaterialRecipes.Deploying.ALL[recipeId];
         for (let part of global.CustomUtils.Tinker.TOOL_PARTS) {
@@ -67,4 +64,5 @@ ServerEvents.recipes(event => {
             ).id(recipeId.toString() + "/" + part.getId().replace(":", "/"));
         }
     }
+
 });

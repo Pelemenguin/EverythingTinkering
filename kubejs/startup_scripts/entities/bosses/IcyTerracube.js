@@ -314,7 +314,8 @@ let ICY_TERRACUBE_AI_STEP = {
         MeleeAttack: (entity, controller, timeLasted, _persistent) => {
             let level = entity.getLevel();
             if (!controller.isMemoryPresent("core/attackTarget")) return;
-            KubeJSAiHelper.tryMeleeAttack(entity, controller.getMemory("core/attackTarget"));
+            // KubeJSAiHelper.tryMeleeAttack(entity, controller.getMemory("core/attackTarget"));
+            KubeJSAiHelper.attackTarget(entity, controller.getMemory("core/attackTarget"), 0);
             controller.setMemory("move/moveTarget", controller.getMemory("core/attackTarget").position());
 
             if (entity.age >= 600 && !controller.isActive("CircularRangedAttack") && level.getTime() - controller.getMemoryOrSetDefault("attack/lastLongRanged", -Infinity) > 300 && controller.getMemory("core/attackTarget").distanceToEntitySqr(entity) > 144) {
@@ -487,7 +488,7 @@ EntityJSEvents.attributes(event => {
     event.modify("kubejs:icy_terracube", attr => {
         attr.add("minecraft:generic.max_health", 200);
         attr.add("minecraft:generic.attack_damage", 8);
-        attr.add("forge:entity_reach", 3.0);
-        attr.add("forge:block_reach", 3.0);
+        // attr.add("forge:entity_reach", 3.0);
+        // attr.add("forge:block_reach", 3.0);
     });
 });

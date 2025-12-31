@@ -161,36 +161,16 @@ const KubeJSAiHelper = {
     },
 
     /**
-     * @param {Internal.Mob} entity 
-     * The entity performing a melee attack.  
-     * 执行近战攻击的实体。
-     * 
-     * @param {Internal.LivingEntity} target 
-     * The target of the melee attack.  
-     * 近战攻击的目标。
-     * 
+     * @param {Internal.LivingEntity} entity 
+     * @param {Internal.LivingEntity} target
+     * @param {number} boundingBoxInflates
      * @returns {boolean}
-     * Whether the attack was successful.  
-     * 攻击是否成功。
      */
-    tryMeleeAttack: (entity, target) => {
-        let d = entity.getPerceivedTargetDistanceSquareForMeleeAttack(target);
-        let atkReachSqr = entity.getBbWidth() * 2 + target.getBbWidth();
-        if (d <= atkReachSqr) {
+    attackTarget: (entity, target, boundingBoxInflates) => {
+        if (target.getBoundingBox().intersects(entity.getBoundingBox().inflate(boundingBoxInflates))) {
             return entity.doHurtTarget(target);
         }
         return false;
-    },
-
-    /**
-     * @param {Internal.LivingEntity} entity
-     * The entity performing melee attacks on touched players.  
-     * 执行对触碰到的玩家进行近战攻击的实体。
-     */
-    meleeAttackTouchedPlayers: (entity) => {
-        entity.getLevel().getEntitiesWithin(entity.getBoundingBox().inflate(KubeJSAiHelper.boundingBoxInflateConstant)).forEach(/** @param {Internal.LivingEntity} e */ e => {
-            KubeJSAiHelper.tryMeleeAttack(entity, e);
-        });
     },
 
     /**
