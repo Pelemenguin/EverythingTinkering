@@ -131,9 +131,7 @@
     "material.kubejs.redstone.flavor": "Why does an energy-conducting material produce acceleration?",
     "material.kubejs.redstone.encyclopedia": "Consumes 1 redstone dust per shot. Accelerates projectiles by 5% per level",
 
-    "material.kubejs.amethyst": "Amethyst",
-    "material.kubejs.amethyst.flavor": "Ding~",
-    "material.kubejs.amethyst.encyclopedia": "Highlights surrounding targets of same type on attack. Effect range is a cube centered on target with side length = 4×trait level + 2×attack damage",
+    "material.tconstruct.amethyst.encyclopedia": "Highlights surrounding targets of same type on attack. Effect range is a cube centered on target with side length = 4×trait level + 2×attack damage",
 
     "material.tconstruct.glass.white_stained": "White Stained Glass",
     "material.tconstruct.glass.orange_stained": "Orange Stained Glass",
@@ -156,9 +154,7 @@
     "material.tconstruct.glass.flavor": "Handle with care! Fragile!",
     "material.tconstruct.glass.encyclopedia": "While attacking, if damage is greater than 5 points, then it is possible to deal damage to enemies in 3×3×3 area. Sum of the damage dealt is equal to the damage to the direct damage",
 
-    "material.kubejs.paper": "Paper",
-    "material.kubejs.paper.flavor": "To the loyal readers of 'Puny Smelting': Not to cut your finger when turning pages",
-    "material.kubejs.paper.encyclopedia": "Deals damage equal to armor value to attackers hitting from the side. Converts a portion of taken damage using armor toughness to counterattack",
+    "material.tconstruct.paper.encyclopedia": "Deals damage equal to armor value to attackers hitting from the side. Converts a portion of taken damage using armor toughness to counterattack",
 
     "material.kubejs.kelp": "Kelp",
     "material.kubejs.kelp.flavor": "Experiment 2-3: Extract iodine from kelp",

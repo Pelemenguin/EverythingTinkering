@@ -134,9 +134,7 @@
     "material.kubejs.redstone.flavor": "为什么一个传导能量的东西能产生加速度？",
     "material.kubejs.redstone.encyclopedia": "消耗一个红石粉，每级将弹射物加速5%",
 
-    "material.kubejs.amethyst": "紫水晶",
-    "material.kubejs.amethyst.flavor": "叮~",
-    "material.kubejs.amethyst.encyclopedia": "攻击时高亮周围的同种目标。高亮范围为一个以目标为中心正方体，边长由四倍特性等级加两倍攻击伤害决定",
+    "material.tconstruct.amethyst.encyclopedia": "攻击时高亮周围的同种目标。高亮范围为一个以目标为中心正方体，边长由四倍特性等级加两倍攻击伤害决定",
 
     "material.tconstruct.glass.white_stained": "白色染色玻璃",
     "material.tconstruct.glass.orange_stained": "橙色染色玻璃",
@@ -159,9 +157,7 @@
     "material.tconstruct.glass.flavor": "小心易碎！",
     "material.tconstruct.glass.encyclopedia": "攻击时，若伤害大于5点，则有概率对目标周围3×3×3的范围内的生物造成伤害，总和为对直接目标的伤害",
 
-    "material.kubejs.paper": "纸",
-    "material.kubejs.paper.flavor": "致《入门熔炼术》的忠实读者们：翻书的时候小心划伤手指。",
-    "material.kubejs.paper.encyclopedia": "对于从侧面攻击的攻击者，造成相当于护甲值的伤害。盔甲韧性可以转化少量受到的伤害并攻击回去",
+    "material.tconstruct.paper.encyclopedia": "对于从侧面攻击的攻击者，造成相当于护甲值的伤害。盔甲韧性可以转化少量受到的伤害并攻击回去",
 
     "material.kubejs.kelp": "海带",
     "material.kubejs.kelp.flavor": "实验2-3：从海带中提取碘",
