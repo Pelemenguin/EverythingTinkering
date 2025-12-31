@@ -54,7 +54,7 @@ global.Entities.AiFunctions.IceSpike = {
                 }
             });
 
-            entity.getLevel().spawnParticles(ParticleTypes.SNOWFLAKE, false, entity.getX(), entity.getY() + 1.5, entity.getZ(), 0, 0, 0, 20, 0.1);
+            entity.getLevel().spawnParticles(ParticleTypes.SNOWFLAKE, false, entity.getX(), entity.getY() + 1.5, entity.getZ(), 0, 0, 0, 10, 0.1);
         } else if (entity.age >= 40) {
             entity.discard();
         }
