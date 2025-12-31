@@ -129,7 +129,7 @@ let ICY_TERRACUBE_AI_STEP = {
                 controller.setMemory("move/lookTarget", controller.getMemory("move/moveTarget"));
                 entity.lookAt("eyes", controller.getMemory("move/lookTarget"));
 
-                let jumpInterval = (entity.getHealth() / entity.getMaxHealth() - 0.5) * 40;
+                let jumpInterval = Math.max(5, (entity.getHealth() / entity.getMaxHealth() - 0.5) * 40);
                 let jumpStrength = (entity.getHealth() / entity.getMaxHealth()) * 0.5 + 0.5;
                 if (time - controller.getMemoryOrSetDefault("move/jumpTimer", time) < jumpInterval) return;
 
