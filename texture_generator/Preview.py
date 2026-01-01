@@ -551,6 +551,8 @@ OVERLAYS = [
     },
 ]
 
+scale = 1
+
 if (len(sys.argv) <= 1):
     print("Please specify a material to create preview")
     exit()
@@ -559,20 +561,26 @@ print(f"Preview Material: {sys.argv[1]}")
 
 suffix = sys.argv[1].replace(":", "_")
 
-preview = PIL.Image.new("RGBA", (WIDTH, HEIGHT))
+if len(sys.argv) >= 3:
+    for i in sys.argv[2:]:
+        if i.startswith("scaled:"):
+            scale = int(i[7:])
+    
+
+preview = PIL.Image.new("RGBA", (WIDTH * scale, HEIGHT * scale))
 
 # Background
 
-for x in range(WIDTH):
-    for y in range(HEIGHT):
-        preview.putpixel((x, y), (255, 255, 255, 255) if (x//4+y//4)%2 == 0 else (216, 216, 216, 255))
+for x in range(WIDTH * scale):
+    for y in range(HEIGHT * scale):
+        preview.putpixel((x, y), (255, 255, 255, 255) if (x//(4*scale)+y//(4*scale))%2 == 0 else (216, 216, 216, 255))
         
 for d in OBJECTS:
     for k in d:
         if (k == "__offset__"): continue
         rc = d[k]
         offset = d["__offset__"]
-        coordinate = (rc[0] + offset[0], rc[1] + offset[1])
+        coordinate = (scale * (rc[0] + offset[0]), scale * (rc[1] + offset[1]))
         path = f"./outputs/{k}_{suffix}.png"
         if not os.path.isfile(path):
             path = f"./resources/{k}_{suffix}.png"
@@ -580,7 +588,8 @@ for d in OBJECTS:
             print(f"{path} not found, using fallback")
             path = f"./resources/{k}_tconstruct_unknown.png"
         image = PIL.Image.open(path, "r")
-        preview.alpha_composite(image.copy(), coordinate)
+        to_paste = image.resize((image.width * scale, image.height * scale), PIL.Image.NEAREST)
+        preview.alpha_composite(to_paste, coordinate)
         image.close()
 
 for d in OVERLAYS:
