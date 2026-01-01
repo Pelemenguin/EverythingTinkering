@@ -18,6 +18,7 @@
 /texture_generator/resources
 /texture_generator/outputs
 /texture_generator/__pycache__
+/texture_generator/previews
 /*.jar
 /*.json
 !/modlist.json
