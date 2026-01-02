@@ -32,10 +32,27 @@ Example:
     - `python Preview.py tconstruct:amethyst`
         - Generate part texture preview for the `tconstruct:amethyst` material.
 
-### `scaled:<int>`
+### Arguments
+
+#### `scaled:<int>`
 
 Scale the preview.
 
 Example:
     - `python Preview.py tconstruct:amethyst scaled:4`
         - Generate preview and scale it by 4.
+
+<!--
+
+#### `no-sections`
+
+*Also:* `no-sec`, `no-section`
+
+Disable sections deviding.
+
+-->
+
+#### `dark`
+
+Darken the background.
+Especially used for materials that have light colors.

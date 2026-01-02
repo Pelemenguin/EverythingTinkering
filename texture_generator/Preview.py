@@ -3,6 +3,8 @@ import os
 import os.path
 import PIL
 import PIL.Image
+import json
+import typing
 
 WIDTH = 256
 HEIGHT = 256
@@ -174,7 +176,7 @@ OBJECTS = [
         "__offset__": (176, 0),
         "item/tool/scythe/accessory": (0, 0),
         "item/tool/scythe/handle": (0, 0),
-        "item/tool/scythe/head_broken": (0, 0),
+        "item/tool/scythe/head": (0, 0),
         "item/tool/scythe/binding": (0, 0),
     },
     {
@@ -325,6 +327,136 @@ OBJECTS = [
         "item/tool/pickaxe/handle": (0, 0),
         "item/tool/minotaur_axe/front_broken": (0, 0),
         "item/tool/minotaur_axe/back": (0, 0),
+    },
+
+    # Large
+
+    # Sledge Hammer
+    {
+        "__offset__": (0, HEIGHT-64),
+        "item/tool/sledge_hammer/large/handle": (0, 0),
+        "item/tool/sledge_hammer/large/head": (0, 0),
+        "item/tool/sledge_hammer/large/back": (0, 0),
+        "item/tool/sledge_hammer/large/front": (0, 0),
+    },
+    {
+        "__offset__": (0, HEIGHT-32),
+        "item/tool/sledge_hammer/large/handle": (0, 0),
+        "item/tool/sledge_hammer/large/head_broken": (0, 0),
+        "item/tool/sledge_hammer/large/back_broken": (0, 0),
+        "item/tool/sledge_hammer/large/front_broken": (0, 0),
+    },
+
+    # Vein Hammer
+    {
+        "__offset__": (32, HEIGHT-64),
+        "item/tool/vein_hammer/large/handle": (0, 0),
+        "item/tool/vein_hammer/large/head": (0, 0),
+        "item/tool/vein_hammer/large/grip": (0, 0),
+        "item/tool/vein_hammer/large/front": (0, 0),
+    },
+    {
+        "__offset__": (32, HEIGHT-32),
+        "item/tool/vein_hammer/large/handle": (0, 0),
+        "item/tool/vein_hammer/large/head_broken": (0, 0),
+        "item/tool/vein_hammer/large/grip": (0, 0),
+        "item/tool/vein_hammer/large/front_broken": (0, 0),
+    },
+
+    # Excavator
+    {
+        "__offset__": (64, HEIGHT-64),
+        "item/tool/excavator/large/handle": (0, 0),
+        "item/tool/excavator/large/head": (0, 0),
+        "item/tool/excavator/large/grip": (0, 0),
+        "item/tool/excavator/large/binding": (0, 0),
+    },
+    {
+        "__offset__": (64, HEIGHT-32),
+        "item/tool/excavator/large/handle": (0, 0),
+        "item/tool/excavator/large/head_broken": (0, 0),
+        "item/tool/excavator/large/grip": (0, 0),
+        "item/tool/excavator/large/binding": (0, 0),
+    },
+
+    # Broad Axe
+    {
+        "__offset__": (96, HEIGHT-64),
+        "item/tool/broad_axe/large/handle": (0, 0),
+        "item/tool/broad_axe/large/blade": (0, 0),
+        "item/tool/broad_axe/large/back": (0, 0),
+        "item/tool/broad_axe/large/binding": (0, 0),
+    },
+    {
+        "__offset__": (96, HEIGHT-32),
+        "item/tool/broad_axe/large/handle": (0, 0),
+        "item/tool/broad_axe/large/blade_broken": (0, 0),
+        "item/tool/broad_axe/large/back_broken": (0, 0),
+        "item/tool/broad_axe/large/binding": (0, 0),
+    },
+
+    # Scythe
+    {
+        "__offset__": (128, HEIGHT-64),
+        "item/tool/scythe/large/accessory": (0, 0),
+        "item/tool/scythe/large/handle": (0, 0),
+        "item/tool/scythe/large/head": (0, 0),
+        "item/tool/scythe/large/binding": (0, 0),
+    },
+    {
+        "__offset__": (128, HEIGHT-32),
+        "item/tool/scythe/large/accessory": (0, 0),
+        "item/tool/scythe/large/handle": (0, 0),
+        "item/tool/scythe/large/head_broken": (0, 0),
+        "item/tool/scythe/large/binding": (0, 0),
+    },
+
+    # Cleaver
+    {
+        "__offset__": (160, HEIGHT-64),
+        "item/tool/cleaver/large/handle": (0, 0),
+        "item/tool/cleaver/large//head": (0, 0),
+        "item/tool/cleaver/large/shield": (0, 0),
+        "item/tool/cleaver/large/guard": (0, 0),
+    },
+    {
+        "__offset__": (160, HEIGHT-32),
+        "item/tool/cleaver/large/handle": (0, 0),
+        "item/tool/cleaver/large/head_broken": (0, 0),
+        "item/tool/cleaver/large/shield_broken": (0, 0),
+        "item/tool/cleaver/large/guard": (0, 0),
+    },
+
+    # Longbow
+    {
+        "__offset__": (192, HEIGHT-64),
+        "item/tool/longbow/large/limb_bottom": (0, 0),
+        "item/tool/longbow/large/limb_top": (0, 0),
+        "item/tool/longbow/large/bowstring": (0, 0),
+        "item/tool/longbow/large/grip": (0, 0),
+    },
+    {
+        "__offset__": (192, HEIGHT-32),
+        "item/tool/longbow/large/limb_bottom": (0, 0),
+        "item/tool/longbow/large/limb_top": (0, 0),
+        "item/tool/longbow/large/bowstring_broken": (0, 0),
+        "item/tool/longbow/large/grip": (0, 0),
+    },
+
+    # Javelin
+    {
+        "__offset__": (224, HEIGHT-64),
+        "item/tool/javelin/large/handle": (0, 0),
+        "item/tool/javelin/large/grip": (0, 0),
+        "item/tool/javelin/large/head": (0, 0),
+        "item/tool/javelin/large/guard": (0, 0),
+    },
+    {
+        "__offset__": (224, HEIGHT-32),
+        "item/tool/javelin/large/handle": (0, 0),
+        "item/tool/javelin/large/grip": (0, 0),
+        "item/tool/javelin/large/head_broken": (0, 0),
+        "item/tool/javelin/large/guard": (0, 0),
     },
 
     # Plate Helmet
@@ -551,6 +683,24 @@ OVERLAYS = [
     },
 ]
 
+# SECTIONS = {
+    # "melee": [(0, 0), (208, 32), (171, 219, 255, 255), (236, 247, 255, 255)],
+    # "ranged": [(0, 32), (64, 64), (255, 170, 255, 255), (255, 225, 255, 255)],
+    # "ancient": [(80, 32), (160, 64), (255, 241, 138, 255), (255, 249, 205, 255)],
+    # "armor": [(0, 64), (80, 96), (165, 255, 215, 255), (228, 255, 243, 255)],
+    # "ammo1": [(96, 64), (128, 80), (255, 150, 150, 255), (255, 230, 230, 255)],
+    # "ammo2": [(112, 80), (128, 96), (255, 150, 150, 255), (255, 230, 230, 255)],
+    # "part_melee1": [(0, 96), (128, 112), (171, 219, 255, 255), (236, 247, 255, 255)],
+    # "part_melee2": [(0, 112), (64, 128), (171, 219, 255, 255), (236, 247, 255, 255)],
+    # "part_ranged": [(80, 112), (128, 128), (255, 170, 255, 255), (255, 225, 255, 255)],
+    # "part_armor": [(144, 96), (192, 128), (165, 255, 215, 255), (228, 255, 243, 255)],
+    # "part_ammo1": [(160, 64), (176, 80), (255, 150, 150, 255), (255, 230, 230, 255)],
+    # "part_ammo2": [(144, 80), (176, 96), (255, 150, 150, 255), (255, 230, 230, 255)],
+    # "repair_kit": [(144, 64), (160, 80), (127, 127, 127, 255), (240, 240, 240, 255)],
+    # "large_melee": [(0, HEIGHT-64), (192, HEIGHT), (171, 219, 255, 255), (236, 247, 255, 255)],
+    # "large_ranged": [(192, HEIGHT-64), (256, HEIGHT), (255, 170, 255, 255), (255, 225, 255, 255)],
+# }
+
 scale = 1
 
 if (len(sys.argv) <= 1):
@@ -561,11 +711,18 @@ print(f"Preview Material: {sys.argv[1]}")
 
 suffix = sys.argv[1].replace(":", "_")
 
+GRID_LIGHT = (255, 255, 255, 255)
+GRID_DARK = (216, 216, 216, 255)
+
 if len(sys.argv) >= 3:
     for i in sys.argv[2:]:
         if i.startswith("scaled:"):
             scale = int(i[7:])
-    
+        # if i == "no-sec" or i == "no-section" or i == "no-sections":
+            # SECTIONS = {}
+        if i == "dark":
+            GRID_LIGHT = (95, 95, 95, 255)
+            GRID_DARK = (63, 63, 63, 255)
 
 preview = PIL.Image.new("RGBA", (WIDTH * scale, HEIGHT * scale))
 
@@ -573,8 +730,16 @@ preview = PIL.Image.new("RGBA", (WIDTH * scale, HEIGHT * scale))
 
 for x in range(WIDTH * scale):
     for y in range(HEIGHT * scale):
-        preview.putpixel((x, y), (255, 255, 255, 255) if (x//(4*scale)+y//(4*scale))%2 == 0 else (216, 216, 216, 255))
-        
+        preview.putpixel((x, y), GRID_LIGHT if (x//(4*scale)+y//(4*scale))%2 == 0 else GRID_DARK)
+
+# for section in SECTIONS:
+    # s = SECTIONS[section]
+    # for x in range(s[0][0] * scale, s[1][0] * scale):
+        # for y in range(s[0][1] * scale, s[1][1] * scale):
+            # preview.putpixel((x, y), s[3] if (x//(4*scale)+y//(4*scale))%2 == 0 else s[2])
+
+results = []
+
 for d in OBJECTS:
     for k in d:
         if (k == "__offset__"): continue
@@ -587,20 +752,25 @@ for d in OBJECTS:
         if not os.path.isfile(path):
             print(f"{path} not found, using fallback")
             path = f"./resources/{k}_tconstruct_unknown.png"
+
         image = PIL.Image.open(path, "r")
+
         to_paste = image.resize((image.width * scale, image.height * scale), PIL.Image.NEAREST)
-        preview.alpha_composite(to_paste, coordinate)
+        results.append((to_paste, coordinate))
         image.close()
+
+for (i, c) in results: preview.alpha_composite(i, c)
 
 for d in OVERLAYS:
     for k in d:
         if (k == "__offset__"): continue
         rc = d[k]
         offset = d["__offset__"]
-        coordinate = (rc[0] + offset[0], rc[1] + offset[1])
+        coordinate = (scale * (rc[0] + offset[0]), scale * (rc[1] + offset[1]))
         path = f"resources/{k}.png"
         image = PIL.Image.open(path, "r")
-        preview.alpha_composite(image.copy(), coordinate)
+        to_paste = image.resize((image.width * scale, image.height * scale), PIL.Image.NEAREST)
+        preview.alpha_composite(to_paste, coordinate)
         image.close()
 
 # Create folder
