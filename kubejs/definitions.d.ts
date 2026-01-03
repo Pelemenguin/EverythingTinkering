@@ -351,6 +351,25 @@ declare namespace Annotation {
              */
             addToolStats?(context: Internal.IToolContext, modifier: Internal.ModifierEntry, builder: Internal.ModifierStatsBuilder): void,
             /**
+             * Adds attributes from this modifier's effect. Called whenever the item stack refreshes attributes, typically on equipping and unequipping.
+             * It is important that you return the same list when equipping and unequipping the item.  
+             * 从该特性的效果中添加属性。在物品堆叠刷新属性时调用，通常在装备和卸下时。
+             * 重要的是，你在装备和卸下物品时返回相同的列表。
+             * - - - - -
+             * @param tool      Current tool instance  
+             *                  当前工具实例
+             * 
+             * @param modifier  Modifier level  
+             *                  特性（及其）等级
+             * 
+             * @param slot      Slot for the attributes  
+             *                  属性栏位
+             * 
+             * @param consumer  Attribute consumer  
+             *                  属性的 Consumer
+             */
+            addAttributes?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, slot: Internal.EquipmentSlot, consumer: Internal.BiConsumer<Internal.Attribute_, Internal.AttributeModifier_>): void,
+            /**
              * Called when modifiers or tool materials change to validate the tool. You are free to modify persistent data in this hook if needed.
              * This hook will not be called when a modifier is removed, to validate if a removal can be done, use {@linkcode ModifierHookArgument.onRemoved onRemoved}.
              * Do not validate max level here, simply ignore levels over max if needed.  
@@ -826,6 +845,54 @@ declare namespace Annotation {
              * });
              */
             afterBlockUse?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, context: Internal.UseOnContext, source: Internal.InteractionSource): Internal.InteractionResult_,
+            /**
+             * Run when attempting to stack a tool on another slot.
+             * As preconditions, we are right-clicking, the tool is stack size 1, and the slot allows modification.  
+             * 在尝试将工具堆叠到另一个栏位时运行。
+             * 作为前提条件，我们正在右键点击，工具堆叠数量为1，且该栏位允许修改。
+             * - - - - -
+             * @param heldTool Tool currently held by the mouse  
+             *                 鼠标当前持有的工具
+             * 
+             * @param modifier Modifier running this hook  
+             *                 运行此钩子的特性
+             * 
+             * @param slot     Slot clicked with the tool  
+             *                 用该工具点击的栏位
+             * 
+             * @param player   Player in the inventory  
+             *                 该物品栏所属的玩家
+             * 
+             * @returns        `true` if standard slot interactions should be prevented  
+             *                 若应阻止标准栏位交互则返回`true`
+             */
+            overrideStackedOnOther?(heldTool: Internal.IToolStackView, modifier: Internal.ModifierEntry, slot: Internal.Slot, player: Internal.Player): boolean,
+            /**
+             * As preconditions, we are right clicking, the tool is stack size 1, and the slot allows modification.  
+             * 作为前提条件，我们正在右键点击，工具堆叠数量为1，且该栏位允许修改。
+             * - - - - -
+             * @param slotTool Tool currently in the slot  
+             *                 栏位中当前的工具
+             * 
+             * @param modifier Modifier running this hook  
+             *                 运行此钩子的特性
+             * 
+             * @param held     Stack held by the mouse  
+             *                 鼠标持有的物品堆
+             * 
+             * @param slot     Slot containing the tool  
+             *                 工具所在的栏位
+             * 
+             * @param player   Player in the inventory  
+             *                 该物品栏所属的玩家
+             * 
+             * @param access   Slot access  
+             *                 栏位访问
+             * 
+             * @returns        `true` if standard slot interactions should be prevented  
+             *                 若应阻止标准栏位交互则返回`true`
+             */
+            overrideOtherStackedOnMe?(slotTool: Internal.IToolStackView, modifier: Internal.ModifierEntry, held: Internal.ItemStack, slot: Internal.Slot, player: Internal.Player, access: Internal.SlotAccess): boolean,
             /**
              * Some custom methods for modifiers written by our KubeJS scripts.
              * These are not standard Tinker's Construct modifier hooks.  

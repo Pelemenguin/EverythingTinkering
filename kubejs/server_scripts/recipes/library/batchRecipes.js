@@ -17,6 +17,7 @@
     global: writable
     ServerEvents
     $MaterialIngredient
+    console
  */
 
 const BatchMaterialRecipes = {};
@@ -54,14 +55,21 @@ BatchMaterialRecipes.Deploying = {
 
 ServerEvents.recipes(event => {
 
+    console.info(`Registering batch material recipes...`);
+    console.info(`Available tool parts: ${global.CustomUtils.Tinker.TOOL_PARTS.map(part => part.getId()).join(", ")}`);
+
     // Deploying
     for (let recipeId in BatchMaterialRecipes.Deploying.ALL) {
         let entry = BatchMaterialRecipes.Deploying.ALL[recipeId];
+        console.info(`Registering deploying batch recipe: ${recipeId} (${entry.inputMaterial} + ${entry.usingItem} -> ${entry.outputMaterial})`);
         for (let part of global.CustomUtils.Tinker.TOOL_PARTS) {
-            event.getRecipes().create.deploying(
-                [part.withMaterial(entry.outputMaterial)],
-                [$MaterialIngredient["of(net.minecraft.world.level.ItemLike,slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](part, entry.inputMaterial), entry.usingItem]
-            ).id(recipeId.toString() + "/" + part.getId().replace(":", "/"));
+            if (part.canUseMaterial(entry.inputMaterial.getId()) && part.canUseMaterial(entry.outputMaterial.getId())) {
+                let recipe = event.getRecipes().create.deploying(
+                    [part.withMaterial(entry.outputMaterial)],
+                    [$MaterialIngredient["of(net.minecraft.world.level.ItemLike,slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](part, entry.inputMaterial), entry.usingItem]
+                ).id(recipeId.toString() + "/" + part.getId().replace(":", "/"));
+                console.info(recipe.readOutputItem(recipe));
+            }
         }
     }
 

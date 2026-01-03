@@ -31,7 +31,7 @@
     ToolMaterialHook
     $ItemStack
     NBT
-    MaterialVariantId
+    $aterialVariantId
     JavaUtils
 */
 
@@ -238,15 +238,15 @@ const DetailedBase = {
             let anyUsed = false;
             requirements.forEach(part => {
                 if (part.canUseMaterial(materialId)) {
-                    materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](MaterialVariantId["tryParse(java.lang.String)"](materialId.toString()));
+                    materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"]($MaterialVariantId["tryParse(java.lang.String)"](materialId.toString()));
                     anyUsed = true;
                 } else {
-                    if (defaultMaterials.length == 0) materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](MaterialVariantId["tryParse(java.lang.String)"](materialId.toString()));
+                    if (defaultMaterials.length == 0) materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"]($MaterialVariantId["tryParse(java.lang.String)"](materialId.toString()));
                     let index = 0;
                     while (index < defaultMaterials.length && !part.canUseMaterial(defaultMaterials[index])) {
                         index ++;
                     }
-                    if (index == defaultMaterials.length) materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](MaterialVariantId["tryParse(java.lang.String)"](materialId.toString()));
+                    if (index == defaultMaterials.length) materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"]($MaterialVariantId["tryParse(java.lang.String)"](materialId.toString()));
                     else materialBuilder["add(slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](defaultMaterials[index]);
                 }
             });
@@ -311,7 +311,7 @@ const DetailedBase = {
 
         let parsedDefaultMaterials = new Array(defaultMaterials.length);
         defaultMaterials.forEach((m, i) => {
-            parsedDefaultMaterials[i] = MaterialVariantId["tryParse(java.lang.String)"](m.toString());
+            parsedDefaultMaterials[i] = $MaterialVariantId["tryParse(java.lang.String)"](m.toString());
         });
 
         DetailedBase.drawExampleTools(elements, materialId, parsedDefaultMaterials, displayArguments.tools);

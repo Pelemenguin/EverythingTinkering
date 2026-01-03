@@ -170,7 +170,11 @@
 
     "material.kubejs.andesite_alloy": "Andesite Alloy",
     "material.kubejs.andesite_alloy.flavor": "Just like a Shaft!",
-    "material.kubejs.andesite_alloy.encyclopedia": "Attack targets in a row with distances between them less than 3 blocks. Damage gets multiplied by 0.2 times trait level and stops conveying when being less that 1.",
+    "material.kubejs.andesite_alloy.encyclopedia": "Attack targets in a row with distances between them less than 3 blocks. Damage gets multiplied by 0.2 times trait level and stops conveying when being less that 1",
+
+    "material.kubejs.steel_clad_copper": "Steel-clad Copper",
+    "material.kubejs.steel_clad_copper.flavor": "Is that reversed?",
+    "material.kubejs.steel_clad_copper.encyclopedia": "Each Iron Plate applied +0.15 attack damage, +1% resistance, or 0.1 projectile power, depending on the tool type. 10 plates can be added per level. 1 plate is consumed per 100 durability loss",
 
     "material.kubejs.scrapped_tinker_metal": "Scrapped Tinker Metal",
     "material.kubejs.scrapped_tinker_metal.flavor": "Still usable?",
@@ -238,7 +242,7 @@
 
     "modifier.kubejs.thawing": "Thawing",
     "modifier.kubejs.thawing.flavor": "Some kind of lite snowplow. Seemingly a little bit hot underfoot?",
-    "modifier.kubejs.thawing.description": "移除周围的雪",
+    "modifier.kubejs.thawing.description": "Removes snow nearby",
 
     "modifier.kubejs.glass_shard": "Glass Shard",
     "modifier.kubejs.glass_shard.flavor": "Fragile products!",
@@ -263,6 +267,14 @@
     "modifier.kubejs.relaying": "Relaying",
     "modifier.kubejs.relaying.flavor": "Convey momentum!",
     "modifier.kubejs.relaying.description": "Attack enemies in a row",
+
+    "modifier.kubejs.cladding": "Cladding",
+    "modifier.kubejs.cladding.flavor": "More iron for copper, more copper for iron!",
+    "modifier.kubejs.cladding.description": "Applying Iron Plates on the tool in your inventory, to provide extra attack damage, resistance, or projectile power, depending on the tool type. Cladding is consumed while tool is getting damaged",
+    "modifier.kubejs.cladding.amount": "Cladding Amount: %s",
+    "modifier.kubejs.cladding.attack_damage": "Cladding Extra Atk. Damage",
+    "modifier.kubejs.cladding.resistance": "Cladding Extra Resistance",
+    "modifier.kubejs.cladding.projectile_power": "Cladding Extra Proj. Power",
 
     "modifier.kubejs.tinker_coating": "Tinker Coating",
     "modifier.kubejs.tinker_coating.flavor": "Some ancient tinker has invented this coating...",

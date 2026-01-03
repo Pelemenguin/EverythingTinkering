@@ -65,6 +65,8 @@
 
         "andesite_alloy": "#c9caba",
 
+        "steel_clad_copper": "#C5C5C5",
+
         "scrapped_tinker_metal": "#ffa263",
 
         "sea_alloy": "#C6DFD8",
@@ -113,6 +115,7 @@
         "papercutting": "#FCFCF2",
         "algae": "#59AB30",
         "relaying": "#c9caba",
+        "cladding": "#C5C5C5",
         "night_owl": "#C2FF66",
         "tinker_coating": "#ffa263",
         "antifatigue": "#C6DFD8",

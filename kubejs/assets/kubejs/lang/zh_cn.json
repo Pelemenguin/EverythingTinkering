@@ -173,7 +173,11 @@
 
     "material.kubejs.andesite_alloy": "安山合金",
     "material.kubejs.andesite_alloy.flavor": "就像一个传动轴！",
-    "material.kubejs.andesite_alloy.encyclopedia": "攻击一条直线上距离不超过三格的敌人。每次传递，伤害会被乘以0.2倍特性等级。传递至小于1时停止。",
+    "material.kubejs.andesite_alloy.encyclopedia": "攻击一条直线上距离不超过三格的敌人。每次传递，伤害会被乘以0.2倍特性等级。传递至小于1时停止",
+
+    "material.kubejs.steel_clad_copper": "钢覆铜",
+    "material.kubejs.steel_clad_copper.flavor": "好像做反了？",
+    "material.kubejs.steel_clad_copper.encyclopedia": "每添加一个铁板增加0.15近战伤害，1%抗性，或0.1弹射物力量，取决于工具类型。每级最多添加10个铁板，工具每损失100点耐久度消耗一个铁板",
 
     "material.kubejs.scrapped_tinker_metal": "废弃工匠金属",
     "material.kubejs.scrapped_tinker_metal.flavor": "还能用？",
@@ -263,6 +267,14 @@
     "modifier.kubejs.relaying.flavor": "传递动量！",
     "modifier.kubejs.relaying.description": "攻击一条直线上的敌人",
 
+    "modifier.kubejs.cladding": "覆层",
+    "modifier.kubejs.cladding.flavor": "铜多加铁，铁多加铜！",
+    "modifier.kubejs.cladding.description": "在物品栏中使用铁板向工具添加覆层，为工具提供额外的近战伤害，抗性，或弹射物力量，取决于工具类型。覆层会在工具损耗时一起损耗",
+    "modifier.kubejs.cladding.amount": "覆层数量：%s",
+    "modifier.kubejs.cladding.attack_damage": "覆层额外伤害",
+    "modifier.kubejs.cladding.resistance": "覆层额外抗性",
+    "modifier.kubejs.cladding.projectile_power": "覆层额外弹射物力量",
+
     "modifier.kubejs.tinker_coating": "工匠镀层",
     "modifier.kubejs.tinker_coating.flavor": "某个远古的工匠发明了这个镀层……",
     "modifier.kubejs.tinker_coating.description": "提供吸收耐久消耗的护盾，在完全消耗的一段时间后恢复",
@@ -293,7 +305,7 @@
     "modifier.kubejs.glacial_strike.requirements": "“冰滞冲击”需要“闪亮”、“保护 II”和“加固 II”作为前置",
 
     "modifier.kubejs.artifact": "工匠造物",
-    "modifier.kubejs.artifact.tooltip": "工匠造物ID: %s",
+    "modifier.kubejs.artifact.tooltip": "工匠造物ID：%s",
     "modifier.kubejs.artifact.flavor": "在世界各地随机出现……",
     "modifier.kubejs.artifact.description": "该工具是在某个地方找到的工匠造物",
     "modifier.kubejs.artifact.remove": "你是不是打算移除一个用来表示一个工具是工匠造物的特性？",

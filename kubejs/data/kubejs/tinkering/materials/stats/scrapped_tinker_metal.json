@@ -22,8 +22,7 @@
         "tconstruct:grip": {
             "durability": 0.10,
             "accuracy": 0.0,
-            "melee_damage": 0.0,
-            "knockback_resistance": 0.0
+            "melee_damage": 0.0
         },
         "tconstruct:plating_helmet": {
             "durability": 154,

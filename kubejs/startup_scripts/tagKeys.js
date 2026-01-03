@@ -14,6 +14,7 @@
  */
 
 /* global
+    global: writable
     $TagKey
     $Registries
 */
@@ -34,3 +35,12 @@ TagKeys.DamageType = {
         ICY_TERRACUBE: $TagKey.create($Registries.DAMAGE_TYPE, "kubejs:boss_immune/icy_terracube")
     }
 };
+
+TagKeys.Item = {
+    Modifiable: {
+        RANGED: $TagKey.create($Registries.ITEM, "tconstruct:modifiable/ranged"),
+        ARMOR: $TagKey.create($Registries.ITEM, "tconstruct:modifiable/armor")
+    }
+};
+
+global.TagKeys = TagKeys;

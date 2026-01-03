@@ -53,4 +53,7 @@ TINKERS_WORKSHOP.createArtifact("non_classic_pickaxe", Item.getItem("tconstruct:
     "kubejs:scrapped_tinker_metal",
     "tconstruct:wood#oak",
     "tconstruct:wood#spruce"
-]).persistent((_artifact, persistent) => persistent.putInt("kubejs:tinker_coating_shield", 20));
+]).persistent((_artifact, persistent) => {
+    persistent.putInt("kubejs:tinker_coating_shield", 20);
+    persistent.putInt("kubejs:tinker_coating_recovery", 601);
+});

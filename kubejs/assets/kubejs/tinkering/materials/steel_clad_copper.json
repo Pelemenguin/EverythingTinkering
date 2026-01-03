@@ -1,0 +1,8 @@
+{
+    "color": "FFC5C5C5",
+    "fallbacks": [
+        "metal"
+    ],
+    "luminosity": 0,
+    "texture": "kubejs:steel_clad_copper"
+}

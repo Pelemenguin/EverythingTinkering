@@ -46,6 +46,7 @@ let HOOK_TO_IMPLEMENTING_INTERFACE = {
     "displayModifiers": "slimeknights.tconstruct.library.modifiers.hook.display.RequirementsModifierHook",
     "requirementsError": "slimeknights.tconstruct.library.modifiers.hook.display.RequirementsModifierHook",
     "addToolStats": "slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook",
+    "addAttributes": "slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook",
     "validate": "slimeknights.tconstruct.library.modifiers.hook.build.ValidateModifierHook",
     "onRemoved": "slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook",
     "getMeleeDamage": "slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook",
@@ -59,7 +60,9 @@ let HOOK_TO_IMPLEMENTING_INTERFACE = {
     "afterBlockBreak": "slimeknights.tconstruct.library.modifiers.hook.mining.BlockBreakModifierHook",
     "onProjectileLaunch": "slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook",
     "beforeBlockUse": "slimeknights.tconstruct.library.modifiers.hook.interaction.BlockInteractionModifierHook",
-    "afterBlockUse": "slimeknights.tconstruct.library.modifiers.hook.interaction.BlockInteractionModifierHook"
+    "afterBlockUse": "slimeknights.tconstruct.library.modifiers.hook.interaction.BlockInteractionModifierHook",
+    "overrideStackedOnOther": "slimeknights.tconstruct.library.modifiers.hook.interaction.SlotStackModifierHook",
+    "overrideOtherStackedOnMe": "slimeknights.tconstruct.library.modifiers.hook.interaction.SlotStackModifierHook",
 };
 
 /** @type {{[hook in Annotation.TinkerFunction.ModifierHooks]: [string[], string, (func: Annotation.TinkerFunction.ModifierHookArgument[hook]) => Annotation.TinkerFunction.ModifierHookArgument[hook]]}} */
@@ -192,6 +195,24 @@ let HOOK_TO_METHOD_PARAMETERS = {
                     func(arg0, arg1, arg2);
                 } catch (e) {
                     console.error(`Error in addToolStats of modifier ${arg1.getId().toString()}: ${e}`);
+                }
+            };
+        }
+    ],
+    "addAttributes": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "net.minecraft.world.entity.EquipmentSlot",
+            "java.util.function.BiConsumer"
+        ],
+        "void",
+        (func) => {
+            return (arg0, arg1, arg2, arg3) => {
+                try {
+                    func(arg0, arg1, arg2, arg3);
+                } catch (e) {
+                    console.error(`Error in addAttributes of modifier ${arg1.getId().toString()}: ${e}`);
                 }
             };
         }
@@ -465,6 +486,46 @@ let HOOK_TO_METHOD_PARAMETERS = {
                 }
             };
         }
+    ],
+    "overrideStackedOnOther": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "net.minecraft.world.inventory.Slot",
+            "net.minecraft.world.entity.player.Player",
+        ],
+        "boolean",
+        (func) => {
+            return (arg0, arg1, arg2, arg3) => {
+                try {
+                    return func(arg0, arg1, arg2, arg3);
+                } catch (e) {
+                    console.error(`Error in overrideStackedOnOther of modifier ${arg1.getId().toString()}: ${e}`);
+                    return false;
+                }
+            };
+        }
+    ],
+    "overrideOtherStackedOnMe": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "net.minecraft.world.item.ItemStack",
+            "net.minecraft.world.inventory.Slot",
+            "net.minecraft.world.entity.player.Player",
+            "net.minecraft.world.entity.SlotAccess"
+        ],
+        "boolean",
+        (func) => {
+            return (arg0, arg1, arg2, arg3, arg4, arg5) => {
+                try {
+                    return func(arg0, arg1, arg2, arg3, arg4, arg5);
+                } catch (e) {
+                    console.error(`Error in overrideOtherStackedOnMe of modifier ${arg1.getId().toString()}: ${e}`);
+                    return false;
+                }
+            };
+        }
     ]
 };
 
@@ -477,6 +538,7 @@ let HOOK_TO_FIELDS = {
     "displayModifiers": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "REQUIREMENTS", "slimeknights.tconstruct.library.module.ModuleHook"],
     "requirementsError": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "REQUIREMENTS", "slimeknights.tconstruct.library.module.ModuleHook"],
     "addToolStats": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "TOOL_STATS", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "addAttributes": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "ATTRIBUTES", "slimeknights.tconstruct.library.module.ModuleHook"],
     "validate": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "VALIDATE", "slimeknights.tconstruct.library.module.ModuleHook"],
     "onRemoved": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "REMOVE", "slimeknights.tconstruct.library.module.ModuleHook"],
     "getMeleeDamage": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "MELEE_DAMAGE", "slimeknights.tconstruct.library.module.ModuleHook"],
@@ -492,6 +554,8 @@ let HOOK_TO_FIELDS = {
     "onProjectileLaunch": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "PROJECTILE_LAUNCH", "slimeknights.tconstruct.library.module.ModuleHook"],
     "beforeBlockUse": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "BLOCK_INTERACT", "slimeknights.tconstruct.library.module.ModuleHook"],
     "afterBlockUse": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "BLOCK_INTERACT", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "overrideStackedOnOther": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "SLOT_STACK", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "overrideOtherStackedOnMe": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "SLOT_STACK", "slimeknights.tconstruct.library.module.ModuleHook"],
 };
 
 const ModifierManager = {
