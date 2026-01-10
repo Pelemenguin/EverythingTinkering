@@ -31,6 +31,7 @@ const MaterialRegistry = Java.loadClass('slimeknights.tconstruct.library.materia
 const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialId');
 const $MaterialVariantId = Java.loadClass("slimeknights.tconstruct.library.materials.definition.MaterialVariantId");
 const MaterialVariant = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialVariant');
+const $MaterialStatsId = Java.loadClass("slimeknights.tconstruct.library.materials.stats.MaterialStatsId");
 const $ModifierId = Java.loadClass('slimeknights.tconstruct.library.modifiers.ModifierId');
 const $ModifierNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ModifierNBT');
 const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
@@ -50,6 +51,7 @@ const $PartialNBTIngredient = Java.loadClass("net.minecraftforge.common.crafting
 const JavaUtils = {
     Float: Java.loadClass("java.lang.Float")
 };
+const $HashSet = Java.loadClass("java.util.HashSet");
 
 /**
  * @type {Internal.Item[]}

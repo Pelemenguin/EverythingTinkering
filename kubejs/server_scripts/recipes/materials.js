@@ -20,5 +20,6 @@
 BatchMaterialRecipes.Deploying.register("tinkering/materials/steel_clad_copper/deploying",
     $MaterialVariantId.tryParse("tconstruct:copper"),
     $MaterialVariantId.tryParse("kubejs:steel_clad_copper"),
-    IngredientHelper.tag("forge:plates/iron")
+    IngredientHelper.tag("forge:plates/iron"),
+    BatchMaterialRecipes.KnownStatGroups.FULL_MATERIAL
 );

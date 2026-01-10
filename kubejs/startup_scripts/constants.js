@@ -94,6 +94,7 @@ const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDef
 /** @type {typeof Internal.TinkerItemElement} */
 const TinkerItemElement = Java.tryLoadClass("slimeknights.tconstruct.library.client.book.elements.TinkerItemElement");
 const $LevelingInt = Java.loadClass("slimeknights.tconstruct.library.json.LevelingInt");
+const $MaterialStatsId = Java.loadClass("slimeknights.tconstruct.library.materials.stats.MaterialStatsId");
 const MaterialCastingLookup = Java.loadClass("slimeknights.tconstruct.library.recipe.casting.material.MaterialCastingLookup");
 const MaterialRecipeCache = Java.loadClass("slimeknights.tconstruct.library.recipe.material.MaterialRecipeCache");
 const TinkerToolParts = Java.loadClass("slimeknights.tconstruct.tools.TinkerToolParts");
@@ -104,6 +105,10 @@ const $TooltipModifierHook = Java.loadClass("slimeknights.tconstruct.library.mod
 const $CapacityBarModule = Java.loadClass("slimeknights.tconstruct.library.modifiers.modules.capacity.CapacityBarModule");
 const $DurabilityShieldModule = Java.loadClass("slimeknights.tconstruct.library.modifiers.modules.capacity.DurabilityShieldModule");
 const $ModifiableItem = Java.loadClass("slimeknights.tconstruct.library.tools.item.ModifiableItem");
+
+// Create
+const $DeployerApplicationRecipe = Java.loadClass("com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe");
+const $ProcessingRecipeBuilder = Java.loadClass("com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder");
 
 // TiC Modifier Modules
 const ProtectionModule = Java.loadClass("slimeknights.tconstruct.library.modifiers.modules.armor.ProtectionModule");
@@ -146,6 +151,7 @@ const JavaUtils = {
 };
 const $ConcurrentHashMap = Java.loadClass("java.util.concurrent.ConcurrentHashMap");
 const $Optional = Java.loadClass("java.util.Optional");
+const $HashSet = Java.loadClass("java.util.HashSet");
 
 // Forge
 /** @type {typeof Internal.FMLJavaModLoadingContext} */

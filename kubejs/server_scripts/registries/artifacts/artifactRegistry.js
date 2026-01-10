@@ -59,11 +59,11 @@ function Artifact(id, item, definition, materials) {
     this.definition = definition;
     this.initialized = false;
     this.translationId = id;
-    /** @type {Internal.Component | null} */
+    /** @type {net.minecraft.network.chat.Component | null} */
     this.name = null;
-    /** @type {Internal.Component | null} */
+    /** @type {net.minecraft.network.chat.Component | null} */
     this.lore = null;
-    /** @type {Internal.Component[]} */
+    /** @type {net.minecraft.network.chat.Component[]} */
     this.extraTooltips = [];
 
     /** @type {Internal.MaterialVariant_[]} */
@@ -148,7 +148,7 @@ Artifact.prototype.getTranslationId = function() {
  * Get the name of the artifact.  
  * 获取 Artifact 的名称。
  * - - - - -
- * @returns {Internal.Component}
+ * @returns {net.minecraft.network.chat.Component}
  */
 Artifact.prototype.getName = function() {
     return Component.translatable(`item.kubejs.${this.translationId}.name`);
@@ -158,7 +158,7 @@ Artifact.prototype.getName = function() {
  * Get the lore of the artifact.  
  * 获取 Artifact 的详细信息。
  * - - - - -
- * @returns {Internal.Component}
+ * @returns {net.minecraft.network.chat.Component}
  */
 Artifact.prototype.getLore = function() {
     return Component.translatable(`item.kubejs.${this.translationId}.lore`);

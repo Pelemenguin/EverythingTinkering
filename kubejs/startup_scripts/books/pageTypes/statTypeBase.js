@@ -99,9 +99,9 @@ let writeStatDesc = (stats) => {
     let result = [BookTextComponentData.literal("\n")];
     let y = 0;
 
-    /** @type {Internal.Component[]} */
+    /** @type {net.minecraft.network.chat.Component[]} */
     let info = stats.getLocalizedInfo().toArray();
-    /** @type {Internal.Component[]} */
+    /** @type {net.minecraft.network.chat.Component[]} */
     let tooltips = stats.getLocalizedDescriptions().toArray();
     for (let i = 0; i < Math.min(info.length, tooltips.length); i++) {
         let thisTooltip = tooltips[i];
@@ -234,11 +234,11 @@ let addPlatingStats = (elements, materialId, y) => {
 
     /**
      * @type {{
-     *     helmet: Internal.Component[],
-     *     chestplate: Internal.Component[],
-     *     leggings: Internal.Component[],
-     *     boots: Internal.Component[],
-     *     shield: Internal.Component[],
+     *     helmet: net.minecraft.network.chat.Component[],
+     *     chestplate: net.minecraft.network.chat.Component[],
+     *     leggings: net.minecraft.network.chat.Component[],
+     *     boots: net.minecraft.network.chat.Component[],
+     *     shield: net.minecraft.network.chat.Component[],
      * }}
      */
     let statInfo = {

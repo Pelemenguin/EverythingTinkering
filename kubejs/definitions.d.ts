@@ -121,7 +121,7 @@ declare namespace Annotation {
              *               堆叠敏感的显示名称
              * - - - - -
              */
-            getDisplayNameFromTool?(tool: Internal.IToolStackView, entry: Internal.ModifierEntry, access: Internal.RegistryAccess): Internal.Component,
+            getDisplayNameFromTool?(tool: Internal.IToolStackView, entry: Internal.ModifierEntry, access: Internal.RegistryAccess): net.minecraft.network.chat.Component,
             /**
              * Method to modify a stat as the tool is being used  
              * 工具使用时修改属性的方法。
@@ -270,7 +270,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            addTooltip?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, player: Internal.Player | null, tooltip: Internal.List<Internal.Component>, tooltipKey: Internal.TooltipKey, tooltipFlag: Internal.TooltipFlag): void,
+            addTooltip?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, player: Internal.Player | null, tooltip: Internal.List<net.minecraft.network.chat.Component>, tooltipKey: Internal.TooltipKey, tooltipFlag: Internal.TooltipFlag): void,
             /**
              * Gets the list of required modifiers to display on tools in recipe viewers.
              * Note that the actual requirement are implemented via {@linkcode ModifierHookArgument.validate validate}.  
@@ -317,7 +317,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            requirementsError?(entry: Internal.ModifierEntry): Internal.Component | null,
+            requirementsError?(entry: Internal.ModifierEntry): net.minecraft.network.chat.Component | null,
             /**
              * Adds raw stats to the tool. Called whenever tool stats are rebuilt.  
              * 向工具添加直接属性数据。在工具属性重建时调用。
@@ -397,7 +397,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            validate?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry): Internal.Component | null,
+            validate?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry): net.minecraft.network.chat.Component | null,
             /**
              * Called after this modifier is removed (and after stats are rebuilt) to clean up persistent data and validate removal.  
              * 在该特性被移除后（且属性重建后）调用以清理持久化数据并验证移除。
@@ -424,7 +424,7 @@ declare namespace Annotation {
              *     }
              * });
              */
-            onRemoved?(tool: Internal.IToolStackView, modifier: Internal.Modifier): Internal.Component | null,
+            onRemoved?(tool: Internal.IToolStackView, modifier: Internal.Modifier): net.minecraft.network.chat.Component | null,
             /**
              * Called when an entity is attacked, before critical hit damage is calculated.
              * Allows modifying the damage dealt.

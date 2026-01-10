@@ -27,13 +27,13 @@ const TooltipUtils = {
      * @param {number} value                 The value to display. Not in percentage.
      *                                       要显示的数值。不是百分比。
      * 
-     * @param {Internal.Component} component The component used for displaying, usually the modifier's name. Not to include percentage display here.
+     * @param {net.minecraft.network.chat.Component} component The component used for displaying, usually the modifier's name. Not to include percentage display here.
      *                                       用于显示的组件，通常是特性的名称。不要在这里包含百分比显示。
      * 
      * @param {number} [base = 0]            The base value. For example, when `base` is `1`, a `value` of `1.2` displays as `+20%`. Default value is `0`  
      *                                       基准值。例如，当 `base` 为 `1` 时，`value` 为 `1.2` 显示为 `+20%`。默认值为`0`。
      * 
-     * @returns {Internal.Component}         The result component
+     * @returns {net.minecraft.network.chat.Component}         The result component
      *                                       结果组件
      * - - - - -
      * ### Example | 示例
