@@ -23,6 +23,8 @@
     ToolPartItem
     $HashSet
     $MaterialStatsId
+    Utils
+    Ingredient
  */
 
 const BatchMaterialRecipes = {};
@@ -94,7 +96,7 @@ BatchMaterialRecipes.KnownStatGroups.FULL_MATERIAL = [BatchMaterialRecipes.Known
  * @typedef {{
  *     inputMaterial: Internal.MaterialVariantId,
  *     outputMaterial: Internal.MaterialVariantId,
- *     usingItem: Internal.Ingredient_,
+ *     usingItem: Internal.Ingredient,
  *     partStatTypes: Internal.Set<Internal.MaterialStatsId>
  * }} Annotation.BatchRecipes.Deploying
  */
@@ -103,6 +105,17 @@ BatchMaterialRecipes.Deploying = {
      * @type {{[recipeId: string]: Annotation.BatchRecipes.Deploying}}
      */
     ALL: {},
+    /**
+     * Cache for already created recipes.
+     * Mapping from material ids to deploying batch recipes.
+     * Used for recipe display in books.  
+     * 机械手使用配方的缓存。
+     * 将材料ID映射到机械手使用批量配方。
+     * 用于书籍中的配方显示。
+     * - - - - -
+     * @type {Internal.Map<Internal.MaterialId, Annotation.BatchRecipes.Deploying[]>}
+     */
+    CACHE: Utils.newMap(),
     /**
      * 
      * @param {string} recipeId 
@@ -118,12 +131,21 @@ BatchMaterialRecipes.Deploying = {
             statTypeSet.add(statType);
         }
 
-        BatchMaterialRecipes.Deploying.ALL[recipeId] = {
+        let recipe = {
             inputMaterial: inputMaterial,
             outputMaterial: outputMaterial,
-            usingItem: usingItem,
+            usingItem: Ingredient.of(usingItem),
             partStatTypes: statTypeSet
         };
+
+        BatchMaterialRecipes.Deploying.ALL[recipeId] = recipe;
+
+        // Cache for book display
+        let materialId = outputMaterial.getId();
+        if (!BatchMaterialRecipes.Deploying.CACHE.containsKey(materialId)) {
+            BatchMaterialRecipes.Deploying.CACHE.put(materialId, []);
+        }
+        BatchMaterialRecipes.Deploying.CACHE.get(materialId).push(recipe);
     }
 };
 
@@ -163,3 +185,5 @@ ServerEvents.recipes(event => {
     }
 
 });
+
+global.BatchMaterialRecipes = BatchMaterialRecipes;

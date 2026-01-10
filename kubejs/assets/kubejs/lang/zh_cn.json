@@ -366,6 +366,9 @@
     "book.kubejs.material.recipes.composite.amount": "%smB",
     "book.kubejs.material.recipes.composite.fluid.unknown": "未知流体",
 
+    "book.kubejs.material.recipes.deploying.name": "使用",
+    "book.kubejs.material.recipes.deploying.description": "能通过机械手对部件使用物品制作",
+
         "_comment_controls": " ----- 控制 ----- ",
 
     "key.categories.kubejs.modifier": "整合包 | 匠魂特性",

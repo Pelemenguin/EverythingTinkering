@@ -363,6 +363,9 @@
     "book.kubejs.material.recipes.composite.amount": "%smB",
     "book.kubejs.material.recipes.composite.fluid.unknown": "Unknown Fluid",
 
+    "book.kubejs.material.recipes.deploying.name": "Deploying",
+    "book.kubejs.material.recipes.deploying.description": "Craftable from deploying items by Deployers",
+
         "_comment_controls": " ----- Controls ----- ",
 
     "key.categories.kubejs.modifier": "Modpack | Tinker's Construct Modifiers",

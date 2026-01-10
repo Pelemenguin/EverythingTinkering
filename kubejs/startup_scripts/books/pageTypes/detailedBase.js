@@ -14,6 +14,7 @@
  */
 
 /* global
+    global: writable
     RecipeDisplay
     Utils
     Client
@@ -31,7 +32,7 @@
     ToolMaterialHook
     $ItemStack
     NBT
-    $aterialVariantId
+    $MaterialVariantId
     JavaUtils
 */
 
@@ -141,6 +142,14 @@ const DetailedBase = {
             h = newH;
             totalRecipes = newRecipeCount;
         });
+
+        // Draw deploying recipes
+        let deployingRecipes = global.BatchMaterialRecipes.Deploying.CACHE.get(materialId);
+        if (deployingRecipes != null) {
+            let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, deployingRecipes, "deploying");
+            h = newH;
+            totalRecipes = newRecipeCount;
+        }
 
         elements.addAll(recipePages[0]);
 

@@ -17,9 +17,12 @@
 
 /* global
     Item
+    TinkerToolParts
+    $MaterialVariantId
 */
 
 const HIDDEN_MATERIAL = {};
+const DISPLAY_AS_LARGE_PLATE = {};
 
 /**
  * - Representative items map.
@@ -161,6 +164,7 @@ let reprItems = {
 
     "tconstruct:treated_wood": "thermal:creosote_bucket",
     "kubejs:andesite_alloy": "create:andesite_alloy",
+    "kubejs:steel_clad_copper": DISPLAY_AS_LARGE_PLATE,
 
     // ========== Adventure Line ========== //
 
@@ -185,8 +189,9 @@ const RepresentativeItems = {
     get: (id) => {
         /** @type {string} */
         let item = reprItems[id];
-        if (item === undefined || item === HIDDEN_MATERIAL) {
-            return Item.of("tconstruct:large_plate", 1, {Material: id});
+        if (item === undefined || item === HIDDEN_MATERIAL || item === DISPLAY_AS_LARGE_PLATE) {
+            // return Item.of("tconstruct:large_plate", 1, {Material: id});
+            return TinkerToolParts.largePlate.get().withMaterialForDisplay($MaterialVariantId.parse(id));
         } else {
             return Item.of(item);
         }

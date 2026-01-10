@@ -42,7 +42,7 @@ ModifierManager.registerCommonModifier("cladding", "CladdingModifier", {
     getMeleeDamageForMonster: ModifierManager.SYNC_NORMAL_TO_MONSTER,
     getProtectionModifier: (tool, _modifier, _context, _slotType, _source, _modifierValue) => {
         let originalCladding = tool.getPersistentData().getFloat("kubejs:cladding");
-        return originalCladding / 2;
+        return originalCladding / 4;
     },
     modifyStat: (tool, _modifier, _living, stat, baseValue, _multiplier) => {
         if (stat === ToolStats.PROJECTILE_DAMAGE) {
@@ -64,7 +64,7 @@ ModifierManager.registerCommonModifier("cladding", "CladdingModifier", {
         if (tool.hasTag(TagKeys.Item.Modifiable.RANGED)) {
             $TooltipModifierHook.addFlatBoost(modifier.getModifier(), Component.translatable("modifier.kubejs.cladding.projectile_power"), 0.1 * tool.getPersistentData().getFloat("kubejs:cladding"), tooltip);
         } else if (tool.hasTag(TagKeys.Item.Modifiable.ARMOR)) {
-            ProtectionModule.addResistanceTooltip(tool, modifier.getModifier(), tool.getPersistentData().getFloat("kubejs:cladding") / 2, player, tooltip);
+            ProtectionModule.addResistanceTooltip(tool, modifier.getModifier(), tool.getPersistentData().getFloat("kubejs:cladding") / 4, player, tooltip);
         } else {
             $TooltipModifierHook.addFlatBoost(modifier.getModifier(), Component.translatable("modifier.kubejs.cladding.attack_damage"), 0.15 * tool.getPersistentData().getFloat("kubejs:cladding"), tooltip);
         }
