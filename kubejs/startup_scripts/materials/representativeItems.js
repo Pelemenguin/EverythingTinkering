@@ -166,6 +166,7 @@ let reprItems = {
     "kubejs:andesite_alloy": "create:andesite_alloy",
     "kubejs:steel_clad_copper": DISPLAY_AS_LARGE_PLATE,
     "kubejs:mainspring": DISPLAY_AS_LARGE_PLATE,
+    "kubejs:incomplete_mainspring": HIDDEN_MATERIAL,
 
     // ========== Adventure Line ========== //
 

@@ -315,6 +315,16 @@
     "modifier.kubejs.artifact.description": "This tool is an artifact found somewhere",
     "modifier.kubejs.artifact.remove": "Did you intend to remove a modifier used to indicate that the tool is an Artifact?",
 
+    "modifier.kubejs.incomplete": "Incomplete",
+    "modifier.kubejs.incomplete.flavor": "For transitional usage only!",
+    "modifier.kubejs.incomplete.description": "You cannot use this material",
+    "modifier.kubejs.incomplete.error": "Are you trying to make a tool using an incomplete part? Perhaps you should complete the sequence assembly recipe first.",
+
+    "material.kubejs.incomplete_mainspring": "Incomplete Mainspring",
+    "material.kubejs.incomplete_mainspring.format": "Incomplete Mainspring %s",
+    "material.kubejs.incomplete_mainspring.flavor": "Winding up...",
+    "material.kubejs.incomplete_mainspring.encyclopedia": "Winding up...",
+
     "modifier.kubejs.immutable": "Immutable",
     "modifier.kubejs.immutable.flavor": "Need to use \".copy()\"?",
     "modifier.kubejs.immutable.description": "Rejects any attempts to alter the tool's materials or traits",

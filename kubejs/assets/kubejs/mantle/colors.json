@@ -67,6 +67,9 @@
 
         "steel_clad_copper": "#C5C5C5",
 
+        "mainspring": "#ffea63",
+        "incomplete_mainspring": "#c9caba",
+
         "scrapped_tinker_metal": "#ffa263",
 
         "sea_alloy": "#C6DFD8",
@@ -127,6 +130,7 @@
         "glacial_strike": "#9dcff0",
 
         "artifact": "#fff020",
+        "incomplete": "#777777",
         "immutable": "#ff0000"
 
     }

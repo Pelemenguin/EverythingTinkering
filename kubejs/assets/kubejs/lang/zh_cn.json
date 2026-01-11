@@ -14,7 +14,7 @@
     "item.kubejs.icy_terracube_treasure_bag_no_hit": "寒冰黏土怪宝藏袋（无伤）",
 
     "item.kubejs.basic_mechanism": "基础构件",
-    "item.kubejs.incomplete_basic_mechanism": "基础构建（半成品）",
+    "item.kubejs.incomplete_basic_mechanism": "基础构件（半成品）",
 
     "item.kubejs.scrapped_tinker_metal": "废弃工匠金属",
 
@@ -183,6 +183,11 @@
     "material.kubejs.mainspring.flavor": "上紧发条！",
     "material.kubejs.mainspring.encyclopedia": "攻击后给予速度加成，最高可达40%",
 
+    "material.kubejs.incomplete_mainspring": "发条（半成品）",
+    "material.kubejs.incomplete_mainspring.format": "发条%s（半成品）",
+    "material.kubejs.incomplete_mainspring.flavor": "上紧发条中……",
+    "material.kubejs.incomplete_mainspring.encyclopedia": "上紧发条中……",
+
     "material.kubejs.scrapped_tinker_metal": "废弃工匠金属",
     "material.kubejs.scrapped_tinker_metal.flavor": "还能用？",
     "material.kubejs.scrapped_tinker_metal.encyclopedia": "提供一个耐久护盾，每级吸收20点耐久。完全消耗后，护盾需要30秒恢复",
@@ -317,6 +322,11 @@
     "modifier.kubejs.artifact.flavor": "在世界各地随机出现……",
     "modifier.kubejs.artifact.description": "该工具是在某个地方找到的工匠造物",
     "modifier.kubejs.artifact.remove": "你是不是打算移除一个用来表示一个工具是工匠造物的特性？",
+
+    "modifier.kubejs.incomplete": "半成品",
+    "modifier.kubejs.incomplete.flavor": "仅用作过渡！",
+    "modifier.kubejs.incomplete.description": "你不能使用这个材料",
+    "modifier.kubejs.incomplete.error": "你在尝试用一个未完成的部件制作工具？也许你应该先完成序列组装配方",
 
     "modifier.kubejs.immutable": "不可变",
     "modifier.kubejs.immutable.flavor": "要用“.copy()”吗？",

@@ -134,3 +134,31 @@ generator.generate("kubejs_mainspring", "resources", "outputs", [
     "tconstruct:head",
     "tconstruct:repair_kit"
 ])
+
+def darken_pixels(image: PIL.Image.Image, inner: dict[int, list[int]]) -> PIL.Image.Image:
+    for y in inner:
+        for x in inner[y]:
+            r, g, b, a = image.getpixel((x, y)) # type: ignore
+            r //= 3
+            g //= 3
+            b //= 3
+            newg = max(0, g - 50)
+            image.putpixel((x, y), (r, g, b, a))
+
+    return image
+
+def process_incomplete(image: PIL.Image.Image) -> PIL.Image.Image:
+
+    inner = inner_pixels(image)
+    image = andesite_alloy_palette.to_transformer()(image)
+    image = darken_pixels(image, inner)
+
+    return image
+
+generator = TextureGenerator(parts)
+generator.add_function(process_incomplete, "process", 1)
+generator.set_fallback(["rock"])
+generator.generate("kubejs_incomplete_mainspring", "resources", "outputs", [
+    "tconstruct:head",
+    "tconstruct:repair_kit"
+])
