@@ -18,5 +18,6 @@
             ],
             "url": "./.vscode/modpack.schema.recipe.json"
         }
-    ]
+    ],
+    "python.analysis.typeCheckingMode": "standard"
 }
