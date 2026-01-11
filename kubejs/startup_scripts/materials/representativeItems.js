@@ -165,6 +165,7 @@ let reprItems = {
     "tconstruct:treated_wood": "thermal:creosote_bucket",
     "kubejs:andesite_alloy": "create:andesite_alloy",
     "kubejs:steel_clad_copper": DISPLAY_AS_LARGE_PLATE,
+    "kubejs:mainspring": DISPLAY_AS_LARGE_PLATE,
 
     // ========== Adventure Line ========== //
 

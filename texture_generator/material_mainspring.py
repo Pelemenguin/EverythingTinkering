@@ -38,9 +38,9 @@ def inner_pixels(image: PIL.Image.Image) -> dict[int, list[int]]:
 
     width, height = image.size
 
-    for y in range(height):
+    for y in range(2, height - 2):
         results[y] = []
-        for x in range(width):
+        for x in range(2, width - 2):
             pixel = image.getpixel((x, y))
             if pixel[3] > 0: # type: ignore
 

@@ -176,6 +176,10 @@
     "material.kubejs.steel_clad_copper.flavor": "Is that reversed?",
     "material.kubejs.steel_clad_copper.encyclopedia": "Each Iron Plate applied +0.15 attack damage, +1% resistance, or 0.1 projectile power, depending on the tool type. 10 plates can be added per level. 1 plate is consumed per 100 durability loss",
 
+    "material.kubejs.mainspring": "Mainspring",
+    "material.kubejs.mainspring.flavor": "Wind up!",
+    "material.kubejs.mainspring.encyclopedia": "Gives movement speed boost after attacking. Can go up to 40% speed boost",
+
     "material.kubejs.scrapped_tinker_metal": "Scrapped Tinker Metal",
     "material.kubejs.scrapped_tinker_metal.flavor": "Still usable?",
     "material.kubejs.scrapped_tinker_metal.encyclopedia": "Provides a durability shield absorbing 20 durability points per level. After complete consumption, the shield takes 30 seconds to recover",

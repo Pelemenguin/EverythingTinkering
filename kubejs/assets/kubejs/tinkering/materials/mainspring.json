@@ -1,0 +1,8 @@
+{
+    "color": "FFffea63",
+    "fallbacks": [
+        "rock"
+    ],
+    "luminosity": 0,
+    "texture": "kubejs:mainspring"
+}

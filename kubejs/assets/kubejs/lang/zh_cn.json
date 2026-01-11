@@ -179,6 +179,10 @@
     "material.kubejs.steel_clad_copper.flavor": "好像做反了？",
     "material.kubejs.steel_clad_copper.encyclopedia": "每添加一个铁板增加0.15近战伤害，1%抗性，或0.1弹射物力量，取决于工具类型。每级最多添加10个铁板，工具每损失100点耐久度消耗一个铁板",
 
+    "material.kubejs.mainspring": "发条",
+    "material.kubejs.mainspring.flavor": "上紧发条！",
+    "material.kubejs.mainspring.encyclopedia": "攻击后给予速度加成，最高可达40%",
+
     "material.kubejs.scrapped_tinker_metal": "废弃工匠金属",
     "material.kubejs.scrapped_tinker_metal.flavor": "还能用？",
     "material.kubejs.scrapped_tinker_metal.encyclopedia": "提供一个耐久护盾，每级吸收20点耐久。完全消耗后，护盾需要30秒恢复",
