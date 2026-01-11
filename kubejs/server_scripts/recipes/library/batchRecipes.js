@@ -149,6 +149,70 @@ BatchMaterialRecipes.Deploying = {
     }
 };
 
+/**
+ * Batch Sequenced Assembly recipes.  
+ * 批量机械手使用配方。
+ * - - - - -
+ * @typedef {{
+ *     inputMaterial: Internal.MaterialVariantId,
+ *     outputMaterial: Internal.MaterialVariantId,
+ *     partStatTypes: Internal.Set<Internal.MaterialStatsId>,
+ *     sequence: (Internal.RecipesEventJS, transitionalItem: Internal.Ingredient, part: Internal.ToolPartItem | Internal.RepairKitItem) => Internal.RecipeJS[],
+ *     loops: number,
+ *     transitionalMaterial: Internal.MaterialVariantId,
+ * }} Annotation.BatchRecipes.SequencedAssembly
+ */
+BatchMaterialRecipes.SequencedAssembly = {
+    /**
+     * @type {{[recipeId: string]: Annotation.BatchRecipes.SequencedAssembly}}
+     */
+    ALL: {},
+    /**
+     * Cache for already created recipes.
+     * Mapping from material ids to sequenced assembly batch recipes.
+     * Used for recipe display in books.  
+     * 机械手使用配方的缓存。
+     * 将材料ID映射到机械手使用批量配方。
+     * 用于书籍中的配方显示。
+     * - - - - -
+     * @type {Internal.Map<Internal.MaterialId, Annotation.BatchRecipes.SequencedAssembly[]>}
+     */
+    CACHE: Utils.newMap(),
+    /**
+     * @param {string} recipeId 
+     * @param {Internal.MaterialVariantId} inputMaterial 
+     * @param {Internal.MaterialVariantId} outputMaterial 
+     * @param {Internal.MaterialVariantId} transitionalMaterial 
+     * @param {(event: Internal.RecipesEventJS, transitionalItem: Internal.ItemStack, part: Internal.ToolPartItem | Internal.RepairKitItem) => Internal.RecipeJS[]} sequence 
+     * @param {number} loops 
+     * @param {Internal.MaterialStatsId[]} partStatTypes 
+     */
+    register: (recipeId, inputMaterial, outputMaterial, transitionalMaterial, sequence, loops, partStatTypes) => {
+        let statTypeSet = new $HashSet();
+        for (let statType of partStatTypes) {
+            statTypeSet.add(statType);
+        }
+
+        let recipe = {
+            inputMaterial: inputMaterial,
+            outputMaterial: outputMaterial,
+            partStatTypes: statTypeSet,
+            sequence: sequence,
+            loops: loops,
+            transitionalMaterial: transitionalMaterial
+        };
+
+        BatchMaterialRecipes.SequencedAssembly.ALL[recipeId] = recipe;
+
+        // Cache for book display
+        let materialId = outputMaterial.getId();
+        if (!BatchMaterialRecipes.SequencedAssembly.CACHE.containsKey(materialId)) {
+            BatchMaterialRecipes.SequencedAssembly.CACHE.put(materialId, []);
+        }
+        BatchMaterialRecipes.SequencedAssembly.CACHE.get(materialId).push(recipe);
+    }
+};
+
 ServerEvents.recipes(event => {
 
     console.info(`Registering batch material recipes...`);
@@ -175,12 +239,40 @@ ServerEvents.recipes(event => {
 
             let inputPart = InputItem.of($MaterialIngredient["of(net.minecraft.world.level.ItemLike,slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](part, entry.inputMaterial), 1);
 
-            let recipe = event.getRecipes().create.deploying(
+            event.getRecipes().create.deploying(
                 [OutputItem.of(part.withMaterialForDisplay(entry.outputMaterial))],
                 [inputPart, InputItem.of(entry.usingItem, 1)]
             ).id(recipeId.toString() + "/" + part.getId().replace(":", "/"));
+        }
+    }
 
-            console.info(recipe.readOutputItem(recipe));
+    // Sequenced Assembly
+    for (let recipeId in BatchMaterialRecipes.SequencedAssembly.ALL) {
+        let entry = BatchMaterialRecipes.SequencedAssembly.ALL[recipeId];
+        console.info(`Registering sequenced assembly batch recipe: ${recipeId} (${entry.inputMaterial} -> ${entry.outputMaterial})`);
+        for (let part of global.CustomUtils.Tinker.TOOL_PARTS) {
+            if (!(part instanceof ToolPartItem)) {
+                if (!entry.partStatTypes.contains(REPAIR_KIT_STAT_ID)) {
+                    console.info(`Skipping ${part.getId()} as for stat type tconstruct:repair_kit`);
+                    continue;
+                }
+            } else {
+                if (!entry.partStatTypes.contains(part.getStatType())) {
+                    console.info(`Skipping ${part.getId()} for stat type ${part.getStatType()}`);
+                    continue;
+                }
+            }
+
+            let inputPart = InputItem.of($MaterialIngredient["of(net.minecraft.world.level.ItemLike,slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](part, entry.inputMaterial), 1);
+            let transitionalItem = part.withMaterialForDisplay(entry.transitionalMaterial);
+
+            event.getRecipes().create.sequenced_assembly(
+                [OutputItem.of(part.withMaterialForDisplay(entry.outputMaterial))],
+                inputPart,
+                entry.sequence(event, transitionalItem, part),
+                part.withMaterialForDisplay(entry.transitionalMaterial),
+                entry.loops
+            ).id(recipeId.toString() + "/" + part.getId().replace(":", "/"));
         }
     }
 

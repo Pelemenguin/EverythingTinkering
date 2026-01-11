@@ -15,11 +15,41 @@
     BatchMaterialRecipes
     $MaterialVariantId
     IngredientHelper
+    $MaterialIngredient
 */
 
-BatchMaterialRecipes.Deploying.register("tinkering/materials/steel_clad_copper/deploying",
-    $MaterialVariantId.tryParse("tconstruct:copper"),
-    $MaterialVariantId.tryParse("kubejs:steel_clad_copper"),
+BatchMaterialRecipes.Deploying.register("kubejs:tinkering/materials/steel_clad_copper/deploying",
+    $MaterialVariantId.parse("tconstruct:copper"),
+    $MaterialVariantId.parse("kubejs:steel_clad_copper"),
     IngredientHelper.tag("forge:plates/iron"),
     BatchMaterialRecipes.KnownStatGroups.FULL_MATERIAL
+);
+
+BatchMaterialRecipes.SequencedAssembly.register("kubejs:tinkering/material/mainspring/sequenced_assembly",
+    $MaterialVariantId.parse("kubejs:andesite_alloy"),
+    $MaterialVariantId.parse("kubejs:mainspring"),
+    $MaterialVariantId.parse("kubejs:incomplete_mainspring"),
+    (event, transitionalItem, part) => [
+        event.getRecipes().create.cutting(
+            [transitionalItem],
+            [transitionalItem]
+        ),
+        event.getRecipes().create.deploying(
+            [transitionalItem],
+            [transitionalItem, IngredientHelper.tag("forge:plates/gold")]
+        ),
+        event.getRecipes().create.cutting(
+            [transitionalItem],
+            [transitionalItem]
+        ),
+        event.getRecipes().create.deploying(
+            [transitionalItem],
+            [transitionalItem, $MaterialIngredient["of(net.minecraft.world.level.ItemLike,slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](part, $MaterialVariantId.parse("tconstruct:glass"))]
+        )
+    ],
+    1,
+    [
+        BatchMaterialRecipes.KnownStats.HEAD,
+        BatchMaterialRecipes.KnownStats.REPAIR_KIT
+    ]
 );
