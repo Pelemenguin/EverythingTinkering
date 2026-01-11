@@ -714,6 +714,8 @@ suffix = sys.argv[1].replace(":", "_")
 GRID_LIGHT = (255, 255, 255, 255)
 GRID_DARK = (216, 216, 216, 255)
 
+fallback = "_tconstruct_unknown"
+
 if len(sys.argv) >= 3:
     for i in sys.argv[2:]:
         if i.startswith("scaled:"):
@@ -723,6 +725,10 @@ if len(sys.argv) >= 3:
         if i == "dark":
             GRID_LIGHT = (95, 95, 95, 255)
             GRID_DARK = (63, 63, 63, 255)
+        if i.startswith("fallback:"):
+            fallback = "_" + i[9:].replace(":", "_").replace("#", "_")
+        if i == "no-fallback":
+            fallback = ""
 
 preview = PIL.Image.new("RGBA", (WIDTH * scale, HEIGHT * scale))
 
@@ -751,15 +757,16 @@ for d in OBJECTS:
             path = f"./resources/{k}_{suffix}.png"
         if not os.path.isfile(path):
             print(f"{path} not found, using fallback")
-            path = f"./resources/{k}_tconstruct_unknown.png"
+            path = f"./resources/{k}{fallback}.png"
 
         image = PIL.Image.open(path, "r")
 
-        to_paste = image.resize((image.width * scale, image.height * scale), PIL.Image.NEAREST)
+        to_paste = image.resize((image.width * scale, image.height * scale), PIL.Image.NEAREST).convert("RGBA")
         results.append((to_paste, coordinate))
         image.close()
 
-for (i, c) in results: preview.alpha_composite(i, c)
+for (i, c) in results:
+    preview.alpha_composite(i, c)
 
 for d in OVERLAYS:
     for k in d:
@@ -769,7 +776,7 @@ for d in OVERLAYS:
         coordinate = (scale * (rc[0] + offset[0]), scale * (rc[1] + offset[1]))
         path = f"resources/{k}.png"
         image = PIL.Image.open(path, "r")
-        to_paste = image.resize((image.width * scale, image.height * scale), PIL.Image.NEAREST)
+        to_paste = image.resize((image.width * scale, image.height * scale), PIL.Image.NEAREST).convert("RGBA")
         preview.alpha_composite(to_paste, coordinate)
         image.close()
 

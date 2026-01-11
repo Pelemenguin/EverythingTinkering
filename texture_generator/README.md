@@ -56,3 +56,8 @@ Disable sections deviding.
 
 Darken the background.
 Especially used for materials that have light colors.
+
+#### `fallback:<material_name>`, `no-fallback`
+
+Set a fallback material.
+Default situation is equivalent to `fallback:tconstruct:unknown`.
