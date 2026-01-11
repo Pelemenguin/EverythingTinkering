@@ -275,6 +275,10 @@
     "modifier.kubejs.cladding.resistance": "覆层额外抗性",
     "modifier.kubejs.cladding.projectile_power": "覆层额外弹射物力量",
 
+    "modifier.kubejs.kinetic_accumulator": "动力蓄能器",
+    "modifier.kubejs.kinetic_accumulator.flavor": "上紧发条加油跑！",
+    "modifier.kubejs.kinetic_accumulator.description": "攻击后跑得更快",
+
     "modifier.kubejs.tinker_coating": "工匠镀层",
     "modifier.kubejs.tinker_coating.flavor": "某个远古的工匠发明了这个镀层……",
     "modifier.kubejs.tinker_coating.description": "提供吸收耐久消耗的护盾，在完全消耗的一段时间后恢复",

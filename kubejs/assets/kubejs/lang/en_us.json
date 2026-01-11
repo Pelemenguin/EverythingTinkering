@@ -276,6 +276,10 @@
     "modifier.kubejs.cladding.resistance": "Cladding Extra Resistance",
     "modifier.kubejs.cladding.projectile_power": "Cladding Extra Proj. Power",
 
+    "modifier.kubejs.kinetic_accumulator": "Kinetic Accumulator",
+    "modifier.kubejs.kinetic_accumulator.flavor": "Wind it up!",
+    "modifier.kubejs.kinetic_accumulator.description": "Run faster after attacking",
+
     "modifier.kubejs.tinker_coating": "Tinker Coating",
     "modifier.kubejs.tinker_coating.flavor": "Some ancient tinker has invented this coating...",
     "modifier.kubejs.tinker_coating.description": "Provides a durability shield that absorbs damage to durability, which will recover after a period of complete consumption",
