@@ -26,6 +26,7 @@
     JavaUtils
     Item
     NonNullList
+    BookTextComponentData
 */
 
 /**
@@ -71,14 +72,14 @@ let getIndicatorToolPart = (referenceMaterials) => {
  * @param {number} value
  * @param {number} x
  * @param {number} y
- * @param {Internal.MaterialVariantId} referenceMaterial
+ * @param {Internal.MaterialVariantId[]} referenceMaterials
  * - - - - -
  * @returns {Internal.TinkerItemElement}
  */
-RecipeDisplay.materialValueIndicator = (variantId, value, x, y, referenceMaterial) => {
-    if (referenceMaterial === undefined) referenceMaterial = variantId;
-    
-    let result = new TinkerItemElement(getIndicatorToolPart([variantId, referenceMaterial]).withMaterial(variantId).withCount(value));
+RecipeDisplay.materialValueIndicator = (variantId, value, x, y, referenceMaterials) => {
+    if (referenceMaterials === undefined) referenceMaterials = [];
+
+    let result = new TinkerItemElement(getIndicatorToolPart([variantId].concat(referenceMaterials)).withMaterial(variantId).withCount(value));
     result.x = x;
     result.y = y;
     result.tooltip = Utils.newList();
@@ -334,7 +335,7 @@ RecipeDisplay.prototype = {
         arrowExtend.y = displayItem.y + 2;
         elements.add(arrowExtend);
 
-        let cast = RecipeDisplay.materialValueIndicator(recipe.getInput().getVariant(), 1, arrowExtend.x + 9, displayItem.y, recipe.getOutput().getVariant());
+        let cast = RecipeDisplay.materialValueIndicator(recipe.getInput().getVariant(), 1, arrowExtend.x + 9, displayItem.y, [recipe.getOutput().getVariant()]);
         elements.add(cast);
         
         let arrow = BookElement.image(new ImageData("jei:textures/jei/atlas/gui/recipe_arrow.png", 2, 0, 20, 16, 22, 16, 15, 12));
@@ -342,7 +343,7 @@ RecipeDisplay.prototype = {
         arrow.y = arrowExtend.y;
         elements.add(arrow);
 
-        elements.add(RecipeDisplay.materialValueIndicator(recipe.getOutput().getVariant(), 1, arrow.x + 21, cast.y, recipe.getInput().getVariant()));
+        elements.add(RecipeDisplay.materialValueIndicator(recipe.getOutput().getVariant(), 1, arrow.x + 21, cast.y, [recipe.getInput().getVariant()]));
 
         return 18;
     },
@@ -375,16 +376,132 @@ RecipeDisplay.prototype = {
         arrowExtend.y = displayItem.y + 2;
         elements.add(arrowExtend);
 
-        let cast = RecipeDisplay.materialValueIndicator(recipe.inputMaterial, 1, arrowExtend.x + 9, displayItem.y, recipe.outputMaterial);
+        let cast = RecipeDisplay.materialValueIndicator(recipe.inputMaterial, 1, arrowExtend.x + 9, displayItem.y, [recipe.outputMaterial]);
         elements.add(cast);
-        
+
         let arrow = BookElement.image(new ImageData("jei:textures/jei/atlas/gui/recipe_arrow.png", 2, 0, 20, 16, 22, 16, 15, 12));
         arrow.x = cast.x + 16;
         arrow.y = arrowExtend.y;
         elements.add(arrow);
 
-        elements.add(RecipeDisplay.materialValueIndicator(recipe.outputMaterial, 1, arrow.x + 21, displayItem.y, recipe.inputMaterial));
+        elements.add(RecipeDisplay.materialValueIndicator(recipe.outputMaterial, 1, arrow.x + 21, displayItem.y, [recipe.inputMaterial]));
 
         return 18;
-    }
+    },
+
+    /**
+     * 
+     * @param {Internal.ArrayList<Internal.BookElement>} elements 
+     * @param {Annotation.BatchRecipes.SequencedAssembly} recipe 
+     * @param {Internal.BookDataJS} book 
+     */
+    sequencedAssembly: function(elements, recipe, book) {
+        let icon = new TinkerItemElement("create:precision_mechanism");
+        icon.x = this.x;
+        icon.y = this.y;
+        icon.tooltip = Utils.newList();
+        icon.tooltip.add(Component.translatable("book.kubejs.material.recipes.sequenced_assembly.name"));
+        icon.tooltip.add(Component.translatable("book.kubejs.material.recipes.sequenced_assembly.description").gray());
+        elements.add(icon);
+
+        let loop_indicator = BookElement.image(new ImageData("create:textures/gui/icons.png", 64, 80, 16, 16, 256, 256, 16, 16, 0x777777));
+        loop_indicator.x = icon.x + 16;
+        loop_indicator.y = icon.y;
+        elements.add(loop_indicator);
+
+        let loop_count_text = BookTextComponentData.of(Component.literal(recipe.loops.toFixed()).white());
+        loop_count_text.dropShadow = true;
+        loop_count_text.scale = 1.5;
+        loop_count_text.tooltips = [Component.translatable("book.kubejs.material.recipes.sequenced_assembly.loops", recipe.loops.toFixed())];
+
+        let loop_count = BookElement.textComponent(
+            loop_indicator.x + 8 - book.getFontRenderer().width(recipe.loops.toFixed()) * 0.5,
+            loop_indicator.y + 2,
+            16,
+            9,
+            [loop_count_text]
+        );
+        elements.add(loop_count);
+
+        let inputPart = RecipeDisplay.materialValueIndicator(recipe.inputMaterial, 1, loop_indicator.x + 32, icon.y, [recipe.outputMaterial]);
+        elements.add(inputPart);
+
+        let arrow = BookElement.image(new ImageData("jei:textures/jei/atlas/gui/recipe_arrow.png", 2, 0, 20, 16, 22, 16, 15, 12));
+        arrow.x = inputPart.x + 24;
+        arrow.y = inputPart.y + 2;
+        elements.add(arrow);
+
+        elements.add(RecipeDisplay.materialValueIndicator(recipe.outputMaterial, 1, arrow.x + 24, inputPart.y, [recipe.inputMaterial]));
+
+        // Show "Seq." before sequence display
+        let sequence_indicator = BookElement.text(
+            icon.x,
+            icon.y + 20,
+            40,
+            9,
+            BookTextData.fromComponent(Component.translatable("book.kubejs.material.recipes.sequenced_assembly.sequence").gray())
+        );
+        elements.add(sequence_indicator);
+
+        let curSequenceX = icon.x + 24;
+
+        /**
+         * @type {Parameters<Annotation.BatchRecipes.SequencedAssembly["displayRecipes"]>[0]}
+         */
+        let utils = {
+            cutting: () => {
+                let cutter = new TinkerItemElement("create:mechanical_saw");
+                cutter.x = curSequenceX;
+                cutter.y = icon.y + 16;
+                cutter.tooltip = Utils.newList();
+                cutter.tooltip.add(Component.translatable("book.kubejs.material.recipes.sequenced_assembly.cutting"));
+                elements.add(cutter);
+
+                curSequenceX += 16;
+            },
+            deployingIngredient: (ingredient) => {
+                let deployer = new TinkerItemElement("create:deployer");
+                deployer.x = curSequenceX;
+                deployer.y = icon.y + 16;
+                deployer.tooltip = Utils.newList();
+                deployer.scale(0.5);
+                deployer.tooltip.add(Component.translatable("book.kubejs.material.recipes.sequenced_assembly.deploying", ingredient.getFirst().getHoverName()));
+                elements.add(deployer);
+
+                let deployerItem = new TinkerItemElement(Item.of("minecraft:air"));
+                deployerItem.x = deployer.x;
+                deployerItem.y = deployer.y;
+                deployerItem.itemCycle = NonNullList.of(
+                    ingredient.getFirst().withCount(1),
+                    ingredient.getDisplayStacks().toArray(),
+                );
+                deployerItem.noTooltip = true;
+                elements.add(deployerItem);
+
+                curSequenceX += 16;
+            },
+            deployingMaterial: (material) => {
+                let deployer = new TinkerItemElement("create:deployer");
+                deployer.x = curSequenceX;
+                deployer.y = icon.y + 16;
+                deployer.tooltip = Utils.newList();
+                deployer.scale(0.5);
+                deployer.tooltip.add(Component.translatable("book.kubejs.material.recipes.sequenced_assembly.deploying",
+                    Component.translatable("book.kubejs.material.recipes.corresponding_part",
+                        RecipeDisplay.translationFallback('material.' + material.toString().replace(':', '.').replace('#', '.')).underlined()
+                    )
+                ));
+                elements.add(deployer);
+
+                let part = RecipeDisplay.materialValueIndicator(material, 1, curSequenceX, deployer.y, [recipe.inputMaterial, recipe.outputMaterial]);
+                part.noTooltip = true;
+                elements.add(part);
+
+                curSequenceX += 16;
+            }
+        };
+        recipe.displayRecipes(utils);
+
+        return 36;
+    },
 };

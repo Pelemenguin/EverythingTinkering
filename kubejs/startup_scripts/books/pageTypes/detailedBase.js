@@ -43,35 +43,38 @@ const DetailedBase = {
     /**
      * @param {number} startH
      * @param {number} beginNumber
-     * @param {RecipeDisplay} display
+     * @param {RecipeDisplay} displayer
      * @param {Internal.ArrayList<Internal.BookElement>[]} pages
      * @param {Internal.MaterialId} materialId
      * @param {(infer R)[]} recipes
      * @ param {(elements: Internal.List<Internal.BookElement>, recipe: (infer R)) => number} recipeDrawer
      * @param {string} recipeDrawer
+     * @param {Internal.BookDataJS} book
      * - - - - -
      * @returns {{newH: number, newRecipeCount: number}}
      */
-    recipeDrawerBase: (startH, beginNumber, displayer, pages, materialId, recipes, recipeDrawer) => {
+    recipeDrawerBase: (startH, beginNumber, displayer, pages, materialId, recipes, recipeDrawer, book) => {
         let page = pages.length - 1;
         let tempList = Utils.newList();
         let totalRecipes = beginNumber;
         let h = startH;
         recipes.forEach(recipe => {
-            h += displayer[recipeDrawer](tempList, recipe);
+            let previousH = h;
+            h += displayer[recipeDrawer](tempList, recipe, book);
             totalRecipes ++;
-            if (h > DetailedBase.MAX_HEIGHT) {
+            if (h > DetailedBase.MAX_HEIGHT + RecipeDisplay.DEFAULT_Y) {
                 page += 1;
                 displayer.y = RecipeDisplay.DEFAULT_Y;
                 tempList.clear();
-                h = displayer[recipeDrawer](tempList, recipe);
+                previousH = RecipeDisplay.DEFAULT_Y;
+                h = displayer[recipeDrawer](tempList, recipe, book);
                 pages.push(Utils.newList());
             }
             let recipeNumber = BookTextData.literal(totalRecipes.toFixed());
             recipeNumber.color = "gray";
-            pages[page].add(BookElement.text(totalRecipes > 99 ? -2 : 0, h + 1, 16, 16, [recipeNumber]));
+            pages[page].add(BookElement.text(totalRecipes > 99 ? -2 : 0, previousH + 1, 16, 16, [recipeNumber]));
             pages[page].addAll(tempList);
-            displayer.y = h + RecipeDisplay.DEFAULT_Y;
+            displayer.y = h;
         });
         return {
             newH: h,
@@ -83,10 +86,11 @@ const DetailedBase = {
      * @param {Internal.ArrayList<Internal.BookElement>} elements 
      * @param {Internal.MaterialId} materialId 
      * @param {number} curPage
+     * @param {Internal.BookDataJS} book
      */
-    drawRecipe: (elements, materialId, curPage) => {
+    drawRecipe: (elements, materialId, curPage, book) => {
         let displayer = new RecipeDisplay(undefined, undefined);
-        let h = 0;
+        let h = 18;
         /** @type {Internal.ArrayList<Internal.BookElement>[]} */
         let recipePages = [Utils.newList()];
         let totalRecipes = 0;
@@ -109,7 +113,7 @@ const DetailedBase = {
                     recipes.push(recipe);
                 }
             });
-            let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, recipes, "partBuilder");
+            let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, recipes, "partBuilder", book);
             h = newH;
             totalRecipes = newRecipeCount;
         });
@@ -121,7 +125,7 @@ const DetailedBase = {
             materialCastingRecipes.put(variant, MaterialCastingLookup.getCastingFluids(variant).toArray());
         });
         materialCastingRecipes.forEach((variant, recipes) => {
-            let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, recipes, "casting");
+            let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, recipes, "casting", book);
             h = newH;
             totalRecipes = newRecipeCount;
         });
@@ -137,7 +141,7 @@ const DetailedBase = {
                 if (result) drawnCompositeRecipes.push(hashCode);
                 return result;
             });
-            let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, recipes, "composite");
+            let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, recipes, "composite", book);
             recipes = drawnCompositeRecipes.concat(recipes);
             h = newH;
             totalRecipes = newRecipeCount;
@@ -146,7 +150,15 @@ const DetailedBase = {
         // Draw deploying recipes
         let deployingRecipes = global.BatchMaterialRecipes.Deploying.CACHE.get(materialId);
         if (deployingRecipes != null) {
-            let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, deployingRecipes, "deploying");
+            let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, deployingRecipes, "deploying", book);
+            h = newH;
+            totalRecipes = newRecipeCount;
+        }
+
+        // Draw sequenced assembly recipes
+        let sequencedAssemblyRecipes = global.BatchMaterialRecipes.SequencedAssembly.CACHE.get(materialId);
+        if (sequencedAssemblyRecipes != null) {
+            let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, sequencedAssemblyRecipes, "sequencedAssembly", book);
             h = newH;
             totalRecipes = newRecipeCount;
         }
@@ -304,7 +316,7 @@ const DetailedBase = {
             defaultMaterials
         } = pageArguments;
 
-        DetailedBase.drawRecipe(elements, materialId, 0);
+        DetailedBase.drawRecipe(elements, materialId, 0, book);
 
         // elements.add(isEncyclopedia
         //     ? BookElement.textComponent(0, 92, BookScreen.PAGE_WIDTH - 18, BookScreen.PAGE_HEIGHT - 90,

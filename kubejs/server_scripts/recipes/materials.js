@@ -44,10 +44,16 @@ BatchMaterialRecipes.SequencedAssembly.register("kubejs:tinkering/material/mains
         ),
         event.getRecipes().create.deploying(
             [transitionalItem],
-            [transitionalItem, $MaterialIngredient["of(net.minecraft.world.level.ItemLike,slimeknights.tconstruct.library.materials.definition.MaterialVariantId)"](part, $MaterialVariantId.parse("tconstruct:glass"))]
+            [transitionalItem, IngredientHelper.tag("forge:glass_panes")]
         )
     ],
     1,
+    (utils) => {
+        utils.cutting();
+        utils.deployingIngredient(IngredientHelper.tag("forge:plates/gold"));
+        utils.cutting();
+        utils.deployingIngredient(IngredientHelper.tag("forge:glass_panes"));
+    },
     [
         BatchMaterialRecipes.KnownStats.HEAD,
         BatchMaterialRecipes.KnownStats.REPAIR_KIT

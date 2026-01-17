@@ -359,6 +359,7 @@
     "book.kubejs.material.tool.missing": "No parts of %1$s can use %2$s",
 
     "book.kubejs.material.recipes.material_value_indicator": "%1$s Material Value of %2$s",
+    "book.kubejs.material.recipes.corresponding_part": "Corresponding Part of %s",
 
     "book.kubejs.material.recipes.missing": "No recipes available for this material",
     "book.kubejs.material.recipes.count": "%s Recipes Total",
@@ -383,6 +384,13 @@
 
     "book.kubejs.material.recipes.deploying.name": "Deploying",
     "book.kubejs.material.recipes.deploying.description": "Craftable from deploying items by Deployers",
+
+    "book.kubejs.material.recipes.sequenced_assembly.name": "Sequenced Assembly",
+    "book.kubejs.material.recipes.sequenced_assembly.description": "Craftable by complex Sequenced Assembly recipes",
+    "book.kubejs.material.recipes.sequenced_assembly.sequence": "Seq.",
+    "book.kubejs.material.recipes.sequenced_assembly.loops": "Repeat Sequence %s Times",
+    "book.kubejs.material.recipes.sequenced_assembly.cutting": "Cut with Saw",
+    "book.kubejs.material.recipes.sequenced_assembly.deploying": "Deploy %s",
 
         "_comment_controls": " ----- Controls ----- ",
 

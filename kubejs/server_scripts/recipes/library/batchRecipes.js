@@ -157,9 +157,14 @@ BatchMaterialRecipes.Deploying = {
  *     inputMaterial: Internal.MaterialVariantId,
  *     outputMaterial: Internal.MaterialVariantId,
  *     partStatTypes: Internal.Set<Internal.MaterialStatsId>,
- *     sequence: (Internal.RecipesEventJS, transitionalItem: Internal.Ingredient, part: Internal.ToolPartItem | Internal.RepairKitItem) => Internal.RecipeJS[],
+ *     sequence: (event: Internal.RecipesEventJS, transitionalItem: Internal.Ingredient, part: Internal.ToolPartItem | Internal.RepairKitItem) => Internal.RecipeJS[],
  *     loops: number,
  *     transitionalMaterial: Internal.MaterialVariantId,
+ *     displayRecipes: (utils: {
+ *         cutting: () => void,
+ *         deployingIngredient: (ingredient: Internal.Ingredient) => void,
+ *         deployingMaterial: (material: Internal.MaterialVariantId) => void,
+ *     }) => void,
  * }} Annotation.BatchRecipes.SequencedAssembly
  */
 BatchMaterialRecipes.SequencedAssembly = {
@@ -185,9 +190,10 @@ BatchMaterialRecipes.SequencedAssembly = {
      * @param {Internal.MaterialVariantId} transitionalMaterial 
      * @param {(event: Internal.RecipesEventJS, transitionalItem: Internal.ItemStack, part: Internal.ToolPartItem | Internal.RepairKitItem) => Internal.RecipeJS[]} sequence 
      * @param {number} loops 
+     * @param {Annotation.BatchRecipes.SequencedAssembly["displayRecipes"]} displayRecipes 
      * @param {Internal.MaterialStatsId[]} partStatTypes 
      */
-    register: (recipeId, inputMaterial, outputMaterial, transitionalMaterial, sequence, loops, partStatTypes) => {
+    register: (recipeId, inputMaterial, outputMaterial, transitionalMaterial, sequence, loops, displayRecipes, partStatTypes) => {
         let statTypeSet = new $HashSet();
         for (let statType of partStatTypes) {
             statTypeSet.add(statType);
@@ -199,7 +205,8 @@ BatchMaterialRecipes.SequencedAssembly = {
             partStatTypes: statTypeSet,
             sequence: sequence,
             loops: loops,
-            transitionalMaterial: transitionalMaterial
+            transitionalMaterial: transitionalMaterial,
+            displayRecipes: displayRecipes
         };
 
         BatchMaterialRecipes.SequencedAssembly.ALL[recipeId] = recipe;

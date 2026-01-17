@@ -362,6 +362,7 @@
     "book.kubejs.material.tool.missing": "%1$s上没有可以使用%2$s的部件",
 
     "book.kubejs.material.recipes.material_value_indicator": "%1$s 材料值的%2$s",
+    "book.kubejs.material.recipes.corresponding_part": "%s的对应部件",
 
     "book.kubejs.material.recipes.missing": "该材料缺少配方",
     "book.kubejs.material.recipes.count": "共 %s 个配方",
@@ -386,6 +387,13 @@
 
     "book.kubejs.material.recipes.deploying.name": "使用",
     "book.kubejs.material.recipes.deploying.description": "能通过机械手对部件使用物品制作",
+
+    "book.kubejs.material.recipes.sequenced_assembly.name": "序列组装",
+    "book.kubejs.material.recipes.sequenced_assembly.description": "能通过复杂的序列组装配方制作",
+    "book.kubejs.material.recipes.sequenced_assembly.sequence": "序列",
+    "book.kubejs.material.recipes.sequenced_assembly.loops": "该序列需要重复 %s 次",
+    "book.kubejs.material.recipes.sequenced_assembly.cutting": "用动力锯切割",
+    "book.kubejs.material.recipes.sequenced_assembly.deploying": "安装 %s",
 
         "_comment_controls": " ----- 控制 ----- ",
 
