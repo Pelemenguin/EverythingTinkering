@@ -2,6 +2,7 @@ from _create_settings import *
 from TextureGenerator import *
 from _shared import Palette
 import random
+import colorsys
 
 andesite_alloy_palette = Palette.from_argb_string_palette({
     0: "FF000000",
@@ -120,7 +121,7 @@ def draw_glass(image: PIL.Image.Image) -> PIL.Image.Image:
         if x%4 == 3: continue
         for y in range(image.height):
             if (x-y-((x//4)%2))%8 == 0:
-                if image.getpixel((x, y))[3] > 0:
+                if image.getpixel((x, y))[3] > 0: # type: ignore
                     result.putpixel((x, y), glass_palette.transform_pixel((102, 102, 102, 255)))
 
     return result
@@ -166,13 +167,20 @@ def large_plate_handling():
 large_plate_handling()
 
 def darken_pixels(image: PIL.Image.Image, inner: dict[int, list[int]]) -> PIL.Image.Image:
+
     for y in inner:
         for x in inner[y]:
             r, g, b, a = image.getpixel((x, y)) # type: ignore
-            r //= 3
-            g //= 3
-            b //= 3
-            newg = max(0, g - 50)
+
+            h, s, v = colorsys.rgb_to_hsv(r / 255, g / 255, b / 255)
+            s *= 1.2
+            v *= 0.3
+
+            fr, fb, fg = colorsys.hsv_to_rgb(h, s, v)
+            r = int(fr * 255)
+            g = int(fg * 255)
+            b = int(fb * 255)
+
             image.putpixel((x, y), (r, g, b, a))
 
     return image
