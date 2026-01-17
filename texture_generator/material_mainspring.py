@@ -100,17 +100,28 @@ def draw_spring(image: PIL.Image.Image, inner: dict[int, list[int]]) -> PIL.Imag
 
     return image
 
-def draw_glass(image: PIL.Image.Image, inner: dict[int, list[int]]) -> PIL.Image.Image:
+# def draw_glass(image: PIL.Image.Image, inner: dict[int, list[int]]) -> PIL.Image.Image:
 
+    # result = PIL.Image.new("RGBA", image.size)
+
+    # for y in inner:
+        # x_list = inner[y]
+        # if (len(x_list) == 0): continue
+
+        # for x in x_list:
+            # if (x-y)%8 == 0:
+                # result.putpixel((x, y), glass_palette.transform_pixel((102, 102, 102, 255))) # type: ignore
+
+    # return result
+
+def draw_glass(image: PIL.Image.Image) -> PIL.Image.Image:
     result = PIL.Image.new("RGBA", image.size)
-
-    for y in inner:
-        x_list = inner[y]
-        if (len(x_list) == 0): continue
-
-        for x in x_list:
-            if (x-y)%8 <= 1:
-                result.putpixel((x, y), glass_palette.transform_pixel((102, 102, 102, 255))) # type: ignore
+    for x in range(image.width):
+        if x%4 == 3: continue
+        for y in range(image.height):
+            if (x-y-((x//4)%2))%8 == 0:
+                if image.getpixel((x, y))[3] > 0:
+                    result.putpixel((x, y), glass_palette.transform_pixel((102, 102, 102, 255)))
 
     return result
 
@@ -121,7 +132,7 @@ def process(image: PIL.Image.Image) -> PIL.Image.Image:
     base = andesite_alloy_palette.to_transformer()(image.copy())
     base = draw_spring(base, inner)
 
-    overlay = draw_glass(image.copy(), inner)
+    overlay = draw_glass(image.copy())
 
     base.alpha_composite(overlay.convert("RGBA"))
 
@@ -134,6 +145,25 @@ generator.generate("kubejs_mainspring", "resources", "outputs", [
     "tconstruct:head",
     "tconstruct:repair_kit"
 ])
+
+def large_plate_handling():
+
+    PATH = "outputs/item/tool/parts/large_plate_kubejs_mainspring.png"
+
+    image = PIL.Image.open(PATH)
+    image.putpixel((8, 8), (0, 255, 0, 255))
+    
+    for p in (
+        (5, 5), (5, 6), (6, 5), (6, 6),
+        (9, 5), (9, 6), (10, 5), (10, 6),
+        (7, 7), (8, 7), (6, 8), (7, 8), (8, 8), (9, 8),
+        (6, 9), (7, 9), (8, 9), (9, 9), (6, 10), (9, 10)
+    ): image.putpixel(p, andesite_alloy_palette.transform_pixel((102, 102, 102, 255)))
+    
+    image.save(PATH)
+    image.close()
+
+large_plate_handling()
 
 def darken_pixels(image: PIL.Image.Image, inner: dict[int, list[int]]) -> PIL.Image.Image:
     for y in inner:
