@@ -605,6 +605,12 @@
     "quest.technology_chapters.1.materials.andesite_alloy.description": "&e安山合金&6材料制作的工具能够&e攻击一条直线上的目标&6。",
     "quest.technology_chapters.1.materials.andesite_alloy.task": "任意安山合金部件",
 
+    "quest.technology_chapters.1.materials.steel_clad_copper.description": "&6机械手能够将执行&e物品使用&7（Deploying）&6配方，将一个物品&e安装到另一个物品上&6。而有些材料可以通过对已有的部件&e安装物品&6制作。\n\n&6尝试为&e铜部件&6安装一个&e铁板&7（Iron Sheet，Iron Plate）&6吧！\n\n能通过向使用了钢覆铜材料的工具&e右键添加铁板&6的方式获取额外加成。",
+    "quest.technology_chapters.1.materials.steel_clad_copper.task": "任意钢覆铜部件",
+
+    "quest.technology_chapters.1.materials.mainspring.description": "&6对一个物品&e多次使用机械动力的机械加工&6的过程被称为&e序列组装&7（Sequenced Assembly）&6。\n\n尝试制作一个&e发条&7（Mainspring）&6部件。\n\n&e发条&6材料能够在进行攻击之后给予你&e额外的移动速度&6。\n\n&c&l注意：&r&e发条&6仅支持&e顶端部件&6。",
+    "quest.technology_chapters.1.materials.mainspring.task": "任意发条部件",
+
         "_comment_recipes": " ----- 配方 ----- ",
     
     "pattern.kubejs.mechanism": "构件",

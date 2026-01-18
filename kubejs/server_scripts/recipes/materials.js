@@ -15,7 +15,6 @@
     BatchMaterialRecipes
     $MaterialVariantId
     IngredientHelper
-    $MaterialIngredient
 */
 
 BatchMaterialRecipes.Deploying.register("kubejs:tinkering/materials/steel_clad_copper/deploying",
@@ -29,7 +28,7 @@ BatchMaterialRecipes.SequencedAssembly.register("kubejs:tinkering/material/mains
     $MaterialVariantId.parse("kubejs:andesite_alloy"),
     $MaterialVariantId.parse("kubejs:mainspring"),
     $MaterialVariantId.parse("kubejs:incomplete_mainspring"),
-    (event, transitionalItem, part) => [
+    (event, transitionalItem, _part) => [
         event.getRecipes().create.cutting(
             [transitionalItem],
             [transitionalItem]

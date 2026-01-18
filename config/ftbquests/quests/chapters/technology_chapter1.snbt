@@ -288,8 +288,8 @@
 				type: "item"
 			}]
 			title: "{quest.technology_chapters.1.encased_fan.title}"
-			x: 6.5d
-			y: -2.0d
+			x: 6.0d
+			y: -1.0d
 		}
 		{
 			dependencies: ["4A2993793923C62D"]
@@ -472,6 +472,67 @@
 			}]
 			title: "{material.kubejs.andesite_alloy}"
 			x: 0.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["4028AB7CCF3C0BCA"]
+			description: ["{quest.technology_chapters.1.materials.steel_clad_copper.description}"]
+			icon: {
+				Count: 1
+				id: "tconstruct:large_plate"
+				tag: {
+					Material: "kubejs:steel_clad_copper"
+				}
+			}
+			id: "003EF6D341CD2E08"
+			optional: true
+			shape: "hexagon"
+			tasks: [{
+				id: "06D37BD6F7ABBF23"
+				item: {
+					Count: 1
+					id: "ftbfiltersystem:smart_filter"
+					tag: {
+						"ftbfiltersystem:filter": "custom(PartMaterialTest/kubejs:steel_clad_copper)"
+					}
+				}
+				title: "{quest.technology_chapters.1.materials.steel_clad_copper.task}"
+				type: "item"
+			}]
+			title: "{material.kubejs.steel_clad_copper}"
+			x: 7.0d
+			y: 2.0d
+		}
+		{
+			dependencies: [
+				"4028AB7CCF3C0BCA"
+				"360AD6BD6D625E8B"
+			]
+			description: ["{quest.technology_chapters.1.materials.mainspring.description}"]
+			id: "6E6838E75C717AB6"
+			optional: true
+			shape: "hexagon"
+			tasks: [{
+				icon: {
+					Count: 1
+					id: "tconstruct:large_plate"
+					tag: {
+						Material: "kubejs:mainspring"
+					}
+				}
+				id: "7CDFD2DBC1F28564"
+				item: {
+					Count: 1
+					id: "ftbfiltersystem:smart_filter"
+					tag: {
+						"ftbfiltersystem:filter": "custom(PartMaterialTest/kubejs:mainspring)"
+					}
+				}
+				title: "{quest.technology_chapters.1.materials.mainspring.task}"
+				type: "item"
+			}]
+			title: "{material.kubejs.mainspring}"
+			x: 8.0d
 			y: -2.0d
 		}
 	]
