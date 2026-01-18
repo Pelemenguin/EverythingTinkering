@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:jigsaw",
+    "biomes": "#minecraft:is_overworld",
+    "step": "underground_structures",
+    "terrain_adaptation": "encapsulate",
+    "spawn_overrides": {},
+    "start_pool": "kubejs:abandoned_tinker_lab/entrance",
+    "size": 7,
+    "start_height": {
+        "type": "minecraft:very_biased_to_bottom",
+        "min_inclusive": {
+            "absolute": -32
+        },
+        "max_inclusive": {
+            "absolute": -16
+        },
+        "inner": 1
+    },
+    "start_jigsaw_name": "kubejs:lobby",
+    "max_distance_from_center": 128,
+    "use_expansion_hack": true
+}

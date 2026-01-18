@@ -61,6 +61,17 @@
             "version": "6.0.8"
         },
         {
+            "name": "Create Deco",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/create-deco",
+            "author": "talrey",
+            "curse_id": {
+                "project": 509285,
+                "file": 6373226
+            },
+            "mod_id": "createdeco",
+            "version": "2.0.3-1.20.1-forge"
+        },
+        {
             "name": "MmmMmmMmmMmm (Target Dummy)",
             "url": "https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm",
             "author": "MehVahdJukaar",

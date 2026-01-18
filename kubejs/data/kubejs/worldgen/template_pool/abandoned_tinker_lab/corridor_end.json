@@ -1,0 +1,44 @@
+{
+    "fallback": "kubejs:abandoned_tinker_lab/corridor_wall_end",
+    "elements": [
+        {
+            "weight": 4,
+            "element": {
+                "element_type": "minecraft:single_pool_element",
+                "projection": "rigid",
+                "location": "kubejs:abandoned_tinker_lab/corridor/corridor_1",
+                "processors": [
+                    {
+                        "processor_type": "minecraft:nop"
+                    }
+                ]
+            }
+        },
+        {
+            "weight": 1,
+            "element": {
+                "element_type": "minecraft:single_pool_element",
+                "projection": "rigid",
+                "location": "kubejs:abandoned_tinker_lab/corridor/wall_end",
+                "processors": [
+                    {
+                        "processor_type": "minecraft:nop"
+                    }
+                ]
+            }
+        },
+        {
+            "weight": 2,
+            "element": {
+                "element_type": "minecraft:single_pool_element",
+                "projection": "rigid",
+                "location": "kubejs:abandoned_tinker_lab/corridor/intersection_1",
+                "processors": [
+                    {
+                        "processor_type": "minecraft:nop"
+                    }
+                ]
+            }
+        }
+    ]
+}

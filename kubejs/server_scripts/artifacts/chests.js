@@ -57,3 +57,19 @@ TINKERS_WORKSHOP.createArtifact("non_classic_pickaxe", Item.getItem("tconstruct:
     persistent.putInt("kubejs:tinker_coating_shield", 20);
     persistent.putInt("kubejs:tinker_coating_recovery", 601);
 });
+
+(() => {
+
+    let ABANDONED_TINKER_LAB = CHEST_LOOT_ARTIFACT.createArtifactGroup("abandoned_tinker_lab");
+
+    let DPS_TEST = ABANDONED_TINKER_LAB.createArtifactGroup("dps_test");
+
+    DPS_TEST.createArtifact("1", Item.getItem("tconstruct:sword"), TiCToolDefinitions.SWORD, [
+        "tconstruct:rock#stone",
+        "tconstruct:rock#stone",
+        "tconstruct:rock#stone",
+    ]);
+
+})();
+
+

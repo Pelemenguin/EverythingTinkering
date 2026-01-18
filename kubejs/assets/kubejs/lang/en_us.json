@@ -344,8 +344,11 @@
     "item.kubejs.artifact.chest.tinkers_workshop.classic_pickaxe.name": "Classic Pickaxe",
     "item.kubejs.artifact.chest.tinkers_workshop.classic_pickaxe.lore": "Isn't It iron pick?",
 
-    "item.kubejs.artifact.chest.tinkers_workshop.non_classic_pickaxe.name": "Non-Classis Pickaxe",
+    "item.kubejs.artifact.chest.tinkers_workshop.non_classic_pickaxe.name": "Non-Classic Pickaxe",
     "item.kubejs.artifact.chest.tinkers_workshop.non_classic_pickaxe.lore": "Is it iron pick?",
+
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.1.name": "DPS Test #1",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.1.desc": "Average result: 11.1 DPS",
 
     "item.kubejs.artifact.boss_no_hit.icy_terracube.name": "Glacial Strike",
     "item.kubejs.artifact.boss_no_hit.icy_terracube.lore": "Ever imagined an iceberg jumping meters high to smash you?",

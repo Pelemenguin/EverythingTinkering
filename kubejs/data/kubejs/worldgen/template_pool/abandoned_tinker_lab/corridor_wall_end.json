@@ -1,0 +1,31 @@
+{
+    "fallback": "minecraft:empty",
+    "elements": [
+        {
+            "weight": 1,
+            "element": {
+                "element_type": "minecraft:single_pool_element",
+                "projection": "rigid",
+                "location": "kubejs:abandoned_tinker_lab/corridor/wall_end",
+                "processors": [
+                    {
+                        "processor_type": "minecraft:nop"
+                    }
+                ]
+            }
+        },
+        {
+            "weight": 1,
+            "element": {
+                "element_type": "minecraft:single_pool_element",
+                "projection": "rigid",
+                "location": "kubejs:abandoned_tinker_lab/corridor/wall_very_end",
+                "processors": [
+                    {
+                        "processor_type": "minecraft:nop"
+                    }
+                ]
+            }
+        }
+    ]
+}

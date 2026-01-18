@@ -3,19 +3,34 @@
 <!-- Generated from `build.py` -->
 - [Architectury API](https://www.curseforge.com/minecraft/mc-mods/architectury-api) *9.2.14* by shedaniel
 - [ClassJS](https://www.curseforge.com/minecraft/mc-mods/classjs) *0.1-alpha.4* by Pelemenguin
-- [Create](https://www.curseforge.com/minecraft/mc-mods/create) *6.0.4* by simibubi
+- [CoFH Core](https://www.curseforge.com/minecraft/mc-mods/cofh-core) *11.0.2* by TeamCoFH
+- [Create](https://www.curseforge.com/minecraft/mc-mods/create) *6.0.8* by simibubi
+- [Create Deco](https://www.curseforge.com/minecraft/mc-mods/create-deco) *2.0.3-1.20.1-forge* by talrey
 - [MmmMmmMmmMmm (Target Dummy)](https://www.curseforge.com/minecraft/mc-mods/mmmmmmmmmmmm) *1.20-2.0.6* by MehVahdJukaar
 - [EntityJS](https://www.curseforge.com/minecraft/mc-mods/entityjs) *0.6.3-1.20.1* by Liopyu
 - [EventJS](https://www.curseforge.com/minecraft/mc-mods/eventjs) *1.4.0* by ZZZank
+- [FTB Filter System](https://www.curseforge.com/minecraft/mc-mods/ftb-filter-system) *20.0.1* by FTB
+- [FTB Library (Forge)](https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge) *2001.2.10* by FTB
+- [FTB Quests (NeoForge)](https://www.curseforge.com/minecraft/mc-mods/ftb-quests-forge) *2001.4.17* by FTB
+- [FTB Teams (NeoForge)](https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge) *2001.3.1* by FTB
+- [FTB XMod Compat](https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat) *2.1.3* by FTB
+- [FTB Quest Localizer](https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge) *3.2.2* by Litchiiiiiii
 - [GeckoLib](https://www.curseforge.com/minecraft/mc-mods/geckolib) *4.8.2* by Gecko
 - [Jade 🔍](https://www.curseforge.com/minecraft/mc-mods/jade) *${file.jarVersion}* by Snownee
 - [Just Enough Items (JEI)](https://www.curseforge.com/minecraft/mc-mods/jei) *15.20.0.106* by mezz
+- [KubeJS Create](https://www.curseforge.com/minecraft/mc-mods/kubejs-create) *2001.3.0-build.8* by LatvianModder
 - [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) *2001.6.5-build.16* by LatvianModder
 - [LootJS: KubeJS Addon](https://www.curseforge.com/minecraft/mc-mods/lootjs) *1.20.1-2.13.0* by Lytho
-- [Mantle](https://www.curseforge.com/minecraft/mc-mods/mantle) *1.11.79* by mDiyo
+- [Mantle](https://www.curseforge.com/minecraft/mc-mods/mantle) *1.11.95* by mDiyo
 - [MantleJS](https://www.curseforge.com/minecraft/mc-mods/mantlejs) *0.1-alpha.3* by Pelemenguin
 - [Moonlight Lib](https://www.curseforge.com/minecraft/mc-mods/selene) *1.20-2.14.1* by MehVahdJukaar
-- [Rhino](https://www.curseforge.com/minecraft/mc-mods/rhino) *2001.2.3-build.10* by LatvianModder
+- [Ponder for KubeJS](https://www.curseforge.com/minecraft/mc-mods/ponder) *2.1.0* by Lytho
 - [ProbeJS](https://www.curseforge.com/minecraft/mc-mods/probejs) *6.0.1* by Amygdaloideae
   - This mod is only installed when developing. Not included in the modpack.
-- [Tinkers Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) *3.10.2.92* by mDiyo
+- [Quests Additions (Forge)](https://www.curseforge.com/minecraft/mc-mods/quests-additions) *${file.jarVersion}* by NaturaSpell
+- [Rhino](https://www.curseforge.com/minecraft/mc-mods/rhino) *2001.2.3-build.10* by LatvianModder
+- [Tinkers Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) *3.11.0.148* by mDiyo
+- [Thermal Dynamics](https://www.curseforge.com/minecraft/mc-mods/thermal-dynamics) *11.0.1* by TeamCoFH
+- [Thermal Expansion](https://www.curseforge.com/minecraft/mc-mods/thermal-expansion) *11.0.1* by TeamCoFH
+- [Thermal Foundation](https://www.curseforge.com/minecraft/mc-mods/thermal-foundation) *11.0.6* by TeamCoFH
+- [Thermal Intergration](https://www.curseforge.com/minecraft/mc-mods/thermal-intergration) *11.0.1* by TeamCoFH

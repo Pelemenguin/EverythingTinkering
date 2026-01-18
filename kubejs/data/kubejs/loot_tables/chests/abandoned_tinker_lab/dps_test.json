@@ -1,0 +1,60 @@
+{
+    "type": "minecraft:chest",
+    "pools": [
+        {
+            "rolls": {
+                "type": "minecraft:uniform",
+                "min": 5,
+                "max": 8
+            },
+            "bonus_rolls": 0,
+            "entries": [
+                {
+                    "type": "minecraft:group",
+                    "children": [
+                        {
+                            "type": "minecraft:item",
+                            "name": "tconstruct:small_blade",
+                            "weight": 1,
+                            "conditions": []
+                        },
+                        {
+                            "type": "minecraft:item",
+                            "name": "tconstruct:tool_handle",
+                            "weight": 1
+                        }
+                    ],
+                    "conditions": []
+                }
+            ],
+            "functions": [
+                {
+                    "function": "minecraft:set_nbt",
+                    "tag": "{Material:\"tconstruct:wood#oak\"}",
+                    "conditions": []
+                },
+                {
+                    "function": "minecraft:set_nbt",
+                    "tag": "{Material:\"tconstruct:rock#stone\"}",
+                    "conditions": [
+                        {
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.67
+                        }
+                    ]
+                },
+                {
+                    "function": "minecraft:set_nbt",
+                    "tag": "{Material:\"tconstruct:copper#oxidized\"}",
+                    "conditions": [
+                        {
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.25
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "random_sequence": "kubejs:abandoned_tinker_lab"
+}
