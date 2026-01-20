@@ -311,6 +311,10 @@
     "modifier.kubejs.andesitize.flavor": "这是什么？……闪长岩？",
     "modifier.kubejs.andesitize.description": "与石头方块交互后将其转化为安山岩",
 
+    "modifier.kubejs.dps_equalizer": "DPS均衡器",
+    "modifier.kubejs.dps_equalizer.flavor": "为啥我非得等一秒半秒让工具蓄力啊？",
+    "modifier.kubejs.dps_equalizer.description": "增加未完全蓄力时的攻击伤害，以使DPS几乎与完全蓄力时的一致",
+
     "modifier.kubejs.glacial_strike": "冰滞冲击",
     "modifier.kubejs.glacial_strike.flavor": "你有没有想象过一座冰山跳几米高砸你？",
     "modifier.kubejs.glacial_strike.description": "按下“冰滞冲击”按键跳起，再按一次以砸向地面。落地时对范围内的目标造成伤害",

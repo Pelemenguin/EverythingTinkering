@@ -303,6 +303,10 @@
     "modifier.kubejs.andesitize.flavor": "What's this? ...Diorite?",
     "modifier.kubejs.andesitize.description": "Interact with Stone blocks to convert them to Andesite",
 
+    "modifier.kubejs.dps_equalizer": "DPS Equalizer",
+    "modifier.kubejs.dps_equalizer.flavor": "Why do I have to wait one or a half second for the tool to charge?",
+    "modifier.kubejs.dps_equalizer.description": "Increase the attack damage when not fully charged, in order to keep the DPS almost the same as fully charged",
+
     "modifier.kubejs.glacial_strike": "Glacial Strike",
     "modifier.kubejs.glacial_strike.flavor": "Ever imagined an iceberg jumping meters high to smash you?",
     "modifier.kubejs.glacial_strike.description": "Press the \"Glacial Strike\" key to leap up, then press again while falling to slam into the ground. Damages targets in an area upon landing.",
