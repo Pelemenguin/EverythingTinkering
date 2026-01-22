@@ -307,6 +307,10 @@
     "modifier.kubejs.dps_equalizer.flavor": "Why do I have to wait one or a half second for the tool to charge?",
     "modifier.kubejs.dps_equalizer.description": "Increase the attack damage when not fully charged, in order to keep the DPS almost the same as fully charged",
 
+    "modifier.kubejs.induced_deflection": "Induced Deflection",
+    "modifier.kubejs.induced_deflection.flavor": "How did you dodge that? \"I didn't, it just dodged me.\"",
+    "modifier.kubejs.induced_deflection.description": "Deflects projectiles when moving. Imagine yourself as a moving point charge, with the deflection direction of projectiles determined by the Lorentz force in the magnetic field you generate",
+
     "modifier.kubejs.glacial_strike": "Glacial Strike",
     "modifier.kubejs.glacial_strike.flavor": "Ever imagined an iceberg jumping meters high to smash you?",
     "modifier.kubejs.glacial_strike.description": "Press the \"Glacial Strike\" key to leap up, then press again while falling to slam into the ground. Damages targets in an area upon landing.",
