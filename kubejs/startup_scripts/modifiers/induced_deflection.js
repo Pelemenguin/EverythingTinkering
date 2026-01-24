@@ -31,7 +31,7 @@ ModifierManager.registerCommonModifier("induced_deflection", "InducedDeflectionM
         if (!holder.isMoving()) return;
 
         let data;
-        if (!tool.getPersistentData().contains("kubejs:induced_deflection")) {
+        if (!world.isClientSide() && !tool.getPersistentData().contains("kubejs:induced_deflection")) {
             data = NBT.compoundTag();
             data.put("LastPosition", NBT.listTag([
                 NBT.doubleTag(holder.getX()),
@@ -46,7 +46,7 @@ ModifierManager.registerCommonModifier("induced_deflection", "InducedDeflectionM
             lastPos.getDouble(1),
             lastPos.getDouble(2)
         ));
-        data.put("LastPosition", NBT.listTag([
+        if (!world.isClientSide()) data.put("LastPosition", NBT.listTag([
             NBT.doubleTag(holder.getX()),
             NBT.doubleTag(holder.getY()),
             NBT.doubleTag(holder.getZ())

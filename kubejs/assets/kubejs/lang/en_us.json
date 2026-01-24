@@ -309,7 +309,7 @@
 
     "modifier.kubejs.induced_deflection": "Induced Deflection",
     "modifier.kubejs.induced_deflection.flavor": "How did you dodge that? \"I didn't, it just dodged me.\"",
-    "modifier.kubejs.induced_deflection.description": "Deflects projectiles when moving. Imagine yourself as a moving point charge, with the deflection direction of projectiles determined by the Lorentz force in the magnetic field you generate",
+    "modifier.kubejs.induced_deflection.description": "Deflects projectiles when moving. Imagine yourself as a positively charged moving point charge and projectiles are also positively charged, then its deflection direction is determined by the Lorentz force in the magnetic field you generate",
 
     "modifier.kubejs.glacial_strike": "Glacial Strike",
     "modifier.kubejs.glacial_strike.flavor": "Ever imagined an iceberg jumping meters high to smash you?",
