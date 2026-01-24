@@ -83,6 +83,13 @@ function Artifact(id, item, definition, materials) {
 }
 
 /**
+ * @returns {this is ArtifactGroup}
+ */
+Artifact.prototype.isGroup = function() {
+    return false;
+};
+
+/**
  * Add a modifier to the artifact.  
  * 为 Artifact 添加 Modifier.
  * - - - - -
@@ -273,6 +280,13 @@ ArtifactGroup.prototype.get = function(id) {
 };
 
 /**
+ * @returns {this is ArtifactGroup}
+ */
+ArtifactGroup.prototype.isGroup = function() {
+    return true;
+};
+
+/**
  * Create an artifact.  
  * 创建一个 Artifact.
  * - - - - -
@@ -342,6 +356,19 @@ ArtifactGroup.prototype.getRecursive = function(namepath) {
 ArtifactGroup.prototype.getRecursiveArtifact = function(namepath) {
     let result = this.getRecursive(namepath);
     return result instanceof Artifact ? result : null;
+};
+
+/**
+ * Get an artifact group from a name path.  
+ * 通过命名路径获取一个 Artifact 组。
+ * - - - - -
+ * @param {string} namepath 
+ * - - - - -
+ * @returns {?ArtifactGroup}
+ */
+ArtifactGroup.prototype.getRecursiveArtifactGroup = function(namepath) {
+    let result = this.getRecursive(namepath);
+    return result instanceof ArtifactGroup ? result : null;
 };
 
 /**

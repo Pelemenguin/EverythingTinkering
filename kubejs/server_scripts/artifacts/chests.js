@@ -70,6 +70,42 @@ TINKERS_WORKSHOP.createArtifact("non_classic_pickaxe", Item.getItem("tconstruct:
         "tconstruct:rock#stone",
     ]);
 
+    DPS_TEST.createArtifact("2", Item.getItem("tconstruct:sword"), TiCToolDefinitions.SWORD, [
+        "tconstruct:rock#granite",
+        "tconstruct:rock#stone",
+        "tconstruct:rock#stone",
+    ]);
+
+    DPS_TEST.createArtifact("3", Item.getItem("tconstruct:sword"), TiCToolDefinitions.SWORD, [
+        "tconstruct:wood#oak",
+        "tconstruct:rock#stone",
+        "tconstruct:rock#stone",
+    ]);
+
+    DPS_TEST.createArtifact("4", Item.getItem("tconstruct:sword"), TiCToolDefinitions.SWORD, [
+        "tconstruct:rock#stone",
+        "tconstruct:wood#oak",
+        "tconstruct:rock#stone",
+    ]);
+
+    DPS_TEST.createArtifact("5", Item.getItem("tconstruct:sword"), TiCToolDefinitions.SWORD, [
+        "tconstruct:rock#stone",
+        "tconstruct:rock#stone",
+        "tconstruct:wood#oak",
+    ]);
+
+    DPS_TEST.createArtifact("6", Item.getItem("tconstruct:sword"), TiCToolDefinitions.SWORD, [
+        "tconstruct:flint",
+        "tconstruct:rock#stone",
+        "tconstruct:rock#stone",
+    ]);
+
+    DPS_TEST.createArtifact("7", Item.getItem("tconstruct:sword"), TiCToolDefinitions.SWORD, [
+        "tconstruct:bone",
+        "tconstruct:rock#stone",
+        "tconstruct:rock#stone",
+    ]);
+
 })();
 
 

@@ -358,6 +358,27 @@
     "item.kubejs.artifact.chest.tinkers_workshop.non_classic_pickaxe.name": "非经典铁镐",
     "item.kubejs.artifact.chest.tinkers_workshop.non_classic_pickaxe.lore": "这是铁镐吗？",
 
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.1.name": "DPS测试 #1",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.1.lore": "平均结果：11.0 DPS",
+
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.2.name": "DPS测试 #2",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.2.lore": "平均结果：11.0 DPS",
+
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.3.name": "DPS测试 #3",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.3.lore": "平均结果：8.4 DPS",
+
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.4.name": "DPS测试 #4",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.4.lore": "平均结果：8.4 DPS",
+
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.5.name": "DPS测试 #5",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.5.lore": "平均结果：8.4 DPS",
+
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.6.name": "DPS测试 #6",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.6.lore": "平均结果：11.8 DPS",
+
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.7.name": "DPS测试 #7",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.7.lore": "平均结果：13.2 DPS",
+
     "item.kubejs.artifact.boss_no_hit.icy_terracube.name": "冰滞冲击",
     "item.kubejs.artifact.boss_no_hit.icy_terracube.lore": "你有没有想象过一座冰山跳几米高砸你？",
     "item.kubejs.artifact.boss_no_hit.icy_terracube.extra": "[寒冰黏土怪的无伤战利品]",

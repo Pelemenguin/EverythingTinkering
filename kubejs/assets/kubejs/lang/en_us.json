@@ -356,7 +356,25 @@
     "item.kubejs.artifact.chest.tinkers_workshop.non_classic_pickaxe.lore": "Is it iron pick?",
 
     "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.1.name": "DPS Test #1",
-    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.1.desc": "Average result: 11.1 DPS",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.1.lore": "Average result: 11.5 DPS",
+
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.2.name": "DPS Test #2",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.2.lore": "Average result: 11.5 DPS",
+
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.3.name": "DPS Test #3",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.3.lore": "Average result: 8.4 DPS",
+
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.4.name": "DPS Test #4",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.4.lore": "Average result: 8.4 DPS",
+
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.5.name": "DPS Test #5",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.5.lore": "Average result: 8.4 DPS",
+
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.6.name": "DPS Test #6",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.6.lore": "Average result: 11.8 DPS",
+
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.7.name": "DPS Test #7",
+    "item.kubejs.artifact.chest.abandoned_tinker_lab.dps_test.7.lore": "Average result: 13.2 DPS",
 
     "item.kubejs.artifact.boss_no_hit.icy_terracube.name": "Glacial Strike",
     "item.kubejs.artifact.boss_no_hit.icy_terracube.lore": "Ever imagined an iceberg jumping meters high to smash you?",
