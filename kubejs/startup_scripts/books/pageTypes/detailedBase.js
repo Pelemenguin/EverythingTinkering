@@ -66,8 +66,8 @@ const DetailedBase = {
                 page += 1;
                 displayer.y = RecipeDisplay.DEFAULT_Y;
                 tempList.clear();
-                previousH = RecipeDisplay.DEFAULT_Y;
-                h = displayer[recipeDrawer](tempList, recipe, book);
+                previousH = displayer.y;
+                h = displayer.y + displayer[recipeDrawer](tempList, recipe, book);
                 pages.push(Utils.newList());
             }
             let recipeNumber = BookTextData.literal(totalRecipes.toFixed());
