@@ -1,3 +1,5 @@
+// priority: 1000
+
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 /**
@@ -12,6 +14,7 @@
  */
 
 /* global
+    global: writable
     StartupEvents
 */
 
@@ -21,3 +24,5 @@ StartupEvents.registry("minecraft:block", event => {
         .resistance(2000)
     ;
 });
+
+global.BlockFunctions = {};

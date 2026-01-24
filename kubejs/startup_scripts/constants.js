@@ -118,6 +118,7 @@ const ProtectionModule = Java.loadClass("slimeknights.tconstruct.library.modifie
 const KubeJS = Java.loadClass("dev.latvian.mods.kubejs.KubeJS");
 const Context = Java.loadClass("dev.latvian.mods.rhino.Context");
 const ConsoleJS = Java.loadClass("dev.latvian.mods.kubejs.util.ConsoleJS");
+const $BlockEntityJS = Java.loadClass("dev.latvian.mods.kubejs.block.entity.BlockEntityJS");
 
 // Logger
 const logger = KubeJS.LOGGER;
