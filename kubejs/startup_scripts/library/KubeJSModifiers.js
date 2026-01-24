@@ -655,8 +655,7 @@ const ModifierManager = {
         });
 
         if ("getPriority" in hooks) {
-            // Due to a ClassJS bug, parameter type list cannot be empty
-            modifierClassCreator.createMethod("getPriority", ["java.lang.Object"], "int")
+            modifierClassCreator.createMethod("getPriority", [], "int")
                 .toPublic().codeJS(hooks.getPriority);
         }
 

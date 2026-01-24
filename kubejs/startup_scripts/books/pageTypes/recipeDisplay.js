@@ -361,26 +361,26 @@ RecipeDisplay.prototype = {
         icon.tooltip.add(Component.translatable("book.kubejs.material.recipes.deploying.name"));
         icon.tooltip.add(Component.translatable("book.kubejs.material.recipes.deploying.description").gray());
         elements.add(icon);
+
+        let cast = RecipeDisplay.materialValueIndicator(recipe.inputMaterial, 1, icon.x + 24, icon.y, [recipe.outputMaterial]);
+        elements.add(cast);
+
+        let arrowExtend = BookElement.image(new ImageData("jei:textures/jei/atlas/gui/recipe_arrow.png", 2, 0, 12, 16, 22, 16, 9, 12));
+        arrowExtend.x = cast.x + 21;
+        arrowExtend.y = cast.y + 2;
+        elements.add(arrowExtend);
         
         let displayItem = new TinkerItemElement(Item.of("minecraft:air"));
-        displayItem.x = icon.x + 24;
-        displayItem.y = icon.y;
+        displayItem.x = arrowExtend.x + 9;
+        displayItem.y = cast.y;
         displayItem.itemCycle = NonNullList.of(
             recipe.usingItem.withCount(1),
             recipe.usingItem.getItemTypes().toArray().map(item => new $ItemStack(item, 1))
         );
         elements.add(displayItem);
 
-        let arrowExtend = BookElement.image(new ImageData("jei:textures/jei/atlas/gui/recipe_arrow.png", 2, 0, 12, 16, 22, 16, 9, 12));
-        arrowExtend.x = displayItem.x + 21;
-        arrowExtend.y = displayItem.y + 2;
-        elements.add(arrowExtend);
-
-        let cast = RecipeDisplay.materialValueIndicator(recipe.inputMaterial, 1, arrowExtend.x + 9, displayItem.y, [recipe.outputMaterial]);
-        elements.add(cast);
-
         let arrow = BookElement.image(new ImageData("jei:textures/jei/atlas/gui/recipe_arrow.png", 2, 0, 20, 16, 22, 16, 15, 12));
-        arrow.x = cast.x + 16;
+        arrow.x = displayItem.x + 16;
         arrow.y = arrowExtend.y;
         elements.add(arrow);
 

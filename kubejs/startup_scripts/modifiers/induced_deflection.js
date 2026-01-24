@@ -30,7 +30,16 @@ ModifierManager.registerCommonModifier("induced_deflection", "InducedDeflectionM
         // Still players won't active this effect
         if (!holder.isMoving()) return;
 
-        let data = tool.getPersistentData().getCompound("kubejs:induced_deflection");
+        let data;
+        if (!tool.getPersistentData().contains("kubejs:induced_deflection")) {
+            data = NBT.compoundTag();
+            data.put("LastPosition", NBT.listTag([
+                NBT.doubleTag(holder.getX()),
+                NBT.doubleTag(holder.getY()),
+                NBT.doubleTag(holder.getZ())
+            ]));
+            tool.getPersistentData().put("kubejs:induced_deflection", data);
+        } else data = tool.getPersistentData().getCompound("kubejs:induced_deflection");
         let lastPos = data.getList("LastPosition", 6);
         let holderMotion = holder.position().subtract(new Vec3d(
             lastPos.getDouble(0),
@@ -47,15 +56,16 @@ ModifierManager.registerCommonModifier("induced_deflection", "InducedDeflectionM
         if (holderMotionSqr >= 400) {
             holderMotion = holderMotion.normalize().scale(20);
         }
+        let holderPosition = holder.position();
 
-        let multiplier = modifier.getLevel() * 15;
+        let multiplier = modifier.getLevel() * 30;
 
         // Just work for nearby projectiles
         world.getEntitiesWithin(AABB.of(
             holder.getX() - 25 * multiplier, holder.getY() - 25 * multiplier, holder.getZ() - 25 * multiplier,
             holder.getX() + 25 * multiplier, holder.getY() + 25 * multiplier, holder.getZ() + 25 * multiplier
         )).filter(e => e instanceof $Projectile).forEach(/** @param {Internal.Projectile} projectile */ projectile => {
-            let relativePosition = projectile.position().subtract(holder.position());
+            let relativePosition = projectile.position().subtract(holderPosition);
             let distanceSqr = relativePosition.lengthSqr();
             if (distanceSqr <= 0) return;
             let mageticInduction = holderMotion.cross(relativePosition.normalize()).scale(multiplier / distanceSqr);

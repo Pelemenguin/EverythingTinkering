@@ -2,7 +2,7 @@
 
 <!-- Generated from `build.py` -->
 - [Architectury API](https://www.curseforge.com/minecraft/mc-mods/architectury-api) *9.2.14* by shedaniel
-- [ClassJS](https://www.curseforge.com/minecraft/mc-mods/classjs) *0.1-alpha.4* by Pelemenguin
+- [ClassJS](https://www.curseforge.com/minecraft/mc-mods/classjs) *0.1-alpha.6* by Pelemenguin
 - [CoFH Core](https://www.curseforge.com/minecraft/mc-mods/cofh-core) *11.0.2* by TeamCoFH
 - [Create](https://www.curseforge.com/minecraft/mc-mods/create) *6.0.8* by simibubi
 - [Create Deco](https://www.curseforge.com/minecraft/mc-mods/create-deco) *2.0.3-1.20.1-forge* by talrey
