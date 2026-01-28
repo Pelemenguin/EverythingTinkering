@@ -178,7 +178,7 @@
 
     "material.kubejs.steel_clad_copper": "Steel-clad Copper",
     "material.kubejs.steel_clad_copper.flavor": "Is that reversed?",
-    "material.kubejs.steel_clad_copper.encyclopedia": "Each Iron Plate applied +0.15 attack damage, +1% resistance, or 0.1 projectile power, depending on the tool type. 10 plates can be added per level. 1 plate is consumed per 100 durability loss",
+    "material.kubejs.steel_clad_copper.encyclopedia": "Each Iron Plate applied +0.2 attack damage, +0.5% resistance, or 0.05 projectile power, depending on the tool type. 5 plates can be added per level. 1 plate is consumed per 50 durability loss",
 
     "material.kubejs.mainspring": "Mainspring",
     "material.kubejs.mainspring.flavor": "Wind up!",
