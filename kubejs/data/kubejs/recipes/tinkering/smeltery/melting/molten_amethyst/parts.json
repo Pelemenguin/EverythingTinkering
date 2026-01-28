@@ -1,9 +1,0 @@
-{
-    "type": "tconstruct:material_melting",
-    "input": "kubejs:amethyst",
-    "result": {
-        "amount": 400,
-        "fluid": "tconstruct:molten_amethyst"
-    },
-    "temperature": 950
-}

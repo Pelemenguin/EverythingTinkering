@@ -164,6 +164,10 @@
     "material.kubejs.phantom_membrane.flavor": "Why do phantoms always find night owls?",
     "material.kubejs.phantom_membrane.encyclopedia": "Continuously gain night vision effect in the dark, consuming 1 durability every 3 seconds",
 
+    "material.kubejs.tin": "Tin",
+    "material.kubejs.tin.flavor": "Don't use tin to solder your gasoline tank!",
+    "material.kubejs.tin.encyclopedia": "Increase durability loss when exposed to low temperatures. The expected extra durability loss is 0 at 0.2 temperature, 0.5 at 0 temperature, or 1 at -0.2 temperature. Increase damage when used in hot environments with value equal to the temperature",
+
     "material.kubejs.sugar_cane": "Sugar Cane",
     "material.kubejs.sugar_cane.flavor": "A cheaper alternative to honey!",
     "material.kubejs.sugar_cane.encyclopedia": "Up to 25% chance to not consume durability when facing near the X-axis",
@@ -263,6 +267,14 @@
     "modifier.kubejs.algae": "Algae",
     "modifier.kubejs.algae.flavor": "Long time ago, algae bricks are used to make alloys...",
     "modifier.kubejs.algae.description": "Tools are slowly repaired under water",
+
+    "modifier.kubejs.tin_pest": "Tin Pest",
+    "modifier.kubejs.tin_pest.flavor": "Don't catch a cold!",
+    "modifier.kubejs.tin_pest.description": "Increases durability loss when exposed to low temperatures, but increase damage when used in hot environments",
+    "modifier.kubejs.tin_pest.durability": "+%s Tin Pest Random Durability Loss",
+    "modifier.kubejs.tin_pest.attack_damage": "+%s Tin Pest Attack Damage",
+    "modifier.kubejs.tin_pest.projectile_power": "+%s Tin Pest Projectile Power",
+    "modifier.kubejs.tin_pest.no_effect": "No Tin Pest Effect",
 
     "modifier.kubejs.night_owl": "Night Owl",
     "modifier.kubejs.night_owl.flavor": "Still staying up late?",

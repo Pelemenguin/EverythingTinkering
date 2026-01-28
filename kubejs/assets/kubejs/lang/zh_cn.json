@@ -171,6 +171,10 @@
     "material.kubejs.sugar_cane.flavor": "更便宜的蜂蜜替代品！",
     "material.kubejs.sugar_cane.encyclopedia": "靠近X轴方向使用时有最多25%的概率不消耗耐久",
 
+    "material.kubejs.tin": "锡",
+    "material.kubejs.tin.flavor": "不要用锡焊接你的汽油罐！",
+    "material.kubejs.tin.encyclopedia": "在低温环境下增加耐久损失。额外耐久消耗的期望值在0.2温度时为0，在0温度时为0.5，或在-0.2温度时为1。在高温环境下增加伤害，数值等于温度",
+
     "material.kubejs.andesite_alloy": "安山合金",
     "material.kubejs.andesite_alloy.flavor": "就像一个传动轴！",
     "material.kubejs.andesite_alloy.encyclopedia": "攻击一条直线上距离不超过三格的敌人。每次传递，伤害会被乘以0.2倍特性等级。传递至小于1时停止",
@@ -271,6 +275,14 @@
     "modifier.kubejs.algae": "海藻",
     "modifier.kubejs.algae.flavor": "很久很久以前，人们用海藻砖来制作合金……",
     "modifier.kubejs.algae.description": "工具在水下会被缓慢修复",
+
+    "modifier.kubejs.tin_pest": "锡疫",
+    "modifier.kubejs.tin_pest.flavor": "小心着凉！",
+    "modifier.kubejs.tin_pest.description": "在低温环境下增加耐久损失，但在高温环境下增加伤害",
+    "modifier.kubejs.tin_pest.durability": "+%s 锡疫随机耐久损失",
+    "modifier.kubejs.tin_pest.attack_damage": "锡疫伤害",
+    "modifier.kubejs.tin_pest.projectile_power": "锡疫弹射物力量",
+    "modifier.kubejs.tin_pest.no_effect": "无锡疫效果",
 
     "modifier.kubejs.relaying": "传动",
     "modifier.kubejs.relaying.flavor": "传递动量！",

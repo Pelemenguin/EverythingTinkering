@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+        "tag": "forge:storage_blocks/tin"
+    },
+    "material": "kubejs:tin",
+    "needed": 1,
+    "value": 9
+}

@@ -1,0 +1,8 @@
+{
+    "color": "FFA1C6C2",
+    "fallbacks": [
+        "metal"
+    ],
+    "luminosity": 0,
+    "texture": "kubejs:tin"
+}

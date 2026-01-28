@@ -63,6 +63,8 @@
 
         "phantom_membrane": "#DCD9C0",
 
+        "tin": "#A1C6C2",
+
         "andesite_alloy": "#c9caba",
 
         "steel_clad_copper": "#C5C5C5",
@@ -117,6 +119,7 @@
         "fibrous": "#97F544",
         "papercutting": "#FCFCF2",
         "algae": "#59AB30",
+        "tin_pest": "#A1C6C2",
         "relaying": "#c9caba",
         "cladding": "#C5C5C5",
         "kinetic_accumulator": "#ffea63",

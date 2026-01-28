@@ -81,6 +81,7 @@ let reprItems = {
 
     // Ingots
     "tconstruct:copper": "minecraft:copper_ingot",
+    "kubejs:tin": "thermal:tin_ingot",
     "tconstruct:iron": "minecraft:iron_ingot",
     "tconstruct:lead": "thermal:lead_ingot",
     "tconstruct:silver": "thermal:silver_ingot",
