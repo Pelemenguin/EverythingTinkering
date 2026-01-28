@@ -337,6 +337,10 @@
     "modifier.kubejs.glacial_strike.remove": "冰滞冲击无法被移除",
     "modifier.kubejs.glacial_strike.requirements": "“冰滞冲击”需要“闪亮”、“保护 II”和“加固 II”作为前置",
 
+    "modifier.kubejs.ferrous_element": "铁系元素",
+    "modifier.kubejs.ferrous_element.flavor": "铁钴镍铜锌……",
+    "modifier.kubejs.ferrous_element.description": "为工具中的铁部件和钴部件提供额外耐久",
+
     "modifier.kubejs.artifact": "工匠造物",
     "modifier.kubejs.artifact.tooltip": "工匠造物ID：%s",
     "modifier.kubejs.artifact.flavor": "在世界各地随机出现……",

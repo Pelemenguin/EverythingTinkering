@@ -40,6 +40,7 @@ global.TinkerFunctions.onClientTickFunctions = Utils.newMap();
  */
 let HOOK_TO_IMPLEMENTING_INTERFACE = {
     "modifyStat": "slimeknights.tconstruct.library.modifiers.hook.build.ConditionalStatModifierHook",
+    "getRepairFactor": "slimeknights.tconstruct.library.modifiers.hook.behavior.RepairFactorModifierHook",
     "onDamageTool": "slimeknights.tconstruct.library.modifiers.hook.behavior.ToolDamageModifierHook",
     "onInventoryTick": "slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook",
     "addTooltip": "slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook",
@@ -84,6 +85,24 @@ let HOOK_TO_METHOD_PARAMETERS = {
                 } catch (e) {
                     console.error(`Error in modifyStat of modifier ${arg1.getId().toString()}: ${e}`);
                     return arg4;
+                }
+            };
+        }
+    ],
+    "getRepairFactor": [
+        [
+            "slimeknights.tconstruct.library.tools.nbt.IToolStackView",
+            "slimeknights.tconstruct.library.modifiers.ModifierEntry",
+            "float"
+        ],
+        "float",
+        (func) => {
+            return (arg0, arg1, arg2) => {
+                try {
+                    return func(arg0, arg1, arg2);
+                } catch (e) {
+                    console.error(`Error in getRepairFactor of modifier ${arg1.getId().toString()}: ${e}`);
+                    return arg2;
                 }
             };
         }
@@ -532,6 +551,7 @@ let HOOK_TO_METHOD_PARAMETERS = {
 /** @type {{[x in Annotation.TinkerFunction.ModifierHooks]: [string, string, string]}} */
 let HOOK_TO_FIELDS = {
     "modifyStat": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "CONDITIONAL_STAT", "slimeknights.tconstruct.library.module.ModuleHook"],
+    "getRepairFactor": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "REPAIR_FACTOR", "slimeknights.tconstruct.library.module.ModuleHook"],
     "onDamageTool": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "TOOL_DAMAGE", "slimeknights.tconstruct.library.module.ModuleHook"],
     "onInventoryTick": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "INVENTORY_TICK", "slimeknights.tconstruct.library.module.ModuleHook"],
     "addTooltip": ["slimeknights.tconstruct.library.modifiers.ModifierHooks", "TOOLTIP", "slimeknights.tconstruct.library.module.ModuleHook"],

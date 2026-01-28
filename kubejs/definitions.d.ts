@@ -163,6 +163,31 @@ declare namespace Annotation {
              */ 
             modifyStat?(tool: Internal.IToolStackView, modifier: Internal.ModifierEntry, living: Internal.LivingEntity, stat: Internal.FloatToolStat, baseValue: number, multiplier: number): number,
             /**
+             * Called when the tool is repair. Can be used to decrease, increase, or cancel the repair.  
+             * 在工具被修复时调用。可以被用于减少，增加，或取消修复。
+             * - - - - -
+             * @param tool   Tool stack  
+             *               工具堆叠
+             * 
+             * @param entry  Modifier and level  
+             *               特性及其等级
+             * 
+             * @param factor Original factor  
+             *               原始系数
+             * 
+             * @returns      Replacement factor. Returning 0 prevents repair  
+             *               要替换为的系数。返回`0`则阻止修复
+             * - - - - -
+             * @example
+             * let TEST = ModifierManager.registerCommonModifier("test", "TestModifier", {
+             *     getRepairFactor: (tool, entry, factor) => {
+             *         return factor * 2; // Double the repair efficiency
+             *                            // 修复效率翻倍
+             *     }
+             * });
+             */
+            getRepairFactor?: (tool: Internal.IToolStackView, entry: Internal.ModifierEntry, factor: number) => number,
+            /**
              * Called when the tool is damaged.
              * Can be used to cancel, decrease, or increase the damage.  
              * 在工具消耗耐久时调用。

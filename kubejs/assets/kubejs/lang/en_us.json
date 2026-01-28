@@ -329,6 +329,10 @@
     "modifier.kubejs.glacial_strike.remove": "Glacial Strike cannot be removed",
     "modifier.kubejs.glacial_strike.requirements": "Glacial Strike requires Shiny, Protection II and Reinforced II to apply",
 
+    "modifier.kubejs.ferrous_element": "The Ferrous Elements",
+    "modifier.kubejs.ferrous_element.flavor": "Fe, Cu, Ni, Cu, Zn...",
+    "modifier.kubejs.ferrous_element.description": "Provide extra durability to iron parts or cobalt parts in the tool",
+
     "modifier.kubejs.artifact": "Artifact",
     "modifier.kubejs.artifact.tooltip": "Artifact ID: %s",
     "modifier.kubejs.artifact.flavor": "Something randomly appears all around the world...",
