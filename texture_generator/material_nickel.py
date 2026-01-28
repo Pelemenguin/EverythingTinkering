@@ -3,20 +3,20 @@ from TextureGenerator import *
 from _convert_palette import *
 from _shared import Palette
 
-palette_tin: Palette = Palette.from_argb_string_palette({
+palette_nickel: Palette = Palette.from_argb_string_palette({
     0: "FF000000",
-    63: "FF314F6F",
-    102: "FF476F81",
-    140: "FF6C8998",
-    178: "FF88A2A7",
-    216: "FFA1C6C2",
-    255: "FFBFD8DD"
+    63: "FF734C3B",
+    102: "FF866444",
+    140: "FFA28960",
+    178: "FFB0A075",
+    216: "FFC7B784",
+    255: "FFF9F5AB"
 })
 
 generator = TextureGenerator(parts)
-generator.add_function(palette_tin.to_transformer(), "recolor", 0)
+generator.add_function(palette_nickel.to_transformer(), "recolor", 0)
 generator.set_fallback(["metal"])
-generator.generate("kubejs_tin", part_types=[
+generator.generate("kubejs_nickel", part_types=[
     "tconstruct:head",
     "tconstruct:handle",
     "tconstruct:binding",
