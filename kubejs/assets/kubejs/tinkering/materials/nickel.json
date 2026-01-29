@@ -1,0 +1,8 @@
+{
+    "color": "FFC7B784",
+    "fallbacks": [
+        "metal"
+    ],
+    "luminosity": 0,
+    "texture": "kubejs:nickel"
+}

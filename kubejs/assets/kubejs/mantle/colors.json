@@ -76,7 +76,9 @@
 
         "sea_alloy": "#C6DFD8",
 
-        "crying_obsidian": "#6006AB"
+        "crying_obsidian": "#6006AB",
+
+        "nickel": "#C7B784"
 
     },
     "material.tconstruct": {

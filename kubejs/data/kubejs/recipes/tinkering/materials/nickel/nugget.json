@@ -1,0 +1,9 @@
+{
+    "type": "tconstruct:material",
+    "ingredient": {
+        "tag": "forge:nuggets/nickel"
+    },
+    "material": "kubejs:nickel",
+    "needed": 9,
+    "value": 1
+}

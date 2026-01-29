@@ -196,6 +196,10 @@
     "material.kubejs.crying_obsidian.flavor": "Who's cutting onions?",
     "material.kubejs.crying_obsidian.encyclopedia": "+4% extra protection in Warped Forests",
 
+    "material.kubejs.nickel": "Nickel",
+    "material.kubejs.nickel.flavor": "Iron, cobalt, nickel, copper, zinc. What's next?",
+    "material.kubejs.nickel.encyclopedia": "+8% per iron part, +15% per cobalt part in the tool, to the tool's durability and repair efficiency",
+
         "_comment_fluids": " ----- Fluids ----- ",
 
     "block.kubejs.molten_sea_alloy": "Molten Sea Alloy",

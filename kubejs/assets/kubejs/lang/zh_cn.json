@@ -204,6 +204,10 @@
     "material.kubejs.crying_obsidian.flavor": "谁在切洋葱？",
     "material.kubejs.crying_obsidian.encyclopedia": "在诡异森林中每级+4%抗性",
 
+    "material.kubejs.nickel": "镍",
+    "material.kubejs.nickel.flavor": "铁、钴、镍、铜、锌。然后是什么？",
+    "material.kubejs.nickel.encyclopedia": "对工具的耐久度和修复效率，每个铁部件+8%，每个钴部件+15%",
+
         "_commont_fluids": " ----- 流体 ----- ",
 
     "block.kubejs.molten_sea_alloy": "熔融海洋合金",
