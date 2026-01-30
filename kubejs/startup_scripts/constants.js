@@ -110,6 +110,7 @@ const $ModifiableItem = Java.loadClass("slimeknights.tconstruct.library.tools.it
 // Create
 const $DeployerApplicationRecipe = Java.loadClass("com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe");
 const $ProcessingRecipeBuilder = Java.loadClass("com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder");
+const $DepotBlockEntity = Java.loadClass("com.simibubi.create.content.logistics.depot.DepotBlockEntity");
 
 // TiC Modifier Modules
 const ProtectionModule = Java.loadClass("slimeknights.tconstruct.library.modifiers.modules.armor.ProtectionModule");
