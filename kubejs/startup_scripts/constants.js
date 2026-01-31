@@ -44,7 +44,9 @@ const Player = Java.loadClass("net.minecraft.world.entity.player.Player");
 const Entity = Java.loadClass("net.minecraft.world.entity.Entity");
 const Entity$RemovalReason = Java.loadClass("net.minecraft.world.entity.Entity$RemovalReason");
 const EquipmentSlot = Java.loadClass("net.minecraft.world.entity.EquipmentSlot");
+const $ItemEntity = Java.loadClass("net.minecraft.world.entity.item.ItemEntity");
 const $ItemStack = Java.loadClass("net.minecraft.world.item.ItemStack");
+const $Ingredient = Java.loadClass("net.minecraft.world.item.crafting.Ingredient");
 const MobEffectInstance = Java.loadClass("net.minecraft.world.effect.MobEffectInstance");
 const ChatFormatting = Java.loadClass("net.minecraft.ChatFormatting");
 const LanguageManager = Java.loadClass("net.minecraft.client.resources.language.LanguageManager");
@@ -108,6 +110,7 @@ const $DurabilityShieldModule = Java.loadClass("slimeknights.tconstruct.library.
 const $ModifiableItem = Java.loadClass("slimeknights.tconstruct.library.tools.item.ModifiableItem");
 
 // Create
+const $FluidIngredient = Java.loadClass("com.simibubi.create.foundation.fluid.FluidIngredient");
 const $DeployerApplicationRecipe = Java.loadClass("com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe");
 const $ProcessingRecipeBuilder = Java.loadClass("com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder");
 const $DepotBlockEntity = Java.loadClass("com.simibubi.create.content.logistics.depot.DepotBlockEntity");
@@ -152,11 +155,14 @@ const JavaUtils = {
     /** @type {typeof Internal.Thread} */
     Thread: new NativeJavaClass(startupContext, topLevelScope, Class.forName("java.lang.Thread"))
 };
+const $Boolean = Java.loadClass("java.lang.Boolean");
 const $ConcurrentHashMap = Java.loadClass("java.util.concurrent.ConcurrentHashMap");
 const $Optional = Java.loadClass("java.util.Optional");
 const $HashSet = Java.loadClass("java.util.HashSet");
 
 // Forge
+const $ForgeCapabilities = Java.loadClass("net.minecraftforge.common.capabilities.ForgeCapabilities");
+const $FluidStack = Java.loadClass("net.minecraftforge.fluids.FluidStack");
 /** @type {typeof Internal.FMLJavaModLoadingContext} */
 const FMLJavaModLoadingContext = new NativeJavaClass(startupContext, topLevelScope, Class.forName("net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext"));
 const $NetworkRegistry = Java.loadClass("net.minecraftforge.network.NetworkRegistry");
