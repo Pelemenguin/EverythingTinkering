@@ -15,6 +15,7 @@
     BatchMaterialRecipes
     $MaterialVariantId
     IngredientHelper
+    Blocks
 */
 
 BatchMaterialRecipes.Deploying.register("kubejs:tinkering/materials/steel_clad_copper/deploying",
@@ -57,4 +58,17 @@ BatchMaterialRecipes.SequencedAssembly.register("kubejs:tinkering/material/mains
         BatchMaterialRecipes.KnownStats.HEAD,
         BatchMaterialRecipes.KnownStats.REPAIR_KIT
     ]
+);
+
+BatchMaterialRecipes.FluidInfusion.register(
+    "kubejs:tinkering/materials/test/fluid_infusion",
+    $MaterialVariantId.parse("kubejs:nickel"),
+    $MaterialVariantId.parse("kubejs:tin"),
+    [
+        Blocks.WATER.getFluid(),
+        Blocks.WATER.getFluid(),
+        Blocks.WATER.getFluid(),
+        Blocks.WATER.getFluid()
+    ],
+    BatchMaterialRecipes.KnownStatGroups.FULL_MATERIAL
 );

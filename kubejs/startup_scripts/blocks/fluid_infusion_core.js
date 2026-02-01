@@ -18,16 +18,12 @@
     DustParticleOptions
     Vec3f
     Component
-    Utils
     Blocks
-    InputItem
-    Items
     $ItemEntity
     BlockProperties
     $Boolean
+    $MaterialItem
 */
-
-global.BlockFunctions.FluidInfusionCore = {};
 
 /** @type {Internal.BlockEntityCallback_} */
 global.BlockFunctions.FluidInfusionCore.blockEntityTick;
@@ -35,59 +31,12 @@ global.BlockFunctions.FluidInfusionCore.blockEntityTick;
 /** @type {Internal.Consumer_<Internal.BlockRightClickedEventJS>} */
 global.BlockFunctions.FluidInfusionCore.rightClick;
 
-/**
- * @typedef {{
- *     inputMaterial: Internal.MaterialVariantId,
- *     inputFluids: Internal.Fluid[],
- *     outputMaterial: Internal.MaterialVariantId
- * }} Annotation.BatchRecipes.FluidInfusion.Material
- * 
- * @typedef {{
- *     inputItem: Internal.Ingredient,
- *     inputFluids: Internal.Fluid[],
- *     outputItem: Internal.ItemStack,
- * }} Annotation.BatchRecipes.FluidInfusion.Item
- */
-
-/** @type {Internal.Map<Internal.MaterialVariantId, Internal.Map<Internal.Fluid[], Annotation.BatchRecipes.FluidInfusion.Material>>} */
-global.BlockFunctions.FluidInfusionCore.MATERIAL_RECIPES = Utils.newMap();
-
-/** @type {Internal.Map<Internal.Ingredient, Internal.Map<Internal.Fluid[], Annotation.BatchRecipes.FluidInfusion.Item>>} */
-global.BlockFunctions.FluidInfusionCore.RECIPES = Utils.newMap();
-
-let testRecipe = {
-    inputItem: InputItem.of(Items.IRON_INGOT).kjs$asIngredient(),
-    inputFluids: [
-        Blocks.WATER.getFluid(),
-        Blocks.WATER.getFluid(),
-        Blocks.WATER.getFluid(),
-        Blocks.LAVA.getFluid()
-    ],
-    outputItem: Items.GOLD_INGOT.getDefaultInstance()
-};
-
-let tempMap = Utils.newMap();
-
-tempMap.put(testRecipe.inputFluids, testRecipe);
-
-global.BlockFunctions.FluidInfusionCore.RECIPES.put(testRecipe.inputItem, tempMap);
-
 (function () {
 
 const FLUID_INFUSION_CORE_ID = "kubejs:fluid_infusion_core";
 
-global.BlockFunctions.FluidInfusionCore.blockEntityTick = (blockEntity) => {
-    let depot = blockEntity.getBlock().getUp();
-    let depotBE = depot.getEntity();
-
-    if (!(depotBE instanceof $DepotBlockEntity)) return;
-
-    let itemOn = depotBE.getHeldItem();
-
-    if (itemOn == null || itemOn.isEmpty()) return;
-
-
-};
+const DIRECTIONS = [[-1, -1], [-1, 1], [1, -1], [1, 1]];
+const MAX_SEARCH_DISTANCE = 4;
 
 /**
  * 
@@ -101,24 +50,97 @@ let queryParticle = (world, x, y, z, error) => {
     world.spawnParticles(new DustParticleOptions(error ? new Vec3f(1, 0, 0) : new Vec3f(0, 1, 1), 1), false, x + 0.5, y + 0.5, z + 0.5, 0.2, 0.4, 0.2, 50, 0.1);
 };
 
-const DIRECTIONS = [[-1, -1], [-1, 1], [1, -1], [1, 1]];
-const MAX_SEARCH_DISTANCE = 4;
-
-global.BlockFunctions.FluidInfusionCore.rightClick = (event) => {
-
-    let blockContainer = event.getBlock();
-    let world = event.getLevel();
-    let clicker = event.getPlayer();
-
-    let depotContainer = blockContainer.getUp();
-    let depotBE = depotContainer.getEntity();
-    if (!(depotBE instanceof $DepotBlockEntity)) {
-        queryParticle(world, blockContainer.getX(), blockContainer.getY() + 1, blockContainer.getZ(), true);
-        clicker.displayClientMessage(Component.translatable("block.kubejs.fluid_infusion_core.missing_depot").red(), true);
-        return;
+/**
+ * @param {Internal.Fluid[]} foundFluids 
+ * @param {Internal.Fluid[]} requiredFluids 
+ * @returns {boolean}
+ */
+let queryFluids = (foundFluids, requiredFluids) => {
+    let foundFluidsCopy = foundFluids.slice();
+    
+    for (let requiredFluid of requiredFluids) {
+        for (let i = 0; i < foundFluidsCopy.length; i++) {
+            let fluid = foundFluidsCopy[i];
+            if (fluid == null) continue;
+            if (requiredFluid.equals(fluid)) {
+                foundFluidsCopy[i] = null;
+                break;
+            }
+        }
     }
-    queryParticle(world, blockContainer.getX(), blockContainer.getY() + 1, blockContainer.getZ(), false);
+    for (let fluid of foundFluidsCopy) {
+        if (fluid != null) return false;
+    }
+    return true;
+};
 
+/**
+ * @param {Internal.ItemStack} inputItemStack 
+ * @param {Internal.Fluid[]} fluidsFound
+ */
+let findOutputItem = (inputItemStack, fluidsFound) => {
+    let depotHeldItemType = inputItemStack.getItem();
+
+    /** @type {Internal.ItemStack} */
+    let outputItem = null;
+
+    if (depotHeldItemType instanceof $MaterialItem) {
+        let variantId = depotHeldItemType.getMaterial(inputItemStack);
+
+        /** @type {Annotation.BatchRecipes.FluidInfusion.Material} */
+        let foundRecipe = null;
+
+        global.BlockFunctions.FluidInfusionCore.MATERIAL_RECIPES.forEach((ingredient, innerMap) => {
+            if (foundRecipe != null) return;
+            if (ingredient.getId().equals(variantId)) {
+                innerMap.forEach((fluids, recipe) => {
+                    if (foundRecipe != null) return;
+                    let match = queryFluids(fluidsFound, fluids);
+                    if (match) {
+                        foundRecipe = recipe;
+                    }
+                });
+            }
+        });
+
+        if (foundRecipe != null) {
+            outputItem = depotHeldItemType.withMaterialForDisplay(foundRecipe.outputMaterial);
+        }
+    }
+
+    if (outputItem == null) {
+        /** @type {Annotation.BatchRecipes.FluidInfusion.Item} */
+        let foundRecipe = null;
+        global.BlockFunctions.FluidInfusionCore.RECIPES.forEach((ingredient, innerMap) => {
+            if (foundRecipe != null) return;
+            let pass = ingredient["test(net.minecraft.world.item.ItemStack)"](inputItemStack);
+            if (!pass) return;
+            innerMap.forEach((fluids, recipe) => {
+                if (foundRecipe != null) return;
+                
+                let match = queryFluids(fluidsFound, fluids);
+                if (match) {
+                    foundRecipe = recipe;
+                }
+            });
+        });
+
+        if (foundRecipe != null) {
+            outputItem = foundRecipe.outputItem;
+        }
+    }
+
+    return outputItem;
+};
+
+/**
+ * 
+ * @param {Internal.BlockContainerJS} blockContainer 
+ * @param {Internal.Level} world 
+ * @param {Internal.LivingEntity | null} clicker 
+ * @returns 
+ */
+let findFluidDistance = (blockContainer, world, clicker) => {
     let foundDistance = -1;
     for (let d = 1; d <= MAX_SEARCH_DISTANCE; d++) {
         let isAtThisDistance = false;
@@ -128,9 +150,11 @@ global.BlockFunctions.FluidInfusionCore.rightClick = (event) => {
             let newBlockContainer = world.getBlock(newBlockPos);
 
             if (newBlockContainer.getBlockState().canOcclude()) {
-                queryParticle(world, newBlockContainer.getX(), newBlockContainer.getY(), newBlockContainer.getZ(), true);
-                clicker.displayClientMessage(Component.translatable("block.kubejs.fluid_infusion_core.solid_blocking").red(), true);
-                return;
+                if (clicker != null) {
+                    queryParticle(world, newBlockContainer.getX(), newBlockContainer.getY(), newBlockContainer.getZ(), true);
+                    clicker.displayClientMessage(Component.translatable("block.kubejs.fluid_infusion_core.solid_blocking").red(), true);
+                }
+                return foundDistance;
             }
 
             let isSource = newBlockContainer.getBlockState().getFluidState().isSource();
@@ -148,78 +172,140 @@ global.BlockFunctions.FluidInfusionCore.rightClick = (event) => {
                 let newBlockContainer = world.getBlock(newBlockPos);
                 let isSource = newBlockContainer.getBlockState().getFluidState().isSource();
                 if (!isSource) {
-                    queryParticle(world, newBlockContainer.getX(), newBlockContainer.getY(), newBlockContainer.getZ(), true);
+                    if (clicker != null) queryParticle(world, newBlockContainer.getX(), newBlockContainer.getY(), newBlockContainer.getZ(), true);
                     err = true;
                 } else {
-                    queryParticle(world, newBlockContainer.getX(), newBlockContainer.getY(), newBlockContainer.getZ(), false);
+                    if (clicker != null) queryParticle(world, newBlockContainer.getX(), newBlockContainer.getY(), newBlockContainer.getZ(), false);
                 }
             }
             if (err) {
-                clicker.displayClientMessage(Component.translatable("block.kubejs.fluid_infusion_core.incomplete_fluid").red(), true);
-                return;
+                if (clicker != null) clicker.displayClientMessage(Component.translatable("block.kubejs.fluid_infusion_core.incomplete_fluid").red(), true);
+                return foundDistance;
             } else {
                 foundDistance = d;
                 break;
             }
         }
     }
+    return foundDistance;
+};
 
-    if (foundDistance < 0) {
-        clicker.displayClientMessage(Component.translatable("block.kubejs.fluid_infusion_core.missing_fluid").red(), true);
+/**
+ * 
+ * @param {Internal.BlockContainerJS} blockContainer 
+ * @param {Internal.Level} world 
+ * @param {number} distance 
+ */
+let getFluidIdsFromDistance = (blockContainer, world, distance) => {
+    /** @type {Internal.BlockState[]} */
+    let fluidsFound = [];
+    for (let [dx, dy] of DIRECTIONS) {
+        let newBlockPos = blockContainer.getPos().offset(dx * distance, 0, dy * distance);
+        let newBlockContainer = world.getBlock(newBlockPos);
+        let fluid = newBlockContainer.getBlockState();
+        fluidsFound.push(fluid);
+    }
+    return fluidsFound;
+};
+
+global.BlockFunctions.FluidInfusionCore.blockEntityTick = (blockEntity) => {
+
+    // Tick lazier
+    if (blockEntity.tick % 5 != 0) return;
+
+    let depot = blockEntity.getBlock().getUp();
+    let depotBE = depot.getEntity();
+
+    if (!(depotBE instanceof $DepotBlockEntity)) return;
+
+    let data = blockEntity.getPersistentData();
+
+    let itemOn = depotBE.getHeldItem();
+
+    if (itemOn == null || itemOn.isEmpty()) {
+        data.remove("LastTickItem");
         return;
     }
 
-    /** @type {Internal.Fluid[]} */
-    let fluidsFound = [];
-    for (let [dx, dy] of DIRECTIONS) {
-        let newBlockPos = blockContainer.getPos().offset(dx * foundDistance, 0, dy * foundDistance);
-        let newBlockContainer = world.getBlock(newBlockPos);
-        let fluid = newBlockContainer.getBlockState().getFluidState().getType();
+    let lastTickItem = data.getCompound("LastTickItem");
+    let thisTickItem = itemOn.serializeNBT();
 
-        fluidsFound.push(fluid);
+    let cacheValid = true;
+
+    if (!lastTickItem.equals(thisTickItem)) {
+        data.put("LastTickItem", thisTickItem);
+        cacheValid = false;
     }
 
-    /** @type {Annotation.BatchRecipes.FluidInfusion.Item} */
-    let foundRecipe = null;
-    global.BlockFunctions.FluidInfusionCore.RECIPES.forEach((ingredient, innerMap) => {
-        if (foundRecipe != null) return;
-        let pass = ingredient["test(net.minecraft.world.item.ItemStack)"](depotBE.getHeldItem());
-        if (!pass) return;
-        innerMap.forEach((fluids, recipe) => {
-            if (foundRecipe != null) return;
+    let oldFluidDistance = -1;
+    if (cacheValid) {
+        // Storage liquid square distance in tag "LastTickFluidDistance"
+        // 4 fluid blocks in "LastTickFluid1", "LastTickFluid2", ...
+        // Stored fluid objects are actually fluid IDs
 
-            let fluidsFoundCopy = fluidsFound.slice();
+        // Find them first, according to last tick's fluid distance
+        oldFluidDistance = data.getInt("LastTickFluidDistance");
+        if (oldFluidDistance <= 0) {
+            data.remove("LastTickFluidDistance");
+            data.remove("LastTickFluid1");
+            data.remove("LastTickFluid2");
+            data.remove("LastTickFluid3");
+            data.remove("LastTickFluid4");
+            cacheValid = false;
+        }
+    }
 
-            let allMatch = true;
-            for (let requiredFluid of fluids) {
-                let thisMatch = false;
+    let world = blockEntity.getLevel();
 
-                fluidsFoundCopy.forEach((fluid, index) => {
-                    if (thisMatch) return;
-                    if (fluid == null) return;
-                    if (requiredFluid.equals(fluid)) {
-                        thisMatch = true;
-                        fluidsFoundCopy[index] = null;
-                    }
-                });
-                if (!thisMatch) {
-                    allMatch = false;
-                    return;
-                }
+    if (cacheValid) {
+        for (let i = 0; i < 4; i++) {
+            // Validate
+            let fluidIdTag = "LastTickFluid" + (i + 1);
+            let storedFluidId = data.getString(fluidIdTag);
+            if (storedFluidId == null || storedFluidId === "") {
+                cacheValid = false;
+                break;
             }
-            if (allMatch) {
-                foundRecipe = recipe;
-            }
-        });
-    });
+            let actualFluidInWorld = world.getBlockState(blockEntity.getBlockPos().offset(DIRECTIONS[i][0] * oldFluidDistance, 0, DIRECTIONS[i][1] * oldFluidDistance)).getBlock().getId();
 
-    if (foundRecipe == null) return;
+            if (storedFluidId != actualFluidInWorld) {
+                cacheValid = false;
+                break;
+            }
+        }
+    }
+
+    if (cacheValid) return;
+
+    // Recalculate
+
+    let foundDistance = findFluidDistance(blockEntity.getBlock(), world, null);
+    if (foundDistance <= 0) {
+        data.remove("LastTickFluidDistance");
+        data.remove("LastTickFluid1");
+        data.remove("LastTickFluid2");
+        data.remove("LastTickFluid3");
+        data.remove("LastTickFluid4");
+        return;
+    }
+
+    let fluidsFound = getFluidIdsFromDistance(blockEntity.getBlock(), world, foundDistance);
+    data.putInt("LastTickFluidDistance", foundDistance);
+    for (let i = 0; i < 4; i++) {
+        let fluidIdTag = "LastTickFluid" + (i + 1);
+        data.putString(fluidIdTag, fluidsFound[i].getBlock().getId());
+    }
+
+    // Process recipe after recaculation
+
+    let outputItem = findOutputItem(itemOn, fluidsFound.map(f => f.getFluidState().getType()));
+    if (outputItem == null) return;
 
     // Clear fluid
     for (let [dx, dy] of DIRECTIONS) {
-        let newBlockPos = blockContainer.getPos().offset(dx * foundDistance, 0, dy * foundDistance);
+        let newBlockPos = blockEntity.getBlock().getPos().offset(dx * foundDistance, 0, dy * foundDistance);
         let bottomFluidType = world.getBlock(newBlockPos).getBlockState().getFluidState().getType();
-        
+
         // Consume the top fluid of a fluid pillar first
         while (true) {
             newBlockPos = newBlockPos.offset(0, 1, 0);
@@ -234,14 +320,38 @@ global.BlockFunctions.FluidInfusionCore.rightClick = (event) => {
         } else {
             world.setBlockAndUpdate(topFluidPos, Blocks.AIR.defaultBlockState());
         }
-    }    
+    }
+
+    let BEPos = depotBE.getBlockPos();
 
     // Replace item
-    if (foundRecipe != null) {
-        depotBE.getHeldItem().shrink(1);
-        let recipeResult = new $ItemEntity(world, depotContainer.getX() + 0.5, depotContainer.getY() + 1, depotContainer.getZ() + 0.5, foundRecipe.outputItem.copy(), 0, 0.4, 0);
-        world.addFreshEntity(recipeResult);
-        depotBE.notifyUpdate();
+    depotBE.getHeldItem().shrink(1);
+    let recipeResult = new $ItemEntity(world, BEPos.getX() + 0.5, BEPos.getY() + 1, BEPos.getZ() + 0.5, outputItem.copy(), 0, 0.2, 0);
+    world.addFreshEntity(recipeResult);
+    depotBE.notifyUpdate();
+
+};
+
+global.BlockFunctions.FluidInfusionCore.rightClick = (event) => {
+
+    let blockContainer = event.getBlock();
+    let world = event.getLevel();
+    let clicker = event.getPlayer();
+
+    let depotContainer = blockContainer.getUp();
+    let depotBE = depotContainer.getEntity();
+    if (!(depotBE instanceof $DepotBlockEntity)) {
+        queryParticle(world, blockContainer.getX(), blockContainer.getY() + 1, blockContainer.getZ(), true);
+        clicker.displayClientMessage(Component.translatable("block.kubejs.fluid_infusion_core.missing_depot").red(), true);
+        return;
+    }
+    queryParticle(world, blockContainer.getX(), blockContainer.getY() + 1, blockContainer.getZ(), false);
+
+    let foundDistance = findFluidDistance(blockContainer, world, clicker);
+
+    if (foundDistance < 0) {
+        clicker.displayClientMessage(Component.translatable("block.kubejs.fluid_infusion_core.missing_fluid").red(), true);
+        return;
     }
 
 };
@@ -249,7 +359,7 @@ global.BlockFunctions.FluidInfusionCore.rightClick = (event) => {
 StartupEvents.registry("minecraft:block", event => {
     event.create(FLUID_INFUSION_CORE_ID)
         .blockEntity(be => {
-            be.tick((blockEntity) => global.BlockFunctions.FluidInfusionCore.blockEntityTick(blockEntity));
+            be.serverTick((blockEntity) => global.BlockFunctions.FluidInfusionCore.blockEntityTick(blockEntity));
         })
         .rightClick((event) => global.BlockFunctions.FluidInfusionCore.rightClick(event))
     ;

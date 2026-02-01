@@ -214,4 +214,42 @@ BatchMaterialRecipes.SequencedAssembly = {
     }
 };
 
+/**
+ * Batch fluid infusion recipe.  
+ * 批量流体注入配方。
+ */
+BatchMaterialRecipes.FluidInfusion = {
+    /**
+     * @param {string} recipeId 
+     * @param {Internal.MaterialVariantId} inputMaterial 
+     * @param {Internal.MaterialVariantId} outputMaterial 
+     * @param {Internal.Fluid[]} fluidList 
+     * @param {Internal.MaterialStatsId[]} partStatTypes 
+     */
+    register: (recipeId, inputMaterial, outputMaterial, fluidList, partStatTypes) => {
+        let statTypeSet = new $HashSet();
+        for (let statType of partStatTypes) {
+            statTypeSet.add(statType);
+        }
+
+        let recipe = {
+            inputMaterial: inputMaterial,
+            inputFluids: fluidList,
+            outputMaterial: outputMaterial,
+            statTypes: statTypeSet,
+            recipeId: recipeId
+        };
+
+        let recipeCache = global.BlockFunctions.FluidInfusionCore.MATERIAL_RECIPES;
+
+        if (recipeCache.containsKey(recipe.inputMaterial)) {
+            recipeCache.get(recipe.inputMaterial).put(recipe.inputFluids, recipe);
+        } else {
+            let innerMap = Utils.newMap();
+            innerMap.put(recipe.inputFluids, recipe);
+            recipeCache.put(recipe.inputMaterial, innerMap);
+        }
+    }
+};
+
 global.BatchMaterialRecipes = BatchMaterialRecipes;

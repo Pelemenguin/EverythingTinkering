@@ -108,6 +108,8 @@ const $TooltipModifierHook = Java.loadClass("slimeknights.tconstruct.library.mod
 const $CapacityBarModule = Java.loadClass("slimeknights.tconstruct.library.modifiers.modules.capacity.CapacityBarModule");
 const $DurabilityShieldModule = Java.loadClass("slimeknights.tconstruct.library.modifiers.modules.capacity.DurabilityShieldModule");
 const $ModifiableItem = Java.loadClass("slimeknights.tconstruct.library.tools.item.ModifiableItem");
+const $MaterialItem = Java.loadClass("slimeknights.tconstruct.library.tools.part.MaterialItem");
+const $RepairKitItem = Java.loadClass("slimeknights.tconstruct.tools.item.RepairKitItem");
 
 // Create
 const $FluidIngredient = Java.loadClass("com.simibubi.create.foundation.fluid.FluidIngredient");

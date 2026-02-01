@@ -24,9 +24,9 @@
     $MaterialStatsId
  */
 
-const BatchMaterialRecipes = global.BatchMaterialRecipes;
-
 ServerEvents.recipes(event => {
+
+    const BatchMaterialRecipes = global.BatchMaterialRecipes;
 
     console.info(`Registering batch material recipes...`);
     console.info(`Available tool parts: ${global.CustomUtils.Tinker.TOOL_PARTS.map(part => part.getId()).join(", ")}`);

@@ -14,7 +14,6 @@
  */
 
 /* global
-    global: writable
     StartupEvents
 */
 
@@ -24,5 +23,3 @@ StartupEvents.registry("minecraft:block", event => {
         .resistance(2000)
     ;
 });
-
-global.BlockFunctions = {};
