@@ -22,3 +22,6 @@ Java.loadClass("slimeknights.tconstruct.library.tools.context.LootingContext");
 Java.loadClass("slimeknights.tconstruct.library.tools.context.ToolAttackContext");
 Java.loadClass("slimeknights.tconstruct.library.tools.context.ToolHarvestContext");
 Java.loadClass("slimeknights.tconstruct.library.tools.context.ToolRebuildContext");
+
+Java.loadClass("net.createmod.ponder.foundation.PonderSceneBuilder");
+Java.loadClass("net.createmod.ponder.foundation.PonderSceneBuilder$PonderWorldInstructions");

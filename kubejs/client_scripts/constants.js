@@ -19,3 +19,13 @@
 
 // Minecraft
 const $Minecraft = Java.loadClass("net.minecraft.client.Minecraft");
+
+// Tinker's Construct
+const $MaterialVariantId = Java.loadClass("slimeknights.tconstruct.library.materials.definition.MaterialVariantId");
+const TinkerToolParts = Java.loadClass("slimeknights.tconstruct.tools.TinkerToolParts");
+
+// Create
+const $DepotBlockEntity = Java.loadClass("com.simibubi.create.content.logistics.depot.DepotBlockEntity");
+
+// KubeJS
+const $BlockEntityJS = Java.loadClass("dev.latvian.mods.kubejs.block.entity.BlockEntityJS");

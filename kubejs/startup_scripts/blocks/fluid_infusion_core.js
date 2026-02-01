@@ -23,6 +23,8 @@
     BlockProperties
     $Boolean
     $MaterialItem
+    $BlockParticleOption
+    ParticleTypes
 */
 
 /** @type {Internal.BlockEntityCallback_} */
@@ -210,6 +212,14 @@ let getFluidIdsFromDistance = (blockContainer, world, distance) => {
 
 global.BlockFunctions.FluidInfusionCore.blockEntityTick = (blockEntity) => {
 
+    let data = blockEntity.getPersistentData();
+
+    let recipeProgress = data.getInt("RecipeProgress");
+
+    if (recipeProgress > 0) {
+        data.putInt("RecipeProgress", recipeProgress + 1);
+    }
+
     // Tick lazier
     if (blockEntity.tick % 5 != 0) return;
 
@@ -217,8 +227,6 @@ global.BlockFunctions.FluidInfusionCore.blockEntityTick = (blockEntity) => {
     let depotBE = depot.getEntity();
 
     if (!(depotBE instanceof $DepotBlockEntity)) return;
-
-    let data = blockEntity.getPersistentData();
 
     let itemOn = depotBE.getHeldItem();
 
@@ -230,7 +238,8 @@ global.BlockFunctions.FluidInfusionCore.blockEntityTick = (blockEntity) => {
     let lastTickItem = data.getCompound("LastTickItem");
     let thisTickItem = itemOn.serializeNBT();
 
-    let cacheValid = true;
+    // Force validating when recipe processing
+    let cacheValid = recipeProgress > 0 ? false : true;
 
     if (!lastTickItem.equals(thisTickItem)) {
         data.put("LastTickItem", thisTickItem);
@@ -262,7 +271,7 @@ global.BlockFunctions.FluidInfusionCore.blockEntityTick = (blockEntity) => {
             // Validate
             let fluidIdTag = "LastTickFluid" + (i + 1);
             let storedFluidId = data.getString(fluidIdTag);
-            if (storedFluidId == null || storedFluidId === "") {
+            if (storedFluidId == null || storedFluidId == "") {
                 cacheValid = false;
                 break;
             }
@@ -300,6 +309,30 @@ global.BlockFunctions.FluidInfusionCore.blockEntityTick = (blockEntity) => {
 
     let outputItem = findOutputItem(itemOn, fluidsFound.map(f => f.getFluidState().getType()));
     if (outputItem == null) return;
+    else if (recipeProgress <= 0) {
+        data.putInt("RecipeProgress", 1);
+    }
+
+    if (recipeProgress < 60) {
+        // Play particle
+        for (let i = 0; i < 4; i++) {
+            let particle = new $BlockParticleOption(ParticleTypes.BLOCK, fluidsFound[i]);
+            let [dx, dy] = DIRECTIONS[i];
+            let pos = blockEntity.getBlockPos();
+
+            // Move particles slowly to the depot
+            // In parabola
+            let horizontal = (60 - recipeProgress) / 60;
+            let vertical = -3 * horizontal * horizontal + horizontal * 1.5 + 1.5;
+
+            world.spawnParticles(particle, false, pos.getX() + 0.5 + dx * foundDistance * horizontal, pos.getY() + 0.5 + vertical, pos.getZ() + 0.5 + dy * foundDistance * horizontal, 0, 0, 0, 20, 1);
+            world.spawnParticles(particle, false, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, 0, 0, 0, 20, 1);
+        }
+
+        return;
+    }
+
+    data.putInt("RecipeProgress", -1);
 
     // Clear fluid
     for (let [dx, dy] of DIRECTIONS) {
@@ -337,6 +370,8 @@ global.BlockFunctions.FluidInfusionCore.rightClick = (event) => {
     let blockContainer = event.getBlock();
     let world = event.getLevel();
     let clicker = event.getPlayer();
+
+    blockContainer.getEntity().getPersistentData().remove("LastTickItem");
 
     let depotContainer = blockContainer.getUp();
     let depotBE = depotContainer.getEntity();
