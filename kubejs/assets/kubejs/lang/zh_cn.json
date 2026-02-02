@@ -335,6 +335,10 @@
     "modifier.kubejs.induced_deflection.flavor": "你怎么躲的？“我没躲，它在躲我。”",
     "modifier.kubejs.induced_deflection.description": "移动时偏转弹射物。想象你自己是一个带正电的运动点电荷，弹射物同样带正电，偏转方向由其在你产生的磁场中的洛伦兹力决定",
 
+    "modifier.kubejs.autonomous": "自主",
+    "modifier.kubejs.autonomous.flavor": "sudo tool --auto-mode",
+    "modifier.kubejs.autonomous.description": "攻击后的一段时间内，工具会自动攻击周围目标",
+
     "modifier.kubejs.glacial_strike": "冰滞冲击",
     "modifier.kubejs.glacial_strike.flavor": "你有没有想象过一座冰山跳几米高砸你？",
     "modifier.kubejs.glacial_strike.description": "按下“冰滞冲击”按键跳起，再按一次以砸向地面。落地时对范围内的目标造成伤害",

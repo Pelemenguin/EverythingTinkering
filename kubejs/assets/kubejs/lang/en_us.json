@@ -184,6 +184,11 @@
     "material.kubejs.mainspring.flavor": "Wind up!",
     "material.kubejs.mainspring.encyclopedia": "Gives movement speed boost after attacking. Can go up to 40% speed boost",
 
+    "material.kubejs.incomplete_mainspring": "Incomplete Mainspring",
+    "material.kubejs.incomplete_mainspring.format": "Incomplete Mainspring %s",
+    "material.kubejs.incomplete_mainspring.flavor": "Winding up...",
+    "material.kubejs.incomplete_mainspring.encyclopedia": "Winding up...",
+
     "material.kubejs.scrapped_tinker_metal": "Scrapped Tinker Metal",
     "material.kubejs.scrapped_tinker_metal.flavor": "Still usable?",
     "material.kubejs.scrapped_tinker_metal.encyclopedia": "Provides a durability shield absorbing 20 durability points per level. After complete consumption, the shield takes 30 seconds to recover",
@@ -327,6 +332,10 @@
     "modifier.kubejs.induced_deflection.flavor": "How did you dodge that? \"I didn't, it just dodged me.\"",
     "modifier.kubejs.induced_deflection.description": "Deflects projectiles when moving. Imagine yourself as a positively charged moving point charge and projectiles are also positively charged, then its deflection direction is determined by the Lorentz force in the magnetic field you generate",
 
+    "modifier.kubejs.autonomous": "Autonomous",
+    "modifier.kubejs.autonomous.flavor": "sudo tool --auto-mode",
+    "modifier.kubejs.autonomous.description": "After attacking, the tool will automatically attack surrounding targets for a period of time",
+
     "modifier.kubejs.glacial_strike": "Glacial Strike",
     "modifier.kubejs.glacial_strike.flavor": "Ever imagined an iceberg jumping meters high to smash you?",
     "modifier.kubejs.glacial_strike.description": "Press the \"Glacial Strike\" key to leap up, then press again while falling to slam into the ground. Damages targets in an area upon landing.",
@@ -347,11 +356,6 @@
     "modifier.kubejs.incomplete.flavor": "For transitional usage only!",
     "modifier.kubejs.incomplete.description": "You cannot use this material",
     "modifier.kubejs.incomplete.error": "Are you trying to make a tool using an incomplete part? Perhaps you should complete the sequence assembly recipe first.",
-
-    "material.kubejs.incomplete_mainspring": "Incomplete Mainspring",
-    "material.kubejs.incomplete_mainspring.format": "Incomplete Mainspring %s",
-    "material.kubejs.incomplete_mainspring.flavor": "Winding up...",
-    "material.kubejs.incomplete_mainspring.encyclopedia": "Winding up...",
 
     "modifier.kubejs.immutable": "Immutable",
     "modifier.kubejs.immutable.flavor": "Need to use \".copy()\"?",
