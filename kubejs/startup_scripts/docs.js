@@ -24,4 +24,8 @@ Java.loadClass("slimeknights.tconstruct.library.tools.context.ToolHarvestContext
 Java.loadClass("slimeknights.tconstruct.library.tools.context.ToolRebuildContext");
 
 Java.loadClass("net.createmod.ponder.foundation.PonderSceneBuilder");
+Java.loadClass("net.createmod.ponder.foundation.PonderSceneBuilder$PonderEffectInstructions");
+Java.loadClass("net.createmod.ponder.foundation.PonderSceneBuilder$PonderOverlayInstructions");
+Java.loadClass("net.createmod.ponder.foundation.PonderSceneBuilder$PonderSpecialInstructions");
 Java.loadClass("net.createmod.ponder.foundation.PonderSceneBuilder$PonderWorldInstructions");
+Java.loadClass("net.createmod.ponder.foundation.PonderSceneBuilder$PonderDebugInstructions");

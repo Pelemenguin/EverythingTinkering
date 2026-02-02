@@ -1,0 +1,14 @@
+{
+  "kubejs.ponder.fluid_infusion_core.header": "流体注入核心",
+  "kubejs.ponder.fluid_infusion_core.text_1": "在流体注入核心上放置一个置物台……",
+  "kubejs.ponder.fluid_infusion_core.text_2": "……并在四个对角线方向上各放置四桶液体",
+  "kubejs.ponder.fluid_infusion_core.text_3": "这些液体距离核心最多四个方块对角线的距离……",
+  "kubejs.ponder.fluid_infusion_core.text_4": "……但不能被固体方块阻挡",
+  "kubejs.ponder.fluid_infusion_core.text_5": "将待处理的物品放入置物台……",
+  "kubejs.ponder.fluid_infusion_core.text_6": "当液体与配方中要求的匹配时，合成立即开始",
+  "kubejs.ponder.using_fluid_columns.header": "使用流体柱",
+  "kubejs.ponder.using_fluid_columns.text_1": "除了单个流体方块……",
+  "kubejs.ponder.using_fluid_columns.text_2": "……我们还可以使用流体柱",
+  "kubejs.ponder.using_fluid_columns.text_3": "柱顶的流体将被消耗",
+  "kubejs.ponder.using_fluid_columns.text_4": "直到一些流体柱变空或物品被消耗完"
+}

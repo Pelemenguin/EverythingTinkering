@@ -226,12 +226,17 @@ global.BlockFunctions.FluidInfusionCore.blockEntityTick = (blockEntity) => {
     let depot = blockEntity.getBlock().getUp();
     let depotBE = depot.getEntity();
 
-    if (!(depotBE instanceof $DepotBlockEntity)) return;
+    if (!(depotBE instanceof $DepotBlockEntity)) {
+        data.remove("LastTickItem");
+        data.putInt("RecipeProgress", -1);
+        return;
+    }
 
     let itemOn = depotBE.getHeldItem();
 
     if (itemOn == null || itemOn.isEmpty()) {
         data.remove("LastTickItem");
+        data.putInt("RecipeProgress", -1);
         return;
     }
 
@@ -295,6 +300,7 @@ global.BlockFunctions.FluidInfusionCore.blockEntityTick = (blockEntity) => {
         data.remove("LastTickFluid2");
         data.remove("LastTickFluid3");
         data.remove("LastTickFluid4");
+        data.putInt("RecipeProgress", -1);
         return;
     }
 
@@ -308,8 +314,10 @@ global.BlockFunctions.FluidInfusionCore.blockEntityTick = (blockEntity) => {
     // Process recipe after recaculation
 
     let outputItem = findOutputItem(itemOn, fluidsFound.map(f => f.getFluidState().getType()));
-    if (outputItem == null) return;
-    else if (recipeProgress <= 0) {
+    if (outputItem == null) {
+        data.putInt("RecipeProgress", -1);
+        return;
+    } else if (recipeProgress <= 0) {
         data.putInt("RecipeProgress", 1);
     }
 

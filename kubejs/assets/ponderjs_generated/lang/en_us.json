@@ -1,0 +1,14 @@
+{
+  "kubejs.ponder.fluid_infusion_core.header": "Fluid Infusion Core",
+  "kubejs.ponder.fluid_infusion_core.text_1": "Place a Depot on the Fluid Infusion Core ...",
+  "kubejs.ponder.fluid_infusion_core.text_2": "... Then four buckets of liquid along the diagonals",
+  "kubejs.ponder.fluid_infusion_core.text_3": "These fluids can be at most four diagonals away from the core ...",
+  "kubejs.ponder.fluid_infusion_core.text_4": "... But not allowed to be blocked",
+  "kubejs.ponder.fluid_infusion_core.text_5": "Place the item to be processed onto the Depot ...",
+  "kubejs.ponder.fluid_infusion_core.text_6": "... Then the process is started if liquids match the recipe\u0027s requirements",
+  "kubejs.ponder.using_fluid_columns.header": "Using Fluid Columns",
+  "kubejs.ponder.using_fluid_columns.text_1": "Instead of single fluid block ...",
+  "kubejs.ponder.using_fluid_columns.text_2": "... We can also use fluid columns",
+  "kubejs.ponder.using_fluid_columns.text_3": "The fluids at the top of the columns will be consumed",
+  "kubejs.ponder.using_fluid_columns.text_4": "Until some of the columns is empty or items are used up"
+}
