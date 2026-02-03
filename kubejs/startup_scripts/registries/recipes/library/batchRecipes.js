@@ -252,4 +252,25 @@ BatchMaterialRecipes.FluidInfusion = {
     }
 };
 
+/**
+ * Resets all the batch recipes.  
+ * 重置所有批量配方。
+ */
+BatchMaterialRecipes.resetAllRecipes = () => {
+
+    // Deploying
+    BatchMaterialRecipes.Deploying.ALL = {};
+    BatchMaterialRecipes.Deploying.CACHE.clear();
+
+    // Sequenced Assembly
+    BatchMaterialRecipes.SequencedAssembly.ALL = {};
+    BatchMaterialRecipes.SequencedAssembly.CACHE.clear();
+
+
+    // Fluid Infusion
+    global.BlockFunctions.FluidInfusionCore.MATERIAL_RECIPES.clear();
+    global.BlockFunctions.FluidInfusionCore.RECIPES.clear();
+
+};
+
 global.BatchMaterialRecipes = BatchMaterialRecipes;

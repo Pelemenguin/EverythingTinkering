@@ -12,63 +12,80 @@
  */
 
 /* global
+    global: writable
     BatchMaterialRecipes
     $MaterialVariantId
     IngredientHelper
-    Blocks
+    StartupEvents
+    $TinkerFluids
 */
 
-BatchMaterialRecipes.Deploying.register("kubejs:tinkering/materials/steel_clad_copper/deploying",
-    $MaterialVariantId.parse("tconstruct:copper"),
-    $MaterialVariantId.parse("kubejs:steel_clad_copper"),
-    IngredientHelper.tag("forge:plates/iron"),
-    BatchMaterialRecipes.KnownStatGroups.FULL_MATERIAL
-);
+/**
+ * Run at post initialization for those client-only users.
+ * Then once again at recipe registration for those dedicated server users.
+ */
+global.DeferredTasks.MaterialRecipesRegister = (() => {
 
-BatchMaterialRecipes.SequencedAssembly.register("kubejs:tinkering/material/mainspring/sequenced_assembly",
-    $MaterialVariantId.parse("kubejs:andesite_alloy"),
-    $MaterialVariantId.parse("kubejs:mainspring"),
-    $MaterialVariantId.parse("kubejs:incomplete_mainspring"),
-    (event, transitionalItem, _part) => [
-        event.getRecipes().create.cutting(
-            [transitionalItem],
-            [transitionalItem]
-        ),
-        event.getRecipes().create.deploying(
-            [transitionalItem],
-            [transitionalItem, IngredientHelper.tag("forge:plates/gold")]
-        ),
-        event.getRecipes().create.cutting(
-            [transitionalItem],
-            [transitionalItem]
-        ),
-        event.getRecipes().create.deploying(
-            [transitionalItem],
-            [transitionalItem, IngredientHelper.tag("forge:glass_panes")]
-        )
-    ],
-    1,
-    (utils) => {
-        utils.cutting();
-        utils.deployingIngredient(IngredientHelper.tag("forge:plates/gold"));
-        utils.cutting();
-        utils.deployingIngredient(IngredientHelper.tag("forge:glass_panes"));
-    },
-    [
-        BatchMaterialRecipes.KnownStats.HEAD,
-        BatchMaterialRecipes.KnownStats.REPAIR_KIT
-    ]
-);
+    BatchMaterialRecipes.resetAllRecipes();
 
-BatchMaterialRecipes.FluidInfusion.register(
-    "kubejs:tinkering/materials/test/fluid_infusion",
-    $MaterialVariantId.parse("tconstruct:copper"),
-    $MaterialVariantId.parse("kubejs:tin"),
-    [
-        Blocks.WATER.getFluid(),
-        Blocks.WATER.getFluid(),
-        Blocks.WATER.getFluid(),
-        Blocks.WATER.getFluid()
-    ],
-    BatchMaterialRecipes.KnownStatGroups.FULL_MATERIAL
-);
+    BatchMaterialRecipes.Deploying.register("kubejs:tinkering/materials/steel_clad_copper/deploying",
+        $MaterialVariantId.parse("tconstruct:copper"),
+        $MaterialVariantId.parse("kubejs:steel_clad_copper"),
+        IngredientHelper.tag("forge:plates/iron"),
+        BatchMaterialRecipes.KnownStatGroups.FULL_MATERIAL
+    );
+
+    BatchMaterialRecipes.SequencedAssembly.register("kubejs:tinkering/material/mainspring/sequenced_assembly",
+        $MaterialVariantId.parse("kubejs:andesite_alloy"),
+        $MaterialVariantId.parse("kubejs:mainspring"),
+        $MaterialVariantId.parse("kubejs:incomplete_mainspring"),
+        (event, transitionalItem, _part) => [
+            event.getRecipes().create.cutting(
+                [transitionalItem],
+                [transitionalItem]
+            ),
+            event.getRecipes().create.deploying(
+                [transitionalItem],
+                [transitionalItem, IngredientHelper.tag("forge:plates/gold")]
+            ),
+            event.getRecipes().create.cutting(
+                [transitionalItem],
+                [transitionalItem]
+            ),
+            event.getRecipes().create.deploying(
+                [transitionalItem],
+                [transitionalItem, IngredientHelper.tag("forge:glass_panes")]
+            )
+        ],
+        1,
+        (utils) => {
+            utils.cutting();
+            utils.deployingIngredient(IngredientHelper.tag("forge:plates/gold"));
+            utils.cutting();
+            utils.deployingIngredient(IngredientHelper.tag("forge:glass_panes"));
+        },
+        [
+            BatchMaterialRecipes.KnownStats.HEAD,
+            BatchMaterialRecipes.KnownStats.REPAIR_KIT
+        ]
+    );
+
+    BatchMaterialRecipes.FluidInfusion.register(
+        "kubejs:tinkering/materials/test/fluid_infusion",
+        $MaterialVariantId.parse("kubejs:scrapped_tinker_metal"),
+        $MaterialVariantId.parse("kubejs:animated_tinker_metal"),
+        [
+            $TinkerFluids.moltenDiamond.getStill(),
+            $TinkerFluids.moltenIron.getStill(),
+            $TinkerFluids.moltenAmethyst.getStill(),
+            $TinkerFluids.moltenGlass.getStill()
+        ],
+        [
+            BatchMaterialRecipes.KnownStats.HEAD,
+            BatchMaterialRecipes.KnownStats.REPAIR_KIT
+        ]
+    );
+
+});
+
+StartupEvents.postInit(global.DeferredTasks.MaterialRecipesRegister);

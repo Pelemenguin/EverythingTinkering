@@ -23,8 +23,6 @@
     BlockProperties
     $Boolean
     $MaterialItem
-    $BlockParticleOption
-    ParticleTypes
 */
 
 /** @type {Internal.BlockEntityCallback_} */
@@ -324,7 +322,8 @@ global.BlockFunctions.FluidInfusionCore.blockEntityTick = (blockEntity) => {
     if (recipeProgress < 60) {
         // Play particle
         for (let i = 0; i < 4; i++) {
-            let particle = new $BlockParticleOption(ParticleTypes.BLOCK, fluidsFound[i]);
+            // let particle = new $BlockParticleOption(ParticleTypes.BLOCK, fluidsFound[i]);
+            let particle = new DustParticleOptions(new Vec3f(0, 1, 1), 1);
             let [dx, dy] = DIRECTIONS[i];
             let pos = blockEntity.getBlockPos();
 
@@ -333,8 +332,8 @@ global.BlockFunctions.FluidInfusionCore.blockEntityTick = (blockEntity) => {
             let horizontal = (60 - recipeProgress) / 60;
             let vertical = -3 * horizontal * horizontal + horizontal * 1.5 + 1.5;
 
-            world.spawnParticles(particle, false, pos.getX() + 0.5 + dx * foundDistance * horizontal, pos.getY() + 0.5 + vertical, pos.getZ() + 0.5 + dy * foundDistance * horizontal, 0, 0, 0, 20, 1);
-            world.spawnParticles(particle, false, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, 0, 0, 0, 20, 1);
+            world.spawnParticles(particle, false, pos.getX() + 0.5 + dx * foundDistance * horizontal, pos.getY() + 0.5 + vertical, pos.getZ() + 0.5 + dy * foundDistance * horizontal, 0, 0, 0, 10, 1);
+            world.spawnParticles(particle, false, pos.getX() + 0.5, pos.getY() + 2, pos.getZ() + 0.5, 0, 0.5, 0, 10, 1);
         }
 
         return;

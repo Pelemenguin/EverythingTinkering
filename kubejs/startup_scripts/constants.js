@@ -79,6 +79,9 @@ const ContentPageIconList = Java.tryLoadClass("slimeknights.mantle.client.book.d
 const ContentPageIconList$PageWithIcon = Java.tryLoadClass("slimeknights.mantle.client.book.data.content.ContentPageIconList$PageWithIcon");
 
 // Tinker's Construct
+const $TinkerFluids = Java.loadClass("slimeknights.tconstruct.fluids.TinkerFluids");
+const $TinkerCommon = Java.loadClass("slimeknights.tconstruct.shared.TinkerCommons");
+const $FluidParticleData = Java.loadClass("slimeknights.tconstruct.shared.particle.FluidParticleData");
 const MaterialId = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialId');
 const MaterialVariant = Java.loadClass('slimeknights.tconstruct.library.materials.definition.MaterialVariant');
 const $MaterialVariantId = Java.loadClass("slimeknights.tconstruct.library.materials.definition.MaterialVariantId");
@@ -438,6 +441,12 @@ global.CustomUtils = CustomUtils;
  * @interface
  */
 global.Tinker = function() {};
+
+/**
+ * Store some deferred tasks to run.  
+ * 存储一些延迟任务以运行。
+ */
+global.DeferredTasks = {};
 
 StartupEvents.postInit(() => {
     /**
