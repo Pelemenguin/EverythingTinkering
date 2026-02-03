@@ -667,6 +667,8 @@
         "_comment_recipes": " ----- 配方 ----- ",
     
     "pattern.kubejs.mechanism": "构件",
+    
+    "jei.kubejs.fluid_infusion.title": "流体注入",
 
         "_comment_end": "我不想再在JSON末尾手动去逗号了你知道吗，我就在这放一行，这样前面的就可以都加上逗号了"
 

@@ -42,6 +42,8 @@ const $ArmorDefinitions = Java.loadClass("slimeknights.tconstruct.tools.ArmorDef
 const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDefinitions');
 const MaterialNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT');
 const TinkerToolParts = Java.loadClass("slimeknights.tconstruct.tools.TinkerToolParts");
+const $FakeIngotItem = Java.loadClass("slimeknights.tconstruct.tools.item.FakeIngotItem");
+const $RepairKitItem = Java.loadClass("slimeknights.tconstruct.tools.item.RepairKitItem");
 const MaterialNBTBuilder = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT$Builder');
 
 const LivingHurtEvent = Java.loadClass("net.minecraftforge.event.entity.living.LivingHurtEvent");
@@ -52,15 +54,3 @@ const JavaUtils = {
     Float: Java.loadClass("java.lang.Float")
 };
 const $HashSet = Java.loadClass("java.util.HashSet");
-
-/**
- * @type {Internal.Item[]}
- */
-var toolParts = [Item.of("tconstruct:repair_kit").item];
-$ForgeRegistries.ITEMS.getValues().forEach(item => {
-    if (item instanceof ToolPartItem) {
-        toolParts.push(item);
-    }
-});
-
-global.CustomUtils.Tinker.TOOL_PARTS = toolParts;

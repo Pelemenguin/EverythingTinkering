@@ -22,6 +22,8 @@
     OutputItem
     ToolPartItem
     $MaterialStatsId
+    $RepairKitItem
+    $FakeIngotItem
  */
 
 ServerEvents.recipes(event => {
@@ -32,18 +34,25 @@ ServerEvents.recipes(event => {
     console.info(`Available tool parts: ${global.CustomUtils.Tinker.TOOL_PARTS.map(part => part.getId()).join(", ")}`);
     
     const REPAIR_KIT_STAT_ID = $MaterialStatsId.tryParse("tconstruct:repair_kit");
+    const FAKE_INGOT_STAT_ID = $MaterialStatsId.tryParse("tconstruct:ingot");
 
     // Deploying
     for (let recipeId in BatchMaterialRecipes.Deploying.ALL) {
         let entry = BatchMaterialRecipes.Deploying.ALL[recipeId];
         console.info(`Registering deploying batch recipe: ${recipeId} (${entry.inputMaterial} + ${entry.usingItem} -> ${entry.outputMaterial})`);
         for (let part of global.CustomUtils.Tinker.TOOL_PARTS) {
-            if (!(part instanceof ToolPartItem)) {
+            if (part instanceof $RepairKitItem) {
+                if (part instanceof $FakeIngotItem) {
+                    if (!entry.partStatTypes.contains(FAKE_INGOT_STAT_ID)) {
+                        console.info(`Skipping ${part.getId()} as for stat type tconstruct:ingot`);
+                        continue;
+                    }
+                }
                 if (!entry.partStatTypes.contains(REPAIR_KIT_STAT_ID)) {
                     console.info(`Skipping ${part.getId()} as for stat type tconstruct:repair_kit`);
                     continue;
                 }
-            } else {
+            } else if (part instanceof ToolPartItem) {
                 if (!entry.partStatTypes.contains(part.getStatType())) {
                     console.info(`Skipping ${part.getId()} for stat type ${part.getStatType()}`);
                     continue;
@@ -64,12 +73,18 @@ ServerEvents.recipes(event => {
         let entry = BatchMaterialRecipes.SequencedAssembly.ALL[recipeId];
         console.info(`Registering sequenced assembly batch recipe: ${recipeId} (${entry.inputMaterial} -> ${entry.outputMaterial})`);
         for (let part of global.CustomUtils.Tinker.TOOL_PARTS) {
-            if (!(part instanceof ToolPartItem)) {
+            if (part instanceof $RepairKitItem) {
+                if (part instanceof $FakeIngotItem) {
+                    if (!entry.partStatTypes.contains(FAKE_INGOT_STAT_ID)) {
+                        console.info(`Skipping ${part.getId()} as for stat type tconstruct:ingot`);
+                        continue;
+                    }
+                }
                 if (!entry.partStatTypes.contains(REPAIR_KIT_STAT_ID)) {
                     console.info(`Skipping ${part.getId()} as for stat type tconstruct:repair_kit`);
                     continue;
                 }
-            } else {
+            } else if (part instanceof ToolPartItem) {
                 if (!entry.partStatTypes.contains(part.getStatType())) {
                     console.info(`Skipping ${part.getId()} for stat type ${part.getStatType()}`);
                     continue;

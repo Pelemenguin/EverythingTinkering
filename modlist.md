@@ -20,6 +20,7 @@
 - [Just Enough Items (JEI)](https://www.curseforge.com/minecraft/mc-mods/jei) *15.20.0.106* by mezz
 - [KubeJS Create](https://www.curseforge.com/minecraft/mc-mods/kubejs-create) *2001.3.0-build.8* by LatvianModder
 - [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) *2001.6.5-build.16* by LatvianModder
+- [KubeJS Additions](https://www.curseforge.com/minecraft/mc-mods/kubejs-additions) *4.3.4* by ILIKEPIEFOO2
 - [LootJS: KubeJS Addon](https://www.curseforge.com/minecraft/mc-mods/lootjs) *1.20.1-2.13.0* by Lytho
 - [Mantle](https://www.curseforge.com/minecraft/mc-mods/mantle) *1.11.95* by mDiyo
 - [MantleJS](https://www.curseforge.com/minecraft/mc-mods/mantlejs) *0.1-alpha.3* by Pelemenguin

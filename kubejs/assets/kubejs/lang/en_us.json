@@ -663,6 +663,8 @@
         "_comment_recipes": " ----- Recipes ----- ",
 
     "pattern.kubejs.mechanism": "Mechanism",
+    
+    "jei.kubejs.fluid_infusion.title": "Fluid Infusing",
 
         "_comment_end": "I don't want to remove commas at the end of the JSON  any more you know? I just place one line here so that all lines above can hava a comma"
 

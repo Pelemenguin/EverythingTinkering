@@ -62,7 +62,7 @@ BatchMaterialRecipes.SequencedAssembly.register("kubejs:tinkering/material/mains
 
 BatchMaterialRecipes.FluidInfusion.register(
     "kubejs:tinkering/materials/test/fluid_infusion",
-    $MaterialVariantId.parse("kubejs:nickel"),
+    $MaterialVariantId.parse("tconstruct:copper"),
     $MaterialVariantId.parse("kubejs:tin"),
     [
         Blocks.WATER.getFluid(),

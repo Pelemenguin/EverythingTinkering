@@ -94,7 +94,7 @@ let findOutputItem = (inputItemStack, fluidsFound) => {
 
         global.BlockFunctions.FluidInfusionCore.MATERIAL_RECIPES.forEach((ingredient, innerMap) => {
             if (foundRecipe != null) return;
-            if (ingredient.getId().equals(variantId)) {
+            if (ingredient.getId().equals(variantId.getId())) {
                 innerMap.forEach((fluids, recipe) => {
                     if (foundRecipe != null) return;
                     let match = queryFluids(fluidsFound, fluids);

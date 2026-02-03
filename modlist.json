@@ -240,6 +240,18 @@
             "version": "2001.6.5-build.16"
         },
         {
+            "name": "KubeJS Additions",
+            "url": "https://www.curseforge.com/minecraft/mc-mods/kubejs-additions",
+            "author": "ILIKEPIEFOO2",
+            "curse_id": {
+                "project": 594387,
+                "file": 6302185
+            },
+            "raw_file_name": "kubejsadditions-forge-4.3.4.jar",
+            "mod_id": "kubejsadditions",
+            "version": "4.3.4"
+        },
+        {
             "name": "LootJS: KubeJS Addon",
             "url": "https://www.curseforge.com/minecraft/mc-mods/lootjs",
             "author": "Lytho",

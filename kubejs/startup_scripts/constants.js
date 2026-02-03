@@ -21,6 +21,9 @@
     Java
     global
     JavaMath
+    StartupEvents
+    Item
+    console
 */
 
 // ---------- Java classes ---------- //
@@ -109,6 +112,7 @@ const $CapacityBarModule = Java.loadClass("slimeknights.tconstruct.library.modif
 const $DurabilityShieldModule = Java.loadClass("slimeknights.tconstruct.library.modifiers.modules.capacity.DurabilityShieldModule");
 const $ModifiableItem = Java.loadClass("slimeknights.tconstruct.library.tools.item.ModifiableItem");
 const $MaterialItem = Java.loadClass("slimeknights.tconstruct.library.tools.part.MaterialItem");
+const $FakeIngotItem = Java.loadClass("slimeknights.tconstruct.tools.item.FakeIngotItem");
 const $RepairKitItem = Java.loadClass("slimeknights.tconstruct.tools.item.RepairKitItem");
 
 // Create
@@ -175,24 +179,23 @@ const $ForgeRegistries = Java.loadClass('net.minecraftforge.registries.ForgeRegi
 /**
  * - An interface for custom KubeJS utils.
  * - 用于自定义 KubeJS 杂项的接口。
- * - - - - -
- * @class
- * @interface
  */
-const CustomUtils = function() {};
+const CustomUtils = global.CustomUtils == undefined ? {} : global.CustomUtils;
 
-CustomUtils.toString = () => "CustomUtils";
+CustomUtils.toString = function () {return "CustomUtils";};
 
 /**
  * - An interface for tinker things.
  * - 用于匠魂相关的接口。
  * - - - - -
- * @class
- * @interface
  */
-CustomUtils.Tinker = function() {};
+CustomUtils.Tinker;
 
-CustomUtils.Tinker.toString = () => "CustomUtils.Tinker";
+if (CustomUtils.Tinker == undefined) {
+    CustomUtils.Tinker = {};
+}
+
+CustomUtils.Tinker.toString = function () {return "CustomUtils.Tinker";};
 
 /**
  * - Check if a tool is broken.
@@ -303,13 +306,11 @@ CustomUtils.Tinker.tryDamageItem = (item, damage, entity, level) => {
 
 /**
  * - A list for all parts in Tinker's Construct.
- * - **Actually loaded in server_scripts**
- * - 所有匠魂部件的列表。
- * - **实际在 server_scripts 中加载**
+ * - 匠魂中所有工具部件的列表
  * - - - - -
- * @type {(Internal.ToolPartItem | Internal.RepairKitItem)[]}
+ * @type {(Internal.MaterialItem)[]}
  */
-CustomUtils.Tinker.TOOL_PARTS = [];
+CustomUtils.Tinker.TOOL_PARTS;
 
 /**
  * - Interface for tinker's persistent data.
@@ -437,3 +438,20 @@ global.CustomUtils = CustomUtils;
  * @interface
  */
 global.Tinker = function() {};
+
+StartupEvents.postInit(() => {
+    /**
+     * @type {Internal.MaterialItem[]}
+     */
+    var toolParts = [];
+    $ForgeRegistries.ITEMS.getValues().forEach(item => {
+        if (item instanceof $MaterialItem) {
+            toolParts.push(item);
+        }
+    });
+
+    global.CustomUtils.Tinker.TOOL_PARTS = toolParts;
+
+    console.info(`Found tool part items:`);
+    toolParts.forEach(i => console.info(i));
+});
