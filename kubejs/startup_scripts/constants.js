@@ -64,6 +64,7 @@ const $Difficulty = Java.loadClass("net.minecraft.world.Difficulty");
 const $TargetingConditions = Java.loadClass("net.minecraft.world.entity.ai.targeting.TargetingConditions");
 const $EvokerFangs = Java.loadClass("net.minecraft.world.entity.projectile.EvokerFangs");
 const $Projectile = Java.loadClass("net.minecraft.world.entity.projectile.Projectile");
+const $MapColor = Java.loadClass("net.minecraft.world.level.material.MapColor");
 const $LootParams$Builder = Java.loadClass("net.minecraft.world.level.storage.loot.LootParams$Builder");
 const $LootContextParams = Java.loadClass("net.minecraft.world.level.storage.loot.parameters.LootContextParams");
 const $LootContextParamSets = Java.loadClass("net.minecraft.world.level.storage.loot.parameters.LootContextParamSets");
@@ -79,6 +80,7 @@ const ContentPageIconList = Java.tryLoadClass("slimeknights.mantle.client.book.d
 const ContentPageIconList$PageWithIcon = Java.tryLoadClass("slimeknights.mantle.client.book.data.content.ContentPageIconList$PageWithIcon");
 
 // Tinker's Construct
+const $FluidDeferredRegisterExtension = Java.loadClass("slimeknights.tconstruct.common.registration.FluidDeferredRegisterExtension");
 const $TinkerFluids = Java.loadClass("slimeknights.tconstruct.fluids.TinkerFluids");
 const $TinkerCommon = Java.loadClass("slimeknights.tconstruct.shared.TinkerCommons");
 const $FluidParticleData = Java.loadClass("slimeknights.tconstruct.shared.particle.FluidParticleData");
@@ -170,8 +172,10 @@ const $Optional = Java.loadClass("java.util.Optional");
 const $HashSet = Java.loadClass("java.util.HashSet");
 
 // Forge
+const $SoundActions = Java.loadClass("net.minecraftforge.common.SoundActions");
 const $ForgeCapabilities = Java.loadClass("net.minecraftforge.common.capabilities.ForgeCapabilities");
 const $FluidStack = Java.loadClass("net.minecraftforge.fluids.FluidStack");
+const $FluidType$Properties = Java.loadClass("net.minecraftforge.fluids.FluidType$Properties");
 /** @type {typeof Internal.FMLJavaModLoadingContext} */
 const FMLJavaModLoadingContext = new NativeJavaClass(startupContext, topLevelScope, Class.forName("net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext"));
 const $NetworkRegistry = Java.loadClass("net.minecraftforge.network.NetworkRegistry");

@@ -17,6 +17,18 @@
 
     "item.kubejs.scrapped_tinker_metal": "Scrapped Tinker Metal",
 
+    "item.kubejs.animation_fluid_bucket": "Animation Fluid Bucket",
+
+        "_comment_fluids": " ----- Fluids ----- ",
+
+    "block.kubejs.molten_sea_alloy": "Molten Sea Alloy",
+    "fluid.kubejs.molten_sea_alloy": "Molten Sea Alloy",
+    "fluid.kubejs.flowing_molten_sea_alloy": "Flowing Molten Sea Alloy",
+    "item.kubejs.molten_sea_alloy_bucket": "Molten Sea Alloy Bucket",
+
+    "block.kubejs.animation_fluid_fluid": "Animation Fluid",
+    "fluid_type.kubejs.animation_fluid": "Animation Fluid",
+
         "_comment_entities": " ----- Entities ----- ",
 
     "entity.kubejs.boss.despawn": "%s has lost all its targets",
@@ -193,6 +205,10 @@
     "material.kubejs.scrapped_tinker_metal.flavor": "Still usable?",
     "material.kubejs.scrapped_tinker_metal.encyclopedia": "Provides a durability shield absorbing 20 durability points per level. After complete consumption, the shield takes 30 seconds to recover",
 
+    "material.kubejs.animated_tinker_metal": "Animated Tinker Metal",
+    "material.kubejs.animated_tinker_metal.flavor": "Lifelike!",
+    "material.kubejs.animated_tinker_metal.encyclopedia": "Automatically attacks targets within reach for 5 seconds after an attack, at half the weapon's maximum attack speed, but no more than once per second",
+
     "material.kubejs.sea_alloy": "Sea Alloy",
     "material.kubejs.sea_alloy.flavor": "It's basically sea lanterns...",
     "material.kubejs.sea_alloy.encyclopedia": "Negates mining fatigue equivalent to the level of the Anti-Fatigue modifier",
@@ -204,13 +220,6 @@
     "material.kubejs.nickel": "Nickel",
     "material.kubejs.nickel.flavor": "Iron, cobalt, nickel, copper, zinc. What's next?",
     "material.kubejs.nickel.encyclopedia": "+8% per iron part, +15% per cobalt part in the tool, to the tool's durability and repair efficiency",
-
-        "_comment_fluids": " ----- Fluids ----- ",
-
-    "block.kubejs.molten_sea_alloy": "Molten Sea Alloy",
-    "fluid.kubejs.molten_sea_alloy": "Molten Sea Alloy",
-    "fluid.kubejs.flowing_molten_sea_alloy": "Flowing Molten Sea Alloy",
-    "item.kubejs.molten_sea_alloy_bucket": "Molten Sea Alloy Bucket",
 
         "_comment_modifiers": " ----- Modifiers ----- ",
 

@@ -17,7 +17,6 @@
     $MaterialVariantId
     IngredientHelper
     StartupEvents
-    $TinkerFluids
 */
 
 /**
@@ -75,10 +74,10 @@ global.DeferredTasks.MaterialRecipesRegister = (() => {
         $MaterialVariantId.parse("kubejs:scrapped_tinker_metal"),
         $MaterialVariantId.parse("kubejs:animated_tinker_metal"),
         [
-            $TinkerFluids.moltenDiamond.getStill(),
-            $TinkerFluids.moltenIron.getStill(),
-            $TinkerFluids.moltenAmethyst.getStill(),
-            $TinkerFluids.moltenGlass.getStill()
+            global.Fluids.ANIMATION_FLUID.getStill(),
+            global.Fluids.ANIMATION_FLUID.getStill(),
+            global.Fluids.ANIMATION_FLUID.getStill(),
+            global.Fluids.ANIMATION_FLUID.getStill()
         ],
         [
             BatchMaterialRecipes.KnownStats.HEAD,

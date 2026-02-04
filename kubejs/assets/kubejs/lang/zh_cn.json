@@ -18,6 +18,18 @@
 
     "item.kubejs.scrapped_tinker_metal": "废弃工匠金属",
 
+    "item.kubejs.animation_fluid_bucket": "活化液桶",
+
+        "_commont_fluids": " ----- 流体 ----- ",
+
+    "block.kubejs.molten_sea_alloy": "熔融海洋合金",
+    "fluid.kubejs.molten_sea_alloy": "熔融海洋合金",
+    "fluid.kubejs.flowing_molten_sea_alloy": "流动的熔融海洋合金",
+    "item.kubejs.molten_sea_alloy_bucket": "熔融海洋合金桶",
+
+    "block.kubejs.animation_fluid_fluid": "活化液",
+    "fluid_type.kubejs.animation_fluid": "活化液",
+
         "_comment_entities": " ----- 实体 ----- ",
 
     "entity.kubejs.boss.despawn": "%s丢失了其所有目标",
@@ -196,6 +208,10 @@
     "material.kubejs.scrapped_tinker_metal.flavor": "还能用？",
     "material.kubejs.scrapped_tinker_metal.encyclopedia": "提供一个耐久护盾，每级吸收20点耐久。完全消耗后，护盾需要30秒恢复",
 
+    "material.kubejs.animated_tinker_metal": "活化工匠金属",
+    "material.kubejs.animated_tinker_metal.flavor": "栩栩如生！",
+    "material.kubejs.animated_tinker_metal.encyclopedia": "攻击后的5秒内，自动攻击触及范围内的目标，攻击速度为武器最大攻击速度的一半，但不超过每秒一次",
+
     "material.kubejs.sea_alloy": "海洋合金",
     "material.kubejs.sea_alloy.flavor": "其实就是海晶灯......",
     "material.kubejs.sea_alloy.encyclopedia": "抵消与“抗疲劳”等级相当的挖掘疲劳",
@@ -207,13 +223,6 @@
     "material.kubejs.nickel": "镍",
     "material.kubejs.nickel.flavor": "铁、钴、镍、铜、锌。然后是什么？",
     "material.kubejs.nickel.encyclopedia": "对工具的耐久度和修复效率，每个铁部件+8%，每个钴部件+15%",
-
-        "_commont_fluids": " ----- 流体 ----- ",
-
-    "block.kubejs.molten_sea_alloy": "熔融海洋合金",
-    "fluid.kubejs.molten_sea_alloy": "熔融海洋合金",
-    "fluid.kubejs.flowing_molten_sea_alloy": "流动的熔融海洋合金",
-    "item.kubejs.molten_sea_alloy_bucket": "熔融海洋合金桶",
 
         "_comment_modifiers": " ----- 属性 ----- ",
 

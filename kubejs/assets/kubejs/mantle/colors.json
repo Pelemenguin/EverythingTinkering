@@ -73,6 +73,7 @@
         "incomplete_mainspring": "#c9caba",
 
         "scrapped_tinker_metal": "#ffa263",
+        "animated_tinker_metal": "#45EAD6",
 
         "sea_alloy": "#C6DFD8",
 
@@ -134,7 +135,7 @@
 
         "dps_equalizer": "#1d60ac",
         "induced_deflection": "#fa2867",
-        "autonomous": "#0fcdee",
+        "autonomous": "#45EAD6",
 
         "glacial_strike": "#9dcff0",
 

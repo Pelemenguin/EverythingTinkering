@@ -1,0 +1,4 @@
+{
+    "still": "kubejs:fluid/liquid/animation_fluid/still",
+    "flowing": "kubejs:fluid/liquid/animation_fluid/flowing"
+}

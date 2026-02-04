@@ -1,0 +1,38 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
+/**
+ * @fileoverview Liquid Fluids | 液体流体
+ * - - - - -
+ * @copyright Pelemenguin 2025
+ * @license LGPL-3.0-or-later
+ * This file is part of EverythingTinkering.
+ * Full license see file `COPYING.LESSER`
+ * - - - - -
+ * @author Pelemenguin
+ */
+
+/* global
+    global: writable
+    $FluidType$Properties
+    $SoundActions
+    $MapColor
+*/
+
+/** @type {Internal.FlowingFluidObject<Internal.FlowingFluid>} */
+global.Fluids.ANIMATION_FLUID;
+
+global.Fluids.addFluidRegistry((fluids) => {
+
+    /**
+     * @type {Internal.FlowingFluidObject<Internal.FlowingFluid>}
+     */
+    global.Fluids.ANIMATION_FLUID = fluids["register(java.lang.String)"]("animation_fluid").type(
+        $FluidType$Properties.create()
+            .sound($SoundActions.BUCKET_FILL, "item.bucket.fill")
+            .sound($SoundActions.BUCKET_EMPTY, "item.bucket.empty")
+            .motionScale(0.0023333333333333335) // idk, tconstruct did so
+            .canExtinguish(true)
+            .temperature(310)
+    ).bucket().block($MapColor.COLOR_CYAN, 15).commonTag().flowing();
+
+});

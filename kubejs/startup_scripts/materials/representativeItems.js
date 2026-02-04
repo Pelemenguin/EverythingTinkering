@@ -28,7 +28,7 @@ const DISPLAY_AS_LARGE_PLATE = {};
  * - Representative items map.
  * - 代表物品表
  * - - - - -
- * @type {{[materialId: string]: string | typeof HIDDEN_MATERIAL}}
+ * @type {{[materialId: string]: string | typeof HIDDEN_MATERIAL | typeof DISPLAY_AS_LARGE_PLATE}}
  */
 let reprItems = {
 
@@ -173,6 +173,7 @@ let reprItems = {
     // ========== Adventure Line ========== //
 
     "kubejs:scrapped_tinker_metal": "kubejs:scrapped_tinker_metal",
+    "kubejs:animated_tinker_metal": DISPLAY_AS_LARGE_PLATE,
 
     // ========== Hidden ========== //
 
