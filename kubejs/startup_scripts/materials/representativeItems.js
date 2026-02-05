@@ -1,5 +1,7 @@
 // priority: 10000
 
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 /* eslint-disable no-unused-vars */
 
 /**
@@ -9,8 +11,6 @@
  * @license LGPL-3.0-or-later
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
- * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
  * - - - - -
  * @author Pelemenguin
  */
@@ -173,7 +173,7 @@ let reprItems = {
     // ========== Adventure Line ========== //
 
     "kubejs:scrapped_tinker_metal": "kubejs:scrapped_tinker_metal",
-    "kubejs:animated_tinker_metal": DISPLAY_AS_LARGE_PLATE,
+    "kubejs:animated_tinker_metal": "kubejs:animated_tinker_metal",
 
     // ========== Hidden ========== //
 

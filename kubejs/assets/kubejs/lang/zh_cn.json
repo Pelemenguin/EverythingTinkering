@@ -17,6 +17,7 @@
     "item.kubejs.incomplete_basic_mechanism": "基础构件（半成品）",
 
     "item.kubejs.scrapped_tinker_metal": "废弃工匠金属",
+    "item.kubejs.animated_tinker_metal": "活化工匠金属",
 
     "item.kubejs.animation_fluid_bucket": "活化液桶",
 
@@ -456,6 +457,10 @@
     "book.kubejs.material.recipes.sequenced_assembly.loops": "该序列需要重复 %s 次",
     "book.kubejs.material.recipes.sequenced_assembly.cutting": "用动力锯切割",
     "book.kubejs.material.recipes.sequenced_assembly.deploying": "安装 %s",
+
+    "book.kubejs.material.recipes.fluid_infusing.name": "流体注入",
+    "book.kubejs.material.recipes.fluid_infusing.description": "能通过流体注入核心为部件注入流体制作",
+    "book.kubejs.material.recipes.fluid_infusing.fluid": "需要%s",
 
         "_comment_controls": " ----- 控制 ----- ",
 

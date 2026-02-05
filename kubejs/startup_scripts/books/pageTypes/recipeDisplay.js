@@ -504,4 +504,52 @@ RecipeDisplay.prototype = {
 
         return 36;
     },
+    /**
+     * 
+     * @param {Internal.ArrayList<Internal.BookElement>} elements 
+     * @param {Annotation.BatchRecipes.FluidInfusion.Material} recipe 
+     * @param {Internal.BookDataJS} book 
+     */
+    fluidInfusing: function(elements, recipe, book) {
+        let icon = new TinkerItemElement("kubejs:fluid_infusion_core");
+        icon.x = this.x;
+        icon.y = this.y;
+        icon.tooltip = Utils.newList();
+        icon.tooltip.add(Component.translatable("book.kubejs.material.recipes.fluid_infusing.name"));
+        icon.tooltip.add(Component.translatable("book.kubejs.material.recipes.fluid_infusing.description").gray());
+        elements.add(icon);
+
+        let fluidElementX = icon.x + 24;
+        recipe.inputFluids.forEach(fluid => {
+            /** @type {Internal.TinkerItemElement} */
+            let displayItem;
+            try {
+                displayItem = new TinkerItemElement(new $ItemStack(fluid.getBucket()));
+            } catch (e) {
+                console.error(e);
+                displayItem = new TinkerItemElement("minecraft:barrier");
+            }
+
+            displayItem.x = fluidElementX;
+            displayItem.y = icon.y;
+            fluidElementX += 18;
+
+            displayItem.tooltip = Utils.newList();
+            displayItem.tooltip.add(Component.translatable("book.kubejs.material.recipes.fluid_infusing.fluid", fluid.getFluidType().getDescription()));
+
+            elements.add(displayItem);
+        });
+
+        let inputItem = RecipeDisplay.materialValueIndicator(recipe.inputMaterial, 1, fluidElementX + 8, icon.y, [recipe.outputMaterial]);
+        elements.add(inputItem);
+
+        let arrow = BookElement.image(new ImageData("jei:textures/jei/atlas/gui/recipe_arrow.png", 2, 0, 20, 16, 22, 16, 15, 12));
+        arrow.x = inputItem.x + 16;
+        arrow.y = inputItem.y + 2;
+        elements.add(arrow);
+
+        elements.add(RecipeDisplay.materialValueIndicator(recipe.outputMaterial, 1, arrow.x + 13, inputItem.y, [recipe.inputMaterial]));
+
+        return 18;
+    }
 };

@@ -220,6 +220,10 @@ BatchMaterialRecipes.SequencedAssembly = {
  */
 BatchMaterialRecipes.FluidInfusion = {
     /**
+     * @type {Internal.Map<Internal.MaterialId, Annotation.BatchRecipes.FluidInfusion.Material[]>}
+     */
+    CACHE: Utils.newMap(),
+    /**
      * @param {string} recipeId 
      * @param {Internal.MaterialVariantId} inputMaterial 
      * @param {Internal.MaterialVariantId} outputMaterial 
@@ -249,6 +253,38 @@ BatchMaterialRecipes.FluidInfusion = {
             innerMap.put(recipe.inputFluids, recipe);
             recipeCache.put(recipe.inputMaterial, innerMap);
         }
+
+        // Cache for book display
+        let materialId = outputMaterial.getId();
+        if (!BatchMaterialRecipes.FluidInfusion.CACHE.containsKey(materialId)) {
+            BatchMaterialRecipes.FluidInfusion.CACHE.put(materialId, [recipe]);
+        } else {
+            BatchMaterialRecipes.FluidInfusion.CACHE.get(materialId).push(recipe);
+        }
+    },
+    /**
+     * @param {string} recipeId 
+     * @param {Internal.Ingredient} ingredient 
+     * @param {Internal.Fluid[]} ingredient 
+     * @param {Internal.ItemStack} output 
+     */
+    registerSingle: (recipeId, ingredient, fluids, output) => {
+        /** @type {Annotation.BatchRecipes.FluidInfusion.Item} */
+        let recipe = {
+            inputItem: ingredient,
+            outputItem: output,
+            inputFluids: fluids,
+            recipeId: recipeId
+        };
+
+        let recipeCache = global.BlockFunctions.FluidInfusionCore.RECIPES;
+        if (recipeCache.containsKey(recipe.inputItem)) {
+            recipeCache.get(recipe.inputItem).put(recipe.inputFluids, recipe);
+        } else {
+            let innerMap = Utils.newMap();
+            innerMap.put(recipe.inputFluids, recipe);
+            recipeCache.put(recipe.inputItem, innerMap);
+        }
     }
 };
 
@@ -265,7 +301,6 @@ BatchMaterialRecipes.resetAllRecipes = () => {
     // Sequenced Assembly
     BatchMaterialRecipes.SequencedAssembly.ALL = {};
     BatchMaterialRecipes.SequencedAssembly.CACHE.clear();
-
 
     // Fluid Infusion
     global.BlockFunctions.FluidInfusionCore.MATERIAL_RECIPES.clear();

@@ -18,11 +18,13 @@
     Utils
 */
 
-global.BlockFunctions = {};
+global.BlockFunctions;
+if (global.BlockFunctions == undefined) global.BlockFunctions = {};
 
 // Init Fluid Infusion Core as they have recipes to register
 
-global.BlockFunctions.FluidInfusionCore = {};
+global.BlockFunctions.FluidInfusionCore;
+if (global.BlockFunctions.FluidInfusionCore == undefined) global.BlockFunctions.FluidInfusionCore = {};
 
 /**
  * @typedef {{
@@ -40,7 +42,13 @@ global.BlockFunctions.FluidInfusionCore = {};
  */
 
 /** @type {Internal.Map<Internal.MaterialVariantId, Internal.Map<Internal.Fluid[], Annotation.BatchRecipes.FluidInfusion.Material>>} */
-global.BlockFunctions.FluidInfusionCore.MATERIAL_RECIPES = Utils.newMap();
+global.BlockFunctions.FluidInfusionCore.MATERIAL_RECIPES;
+if (global.BlockFunctions.FluidInfusionCore.MATERIAL_RECIPES == undefined) {
+    global.BlockFunctions.FluidInfusionCore.MATERIAL_RECIPES = Utils.newMap();
+}
 
 /** @type {Internal.Map<Internal.Ingredient, Internal.Map<Internal.Fluid[], Annotation.BatchRecipes.FluidInfusion.Item>>} */
-global.BlockFunctions.FluidInfusionCore.RECIPES = Utils.newMap();
+global.BlockFunctions.FluidInfusionCore.RECIPES;
+if (global.BlockFunctions.FluidInfusionCore.RECIPES == undefined) {
+    global.BlockFunctions.FluidInfusionCore.RECIPES = Utils.newMap();
+}

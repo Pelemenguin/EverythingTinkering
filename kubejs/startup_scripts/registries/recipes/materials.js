@@ -17,6 +17,7 @@
     $MaterialVariantId
     IngredientHelper
     StartupEvents
+    Item
 */
 
 /**
@@ -85,6 +86,27 @@ global.DeferredTasks.MaterialRecipesRegister = (() => {
         ]
     );
 
+    BatchMaterialRecipes.FluidInfusion.registerSingle(
+        "kubejs:tinkering/adventure/common/animated_tinker_metal",
+        IngredientHelper.stack("kubejs:scrapped_tinker_metal", 1).kjs$asIngredient(),
+        [
+            global.Fluids.ANIMATION_FLUID.getStill(),
+            global.Fluids.ANIMATION_FLUID.getStill(),
+            global.Fluids.ANIMATION_FLUID.getStill(),
+            global.Fluids.ANIMATION_FLUID.getStill()
+        ],
+        Item.getItem("kubejs:animated_tinker_metal").getDefaultInstance(),
+    );
+
 });
 
-StartupEvents.postInit(global.DeferredTasks.MaterialRecipesRegister);
+/** @type {boolean} */
+global.DeferredTasks.MaterialRecipesRegister.runOnce;
+if (global.DeferredTasks.MaterialRecipesRegister.runOnce) {
+    global.DeferredTasks.MaterialRecipesRegister();
+}
+
+StartupEvents.postInit(() => {
+    global.DeferredTasks.MaterialRecipesRegister;
+    global.DeferredTasks.MaterialRecipesRegister.runOnce = true;
+});

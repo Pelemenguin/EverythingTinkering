@@ -16,6 +16,7 @@
     "item.kubejs.incomplete_basic_mechanism": "Incomplete Basic Mechanism",
 
     "item.kubejs.scrapped_tinker_metal": "Scrapped Tinker Metal",
+    "item.kubejs.animated_tinker_metal": "Animated Tinker Metal",
 
     "item.kubejs.animation_fluid_bucket": "Animation Fluid Bucket",
 
@@ -453,6 +454,10 @@
     "book.kubejs.material.recipes.sequenced_assembly.loops": "Repeat Sequence %s Times",
     "book.kubejs.material.recipes.sequenced_assembly.cutting": "Cut with Saw",
     "book.kubejs.material.recipes.sequenced_assembly.deploying": "Deploy %s",
+
+    "book.kubejs.material.recipes.fluid_infusing.name": "Fluid Infusing",
+    "book.kubejs.material.recipes.fluid_infusing.description": "Craftable by infusing items with fluids using Fluid Infusion Cores",
+    "book.kubejs.material.recipes.fluid_infusing.fluid": "%s Required",
 
         "_comment_controls": " ----- Controls ----- ",
 

@@ -163,6 +163,14 @@ const DetailedBase = {
             totalRecipes = newRecipeCount;
         }
 
+        // Draw fluid infusing recipes
+        let fluidInfusingRecipes = global.BatchMaterialRecipes.FluidInfusion.CACHE.get(materialId);
+        if (fluidInfusingRecipes != null) {
+            let {newH, newRecipeCount} = DetailedBase.recipeDrawerBase(h, totalRecipes, displayer, recipePages, materialId, fluidInfusingRecipes, "fluidInfusing", book);
+            h = newH;
+            totalRecipes = newRecipeCount;
+        }
+
         elements.addAll(recipePages[0]);
 
         let currentRecipePageIndicator = DetailedBase.updateRecipePageIndicator(totalRecipes, 1, recipePages.length);

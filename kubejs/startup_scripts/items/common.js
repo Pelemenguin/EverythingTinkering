@@ -22,4 +22,5 @@ StartupEvents.registry("minecraft:item", event => {
 
     // Adventure Line
     event.create("kubejs:scrapped_tinker_metal");
+    event.create("kubejs:animated_tinker_metal");
 });
