@@ -153,7 +153,7 @@ let reprItems = {
     "tconstruct:slimeball": "minecraft:slime_ball",
     "tconstruct:magma": "minecraft:magma_cream",
     "tconstruct:blaze": "minecraft:blaze_rod",
-    "kubejs:phantom_membrane": "minecraft:phantom_membrane",
+    "tconstruct:phantom": "minecraft:phantom_membrane",
     "tconstruct:shulker": "minecraft:shulker_shell",
     "tconstruct:dragon_scale": "tconstruct:dragon_scale",
 

@@ -1,0 +1,10 @@
+{
+    "perStat": {
+        "tconstruct:maille": [
+            {
+                "name": "kubejs:night_owl",
+                "level": 1
+            }
+        ]
+    }
+}
