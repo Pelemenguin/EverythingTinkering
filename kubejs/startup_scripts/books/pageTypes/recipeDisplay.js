@@ -510,7 +510,7 @@ RecipeDisplay.prototype = {
      * @param {Annotation.BatchRecipes.FluidInfusion.Material} recipe 
      * @param {Internal.BookDataJS} book 
      */
-    fluidInfusing: function(elements, recipe, book) {
+    fluidInfusing: function(elements, recipe, _book) {
         let icon = new TinkerItemElement("kubejs:fluid_infusion_core");
         icon.x = this.x;
         icon.y = this.y;

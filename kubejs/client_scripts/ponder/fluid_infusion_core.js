@@ -36,8 +36,8 @@ let doParticles = (scene) => {
         horizontal *= 2;
 
         for (let dx of [-1, 1]) for (let dz of [-1, 1]) {
-            scene.getParticles().block(20, Blocks.WATER.defaultBlockState(), [3.5, 2.5, 3.5]);
-            scene.getParticles().block(20, Blocks.WATER.defaultBlockState(), [3.5 + dx * horizontal, 1.5 + vertical, 3.5 + dz * horizontal]);
+            scene.getParticles().dust(10, 0x00FFFF, [3.5, 2.5, 3.5]);
+            scene.getParticles().dust(10, 0x00FFFF, [3.5 + dx * horizontal, 1.5 + vertical, 3.5 + dz * horizontal]);
         }
 
         scene.idle(5);
@@ -52,7 +52,7 @@ let placeInputItem = (world, count) => {
     count = count == undefined ? 1 : count;
     world.modifyBlockEntityNBT([3, 2, 3], $DepotBlockEntity, tag => {
         tag.put("HeldItem", NBT.compoundTag({
-            Item: TinkerToolParts.largePlate.get().withMaterialForDisplay($MaterialVariantId.parse("kubejs:nickel")).withCount(count).serializeNBT(),
+            Item: TinkerToolParts.largePlate.get().withMaterialForDisplay($MaterialVariantId.parse("kubejs:scrapped_tinker_metal")).withCount(count).serializeNBT(),
             Pos: NBT.floatTag(0)
         }));
     });
@@ -69,7 +69,7 @@ let createOutput = (world, oneItemRemains) => {
         } else tag.remove("HeldItem");
     });
 
-    return world.createItemEntity([3.5, 3, 3.5], [0, 0.2, 0], TinkerToolParts.largePlate.get().withMaterialForDisplay($MaterialVariantId.parse("kubejs:tin")));
+    return world.createItemEntity([3.5, 3, 3.5], [0, 0.2, 0], TinkerToolParts.largePlate.get().withMaterialForDisplay($MaterialVariantId.parse("kubejs:animated_tinker_metal")));
 };
 
 Ponder.registry(event => {
@@ -149,7 +149,7 @@ Ponder.registry(event => {
 
             scene.showControls(20, [3.5, 3, 3.5], PonderPointing.DOWN)
                 .rightClick()
-                .withItem(TinkerToolParts.largePlate.get().withMaterialForDisplay($MaterialVariantId.parse("kubejs:nickel")));
+                .withItem(TinkerToolParts.largePlate.get().withMaterialForDisplay($MaterialVariantId.parse("kubejs:scrapped_tinker_metal")));
 
             scene.idle(10);
 
@@ -169,7 +169,7 @@ Ponder.registry(event => {
             scene.idle(20);
 
             scene.showControls(40, [3.5, 3.5, 3.5], PonderPointing.DOWN)
-            .withItem(TinkerToolParts.largePlate.get().withMaterialForDisplay($MaterialVariantId.parse("kubejs:tin")));
+            .withItem(TinkerToolParts.largePlate.get().withMaterialForDisplay($MaterialVariantId.parse("kubejs:animated_tinker_metal")));
 
             scene.idle(40);
 
@@ -209,7 +209,7 @@ Ponder.registry(event => {
 
             scene.showControls(20, [3.5, 3, 3.5], PonderPointing.DOWN)
                 .rightClick()
-                .withItem(TinkerToolParts.largePlate.get().withMaterialForDisplay($MaterialVariantId.parse("kubejs:nickel")).withCount(2));
+                .withItem(TinkerToolParts.largePlate.get().withMaterialForDisplay($MaterialVariantId.parse("kubejs:scrapped_tinker_metal")).withCount(2));
 
             scene.idle(10);
 
