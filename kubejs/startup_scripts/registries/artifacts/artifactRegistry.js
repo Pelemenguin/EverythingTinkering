@@ -1,5 +1,7 @@
 // priority: 10000
 
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 /**
  * @fileoverview Artifact Register | Artifact 注册
  * - - - - -
@@ -7,8 +9,6 @@
  * @license LGPL-3.0-or-later
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
- * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
  * - - - - -
  * @author Pelemenguin
  */
