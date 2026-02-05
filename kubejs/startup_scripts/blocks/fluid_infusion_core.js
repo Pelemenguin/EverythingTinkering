@@ -23,6 +23,10 @@
     BlockProperties
     $Boolean
     $MaterialItem
+    $RepairKitItem
+    $MaterialStatsId
+    $FakeIngotItem
+    ToolPartItem
 */
 
 /** @type {Internal.BlockEntityCallback_} */
@@ -96,6 +100,21 @@ let findOutputItem = (inputItemStack, fluidsFound) => {
                 innerMap.forEach((fluids, recipe) => {
                     if (foundRecipe != null) return;
                     let match = queryFluids(fluidsFound, fluids);
+
+                    if (depotHeldItemType instanceof $RepairKitItem) {
+                        if (!recipe.statTypes.contains(new $MaterialStatsId("tconstruct", "repair_kit"))) {
+                            match = false;
+                        }
+                    } else if (depotHeldItemType instanceof $FakeIngotItem) {
+                        if (!recipe.statTypes.contains(new $MaterialStatsId("tconstruct", "ingot"))) {
+                            match = false;
+                        }
+                    } else if (depotHeldItemType instanceof ToolPartItem) {
+                        if (!recipe.statTypes.contains(depotHeldItemType.getStatType())) {
+                            match = false;
+                        }
+                    } else match = false;
+
                     if (match) {
                         foundRecipe = recipe;
                     }

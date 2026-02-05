@@ -19,15 +19,19 @@
     $MaterialStatsId
     Utils
     Ingredient
+    console
  */
 
-const BatchMaterialRecipes = {};
+global.BatchMaterialRecipes;
+if (global.BatchMaterialRecipes == undefined) {
+    global.BatchMaterialRecipes = {};
+}
 
 /**
  * Stores some predefined `MaterialStatsId`s for materials.  
  * 材料的已知属性类型。
  */
-BatchMaterialRecipes.KnownStats = {
+global.BatchMaterialRecipes.KnownStats = {
     REPAIR_KIT: $MaterialStatsId.tryParse("tconstruct:repair_kit"),
 
     HEAD: $MaterialStatsId.tryParse("tconstruct:head"),
@@ -51,23 +55,23 @@ BatchMaterialRecipes.KnownStats = {
  * Groups of known stats.  
  * 已知属性类型的分组。
  */
-BatchMaterialRecipes.KnownStatGroups = {
+global.BatchMaterialRecipes.KnownStatGroups = {
     TOOL: [
-        BatchMaterialRecipes.KnownStats.HEAD,
-        BatchMaterialRecipes.KnownStats.HANDLE,
-        BatchMaterialRecipes.KnownStats.BINDING
+        global.BatchMaterialRecipes.KnownStats.HEAD,
+        global.BatchMaterialRecipes.KnownStats.HANDLE,
+        global.BatchMaterialRecipes.KnownStats.BINDING
     ],
     BOW: [
-        BatchMaterialRecipes.KnownStats.LIMB,
-        BatchMaterialRecipes.KnownStats.GRIP
+        global.BatchMaterialRecipes.KnownStats.LIMB,
+        global.BatchMaterialRecipes.KnownStats.GRIP
     ],
     ARMOR: [
-        BatchMaterialRecipes.KnownStats.PLATING_HELMET,
-        BatchMaterialRecipes.KnownStats.PLATING_CHESTPLATE,
-        BatchMaterialRecipes.KnownStats.PLATING_LEGGINGS,
-        BatchMaterialRecipes.KnownStats.PLATING_BOOTS,
-        BatchMaterialRecipes.KnownStats.PLATING_SHIELD,
-        BatchMaterialRecipes.KnownStats.MAILLE
+        global.BatchMaterialRecipes.KnownStats.PLATING_HELMET,
+        global.BatchMaterialRecipes.KnownStats.PLATING_CHESTPLATE,
+        global.BatchMaterialRecipes.KnownStats.PLATING_LEGGINGS,
+        global.BatchMaterialRecipes.KnownStats.PLATING_BOOTS,
+        global.BatchMaterialRecipes.KnownStats.PLATING_SHIELD,
+        global.BatchMaterialRecipes.KnownStats.MAILLE
     ],
     /**
      * All stats for some common materials (iron, copper for example).  
@@ -78,10 +82,10 @@ BatchMaterialRecipes.KnownStatGroups = {
     FULL_MATERIAL: []
 };
 
-BatchMaterialRecipes.KnownStatGroups.FULL_MATERIAL = [BatchMaterialRecipes.KnownStats.REPAIR_KIT]
-    .concat(BatchMaterialRecipes.KnownStatGroups.TOOL)
-    .concat(BatchMaterialRecipes.KnownStatGroups.BOW)
-    .concat(BatchMaterialRecipes.KnownStatGroups.ARMOR);
+global.BatchMaterialRecipes.KnownStatGroups.FULL_MATERIAL = [global.BatchMaterialRecipes.KnownStats.REPAIR_KIT]
+    .concat(global.BatchMaterialRecipes.KnownStatGroups.TOOL)
+    .concat(global.BatchMaterialRecipes.KnownStatGroups.BOW)
+    .concat(global.BatchMaterialRecipes.KnownStatGroups.ARMOR);
 
 /**
  * Batch Deploying recipes.  
@@ -94,7 +98,7 @@ BatchMaterialRecipes.KnownStatGroups.FULL_MATERIAL = [BatchMaterialRecipes.Known
  *     partStatTypes: Internal.Set<Internal.MaterialStatsId>
  * }} Annotation.BatchRecipes.Deploying
  */
-BatchMaterialRecipes.Deploying = {
+global.BatchMaterialRecipes.Deploying = {
     /**
      * @type {{[recipeId: string]: Annotation.BatchRecipes.Deploying}}
      */
@@ -132,14 +136,14 @@ BatchMaterialRecipes.Deploying = {
             partStatTypes: statTypeSet
         };
 
-        BatchMaterialRecipes.Deploying.ALL[recipeId] = recipe;
+        global.BatchMaterialRecipes.Deploying.ALL[recipeId] = recipe;
 
         // Cache for book display
         let materialId = outputMaterial.getId();
-        if (!BatchMaterialRecipes.Deploying.CACHE.containsKey(materialId)) {
-            BatchMaterialRecipes.Deploying.CACHE.put(materialId, []);
+        if (!global.BatchMaterialRecipes.Deploying.CACHE.containsKey(materialId)) {
+            global.BatchMaterialRecipes.Deploying.CACHE.put(materialId, []);
         }
-        BatchMaterialRecipes.Deploying.CACHE.get(materialId).push(recipe);
+        global.BatchMaterialRecipes.Deploying.CACHE.get(materialId).push(recipe);
     }
 };
 
@@ -161,7 +165,7 @@ BatchMaterialRecipes.Deploying = {
  *     }) => void,
  * }} Annotation.BatchRecipes.SequencedAssembly
  */
-BatchMaterialRecipes.SequencedAssembly = {
+global.BatchMaterialRecipes.SequencedAssembly = {
     /**
      * @type {{[recipeId: string]: Annotation.BatchRecipes.SequencedAssembly}}
      */
@@ -203,14 +207,14 @@ BatchMaterialRecipes.SequencedAssembly = {
             displayRecipes: displayRecipes
         };
 
-        BatchMaterialRecipes.SequencedAssembly.ALL[recipeId] = recipe;
+        global.BatchMaterialRecipes.SequencedAssembly.ALL[recipeId] = recipe;
 
         // Cache for book display
         let materialId = outputMaterial.getId();
-        if (!BatchMaterialRecipes.SequencedAssembly.CACHE.containsKey(materialId)) {
-            BatchMaterialRecipes.SequencedAssembly.CACHE.put(materialId, []);
+        if (!global.BatchMaterialRecipes.SequencedAssembly.CACHE.containsKey(materialId)) {
+            global.BatchMaterialRecipes.SequencedAssembly.CACHE.put(materialId, []);
         }
-        BatchMaterialRecipes.SequencedAssembly.CACHE.get(materialId).push(recipe);
+        global.BatchMaterialRecipes.SequencedAssembly.CACHE.get(materialId).push(recipe);
     }
 };
 
@@ -218,7 +222,7 @@ BatchMaterialRecipes.SequencedAssembly = {
  * Batch fluid infusion recipe.  
  * 批量流体注入配方。
  */
-BatchMaterialRecipes.FluidInfusion = {
+global.BatchMaterialRecipes.FluidInfusion = {
     /**
      * @type {Internal.Map<Internal.MaterialId, Annotation.BatchRecipes.FluidInfusion.Material[]>}
      */
@@ -256,10 +260,10 @@ BatchMaterialRecipes.FluidInfusion = {
 
         // Cache for book display
         let materialId = outputMaterial.getId();
-        if (!BatchMaterialRecipes.FluidInfusion.CACHE.containsKey(materialId)) {
-            BatchMaterialRecipes.FluidInfusion.CACHE.put(materialId, [recipe]);
+        if (!global.BatchMaterialRecipes.FluidInfusion.CACHE.containsKey(materialId)) {
+            global.BatchMaterialRecipes.FluidInfusion.CACHE.put(materialId, [recipe]);
         } else {
-            BatchMaterialRecipes.FluidInfusion.CACHE.get(materialId).push(recipe);
+            global.BatchMaterialRecipes.FluidInfusion.CACHE.get(materialId).push(recipe);
         }
     },
     /**
@@ -292,20 +296,21 @@ BatchMaterialRecipes.FluidInfusion = {
  * Resets all the batch recipes.  
  * 重置所有批量配方。
  */
-BatchMaterialRecipes.resetAllRecipes = () => {
+global.BatchMaterialRecipes.resetAllRecipes = () => {
+
+    console.info("Reseting all batch recipes...");
 
     // Deploying
-    BatchMaterialRecipes.Deploying.ALL = {};
-    BatchMaterialRecipes.Deploying.CACHE.clear();
+    global.BatchMaterialRecipes.Deploying.ALL = {};
+    global.BatchMaterialRecipes.Deploying.CACHE.clear();
 
     // Sequenced Assembly
-    BatchMaterialRecipes.SequencedAssembly.ALL = {};
-    BatchMaterialRecipes.SequencedAssembly.CACHE.clear();
+    global.BatchMaterialRecipes.SequencedAssembly.ALL = {};
+    global.BatchMaterialRecipes.SequencedAssembly.CACHE.clear();
 
     // Fluid Infusion
+    global.BatchMaterialRecipes.FluidInfusion.CACHE.clear();
     global.BlockFunctions.FluidInfusionCore.MATERIAL_RECIPES.clear();
     global.BlockFunctions.FluidInfusionCore.RECIPES.clear();
 
 };
-
-global.BatchMaterialRecipes = BatchMaterialRecipes;

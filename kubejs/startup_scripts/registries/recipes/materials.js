@@ -13,18 +13,24 @@
 
 /* global
     global: writable
-    BatchMaterialRecipes
     $MaterialVariantId
     IngredientHelper
     StartupEvents
     Item
 */
 
+global.DeferredTasks.MaterialRecipesRegister;
+if (global.DeferredTasks.MaterialRecipesRegister == undefined) {
+    global.DeferredTasks.MaterialRecipesRegister = {};
+}
+
 /**
  * Run at post initialization for those client-only users.
  * Then once again at recipe registration for those dedicated server users.
  */
-global.DeferredTasks.MaterialRecipesRegister = (() => {
+global.DeferredTasks.MaterialRecipesRegister.Task = (() => {
+
+    let BatchMaterialRecipes = global.BatchMaterialRecipes;
 
     BatchMaterialRecipes.resetAllRecipes();
 
@@ -98,15 +104,16 @@ global.DeferredTasks.MaterialRecipesRegister = (() => {
         Item.getItem("kubejs:animated_tinker_metal").getDefaultInstance(),
     );
 
+    global.DeferredTasks.MaterialRecipesRegister.RunOnce = true;
+
 });
 
 /** @type {boolean} */
-global.DeferredTasks.MaterialRecipesRegister.runOnce;
-if (global.DeferredTasks.MaterialRecipesRegister.runOnce) {
-    global.DeferredTasks.MaterialRecipesRegister();
+global.DeferredTasks.MaterialRecipesRegister.RunOnce;
+if (global.DeferredTasks.MaterialRecipesRegister.RunOnce) {
+    global.DeferredTasks.MaterialRecipesRegister.Task();
 }
 
 StartupEvents.postInit(() => {
-    global.DeferredTasks.MaterialRecipesRegister;
-    global.DeferredTasks.MaterialRecipesRegister.runOnce = true;
+    global.DeferredTasks.MaterialRecipesRegister.Task();
 });

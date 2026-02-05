@@ -119,6 +119,7 @@ const $ModifiableItem = Java.loadClass("slimeknights.tconstruct.library.tools.it
 const $MaterialItem = Java.loadClass("slimeknights.tconstruct.library.tools.part.MaterialItem");
 const $FakeIngotItem = Java.loadClass("slimeknights.tconstruct.tools.item.FakeIngotItem");
 const $RepairKitItem = Java.loadClass("slimeknights.tconstruct.tools.item.RepairKitItem");
+const ToolPartItem = Java.loadClass('slimeknights.tconstruct.library.tools.part.ToolPartItem');
 
 // Create
 const $FluidIngredient = Java.loadClass("com.simibubi.create.foundation.fluid.FluidIngredient");
@@ -450,7 +451,10 @@ global.Tinker = function() {};
  * Store some deferred tasks to run.  
  * 存储一些延迟任务以运行。
  */
-global.DeferredTasks = {};
+global.DeferredTasks;
+if (global.DeferredTasks == undefined) {
+    global.DeferredTasks = {};
+}
 
 StartupEvents.postInit(() => {
     /**

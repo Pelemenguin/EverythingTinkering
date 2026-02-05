@@ -28,3 +28,5 @@
  * @at client
  */
 global.JEIFunctions = {};
+
+global.JEIFunctions.AllCategories = {};

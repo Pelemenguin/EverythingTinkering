@@ -30,7 +30,7 @@ ServerEvents.recipes(event => {
 
     const BatchMaterialRecipes = global.BatchMaterialRecipes;
 
-    global.DeferredTasks.MaterialRecipesRegister();
+    global.DeferredTasks.MaterialRecipesRegister.Task();
 
     console.info(`Registering batch material recipes...`);
     console.info(`Available tool parts: ${global.CustomUtils.Tinker.TOOL_PARTS.map(part => part.getId()).join(", ")}`);

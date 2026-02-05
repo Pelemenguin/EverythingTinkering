@@ -14,6 +14,9 @@
 
 global.JEIFunctions.FluidInfusion = {};
 
+/** @type {Internal.CustomRecipeCategory<?>} */
+global.JEIFunctions.AllCategories.FLUID_INFUSION_CORE;
+
 /**
  * @param {Internal.RecipeCategoryBuilder<Internal.CustomJSRecipe>} category 
  */
@@ -32,7 +35,7 @@ global.JEIFunctions.FluidInfusion.RECIPE_ARROW = null;
  * @param {number} mouseY 
  * @param {Internal.RecipeCategoryBuilder<Internal.CustomJSRecipe>} category 
  */
-global.JEIFunctions.FluidInfusion.DrawHandler = (recipe, recipeSlotsView, guiGraphics, mouseX, mouseY, category) => {
+global.JEIFunctions.FluidInfusion.DrawHandler = (_recipe, _recipeSlotsView, guiGraphics, _mouseX, _mouseY, category) => {
     let arrow = global.JEIFunctions.FluidInfusion.RECIPE_ARROW;
     if (arrow === null) {
         arrow = category.getJeiHelpers().getGuiHelper().createAnimatedRecipeArrow(60);
@@ -49,7 +52,7 @@ global.JEIFunctions.FluidInfusion.DrawHandler = (recipe, recipeSlotsView, guiGra
  * @param {Internal.IFocusGroup} focusGroup 
  * @param {Internal.RecipeCategoryBuilder<Internal.CustomJSRecipe>} category 
  */
-global.JEIFunctions.FluidInfusion.HandleLookup = (recipeLayoutBuilder, recipe, focusGroup, category) => {
+global.JEIFunctions.FluidInfusion.HandleLookup = (recipeLayoutBuilder, recipe, _focusGroup, category) => {
     /** @type {Annotation.BatchRecipes.FluidInfusion.Item} */
     let data = recipe.getData();
 
@@ -73,7 +76,7 @@ global.JEIFunctions.FluidInfusion.HEIGHT = $Integer["valueOf(int)"](48);
 (() => {
 
 JEIAddedEvents.registerCategories(event => {
-    event.custom("kubejs:fluid_infusion_core", category => {
+    global.JEIFunctions.AllCategories.FLUID_INFUSION_CORE = event.custom("kubejs:fluid_infusion_core", category => {
         category.backgroundSupplier(() => global.JEIFunctions.FluidInfusion.Background(category));
         category.title(Component.translatable("jei.kubejs.fluid_infusion.title"));
         category.icon(category.getJeiHelpers().getGuiHelper().createDrawableItemStack("kubejs:fluid_infusion_core"));
@@ -112,6 +115,17 @@ JEIAddedEvents.registerRecipes(event => {
             }
         });
     });
+    global.BlockFunctions.FluidInfusionCore.RECIPES.forEach((_, inner) => {
+        inner.forEach((_, recipe) => {
+            builder.add(recipe);
+        });
+    });
+});
+
+JEIAddedEvents.registerRecipeCatalysts(event => {
+    event.data["addRecipeCatalyst(net.minecraft.world.item.ItemStack,mezz.jei.api.recipe.RecipeType[])"]("kubejs:fluid_infusion_core", global.JEIFunctions.AllCategories.FLUID_INFUSION_CORE);
+    event.data["addRecipeCatalyst(net.minecraft.world.item.ItemStack,mezz.jei.api.recipe.RecipeType[])"]("create:depot", global.JEIFunctions.AllCategories.FLUID_INFUSION_CORE);
+
 });
 
 })();

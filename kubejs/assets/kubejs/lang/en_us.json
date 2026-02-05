@@ -343,7 +343,7 @@
     "modifier.kubejs.induced_deflection.description": "Deflects projectiles when moving. Imagine yourself as a positively charged moving point charge and projectiles are also positively charged, then its deflection direction is determined by the Lorentz force in the magnetic field you generate",
 
     "modifier.kubejs.autonomous": "Autonomous",
-    "modifier.kubejs.autonomous.flavor": "sudo tool --auto-mode",
+    "modifier.kubejs.autonomous.flavor": "sudo tool --attack-on-your-own",
     "modifier.kubejs.autonomous.description": "After attacking, the tool will automatically attack surrounding targets for a period of time",
 
     "modifier.kubejs.glacial_strike": "Glacial Strike",
