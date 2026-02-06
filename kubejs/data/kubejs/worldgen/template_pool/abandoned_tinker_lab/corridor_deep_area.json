@@ -1,0 +1,18 @@
+{
+    "fallback": "kubejs:abandoned_tinker_lab/corridor_end",
+    "elements": [
+        {
+            "weight": 5,
+            "element": {
+                "element_type": "minecraft:single_pool_element",
+                "projection": "rigid",
+                "location": "kubejs:abandoned_tinker_lab/corridor/corridor_deep_area",
+                "processors": [
+                    {
+                        "processor_type": "minecraft:nop"
+                    }
+                ]
+            }
+        }
+    ]
+}

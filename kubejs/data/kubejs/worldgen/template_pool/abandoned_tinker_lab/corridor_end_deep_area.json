@@ -2,11 +2,11 @@
     "fallback": "kubejs:abandoned_tinker_lab/corridor_end",
     "elements": [
         {
-            "weight": 2,
+            "weight": 5,
             "element": {
                 "element_type": "minecraft:single_pool_element",
                 "projection": "rigid",
-                "location": "kubejs:abandoned_tinker_lab/corridor/corridor",
+                "location": "kubejs:abandoned_tinker_lab/corridor/corridor_deep_area",
                 "processors": [
                     {
                         "processor_type": "minecraft:nop"
@@ -15,24 +15,11 @@
             }
         },
         {
-            "weight": 1,
+            "weight": 3,
             "element": {
                 "element_type": "minecraft:single_pool_element",
                 "projection": "rigid",
-                "location": "kubejs:abandoned_tinker_lab/chambers/dps_test",
-                "processors": [
-                    {
-                        "processor_type": "minecraft:nop"
-                    }
-                ]
-            }
-        },
-        {
-            "weight": 1,
-            "element": {
-                "element_type": "minecraft:single_pool_element",
-                "projection": "rigid",
-                "location": "kubejs:abandoned_tinker_lab/chambers/electromagnetics",
+                "location": "kubejs:abandoned_tinker_lab/corridor/corridor_transition",
                 "processors": [
                     {
                         "processor_type": "minecraft:nop"
