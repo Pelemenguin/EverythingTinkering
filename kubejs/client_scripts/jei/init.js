@@ -10,8 +10,6 @@
  * This file is part of EverythingTinkering.
  * Full license see file `COPYING.LESSER`
  * - - - - -
- * SPDX-License-Identifier: LGPL-3.0-or-later
- * - - - - -
  * @author Pelemenguin
  */
 
@@ -23,7 +21,7 @@
  * Store some JEI related functions.
  * **Use this only in *CLIENT*!**  
  * 储存一些JEI相关函数。
- * **仅在*服务端*使用！**
+ * **仅在*客户端*使用！**
  * - - - - -
  * @at client
  */

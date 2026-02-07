@@ -1,0 +1,87 @@
+{
+    "type": "minecraft:chest",
+    "pools": [
+        {
+            "rolls": {
+                "type": "minecraft:uniform",
+                "min": 5,
+                "max": 2
+            },
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "minecraft:iron_ingot",
+                    "weight": 1
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "minecraft:copper_ingot",
+                    "weight": 3
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "kubejs:scrapped_tinker_metal",
+                    "weight": 1
+                }
+            ],
+            "functions": [
+                {
+                    "function": "minecraft:set_count",
+                    "count": {
+                        "type": "minecraft:uniform",
+                        "min": 4,
+                        "max": 2
+                    },
+                    "add": true
+                }
+            ]
+        },
+        {
+            "rolls": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 5
+            },
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "tconstruct:tool_handle",
+                    "weight": 2
+                },
+                {
+                    "type": "minecraft:item",
+                    "name": "tconstruct:tool_binding",
+                    "weight": 3
+                }
+            ],
+            "functions": [
+                {
+                    "function": "minecraft:set_nbt",
+                    "tag": "{Material:\"tconstruct:copper#oxidized\"}",
+                    "conditions": []
+                },
+                {
+                    "function": "minecraft:set_nbt",
+                    "tag": "{Material:\"tconstruct:iron#oxidized\"}",
+                    "conditions": [
+                        {
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.5
+                        }
+                    ]
+                },
+                {
+                    "function": "minecraft:set_nbt",
+                    "tag": "{Material:\"kubejs:scrapped_tinker_metal\"}",
+                    "conditions": [
+                        {
+                            "condition": "minecraft:random_chance",
+                            "chance": 0.5
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "random_sequence": "kubejs:abandoned_tinker_lab"
+}
