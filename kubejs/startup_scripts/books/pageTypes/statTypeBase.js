@@ -14,12 +14,12 @@
  */
 
 /* global
+    global: writable
     MaterialRegistry
     BookTextComponentData
     Item
     BookTextData
     Component
-    CustomUtils
     BookElement
     RepresentativeItems
     MaterialStatsId
@@ -159,7 +159,7 @@ const StatTypeBase = {
         text.scale = 1.2;
         text.underlined = true;
         text.useOldColor = false;
-        text.rgbColor = CustomUtils.Tinker.getMantleColor(translationKey).getValue();
+        text.rgbColor = global.ClientUtils.getMantleColor(translationKey).getValue();
         text.dropshadow = true;
 
         let itemElement = new TinkerItemElement(RepresentativeItems.get(strMatId));

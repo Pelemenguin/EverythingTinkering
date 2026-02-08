@@ -14,6 +14,7 @@
  */
 
 /* global
+    global: writable
     Java
 */
 
@@ -23,9 +24,13 @@
 const $Integer = Java.loadClass("java.lang.Integer");
 
 // Minecraft
+const TextColor = Java.loadClass('net.minecraft.network.chat.TextColor');
 const $Minecraft = Java.loadClass("net.minecraft.client.Minecraft");
 const $Rect2i = Java.loadClass("net.minecraft.client.renderer.Rect2i");
 const $TooltipFlag = Java.loadClass("net.minecraft.world.item.TooltipFlag");
+
+// Mantle
+const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
 
 // Tinker's Construct
 const $MaterialVariantId = Java.loadClass("slimeknights.tconstruct.library.materials.definition.MaterialVariantId");
@@ -41,3 +46,29 @@ const $DepotBlockEntity = Java.loadClass("com.simibubi.create.content.logistics.
 
 // KubeJS
 const $BlockEntityJS = Java.loadClass("dev.latvian.mods.kubejs.block.entity.BlockEntityJS");
+
+// ---------- Utils ---------- //
+
+/**
+ * @namespace ClientUtils
+ * Utility functions for client-side operations.  
+ * 客户端操作的实用程序函数。
+ */
+global.ClientUtils = {};
+
+/**
+ * Get the color for a given text, usually translation keys for materials or modifiers.  
+ * 根据给定的文本获取颜色，通常是材料或特性的翻译键。
+ * - - - - -
+ * @param {string} parameter 
+ * @returns {Internal.TextColor}
+ */
+global.ClientUtils.getMantleColor = (parameter) => {
+    try {
+        return ResourceColorManager.getTextColor(parameter);
+    } catch (e) {
+        return TextColor.fromRgb(0x000000);
+    }
+};
+
+

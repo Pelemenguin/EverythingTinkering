@@ -15,10 +15,10 @@
  */
 
 /* global
+    global: writable
     ModifierManager
     ToolStack
     $ModifierId
-    CustomUtils
     ToolStats
     Component
 */
@@ -35,7 +35,7 @@ let WELCOME_DISAPPEAR_TIME = 72000;
 let WELCOME = ModifierManager.registerCommonModifier("welcome", "WelcomeModifier", {
     onInventoryTick: (tool, modifier, world, holder, itemSlot, isSelected, isCorrectSlot, stack) => {
         if (world.isClientSide()) return;
-        let traitColor = CustomUtils.Tinker.getMantleColor("modifier.kubejs.welcome");
+        let traitColor = global.ClientUtils.getMantleColor("modifier.kubejs.welcome");
         let colorNumber = traitColor.getValue();
         let darkenedColorChannels = [Math.round(((colorNumber & 0xFF0000) >> 16) / 2), Math.round(((colorNumber & 0x00FF00) >> 8) / 2), Math.round((colorNumber & 0x0000FF) / 2)];
         let darkenedColor = (darkenedColorChannels[0] << 16) + (darkenedColorChannels[1] << 8) + darkenedColorChannels[2];

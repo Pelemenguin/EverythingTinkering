@@ -33,7 +33,7 @@ ServerEvents.recipes(event => {
     global.DeferredTasks.MaterialRecipesRegister.Task();
 
     console.info(`Registering batch material recipes...`);
-    console.info(`Available tool parts: ${global.CustomUtils.Tinker.TOOL_PARTS.map(part => part.getId()).join(", ")}`);
+    console.info(`Available tool parts: ${global.TOOL_PARTS.map(part => part.getId()).join(", ")}`);
     
     const REPAIR_KIT_STAT_ID = $MaterialStatsId.tryParse("tconstruct:repair_kit");
     const FAKE_INGOT_STAT_ID = $MaterialStatsId.tryParse("tconstruct:ingot");
@@ -42,7 +42,7 @@ ServerEvents.recipes(event => {
     for (let recipeId in BatchMaterialRecipes.Deploying.ALL) {
         let entry = BatchMaterialRecipes.Deploying.ALL[recipeId];
         console.info(`Registering deploying batch recipe: ${recipeId} (${entry.inputMaterial} + ${entry.usingItem} -> ${entry.outputMaterial})`);
-        for (let part of global.CustomUtils.Tinker.TOOL_PARTS) {
+        for (let part of global.TOOL_PARTS) {
             if (part instanceof $RepairKitItem) {
                 if (part instanceof $FakeIngotItem) {
                     if (!entry.partStatTypes.contains(FAKE_INGOT_STAT_ID)) {
@@ -74,7 +74,7 @@ ServerEvents.recipes(event => {
     for (let recipeId in BatchMaterialRecipes.SequencedAssembly.ALL) {
         let entry = BatchMaterialRecipes.SequencedAssembly.ALL[recipeId];
         console.info(`Registering sequenced assembly batch recipe: ${recipeId} (${entry.inputMaterial} -> ${entry.outputMaterial})`);
-        for (let part of global.CustomUtils.Tinker.TOOL_PARTS) {
+        for (let part of global.TOOL_PARTS) {
             if (part instanceof $RepairKitItem) {
                 if (part instanceof $FakeIngotItem) {
                     if (!entry.partStatTypes.contains(FAKE_INGOT_STAT_ID)) {

@@ -21,9 +21,6 @@
     MaterialId
 */
 
-let toolParts = global.CustomUtils.Tinker.TOOL_PARTS;
-let getMantleColor = global.CustomUtils.Tinker.getMantleColor;
-
 /**
  * - Gives the part list to the player
  * - 给予玩家材料列表。
@@ -34,20 +31,19 @@ let getMantleColor = global.CustomUtils.Tinker.getMantleColor;
 
 let give_part_list = (target, materialId) => {
     let translation_key = `material.${materialId.replace('#', '.').replace(':', '.')}`;
-    let material_color = getMantleColor(translation_key);
     let new_nbt = {
         BlockEntityTag: {
             Items: []
         },
         display: {
-            Name: `{"translate":"command.kubejs.item_list.parts.name","italic":false,"with":[{"translate":"${translation_key}","color":"${material_color.toString()}","underlined":true}]}`,
+            Name: `{"translate":"command.kubejs.item_list.parts.name","italic":false,"with":[{"translate":"${translation_key}","underlined":true}]}`,
             Lore: [
                 `{"translate":"command.kubejs.item_list.parts.lore","color":"gray","italic":false}`
             ]
         },
     };
     let current_slot = 0;
-    toolParts.forEach(item => {
+    global.TOOL_PARTS.forEach(item => {
         // console.info(item)
         if (partSupportsMaterial(item, materialId)) {
             let this_item = {Count: NBT.byteTag(1),

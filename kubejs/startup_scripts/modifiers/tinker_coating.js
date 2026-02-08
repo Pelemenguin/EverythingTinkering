@@ -15,13 +15,13 @@
  */
 
 /* global
+    global: writable
     ModifierManager
     $CapacityBarModule
     $DurabilityShieldModule
     $LevelingInt
     $ModifierHooks
     Component
-    CustomUtils
 */
 
 // eslint-disable-next-line no-unused-vars
@@ -48,17 +48,17 @@ let TINKER_COATING = ModifierManager.registerCommonModifier("tinker_coating", "T
         let maxShield = modifier.getHook($ModifierHooks.CAPACITY_BAR).getCapacity(tool, modifier);
         if (shieldAmount > 0) {
             tooltip.add(
-                Component.translatable("modifier.kubejs.tinker_coating.tooltip.shield", Component.literal(shieldAmount.toFixed()).color(CustomUtils.Tinker.getMantleColor("modifier.kubejs.tinker_coating"))
+                Component.translatable("modifier.kubejs.tinker_coating.tooltip.shield", Component.literal(shieldAmount.toFixed()).color(global.ClientUtils.getMantleColor("modifier.kubejs.tinker_coating"))
                     .append(Component.literal(" / ").gray())
-                    .append(Component.literal(maxShield.toFixed()).color(CustomUtils.Tinker.getMantleColor("modifier.kubejs.tinker_coating")))
+                    .append(Component.literal(maxShield.toFixed()).color(global.ClientUtils.getMantleColor("modifier.kubejs.tinker_coating")))
                 )
             );
         } else {
             let recoveryTime = Math.ceil(tool.getPersistentData().getInt("kubejs:tinker_coating_recovery") / 20).toFixed();
             tooltip.add(
-                Component.translatable("modifier.kubejs.tinker_coating.tooltip.recovery", Component.literal(recoveryTime).color(CustomUtils.Tinker.getMantleColor("modifier.kubejs.tinker_coating"))
+                Component.translatable("modifier.kubejs.tinker_coating.tooltip.recovery", Component.literal(recoveryTime).color(global.ClientUtils.getMantleColor("modifier.kubejs.tinker_coating"))
                     .append(Component.literal(" / ").gray())
-                    .append(Component.literal("30").color(CustomUtils.Tinker.getMantleColor("modifier.kubejs.tinker_coating")))
+                    .append(Component.literal("30").color(global.ClientUtils.getMantleColor("modifier.kubejs.tinker_coating")))
                 )
             );
         }

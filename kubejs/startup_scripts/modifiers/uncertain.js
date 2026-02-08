@@ -16,13 +16,13 @@
 
 /* global
     ModifierManager
-    CustomUtils
-    NBT
     JavaMath
     Direction
     ResourceLocation
     Component
 */
+
+(() => {
 
 let UNCERTAIN_ID = "kubejs:uncertain";
 
@@ -61,38 +61,6 @@ let UNCERTAIN_TAGS = {
  * @returns number
  */
 let UNCERTAIN_GET_PROBABILITY = (mined, level) => UNCERTAIN_MAX_PROBABILITY - mined * UNCERTAIN_PROBABILITY_REDUCE / level;
-
-/**
- * - Add a tool with `uncertain`'s persistent data.
- * - 增加带有 `未定` 的工具的 Persistent 数据。
- * - - - - -
- * @param {Internal.ItemStack} item -
- * - The item to set persistent data to.
- * - 要设置 Persistent 数据的物品。
- * @param {number} value -
- * - The value to set.
- * - 要设置的数值。
- * - - - - -
- * @returns {boolean}
- * - Whether this is successful or not.
- * - 是否成功。
- */
-let addUncertainPersistent = (item, value) => {
-    try {
-        if (!(UNCERTAIN_ID in CustomUtils.Tinker.getModifiersFromItem(item))) return false;
-        try {
-            CustomUtils.Tinker.Persistent.set(item, UNCERTAIN_ID, NBT.intTag(CustomUtils.Tinker.Persistent.get(item, UNCERTAIN_ID).asInt + value));
-        // eslint-disable-next-line no-unused-vars
-        } catch (e) {
-            CustomUtils.Tinker.Persistent.set(item, UNCERTAIN_ID, NBT.intTag(value));
-            return true;
-        }
-    // eslint-disable-next-line no-unused-vars
-    } catch (e) {
-        return false;
-    }
-    return true;
-};
 
 /**
  * - Replace blocks.
@@ -149,8 +117,7 @@ let calcUncertainColor = (percentage) => {
     return ((r << 16) + (g << 8) + b);
 };
 
-// eslint-disable-next-line no-unused-vars
-let UNCERTAIN = ModifierManager.registerCommonModifier("uncertain", "UncertainModifier", {
+ModifierManager.registerCommonModifier("uncertain", "UncertainModifier", {
     afterBlockBreak: (tool, modifier, context) => {
         if (context.getWorld().isClientSide()) return;
         let mined = 0;
@@ -158,9 +125,7 @@ let UNCERTAIN = ModifierManager.registerCommonModifier("uncertain", "UncertainMo
             mined = tool.persistentData.getInt(UNCERTAIN_ID);
         // eslint-disable-next-line no-unused-vars
         } catch (e) { /* Do nothing */ }
-        context.getLiving().handSlots.forEach(item => {
-            addUncertainPersistent(item, 1);
-        });
+        tool.getPersistentData().putInt("kubejs:uncertain", tool.getPersistentData().getInt("kubejs:uncertain") + 1);
         if (JavaMath.random() >= UNCERTAIN_GET_PROBABILITY(mined, modifier.level)) return;
         let miningBlock = context.getWorld().getBlock(context.getPos());
         /** @type {Internal.BlockContainerJS} */
@@ -177,9 +142,8 @@ let UNCERTAIN = ModifierManager.registerCommonModifier("uncertain", "UncertainMo
                 break;
         }
     },
-    addTooltip: (tool, modifier, player, tooltip, _tooltipKey, _tooltipFlag) => {
-        if (tool.persistentData.getInt(UNCERTAIN_ID) == null) player.getHandSlots().forEach(item => addUncertainPersistent(item, 0));
-        let probability = Math.max(UNCERTAIN_GET_PROBABILITY(tool.persistentData.getInt(UNCERTAIN_ID), modifier.level), 0);
+    addTooltip: (tool, modifier, _player, tooltip, _tooltipKey, _tooltipFlag) => {
+        let probability = Math.max(UNCERTAIN_GET_PROBABILITY(tool.getPersistentData().getInt(UNCERTAIN_ID), modifier.level), 0);
         let max = UNCERTAIN_GET_PROBABILITY(0, modifier.level);
         tooltip.add(Component.translatable("modifier.kubejs.uncertain.tooltip", Component.literal("")
             .append(Component.literal((probability * 100).toFixed(2) + '%').color(calcUncertainColor(probability / max)))
@@ -188,3 +152,5 @@ let UNCERTAIN = ModifierManager.registerCommonModifier("uncertain", "UncertainMo
         ));
     }
 });
+
+})();

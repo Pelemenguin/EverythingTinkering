@@ -92,7 +92,7 @@ JEIAddedEvents.registerRecipes(event => {
     global.BlockFunctions.FluidInfusionCore.MATERIAL_RECIPES.forEach((_, inner) => {
         inner.forEach((_, recipe) => {
             let supported = recipe.statTypes;
-            for (let toolPartItem of global.CustomUtils.Tinker.TOOL_PARTS) {
+            for (let toolPartItem of global.TOOL_PARTS) {
                 if (toolPartItem instanceof $RepairKitItem) {
                     if (toolPartItem instanceof $FakeIngotItem) {
                         if (!supported.contains(new $MaterialStatsId("tconstruct", "ingot"))) continue;
