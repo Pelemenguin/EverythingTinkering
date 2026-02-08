@@ -1,5 +1,5 @@
 {
-    "fallback": "kubejs:abandoned_tinker_lab/corridor_end",
+    "fallback": "kubejs:abandoned_tinker_lab/corridor_deep_area_end",
     "elements": [
         {
             "weight": 8,
@@ -19,7 +19,7 @@
             "element": {
                 "element_type": "minecraft:single_pool_element",
                 "projection": "rigid",
-                "location": "kubejs:abandoned_tinker_lab/corridor/corridor_stairs",
+                "location": "kubejs:abandoned_tinker_lab/corridor/corridor_stairs_transition",
                 "processors": [
                     {
                         "processor_type": "minecraft:nop"
@@ -28,11 +28,11 @@
             }
         },
         {
-            "weight": 3,
+            "weight": 1,
             "element": {
                 "element_type": "minecraft:single_pool_element",
                 "projection": "rigid",
-                "location": "kubejs:abandoned_tinker_lab/corridor/corridor_transition",
+                "location": "kubejs:abandoned_tinker_lab/corridor/corridor_deep_area_end",
                 "processors": [
                     {
                         "processor_type": "minecraft:nop"
