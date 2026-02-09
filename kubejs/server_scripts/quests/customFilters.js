@@ -19,6 +19,7 @@
     $MaterialVariantId
     ToolStack
     $IModifiable
+    $HashSet
 */
 
 FTBFilterSystemEvents.customFilter("PartMaterialTest", event => {
@@ -45,21 +46,25 @@ FTBFilterSystemEvents.customFilter("PartMaterialTest", event => {
 
 FTBFilterSystemEvents.customFilter("DistinctMaterialTest", event => {
     let stack = event.getStack();
-    if (!stack.hasTag("tconstruct:modifiable")) {
+    if (!(stack.getItem() instanceof $IModifiable)) {
         event.cancel();
         return;
     }
-    let allMaterials = stack.getNbt().getList("tic_materials", 8).toArray();
+    let materialList = ToolStack.from(stack).getMaterials().getList();
+    if (materialList.size() <= 1) {
+        // Do you really want to complete this task with only one material?
+        event.cancel();
+        return;
+    }
     // Success if all materials are distinct
-    // KubeJS's Set has bug, so we don't use Set
-    let materialSet = {};
-    for (let i = 0; i < allMaterials.length; i++) {
-        let material = allMaterials[i];
-        if (material in materialSet) {
+    let materialSet = new $HashSet();
+    for (let i = 0; i < materialList.size(); i++) {
+        let material = materialList.get(i).getId();
+        if (materialSet.contains(material)) {
             event.cancel();
             return;
         }
-        materialSet[material] = true;
+        materialSet.add(material);
     }
     event.success();
 });
@@ -73,37 +78,23 @@ FTBFilterSystemEvents.customFilter("ToolMaterialTest", event => {
     // It accept any variant of that material
 
     let stack = event.getStack();
-    if (!stack.hasTag("tconstruct:modifiable")) {
+    if (!(stack.getItem() instanceof $IModifiable)) {
         event.cancel();
         return;
     }
     let requiredMaterials = event.getData().split(",");
-    /** @type {Internal.StringTag[]} */
-    let allMaterials = stack.getNbt().getList("tic_materials", 8).toArray();
+    let allMaterials = ToolStack.from(stack).getMaterials().getList();
+    if (allMaterials.size() != requiredMaterials.length) {
+        event.cancel();
+        return;
+    }
     for (let i = 0; i < requiredMaterials.length; i++) {
-        let requiredMaterial = requiredMaterials[i];
-        if (requiredMaterial == "*") continue;
+        let requiredMaterial = $MaterialVariantId.parse(requiredMaterials[i]);
 
-        let actualMaterialTag = allMaterials[i];
-        if (actualMaterialTag == undefined) {
+        let actualMaterialTag = allMaterials.get(i);
+        if (!requiredMaterial["matchesVariant(slimeknights.tconstruct.library.materials.definition.MaterialVariant)"](actualMaterialTag)) {
             event.cancel();
             return;
-        }
-        let actualMaterial = actualMaterialTag.getAsString();
-        if (requiredMaterial.endsWith("#*")) {
-            // Check only material id
-            let requiredMaterialId = requiredMaterial.split("#")[0];
-            let actualMaterialId = actualMaterial.split("#")[0];
-            if (requiredMaterialId != actualMaterialId) {
-                event.cancel();
-                return;
-            }
-        } else {
-            // Check full material id
-            if (requiredMaterial != actualMaterial) {
-                event.cancel();
-                return;
-            }
         }
     }
     event.success();

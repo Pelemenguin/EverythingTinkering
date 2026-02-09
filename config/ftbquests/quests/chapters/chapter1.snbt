@@ -248,7 +248,7 @@
 					Count: 1
 					id: "ftbfiltersystem:smart_filter"
 					tag: {
-						"ftbfiltersystem:filter": "custom(ToolMaterialTest/tconstruct:wood#*,tconstruct:wood#*,tconstruct:wood#*)item(tconstruct:pickaxe)"
+						"ftbfiltersystem:filter": "custom(ToolMaterialTest/tconstruct:wood,tconstruct:wood,tconstruct:wood)item(tconstruct:pickaxe)"
 					}
 				}
 				title: "{quest.chapters.1.tutorial_tools.task}"
