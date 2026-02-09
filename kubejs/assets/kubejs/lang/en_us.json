@@ -555,8 +555,8 @@
 
     "quest.chapters.1.more_materials.title": "More Materials",
     "quest.chapters.1.more_materials.description": "&6Tools can made of not only wood, but &eother materials&6 as well.\n\nMaybe you can try to use &eRock&e and &eCopper&6 to make tools?\n\n&e\"Knowledge is power.\"&6 You can get inspirations from the books provided, such as &e\"Materials And You\"&6.",
-    "quest.chapters.1.more_materials.task.rock": "Any Rock part",
-    "quest.chapters.1.more_materials.task.copper": "Any Copper part",
+    "quest.chapters.1.more_materials.task.rock": "Any Rock Tool Part or Tool",
+    "quest.chapters.1.more_materials.task.copper": "Any Copper Tool Part or Tool",
 
     "quest.chapters.1.distinct_materials.title": "Permutation \\& Combination",
     "quest.chapters.1.distinct_materials.description": "&6You can use &edifferent&6 materials in differnt parts of the tool.",
@@ -666,13 +666,13 @@
     "quest.technology_chapters.1.basic_mechanism_automation.description": "&6Apply &ethree Andesite Alloys&6 on a &ePattern&6 to craft a &eBasic Mechanism&6.",
 
     "quest.technology_chapters.1.materials.andesite_alloy.description": "Tool made of &eAndesite Alloy&6 can &eattack targets in a straight line&6.",
-    "quest.technology_chapters.1.materials.andesite_alloy.task": "Any Andesite Alloy Tool Part",
+    "quest.technology_chapters.1.materials.andesite_alloy.task": "Any Andesite Alloy Tool Part or Tool",
 
     "quest.technology_chapters.1.materials.steel_clad_copper.description": "&6Deployers can perform &eDeploying&6 recipes, &eapplying one item&6 on another. There are some materials that can be made by &eitem deploying&6.\n\nTry deploying an &eIron Sheet&6 or an &eIron Plate&6 onto a &eCopper&6 tool part!\n\n&eRight-click to attach Iron Plates / Iron Sheets&6 on a tool that has Steel-clad Copper part to gain bonus stats.",
-    "quest.technology_chapters.1.materials.steel_clad_copper.task": "Any Steel-clad Copper Tool Part",
+    "quest.technology_chapters.1.materials.steel_clad_copper.task": "Any Steel-clad Copper Tool Part or Tool",
 
     "quest.technology_chapters.1.materials.mainspring.description": "&6Perforing &eCreate processing multiple times&6 on one item is called &eSequenced Assembly&6.\n\nTry making a &eMainspring&6 tool part.\n\nThe &eMainspring&6 material can give you &eextra movements speed&6 after attacking.\n\n&c&lNote: &r&6The &eMainspring&6 material only supports &eHead&6 tool parts.",
-    "quest.technology_chapters.1.materials.mainspring.task": "Any Mainspring Tool Part",
+    "quest.technology_chapters.1.materials.mainspring.task": "Any Mainspring Tool Part or Tool",
 
         "_comment_recipes": " ----- Recipes ----- ",
 

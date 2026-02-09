@@ -37,12 +37,15 @@ const $ModifierNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.M
 const ResourceColorManager = Java.loadClass('slimeknights.mantle.client.ResourceColorManager');
 const TextColor = Java.loadClass('net.minecraft.network.chat.TextColor');
 const $MaterialIngredient = Java.loadClass("slimeknights.tconstruct.library.recipe.ingredient.MaterialIngredient");
+const $IToolStackView = Java.loadClass("slimeknights.tconstruct.library.tools.nbt.IToolStackView");
 const ToolStack = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.ToolStack');
 const $ArmorDefinitions = Java.loadClass("slimeknights.tconstruct.tools.ArmorDefinitions");
 const TiCToolDefinitions = Java.loadClass('slimeknights.tconstruct.tools.ToolDefinitions');
 const MaterialNBT = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT');
+const $MaterialItem = Java.loadClass("slimeknights.tconstruct.library.tools.part.MaterialItem");
 const TinkerToolParts = Java.loadClass("slimeknights.tconstruct.tools.TinkerToolParts");
 const $FakeIngotItem = Java.loadClass("slimeknights.tconstruct.tools.item.FakeIngotItem");
+const $IModifiable = Java.loadClass("slimeknights.tconstruct.library.tools.item.IModifiable");
 const $RepairKitItem = Java.loadClass("slimeknights.tconstruct.tools.item.RepairKitItem");
 const MaterialNBTBuilder = Java.loadClass('slimeknights.tconstruct.library.tools.nbt.MaterialNBT$Builder');
 

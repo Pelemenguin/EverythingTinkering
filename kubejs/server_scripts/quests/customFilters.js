@@ -15,19 +15,32 @@
     FTBFilterSystemEvents
     $ModifierNBT
     $ModifierId
+    $MaterialItem
+    $MaterialVariantId
+    ToolStack
+    $IModifiable
 */
 
 FTBFilterSystemEvents.customFilter("PartMaterialTest", event => {
     let stack = event.getStack();
-    if (!stack.hasTag("tconstruct:parts")) {
-        event.cancel();
-        return;
+    let item = stack.getItem();
+    let requiredVariant = $MaterialVariantId.parse(event.getData());
+    if (item instanceof $MaterialItem) {
+        if (!requiredVariant["matchesVariant(net.minecraft.world.item.ItemStack)"](stack)) {
+            event.cancel();
+            return;
+        }
+        event.success();
     }
-    if (stack.getNbt().getString("Material").split("#")[0] != (event.getData())) {
-        event.cancel();
-        return;
+    if (item instanceof $IModifiable) {
+        let toolStack = ToolStack.from(stack);
+        let success = toolStack.getMaterials().getList().some(mv => requiredVariant["matchesVariant(slimeknights.tconstruct.library.materials.definition.MaterialVariant)"](mv));
+        if (success) {
+            event.success();
+            return;
+        }
     }
-    event.success();
+    event.cancel();
 });
 
 FTBFilterSystemEvents.customFilter("DistinctMaterialTest", event => {
