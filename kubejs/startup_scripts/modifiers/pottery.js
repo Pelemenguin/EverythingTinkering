@@ -1,15 +1,8 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Pottery | 陶片
  * - - - - -
  * Random damage boost after tool is damaged.
  * 工具损伤后随机伤害提升
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */

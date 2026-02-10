@@ -1,15 +1,8 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Fibrous | 纤维
  * - - - - -
  * Chance to cancel durability consumption when facing is near the X axis.
  * 朝向接近X轴时概率不消耗耐久。
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */

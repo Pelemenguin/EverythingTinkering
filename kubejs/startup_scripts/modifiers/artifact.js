@@ -1,15 +1,8 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Artifact ID Displayer | Artifact ID 显示器
  * - - - - -
  * No actual effect, used to display the ID of an Artifact.  
  * 无实际效果，仅用于显示Artifact ID。
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */

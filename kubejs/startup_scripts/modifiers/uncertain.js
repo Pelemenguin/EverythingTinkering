@@ -1,15 +1,8 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Uncertain | 未定
  * - - - - -
  * Chance to replace the rock behind the one you mined with ores.
  * 有概率将你挖的方块后面的岩石替换为矿物。
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */

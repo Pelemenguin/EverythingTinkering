@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Igniting | 点燃
  * - - - - -
@@ -9,11 +7,6 @@
  * 将燃烧时间从被攻击的生物转移到工具上，
  * 并在下次攻击释放。
  * 当工具仍然在着火时，每秒消耗耐久。
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */

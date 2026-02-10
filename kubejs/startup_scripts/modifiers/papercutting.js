@@ -1,15 +1,8 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Paper-Cutting | 剪纸
  * - - - - -
  * Deal damage to enemies attacked from the side.
  * 对从侧面攻击的敌人造成伤害。 
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */

@@ -1,15 +1,8 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview DPS Equalizer | DPS均衡器
  * - - - - -
  * Increase damage for melee attacks that are not fully charged.  
  * 对未完全蓄力的近战攻击增加伤害。
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */

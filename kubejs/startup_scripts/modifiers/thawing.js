@@ -1,15 +1,8 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
- 
 /**
  * @fileoverview Thawing | 融雪
  * - - - - -
  * Thaw the surrounding snow.
  * 融化周围的雪。
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */

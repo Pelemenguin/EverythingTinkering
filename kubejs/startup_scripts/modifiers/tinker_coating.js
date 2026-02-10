@@ -1,15 +1,8 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Durability Protection | 耐久保护
  * - - - - -
  * Grants 20 durability protection per level at one time. After comsuming all of them, recover the durability protection in 30 seconds.
  * 授予每级20点耐久保护一次性使用。使用完后，30秒内恢复耐久保护。
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */

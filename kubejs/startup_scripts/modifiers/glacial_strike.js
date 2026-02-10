@@ -1,15 +1,8 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
- 
 /**
  * @fileoverview Glacial Strike | 霜滞冲击
  * - - - - -
  * Press the key (default: G) to jump high and smash down.
  * 按下特定按键（默认：G）跃起并砸向地面，造成范围伤害。
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */

@@ -1,15 +1,8 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
- 
 /**
  * @fileoverview Resonance | 共振
  * - - - - -
  * Show all the same type of entites nearby on attack.
  * 攻击时显示周围所有同种实体。
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */

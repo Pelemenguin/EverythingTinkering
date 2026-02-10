@@ -1,15 +1,8 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Glass Shard | 玻璃碎片
  * - - - - -
  * Deal damage to entites in a 3x3x3 area near the target.
  * 对目标周围 3x3x3 范围内的实体造成伤害。
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */

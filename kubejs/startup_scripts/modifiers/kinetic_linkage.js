@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Kinetic Linkage | 动力连动
  * - - - - -
@@ -7,11 +5,6 @@
  * This process may happen multiple times in succession, which stops after damage is less than or equal to 1.  
  * 攻击目标后，目标周围一定范围内的一个随机实体也会受到攻击。
  * 此过程可能会连续发生多次，直到伤害小于等于1为止。
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */

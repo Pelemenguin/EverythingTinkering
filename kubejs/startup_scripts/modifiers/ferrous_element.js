@@ -1,15 +1,8 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview The Ferrous Elements | 铁系元素
  * - - - - -
  * Add max durability and repair effeciency when iron or cobaly exists in the tool.  
  * 当工具中存在铁或钴时，增加最大耐久度和修复效率。
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */

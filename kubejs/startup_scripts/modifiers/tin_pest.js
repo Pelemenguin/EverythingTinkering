@@ -1,15 +1,8 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Tin Pest | 锡疫
  * - - - - -
  * Increase durability loss when exposed to low temperatures, but increase damage when used in hot environments.  
  * 在低温环境下增加耐久损失，但在高温环境下增加伤害。
- * - - - - -
- * @copyright Pelemenguin 2025
- * @license LGPL-3.0-or-later
- * This file is part of EverythingTinkering.
- * Full license see file `COPYING.LESSER`
  * - - - - -
  * @author Pelemenguin
  */
