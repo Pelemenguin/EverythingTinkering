@@ -1,7 +1,5 @@
 // priority: 10000
 
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview
  * @author Pelemenguin

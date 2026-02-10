@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Disable Entity Spawn | 禁用实体生成
  * - - - - -

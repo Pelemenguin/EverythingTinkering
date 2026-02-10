@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Fluid Infusion Core | 流体注入核心
  * @author Pelemenguin

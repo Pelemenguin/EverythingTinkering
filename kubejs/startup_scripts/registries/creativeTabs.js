@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Artifact Tab | Artifact 创造模式标签页
  * @author Pelemenguin

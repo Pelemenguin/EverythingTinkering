@@ -1,7 +1,5 @@
 // priority: 65536
 
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Tooltip Utils
  * @author Pelemenguin

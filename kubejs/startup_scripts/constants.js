@@ -1,7 +1,5 @@
 // priority: 2147483647
 
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Constants | 常量
  * - Because Rhino made `const`-defined objects global, use a special JS file to create these.

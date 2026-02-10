@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview /modpack rescue  
  * 用于整合包开发时的紧急情况。

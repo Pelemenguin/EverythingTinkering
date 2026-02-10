@@ -1,7 +1,5 @@
 // priority: 32767
 
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Icy Terracube
  * @author Pelemenguin

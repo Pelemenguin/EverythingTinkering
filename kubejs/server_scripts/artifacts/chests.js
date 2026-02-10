@@ -1,7 +1,5 @@
 // priority: 999
 
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Chest Loot Artifacts | 箱子战利品 Artifact
  * @author Pelemenguin

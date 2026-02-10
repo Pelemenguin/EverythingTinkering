@@ -1,7 +1,5 @@
 // priority: -1000
 
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Spawn bonus chest | 初始奖励箱
  * @author Pelemenguin

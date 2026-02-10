@@ -1,7 +1,5 @@
 // priority: 1000
 
-// SPDX-License-Identifier: LGPL-3.0-or-later
-
 /**
  * @fileoverview Common Recipe Removal | 一般配方删除
  * @author Pelemenguin
