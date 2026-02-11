@@ -9,7 +9,8 @@ import tomllib
 
 def build_modpack(args: list[str]):
     options = {
-        "build_version": "Unknown"
+        "build_version": "Unknown",
+        "developer": False
     }
 
     args_index = 0
@@ -22,6 +23,8 @@ def build_modpack(args: list[str]):
                 except:
                     print("An argument is required after '--build-version'")
                     return
+            case "--developer":
+                options["developer"] = True
             case unknown:
                 print(f"Unknown option: {args[args_index]}")
                 help_build(["build"])
@@ -74,7 +77,7 @@ def build_modpack(args: list[str]):
 
     read = 0
     for m in mods:
-        if "tags" not in m or "DeveloperOnly" not in m["tags"]:
+        if options["developer"] or ("tags" not in m or "DeveloperOnly" not in m["tags"]):
             manifest["files"].append({
                 "projectID": m['curse_id']['project'],
                 "fileID": m['curse_id']['file'],
@@ -99,7 +102,7 @@ def build_modpack(args: list[str]):
     modlist_html += "</ul>"
     print()
 
-    output = zipfile.ZipFile(f"{MODPACK_NAME} {"v"+MODPACK_VERSION if MODPACK_VERSION else f"[Build]{" "+LATEST_COMMIT if LATEST_COMMIT != "Unknown" else ""}"}.zip", "w")
+    output = zipfile.ZipFile(f"{MODPACK_NAME} {"v"+MODPACK_VERSION if MODPACK_VERSION else f"[Build]{" "+LATEST_COMMIT if LATEST_COMMIT != "Unknown" else ""}"}{" [Developer Pack]" if options['developer'] else ""}.zip", "w")
     output.writestr("manifest.json", manifest_json)
     output.writestr("modlist.html", modlist_html)
 
@@ -117,6 +120,20 @@ Build time: {BUILD_TIME}""")
     zipping.extend(os.walk(os.path.join(curdir, "config\\ftbquests")))
     # zipping.extend(os.walk(os.path.join(curdir, "config")))
     zipping.extend(os.walk(os.path.join(curdir, "LICENSES")))
+    if (options["developer"] == True):
+        zipping.extend(os.walk(os.path.join(curdir, ".git")))
+        zipping.extend(os.walk(os.path.join(curdir, ".github")))
+        zipping.extend(os.walk(os.path.join("config\\.gitigore")))
+        zipping.extend(os.walk(os.path.join("texture_generator")))
+        zipping.extend(os.walk(os.path.join(curdir, ".gitignore")))
+        zipping.extend(os.walk(os.path.join(curdir, "ASSETS_LICENSE")))
+        zipping.extend(os.walk(os.path.join(curdir, "build.py")))
+        zipping.extend(os.walk(os.path.join(curdir, "COPYING")))
+        zipping.extend(os.walk(os.path.join(curdir, "COPYING.LESSER")))
+        zipping.extend(os.walk(os.path.join(curdir, "eslint.config.mjs")))
+        zipping.extend(os.walk(os.path.join(curdir, "modlist.json")))
+        zipping.extend(os.walk(os.path.join(curdir, "modlist.md")))
+        zipping.extend(os.walk(os.path.join(curdir, "README.md")))
 
     # Exclude files here
     excluding = [
@@ -126,6 +143,9 @@ Build time: {BUILD_TIME}""")
         "./kubejs/definitions.d.ts",        # For developers, not necessary in modpacks
         "./kubejs/config/*",                # KubeJS Config
         "./kubejs/jsconfig.json",           # JSConfig
+    ] if options["developer"] == False else [
+        "./kubejs/probe/*",
+        "./kubejs/README.txt"
     ]
 
     total = len(zipping)
@@ -167,7 +187,7 @@ def check_mods(args: list[str]):
                 for i in modinfo['mods']:
                     modid = i['modId']
                     modversion = i['version']
-                    detected_mods[modid] = [modversion]
+                    detected_mods[modid] = [modversion] # type: ignore
             except:
                 print(f"Cannot read mod info from {m}. Possibly not a mod.")
             finally:
@@ -204,7 +224,7 @@ def check_mods(args: list[str]):
         if missings == mismatched == extra == 0:
             print("All of you mods are up-to-date.")
     except Exception as e:
-        try: modlist_file.close()
+        try: modlist_file.close() # type: ignore
         except: ...
         raise
 

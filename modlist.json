@@ -7,7 +7,7 @@
     },
     "version": {
         "minecraft": "1.20.1",
-        "modloader": "neoforge-1.20.1-47.1.106",
+        "modloader": "forge-1.20.1-47.4.16",
             "_comment_modpack_version": "Leave empty if this is a build version",
         "modpack": ""
     },
