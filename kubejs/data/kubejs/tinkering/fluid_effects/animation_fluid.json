@@ -1,0 +1,39 @@
+{
+    "entity_effects": [
+        {
+            "type": "tconstruct:damage",
+            "damage": 1.0,
+            "damage_type": {
+                "melee": "tconstruct:fluid_magic_melee",
+                "ranged": "tconstruct:fluid_magic_ranged"
+            }
+        },
+        {
+            "type": "tconstruct:mob_effect",
+            "effect": "minecraft:instant_health",
+            "time": 1,
+            "level": 1,
+            "curative_items": [],
+            "action": "add"
+        }
+    ],
+    "block_effects": [
+        {
+            "type": "tconstruct:conditional",
+            "block": {
+                "type": "mantle:set",
+                "blocks": [
+                    "minecraft:air"
+                ]
+            },
+            "effect": {
+                "type": "tconstruct:place_block",
+                "block": "cofh_core:signal_air"
+            }
+        }
+    ],
+    "fluid": {
+        "amount": 250,
+        "fluid": "kubejs:animation_fluid"
+    }
+}
