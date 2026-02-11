@@ -123,17 +123,10 @@ Build time: {BUILD_TIME}""")
     if (options["developer"] == True):
         zipping.extend(os.walk(os.path.join(curdir, ".git")))
         zipping.extend(os.walk(os.path.join(curdir, ".github")))
-        zipping.extend(os.walk(os.path.join("config\\.gitigore")))
         zipping.extend(os.walk(os.path.join("texture_generator")))
-        zipping.extend(os.walk(os.path.join(curdir, ".gitignore")))
-        zipping.extend(os.walk(os.path.join(curdir, "ASSETS_LICENSE")))
-        zipping.extend(os.walk(os.path.join(curdir, "build.py")))
-        zipping.extend(os.walk(os.path.join(curdir, "COPYING")))
-        zipping.extend(os.walk(os.path.join(curdir, "COPYING.LESSER")))
-        zipping.extend(os.walk(os.path.join(curdir, "eslint.config.mjs")))
-        zipping.extend(os.walk(os.path.join(curdir, "modlist.json")))
-        zipping.extend(os.walk(os.path.join(curdir, "modlist.md")))
-        zipping.extend(os.walk(os.path.join(curdir, "README.md")))
+        zipping.append((os.path.join(curdir, "config"), [], [".gitignore"]))
+        zipping.append((os.path.join(curdir, ""), [], [".gitignore", "ASSETS_LICENSE", "build.py", "modlist.json", "modlist.md", "README.md", "COPYING", "COPYING.LESSER", "eslint.config.mjs"]))
+
 
     # Exclude files here
     excluding = [
