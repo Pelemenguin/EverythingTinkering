@@ -1,4 +1,9 @@
 {
+  "kubejs.ponder.casting.header": "Casting",
+  "kubejs.ponder.casting.text_1": "Seared Tables and Basins can be used for casting",
+  "kubejs.ponder.casting.text_2": "Fluids can be input from any direction",
+  "kubejs.ponder.casting.text_3": "Some recipes take a long time to complete ...",
+  "kubejs.ponder.casting.text_4": "... While some recipes require a cast",
   "kubejs.ponder.fluid_infusion_core.header": "Fluid Infusion Core",
   "kubejs.ponder.fluid_infusion_core.text_1": "Place a Depot on the Fluid Infusion Core ...",
   "kubejs.ponder.fluid_infusion_core.text_2": "... Then four buckets of liquid along the diagonals",

@@ -22,7 +22,7 @@
 - [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) *2001.6.5-build.16* by LatvianModder
 - [KubeJS Additions](https://www.curseforge.com/minecraft/mc-mods/kubejs-additions) *4.3.4* by ILIKEPIEFOO2
 - [LootJS: KubeJS Addon](https://www.curseforge.com/minecraft/mc-mods/lootjs) *1.20.1-2.13.0* by Lytho
-- [Mantle](https://www.curseforge.com/minecraft/mc-mods/mantle) *1.11.95* by mDiyo
+- [Mantle](https://www.curseforge.com/minecraft/mc-mods/mantle) *1.11.104* by mDiyo
 - [MantleJS](https://www.curseforge.com/minecraft/mc-mods/mantlejs) *0.1-alpha.3* by Pelemenguin
 - [Moonlight Lib](https://www.curseforge.com/minecraft/mc-mods/selene) *1.20-2.14.1* by MehVahdJukaar
 - [Ponder for KubeJS](https://www.curseforge.com/minecraft/mc-mods/ponder) *2.1.0* by Lytho
@@ -30,7 +30,7 @@
   - This mod is only installed when developing. Not included in the modpack.
 - [Quests Additions (Forge)](https://www.curseforge.com/minecraft/mc-mods/quests-additions) *${file.jarVersion}* by NaturaSpell
 - [Rhino](https://www.curseforge.com/minecraft/mc-mods/rhino) *2001.2.3-build.10* by LatvianModder
-- [Tinkers Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) *3.11.0.148* by mDiyo
+- [Tinkers Construct](https://www.curseforge.com/minecraft/mc-mods/tinkers-construct) *3.11.2.166* by mDiyo
 - [Thermal Dynamics](https://www.curseforge.com/minecraft/mc-mods/thermal-dynamics) *11.0.1* by TeamCoFH
 - [Thermal Expansion](https://www.curseforge.com/minecraft/mc-mods/thermal-expansion) *11.0.1* by TeamCoFH
 - [Thermal Foundation](https://www.curseforge.com/minecraft/mc-mods/thermal-foundation) *11.0.6* by TeamCoFH

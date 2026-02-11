@@ -1,4 +1,9 @@
 {
+  "kubejs.ponder.casting.header": "浇铸",
+  "kubejs.ponder.casting.text_1": "焦黑铸件台和铸造盆可以用于浇铸",
+  "kubejs.ponder.casting.text_2": "流体可以从任何方向输入",
+  "kubejs.ponder.casting.text_3": "一些配方需要很长时间才能完成……",
+  "kubejs.ponder.casting.text_4": "……而一些配方需要一个模具",
   "kubejs.ponder.fluid_infusion_core.header": "流体注入核心",
   "kubejs.ponder.fluid_infusion_core.text_1": "在流体注入核心上放置一个置物台……",
   "kubejs.ponder.fluid_infusion_core.text_2": "……并在四个对角线方向上各放置四桶液体",
