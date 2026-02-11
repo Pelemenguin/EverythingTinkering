@@ -11,6 +11,10 @@
     NBT
     Block
     IngredientHelper
+    AABB
+
+    Client
+    Component
 */
 
 (() => {
@@ -274,6 +278,133 @@ Ponder.registry(event => {
                 .withItem("tconstruct:molten_iron_bucket");
 
             scene.idle(80);
+
+            scene.markAsFinished();
+        });
+
+    event.create(IngredientHelper.or([
+        "tconstruct:seared_melter",
+        "tconstruct:seared_faucet",
+        "tconstruct:scorched_faucet"
+    ]))
+        .scene("moving_fluid_using_faucets", "Moving Fluid using Faucets", "kubejs:smeltery/using_faucets", (/** @type {Internal.PonderSceneBuilder} */ scene, _util) => {
+            /** @type {Internal.PonderSceneBuilder$PonderWorldInstructions} */
+            let world = scene.getWorld();
+            /** @type {Internal.PonderSceneBuilder$PonderOverlayInstructions} */
+            let overlay = scene.getOverlay();
+
+            scene.showBasePlate();
+            world.showSection([2, 1, 2, 2, 2, 2], Direction.DOWN);
+
+            overlay.showText(60)
+                .text("Now we have Molten Iron in the Seared Melter")
+                .pointAt([2.5, 2.5, 2.5]);
+
+            scene.idle(80);
+
+            world.showSection([1, 2, 2, 1, 2, 2], Direction.NORTH);
+
+            scene.idle(20);
+
+            // overlay.showOutlineWithText([1.625, 2.25, 2.25, 2, 2.625, 2.75], 60)
+            //     .text("Seared Faucets can be used to move fluid")
+            //     .colored(PonderPalette.OUTPUT)
+            //     .attachKeyFrame();
+            overlay.showText(60)
+                .text("Seared Faucets can be used to move fluid")
+                .colored(PonderPalette.OUTPUT)
+                .attachKeyFrame()
+                .pointAt([1.8125, 2.4375, 2.5]);
+            overlay.chaseBoundingBoxOutline(PonderPalette.OUTPUT, {}, AABB.of(1.625, 2.25, 2.25, 2, 2.625, 2.75), 60);
+
+            scene.idle(80);
+
+            world.showSection([1, 1, 2, 1, 1, 2], Direction.NORTH);
+
+            scene.idle(20);
+
+            overlay.chaseBoundingBoxOutline(PonderPalette.OUTPUT, {}, AABB.of(1.625, 2.25, 2.25, 2, 2.625, 2.75), 10);
+            overlay.showControls([1.625, 2.4375, 2.75], PonderPointing.LEFT, 40)
+                .rightClick();
+
+            scene.addLazyKeyframe();
+
+            scene.idle(20);
+
+            world.modifyBlockEntityNBT([2, 2, 2, 2, 2, 2], tag => {
+                let tankTag = tag.getCompound("tank");
+                tankTag.putInt("Amount", 180);
+                tag.put("tank", tankTag);
+            });
+            world.modifyBlockEntityNBT([1, 2, 2, 1, 2, 2], tag => {
+                let renderFluidTag = tag.getCompound("render_fluid");
+                renderFluidTag.putString("FluidName", "tconstruct:molten_iron");
+                renderFluidTag.putInt("Amount", 90);
+                tag.put("render_fluid", renderFluidTag);
+                let drainedTag = tag.getCompound("drained");
+                drainedTag.putString("FluidName", "tconstruct:molten_iron");
+                drainedTag.putInt("Amount", 90);
+                tag.put("drained", drainedTag);
+                tag.putByte("state", 1);
+            });
+
+            // 10mB per tick
+            for (let i = 10; i <= 90; i += 10) {
+                let j = i;
+                scene.idle(1);
+                world.modifyBlockEntityNBT([1, 2, 2, 1, 2, 2], tag => {
+                    let renderFluidTag = tag.getCompound("render_fluid");
+                    renderFluidTag.putInt("Amount", 90);
+                    tag.put("render_fluid", renderFluidTag);
+                    let drainedTag = tag.getCompound("drained");
+                    drainedTag.putInt("Amount", 90 - j);
+                    tag.put("drained", drainedTag);
+                });
+                world.modifyBlockEntityNBT([1, 1, 2, 1, 1, 2], tag => {
+                    let tankTag = tag.getCompound("tank");
+                    tankTag.putString("filter", "tconstruct:molten_iron");
+                    tankTag.putInt("capacity", 90);
+                    let fluidTag = tankTag.getCompound("fluid");
+                    fluidTag.putString("FluidName", "tconstruct:molten_iron");
+                    fluidTag.putInt("Amount", j);
+                    tankTag.put("fluid", fluidTag);
+                    tag.put("tank", tankTag);
+
+                    tag.putString("recipe", "tconstruct:smeltery/casting/metal/iron/ingot_gold_cast");
+                    tag.putInt("timer", 0);
+                });
+            }
+            world.modifyBlockEntityNBT([1, 2, 2, 1, 2, 2], tag => {
+                tag.remove("render_fluid");
+                tag.remove("drained");
+                tag.putByte("state", 0);
+            });
+
+            scene.idle(60);
+
+            world.modifyBlockEntityNBT([1, 1, 2, 1, 1, 2], tag => {
+                tag.remove("recipe");
+                tag.remove("timer");
+                let tankTag = tag.getCompound("tank");
+                tankTag.remove("filter");
+                tankTag.remove("fluid");
+                tankTag.putInt("capacity", 0);
+                let itemTag = tag.getList("Items", 10);
+                /** @type {Internal.CompoundTag} */
+                let newItem = NBT.compoundTag();
+                newItem.putString("id", "minecraft:iron_ingot");
+                newItem.putByte("Count", 1);
+                newItem.putByte("Slot", 1);
+                itemTag.add(newItem);
+                tag.put("Items", itemTag);
+            });
+
+            scene.idle(20);
+
+            overlay.showControls([1, 1.5, 3], PonderPointing.LEFT, 40)
+                .withItem("minecraft:iron_ingot");
+
+            scene.idle(60);
 
             scene.markAsFinished();
         });
