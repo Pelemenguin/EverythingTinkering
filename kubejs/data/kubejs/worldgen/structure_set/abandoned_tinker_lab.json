@@ -1,0 +1,16 @@
+{
+    "placement": {
+        "type": "minecraft:concentric_rings",
+        "count": 196,
+        "distance": 24,
+        "preferred_biomes": [],
+        "salt": 12489,
+        "spread": 5
+    },
+    "structures": [
+        {
+            "structure": "kubejs:abandoned_tinker_lab",
+            "weight": 1
+        }
+    ]
+}
