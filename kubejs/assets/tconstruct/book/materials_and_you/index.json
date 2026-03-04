@@ -5,7 +5,10 @@
         "extraData": {
             "kubejs:material_tier": {
                 "type": "melee_harvest",
-                "tier": 1,
+                "tier": {
+                    "min": 0,
+                    "max": 1
+                },
                 "isEncyclopedia": false,
                 "defaultMaterials": [
                     "tconstruct:wood"

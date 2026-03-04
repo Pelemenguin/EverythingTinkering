@@ -125,10 +125,9 @@ let writeTraitDesc = (traits, seperator) => {
     let result = [BookTextComponentData.LINEBREAK];
     traits.forEach(trait => {
         let modifier = trait.getModifier();
-        let textCopmonentData = BookTextComponentData.of(modifier.getDisplayName());
+        let textCopmonentData = BookTextComponentData.of(modifier.getDisplayName().copy().withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.UNDERLINE));
 
         textCopmonentData.tooltips = modifier.getDescriptionList(trait.getLevel()).toArray();
-        textCopmonentData.text = textCopmonentData.text.copy().withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.UNDERLINE);
 
         result.push(textCopmonentData);
 
